@@ -3,7 +3,7 @@ extends Resource
 ## Data-driven definition of a jutsu: frame data, costs, hit properties.
 ## The `kind` selects a generic executor in AbilityEffects.
 
-enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL, SUMMON_CLONE }
+enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL, SUMMON_CLONE, TELEPORT }
 
 @export_category("Identity")
 @export var display_name: String = "Jutsu"
@@ -91,10 +91,31 @@ enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL, SUMMON
 ## Bonus damage against rooted targets (consumes the root).
 @export var bonus_vs_rooted: float = 0.0
 
+## Stacks of LOCK (chakra block) applied; 3 stacks silence for 1.5 s.
+@export var apply_lock: int = 0
+@export var silence_duration: float = 0.0
+## Incapacitate (genjutsu): like a stun but broken by any damage.
+@export var incapacitate_duration: float = 0.0
+## Burn damage-over-time applied on hit (BURN_PER_SECOND).
+@export var burn_duration: float = 0.0
+## Chakra energy stolen from the target on hit.
+@export var energy_drain: float = 0.0
+## Applies Minato's Flying Thunder God seal on hit (SEAL, 8 s).
+@export var apply_seal: bool = false
+
+@export_category("Multi-hit")
+## MELEE_ARC: number of pulses spread over active_time (flurries).
+@export var multi_hits: int = 1
+
 @export_category("Self Buffs (on activation)")
 @export var buff_haste: float = 0.0
 @export var buff_empower: float = 0.0
 @export var buff_regen: float = 0.0
+## Eight Gates style HP drain on self while buffed.
+@export var buff_drain: float = 0.0
+## Shield points granted on activation (absorbs damage), lasts shield_time.
+@export var grant_shield: float = 0.0
+@export var shield_time: float = 3.0
 
 @export_category("Lingering Zone")
 ## GROUND_AREA: stays this long after detonating, ticking on enemies inside.
@@ -102,6 +123,13 @@ enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL, SUMMON
 @export var zone_tick_damage: float = 0.0
 ## PROJECTILE: ground area left where it lands (e.g. burning ground).
 @export var expire_zone: AbilityData
+## Zone is a trap: armed after area_delay, triggers once (full hit) on the
+## first enemy inside, expires after zone_duration.
+@export var trap: bool = false
+## Zone raises a wall (blocks movement) across the cast direction.
+@export var wall_length: float = 0.0
+## Zone is a Flying Thunder God kunai (teleport destination).
+@export var marker: bool = false
 
 @export_category("Counter Extras")
 ## Cooldown reset on a successful counter (e.g. &"rmb").
@@ -109,6 +137,17 @@ enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL, SUMMON
 @export var counter_haste: float = 0.0
 ## Copy the countered jutsu into the E slot for 10 s (one use).
 @export var counter_copy: bool = false
+## Burst around the countering fighter on trigger (Kaiten, crow clone).
+@export var counter_aoe_radius: float = 0.0
+@export var counter_aoe_damage: float = 0.0
+@export var counter_aoe_knockback: float = 0.0
+@export var counter_aoe_stun: float = 0.0
+
+@export_category("Teleport")
+## TELEPORT: "marker" (to your newest kunai), "sealed" (behind the nearest
+## sealed enemy, then strike), "sealed_all" (strike every sealed enemy).
+@export var teleport_mode: StringName = &""
+@export var teleport_range: float = 12.0
 
 @export_category("Shadow Clones")
 ## SUMMON_CLONE: clone lifetime and spawn distance.
@@ -133,4 +172,6 @@ func get_reach() -> float:
 			return dash_distance + hit_radius
 		Kind.GROUND_AREA:
 			return max_range + hit_radius * 0.5
+		Kind.TELEPORT:
+			return teleport_range if teleport_mode != &"marker" else 0.0
 	return 0.0

@@ -22,6 +22,8 @@ var phase: Phase = Phase.IDLE
 var current: AbilityData
 var current_slot: StringName = &""
 var phase_elapsed: float = 0.0
+## Swings already performed by a multi-hit (flurry) jutsu this cast.
+var pulse_count: int = 0
 ## Direction / point locked when the ability goes ACTIVE.
 var cast_direction: Vector3 = Vector3.FORWARD
 var cast_target_point: Vector3 = Vector3.ZERO
@@ -214,7 +216,7 @@ func try_cast(slot: StringName) -> bool:
 	var ability: AbilityData = get_castable(slot)
 	if ability == null or phase != Phase.IDLE or character.is_dead():
 		return false
-	if not character.status.can_act() or not is_ready(slot):
+	if not character.status.can_act() or not character.status.can_cast(slot) or not is_ready(slot):
 		return false
 	if ability.kind == AbilityData.Kind.DASH and character.status.has_status(StatusController.Type.ROOT):
 		return false

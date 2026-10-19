@@ -9,6 +9,12 @@ const ROSTER_PATHS: Array[String] = [
 	"res://characters/sasuke/sasuke_data.tres",
 	"res://characters/sakura/sakura_data.tres",
 	"res://characters/kakashi/kakashi_data.tres",
+	"res://characters/lee/lee_data.tres",
+	"res://characters/gaara/gaara_data.tres",
+	"res://characters/hinata/hinata_data.tres",
+	"res://characters/shikamaru/shikamaru_data.tres",
+	"res://characters/itachi/itachi_data.tres",
+	"res://characters/minato/minato_data.tres",
 ]
 const MENU_SCENE: String = "res://ui/menu/character_select.tscn"
 const ARENA_SCENE: String = "res://arenas/playground/playground.tscn"

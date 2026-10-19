@@ -1,0 +1,206 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=21 format=3]
+
+[ext_resource type="Script" path="res://characters/base/character_data.gd" id="1"]
+[ext_resource type="Script" path="res://core/abilities/ability_data.gd" id="2"]
+[ext_resource type="Script" path="res://core/movement/movement_data.gd" id="3"]
+[ext_resource type="Script" path="res://characters/base/shinobi_look.gd" id="4"]
+[ext_resource type="Texture2D" path="res://ui/icons/lee_lmb.svg" id="icon_lmb"]
+[ext_resource type="Texture2D" path="res://ui/icons/lee_rmb.svg" id="icon_rmb"]
+[ext_resource type="Texture2D" path="res://ui/icons/lee_space.svg" id="icon_space"]
+[ext_resource type="Texture2D" path="res://ui/icons/lee_q.svg" id="icon_q"]
+[ext_resource type="Texture2D" path="res://ui/icons/lee_e.svg" id="icon_e"]
+[ext_resource type="Texture2D" path="res://ui/icons/lee_ult.svg" id="icon_ult"]
+
+[sub_resource type="Resource" id="movement"]
+script = ExtResource("3")
+move_speed = 7.3
+acceleration = 300.0
+deceleration = 360.0
+
+[sub_resource type="Resource" id="look"]
+script = ExtResource("4")
+skin = Color(0.98, 0.82, 0.68, 1)
+top = Color(0.2, 0.55, 0.22, 1)
+top_accent = Color(0.2, 0.55, 0.22, 1)
+sleeves = Color(0.2, 0.55, 0.22, 1)
+pants = Color(0.2, 0.55, 0.22, 1)
+accent = Color(0.75, 0.15, 0.12, 1)
+hair_color = Color(0.05, 0.05, 0.08, 1)
+hair = 4
+eye_color = Color(0.05, 0.05, 0.08, 1)
+thick_brows = true
+leg_warmers = Color(1.0, 0.55, 0.1, 1)
+gloves = Color(0.95, 0.95, 0.92, 1)
+
+[sub_resource type="Resource" id="lmb_2"]
+script = ExtResource("2")
+icon = ExtResource("icon_lmb")
+display_name = "Leaf Hurricane"
+kind = 0
+color = Color(0.4, 1, 0.45, 1)
+startup_time = 0.11
+active_time = 0.05
+recovery_time = 0.28
+max_range = 2.3
+arc_degrees = 200.0
+damage = 10.0
+lunge_distance = 0.6
+cast_move_multiplier = 0.55
+recovery_move_multiplier = 0.85
+combo_window = 0.45
+knockback_speed = 9.0
+anim = "kick"
+energy_gain_on_hit = 10.0
+
+[sub_resource type="Resource" id="lmb_1"]
+script = ExtResource("2")
+icon = ExtResource("icon_lmb")
+display_name = "Konoha Strike II"
+kind = 0
+color = Color(0.5, 1, 0.5, 1)
+startup_time = 0.07
+active_time = 0.05
+recovery_time = 0.12
+max_range = 1.9
+arc_degrees = 100.0
+damage = 5.5
+lunge_distance = 0.5
+cast_move_multiplier = 0.55
+recovery_move_multiplier = 0.85
+combo_window = 0.45
+anim = "hook"
+energy_gain_on_hit = 7.3
+combo_next = SubResource("lmb_2")
+
+[sub_resource type="Resource" id="lmb"]
+script = ExtResource("2")
+icon = ExtResource("icon_lmb")
+display_name = "Konoha Strike"
+kind = 0
+color = Color(0.5, 1, 0.5, 1)
+startup_time = 0.07
+active_time = 0.05
+recovery_time = 0.12
+max_range = 1.9
+arc_degrees = 100.0
+damage = 5.5
+lunge_distance = 0.5
+cast_move_multiplier = 0.55
+recovery_move_multiplier = 0.85
+combo_window = 0.45
+anim = "jab"
+energy_gain_on_hit = 7.3
+combo_next = SubResource("lmb_1")
+
+[sub_resource type="Resource" id="rmb"]
+script = ExtResource("2")
+icon = ExtResource("icon_rmb")
+display_name = "Primary Lotus"
+kind = 2
+color = Color(0.4, 1, 0.5, 1)
+anim = "dash"
+vfx = "lotus"
+startup_time = 0.25
+active_time = 0.22
+recovery_time = 0.4
+cooldown = 8.0
+dash_distance = 6.0
+hit_radius = 0.7
+damage = 18.0
+stun_duration = 0.9
+cast_move_multiplier = 0.3
+recovery_move_multiplier = 0.5
+energy_gain_on_hit = 14.8
+
+[sub_resource type="Resource" id="space"]
+script = ExtResource("2")
+icon = ExtResource("icon_space")
+display_name = "Dynamic Entry"
+kind = 2
+color = Color(0.4, 1, 0.5, 1)
+anim = "kick"
+startup_time = 0.1
+active_time = 0.24
+recovery_time = 0.15
+cooldown = 7.0
+dash_distance = 7.5
+hit_radius = 0.7
+damage = 8.0
+knockback_speed = 12.0
+dash_stop_on_hit = true
+cast_move_multiplier = 1.0
+can_cancel_during_startup = false
+energy_gain_on_hit = 8.8
+
+[sub_resource type="Resource" id="q"]
+script = ExtResource("2")
+icon = ExtResource("icon_q")
+display_name = "Eight Gates: Open"
+kind = 5
+color = Color(0.35, 1, 0.45, 1)
+anim = "heal"
+vfx = "gates"
+startup_time = 0.4
+active_time = 0.05
+recovery_time = 0.15
+cooldown = 16.0
+buff_haste = 6.0
+buff_empower = 6.0
+buff_drain = 6.0
+cast_move_multiplier = 0.3
+energy_gain_on_hit = 4.0
+
+[sub_resource type="Resource" id="e"]
+script = ExtResource("2")
+icon = ExtResource("icon_e")
+display_name = "Leaf Gale"
+kind = 0
+color = Color(0.5, 1, 0.5, 1)
+anim = "kick"
+startup_time = 0.15
+active_time = 0.05
+recovery_time = 0.25
+cooldown = 6.0
+max_range = 2.4
+arc_degrees = 360.0
+damage = 9.0
+slow_duration = 1.2
+cast_move_multiplier = 0.5
+energy_gain_on_hit = 9.4
+
+[sub_resource type="Resource" id="ult"]
+script = ExtResource("2")
+icon = ExtResource("icon_ult")
+display_name = "Morning Peacock"
+kind = 0
+color = Color(1, 0.55, 0.15, 1)
+anim = "jab"
+vfx = "peacock"
+startup_time = 0.35
+active_time = 0.9
+recovery_time = 0.4
+energy_cost = 100.0
+max_range = 3.2
+arc_degrees = 100.0
+damage = 5.0
+multi_hits = 8
+energy_gain_on_hit = 0.0
+cast_move_multiplier = 0.0
+
+[resource]
+script = ExtResource("1")
+display_name = "Rock Lee"
+short_name = "Lee"
+passive = ""
+passive_description = "Eight Gates: opening them grants haste + 25% damage but drains HP (never lethal)."
+identity = "Pure taijutsu: relentless strings, the Lotus, and the Eight Gates (power at the cost of HP)."
+body_color = Color(0.2, 0.6, 0.25, 1)
+max_health = 140.0
+movement = SubResource("movement")
+look = SubResource("look")
+lmb = SubResource("lmb")
+rmb = SubResource("rmb")
+space = SubResource("space")
+q = SubResource("q")
+e = SubResource("e")
+ult = SubResource("ult")

@@ -3,12 +3,15 @@ extends Node
 ## Single source of truth for every status on a character.
 ## Ticked by the owning character inside its physics step.
 
-enum Type { STUN, ROOT, IMMATERIAL, COUNTER, SLOW, HASTE, EMPOWER, REGEN, MARK }
+enum Type { STUN, ROOT, IMMATERIAL, COUNTER, SLOW, HASTE, EMPOWER, REGEN, MARK, SILENCE, INCAPACITATE, BURN, DRAIN, LOCK, SEAL }
 
 const SLOW_MULTIPLIER: float = 0.6
 const HASTE_MULTIPLIER: float = 1.3
 const EMPOWER_MULTIPLIER: float = 1.25
 const REGEN_PER_SECOND: float = 6.0
+const BURN_PER_SECOND: float = 4.0
+## Eight Gates: HP lost per second while open (never lethal).
+const DRAIN_PER_SECOND: float = 3.0
 
 signal status_applied(type: Type, duration: float)
 signal status_removed(type: Type)
@@ -88,11 +91,16 @@ func tick(delta: float) -> void:
 
 
 func can_move() -> bool:
-	return not has_status(Type.STUN) and not has_status(Type.ROOT)
+	return not has_status(Type.STUN) and not has_status(Type.ROOT) and not has_status(Type.INCAPACITATE)
 
 
 func can_act() -> bool:
-	return not has_status(Type.STUN)
+	return not has_status(Type.STUN) and not has_status(Type.INCAPACITATE)
+
+
+## Silenced fighters can only use their basic attack.
+func can_cast(slot: StringName) -> bool:
+	return slot == &"lmb" or not has_status(Type.SILENCE)
 
 
 func describe() -> String:

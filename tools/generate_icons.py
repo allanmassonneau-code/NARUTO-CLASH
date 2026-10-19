@@ -34,6 +34,34 @@ def spiral(cx, cy, turns, r_max, width, color):
 
 
 GLYPHS = {
+    "gate": f'''<circle cx="64" cy="64" r="40" fill="none" stroke="{W}" stroke-width="8"/>
+<path d="M64 24v80M24 64h80M36 36l56 56M92 36l-56 56" stroke="{W}" stroke-width="5" stroke-opacity="0.7"/>
+<circle cx="64" cy="64" r="12" fill="{W}"/>''',
+    "sand": f'''<path d="M18 86 Q40 40 64 70 T110 52" fill="none" stroke="{W}" stroke-width="10" stroke-linecap="round"/>
+<g fill="{W}"><circle cx="30" cy="104" r="5"/><circle cx="52" cy="98" r="4"/><circle cx="80" cy="102" r="6"/><circle cx="100" cy="94" r="4"/></g>''',
+    "shield": f'''<path d="M64 18 L102 32 V62 C102 88 84 104 64 112 C44 104 26 88 26 62 V32 Z" fill="{W}" fill-opacity="0.85"/>
+<path d="M64 34 V96" stroke="{INK}" stroke-width="5"/>''',
+    "wall": f'''<g fill="{W}"><rect x="18" y="40" width="44" height="22" rx="3"/><rect x="66" y="40" width="44" height="22" rx="3"/>
+<rect x="18" y="66" width="22" height="22" rx="3"/><rect x="44" y="66" width="44" height="22" rx="3"/><rect x="92" y="66" width="18" height="22" rx="3"/></g>''',
+    "byakugan": f'''<ellipse cx="64" cy="64" rx="48" ry="26" fill="{W}"/>
+<circle cx="64" cy="64" r="18" fill="#dcd6f2"/><path d="M20 40l20 14M108 40l-20 14M20 88l20-14M108 88l-20-14" stroke="{W}" stroke-width="4"/>''',
+    "palm": f'''<path d="M44 108 V60 a6 6 0 0 1 12 0 V40 a6 6 0 0 1 12 0 V36 a6 6 0 0 1 12 0 V44 a6 6 0 0 1 12 0 V80 C92 98 80 108 64 108 Z" fill="{W}"/>
+<circle cx="64" cy="64" r="44" fill="none" stroke="{W}" stroke-width="3" stroke-opacity="0.5"/>''',
+    "shadow": f'''<ellipse cx="64" cy="96" rx="46" ry="12" fill="#05050a"/>
+<path d="M20 96 C40 70 50 100 64 72 C78 44 90 78 108 40" fill="none" stroke="#05050a" stroke-width="12" stroke-linecap="round"/>
+<path d="M20 96 C40 70 50 100 64 72 C78 44 90 78 108 40" fill="none" stroke="{W}" stroke-width="3" stroke-linecap="round" stroke-opacity="0.6"/>''',
+    "tag": f'''<rect x="42" y="18" width="44" height="92" rx="4" fill="#f4ecd2"/>
+<path d="M64 30v64M52 46h24M52 62h24M52 78h24" stroke="#b01818" stroke-width="5"/>''',
+    "crow": f'''<path d="M18 70 Q44 40 64 64 Q84 40 110 70 Q86 60 64 80 Q42 60 18 70z" fill="{INK}" stroke="{W}" stroke-width="3"/>
+<circle cx="64" cy="64" r="6" fill="#d01818"/>''',
+    "black_flame": f'''<path d="M64 18c10 18 34 26 34 54a34 34 0 0 1-68 0c0-14 8-22 14-28 0 10 6 16 12 16-6-16 0-30 8-42z" fill="#120812" stroke="#b040c0" stroke-width="4"/>''',
+    "susanoo": f'''<path d="M64 14 L100 50 L84 112 H44 L28 50 Z" fill="#9a5ae6" fill-opacity="0.75" stroke="{W}" stroke-width="4"/>
+<path d="M64 30 V100" stroke="{W}" stroke-width="6"/>''',
+    "kunai3": f'''<g stroke="{W}" stroke-width="6" stroke-linecap="round" fill="none"><path d="M64 20 V70"/><path d="M64 70 L42 50M64 70 L86 50"/></g>
+<circle cx="64" cy="98" r="12" fill="none" stroke="{W}" stroke-width="5"/>''',
+    "flash": f'''<polygon points="56,14 40,62 60,62 46,114 90,50 68,50 82,14" fill="#ffe680"/>
+<circle cx="64" cy="64" r="48" fill="none" stroke="{W}" stroke-width="3" stroke-dasharray="6 8"/>''',
+
     "fist": f'''<rect x="38" y="44" width="52" height="40" rx="12" fill="{W}"/>
 <rect x="38" y="80" width="40" height="22" rx="6" fill="{W}"/>
 <path d="M52 44v20M64 44v20M76 44v20" stroke="{INK}" stroke-width="4"/>
@@ -87,6 +115,19 @@ GLYPHS = {
 
 # (file id, glyph, colour) — colours match the jutsu colour in the .tres files.
 ICONS = {
+    "lee_lmb": ("fist", "#3fa34d"), "lee_rmb": ("kick", "#2e8b3f"), "lee_space": ("dash", "#5cbf6a"),
+    "lee_q": ("gate", "#2fbf5a"), "lee_e": ("kick", "#4caf50"), "lee_ult": ("fireball", "#ff8c1a"),
+    "gaara_lmb": ("sand", "#c9a46a"), "gaara_rmb": ("sand", "#b8925a"), "gaara_space": ("dash", "#c9a46a"),
+    "gaara_q": ("shield", "#c9a46a"), "gaara_e": ("wall", "#a8824c"), "gaara_ult": ("sand", "#d8a04a"),
+    "hinata_lmb": ("palm", "#7a90e0"), "hinata_rmb": ("palm", "#5a78d0"), "hinata_space": ("dash", "#9fb7d9"),
+    "hinata_q": ("swirl", "#6f8fe8"), "hinata_e": ("byakugan", "#b0a6d8"), "hinata_ult": ("palm", "#4a64c8"),
+    "shikamaru_lmb": ("kunai", "#6b7a5a"), "shikamaru_rmb": ("shadow", "#3a3f4a"), "shikamaru_space": ("dash", "#9fb7d9"),
+    "shikamaru_q": ("tag", "#b06a2a"), "shikamaru_e": ("shadow", "#2a2e38"), "shikamaru_ult": ("shadow", "#4a3a5a"),
+    "itachi_lmb": ("kunai", "#5a3a40"), "itachi_rmb": ("sharingan", "#a01818"), "itachi_space": ("crow", "#3a2a3a"),
+    "itachi_q": ("crow", "#5a1a2a"), "itachi_e": ("black_flame", "#4a1a5a"), "itachi_ult": ("susanoo", "#7a3ac0"),
+    "minato_lmb": ("kunai3", "#c9a02a"), "minato_rmb": ("flash", "#d9b23a"), "minato_space": ("flash", "#e0c040"),
+    "minato_q": ("swirl", "#4d99ff"), "minato_e": ("kunai3", "#b08a2a"), "minato_ult": ("flash", "#f0c030"),
+
     "naruto_lmb": ("fist", "#ffb34d"),
     "naruto_rmb": ("swirl", "#4d99ff"),
     "naruto_space": ("dash", "#9fb7d9"),

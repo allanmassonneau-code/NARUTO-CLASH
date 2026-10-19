@@ -31,6 +31,20 @@ static func on_startup(c: CombatCharacter, a: AbilityData, model: ShinobiModel) 
 			smoke(c, c.global_position, 0.7)
 		&"stomp":
 			return _orb(model.hand_r(), Color(1.0, 0.5, 0.7), 0.12, a.startup_time)
+		&"gates":
+			return _heal_aura(c, Color(0.3, 1.0, 0.4), a.startup_time + 0.4)
+		&"kaiten":
+			return _dome(c, Color(0.55, 0.75, 1.0), 1.5)
+		&"crow":
+			return _dome(c, Color(0.15, 0.1, 0.15), 1.0)
+		&"gentle_fist", &"palms":
+			return _orb(model.hand_r(), Color(0.5, 0.75, 1.0), 0.1, a.startup_time)
+		&"tsukuyomi":
+			return _orb(model.hand_r(), Color(0.9, 0.05, 0.1), 0.12, a.startup_time)
+		&"susanoo":
+			return _dome(c, Color(0.6, 0.3, 0.95), 1.6)
+		&"flash":
+			return _lightning_hand(model.hand_r(), Color(1.0, 0.9, 0.35))
 	return null
 
 
@@ -46,6 +60,15 @@ static func on_active(c: CombatCharacter, a: AbilityData, held: Node3D) -> void:
 		&"byakugou":
 			_column(c, c.global_position, Color(0.7, 0.4, 1.0), 1.4)
 			_diamond(c, c.global_position + Vector3.UP * 2.3)
+		&"gates":
+			_column(c, c.global_position, Color(0.35, 1.0, 0.45), 1.1)
+			dust_ring(c, c.global_position, 2.0)
+		&"flash":
+			_column(c, c.global_position, Color(1.0, 0.9, 0.35), 0.8)
+		&"peacock":
+			_explosion(c, c.global_position + c.facing.facing_direction * 1.6 + Vector3.UP, Color(1.0, 0.55, 0.15), 1.4)
+		&"susanoo":
+			_explosion(c, c.global_position + c.facing.facing_direction * 2.4 + Vector3.UP, Color(0.6, 0.3, 0.95), 2.0)
 	if a.kind == AbilityData.Kind.MELEE_ARC and a.knockback_speed > 0.0:
 		dust_ring(c, c.global_position, 1.0)
 
@@ -100,6 +123,10 @@ static func projectile_visual(p: Projectile) -> void:
 				flame.set_meta(&"flicker", i)
 		&"rasenshuriken":
 			p.add_child(_shuriken(a.hit_radius))
+		&"shadow":
+			var blot := _mesh_node(p, _disk_mesh(a.hit_radius * 1.4), Color(0.02, 0.02, 0.05, 0.85), false)
+			blot.position = Vector3.DOWN * (HitQuery.BODY_HEIGHT - 0.04)
+			blot.scale = Vector3(1.0, 1.0, 1.8)
 		_:
 			_mesh_node(p, _sphere_mesh(a.hit_radius), Color(a.color, 0.9), true)
 
@@ -161,6 +188,35 @@ static func zone_visual(area: GroundArea) -> void:
 				flame.position = at + Vector3.UP * 0.2
 				flame.set_meta(&"flame", randf() * TAU)
 			_mesh_node(area, _disk_mesh(r), Color(1.0, 0.35, 0.05, 0.25), true).position.y = 0.03
+		&"black_fire":
+			for i in 8:
+				var flame := _mesh_node(area, _sphere_mesh(randf_range(0.25, 0.4)), Color(0.05, 0.02, 0.08, 0.9), false)
+				flame.position = Vector3.FORWARD.rotated(Vector3.UP, randf() * TAU) * randf() * r * 0.85 + Vector3.UP * 0.2
+				flame.set_meta(&"flame", randf() * TAU)
+			_mesh_node(area, _disk_mesh(r), Color(0.4, 0.05, 0.4, 0.3), false).position.y = 0.03
+		&"kunai_marker":
+			var kunai := Node3D.new()
+			area.add_child(kunai)
+			var blade := CylinderMesh.new()
+			blade.top_radius = 0.0
+			blade.bottom_radius = 0.07
+			blade.height = 0.35
+			_mesh_node(kunai, blade, Color(0.8, 0.82, 0.9, 1.0), false).position.y = 0.15
+			var grip := CylinderMesh.new()
+			grip.top_radius = 0.03
+			grip.bottom_radius = 0.03
+			grip.height = 0.25
+			_mesh_node(kunai, grip, Color(0.2, 0.15, 0.25, 1.0), false).position.y = 0.45
+			var glow := _mesh_node(area, _torus_mesh(0.45, 0.55), Color(1.0, 0.85, 0.3, 0.8), true)
+			glow.scale = Vector3(1, 0.2, 1)
+			glow.set_meta(&"spin", true)
+		&"paper_tag":
+			var tag := BoxMesh.new()
+			tag.size = Vector3(0.35, 0.02, 0.6)
+			_mesh_node(area, tag, Color(0.95, 0.9, 0.75, 1.0), false).position.y = 0.03
+			var seal := BoxMesh.new()
+			seal.size = Vector3(0.12, 0.025, 0.4)
+			_mesh_node(area, seal, Color(0.75, 0.1, 0.1, 1.0), false).position.y = 0.04
 		&"crater":
 			var crater := _mesh_node(area, _disk_mesh(r), Color(0.25, 0.18, 0.15, 0.55), false)
 			crater.position.y = 0.025
@@ -173,6 +229,23 @@ static func zone_visual(area: GroundArea) -> void:
 			_mesh_node(area, im, Color(0.15, 0.1, 0.08, 1.0), false)
 		_:
 			_mesh_node(area, _disk_mesh(r), Color(area.ability.color, 0.3), true).position.y = 0.03
+
+
+## Sand wall rising out of the ground.
+static func sand_wall(area: GroundArea, body: Node3D, length: float) -> void:
+	var mesh := BoxMesh.new()
+	mesh.size = Vector3(length, 2.0, 0.8)
+	var wall := MeshInstance3D.new()
+	wall.mesh = mesh
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.82, 0.68, 0.42)
+	mat.roughness = 1.0
+	wall.material_override = mat
+	body.add_child(wall)
+	wall.position.y = -1.0
+	var tween := wall.create_tween()
+	tween.tween_property(wall, "position:y", 1.0, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	dust_ring(area, area.global_position, length * 0.6)
 
 
 static func _disk_mesh(radius: float) -> CylinderMesh:
@@ -213,6 +286,16 @@ static func area_detonate(anchor: Node, at: Vector3, a: AbilityData) -> void:
 			_dogs(anchor, at, r)
 		&"kamui":
 			_implosion(anchor, at, r, Color(0.45, 0.2, 0.75))
+		&"sand_coffin":
+			_closing_spheres(anchor, at, r, Color(0.85, 0.72, 0.45))
+			dust_ring(anchor, at, r * 1.2)
+		&"sand_tsunami":
+			_wave(anchor, at, r, Color(0.85, 0.72, 0.45))
+		&"shadow_gather", &"shadow_strangle":
+			_spikes(anchor, at, r, Color(0.03, 0.03, 0.06))
+		&"trap":
+			_explosion(anchor, at + Vector3.UP * 0.5, Color(1.0, 0.55, 0.15), r * 1.3)
+			dust_ring(anchor, at, r * 1.4)
 		_:
 			CombatFx.ring(anchor, at, r, a.color, 0.3)
 
@@ -370,6 +453,69 @@ static func _tomoe_ring(c: CombatCharacter) -> Node3D:
 	_animate(root, 30.0, func(n: Node3D, t: float) -> void:
 		n.rotation.y = t * 30.0 * 6.0)
 	return root
+
+
+## Translucent spinning dome (Kaiten, Susanoo, crow clone) held on the fighter.
+static func _dome(c: CombatCharacter, color: Color, radius: float) -> Node3D:
+	var root := Node3D.new()
+	c.add_child(root)
+	root.position = Vector3.UP * 0.9
+	var shell := _mesh_node(root, _sphere_mesh(radius), Color(color, 0.3), true)
+	var ring := _mesh_node(root, _torus_mesh(radius * 0.95, radius * 1.05), Color(color.lightened(0.3), 0.6), true)
+	_animate(root, 30.0, func(_n: Node3D, t: float) -> void:
+		var age: float = t * 30.0
+		shell.rotation.y = age * 12.0
+		ring.rotation = Vector3(age * 6.0, age * 11.0, 0)
+		root.scale = Vector3.ONE * minf(1.0, age * 8.0))
+	return root
+
+
+static func _closing_spheres(anchor: Node, at: Vector3, radius: float, color: Color) -> void:
+	for i in 10:
+		var dir := Vector3.FORWARD.rotated(Vector3.UP, TAU * i / 10.0)
+		var ball := _world_node(anchor, _sphere_mesh(0.45), Color(color, 1.0), false)
+		var start: Vector3 = HitQuery.flat(at) + dir * radius + Vector3.UP * 0.4
+		_animate(ball, 0.5, func(n: Node3D, t: float) -> void:
+			n.global_position = start.lerp(HitQuery.flat(at) + Vector3.UP * (0.4 + t * 0.8), minf(1.0, t * 2.0))
+			n.scale = Vector3.ONE * (1.0 - maxf(0.0, t - 0.6) * 2.0))
+
+
+static func _wave(anchor: Node, at: Vector3, radius: float, color: Color) -> void:
+	var ring := _world_node(anchor, _torus_mesh(0.7, 1.0), Color(color, 0.9), false)
+	ring.global_position = HitQuery.flat(at)
+	_animate(ring, 0.6, func(n: Node3D, t: float) -> void:
+		n.scale = Vector3(radius * (0.3 + t), 1.5 * sin(t * PI) + 0.1, radius * (0.3 + t))
+		(n as MeshInstance3D).transparency = t * t)
+	dust_ring(anchor, at, radius)
+
+
+static func _spikes(anchor: Node, at: Vector3, radius: float, color: Color) -> void:
+	for i in 12:
+		var mesh := CylinderMesh.new()
+		mesh.top_radius = 0.0
+		mesh.bottom_radius = 0.12
+		mesh.height = 1.4
+		var spike := _world_node(anchor, mesh, Color(color, 0.95), false)
+		var base: Vector3 = HitQuery.flat(at) + Vector3.FORWARD.rotated(Vector3.UP, randf() * TAU) * randf() * radius
+		spike.global_position = base
+		spike.rotation = Vector3(randf_range(-0.3, 0.3), 0, randf_range(-0.3, 0.3))
+		_animate(spike, 0.7, func(n: Node3D, t: float) -> void:
+			n.global_position = base + Vector3.UP * (0.7 * sin(minf(1.0, t * 1.5) * PI)))
+
+
+## Crows bursting out (Itachi's crow clone).
+static func crows(anchor: Node, at: Vector3) -> void:
+	if not CombatFx.is_enabled():
+		return
+	for i in 10:
+		var mesh := PrismMesh.new()
+		mesh.size = Vector3(0.35, 0.12, 0.2)
+		var crow := _world_node(anchor, mesh, Color(0.05, 0.04, 0.08, 1.0), false)
+		var start: Vector3 = HitQuery.flat(at) + Vector3.UP * 1.0
+		var dir := Vector3(randf_range(-1, 1), randf_range(0.2, 1.0), randf_range(-1, 1)).normalized()
+		_animate(crow, 0.8, func(n: Node3D, t: float) -> void:
+			n.global_position = start + dir * t * 4.0
+			n.rotation.y = t * 10.0)
 
 
 static func _column(anchor: Node, at: Vector3, color: Color, radius: float) -> void:

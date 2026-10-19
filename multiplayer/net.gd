@@ -372,7 +372,7 @@ func s2c_spawn_entity(id: int, kind: int, fighter_index: int, slot_index: int, a
 	if kind == 0:
 		entity = Projectile.spawn_visual(source, ability, a, b)
 	else:
-		entity = GroundArea.spawn_visual(source, ability, a)
+		entity = GroundArea.spawn_visual(source, ability, a, b)
 	_entities[id] = entity
 
 

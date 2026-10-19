@@ -1,0 +1,214 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=21 format=3]
+
+[ext_resource type="Script" path="res://characters/base/character_data.gd" id="1"]
+[ext_resource type="Script" path="res://core/abilities/ability_data.gd" id="2"]
+[ext_resource type="Script" path="res://core/movement/movement_data.gd" id="3"]
+[ext_resource type="Script" path="res://characters/base/shinobi_look.gd" id="4"]
+[ext_resource type="Texture2D" path="res://ui/icons/shikamaru_lmb.svg" id="icon_lmb"]
+[ext_resource type="Texture2D" path="res://ui/icons/shikamaru_rmb.svg" id="icon_rmb"]
+[ext_resource type="Texture2D" path="res://ui/icons/shikamaru_space.svg" id="icon_space"]
+[ext_resource type="Texture2D" path="res://ui/icons/shikamaru_q.svg" id="icon_q"]
+[ext_resource type="Texture2D" path="res://ui/icons/shikamaru_e.svg" id="icon_e"]
+[ext_resource type="Texture2D" path="res://ui/icons/shikamaru_ult.svg" id="icon_ult"]
+
+[sub_resource type="Resource" id="movement"]
+script = ExtResource("3")
+move_speed = 6.9
+acceleration = 300.0
+deceleration = 360.0
+
+[sub_resource type="Resource" id="look"]
+script = ExtResource("4")
+skin = Color(0.96, 0.82, 0.68, 1)
+top = Color(0.36, 0.45, 0.27, 1)
+top_accent = Color(0.36, 0.45, 0.27, 1)
+sleeves = Color(0.25, 0.3, 0.38, 1)
+pants = Color(0.22, 0.26, 0.34, 1)
+accent = Color(0.15, 0.15, 0.18, 1)
+hair_color = Color(0.1, 0.1, 0.12, 1)
+hair = 7
+eye_color = Color(0.1, 0.1, 0.12, 1)
+flak_vest = true
+weapon = 2
+
+[sub_resource type="Resource" id="lmb_2"]
+script = ExtResource("2")
+icon = ExtResource("icon_lmb")
+display_name = "Shadow Jab"
+kind = 0
+color = Color(0.2, 0.2, 0.3, 1)
+startup_time = 0.13
+active_time = 0.05
+recovery_time = 0.28
+max_range = 2.2
+arc_degrees = 60.0
+damage = 9.0
+lunge_distance = 0.7
+cast_move_multiplier = 0.55
+recovery_move_multiplier = 0.85
+combo_window = 0.45
+slow_duration = 1.0
+anim = "thrust"
+energy_gain_on_hit = 9.4
+
+[sub_resource type="Resource" id="lmb_1"]
+script = ExtResource("2")
+icon = ExtResource("icon_lmb")
+display_name = "Trench Knife II"
+kind = 0
+color = Color(0.6, 0.65, 0.75, 1)
+startup_time = 0.08
+active_time = 0.05
+recovery_time = 0.14
+max_range = 2.0
+arc_degrees = 100.0
+damage = 6.0
+lunge_distance = 0.5
+cast_move_multiplier = 0.55
+recovery_move_multiplier = 0.85
+combo_window = 0.45
+anim = "slash2"
+energy_gain_on_hit = 7.6
+combo_next = SubResource("lmb_2")
+
+[sub_resource type="Resource" id="lmb"]
+script = ExtResource("2")
+icon = ExtResource("icon_lmb")
+display_name = "Trench Knife"
+kind = 0
+color = Color(0.6, 0.65, 0.75, 1)
+startup_time = 0.08
+active_time = 0.05
+recovery_time = 0.14
+max_range = 2.0
+arc_degrees = 100.0
+damage = 6.0
+lunge_distance = 0.5
+cast_move_multiplier = 0.55
+recovery_move_multiplier = 0.85
+combo_window = 0.45
+anim = "slash"
+energy_gain_on_hit = 7.6
+combo_next = SubResource("lmb_1")
+
+[sub_resource type="Resource" id="rmb"]
+script = ExtResource("2")
+icon = ExtResource("icon_rmb")
+display_name = "Shadow Possession"
+kind = 1
+color = Color(0.1, 0.1, 0.15, 1)
+anim = "seal"
+vfx = "shadow"
+startup_time = 0.3
+active_time = 0.05
+recovery_time = 0.35
+cooldown = 9.0
+max_range = 9.0
+hit_radius = 0.45
+projectile_speed = 11.0
+damage = 4.0
+root_duration = 1.7
+cast_move_multiplier = 0.2
+energy_gain_on_hit = 6.4
+
+[sub_resource type="Resource" id="space"]
+script = ExtResource("2")
+icon = ExtResource("icon_space")
+display_name = "Shunshin"
+kind = 2
+color = Color(0.8, 0.9, 1, 1)
+anim = "dash"
+vfx = "shunshin"
+startup_time = 0.03
+active_time = 0.14
+recovery_time = 0.08
+cooldown = 8.0
+dash_distance = 5.0
+dash_immaterial = true
+cast_move_multiplier = 1.0
+recovery_move_multiplier = 1.0
+can_cancel_during_startup = false
+energy_gain_on_hit = 4.0
+
+[sub_resource type="Resource" id="q"]
+script = ExtResource("2")
+icon = ExtResource("icon_q")
+display_name = "Explosive Tag Trap"
+kind = 3
+color = Color(1, 0.55, 0.15, 1)
+anim = "throw"
+vfx = "trap"
+startup_time = 0.15
+active_time = 0.05
+recovery_time = 0.15
+cooldown = 9.0
+max_range = 6.0
+hit_radius = 1.4
+area_delay = 0.6
+trap = true
+zone_duration = 12.0
+damage = 14.0
+stun_duration = 1.0
+cast_move_multiplier = 0.5
+energy_gain_on_hit = 12.4
+
+[sub_resource type="Resource" id="e"]
+script = ExtResource("2")
+icon = ExtResource("icon_e")
+display_name = "Shadow Strangle"
+kind = 3
+color = Color(0.05, 0.05, 0.08, 1)
+anim = "seal"
+vfx = "shadow_strangle"
+startup_time = 0.25
+active_time = 0.05
+recovery_time = 0.25
+cooldown = 7.0
+max_range = 7.0
+hit_radius = 1.4
+area_delay = 0.35
+damage = 8.0
+bonus_vs_rooted = 16.0
+slow_duration = 1.2
+cast_move_multiplier = 0.3
+energy_gain_on_hit = 8.8
+
+[sub_resource type="Resource" id="ult"]
+script = ExtResource("2")
+icon = ExtResource("icon_ult")
+display_name = "Shadow Gathering"
+kind = 3
+color = Color(0.05, 0.05, 0.08, 1)
+anim = "seal"
+vfx = "shadow_gather"
+startup_time = 0.45
+active_time = 0.05
+recovery_time = 0.35
+energy_cost = 100.0
+max_range = 8.0
+hit_radius = 3.2
+area_delay = 0.9
+damage = 14.0
+root_duration = 2.2
+zone_duration = 2.0
+zone_tick_damage = 3.0
+cast_move_multiplier = 0.25
+energy_gain_on_hit = 0.0
+
+[resource]
+script = ExtResource("1")
+display_name = "Shikamaru Nara"
+short_name = "Shikamaru"
+passive = ""
+passive_description = "Shadow tactics: Shadow Strangle deals heavy bonus damage to rooted targets."
+identity = "Strategist: shadows that root, a strangle that punishes rooted targets, traps for the predictable."
+body_color = Color(0.4, 0.45, 0.35, 1)
+max_health = 130.0
+movement = SubResource("movement")
+look = SubResource("look")
+lmb = SubResource("lmb")
+rmb = SubResource("rmb")
+space = SubResource("space")
+q = SubResource("q")
+e = SubResource("e")
+ult = SubResource("ult")

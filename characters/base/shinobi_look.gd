@@ -2,7 +2,7 @@ class_name ShinobiLook
 extends Resource
 ## Placeholder appearance built from primitives. Presentation only.
 
-enum Hair { SPIKY, DUCK_TAIL, LONG, SWEPT }
+enum Hair { SPIKY, DUCK_TAIL, LONG, SWEPT, BOWL, SHORT, HIME, PINEAPPLE, PONYTAIL }
 enum Weapon { NONE, SWORD, KUNAI }
 
 @export var skin: Color = Color(0.98, 0.8, 0.65)
@@ -23,3 +23,14 @@ enum Weapon { NONE, SWORD, KUNAI }
 @export var shorts: bool = false
 @export var whiskers: bool = false
 @export var weapon: Weapon = Weapon.NONE
+## Long coat (Akatsuki cloak, Hokage haori). Alpha 0 = none.
+@export var cloak: Color = Color(0, 0, 0, 0)
+## Cloak decoration: red clouds or flame hem.
+@export var cloak_pattern: StringName = &""
+@export var gourd: bool = false
+@export var thick_brows: bool = false
+## Leg warmers (Lee). Alpha 0 = none.
+@export var leg_warmers: Color = Color(0, 0, 0, 0)
+## Kanji tattoo on the forehead (Gaara).
+@export var forehead_mark: bool = false
+@export var eye_white: bool = false

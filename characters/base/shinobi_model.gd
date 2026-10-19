@@ -181,7 +181,9 @@ func _build_legs(look: ShinobiLook) -> void:
 		_capsule(leg, Vector3(0, -0.2, 0), 0.105, 0.44, look.pants if not look.shorts else look.pants)
 		var knee := _pivot(leg, Vector3(0, -0.4, 0))
 		_capsule(knee, Vector3(0, -0.17, 0), 0.085, 0.4, thigh_color if look.shorts else look.pants)
-		if not look.shorts:
+		if look.leg_warmers.a > 0.0:
+			_cylinder(knee, Vector3(0, -0.2, 0), 0.095, 0.22, look.leg_warmers)
+		elif not look.shorts:
 			_cylinder(knee, Vector3(0, -0.24, 0), 0.075, 0.12, Color(0.92, 0.92, 0.9))  # leg wrap
 		_box(knee, Vector3(0, -0.37, -0.04), Vector3(0.15, 0.06, 0.28), SANDAL)
 		_box(knee, Vector3(0, -0.34, -0.15), Vector3(0.11, 0.05, 0.07), look.skin)  # toes
@@ -209,6 +211,33 @@ func _build_torso(look: ShinobiLook) -> void:
 	if look.weapon == ShinobiLook.Weapon.SWORD:
 		var rope := _cylinder(_torso, Vector3(0, 0.02, 0), 0.27, 0.06, look.accent)
 		rope.scale = Vector3(1.0, 1.0, 0.8)
+	if look.cloak.a > 0.0:
+		var coat := _capsule(_torso, Vector3(0, 0.3, 0.01), 0.29, 0.78, look.cloak)
+		coat.scale = Vector3(1.08, 1.0, 0.8)
+		var collar := _cylinder(_torso, Vector3(0, 0.66, 0), 0.17, 0.2, look.cloak)
+		collar.scale = Vector3(1.0, 1.0, 0.9)
+		var skirt := CylinderMesh.new()
+		skirt.top_radius = 0.3
+		skirt.bottom_radius = 0.45
+		skirt.height = 0.62
+		skirt.radial_segments = 16
+		_add(_hips, skirt, Vector3(0, -0.32, 0.02), look.cloak)
+		if look.cloak_pattern == &"clouds":
+			for p: Vector3 in [Vector3(-0.15, 0.35, -0.22), Vector3(0.14, 0.15, -0.22), Vector3(0.1, 0.45, 0.24), Vector3(-0.12, 0.1, 0.24)]:
+				var cloud := _sphere(_torso, p, 0.07, Color(0.85, 0.1, 0.12))
+				cloud.scale = Vector3(1.5, 0.8, 0.3)
+		elif look.cloak_pattern == &"flames":
+			var hem := CylinderMesh.new()
+			hem.top_radius = 0.43
+			hem.bottom_radius = 0.46
+			hem.height = 0.12
+			hem.radial_segments = 16
+			_add(_hips, hem, Vector3(0, -0.58, 0.02), Color(0.95, 0.3, 0.1))
+	if look.gourd:
+		_sphere(_torso, Vector3(0, 0.15, 0.3), 0.2, Color(0.72, 0.55, 0.38))
+		_sphere(_torso, Vector3(0, 0.45, 0.28), 0.14, Color(0.72, 0.55, 0.38))
+		var strap := _box(_torso, Vector3(0, 0.35, 0), Vector3(0.06, 0.75, 0.42), Color(0.55, 0.4, 0.3))
+		strap.rotation_degrees.z = 35.0
 
 
 func _build_arms(look: ShinobiLook) -> void:
@@ -239,8 +268,11 @@ func _build_head(look: ShinobiLook) -> void:
 		if covered_left and x < 0.0:
 			continue
 		_box(_head, Vector3(x, 0.02, -0.205), Vector3(0.085, 0.07, 0.02), Color.WHITE)
-		_box(_head, Vector3(x, 0.015, -0.218), Vector3(0.045, 0.06, 0.02), look.eye_color)
-		_box(_head, Vector3(x, 0.085, -0.205), Vector3(0.09, 0.02, 0.02), look.hair_color.darkened(0.3))  # brow
+		_box(_head, Vector3(x, 0.015, -0.218), Vector3(0.045, 0.06, 0.02), Color(0.88, 0.85, 0.95) if look.eye_white else look.eye_color)
+		var brow := Vector3(0.1, 0.045, 0.03) if look.thick_brows else Vector3(0.09, 0.02, 0.02)
+		_box(_head, Vector3(x, 0.088, -0.205), brow, look.hair_color.darkened(0.3))  # brow
+	if look.forehead_mark:
+		_box(_head, Vector3(-0.09, 0.15, -0.205), Vector3(0.06, 0.06, 0.015), Color(0.8, 0.1, 0.12))
 	if look.whiskers:
 		for side: float in [-1.0, 1.0]:
 			for i in 3:
@@ -289,6 +321,38 @@ func _build_hair(look: ShinobiLook) -> void:
 			for x: float in [-0.18, 0.18]:
 				_capsule(_head, Vector3(x, -0.13, -0.07), 0.05, 0.36, c)  # front locks
 			_box(_head, Vector3(0.02, 0.15, -0.19), Vector3(0.3, 0.07, 0.06), c)  # fringe
+		ShinobiLook.Hair.BOWL:
+			var cap := _sphere(_head, Vector3(0, 0.07, 0.01), 0.252, c)
+			cap.scale = Vector3(1.03, 0.85, 1.03)
+			_box(_head, Vector3(0, 0.12, -0.2), Vector3(0.42, 0.09, 0.08), c)  # straight fringe
+			for x: float in [-0.22, 0.22]:
+				_box(_head, Vector3(x, 0.0, -0.02), Vector3(0.06, 0.24, 0.36), c)
+		ShinobiLook.Hair.SHORT:
+			_sphere(_head, Vector3(0, 0.08, 0.03), 0.24, c).scale = Vector3(1.0, 0.8, 1.0)
+			for i in 10:
+				var a: float = TAU * i / 10.0
+				var dir := Vector3(sin(a) * 0.8, 0.6, cos(a) * 0.8).normalized()
+				_spike(_head, dir * 0.18 + Vector3(0, 0.06, 0.02), dir, 0.07, 0.16, c)
+		ShinobiLook.Hair.HIME:
+			_sphere(_head, Vector3(0, 0.07, 0.03), 0.255, c).scale = Vector3(1.04, 0.9, 1.02)
+			var back := _capsule(_head, Vector3(0, -0.32, 0.12), 0.2, 0.9, c)
+			back.scale = Vector3(1.1, 1.0, 0.5)
+			_box(_head, Vector3(0, 0.14, -0.2), Vector3(0.4, 0.08, 0.06), c)  # blunt bangs
+			for x: float in [-0.2, 0.2]:
+				_capsule(_head, Vector3(x, -0.12, -0.08), 0.045, 0.4, c)
+		ShinobiLook.Hair.PINEAPPLE:
+			_sphere(_head, Vector3(0, 0.07, 0.03), 0.24, c).scale = Vector3(1.0, 0.82, 1.0)
+			_cylinder(_head, Vector3(0, 0.2, 0.14), 0.05, 0.06, Color(0.2, 0.2, 0.25))  # hair tie
+			for i in 7:
+				var a: float = lerpf(-1.2, 1.2, i / 6.0)
+				var dir := Vector3(sin(a) * 0.5, 1.0, 0.35 + cos(a) * 0.2).normalized()
+				_spike(_head, Vector3(0, 0.24, 0.16), dir, 0.05, 0.24, c)
+		ShinobiLook.Hair.PONYTAIL:
+			_sphere(_head, Vector3(0, 0.07, 0.03), 0.245, c).scale = Vector3(1.02, 0.86, 1.0)
+			for x: float in [-0.19, 0.19]:
+				_capsule(_head, Vector3(x, -0.08, -0.1), 0.045, 0.34, c)  # long front locks
+			_cylinder(_head, Vector3(0, -0.05, 0.22), 0.04, 0.05, Color(0.2, 0.2, 0.25))
+			_capsule(_head, Vector3(0, -0.28, 0.25), 0.05, 0.4, c)  # low ponytail
 		ShinobiLook.Hair.SWEPT:
 			_sphere(_head, Vector3(0, 0.08, 0.03), 0.24, c).scale = Vector3(1.02, 0.82, 1.0)
 			for i in 9:

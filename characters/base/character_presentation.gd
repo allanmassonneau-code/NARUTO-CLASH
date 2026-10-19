@@ -172,8 +172,10 @@ func _default_anim(a: AbilityData) -> String:
 			return "dash"
 		AbilityData.Kind.PROJECTILE:
 			return "throw"
-		AbilityData.Kind.GROUND_AREA:
+		AbilityData.Kind.GROUND_AREA, AbilityData.Kind.SUMMON_CLONE:
 			return "seal"
+		AbilityData.Kind.TELEPORT:
+			return "dash"
 	return "jab"
 
 
@@ -220,7 +222,7 @@ func _track_spell(delta: float) -> void:
 
 func _update_overhead() -> void:
 	# Only what you can't read from the body: name and crowd control.
-	var text: String = _character.data.display_name.get_slice(" ", 0)
+	var text: String = _character.data.short_name if _character.data.short_name != "" else _character.data.display_name.get_slice(" ", 0)
 	if _character.status.has_status(StatusController.Type.STUN):
 		text = "STUN"
 	elif _character.status.has_status(StatusController.Type.ROOT):

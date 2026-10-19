@@ -12,6 +12,9 @@ signal died
 var max_health: float = 100.0
 var current_health: float = 100.0
 var recoverable_health: float = 0.0
+## Damage absorbed before health (sand armor, sand shield).
+var shield: float = 0.0
+var shield_left: float = 0.0
 var invulnerable_debug: bool = false
 
 
@@ -23,12 +26,21 @@ func setup(maximum: float) -> void:
 func reset() -> void:
 	current_health = max_health
 	recoverable_health = 0.0
+	shield = 0.0
+	shield_left = 0.0
 	_emit()
 
 
 func apply_damage(amount: float) -> float:
 	if is_dead() or amount <= 0.0:
 		return 0.0
+	if shield > 0.0:
+		var absorbed: float = minf(shield, amount)
+		shield -= absorbed
+		amount -= absorbed
+		if amount <= 0.0:
+			_emit()
+			return 0.0
 	var dealt: float = minf(amount, current_health)
 	if invulnerable_debug:
 		dealt = 0.0
@@ -51,6 +63,26 @@ func heal(amount: float, true_heal: bool = false) -> float:
 	recoverable_health = clampf(recoverable_health - healed, 0.0, max_health - current_health)
 	_emit()
 	return healed
+
+
+func add_shield(amount: float, duration: float) -> void:
+	shield = maxf(shield, amount)
+	shield_left = maxf(shield_left, duration)
+	_emit()
+
+
+func tick_shield(delta: float) -> void:
+	if shield_left > 0.0:
+		shield_left -= delta
+		if shield_left <= 0.0:
+			shield = 0.0
+			_emit()
+
+
+## Damage that ignores shields and can't kill (Eight Gates drain).
+func drain(amount: float) -> void:
+	current_health = maxf(1.0, current_health - amount)
+	_emit()
 
 
 ## Client mirror of the server value.

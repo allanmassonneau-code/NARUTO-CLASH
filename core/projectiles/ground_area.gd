@@ -7,6 +7,8 @@ extends Node3D
 var source: CombatCharacter
 var team: int = 0
 var ability: AbilityData
+## Cast direction (orients walls).
+var direction: Vector3 = Vector3.FORWARD
 var elapsed: float = 0.0
 ## Client-side replica: shows the telegraph, never deals damage.
 var visual_only: bool = false
@@ -20,31 +22,51 @@ var _tick_timer: float = 0.0
 const ZONE_TICK: float = 0.5
 
 
-static func spawn(from: CombatCharacter, data: AbilityData, point: Vector3) -> GroundArea:
+static func spawn(from: CombatCharacter, data: AbilityData, point: Vector3, dir: Vector3 = Vector3.FORWARD) -> GroundArea:
 	var area := GroundArea.new()
 	area.source = from
 	area.team = from.team
 	area.ability = data
+	area.direction = HitQuery.flat(dir).normalized() if dir.length_squared() > 0.01 else Vector3.FORWARD
 	from.get_parent().add_child(area)
 	area.global_position = Vector3(point.x, 0.0, point.z)
-	area.net_id = Net.on_entity_spawned(area, from, data, area.global_position, Vector3.ZERO)
+	area.net_id = Net.on_entity_spawned(area, from, data, area.global_position, area.direction)
 	return area
 
 
-static func spawn_visual(from: CombatCharacter, data: AbilityData, point: Vector3) -> GroundArea:
+static func spawn_visual(from: CombatCharacter, data: AbilityData, point: Vector3, dir: Vector3 = Vector3.FORWARD) -> GroundArea:
 	var area := GroundArea.new()
 	area.source = from
 	area.team = from.team
 	area.ability = data
+	area.direction = dir if dir.length_squared() > 0.01 else Vector3.FORWARD
 	area.visual_only = true
 	from.get_parent().add_child(area)
 	area.global_position = point
 	return area
 
 
+## Newest Flying Thunder God kunai of `owner_char` (or null).
+static func newest_marker(owner_char: CombatCharacter) -> GroundArea:
+	var best: GroundArea = null
+	for node: Node in owner_char.get_tree().get_nodes_in_group(&"markers"):
+		var m := node as GroundArea
+		if m != null and m.source == owner_char and not m.is_queued_for_deletion():
+			if best == null or m.elapsed < best.elapsed:
+				best = m
+	return best
+
+
+## Removes a marker after it has been used.
+func consume() -> void:
+	_finish()
+
+
 func _ready() -> void:
 	add_to_group(&"ground_areas")
 	add_to_group(&"round_entities")
+	if ability.marker:
+		add_to_group(&"markers")
 	if not CombatFx.is_enabled():
 		return
 	add_child(_make_disk(Color(ability.color, 0.18), 0.015))
@@ -72,6 +94,8 @@ func _detonate() -> void:
 	SpellVfx.area_detonate(self, global_position, ability)
 	_detonated = true
 	_zone_left = ability.zone_duration
+	if ability.wall_length > 0.0:
+		_raise_wall()
 	if ability.zone_duration > 0.0 and CombatFx.is_enabled():
 		if _fill != null:
 			_fill.visible = false
@@ -80,7 +104,7 @@ func _detonate() -> void:
 		if ability.zone_duration <= 0.0:
 			queue_free()
 		return  # replicas linger until the server despawns them
-	if ability.damage > 0.0 or ability.stun_duration > 0.0 or ability.root_duration > 0.0:
+	if not ability.trap and (ability.damage > 0.0 or ability.stun_duration > 0.0 or ability.root_duration > 0.0):
 		_hit_inside(ability.damage, true)
 	if ability.zone_duration <= 0.0:
 		_finish()
@@ -92,12 +116,45 @@ func _zone_process(delta: float) -> void:
 		if _zone_left < -2.0:
 			queue_free()  # safety if the despawn message was lost
 		return
-	_tick_timer -= delta
-	if _tick_timer <= 0.0:
-		_tick_timer = ZONE_TICK
-		_hit_inside(ability.zone_tick_damage, false)
+	if ability.trap:
+		if _enemy_inside():
+			SpellVfx.area_detonate(self, global_position, ability)
+			_hit_inside(ability.damage, true)
+			_finish()
+			return
+	elif ability.zone_tick_damage > 0.0 or ability.slow_duration > 0.0 or ability.burn_duration > 0.0:
+		_tick_timer -= delta
+		if _tick_timer <= 0.0:
+			_tick_timer = ZONE_TICK
+			_hit_inside(ability.zone_tick_damage, false)
 	if _zone_left <= 0.0:
 		_finish()
+
+
+func _enemy_inside() -> bool:
+	for node: Node in get_tree().get_nodes_in_group(&"fighters"):
+		var f := node as CombatCharacter
+		if f != null and f.team != team and not f.is_dead() and HitQuery.flat(f.global_position - global_position).length() <= ability.hit_radius:
+			return true
+	return false
+
+
+## Sand wall: a solid box across the cast direction (blocks movement for
+## everyone, including the client's predicted body).
+func _raise_wall() -> void:
+	var body := StaticBody3D.new()
+	body.collision_layer = 1
+	body.collision_mask = 0
+	var shape := CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = Vector3(ability.wall_length, 2.0, 0.8)
+	shape.shape = box
+	shape.position.y = 1.0
+	body.add_child(shape)
+	add_child(body)
+	body.global_basis = Basis.looking_at(direction, Vector3.UP)
+	if CombatFx.is_enabled():
+		SpellVfx.sand_wall(self, body, ability.wall_length)
 
 
 func _finish() -> void:

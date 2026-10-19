@@ -169,6 +169,55 @@ func _kit_tests(naruto: CombatCharacter, sasuke: CombatCharacter) -> void:
 	naruto.receive_hit(big)
 	_check(naruto.status.has_status(StatusController.Type.REGEN), "kurama chakra triggers under 30% HP")
 	kakashi.queue_free()
+	_new_roster_tests(naruto, sasuke)
+
+
+func _new_roster_tests(a: CombatCharacter, b: CombatCharacter) -> void:
+	var scene := load("res://characters/base/shinobi.tscn") as PackedScene
+	var hinata := scene.instantiate() as CombatCharacter
+	hinata.data = load("res://characters/hinata/hinata_data.tres")
+	hinata.team = 1
+	add_child(hinata)
+	a.status.clear_all()
+	a.health.reset()
+	for i in 3:
+		a.receive_hit(HitData.from_ability(hinata, hinata.data.lmb, Vector3.FORWARD))
+	_check(a.status.has_status(StatusController.Type.SILENCE), "3 gentle fist blocks silence")
+	_check(not a.abilities.try_cast(&"rmb") and a.status.can_cast(&"lmb"), "silence blocks jutsu, not basic attacks")
+	a.status.clear_all()
+	var itachi := scene.instantiate() as CombatCharacter
+	itachi.data = load("res://characters/itachi/itachi_data.tres")
+	itachi.team = 1
+	add_child(itachi)
+	a.receive_hit(HitData.from_ability(itachi, itachi.data.rmb, Vector3.FORWARD))
+	a.status.apply_status(StatusController.Type.INCAPACITATE, 2.0)
+	var poke := HitData.new()
+	poke.source = itachi
+	poke.damage = 1.0
+	a.receive_hit(poke)
+	_check(not a.status.has_status(StatusController.Type.INCAPACITATE), "genjutsu breaks on damage")
+	var gaara := scene.instantiate() as CombatCharacter
+	gaara.data = load("res://characters/gaara/gaara_data.tres")
+	add_child(gaara)
+	gaara.health.add_shield(20.0, 3.0)
+	var hit := HitData.new()
+	hit.source = itachi
+	hit.damage = 15.0
+	gaara.receive_hit(hit)
+	_check(gaara.health.current_health == gaara.health.max_health and is_equal_approx(gaara.health.shield, 5.0), "sand shield absorbs damage")
+	var minato := scene.instantiate() as CombatCharacter
+	minato.data = load("res://characters/minato/minato_data.tres")
+	add_child(minato)
+	minato.global_position = Vector3(0, 0, 6)
+	b.global_position = Vector3(0, 0, -3)
+	b.status.clear_all()
+	b.status.apply_status(StatusController.Type.SEAL, 8.0)
+	minato.abilities.try_cast(&"rmb")
+	for i in 20:
+		minato.abilities.tick(1.0 / 60.0, null)
+	_check(minato.global_position.distance_to(b.global_position) < 1.6, "hiraishin teleports to the sealed target")
+	for n: Node in [hinata, itachi, gaara, minato]:
+		n.queue_free()
 
 
 func _check(condition: bool, label: String) -> void:

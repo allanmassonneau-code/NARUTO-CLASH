@@ -22,6 +22,7 @@ var controls_enabled: bool = true
 ## Naruto's active shadow clone (null when none).
 var clone: ShadowClone
 var _passive_used: bool = false
+var _passive_timer: float = 0.0
 ## AUTHORITY: simulates (offline / server). PUPPET: mirrors snapshots.
 ## PREDICTED: local client fighter, predicts movement and reconciles.
 var net_mode: NetMode = NetMode.AUTHORITY
@@ -84,8 +85,7 @@ func _physics_process(delta: float) -> void:
 	abilities.tick(delta, intent if can_act else null)
 	var wish: Vector3 = intent.move_direction if intent != null and status.can_move() else Vector3.ZERO
 	movement.speed_multiplier = abilities.get_move_multiplier() * status.speed_multiplier()
-	if status.has_status(StatusController.Type.REGEN):
-		health.heal(StatusController.REGEN_PER_SECOND * delta, true)
+	_tick_status_effects(delta)
 	velocity = movement.compute_velocity(wish, delta)
 	move_and_slide()
 	movement.on_post_move(get_real_velocity())
@@ -117,6 +117,8 @@ func receive_hit(hit: HitData) -> HitData.Result:
 			damage += a.bonus_vs_rooted
 			status.remove_status(StatusController.Type.ROOT)
 	health.apply_damage(damage)
+	if damage > 0.0:
+		status.remove_status(StatusController.Type.INCAPACITATE)  # genjutsu breaks on damage
 	if is_dead():
 		hit_received.emit(hit)
 		return HitData.Result.HIT
@@ -133,11 +135,46 @@ func receive_hit(hit: HitData) -> HitData.Result:
 			status.apply_status(StatusController.Type.SLOW, a.slow_duration)
 		if a.apply_mark > 0:
 			status.add_stacks(StatusController.Type.MARK, a.apply_mark, 3, 5.0)
+		if a.apply_lock > 0:
+			status.add_stacks(StatusController.Type.LOCK, a.apply_lock, 3, 4.0)
+			if status.get_stacks(StatusController.Type.LOCK) >= 3:
+				status.remove_status(StatusController.Type.LOCK)
+				status.apply_status(StatusController.Type.SILENCE, 1.5)
+				abilities.interrupt()
+		if a.silence_duration > 0.0:
+			status.apply_status(StatusController.Type.SILENCE, a.silence_duration)
+		if a.incapacitate_duration > 0.0:
+			status.apply_status(StatusController.Type.INCAPACITATE, a.incapacitate_duration)
+			abilities.interrupt()
+		if a.burn_duration > 0.0:
+			status.apply_status(StatusController.Type.BURN, a.burn_duration)
+		if a.apply_seal:
+			status.apply_status(StatusController.Type.SEAL, 8.0)
+		if a.energy_drain > 0.0 and is_instance_valid(hit.source):
+			var stolen: float = minf(a.energy_drain, energy.current_energy)
+			energy.sync_state(energy.current_energy - stolen)
+			hit.source.energy.gain(stolen)
 	if is_instance_valid(hit.source):
 		hit.source.energy.gain(hit.energy_gain)
 	_check_passive()
 	hit_received.emit(hit)
 	return HitData.Result.HIT
+
+
+## Damage / healing over time and passive timers (authoritative only).
+func _tick_status_effects(delta: float) -> void:
+	if status.has_status(StatusController.Type.REGEN):
+		health.heal(StatusController.REGEN_PER_SECOND * delta, true)
+	if status.has_status(StatusController.Type.BURN):
+		health.apply_damage(StatusController.BURN_PER_SECOND * delta)
+	if status.has_status(StatusController.Type.DRAIN):
+		health.drain(StatusController.DRAIN_PER_SECOND * delta)
+	health.tick_shield(delta)
+	if data.passive == &"sand_armor":
+		_passive_timer -= delta
+		if _passive_timer <= 0.0 and health.shield <= 0.0:
+			_passive_timer = 8.0
+			health.add_shield(15.0, 999.0)
 
 
 ## Character passives triggered by state (data-driven via CharacterData.passive).
@@ -161,6 +198,7 @@ func set_pass_through(enabled: bool) -> void:
 func reset_for_round(spawn: Transform3D) -> void:
 	dismiss_clone()
 	_passive_used = false
+	_passive_timer = 0.0
 	abilities.reset()
 	status.clear_all()
 	movement.stop()
@@ -178,7 +216,7 @@ func reset_for_round(spawn: Transform3D) -> void:
 
 ## Floats per fighter in a snapshot (see write_snapshot for the layout).
 static func snapshot_stride() -> int:
-	return 11 + StatusController.Type.size() + AbilityController.SLOTS.size() + 5 + 1 + 4 + 4
+	return 11 + StatusController.Type.size() + AbilityController.SLOTS.size() + 5 + 3 + 4 + 4
 
 
 ## Server: appends this fighter's state to a snapshot buffer.
@@ -194,7 +232,7 @@ func write_snapshot(out: PackedFloat32Array, acked_seq: int) -> void:
 	for slot: StringName in AbilityController.SLOTS:
 		out.append(abilities.get_cooldown_left(slot))
 	out.append_array([1.0 if movement.is_forced() else 0.0, float(acked_seq), facing.aim_point.x, facing.aim_point.z, 1.0 if controls_enabled else 0.0])
-	out.append(float(status.get_stacks(StatusController.Type.MARK)))
+	out.append_array([float(status.get_stacks(StatusController.Type.MARK)), float(status.get_stacks(StatusController.Type.LOCK)), health.shield])
 	if is_instance_valid(clone):
 		out.append_array([1.0, clone.global_position.x, clone.global_position.z, atan2(clone.facing.x, clone.facing.z)])
 	else:
@@ -232,7 +270,9 @@ func apply_snapshot(data: PackedFloat32Array, o: int) -> void:
 	var aim := Vector3(data[r + 2], 0.0, data[r + 3])
 	r += 5
 	status.sync_stacks(StatusController.Type.MARK, int(data[r]))
-	r += 1
+	status.sync_stacks(StatusController.Type.LOCK, int(data[r + 1]))
+	health.shield = data[r + 2]
+	r += 3
 	_sync_clone(data[r] > 0.5, Vector3(data[r + 1], 0.0, data[r + 2]), data[r + 3])
 	r += 4
 	var copy_source: CombatCharacter = Net.fighter_at(int(data[r]))

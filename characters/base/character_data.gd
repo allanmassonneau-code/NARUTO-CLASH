@@ -3,6 +3,8 @@ extends Resource
 ## Static definition of a shinobi: stats + one AbilityData per input slot.
 
 @export var display_name: String = "Shinobi"
+## Shown over the head and in HUD cards.
+@export var short_name: String = ""
 @export_multiline var identity: String = ""
 @export var body_color: Color = Color.WHITE
 @export var look: ShinobiLook

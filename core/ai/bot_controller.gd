@@ -128,6 +128,9 @@ func _sees_threat(dist: float) -> bool:
 
 func _try_defend(dir: Vector3) -> bool:
 	var q: AbilityData = _body.abilities.get_ability(&"q")
+	if q != null and q.grant_shield > 0.0 and _body.abilities.is_ready(&"q"):
+		_press(&"q")
+		return true
 	if q != null and q.kind == AbilityData.Kind.COUNTER and _body.abilities.is_ready(&"q") and _rng.randf() < 0.5:
 		_press(&"q")
 		return true
@@ -158,11 +161,20 @@ func _try_attack(dir: Vector3, dist: float) -> void:
 				and not is_instance_valid(_body.clone):
 			_press(slot)
 			return
-	for slot: StringName in [&"ult", &"e", &"rmb", &"lmb"]:
+	for slot: StringName in [&"q", &"e"]:
+		var buff: AbilityData = _body.abilities.get_ability(slot)
+		if buff != null and buff.buff_empower > 0.0 and dist < 4.0 and _body.abilities.is_ready(slot):
+			_press(slot)
+			return
+	for slot: StringName in [&"ult", &"e", &"rmb", &"q", &"lmb"]:
 		var a: AbilityData = _body.abilities.get_ability(slot)
+		if a != null and a.kind == AbilityData.Kind.COUNTER:
+			continue
 		if a == null or not a.does_damage() or not _body.abilities.is_ready(slot):
 			continue
 		if dist > a.get_reach() * 0.9:
+			continue
+		if a.kind == AbilityData.Kind.TELEPORT and not _has_sealed_target():
 			continue
 		if slot != &"lmb" and _rng.randf() < 0.35:
 			continue  # don't dump every cooldown instantly
@@ -173,6 +185,14 @@ func _try_attack(dir: Vector3, dist: float) -> void:
 	if dist > _preferred_range + 5.0 and _body.abilities.is_ready(&"space") and _rng.randf() < 0.15:
 		_force_aim(_body.global_position + dir * 5.0, 0.3)
 		_press(&"space")
+
+
+func _has_sealed_target() -> bool:
+	for node: Node in get_tree().get_nodes_in_group(&"fighters"):
+		var other := node as CombatCharacter
+		if other != null and other.team != _body.team and other.status.has_status(StatusController.Type.SEAL):
+			return true
+	return false
 
 
 func _press(slot: StringName) -> void:

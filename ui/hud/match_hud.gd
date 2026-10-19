@@ -229,7 +229,7 @@ func _build_card(parent: Control, fighter: CombatCharacter) -> Dictionary:
 	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	info.add_theme_constant_override("separation", 3)
 	row.add_child(info)
-	var title: String = fighter.data.display_name.get_slice(" ", 0)
+	var title: String = fighter.data.short_name if fighter.data.short_name != "" else fighter.data.display_name.get_slice(" ", 0)
 	UiStyle.label(info, title + ("  (toi)" if fighter == _player else ""), 14, UiStyle.TEXT, 700)
 	var stack := Control.new()
 	stack.custom_minimum_size = Vector2(0, 10)

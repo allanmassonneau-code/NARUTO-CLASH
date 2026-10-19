@@ -37,11 +37,11 @@ func _ready() -> void:
 
 	var roster: Array[CharacterData] = GameSession.get_roster()
 	_title(box, "Your shinobi", 20)
-	var player_row := _row(box)
+	var player_row := _grid(box)
 	for i in roster.size():
 		_player_buttons.append(_character_button(player_row, roster[i], _select_player.bind(i)))
 	_title(box, "Opponent", 20)
-	var opponent_row := _row(box)
+	var opponent_row := _grid(box)
 	for i in roster.size():
 		_opponent_buttons.append(_character_button(opponent_row, roster[i], _select_opponent.bind(i)))
 	_opponent_buttons.append(_button(opponent_row, "Random", _select_opponent.bind(-1)))
@@ -138,7 +138,7 @@ func _button(parent: Control, text: String, callback: Callable) -> Button:
 	var button := Button.new()
 	button.text = text
 	button.toggle_mode = true
-	button.custom_minimum_size = Vector2(160, 40)
+	button.custom_minimum_size = Vector2(150, 38)
 	button.pressed.connect(callback)
 	parent.add_child(button)
 	return button
@@ -151,6 +151,17 @@ func _line_edit(parent: Control, text: String, placeholder: String, width: float
 	edit.custom_minimum_size = Vector2(width, 40)
 	parent.add_child(edit)
 	return edit
+
+
+func _grid(parent: Control) -> GridContainer:
+	var grid := GridContainer.new()
+	grid.columns = 6
+	grid.add_theme_constant_override("h_separation", 8)
+	grid.add_theme_constant_override("v_separation", 8)
+	var center := CenterContainer.new()
+	parent.add_child(center)
+	center.add_child(grid)
+	return grid
 
 
 func _row(parent: Control) -> HBoxContainer:
