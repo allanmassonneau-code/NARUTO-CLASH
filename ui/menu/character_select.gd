@@ -14,8 +14,9 @@ var _online_status: Label
 
 
 func _ready() -> void:
+	theme = UiStyle.theme()
 	var bg := ColorRect.new()
-	bg.color = Color(0.1, 0.11, 0.14)
+	bg.color = UiStyle.BG_SOLID
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
 	var center := CenterContainer.new()
@@ -25,7 +26,10 @@ func _ready() -> void:
 	box.add_theme_constant_override("separation", 14)
 	center.add_child(box)
 
-	_title(box, "NARUTO CLASH — Shinobi Arena", 40)
+	var title := _title(box, "NARUTO CLASH", 56)
+	title.add_theme_color_override("font_color", UiStyle.ACCENT)
+	title.add_theme_font_override("font", UiStyle.font(900))
+	_title(box, "SHINOBI ARENA", 14).add_theme_color_override("font_color", UiStyle.MUTED)
 	_title(box, "Mode", 20)
 	var mode_row := _row(box)
 	_mode_buttons.append(_button(mode_row, "1v1 vs Bot", func() -> void: _set_mode(GameSession.Mode.DUEL_VS_BOT)))
@@ -155,9 +159,10 @@ func _row(parent: Control) -> HBoxContainer:
 	return row
 
 
-func _title(parent: Control, text: String, size: int) -> void:
+func _title(parent: Control, text: String, size: int) -> Label:
 	var label := Label.new()
 	label.text = text
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.add_theme_font_size_override("font_size", size)
 	parent.add_child(label)
+	return label
