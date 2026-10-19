@@ -1,4 +1,4 @@
-# Naruto Clash — Shinobi Arena
+# Ninja Battle
 
 Competitive top-down arena brawler (Battlerite-like) in the Naruto universe. Godot 4.3, typed GDScript.
 Gameplay first, placeholder visuals (capsules, cubes, debug shapes).
@@ -12,7 +12,9 @@ Modes: **1v1 vs bot**, **2v2 (you + bot ally) vs 2 bots**. Best of 5 (first to 3
 |---|---|
 | WASD / ZQSD (physical keys) | Move |
 | Mouse | Aim / facing |
-| LMB / RMB / Space / Q(A on AZERTY) / E / F | Jutsu slots (F = ultimate, 100 energy). Hold LMB to keep attacking |
+| LMB / RMB / Space / Q(A on AZERTY) / E / R | Jutsu slots (R = ultimate, 100 energy). Hold LMB to keep attacking |
+| F (hold) | Guard: frontal hits deal 30% and no CC, slower movement; breaks after 45 blocked damage |
+| F + LMB | Perfect parry (0.22 s window): an enemy basic attack is negated and its attacker stunned 1.2 s |
 | X or middle mouse | Cancel during startup (feint) |
 | F1 / F2 / F3 | Debug overlay / aim line / collision shapes |
 | F6 / F7 / F8 | Cheats: infinite HP / infinite energy / no cooldowns |

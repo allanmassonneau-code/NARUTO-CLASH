@@ -77,6 +77,18 @@ func get_base_ability(slot: StringName) -> AbilityData:
 	return _abilities.get(slot)
 
 
+## True for any hit of the basic attack string (LMB and its combo follow-ups).
+func is_basic_attack(ability: AbilityData) -> bool:
+	var a: AbilityData = get_base_ability(&"lmb")
+	var depth: int = 0
+	while a != null and depth < 8:
+		if a == ability:
+			return true
+		a = a.combo_next
+		depth += 1
+	return false
+
+
 func reset_cooldown(slot: StringName) -> void:
 	if _cooldowns.has(slot):
 		_cooldowns[slot] = 0.0

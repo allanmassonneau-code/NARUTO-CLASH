@@ -30,6 +30,8 @@ var _dot_timer: float = 0.0
 var _was_stunned: bool = false
 var _was_dead: bool = false
 var _was_immaterial: bool = false
+var _was_parry: bool = false
+var _was_break: bool = false
 
 const BAR_WIDTH_PX: int = 120
 const BAR_HEIGHT_PX: int = 12
@@ -106,6 +108,9 @@ func _process(delta: float) -> void:
 		tint = Color(0.3, 0.5, 1.0, 0.25)
 	if status.has_status(StatusController.Type.IMMATERIAL):
 		fade = 0.65
+	if _character.guarding and pose == &"" and not abilities.is_casting():
+		pose = &"guard:windup"
+		tint = Color(0.6, 0.8, 1.0, 0.12)
 	if abilities.is_casting() and pose == &"":
 		var a: AbilityData = abilities.current
 		var anim: String = String(a.anim) if a.anim != &"" else _default_anim(a)
@@ -132,6 +137,8 @@ func _on_damaged(amount: float) -> void:
 	_flash = 0.12
 	var heavy: bool = amount >= 15.0
 	model.hitstop(0.09 if heavy else 0.05)
+	if _character.guarding:
+		Sfx.play(&"orb_hit", _character.global_position, -2.0, 0.6)  # blocked: metallic clank
 	Sfx.play(&"hit_heavy" if heavy else &"hit", _character.global_position, 0.0 if _role == Role.LOCAL_PLAYER else -2.0)
 	var at: Vector3 = _character.global_position
 	CombatFx.damage_number(_character, at + Vector3.UP * 2.3, amount, Color(1.0, 0.85, 0.3) if heavy else Color.WHITE)
@@ -379,6 +386,20 @@ func _audio_cues() -> void:
 		Sfx.play(&"counter", _character.global_position)  # counter triggered
 		CombatFx.burst(_character, _character.global_position + Vector3.UP * 1.0, a.color, 1.2)
 	_was_immaterial = immaterial
+	var parry: bool = _character.parry_flash > 0.0
+	if parry and not _was_parry:
+		Sfx.play(&"counter", _character.global_position, 2.0, 1.2)
+		CombatFx.burst(_character, _character.global_position + Vector3.UP * 1.2, Color(1.0, 0.95, 0.5), 1.8)
+		CombatFx.damage_number(_character, _character.global_position + Vector3.UP * 2.6, 0.0, Color(1.0, 0.9, 0.3), "PARRY!")
+		var camera := get_viewport().get_camera_3d() as ArenaCamera
+		if camera != null:
+			camera.shake(0.25)
+	_was_parry = parry
+	var broken: bool = _character.guard_break_flash > 0.0
+	if broken and not _was_break:
+		Sfx.play(&"wall_slam", _character.global_position)
+		CombatFx.damage_number(_character, _character.global_position + Vector3.UP * 2.6, 0.0, Color(1.0, 0.4, 0.3), "GUARD BREAK")
+	_was_break = broken
 
 
 func _cast_sound(a: AbilityData, phase: int) -> void:

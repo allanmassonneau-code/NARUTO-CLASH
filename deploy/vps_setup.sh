@@ -101,7 +101,7 @@ setup_naruto() {
 
   cat > /etc/systemd/system/naruto-server@.service <<UNIT
 [Unit]
-Description=Naruto Clash game server (%i)
+Description=Ninja Battle game server (%i)
 After=network-online.target
 
 [Service]
@@ -146,7 +146,7 @@ NGINX
   rm -f /etc/nginx/sites-enabled/default  # would clash with our default_server
   ln -sf /etc/nginx/sites-available/naruto-clash /etc/nginx/sites-enabled/naruto-clash
   install -d /var/www/html
-  echo "Naruto Clash" > /var/www/html/index.html
+  echo "Ninja Battle" > /var/www/html/index.html
   nginx -t
   systemctl reload nginx
 

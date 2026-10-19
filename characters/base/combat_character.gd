@@ -17,12 +17,31 @@ const MASK_PASS_THROUGH: int = 1
 const WALL_SLAM_MIN_SPEED: float = 7.0
 const WALL_SLAM_DAMAGE: float = 6.0
 const WALL_SLAM_STUN: float = 0.6
+## Guard (hold F): frontal hits deal a fraction of their damage and no CC.
+const GUARD_MOVE_MULTIPLIER: float = 0.45
+const GUARD_DAMAGE_TAKEN: float = 0.3
+## Raw damage a guard absorbs before breaking (stun).
+const GUARD_BREAK_DAMAGE: float = 45.0
+const GUARD_BREAK_STUN: float = 1.0
+## Perfect parry: LMB while guarding opens this window; an enemy basic
+## attack landing in it is negated and stuns the attacker.
+const PARRY_WINDOW: float = 0.22
+const PARRY_COOLDOWN: float = 0.9
+const PARRY_STUN: float = 1.2
+const PARRY_ENERGY: float = 15.0
 
 @export var data: CharacterData
 @export var controller: IntentSource
 @export var team: int = 0
 
 var controls_enabled: bool = true
+var guarding: bool = false
+## > 0 right after a perfect parry or a guard break (presentation cue, synced).
+var parry_flash: float = 0.0
+var guard_break_flash: float = 0.0
+var _parry_left: float = 0.0
+var _parry_cooldown: float = 0.0
+var _guard_absorbed: float = 0.0
 ## Naruto's active shadow clone (null when none).
 var clone: ShadowClone
 var _passive_used: bool = false
@@ -88,9 +107,10 @@ func _physics_process(delta: float) -> void:
 	var can_act: bool = status.can_act()
 	if intent != null and intent.has_aim_point and can_act and not abilities.is_facing_locked():
 		facing.update_aim(global_position, intent.aim_point)
-	abilities.tick(delta, intent if can_act else null)
+	_tick_guard(delta, intent, can_act)
+	abilities.tick(delta, intent if can_act and not guarding else null)
 	var wish: Vector3 = intent.move_direction if intent != null and status.can_move() else Vector3.ZERO
-	movement.speed_multiplier = abilities.get_move_multiplier() * status.speed_multiplier()
+	movement.speed_multiplier = abilities.get_move_multiplier() * status.speed_multiplier() * (GUARD_MOVE_MULTIPLIER if guarding else 1.0)
 	_tick_status_effects(delta)
 	var knockback_speed: float = movement.forced_speed() if movement.is_knockback else 0.0
 	velocity = movement.compute_velocity(wish, delta)
@@ -119,6 +139,29 @@ func _check_wall_slam() -> void:
 		return
 
 
+## Guard / perfect parry state (authoritative).
+func _tick_guard(delta: float, intent: GameplayIntent, can_act: bool) -> void:
+	parry_flash = maxf(0.0, parry_flash - delta)
+	guard_break_flash = maxf(0.0, guard_break_flash - delta)
+	_parry_left = maxf(0.0, _parry_left - delta)
+	_parry_cooldown = maxf(0.0, _parry_cooldown - delta)
+	guarding = intent != null and intent.guard_held and can_act and not abilities.is_casting() and not is_dead()
+	if not guarding:
+		_parry_left = 0.0
+		_guard_absorbed = maxf(0.0, _guard_absorbed - 12.0 * delta)
+		return
+	if intent.pressed_slots.has(&"lmb") and _parry_cooldown <= 0.0:
+		_parry_left = PARRY_WINDOW
+		_parry_cooldown = PARRY_COOLDOWN
+
+
+func _is_frontal(hit: HitData) -> bool:
+	if not is_instance_valid(hit.source) or hit.source == self:
+		return false
+	var to_source: Vector3 = HitQuery.flat(hit.source.global_position - global_position)
+	return to_source.length() < 0.05 or facing.facing_direction.dot(to_source.normalized()) > -0.2
+
+
 ## Central damage pipeline: immaterial -> counter -> modifiers (empower,
 ## marks, rooted bonus) -> damage -> CC -> knockback -> on-hit effects.
 func receive_hit(hit: HitData) -> HitData.Result:
@@ -128,6 +171,11 @@ func receive_hit(hit: HitData) -> HitData.Result:
 		abilities.resolve_counter(hit)
 		counter_triggered.emit(hit)
 		return HitData.Result.COUNTERED
+	if guarding and _is_frontal(hit):
+		if _parry_left > 0.0 and hit.ability != null and hit.source.abilities.is_basic_attack(hit.ability):
+			_perfect_parry(hit)
+			return HitData.Result.COUNTERED
+		return _block(hit)
 	var a: AbilityData = hit.ability
 	var damage: float = hit.damage
 	var stun: float = hit.stun_duration
@@ -189,6 +237,40 @@ func receive_hit(hit: HitData) -> HitData.Result:
 	return HitData.Result.HIT
 
 
+func _perfect_parry(hit: HitData) -> void:
+	_parry_left = 0.0
+	_parry_cooldown = 0.0
+	_guard_absorbed = 0.0
+	parry_flash = 0.4
+	energy.gain(PARRY_ENERGY)
+	var attacker: CombatCharacter = hit.source
+	attacker.status.apply_status(StatusController.Type.STUN, PARRY_STUN)
+	attacker.abilities.interrupt()
+	var push: Vector3 = HitQuery.flat(attacker.global_position - global_position).normalized() * 6.0
+	attacker.movement.apply_forced_motion(push, 0.15, true)
+	CombatFx.ring(self, global_position, 1.6, Color(1.0, 0.95, 0.6), 0.35)
+	counter_triggered.emit(hit)
+
+
+## Guarded frontal hit: chip damage only, no crowd control.
+func _block(hit: HitData) -> HitData.Result:
+	var damage: float = hit.damage
+	if is_instance_valid(hit.source) and hit.source.status.has_status(StatusController.Type.EMPOWER):
+		damage *= StatusController.EMPOWER_MULTIPLIER
+	health.apply_damage(damage * GUARD_DAMAGE_TAKEN)
+	_guard_absorbed += damage
+	if is_instance_valid(hit.source):
+		hit.source.energy.gain(hit.energy_gain * 0.5)
+	if _guard_absorbed >= GUARD_BREAK_DAMAGE and not is_dead():
+		_guard_absorbed = 0.0
+		guarding = false
+		guard_break_flash = 0.5
+		status.apply_status(StatusController.Type.STUN, GUARD_BREAK_STUN)
+		CombatFx.ring(self, global_position, 1.3, Color(1.0, 0.4, 0.3), 0.35)
+	hit_received.emit(hit)
+	return HitData.Result.HIT
+
+
 ## Damage / healing over time and passive timers (authoritative only).
 func _tick_status_effects(delta: float) -> void:
 	if status.has_status(StatusController.Type.REGEN):
@@ -225,6 +307,12 @@ func set_pass_through(enabled: bool) -> void:
 
 func reset_for_round(spawn: Transform3D) -> void:
 	dismiss_clone()
+	guarding = false
+	parry_flash = 0.0
+	guard_break_flash = 0.0
+	_parry_left = 0.0
+	_parry_cooldown = 0.0
+	_guard_absorbed = 0.0
 	_passive_used = false
 	_passive_timer = 0.0
 	abilities.reset()
@@ -244,7 +332,7 @@ func reset_for_round(spawn: Transform3D) -> void:
 
 ## Floats per fighter in a snapshot (see write_snapshot for the layout).
 static func snapshot_stride() -> int:
-	return 11 + StatusController.Type.size() + AbilityController.SLOTS.size() + 5 + 3 + 4 + 4
+	return 11 + StatusController.Type.size() + AbilityController.SLOTS.size() + 5 + 3 + 4 + 4 + 3
 
 
 ## Server: appends this fighter's state to a snapshot buffer.
@@ -270,6 +358,7 @@ func write_snapshot(out: PackedFloat32Array, acked_seq: int) -> void:
 			float(abilities.copied_depth), abilities.copied_left])
 	else:
 		out.append_array([-1.0, -1.0, 0.0, 0.0])
+	out.append_array([1.0 if guarding else 0.0, parry_flash, guard_break_flash])
 
 
 ## Client: applies the state written by write_snapshot.
@@ -306,6 +395,10 @@ func apply_snapshot(data: PackedFloat32Array, o: int) -> void:
 	var copy_source: CombatCharacter = Net.fighter_at(int(data[r]))
 	var copy_slot: int = int(data[r + 1])
 	abilities.sync_copy(copy_source, AbilityController.SLOTS[copy_slot] if copy_slot >= 0 else &"", int(data[r + 2]), data[r + 3])
+	r += 4
+	guarding = data[r] > 0.5
+	parry_flash = data[r + 1]
+	guard_break_flash = data[r + 2]
 	abilities.sync_state(phase, slot_index, elapsed, cooldowns)
 	if net_mode == NetMode.PUPPET:
 		facing.set_direction(Vector3(sin(angle), 0.0, cos(angle)))
@@ -344,6 +437,8 @@ func _predicted_process(delta: float) -> void:
 		_follow_server(delta)
 		return
 	var multiplier: float = abilities.get_move_multiplier() * status.speed_multiplier()
+	if intent.guard_held and status.can_act() and not abilities.is_casting():
+		multiplier *= GUARD_MOVE_MULTIPLIER
 	_simulate_locomotion(intent.move_direction, multiplier, delta)
 	_pending_inputs.append({"seq": _input_seq, "wish": intent.move_direction, "mult": multiplier, "dt": delta})
 	if _pending_inputs.size() > 120:

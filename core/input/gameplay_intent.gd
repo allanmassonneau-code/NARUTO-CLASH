@@ -13,6 +13,8 @@ var pressed_slots: Array[StringName] = []
 ## Ability slots currently held down (hold LMB = keep attacking).
 var held_slots: Array[StringName] = []
 var cancel_pressed: bool = false
+## Guard (F) held down.
+var guard_held: bool = false
 
 
 func clear_actions() -> void:

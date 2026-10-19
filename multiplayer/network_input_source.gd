@@ -3,6 +3,8 @@ extends IntentSource
 ## Server side: intent fed by a remote client's input messages.
 
 const SLOT_ORDER: Array[StringName] = AbilityController.SLOTS
+## Bit of the held mask carrying the guard key.
+const GUARD_BIT: int = 1 << 6
 
 var peer_id: int = 0
 ## Last input sequence number received (acked back in snapshots).
@@ -16,6 +18,7 @@ func receive_input(seq: int, move: Vector2, aim: Vector2, held_mask: int = 0) ->
 	if seq <= last_seq:
 		return  # out of date
 	last_seq = seq
+	intent.guard_held = held_mask & GUARD_BIT != 0
 	intent.held_slots.clear()
 	for i in SLOT_ORDER.size():
 		if held_mask & (1 << i):

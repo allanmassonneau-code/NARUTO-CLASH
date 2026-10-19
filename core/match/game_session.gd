@@ -45,7 +45,14 @@ const SETTINGS_PATH: String = "user://settings.cfg"
 var _roster: Array[CharacterData] = []
 
 
+## Display name. The project keeps its original config/name so the user data
+## folder (settings, friend code) stays where it was.
+const GAME_TITLE: String = "Ninja Battle"
+
+
 func _ready() -> void:
+	if DisplayServer.get_name() != "headless":
+		DisplayServer.window_set_title(GAME_TITLE)
 	var cfg := ConfigFile.new()
 	if cfg.load(SETTINGS_PATH) == OK:
 		player_name = cfg.get_value("online", "name", player_name)

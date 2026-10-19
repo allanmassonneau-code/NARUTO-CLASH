@@ -1,5 +1,5 @@
 extends Control
-## Naruto Clash launcher: checks version.json on the server, downloads and
+## Ninja Battle launcher: checks version.json on the server, downloads and
 ## verifies the new build if needed, then starts the game.
 
 const LauncherConfig = preload("res://launcher_config.gd")
@@ -21,6 +21,7 @@ var _download_path: String = ""
 
 
 func _ready() -> void:
+	DisplayServer.window_set_title("Ninja Battle Launcher")
 	_http = HTTPRequest.new()
 	_http.timeout = 20.0
 	add_child(_http)

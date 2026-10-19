@@ -46,12 +46,12 @@ static func log_decoy(anchor: Node, at: Vector3) -> void:
 
 
 ## Rising, fading damage number (client-side feedback only).
-static func damage_number(anchor: Node, at: Vector3, amount: float, color: Color) -> void:
+static func damage_number(anchor: Node, at: Vector3, amount: float, color: Color, text: String = "") -> void:
 	if not is_enabled():
 		return
 	var label := Label3D.new()
-	label.text = str(roundi(amount))
-	label.font_size = 64 if amount >= 15.0 else 48
+	label.text = text if text != "" else str(roundi(amount))
+	label.font_size = 64 if amount >= 15.0 or text != "" else 48
 	label.outline_size = 14
 	label.modulate = color
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED

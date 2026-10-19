@@ -21,6 +21,8 @@ var _aim_error: float = 0.0
 var _forced_aim: Vector3 = Vector3.ZERO
 var _forced_aim_left: float = 0.0
 var _preferred_range: float = -1.0
+var _guard_left: float = 0.0
+var _parry_tried: bool = false
 
 
 func _ready() -> void:
@@ -46,11 +48,32 @@ func poll_intent() -> GameplayIntent:
 	intent.has_aim_point = true
 	if _arena_objectives(dist):
 		return intent
+	_guard_logic(dist, delta)
 	_decision_timer -= delta
 	if _decision_timer <= 0.0:
 		_decision_timer = decision_interval
 		_decide(dir, dist)
 	return intent
+
+
+## Guards against an incoming melee hit, sometimes perfect-parries basics.
+func _guard_logic(dist: float, delta: float) -> void:
+	_guard_left -= delta
+	intent.guard_held = _guard_left > 0.0
+	var enemy: AbilityController = target.abilities
+	var incoming: bool = enemy.phase == AbilityController.Phase.STARTUP and dist < 3.2 \
+		and enemy.current.kind == AbilityData.Kind.MELEE_ARC
+	if not intent.guard_held:
+		_parry_tried = false
+		if incoming and enemy.phase_elapsed >= reaction_time * 0.5 and not _body.abilities.is_casting() \
+				and _rng.randf() < defend_chance * 0.25:
+			_guard_left = _rng.randf_range(0.4, 0.9)
+			intent.guard_held = true
+		return
+	if incoming and not _parry_tried and enemy.is_basic_attack(enemy.current):
+		_parry_tried = true
+		if _rng.randf() < 0.45:
+			_press(&"lmb")
 
 
 ## Orb and sudden-death ring. Returns true when it took over this tick.

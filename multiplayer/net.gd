@@ -467,6 +467,8 @@ func send_input(seq: int, intent: GameplayIntent, aim: Vector3) -> void:
 	var held_mask: int = 0
 	for slot: StringName in intent.held_slots:
 		held_mask |= 1 << AbilityController.SLOTS.find(slot)
+	if intent.guard_held:
+		held_mask |= NetworkInputSource.GUARD_BIT
 	c2s_input.rpc_id(1, seq, Vector2(intent.move_direction.x, intent.move_direction.z), Vector2(aim.x, aim.z), held_mask)
 	for slot: StringName in intent.pressed_slots:
 		c2s_press.rpc_id(1, AbilityController.SLOTS.find(slot))

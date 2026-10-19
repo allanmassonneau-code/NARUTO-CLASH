@@ -267,6 +267,36 @@ func _feel_tests(a: CombatCharacter, b: CombatCharacter) -> void:
 	_check(a.abilities.current_slot == &"space", "mobility cancels attack recovery")
 	a.abilities.reset()
 
+	# Guard: frontal hits chip, perfect parry (F + LMB) stuns basic attackers.
+	b.global_position = Vector3(0, 0, -1.5)
+	a.global_position = Vector3.ZERO
+	a.facing.set_direction(Vector3.FORWARD)
+	var guard := GameplayIntent.new()
+	guard.guard_held = true
+	a._tick_guard(1.0 / 60.0, guard, true)
+	_check(a.guarding, "holding F guards")
+	var hp0: float = a.health.current_health
+	a.receive_hit(HitData.from_ability(b, b.data.rmb, Vector3.BACK))
+	_check(is_equal_approx(hp0 - a.health.current_health, b.data.rmb.damage * CombatCharacter.GUARD_DAMAGE_TAKEN)
+		and not a.status.has_status(StatusController.Type.STUN), "guard blocks most damage and all CC")
+	guard.pressed_slots.append(&"lmb")
+	a._tick_guard(1.0 / 60.0, guard, true)
+	hp0 = a.health.current_health
+	var parried: HitData.Result = a.receive_hit(HitData.from_ability(b, b.data.lmb.combo_next, Vector3.BACK))
+	_check(parried == HitData.Result.COUNTERED and a.health.current_health == hp0 and b.status.has_status(StatusController.Type.STUN),
+		"perfect parry on a basic attack stuns the attacker")
+	b.status.clear_all()
+	guard.pressed_slots.clear()
+	for i in 60:
+		a._tick_guard(1.0 / 60.0, guard, true)
+	guard.pressed_slots.append(&"lmb")
+	a._tick_guard(1.0 / 60.0, guard, true)
+	a.receive_hit(HitData.from_ability(b, b.data.rmb, Vector3.BACK))
+	_check(not b.status.has_status(StatusController.Type.STUN), "perfect parry only works on basic attacks")
+	a._tick_guard(1.0 / 60.0, null, true)
+	a.health.reset()
+	b.health.reset()
+
 	var rules := ArenaRules.new()
 	add_child(rules)
 	rules.orb_hp = ArenaRules.ORB_MAX_HP
