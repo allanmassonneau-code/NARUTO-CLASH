@@ -218,7 +218,8 @@ NGINX
   echo "HTTPS ready: https://$domain/"
 }
 
-# Basic auth on every download location (the ACME challenge stays open).
+# Basic auth on the downloads (launcher, game, version.json). The download
+# page itself stays public; the ACME challenge stays open.
 # The password comes from $SITE_PASSWORD, never from the command line.
 setup_auth() {
   local user="$1"
@@ -227,15 +228,25 @@ setup_auth() {
   chown root:www-data /etc/nginx/ninja.htpasswd
   chmod 640 /etc/nginx/ninja.htpasswd
   install -d /etc/nginx/snippets
-  printf 'auth_basic "Ninja Battle";\nauth_basic_user_file /etc/nginx/ninja.htpasswd;\n' > /etc/nginx/snippets/ninja-auth.conf
-  for site in naruto-clash ninja-domain-tls; do
-    local f="/etc/nginx/sites-available/$site"
-    [[ -f "$f" ]] || continue
-    grep -q "ninja-auth.conf" "$f" || sed -i '0,/server_name .*;/s//&\n    include snippets\/ninja-auth.conf;/' "$f"
-  done
+  cat > /etc/nginx/snippets/ninja-auth.conf <<NGINX
+auth_basic "Ninja Battle";
+auth_basic_user_file /etc/nginx/ninja.htpasswd;
+location = /naruto-clash/ { auth_basic off; alias $WWW/; index index.html; }
+location = /naruto-clash/index.html { auth_basic off; alias $WWW/index.html; }
+NGINX
+  cat > /etc/nginx/snippets/ninja-auth-root.conf <<NGINX
+location = / { auth_basic off; root $WWW; index index.html; }
+location = /index.html { auth_basic off; root $WWW; }
+NGINX
+  local f
+  f=/etc/nginx/sites-available/naruto-clash
+  [[ -f "$f" ]] && ! grep -q "ninja-auth.conf" "$f" && sed -i '0,/server_name .*;/s//&\n    include snippets\/ninja-auth.conf;/' "$f"
+  f=/etc/nginx/sites-available/ninja-domain-tls
+  [[ -f "$f" ]] && ! grep -q "ninja-auth.conf" "$f" && \
+    sed -i '0,/server_name .*;/s//&\n    include snippets\/ninja-auth.conf;\n    include snippets\/ninja-auth-root.conf;/' "$f"
   nginx -t
   systemctl reload nginx
-  echo "Site protected (user: $user)"
+  echo "Downloads protected (user: $user)"
 }
 
 if [[ -n "$DOMAIN" ]]; then setup_https "$DOMAIN"; fi

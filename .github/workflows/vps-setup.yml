@@ -90,7 +90,9 @@ jobs:
         run: |
           if [ "$PROTECT" = "true" ]; then
             code=$(curl -s -o /dev/null -w '%{http_code}' "http://$HOST/naruto-clash/version.json")
-            [ "$code" = "401" ] && echo "Site is password-protected" || { echo "Expected 401, got $code"; exit 1; }
+            [ "$code" = "401" ] && echo "Downloads are password-protected" || { echo "Expected 401, got $code"; exit 1; }
+            curl -fsS -o /dev/null "http://$HOST/naruto-clash/" && echo "Download page still public"
+            curl -fsS -o /dev/null -u "$SITE_USER:$SITE_PASSWORD" "http://$HOST/naruto-clash/version.json" && echo "Password works"
             exit 0
           fi
           curl -fsS "http://$HOST/" >/dev/null && echo "VPS ready"
