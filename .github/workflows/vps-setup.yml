@@ -1,0 +1,67 @@
+name: VPS setup (one-time)
+
+# Actions -> "VPS setup (one-time)" -> Run workflow.
+# Needs secrets: VPS_HOST, VPS_SSH_KEY (deploy key, private) and root access:
+# VPS_ROOT_PASSWORD (or VPS_ROOT_KEY), optional VPS_ROOT_USER (default root).
+on:
+  workflow_dispatch:
+    inputs:
+      wipe:
+        description: "Delete everything previously installed on the VPS (Grandlinetactics...)"
+        type: boolean
+        default: false
+      confirm:
+        description: "Type WIPE to confirm the wipe"
+        type: string
+        default: ""
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      HOST: ${{ secrets.VPS_HOST }}
+      ROOT_USER: ${{ secrets.VPS_ROOT_USER || 'root' }}
+      ROOT_PASSWORD: ${{ secrets.VPS_ROOT_PASSWORD }}
+      ROOT_KEY: ${{ secrets.VPS_ROOT_KEY }}
+      DEPLOY_KEY: ${{ secrets.VPS_SSH_KEY }}
+      WIPE: ${{ inputs.wipe }}
+      CONFIRM: ${{ inputs.confirm }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check inputs
+        run: |
+          [ -n "$HOST" ] || { echo "Secret VPS_HOST missing"; exit 1; }
+          [ -n "$DEPLOY_KEY" ] || { echo "Secret VPS_SSH_KEY missing"; exit 1; }
+          [ -n "$ROOT_PASSWORD$ROOT_KEY" ] || { echo "Secret VPS_ROOT_PASSWORD or VPS_ROOT_KEY missing"; exit 1; }
+          if [ "$WIPE" = "true" ] && [ "$CONFIRM" != "WIPE" ]; then echo "Wipe requested but confirm is not WIPE"; exit 1; fi
+
+      - name: Prepare SSH
+        run: |
+          sudo apt-get install -y sshpass >/dev/null
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" | tr -d '\r' > ~/.ssh/deploy && chmod 600 ~/.ssh/deploy
+          ssh-keygen -y -f ~/.ssh/deploy > deploy.pub
+          if [ -n "$ROOT_KEY" ]; then printf '%s\n' "$ROOT_KEY" | tr -d '\r' > ~/.ssh/root && chmod 600 ~/.ssh/root; fi
+
+      - name: Run vps_setup.sh on the VPS
+        run: |
+          OPTS="-o StrictHostKeyChecking=accept-new"
+          if [ -n "$ROOT_KEY" ]; then
+            SSH="ssh $OPTS -i $HOME/.ssh/root"; SCP="scp $OPTS -i $HOME/.ssh/root"
+          else
+            export SSHPASS="$ROOT_PASSWORD"
+            SSH="sshpass -e ssh $OPTS"; SCP="sshpass -e scp $OPTS"
+          fi
+          SUDO=""; [ "$ROOT_USER" = "root" ] || SUDO="sudo"
+          $SCP deploy/vps_setup.sh deploy.pub "$ROOT_USER@$HOST:/tmp/"
+          FLAGS='--deploy-key "$(cat /tmp/deploy.pub)"'
+          if [ "$WIPE" = "true" ]; then
+            $SSH "$ROOT_USER@$HOST" "echo WIPE | $SUDO bash /tmp/vps_setup.sh --wipe $FLAGS"
+          else
+            $SSH "$ROOT_USER@$HOST" "$SUDO bash /tmp/vps_setup.sh $FLAGS"
+          fi
+
+      - name: Check web server
+        run: curl -fsS "http://$HOST/" && echo "VPS ready"
