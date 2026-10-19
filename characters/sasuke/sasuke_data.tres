@@ -1,0 +1,121 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://characters/base/character_data.gd" id="1"]
+[ext_resource type="Script" path="res://core/abilities/ability_data.gd" id="2"]
+[ext_resource type="Script" path="res://core/movement/movement_data.gd" id="3"]
+
+[sub_resource type="Resource" id="movement"]
+script = ExtResource("3")
+move_speed = 6.7
+acceleration = 260.0
+deceleration = 320.0
+
+[sub_resource type="Resource" id="lmb"]
+script = ExtResource("2")
+display_name = "Kunai"
+kind = 1
+color = Color(0.75, 0.75, 0.8, 1)
+startup_time = 0.12
+active_time = 0.03
+recovery_time = 0.22
+max_range = 13.0
+hit_radius = 0.2
+projectile_speed = 28.0
+damage = 6.0
+cast_move_multiplier = 0.6
+energy_gain_on_hit = 7.6
+
+[sub_resource type="Resource" id="rmb"]
+script = ExtResource("2")
+display_name = "Katon: Goukakyuu"
+kind = 1
+color = Color(1, 0.3, 0.1, 1)
+startup_time = 0.4
+active_time = 0.05
+recovery_time = 0.3
+cooldown = 5.0
+max_range = 12.0
+hit_radius = 0.75
+projectile_speed = 15.0
+damage = 18.0
+knockback_speed = 4.0
+cast_move_multiplier = 0.3
+energy_gain_on_hit = 14.8
+
+[sub_resource type="Resource" id="space"]
+script = ExtResource("2")
+display_name = "Shunshin"
+kind = 2
+color = Color(0.8, 0.9, 1, 1)
+startup_time = 0.03
+active_time = 0.15
+recovery_time = 0.1
+cooldown = 8.0
+dash_distance = 5.5
+dash_immaterial = true
+cast_move_multiplier = 1.0
+recovery_move_multiplier = 1.0
+can_cancel_during_startup = false
+energy_gain_on_hit = 4.0
+
+[sub_resource type="Resource" id="q"]
+script = ExtResource("2")
+display_name = "Sharingan Counter"
+kind = 4
+color = Color(0.9, 0.1, 0.1, 1)
+startup_time = 0.02
+active_time = 1.0
+recovery_time = 0.2
+cooldown = 12.0
+counter_stun_attacker = 1.2
+cast_move_multiplier = 0.3
+energy_gain_on_hit = 10.0
+can_cancel_during_startup = false
+
+[sub_resource type="Resource" id="e"]
+script = ExtResource("2")
+display_name = "Chidori"
+kind = 2
+color = Color(0.4, 0.9, 1, 1)
+startup_time = 0.3
+active_time = 0.25
+recovery_time = 0.4
+cooldown = 9.0
+dash_distance = 6.5
+hit_radius = 0.7
+damage = 16.0
+stun_duration = 0.5
+cast_move_multiplier = 0.3
+recovery_move_multiplier = 0.5
+energy_gain_on_hit = 13.6
+
+[sub_resource type="Resource" id="ult"]
+script = ExtResource("2")
+display_name = "Kirin"
+kind = 3
+color = Color(0.5, 0.8, 1, 1)
+startup_time = 0.4
+active_time = 0.05
+recovery_time = 0.3
+energy_cost = 100.0
+max_range = 11.0
+hit_radius = 3.0
+area_delay = 1.1
+damage = 40.0
+stun_duration = 0.5
+cast_move_multiplier = 0.3
+energy_gain_on_hit = 0.0
+
+[resource]
+script = ExtResource("1")
+display_name = "Sasuke Uchiha"
+identity = "Technical midrange duelist. Katon zones, Chidori punishes, Sharingan counters reward reads."
+body_color = Color(0.2, 0.35, 0.9, 1)
+max_health = 125.0
+movement = SubResource("movement")
+lmb = SubResource("lmb")
+rmb = SubResource("rmb")
+space = SubResource("space")
+q = SubResource("q")
+e = SubResource("e")
+ult = SubResource("ult")
