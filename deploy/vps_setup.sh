@@ -5,6 +5,7 @@
 #   sudo bash vps_setup.sh --deploy-key "ssh-ed25519 AAAA... ci"          # install
 #   sudo bash vps_setup.sh --wipe --deploy-key "ssh-ed25519 AAAA... ci"   # clean first, then install
 #   sudo bash vps_setup.sh --https ninjabattle.fr      # only add HTTPS (Let's Encrypt) for a domain
+#   SITE_PASSWORD=... sudo -E bash vps_setup.sh --auth <user>   # password-protect the download site
 #
 # Installs: nginx (serves launcher updates on :80 /naruto-clash/), Godot headless,
 # two game servers as systemd services (1v1 on UDP 7777, 2v2 on UDP 7778),
@@ -18,6 +19,7 @@ WIPE=0
 INVENTORY=0
 DEPLOY_KEY=""
 DOMAIN=""
+AUTH_USER=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -25,6 +27,7 @@ while [[ $# -gt 0 ]]; do
     --inventory) INVENTORY=1 ;;
     --deploy-key) DEPLOY_KEY="$2"; shift ;;
     --https) DOMAIN="$2"; shift ;;
+    --auth) AUTH_USER="$2"; shift ;;
     *) echo "Unknown option $1"; exit 1 ;;
   esac
   shift
@@ -215,7 +218,29 @@ NGINX
   echo "HTTPS ready: https://$domain/"
 }
 
-if [[ -n "$DOMAIN" ]]; then setup_https "$DOMAIN"; exit 0; fi
+# Basic auth on every download location (the ACME challenge stays open).
+# The password comes from $SITE_PASSWORD, never from the command line.
+setup_auth() {
+  local user="$1"
+  [[ -n "${SITE_PASSWORD:-}" ]] || { echo "SITE_PASSWORD missing"; exit 1; }
+  printf '%s:%s\n' "$user" "$(printf '%s' "$SITE_PASSWORD" | openssl passwd -apr1 -stdin)" > /etc/nginx/ninja.htpasswd
+  chown root:www-data /etc/nginx/ninja.htpasswd
+  chmod 640 /etc/nginx/ninja.htpasswd
+  install -d /etc/nginx/snippets
+  printf 'auth_basic "Ninja Battle";\nauth_basic_user_file /etc/nginx/ninja.htpasswd;\n' > /etc/nginx/snippets/ninja-auth.conf
+  for site in naruto-clash ninja-domain-tls; do
+    local f="/etc/nginx/sites-available/$site"
+    [[ -f "$f" ]] || continue
+    grep -q "ninja-auth.conf" "$f" || sed -i '0,/server_name .*;/s//&\n    include snippets\/ninja-auth.conf;/' "$f"
+  done
+  nginx -t
+  systemctl reload nginx
+  echo "Site protected (user: $user)"
+}
+
+if [[ -n "$DOMAIN" ]]; then setup_https "$DOMAIN"; fi
+if [[ -n "$AUTH_USER" ]]; then setup_auth "$AUTH_USER"; fi
+if [[ -n "$DOMAIN$AUTH_USER" ]]; then exit 0; fi
 if [[ $INVENTORY -eq 1 ]]; then inventory; exit 0; fi
 if [[ $WIPE -eq 1 ]]; then inventory; wipe; fi
 setup_naruto

@@ -46,7 +46,7 @@ func _check_for_update() -> void:
 	if _http.request_completed.is_connected(_on_manifest):
 		_http.request_completed.disconnect(_on_manifest)
 	_http.request_completed.connect(_on_manifest, CONNECT_ONE_SHOT)
-	if _http.request(url) != OK:
+	if _http.request(url, LauncherConfig.headers()) != OK:
 		_on_offline("Cannot reach %s" % url)
 
 
@@ -72,7 +72,7 @@ func _start_download() -> void:
 	_http.request_completed.connect(_on_downloaded, CONNECT_ONE_SHOT)
 	var url: String = LauncherConfig.base_url().path_join(str(_manifest.file))
 	_set_step(Step.DOWNLOADING, "Downloading v%s..." % _manifest.version)
-	if _http.request(url) != OK:
+	if _http.request(url, LauncherConfig.headers()) != OK:
 		_on_offline("Download failed to start.")
 
 

@@ -18,6 +18,10 @@ on:
         description: "Only set up HTTPS for this domain (leave empty for a full setup)"
         type: string
         default: ""
+      protect:
+        description: "Only password-protect the site (secrets SITE_USER / SITE_PASSWORD)"
+        type: boolean
+        default: false
 
 jobs:
   setup:
@@ -32,6 +36,9 @@ jobs:
       WIPE: ${{ inputs.wipe }}
       CONFIRM: ${{ inputs.confirm }}
       HTTPS_DOMAIN: ${{ inputs.https_domain }}
+      PROTECT: ${{ inputs.protect }}
+      SITE_USER: ${{ secrets.SITE_USER }}
+      SITE_PASSWORD: ${{ secrets.SITE_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
 
@@ -62,11 +69,16 @@ jobs:
             SSH="sshpass -e ssh $OPTS"; SCP="sshpass -e scp $OPTS"
           fi
           SUDO=""; [ "$ROOT_USER" = "root" ] || SUDO="sudo"
+          SUDO_E=""; [ "$ROOT_USER" = "root" ] || SUDO_E="sudo -E"
           # Stop leftovers of a previous (looping) run before starting again.
           $SSH "$ROOT_USER@$HOST" "$SUDO pkill -f vps_setu[p].sh; $SUDO pkill -x apt-get; sleep 2; $SUDO rm -f /var/cache/apt/*.bin; true"
           $SCP deploy/vps_setup.sh deploy.pub "$ROOT_USER@$HOST:/tmp/"
           FLAGS='--deploy-key "$(cat /tmp/deploy.pub)"'
-          if [ -n "$HTTPS_DOMAIN" ]; then
+          if [ "$PROTECT" = "true" ]; then
+            [ -n "$SITE_USER" ] && [ -n "$SITE_PASSWORD" ] || { echo "Secrets SITE_USER / SITE_PASSWORD missing"; exit 1; }
+            # Password goes through stdin, not the command line.
+            printf '%s' "$SITE_PASSWORD" | $SSH "$ROOT_USER@$HOST" "read -r SITE_PASSWORD; export SITE_PASSWORD; $SUDO_E bash /tmp/vps_setup.sh --auth '$SITE_USER'"
+          elif [ -n "$HTTPS_DOMAIN" ]; then
             $SSH "$ROOT_USER@$HOST" "$SUDO bash /tmp/vps_setup.sh --https '$HTTPS_DOMAIN'"
           elif [ "$WIPE" = "true" ]; then
             $SSH "$ROOT_USER@$HOST" "echo WIPE | $SUDO bash /tmp/vps_setup.sh --wipe $FLAGS"
@@ -76,5 +88,10 @@ jobs:
 
       - name: Check web server
         run: |
+          if [ "$PROTECT" = "true" ]; then
+            code=$(curl -s -o /dev/null -w '%{http_code}' "http://$HOST/naruto-clash/version.json")
+            [ "$code" = "401" ] && echo "Site is password-protected" || { echo "Expected 401, got $code"; exit 1; }
+            exit 0
+          fi
           curl -fsS "http://$HOST/" >/dev/null && echo "VPS ready"
           if [ -n "$HTTPS_DOMAIN" ]; then curl -fsSI "https://$HTTPS_DOMAIN/" && echo "HTTPS ready"; fi

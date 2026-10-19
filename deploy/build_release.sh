@@ -28,9 +28,16 @@ ZIP="NarutoClash-$VERSION.zip"
 
 # Launcher with the update URL baked in.
 sed -i "s|__BASE_URL__|$BASE_URL|" launcher/launcher_config.gd
+# Site password (SITE_USER / SITE_PASSWORD) baked into the launcher.
+AUTH=""
+if [[ -n "${SITE_USER:-}" && -n "${SITE_PASSWORD:-}" ]]; then
+  AUTH="$(printf '%s:%s' "$SITE_USER" "$SITE_PASSWORD" | base64 -w0)"
+  sed -i "s|__AUTH__|$AUTH|" launcher/launcher_config.gd
+fi
 "$GODOT" --headless --path launcher --import >/dev/null 2>&1 || true
 "$GODOT" --headless --path launcher --export-release "Windows Desktop" ../build/publish/NarutoClashLauncher.exe
 sed -i "s|$BASE_URL|__BASE_URL__|" launcher/launcher_config.gd
+[[ -z "$AUTH" ]] || sed -i "s|$AUTH|__AUTH__|" launcher/launcher_config.gd
 
 cp "$ROOT/deploy/www/"* "$OUT/"  # download page
 
