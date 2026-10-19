@@ -13,7 +13,7 @@ static var _cache: Dictionary = {}
 static var _pool: Array[AudioStreamPlayer] = []
 static var _next: int = 0
 static var _rng := RandomNumberGenerator.new()
-static var volume_db: float = 0.0
+static var volume_db: float = -14.0
 
 
 const ALL: Array[StringName] = [&"swing", &"swing_heavy", &"hit", &"hit_heavy", &"dash", &"blink", &"throw", &"boom",
