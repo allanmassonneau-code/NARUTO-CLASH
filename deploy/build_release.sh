@@ -31,6 +31,8 @@ sed -i "s|__BASE_URL__|$BASE_URL|" launcher/launcher_config.gd
 "$GODOT" --headless --path launcher --export-release "Windows Desktop" ../build/publish/NarutoClashLauncher.exe
 sed -i "s|$BASE_URL|__BASE_URL__|" launcher/launcher_config.gd
 
+cp "$ROOT/deploy/www/"* "$OUT/"  # download page
+
 SHA="$(sha256sum "$OUT/$ZIP" | cut -d' ' -f1)"
 SIZE="$(stat -c %s "$OUT/$ZIP")"
 python3 - "$OUT/version.json" "$VERSION" "$ZIP" "$SHA" "$SIZE" "$HOST" "$CHANGELOG" <<'PY'

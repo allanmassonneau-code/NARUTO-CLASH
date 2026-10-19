@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Naruto Clash — Shinobi Arena</title>
+<style>
+  :root { --orange:#ff7a1a; --orange2:#ffb347; --ink:#14121c; --panel:#1f1b2b; --text:#f3eee6; --muted:#a9a2b6; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family: "Segoe UI", system-ui, sans-serif; color:var(--text); min-height:100vh;
+    background: radial-gradient(circle at 20% 10%, #3a1f12 0, transparent 45%),
+                radial-gradient(circle at 85% 80%, #1b2240 0, transparent 50%), var(--ink); }
+  .wrap { max-width:960px; margin:0 auto; padding:48px 20px 64px; }
+  .spiral { width:84px; height:84px; border-radius:50%; margin:0 auto 18px;
+    background: conic-gradient(var(--orange), var(--orange2), var(--orange));
+    -webkit-mask: radial-gradient(circle, transparent 18%, #000 19%); mask: radial-gradient(circle, transparent 18%, #000 19%);
+    animation: spin 6s linear infinite; box-shadow:0 0 40px #ff7a1a55; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  h1 { text-align:center; font-size:clamp(40px,8vw,76px); letter-spacing:4px; font-weight:900;
+    background:linear-gradient(180deg,#fff 10%,var(--orange2) 55%,var(--orange));
+    -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:0 6px 30px #ff7a1a33; }
+  .sub { text-align:center; color:var(--muted); font-size:18px; margin-top:6px; letter-spacing:2px; text-transform:uppercase; }
+  .cta { display:flex; flex-direction:column; align-items:center; gap:10px; margin:40px 0 12px; }
+  .btn { display:inline-flex; align-items:center; gap:12px; padding:18px 38px; border-radius:14px; text-decoration:none;
+    font-size:22px; font-weight:800; color:#1a0d02; background:linear-gradient(180deg,var(--orange2),var(--orange));
+    box-shadow:0 10px 30px #ff7a1a55, inset 0 -3px 0 #0003; transition:transform .12s, box-shadow .12s; }
+  .btn:hover { transform:translateY(-2px); box-shadow:0 14px 40px #ff7a1a77, inset 0 -3px 0 #0003; }
+  .meta { color:var(--muted); font-size:14px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-top:44px; }
+  .card { background:var(--panel); border:1px solid #ffffff12; border-radius:14px; padding:18px; }
+  .card h3 { font-size:17px; margin-bottom:6px; }
+  .card p { color:var(--muted); font-size:14px; line-height:1.45; }
+  .dot { display:inline-block; width:12px; height:12px; border-radius:50%; margin-right:8px; vertical-align:middle; }
+  .steps { margin-top:40px; background:var(--panel); border-radius:14px; padding:22px 26px; border:1px solid #ffffff12; }
+  .steps h2 { font-size:20px; margin-bottom:12px; }
+  .steps ol { padding-left:20px; color:var(--muted); line-height:1.8; }
+  .steps b { color:var(--text); }
+  footer { text-align:center; color:#6f6880; font-size:12px; margin-top:40px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="spiral"></div>
+  <h1>NARUTO CLASH</h1>
+  <p class="sub">Shinobi Arena · 1v1 &amp; 2v2</p>
+
+  <div class="cta">
+    <a class="btn" href="NarutoClashLauncher.exe" download>⬇ Télécharger pour Windows</a>
+    <span class="meta" id="version">Launcher avec mises à jour automatiques</span>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h3><span class="dot" style="background:#ff7a1a"></span>Naruto</h3><p>Pression et clones. Rasengan, Kawarimi, Rasenshuriken.</p></div>
+    <div class="card"><h3><span class="dot" style="background:#3355e6"></span>Sasuke</h3><p>Duelliste mi-distance. Katon, Chidori, contre Sharingan.</p></div>
+    <div class="card"><h3><span class="dot" style="background:#ff73b3"></span>Sakura</h3><p>Brute de mêlée et soigneuse. Ōkashō, Byakugō.</p></div>
+    <div class="card"><h3><span class="dot" style="background:#b8bcc8"></span>Kakashi</h3><p>Technique et polyvalent. Raikiri, Ninken, Kamui.</p></div>
+  </div>
+
+  <div class="steps">
+    <h2>Installation</h2>
+    <ol>
+      <li>Télécharge le launcher et mets-le dans <b>son propre dossier</b> (ex. Documents\NarutoClash).</li>
+      <li>Lance-le. Si Windows affiche un écran bleu : <b>Informations complémentaires → Exécuter quand même</b>.</li>
+      <li>Le launcher télécharge le jeu puis clique <b>PLAY</b>.</li>
+      <li>Menu → <b>Online 1v1</b> ou <b>Online 2v2</b>, ou entraîne-toi contre les bots.</li>
+    </ol>
+  </div>
+
+  <footer>Projet de fans non officiel. Naruto © Masashi Kishimoto / Shueisha.</footer>
+</div>
+<script>
+  fetch("version.json", {cache: "no-store"}).then(r => r.json()).then(v => {
+    document.getElementById("version").textContent = "Version " + v.version + " · launcher avec mises à jour automatiques";
+  }).catch(() => {});
+</script>
+</body>
+</html>

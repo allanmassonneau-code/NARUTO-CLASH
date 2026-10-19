@@ -133,9 +133,12 @@ server {
     server_name _;
     root /var/www/html;
 
+    location = / { return 302 /naruto-clash/; }
+
     location /naruto-clash/ {
         alias $WWW/;
         autoindex off;
+        index index.html;
         location ~ version\.json\$ { add_header Cache-Control "no-cache"; }
     }
 }
