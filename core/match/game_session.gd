@@ -39,6 +39,13 @@ var server_host: String = "127.0.0.1"
 var friend_code: String = ""
 ## Friends: Array of {code:String, name:String}.
 var friends: Array[Dictionary] = []
+## Options (O in game / gear button): audio and display.
+var master_volume: float = 70.0
+var sfx_volume: float = 80.0
+var muted: bool = false
+var spatial_sound: bool = true
+var fullscreen: bool = false
+var anti_aliasing: bool = true
 
 const SETTINGS_PATH: String = "user://settings.cfg"
 
@@ -61,9 +68,16 @@ func _ready() -> void:
 		for entry: Variant in cfg.get_value("online", "friends", []):
 			if entry is Dictionary:
 				friends.append(entry)
+		master_volume = cfg.get_value("options", "master_volume", master_volume)
+		sfx_volume = cfg.get_value("options", "sfx_volume", sfx_volume)
+		muted = cfg.get_value("options", "muted", muted)
+		spatial_sound = cfg.get_value("options", "spatial_sound", spatial_sound)
+		fullscreen = cfg.get_value("options", "fullscreen", fullscreen)
+		anti_aliasing = cfg.get_value("options", "anti_aliasing", anti_aliasing)
 	if friend_code == "":
 		friend_code = _new_code()
 		save_settings()
+	apply_options()
 	# The launcher passes the official server: game.exe -- --host=1.2.3.4
 	for arg: String in OS.get_cmdline_user_args():
 		if arg.begins_with("--host="):
@@ -76,7 +90,51 @@ func save_settings() -> void:
 	cfg.set_value("online", "host", server_host)
 	cfg.set_value("online", "friend_code", friend_code)
 	cfg.set_value("online", "friends", friends)
+	for key: String in ["master_volume", "sfx_volume", "muted", "spatial_sound", "fullscreen", "anti_aliasing"]:
+		cfg.set_value("options", key, get(key))
 	cfg.save(SETTINGS_PATH)
+
+
+## Audio buses (SFX: soft compressor + light room reverb, like a mixed game)
+## and display settings. Safe to call any time.
+func apply_options() -> void:
+	if DisplayServer.get_name() == "headless":
+		return
+	var sfx: int = AudioServer.get_bus_index(&"SFX")
+	if sfx < 0:
+		AudioServer.add_bus()
+		sfx = AudioServer.bus_count - 1
+		AudioServer.set_bus_name(sfx, &"SFX")
+		AudioServer.set_bus_send(sfx, &"Master")
+		var comp := AudioEffectCompressor.new()
+		comp.threshold = -18.0
+		comp.ratio = 3.0
+		comp.attack_us = 10000.0
+		comp.release_ms = 250.0
+		AudioServer.add_bus_effect(sfx, comp)
+		var shelf := AudioEffectHighShelfFilter.new()
+		shelf.cutoff_hz = 6000.0
+		shelf.gain = 0.5  # about -6 dB on the harsh highs
+		AudioServer.add_bus_effect(sfx, shelf)
+		var reverb := AudioEffectReverb.new()
+		reverb.room_size = 0.35
+		reverb.damping = 0.6
+		reverb.wet = 0.12
+		reverb.dry = 1.0
+		AudioServer.add_bus_effect(sfx, reverb)
+	AudioServer.set_bus_volume_db(0, _to_db(master_volume))
+	AudioServer.set_bus_mute(0, muted)
+	AudioServer.set_bus_volume_db(sfx, _to_db(sfx_volume))
+	var window_mode: DisplayServer.WindowMode = DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen else DisplayServer.WINDOW_MODE_WINDOWED
+	if DisplayServer.window_get_mode() != window_mode and not (not fullscreen and DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_MAXIMIZED):
+		DisplayServer.window_set_mode(window_mode)
+	var viewport := get_viewport()
+	viewport.msaa_3d = Viewport.MSAA_4X if anti_aliasing else Viewport.MSAA_DISABLED
+	viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA if anti_aliasing else Viewport.SCREEN_SPACE_AA_DISABLED
+
+
+static func _to_db(percent: float) -> float:
+	return linear_to_db(clampf(percent / 100.0, 0.0001, 1.0))
 
 
 func add_friend(code: String, friend_name: String) -> bool:

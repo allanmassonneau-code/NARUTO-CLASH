@@ -48,6 +48,9 @@ func poll_intent() -> GameplayIntent:
 	intent.has_aim_point = true
 	if _arena_objectives(dist):
 		return intent
+	var dodge: Vector3 = _dodge_direction()
+	if dodge != Vector3.ZERO:
+		intent.move_direction = dodge
 	_guard_logic(dist, delta)
 	_decision_timer -= delta
 	if _decision_timer <= 0.0:
@@ -76,6 +79,60 @@ func _guard_logic(dist: float, delta: float) -> void:
 			_press(&"lmb")
 
 
+## Steps out of enemy telegraphs (casts in startup, armed areas, lingering
+## zones) and sidesteps projectiles flying at us. ZERO when safe.
+func _dodge_direction() -> Vector3:
+	var me: Vector3 = HitQuery.flat(_body.global_position)
+	var margin: float = HitQuery.HURTBOX_RADIUS + 0.4
+	for node: Node in get_tree().get_nodes_in_group(&"fighters"):
+		var enemy := node as CombatCharacter
+		if enemy == null or enemy.team == _body.team or enemy.is_dead():
+			continue
+		var ab: AbilityController = enemy.abilities
+		if ab.phase != AbilityController.Phase.STARTUP or ab.phase_elapsed < reaction_time * 0.6 or not ab.current.does_damage():
+			continue
+		var a: AbilityData = ab.current
+		var origin: Vector3 = HitQuery.flat(enemy.global_position)
+		var dir: Vector3 = enemy.facing.facing_direction
+		var rel: Vector3 = me - origin
+		match a.kind:
+			AbilityData.Kind.GROUND_AREA:
+				var center: Vector3 = origin + HitQuery.flat(enemy.facing.aim_point - enemy.global_position).limit_length(a.max_range)
+				if me.distance_to(center) < a.hit_radius + margin:
+					return _away(me - center)
+			AbilityData.Kind.DASH, AbilityData.Kind.PROJECTILE:
+				var along: float = rel.dot(dir)
+				var length: float = a.dash_distance + a.hit_radius if a.kind == AbilityData.Kind.DASH else a.max_range
+				var side: float = rel.dot(dir.cross(Vector3.UP))
+				if along > 0.0 and along < length and absf(side) < a.hit_radius + margin:
+					return _away(dir.cross(Vector3.UP) * (1.0 if side >= 0.0 else -1.0))
+			AbilityData.Kind.MELEE_ARC:
+				var reach: float = a.max_range + a.lunge_distance + margin
+				if rel.length() < reach and (rel.length() < 0.8 or dir.angle_to(rel) < deg_to_rad(a.arc_degrees) * 0.5 + 0.2):
+					return _away(rel)
+	for node: Node in get_tree().get_nodes_in_group(&"ground_areas"):
+		var area := node as GroundArea
+		if area.team == _body.team or area.elapsed < reaction_time:
+			continue
+		var harmful: bool = area.ability.does_damage() or area.ability.zone_tick_damage > 0.0 or area.ability.trap
+		if harmful and me.distance_to(HitQuery.flat(area.global_position)) < area.ability.hit_radius + margin:
+			return _away(me - HitQuery.flat(area.global_position))
+	for node: Node in get_tree().get_nodes_in_group(&"projectiles"):
+		var p := node as Projectile
+		if p.team == _body.team or p.age < reaction_time * 0.5:
+			continue
+		var to_me: Vector3 = me - HitQuery.flat(p.global_position)
+		if to_me.length() < 7.0 and p.direction.dot(to_me.normalized()) > 0.9:
+			var perp: Vector3 = p.direction.cross(Vector3.UP)
+			return _away(perp * (1.0 if perp.dot(to_me) >= 0.0 else -1.0))
+	return Vector3.ZERO
+
+
+func _away(v: Vector3) -> Vector3:
+	v = HitQuery.flat(v)
+	return v.normalized() if v.length() > 0.01 else Vector3(_strafe_sign, 0.0, 0.0)
+
+
 ## Orb and sudden-death ring. Returns true when it took over this tick.
 func _arena_objectives(enemy_dist: float) -> bool:
 	var rules: ArenaRules = ArenaRules.active
@@ -90,8 +147,10 @@ func _arena_objectives(enemy_dist: float) -> bool:
 		return false
 	var my_dist: float = from_center.length()
 	var enemy_orb_dist: float = HitQuery.flat(target.global_position - center).length()
-	# Go for the orb when not locked in melee and at least as close as the enemy.
-	if enemy_dist < 3.0 or my_dist > enemy_orb_dist + 3.0:
+	# Go for the orb when not locked in melee and at least as close as the
+	# enemy, or when hurt.
+	var hurt: bool = _body.health.get_ratio() < 0.5
+	if not hurt and (enemy_dist < 3.0 or my_dist > enemy_orb_dist + 3.0):
 		return false
 	intent.aim_point = center
 	if my_dist > 1.8:

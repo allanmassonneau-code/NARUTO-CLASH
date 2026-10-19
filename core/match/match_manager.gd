@@ -68,6 +68,7 @@ func _ready() -> void:
 	if GameSession.net_role != GameSession.NetRole.SERVER:
 		Sfx.warm_up()
 		_set_cursor()
+		OptionsPanel.attach(self)
 	Net.register_match(self)
 	if is_authoritative():
 		_start_round()

@@ -70,6 +70,7 @@ func _ready() -> void:
 	_build_stage(col)
 	_build_kit_sheet(col)
 	_build_friends_panel()
+	OptionsPanel.attach(self)
 	Net.status_changed.connect(_on_net_status)
 	Net.friends_status.connect(_on_friends_status)
 	Net.invite_received.connect(_on_invite)

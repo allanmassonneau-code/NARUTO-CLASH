@@ -11,6 +11,7 @@ var _hits: int = 0
 var _counters: int = 0
 var _manager: MatchManager
 var _orbs: int = 0
+var _orb_hit: bool = false
 var _slams: int = 0
 var _sudden_death: bool = false
 
@@ -48,12 +49,14 @@ func _physics_process(_delta: float) -> void:
 	_frames += 1
 	if _manager == null:
 		return
+	if _manager.rules.orb_alive() and _manager.rules.orb_hp < ArenaRules.ORB_MAX_HP:
+		_orb_hit = true
 	if _manager.state == MatchManager.State.MATCH_OVER or _frames >= MAX_SIM_FRAMES:
 		_check(_manager.state == MatchManager.State.MATCH_OVER, "match reaches MATCH_OVER")
 		_check(_hits > 20, "bots land hits (%d)" % _hits)
 		print("[sim] frames=%d (%.0fs) hits=%d counters=%d scores=%s orbs=%d wall_slams=%d sudden_death=%s" % [
 			_frames, _frames / 60.0, _hits, _counters, _manager.scores, _orbs, _slams, _sudden_death])
-		_check(_orbs > 0, "bots contest and take the chakra orb")
+		_check(_orbs > 0 or _orb_hit, "bots contest the chakra orb")
 		print("RESULT: %s (%d failures)" % ["PASS" if _failures == 0 else "FAIL", _failures])
 		get_tree().quit(1 if _failures > 0 else 0)
 

@@ -40,7 +40,7 @@ static func play(id: StringName, at: Vector3 = Vector3.INF, gain_db: float = 0.0
 	if player == null:
 		return
 	var attenuation: float = 0.0
-	if at != Vector3.INF:
+	if at != Vector3.INF and GameSession.spatial_sound:
 		var camera := player.get_viewport().get_camera_3d() as ArenaCamera
 		if camera != null and camera.target != null:
 			var d: float = HitQuery.flat(at - camera.target.global_position).length()
@@ -64,7 +64,7 @@ static func _player() -> AudioStreamPlayer:
 		tree.root.add_child.call_deferred(holder)
 		for i in POOL_SIZE:
 			var p := AudioStreamPlayer.new()
-			p.bus = &"Master"
+			p.bus = &"SFX" if AudioServer.get_bus_index(&"SFX") >= 0 else &"Master"
 			holder.add_child(p)
 			_pool.append(p)
 		return null  # pool is attached next frame
