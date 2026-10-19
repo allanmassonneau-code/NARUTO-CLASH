@@ -107,11 +107,12 @@ recovery_time = 0.4
 cooldown = 7.0
 dash_distance = 7.0
 hit_radius = 0.7
-damage = 26.0
+damage = 20.0
+bonus_vs_rooted = 14.0
 knockback_speed = 8.0
 cast_move_multiplier = 0.25
 recovery_move_multiplier = 0.5
-energy_gain_on_hit = 19.6
+energy_gain_on_hit = 16.0
 
 [sub_resource type="Resource" id="space"]
 script = ExtResource("2")
@@ -135,17 +136,19 @@ energy_gain_on_hit = 4.0
 [sub_resource type="Resource" id="q"]
 script = ExtResource("2")
 icon = ExtResource("icon_q")
-display_name = "Kawarimi no Jutsu"
+display_name = "Sharingan Copy"
 kind = 4
-color = Color(0.6, 0.4, 0.2, 1)
-anim = "seal"
+color = Color(0.9, 0.15, 0.15, 1)
+anim = "guard"
+vfx = "sharingan"
 startup_time = 0.02
-active_time = 0.7
+active_time = 0.8
 recovery_time = 0.15
 cooldown = 11.0
-counter_teleport_distance = 4.0
+counter_copy = true
+counter_teleport_distance = 2.0
 cast_move_multiplier = 0.4
-energy_gain_on_hit = 10.0
+energy_gain_on_hit = 12.0
 can_cancel_during_startup = false
 
 [sub_resource type="Resource" id="e"]
@@ -190,7 +193,9 @@ energy_gain_on_hit = 0.0
 [resource]
 script = ExtResource("1")
 display_name = "Kakashi Hatake"
-identity = "Technical melee fighter. Kunai strings, Ninken roots set up Raikiri, Kamui is a delayed read."
+passive = ""
+passive_description = "Copy Ninja: a successful Sharingan Copy turns E into the copied jutsu for 10 s."
+identity = "Copy ninja: counter a jutsu to copy it into E; Ninken roots set up a devastating Raikiri."
 body_color = Color(0.7, 0.72, 0.78, 1)
 max_health = 130.0
 movement = SubResource("movement")

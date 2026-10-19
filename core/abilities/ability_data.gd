@@ -3,7 +3,7 @@ extends Resource
 ## Data-driven definition of a jutsu: frame data, costs, hit properties.
 ## The `kind` selects a generic executor in AbilityEffects.
 
-enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL }
+enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL, SUMMON_CLONE }
 
 @export_category("Identity")
 @export var display_name: String = "Jutsu"
@@ -77,10 +77,51 @@ enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL }
 @export_category("Heal")
 @export var heal_amount: float = 0.0
 @export var true_heal: bool = false
+## Also heals allies within this radius (0 = self only).
+@export var heal_allies_radius: float = 0.0
+
+@export_category("On-Hit Effects")
+@export var slow_duration: float = 0.0
+## Stacks of MARK applied on hit (max 3, 5 s).
+@export var apply_mark: int = 0
+## Bonus damage per MARK stack consumed by this hit.
+@export var mark_bonus_damage: float = 0.0
+## Stun applied instead when 3 marks are consumed.
+@export var mark_full_stun: float = 0.0
+## Bonus damage against rooted targets (consumes the root).
+@export var bonus_vs_rooted: float = 0.0
+
+@export_category("Self Buffs (on activation)")
+@export var buff_haste: float = 0.0
+@export var buff_empower: float = 0.0
+@export var buff_regen: float = 0.0
+
+@export_category("Lingering Zone")
+## GROUND_AREA: stays this long after detonating, ticking on enemies inside.
+@export var zone_duration: float = 0.0
+@export var zone_tick_damage: float = 0.0
+## PROJECTILE: ground area left where it lands (e.g. burning ground).
+@export var expire_zone: AbilityData
+
+@export_category("Counter Extras")
+## Cooldown reset on a successful counter (e.g. &"rmb").
+@export var counter_reset_slot: StringName = &""
+@export var counter_haste: float = 0.0
+## Copy the countered jutsu into the E slot for 10 s (one use).
+@export var counter_copy: bool = false
+
+@export_category("Shadow Clones")
+## SUMMON_CLONE: clone lifetime and spawn distance.
+@export var summon_duration: float = 0.0
+@export var summon_distance: float = 2.5
+## This melee / dash is also performed by the caster's clone (50 % damage).
+@export var clone_mirror: bool = false
+## DASH: swap places with the clone instead of dashing when one is out.
+@export var swap_with_clone: bool = false
 
 
 func does_damage() -> bool:
-	return damage > 0.0 or stun_duration > 0.0 or root_duration > 0.0
+	return damage > 0.0 or stun_duration > 0.0 or root_duration > 0.0 or slow_duration > 0.0
 
 
 ## Effective threat distance from the caster (used by AI and indicators).

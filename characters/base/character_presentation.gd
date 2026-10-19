@@ -80,6 +80,10 @@ func _process(delta: float) -> void:
 		pose = &"stunned:"
 	elif status.has_status(StatusController.Type.ROOT):
 		tint = Color(0.4, 0.3, 0.15, 0.35)
+	elif status.has_status(StatusController.Type.EMPOWER):
+		tint = Color(0.75, 0.3, 1.0, 0.2 + 0.1 * sin(Time.get_ticks_msec() * 0.01))
+	elif status.has_status(StatusController.Type.SLOW):
+		tint = Color(0.3, 0.5, 1.0, 0.25)
 	if status.has_status(StatusController.Type.IMMATERIAL):
 		fade = 0.65
 	if abilities.is_casting() and pose == &"":
@@ -221,6 +225,9 @@ func _update_overhead() -> void:
 		text = "STUN"
 	elif _character.status.has_status(StatusController.Type.ROOT):
 		text = "ROOT"
+	var marks: int = _character.status.get_stacks(StatusController.Type.MARK)
+	if marks > 0:
+		text += "  " + "◆".repeat(marks)
 	overhead.text = text
 
 

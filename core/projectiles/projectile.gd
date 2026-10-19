@@ -90,4 +90,6 @@ func _expire(at: Vector3) -> void:
 		return
 	Net.on_entity_despawned(net_id)
 	SpellVfx.projectile_impact(self, at, ability)
+	if ability.expire_zone != null and is_instance_valid(source):
+		GroundArea.spawn(source, ability.expire_zone, at)
 	queue_free()

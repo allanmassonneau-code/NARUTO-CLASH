@@ -108,7 +108,7 @@ ICONS = {
     "kakashi_lmb": ("kunai", "#8c8c99"),
     "kakashi_rmb": ("bolt", "#4dbfff"),
     "kakashi_space": ("dash", "#9fb7d9"),
-    "kakashi_q": ("log", "#99663a"),
+    "kakashi_q": ("sharingan", "#b31a1a"),
     "kakashi_e": ("paw", "#998052"),
     "kakashi_ult": ("kamui", "#6633a6"),
 }

@@ -105,12 +105,15 @@ active_time = 0.05
 recovery_time = 0.3
 cooldown = 7.0
 max_range = 5.0
-hit_radius = 2.2
+hit_radius = 2.4
 area_delay = 0.4
-damage = 20.0
-stun_duration = 0.7
+damage = 18.0
+stun_duration = 0.6
+zone_duration = 2.5
+zone_tick_damage = 0.0
+slow_duration = 0.6
 cast_move_multiplier = 0.3
-energy_gain_on_hit = 16.0
+energy_gain_on_hit = 14.8
 
 [sub_resource type="Resource" id="space"]
 script = ExtResource("2")
@@ -142,7 +145,8 @@ startup_time = 0.55
 active_time = 0.05
 recovery_time = 0.2
 cooldown = 12.0
-heal_amount = 24.0
+heal_amount = 22.0
+heal_allies_radius = 5.0
 cast_move_multiplier = 0.3
 energy_gain_on_hit = 4.0
 
@@ -169,7 +173,7 @@ energy_gain_on_hit = 11.2
 [sub_resource type="Resource" id="ult"]
 script = ExtResource("2")
 icon = ExtResource("icon_ult")
-display_name = "Byakugou Seal"
+display_name = "Byakugou: Strength of a Hundred"
 kind = 5
 color = Color(0.6, 0.3, 1, 1)
 anim = "heal"
@@ -178,15 +182,20 @@ startup_time = 0.5
 active_time = 0.05
 recovery_time = 0.2
 energy_cost = 100.0
-heal_amount = 55.0
+heal_amount = 40.0
 true_heal = true
+buff_regen = 6.0
+buff_empower = 6.0
+buff_haste = 3.0
 cast_move_multiplier = 0.2
 energy_gain_on_hit = 0.0
 
 [resource]
 script = ExtResource("1")
 display_name = "Sakura Haruno"
-identity = "Melee bruiser / combat healer. Heavy punches, heals limited by recoverable health."
+passive = ""
+passive_description = "Medical ninja: Mystical Palm also heals allies within 5 m."
+identity = "Frontline medic: craters that slow, heals that reach allies, Strength of a Hundred to finish."
 body_color = Color(1, 0.45, 0.7, 1)
 max_health = 150.0
 movement = SubResource("movement")

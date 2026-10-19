@@ -3,12 +3,18 @@ extends Node
 ## Single source of truth for every status on a character.
 ## Ticked by the owning character inside its physics step.
 
-enum Type { STUN, ROOT, IMMATERIAL, COUNTER }
+enum Type { STUN, ROOT, IMMATERIAL, COUNTER, SLOW, HASTE, EMPOWER, REGEN, MARK }
+
+const SLOW_MULTIPLIER: float = 0.6
+const HASTE_MULTIPLIER: float = 1.3
+const EMPOWER_MULTIPLIER: float = 1.25
+const REGEN_PER_SECOND: float = 6.0
 
 signal status_applied(type: Type, duration: float)
 signal status_removed(type: Type)
 
 var _remaining: Dictionary = {}  # Type -> seconds left
+var _stacks: Dictionary = {}  # Type -> stack count (stacking statuses like MARK)
 
 
 func apply_status(type: Type, duration: float) -> void:
@@ -18,9 +24,31 @@ func apply_status(type: Type, duration: float) -> void:
 	status_applied.emit(type, duration)
 
 
+## Adds stacks (capped) and refreshes the duration.
+func add_stacks(type: Type, amount: int, max_stacks: int, duration: float) -> void:
+	_stacks[type] = mini(get_stacks(type) + amount, max_stacks)
+	_remaining[type] = duration
+	status_applied.emit(type, duration)
+
+
+func get_stacks(type: Type) -> int:
+	return _stacks.get(type, 0) if has_status(type) else 0
+
+
 func remove_status(type: Type) -> void:
+	_stacks.erase(type)
 	if _remaining.erase(type):
 		status_removed.emit(type)
+
+
+## Movement speed factor from slows / hastes.
+func speed_multiplier() -> float:
+	var m: float = 1.0
+	if has_status(Type.SLOW):
+		m *= SLOW_MULTIPLIER
+	if has_status(Type.HASTE):
+		m *= HASTE_MULTIPLIER
+	return m
 
 
 func has_status(type: Type) -> bool:
@@ -37,6 +65,14 @@ func sync_remaining(type: Type, remaining: float) -> void:
 		_remaining[type] = remaining
 	else:
 		_remaining.erase(type)
+		_stacks.erase(type)
+
+
+func sync_stacks(type: Type, stacks: int) -> void:
+	if stacks > 0:
+		_stacks[type] = stacks
+	else:
+		_stacks.erase(type)
 
 
 func clear_all() -> void:

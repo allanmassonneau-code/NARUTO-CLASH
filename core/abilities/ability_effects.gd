@@ -1,21 +1,32 @@
 class_name AbilityEffects
-## Generic executors, one per AbilityData.Kind. No character-specific code here.
+## Generic executors, one per AbilityData.Kind. No character-specific code here:
+## kit identity comes from AbilityData flags (clone mirroring, marks, zones...).
 
 
 static func activate(ctrl: AbilityController, a: AbilityData) -> void:
 	var c: CombatCharacter = ctrl.character
+	_apply_self_buffs(c, a)
 	match a.kind:
 		AbilityData.Kind.MELEE_ARC:
 			if a.lunge_distance > 0.0:
 				c.movement.apply_forced_motion(ctrl.cast_direction * (a.lunge_distance / 0.08), 0.08, true)
-			_melee(ctrl, a)
+			var hits: Array[CombatCharacter] = []
+			melee_from(c, c.global_position, ctrl.cast_direction, a, 1.0, hits)
+			if a.clone_mirror and is_instance_valid(c.clone):
+				c.clone.mirror_melee(a, ctrl.cast_direction)
 		AbilityData.Kind.PROJECTILE:
 			Projectile.spawn(c, a, ctrl.cast_direction)
 		AbilityData.Kind.DASH:
+			if a.swap_with_clone and is_instance_valid(c.clone):
+				_swap_with_clone(c)
+				ctrl.end_active_early()
+				return
 			c.movement.apply_forced_motion(ctrl.cast_direction * (a.dash_distance / a.active_time), a.active_time, false)
 			if a.dash_immaterial:
 				c.status.apply_status(StatusController.Type.IMMATERIAL, a.active_time)
 			c.set_pass_through(a.dash_pass_through_characters)
+			if a.clone_mirror and is_instance_valid(c.clone):
+				c.clone.mirror_dash(a, ctrl.cast_direction)
 		AbilityData.Kind.GROUND_AREA:
 			GroundArea.spawn(c, a, ctrl.cast_target_point)
 		AbilityData.Kind.COUNTER:
@@ -23,6 +34,18 @@ static func activate(ctrl: AbilityController, a: AbilityData) -> void:
 		AbilityData.Kind.SELF_HEAL:
 			c.health.heal(a.heal_amount, a.true_heal)
 			CombatFx.ring(c, c.global_position, 1.2, a.color, 0.4)
+			if a.heal_allies_radius > 0.0:
+				for node: Node in c.get_tree().get_nodes_in_group(&"fighters"):
+					var ally := node as CombatCharacter
+					if ally == null or ally == c or ally.team != c.team or ally.is_dead():
+						continue
+					if ally.global_position.distance_to(c.global_position) <= a.heal_allies_radius:
+						ally.health.heal(a.heal_amount, a.true_heal)
+						CombatFx.ring(c, ally.global_position, 1.0, a.color, 0.4)
+		AbilityData.Kind.SUMMON_CLONE:
+			c.dismiss_clone()
+			var dest: Vector3 = _clear_point(c, ctrl.cast_direction, a.summon_distance)
+			c.clone = ShadowClone.spawn(c, dest, a.summon_duration)
 
 
 static func tick_active(ctrl: AbilityController, a: AbilityData, _delta: float) -> void:
@@ -67,33 +90,67 @@ static func resolve_counter(ctrl: AbilityController, a: AbilityData, hit: HitDat
 	c.energy.gain(a.energy_gain_on_hit)
 	if a.counter_teleport_distance > 0.0:
 		var origin: Vector3 = c.global_position
-		var dir: Vector3 = c.facing.facing_direction
-		var dest: Vector3 = origin + dir * a.counter_teleport_distance
-		var lift := Vector3.UP * HitQuery.BODY_HEIGHT
-		var wall: Dictionary = HitQuery.raycast_world(c.get_world_3d(), origin + lift, dest + lift)
-		if not wall.is_empty():
-			dest = HitQuery.flat(wall.position) - dir * 0.6
 		CombatFx.log_decoy(c, origin)
-		c.global_position = Vector3(dest.x, origin.y, dest.z)
+		c.global_position = Vector3(0, origin.y, 0) + _clear_point(c, c.facing.facing_direction, a.counter_teleport_distance)
 	if a.counter_stun_attacker > 0.0 and is_instance_valid(hit.source) and not hit.source.is_dead():
 		hit.source.status.apply_status(StatusController.Type.STUN, a.counter_stun_attacker)
 		hit.source.abilities.interrupt()
 		CombatFx.ring(c, hit.source.global_position, 1.0, a.color, 0.35)
+	if a.counter_reset_slot != &"":
+		ctrl.reset_cooldown(a.counter_reset_slot)
+	if a.counter_haste > 0.0:
+		c.status.apply_status(StatusController.Type.HASTE, a.counter_haste)
+	if a.counter_copy and hit.ability != null and is_instance_valid(hit.source):
+		ctrl.copy_jutsu(hit.source, hit.ability)
 	CombatFx.ring(c, c.global_position, 1.4, a.color, 0.3)
 	ctrl.end_active_early()
 
 
-static func _melee(ctrl: AbilityController, a: AbilityData) -> void:
-	var c: CombatCharacter = ctrl.character
-	var origin: Vector3 = c.global_position
+## Melee arc from any origin (the caster or its clone). `already_hit`
+## de-duplicates targets for one swing.
+static func melee_from(c: CombatCharacter, origin: Vector3, direction: Vector3, a: AbilityData, damage_scale: float, already_hit: Array[CombatCharacter]) -> void:
 	var center: Vector3 = origin + Vector3.UP * HitQuery.BODY_HEIGHT
 	var half_arc: float = deg_to_rad(a.arc_degrees) * 0.5
-	CombatFx.arc(c, origin, ctrl.cast_direction, a.max_range, a.arc_degrees, a.color, 0.15)
+	CombatFx.arc(c, origin, direction, a.max_range, a.arc_degrees, a.color, 0.15)
 	for target: CombatCharacter in HitQuery.characters_in_sphere(c.get_world_3d(), center, a.max_range + HitQuery.HURTBOX_RADIUS):
-		if target.team == c.team:
+		if target.team == c.team or already_hit.has(target):
 			continue
 		var to_target: Vector3 = HitQuery.flat(target.global_position - origin)
 		# Inside arc, or so close that the body overlaps the swing origin.
-		if to_target.length() > HitQuery.HURTBOX_RADIUS * 1.5 and ctrl.cast_direction.angle_to(to_target) > half_arc:
+		if to_target.length() > HitQuery.HURTBOX_RADIUS * 1.5 and direction.angle_to(to_target) > half_arc:
 			continue
-		apply_hit(ctrl, a, target, to_target.normalized() if to_target.length() > 0.01 else ctrl.cast_direction)
+		already_hit.append(target)
+		var hit := HitData.from_ability(c, a, to_target.normalized() if to_target.length() > 0.01 else direction)
+		hit.damage *= damage_scale
+		if damage_scale < 1.0:
+			hit.energy_gain = 0.0
+		target.receive_hit(hit)
+
+
+static func _apply_self_buffs(c: CombatCharacter, a: AbilityData) -> void:
+	if a.buff_haste > 0.0:
+		c.status.apply_status(StatusController.Type.HASTE, a.buff_haste)
+	if a.buff_empower > 0.0:
+		c.status.apply_status(StatusController.Type.EMPOWER, a.buff_empower)
+	if a.buff_regen > 0.0:
+		c.status.apply_status(StatusController.Type.REGEN, a.buff_regen)
+
+
+static func _swap_with_clone(c: CombatCharacter) -> void:
+	var here: Vector3 = c.global_position
+	var there: Vector3 = c.clone.global_position
+	CombatFx.log_decoy(c, here)
+	c.global_position = Vector3(there.x, here.y, there.z)
+	c.clone.global_position = HitQuery.flat(here)
+	c.status.apply_status(StatusController.Type.IMMATERIAL, 0.25)
+
+
+## Point `distance` ahead, stopped short of walls.
+static func _clear_point(c: CombatCharacter, direction: Vector3, distance: float) -> Vector3:
+	var origin: Vector3 = HitQuery.flat(c.global_position)
+	var dest: Vector3 = origin + direction * distance
+	var lift := Vector3.UP * HitQuery.BODY_HEIGHT
+	var wall: Dictionary = HitQuery.raycast_world(c.get_world_3d(), origin + lift, dest + lift)
+	if not wall.is_empty():
+		dest = HitQuery.flat(wall.position) - direction * 0.6
+	return dest

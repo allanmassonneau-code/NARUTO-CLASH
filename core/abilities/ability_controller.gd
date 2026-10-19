@@ -31,6 +31,16 @@ var _cooldowns: Dictionary = {}
 var _buffered_slot: StringName = &""
 var _buffer_left: float = 0.0
 var _hit_this_cast: Array[CombatCharacter] = []
+## Kakashi's copied jutsu: replaces COPY_SLOT for COPY_DURATION, one use.
+const COPY_SLOT: StringName = &"e"
+const COPY_DURATION: float = 10.0
+var copied: AbilityData
+var copied_left: float = 0.0
+## Where the copy came from (fighter + slot + combo depth), for network sync.
+var copied_source: CombatCharacter
+var copied_source_slot: StringName = &""
+var copied_depth: int = 0
+
 ## Pending combo follow-up per slot (AbilityData) and time left to use it.
 var _combo_next: Dictionary = {}
 var _combo_left: Dictionary = {}
@@ -50,10 +60,66 @@ func reset() -> void:
 	_buffer_left = 0.0
 	_combo_next.clear()
 	_combo_left.clear()
+	_clear_copy()
 
 
 func get_ability(slot: StringName) -> AbilityData:
+	if slot == COPY_SLOT and copied != null:
+		return copied
 	return _abilities.get(slot)
+
+
+func get_base_ability(slot: StringName) -> AbilityData:
+	return _abilities.get(slot)
+
+
+func reset_cooldown(slot: StringName) -> void:
+	if _cooldowns.has(slot):
+		_cooldowns[slot] = 0.0
+
+
+## Copies `ability` (cast by `source`) into COPY_SLOT. Ultimates and
+## counters can't be copied.
+func copy_jutsu(source: CombatCharacter, ability: AbilityData) -> void:
+	if ability.energy_cost >= 100.0 or ability.kind == AbilityData.Kind.COUNTER:
+		return
+	for slot: StringName in SLOTS:
+		var depth: int = 0
+		var a: AbilityData = source.abilities.get_base_ability(slot)
+		while a != null:
+			if a == ability:
+				copied = ability
+				copied_left = COPY_DURATION
+				copied_source = source
+				copied_source_slot = slot
+				copied_depth = depth
+				return
+			a = a.combo_next
+			depth += 1
+
+
+## Client mirror of the server's copy state.
+func sync_copy(source: CombatCharacter, slot: StringName, depth: int, left: float) -> void:
+	if source == null or left <= 0.0:
+		_clear_copy()
+		return
+	var a: AbilityData = source.abilities.get_base_ability(slot)
+	for i in depth:
+		if a != null:
+			a = a.combo_next
+	copied = a
+	copied_left = left
+	copied_source = source
+	copied_source_slot = slot
+	copied_depth = depth
+
+
+func _clear_copy() -> void:
+	copied = null
+	copied_left = 0.0
+	copied_source = null
+	copied_source_slot = &""
+	copied_depth = 0
 
 
 func get_cooldown_left(slot: StringName) -> float:
@@ -65,6 +131,8 @@ func slot_index(slot: StringName) -> int:
 
 
 func slot_of(ability: AbilityData) -> StringName:
+	if ability != null and ability == copied:
+		return COPY_SLOT
 	for slot: StringName in _abilities:
 		if _abilities[slot] == ability:
 			return slot
@@ -81,7 +149,7 @@ func sync_state(new_phase: int, new_slot_index: int, elapsed: float, cooldowns: 
 		return
 	phase = new_phase as Phase
 	current_slot = SLOTS[new_slot_index]
-	current = _abilities.get(current_slot)
+	current = get_ability(current_slot)
 	phase_elapsed = elapsed
 
 
@@ -91,6 +159,8 @@ func is_casting() -> bool:
 
 func is_ready(slot: StringName) -> bool:
 	var ability: AbilityData = get_ability(slot)
+	if ability != null and ability == copied:
+		return character.energy.can_afford(ability.energy_cost)
 	return ability != null and get_cooldown_left(slot) <= 0.0 and character.energy.can_afford(ability.energy_cost)
 
 
@@ -110,6 +180,10 @@ func get_move_multiplier() -> float:
 func tick(delta: float, intent: GameplayIntent) -> void:
 	for slot: StringName in _cooldowns:
 		_cooldowns[slot] = maxf(0.0, _cooldowns[slot] - delta)
+	if copied != null:
+		copied_left -= delta
+		if copied_left <= 0.0 and not (current == copied and phase != Phase.IDLE):
+			_clear_copy()
 	for slot: StringName in _combo_left.keys():
 		_combo_left[slot] -= delta
 		if _combo_left[slot] <= 0.0:
@@ -229,7 +303,10 @@ func _activate() -> void:
 	cast_direction = character.facing.facing_direction
 	var to_aim: Vector3 = HitQuery.flat(character.facing.aim_point - character.global_position)
 	cast_target_point = character.global_position + to_aim.limit_length(current.max_range)
-	_set_cooldown(current_slot, current.cooldown)
+	if current == copied:
+		_clear_copy()  # one use; the slot keeps its own cooldown
+	else:
+		_set_cooldown(current_slot, current.cooldown)
 	cast_activated.emit(current_slot, current)
 	AbilityEffects.activate(self, current)
 

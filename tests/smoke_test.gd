@@ -106,8 +106,69 @@ func _unit_tests() -> void:
 	sasuke.abilities.try_cast(&"rmb")
 	sasuke.abilities.cancel()
 	_check(not sasuke.abilities.is_casting(), "katon can be cancelled (feint)")
+	_kit_tests(naruto, sasuke)
 	naruto.queue_free()
 	sasuke.queue_free()
+
+
+## Signature mechanics of each kit.
+func _kit_tests(naruto: CombatCharacter, sasuke: CombatCharacter) -> void:
+	for c: CombatCharacter in [naruto, sasuke]:
+		c.status.clear_all()
+		c.abilities.reset()
+		c.health.reset()
+	naruto.global_position = Vector3.ZERO
+	sasuke.global_position = Vector3(0, 0, -1.5)
+	naruto.facing.set_direction(Vector3.FORWARD)
+	# Sasuke: Kusanagi marks, Chidori consumes them.
+	var slash: AbilityData = sasuke.data.lmb
+	for i in 3:
+		naruto.receive_hit(HitData.from_ability(sasuke, slash, Vector3.FORWARD))
+	_check(naruto.status.get_stacks(StatusController.Type.MARK) == 3, "kusanagi stacks 3 sharingan marks")
+	var before: float = naruto.health.current_health
+	naruto.receive_hit(HitData.from_ability(sasuke, sasuke.data.rmb, Vector3.FORWARD))
+	var dealt: float = before - naruto.health.current_health
+	_check(is_equal_approx(dealt, sasuke.data.rmb.damage + 3.0 * sasuke.data.rmb.mark_bonus_damage), "chidori cashes in marks (%.0f dmg)" % dealt)
+	_check(naruto.status.get_stacks(StatusController.Type.MARK) == 0, "marks consumed")
+	_check(naruto.status.get_remaining(StatusController.Type.STUN) >= 1.2, "3 marks = long stun")
+	naruto.status.clear_all()
+	naruto.health.reset()
+	# Naruto: clone summon + mirrored taijutsu (half damage) + swap.
+	naruto.abilities.try_cast(&"e")
+	for i in 30:
+		naruto.abilities.tick(1.0 / 60.0, null)
+	_check(is_instance_valid(naruto.clone), "kage bunshin summons a clone")
+	if is_instance_valid(naruto.clone):
+		naruto.clone.global_position = Vector3(0, 0, -0.5)
+		sasuke.health.reset()
+		var hits: Array[CombatCharacter] = []
+		naruto.clone.mirror_melee(naruto.data.lmb, Vector3.FORWARD)
+		_check(is_equal_approx(sasuke.health.max_health - sasuke.health.current_health, naruto.data.lmb.damage * ShadowClone.DAMAGE_SCALE), "clone mirrors taijutsu at 50%")
+		var clone_pos: Vector3 = naruto.clone.global_position
+		naruto.abilities.try_cast(&"space")
+		for i in 10:
+			naruto.abilities.tick(1.0 / 60.0, null)
+		_check(naruto.global_position.distance_to(clone_pos) < 0.1, "space swaps places with the clone")
+	# Kakashi: copy the countered jutsu into E.
+	var kakashi := (load("res://characters/base/shinobi.tscn") as PackedScene).instantiate() as CombatCharacter
+	kakashi.data = load("res://characters/kakashi/kakashi_data.tres")
+	add_child(kakashi)
+	kakashi.abilities.try_cast(&"q")
+	kakashi.abilities.tick(0.05, null)
+	kakashi.receive_hit(HitData.from_ability(sasuke, sasuke.data.e, Vector3.FORWARD))
+	_check(kakashi.abilities.get_ability(&"e") == sasuke.data.e, "sharingan copy puts the jutsu in E")
+	_check(kakashi.abilities.is_ready(&"e"), "copied jutsu is usable")
+	# Burning ground: Katon carries a lingering zone.
+	_check(sasuke.data.e.expire_zone != null and sasuke.data.e.expire_zone.zone_duration > 0.0, "katon leaves burning ground")
+	# Kurama passive.
+	naruto.status.clear_all()
+	naruto.health.reset()
+	var big := HitData.new()
+	big.source = sasuke
+	big.damage = naruto.health.max_health * 0.75
+	naruto.receive_hit(big)
+	_check(naruto.status.has_status(StatusController.Type.REGEN), "kurama chakra triggers under 30% HP")
+	kakashi.queue_free()
 
 
 func _check(condition: bool, label: String) -> void:

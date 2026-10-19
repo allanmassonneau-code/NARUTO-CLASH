@@ -151,6 +151,13 @@ func _try_heal(dist: float) -> bool:
 
 
 func _try_attack(dir: Vector3, dist: float) -> void:
+	# Utility first: summon a clone when an enemy is close.
+	for slot: StringName in [&"e", &"rmb"]:
+		var u: AbilityData = _body.abilities.get_ability(slot)
+		if u != null and u.kind == AbilityData.Kind.SUMMON_CLONE and dist < 7.0 and _body.abilities.is_ready(slot) \
+				and not is_instance_valid(_body.clone):
+			_press(slot)
+			return
 	for slot: StringName in [&"ult", &"e", &"rmb", &"lmb"]:
 		var a: AbilityData = _body.abilities.get_ability(slot)
 		if a == null or not a.does_damage() or not _body.abilities.is_ready(slot):

@@ -118,6 +118,8 @@ func _refresh() -> void:
 	_mode_buttons[1].button_pressed = _mode == GameSession.Mode.TEAM_2V2_VS_BOTS
 	var data: CharacterData = GameSession.get_roster()[_player_index]
 	var lines: PackedStringArray = ["%s — %s" % [data.display_name, data.identity]]
+	if data.passive_description != "":
+		lines.append("Passive: " + data.passive_description)
 	for slot: StringName in AbilityController.SLOTS:
 		var a: AbilityData = data.get(slot)
 		if a != null:

@@ -8,7 +8,7 @@ stay editable in the Godot inspector; re-running this overwrites them.
 import os
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
-KIND = {"MELEE": 0, "PROJ": 1, "DASH": 2, "AREA": 3, "COUNTER": 4, "HEAL": 5}
+KIND = {"MELEE": 0, "PROJ": 1, "DASH": 2, "AREA": 3, "COUNTER": 4, "HEAL": 5, "SUMMON": 6}
 
 
 def c(r, g, b, a=1):
@@ -44,58 +44,73 @@ def melee_hit(name, color, dmg, rng=1.9, arc=100.0, startup=0.08, rec=0.14, lung
 
 
 CHARACTERS = {
+    # NARUTO — shadow clones. The clone mirrors his taijutsu and Rasengan;
+    # Space swaps places with it. Passive: Kurama's chakra when low.
     "naruto": dict(
         display_name="Naruto Uzumaki", body_color=c(1, 0.5, 0.05), max_health=135.0, speed=7.0,
-        identity="Aggressive pressure fighter. Taijutsu strings into Rasengan, Kawarimi baits commitment.",
+        identity="Shadow-clone pressure: your clone copies your taijutsu and Rasengan, Space swaps places with it.",
+        passive="kurama", passive_description="Kurama's Chakra: once per round, under 30% HP you regenerate and gain haste.",
         look=dict(skin=c(0.98, 0.8, 0.64), top=c(1, 0.5, 0.1), top_accent=c(0.1, 0.1, 0.14), sleeves=c(1, 0.5, 0.1),
                   pants=c(1, 0.5, 0.1), accent=c(0.12, 0.12, 0.18), hair_color=c(1, 0.85, 0.2), hair=0,
                   eye_color=c(0.15, 0.45, 0.95), whiskers=True),
         kit=dict(
-            lmb=combo(melee_hit("Taijutsu", c(1, 0.7, 0.3), 6.0, anim="jab"),
-                      melee_hit("Taijutsu II", c(1, 0.7, 0.3), 6.0, anim="hook"),
+            lmb=combo(melee_hit("Taijutsu", c(1, 0.7, 0.3), 6.0, anim="jab", clone_mirror=True),
+                      melee_hit("Taijutsu II", c(1, 0.7, 0.3), 6.0, anim="hook", clone_mirror=True),
                       melee_hit("Uzumaki Kick", c(1, 0.6, 0.2), 11.0, rng=2.1, startup=0.12, rec=0.3, lunge=0.9,
-                                knockback_speed=10.0, knockback_duration=0.2, anim="kick")),
-            rmb=ab("Rasengan", "DASH", c(0.3, 0.6, 1), anim="palm", vfx="rasengan", startup_time=0.3, active_time=0.2, recovery_time=0.32, cooldown=6.0,
-                   dash_distance=4.5, hit_radius=0.7, damage=24.0, knockback_speed=13.0, knockback_duration=0.24,
+                                knockback_speed=10.0, knockback_duration=0.2, anim="kick", clone_mirror=True)),
+            rmb=ab("Rasengan", "DASH", c(0.3, 0.6, 1), anim="palm", vfx="rasengan", clone_mirror=True,
+                   startup_time=0.3, active_time=0.2, recovery_time=0.32, cooldown=6.0,
+                   dash_distance=4.5, hit_radius=0.7, damage=22.0, knockback_speed=13.0, knockback_duration=0.24,
                    cast_move_multiplier=0.3, recovery_move_multiplier=0.5),
-            space=shunshin(6.0, 7.0),
-            q=ab("Kawarimi no Jutsu", "COUNTER", c(0.6, 0.4, 0.2), anim="seal", startup_time=0.02, active_time=0.8, recovery_time=0.15,
-                 cooldown=11.0, counter_teleport_distance=4.5, cast_move_multiplier=0.4, energy_gain_on_hit=10.0,
-                 can_cancel_during_startup=False),
-            e=ab("Kage Bunshin Rush", "PROJ", c(1, 0.55, 0.1), anim="seal", vfx="clone", startup_time=0.22, active_time=0.05, recovery_time=0.22,
-                 cooldown=8.0, max_range=11.0, hit_radius=0.5, projectile_speed=14.0, damage=8.0, stun_duration=0.8,
-                 cast_move_multiplier=0.4),
-            ult=ab("Rasenshuriken", "PROJ", c(0.6, 0.9, 1), anim="throw", vfx="rasenshuriken", startup_time=0.5, active_time=0.05, recovery_time=0.35,
-                   energy_cost=100.0, max_range=14.0, hit_radius=1.0, projectile_speed=16.0, damage=36.0,
-                   knockback_speed=9.0, cast_move_multiplier=0.2),
+            space=dict(shunshin(6.0, 7.0), display_name="Shunshin / Clone Swap", swap_with_clone=True),
+            q=ab("Kawarimi no Jutsu", "COUNTER", c(0.6, 0.4, 0.2), anim="seal", startup_time=0.02, active_time=0.8,
+                 recovery_time=0.15, cooldown=11.0, counter_teleport_distance=4.5, cast_move_multiplier=0.4,
+                 energy_gain_on_hit=10.0, can_cancel_during_startup=False),
+            e=ab("Kage Bunshin", "SUMMON", c(1, 0.55, 0.1), anim="seal", vfx="clone", startup_time=0.2, active_time=0.05,
+                 recovery_time=0.15, cooldown=11.0, summon_duration=6.0, summon_distance=2.5, max_range=2.5,
+                 cast_move_multiplier=0.5),
+            ult=ab("Rasenshuriken", "PROJ", c(0.6, 0.9, 1), anim="throw", vfx="rasenshuriken", startup_time=0.5,
+                   active_time=0.05, recovery_time=0.35, energy_cost=100.0, max_range=14.0, hit_radius=1.0,
+                   projectile_speed=16.0, damage=36.0, knockback_speed=9.0, cast_move_multiplier=0.2),
         )),
+    # SASUKE — reads. Kusanagi stacks Sharingan marks; Chidori cashes them in
+    # (3 marks = long stun). A successful Sharingan counter resets Chidori.
     "sasuke": dict(
         display_name="Sasuke Uchiha", body_color=c(0.25, 0.35, 0.85), max_health=130.0, speed=7.1,
-        identity="Precise melee duelist. Kusanagi strings, Chidori punishes, Katon zones, Sharingan reads.",
+        identity="Precise duelist: Kusanagi marks, Chidori cashes the marks in, Sharingan counters reset Chidori.",
+        passive="", passive_description="Sharingan marks: Kusanagi hits stack up to 3 marks on the target.",
         look=dict(skin=c(0.98, 0.85, 0.74), top=c(0.9, 0.9, 0.93), top_accent=c(0.35, 0.3, 0.5), sleeves=c(0.9, 0.9, 0.93),
                   pants=c(0.2, 0.22, 0.32), accent=c(0.45, 0.3, 0.6), hair_color=c(0.08, 0.09, 0.16), hair=1,
                   eye_color=c(0.85, 0.05, 0.05), headband=False, weapon=1),
         kit=dict(
-            lmb=combo(melee_hit("Kusanagi", c(0.8, 0.85, 1), 7.0, rng=2.3, arc=120.0, startup=0.09, rec=0.15, lunge=0.6, anim="slash"),
-                      melee_hit("Kusanagi II", c(0.8, 0.85, 1), 7.0, rng=2.3, arc=120.0, startup=0.09, rec=0.15, lunge=0.6, anim="slash2"),
-                      melee_hit("Kusanagi Thrust", c(0.6, 0.8, 1), 12.0, rng=2.9, arc=45.0, startup=0.14, rec=0.32,
-                                lunge=1.3, knockback_speed=7.0, anim="thrust")),
-            rmb=ab("Chidori", "DASH", c(0.4, 0.85, 1), anim="chidori", vfx="chidori", startup_time=0.3, active_time=0.22, recovery_time=0.38, cooldown=7.0,
-                   dash_distance=6.5, hit_radius=0.7, damage=20.0, stun_duration=0.6, cast_move_multiplier=0.3,
-                   recovery_move_multiplier=0.5),
+            lmb=combo(melee_hit("Kusanagi", c(0.8, 0.85, 1), 6.0, rng=2.3, arc=120.0, startup=0.09, rec=0.15, lunge=0.6,
+                                anim="slash", apply_mark=1),
+                      melee_hit("Kusanagi II", c(0.8, 0.85, 1), 6.0, rng=2.3, arc=120.0, startup=0.09, rec=0.15, lunge=0.6,
+                                anim="slash2", apply_mark=1),
+                      melee_hit("Kusanagi Thrust", c(0.6, 0.8, 1), 10.0, rng=2.9, arc=45.0, startup=0.14, rec=0.32,
+                                lunge=1.3, knockback_speed=7.0, anim="thrust", apply_mark=1)),
+            rmb=ab("Chidori", "DASH", c(0.4, 0.85, 1), anim="chidori", vfx="chidori", startup_time=0.3, active_time=0.22,
+                   recovery_time=0.38, cooldown=7.0, dash_distance=6.5, hit_radius=0.7, damage=14.0, stun_duration=0.3,
+                   mark_bonus_damage=6.0, mark_full_stun=1.3, cast_move_multiplier=0.3, recovery_move_multiplier=0.5),
             space=shunshin(5.5, 8.0),
-            q=ab("Sharingan Counter", "COUNTER", c(0.9, 0.1, 0.1), anim="guard", vfx="sharingan", startup_time=0.02, active_time=0.9, recovery_time=0.2,
-                 cooldown=12.0, counter_stun_attacker=1.2, cast_move_multiplier=0.3, energy_gain_on_hit=10.0,
-                 can_cancel_during_startup=False),
-            e=ab("Katon: Goukakyuu", "PROJ", c(1, 0.35, 0.1), anim="breath", vfx="katon", startup_time=0.35, active_time=0.05, recovery_time=0.3,
-                 cooldown=8.0, max_range=10.0, hit_radius=0.9, projectile_speed=14.0, damage=16.0, knockback_speed=5.0,
-                 cast_move_multiplier=0.3),
-            ult=ab("Kirin", "AREA", c(0.5, 0.8, 1), anim="seal", vfx="kirin", startup_time=0.4, active_time=0.05, recovery_time=0.3, energy_cost=100.0,
-                   max_range=11.0, hit_radius=3.0, area_delay=1.1, damage=40.0, stun_duration=0.5, cast_move_multiplier=0.3),
+            q=ab("Sharingan Counter", "COUNTER", c(0.9, 0.1, 0.1), anim="guard", vfx="sharingan", startup_time=0.02,
+                 active_time=0.9, recovery_time=0.2, cooldown=12.0, counter_stun_attacker=0.8, counter_reset_slot="rmb",
+                 counter_haste=2.0, cast_move_multiplier=0.3, energy_gain_on_hit=10.0, can_cancel_during_startup=False),
+            e=ab("Katon: Goukakyuu", "PROJ", c(1, 0.35, 0.1), anim="breath", vfx="katon", startup_time=0.35,
+                 active_time=0.05, recovery_time=0.3, cooldown=9.0, max_range=9.0, hit_radius=0.9, projectile_speed=13.0,
+                 damage=12.0, knockback_speed=4.0, cast_move_multiplier=0.3,
+                 expire_zone=ab("Burning Ground", "AREA", c(1, 0.4, 0.1), vfx="fire_zone", area_delay=0.0, hit_radius=2.0,
+                                zone_duration=3.0, zone_tick_damage=3.0, slow_duration=0.6, energy_gain_on_hit=2.0)),
+            ult=ab("Kirin", "AREA", c(0.5, 0.8, 1), anim="seal", vfx="kirin", startup_time=0.4, active_time=0.05,
+                   recovery_time=0.3, energy_cost=100.0, max_range=11.0, hit_radius=3.0, area_delay=1.1, damage=38.0,
+                   stun_duration=0.5, mark_bonus_damage=4.0, cast_move_multiplier=0.3),
         )),
+    # SAKURA — frontline medic. Okashou leaves a slowing crater, her heal
+    # also heals allies, Byakugou = full heal + regen + Strength of a Hundred.
     "sakura": dict(
         display_name="Sakura Haruno", body_color=c(1, 0.45, 0.7), max_health=150.0, speed=6.8,
-        identity="Melee bruiser / combat healer. Heavy punches, heals limited by recoverable health.",
+        identity="Frontline medic: craters that slow, heals that reach allies, Strength of a Hundred to finish.",
+        passive="", passive_description="Medical ninja: Mystical Palm also heals allies within 5 m.",
         look=dict(skin=c(0.99, 0.84, 0.74), top=c(0.82, 0.12, 0.2), top_accent=c(0.95, 0.95, 0.95), sleeves=c(0.99, 0.84, 0.74),
                   pants=c(0.12, 0.12, 0.15), accent=c(0.6, 0.6, 0.65), hair_color=c(1, 0.55, 0.75), hair=2,
                   eye_color=c(0.2, 0.65, 0.3), gloves=c(0.15, 0.15, 0.18), shorts=True),
@@ -104,22 +119,27 @@ CHARACTERS = {
                       melee_hit("Chakra Punch II", c(1, 0.6, 0.8), 8.0, rng=2.0, arc=110.0, startup=0.12, rec=0.18, anim="hook"),
                       melee_hit("Shannaro!", c(1, 0.35, 0.55), 14.0, rng=2.3, arc=90.0, startup=0.18, rec=0.34, lunge=0.9,
                                 knockback_speed=13.0, knockback_duration=0.25, anim="thrust")),
-            rmb=ab("Oukashou", "AREA", c(1, 0.4, 0.6), anim="stomp", vfx="okasho", startup_time=0.25, active_time=0.05, recovery_time=0.3, cooldown=7.0,
-                   max_range=5.0, hit_radius=2.2, area_delay=0.4, damage=20.0, stun_duration=0.7, cast_move_multiplier=0.3),
-            space=ab("Chakra Leap", "DASH", c(1, 0.7, 0.85), anim="leap", vfx="leap", startup_time=0.08, active_time=0.28, recovery_time=0.12,
-                     cooldown=9.0, dash_distance=6.5, dash_immaterial=True, cast_move_multiplier=1.0,
+            rmb=ab("Oukashou", "AREA", c(1, 0.4, 0.6), anim="stomp", vfx="okasho", startup_time=0.25, active_time=0.05,
+                   recovery_time=0.3, cooldown=7.0, max_range=5.0, hit_radius=2.4, area_delay=0.4, damage=18.0,
+                   stun_duration=0.6, zone_duration=2.5, zone_tick_damage=0.0, slow_duration=0.6, cast_move_multiplier=0.3),
+            space=ab("Chakra Leap", "DASH", c(1, 0.7, 0.85), anim="leap", vfx="leap", startup_time=0.08, active_time=0.28,
+                     recovery_time=0.12, cooldown=9.0, dash_distance=6.5, dash_immaterial=True, cast_move_multiplier=1.0,
                      can_cancel_during_startup=False),
-            q=ab("Mystical Palm", "HEAL", c(0.4, 1, 0.5), anim="heal", vfx="heal", startup_time=0.55, active_time=0.05, recovery_time=0.2,
-                 cooldown=12.0, heal_amount=24.0, cast_move_multiplier=0.3),
-            e=ab("Heel Drop", "MELEE", c(1, 0.3, 0.5), anim="stomp", vfx="stomp", startup_time=0.22, active_time=0.05, recovery_time=0.3, cooldown=6.0,
-                 max_range=2.4, arc_degrees=80.0, damage=12.0, stun_duration=0.5, lunge_distance=1.4,
-                 cast_move_multiplier=0.4),
-            ult=ab("Byakugou Seal", "HEAL", c(0.6, 0.3, 1), anim="heal", vfx="byakugou", startup_time=0.5, active_time=0.05, recovery_time=0.2,
-                   energy_cost=100.0, heal_amount=55.0, true_heal=True, cast_move_multiplier=0.2),
+            q=ab("Mystical Palm", "HEAL", c(0.4, 1, 0.5), anim="heal", vfx="heal", startup_time=0.55, active_time=0.05,
+                 recovery_time=0.2, cooldown=12.0, heal_amount=22.0, heal_allies_radius=5.0, cast_move_multiplier=0.3),
+            e=ab("Heel Drop", "MELEE", c(1, 0.3, 0.5), anim="stomp", vfx="stomp", startup_time=0.22, active_time=0.05,
+                 recovery_time=0.3, cooldown=6.0, max_range=2.4, arc_degrees=80.0, damage=12.0, stun_duration=0.5,
+                 lunge_distance=1.4, cast_move_multiplier=0.4),
+            ult=ab("Byakugou: Strength of a Hundred", "HEAL", c(0.6, 0.3, 1), anim="heal", vfx="byakugou",
+                   startup_time=0.5, active_time=0.05, recovery_time=0.2, energy_cost=100.0, heal_amount=40.0,
+                   true_heal=True, buff_regen=6.0, buff_empower=6.0, buff_haste=3.0, cast_move_multiplier=0.2),
         )),
+    # KAKASHI — copy ninja. His Sharingan counter copies the jutsu that hit
+    # him into E (10 s, one use). Raikiri punishes targets rooted by Ninken.
     "kakashi": dict(
         display_name="Kakashi Hatake", body_color=c(0.7, 0.72, 0.78), max_health=130.0, speed=7.0,
-        identity="Technical melee fighter. Kunai strings, Ninken roots set up Raikiri, Kamui is a delayed read.",
+        identity="Copy ninja: counter a jutsu to copy it into E; Ninken roots set up a devastating Raikiri.",
+        passive="", passive_description="Copy Ninja: a successful Sharingan Copy turns E into the copied jutsu for 10 s.",
         look=dict(skin=c(0.95, 0.8, 0.66), top=c(0.16, 0.2, 0.35), top_accent=c(0.36, 0.45, 0.27), sleeves=c(0.16, 0.2, 0.35),
                   pants=c(0.16, 0.2, 0.35), accent=c(0.1, 0.1, 0.14), hair_color=c(0.86, 0.88, 0.92), hair=3,
                   eye_color=c(0.1, 0.1, 0.12), mask=True, flak_vest=True, gloves=c(0.12, 0.12, 0.15), weapon=2),
@@ -128,18 +148,18 @@ CHARACTERS = {
                       melee_hit("Kunai Slash II", c(0.8, 0.82, 0.9), 6.5, rng=2.1, arc=110.0, anim="slash2"),
                       melee_hit("Raiton Palm", c(0.55, 0.85, 1), 10.0, rng=2.2, arc=70.0, startup=0.14, rec=0.3, lunge=0.9,
                                 stun_duration=0.35, anim="palm")),
-            rmb=ab("Raikiri", "DASH", c(0.5, 0.85, 1), anim="chidori", vfx="raikiri", startup_time=0.4, active_time=0.25, recovery_time=0.4, cooldown=7.0,
-                   dash_distance=7.0, hit_radius=0.7, damage=26.0, knockback_speed=8.0, cast_move_multiplier=0.25,
-                   recovery_move_multiplier=0.5),
+            rmb=ab("Raikiri", "DASH", c(0.5, 0.85, 1), anim="chidori", vfx="raikiri", startup_time=0.4, active_time=0.25,
+                   recovery_time=0.4, cooldown=7.0, dash_distance=7.0, hit_radius=0.7, damage=20.0, bonus_vs_rooted=14.0,
+                   knockback_speed=8.0, cast_move_multiplier=0.25, recovery_move_multiplier=0.5),
             space=shunshin(5.5, 8.0),
-            q=ab("Kawarimi no Jutsu", "COUNTER", c(0.6, 0.4, 0.2), anim="seal", startup_time=0.02, active_time=0.7, recovery_time=0.15,
-                 cooldown=11.0, counter_teleport_distance=4.0, cast_move_multiplier=0.4, energy_gain_on_hit=10.0,
-                 can_cancel_during_startup=False),
-            e=ab("Summoning: Ninken", "AREA", c(0.6, 0.5, 0.3), anim="stomp", vfx="ninken", startup_time=0.2, active_time=0.05, recovery_time=0.25,
-                 cooldown=10.0, max_range=9.0, hit_radius=1.6, area_delay=0.45, damage=6.0, root_duration=1.6,
-                 cast_move_multiplier=0.4),
-            ult=ab("Kamui", "AREA", c(0.4, 0.2, 0.6), anim="seal", vfx="kamui", startup_time=0.5, active_time=0.05, recovery_time=0.4,
-                   energy_cost=100.0, max_range=10.0, hit_radius=2.4, area_delay=1.2, damage=45.0,
+            q=ab("Sharingan Copy", "COUNTER", c(0.9, 0.15, 0.15), anim="guard", vfx="sharingan", startup_time=0.02,
+                 active_time=0.8, recovery_time=0.15, cooldown=11.0, counter_copy=True, counter_teleport_distance=2.0,
+                 cast_move_multiplier=0.4, energy_gain_on_hit=12.0, can_cancel_during_startup=False),
+            e=ab("Summoning: Ninken", "AREA", c(0.6, 0.5, 0.3), anim="stomp", vfx="ninken", startup_time=0.2,
+                 active_time=0.05, recovery_time=0.25, cooldown=10.0, max_range=9.0, hit_radius=1.6, area_delay=0.45,
+                 damage=6.0, root_duration=1.6, cast_move_multiplier=0.4),
+            ult=ab("Kamui", "AREA", c(0.4, 0.2, 0.6), anim="seal", vfx="kamui", startup_time=0.5, active_time=0.05,
+                   recovery_time=0.4, energy_cost=100.0, max_range=10.0, hit_radius=2.4, area_delay=1.2, damage=45.0,
                    cast_move_multiplier=0.25),
         )),
 }
@@ -173,16 +193,21 @@ def write(key, ch):
         look += f"{k} = {val(v)}\n"
     subs.append(look)
 
-    def emit(slot, a, idx):
-        """Emits `a` (and its combo chain, last hit first) and returns its id."""
-        next_id = emit(slot, a["combo_next"], idx + 1) if "combo_next" in a else None
-        rid = slot if idx == 0 else f"{slot}_{idx}"
+    NESTED = ("combo_next", "expire_zone")
+
+    def emit(slot, a, idx, suffix=""):
+        """Emits `a` (nested abilities first: combo chain, expire zone) and returns its id."""
+        nested_ids = {}
+        for key in NESTED:
+            if key in a:
+                nested_ids[key] = emit(slot, a[key], idx + 1, suffix + ("z" if key == "expire_zone" else ""))
+        rid = (slot if idx == 0 else f"{slot}_{idx}") + suffix
         body = f'[sub_resource type="Resource" id="{rid}"]\nscript = ExtResource("2")\nicon = ExtResource("icon_{slot}")\n'
         for k, v in a.items():
-            if k != "combo_next":
+            if k not in NESTED:
                 body += f"{k} = {val(v)}\n"
-        if next_id:
-            body += f'combo_next = SubResource("{next_id}")\n'
+        for key, nid in nested_ids.items():
+            body += f'{key} = SubResource("{nid}")\n'
         subs.append(body)
         return rid
 
@@ -191,6 +216,7 @@ def write(key, ch):
         slots[slot] = emit(slot, a[0] if isinstance(a, list) else a, 0)
 
     res = ['[resource]', 'script = ExtResource("1")', f'display_name = "{ch["display_name"]}"',
+           f'passive = "{ch.get("passive", "")}"', f'passive_description = "{ch.get("passive_description", "")}"',
            f'identity = "{ch["identity"]}"', f'body_color = {ch["body_color"]}', f'max_health = {ch["max_health"]}',
            'movement = SubResource("movement")', 'look = SubResource("look")']
     res += [f'{slot} = SubResource("{rid}")' for slot, rid in slots.items()]

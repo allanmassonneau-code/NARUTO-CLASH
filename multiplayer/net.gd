@@ -168,6 +168,16 @@ func _broadcast_lobby() -> void:
 			s2c_lobby.rpc_id(peer_id, text)
 
 
+func fighter_index(c: CombatCharacter) -> int:
+	return _match.fighters.find(c) if _match != null and c != null else -1
+
+
+func fighter_at(index: int) -> CombatCharacter:
+	if _match == null or index < 0 or index >= _match.fighters.size():
+		return null
+	return _match.fighters[index]
+
+
 func register_match(match_manager: MatchManager) -> void:
 	_match = match_manager
 	_tick = 0
@@ -213,6 +223,12 @@ func on_entity_spawned(entity: Node3D, source: CombatCharacter, ability: Ability
 	_next_entity_id += 1
 	var fighter_index: int = _match.fighters.find(source)
 	var slot_index: int = source.abilities.slot_index(source.abilities.slot_of(ability))
+	if slot_index < 0:
+		# Not a slot ability: a projectile's expire zone (encoded slot + 10).
+		for i in AbilityController.SLOTS.size():
+			var base: AbilityData = source.abilities.get_ability(AbilityController.SLOTS[i])
+			if base != null and base.expire_zone == ability:
+				slot_index = i + 10
 	var kind: int = 0 if entity is Projectile else 1
 	for peer_id: int in _match_peers:
 		s2c_spawn_entity.rpc_id(peer_id, id, kind, fighter_index, slot_index, a, b)
@@ -328,7 +344,7 @@ func s2c_return_to_lobby() -> void:
 func s2c_snapshot(_server_tick: int, data: PackedFloat32Array) -> void:
 	if _match == null:
 		return
-	var stride: int = CombatCharacter.SNAPSHOT_STRIDE
+	var stride: int = CombatCharacter.snapshot_stride()
 	for i in mini(_match.fighters.size(), data.size() / stride):
 		_match.fighters[i].apply_snapshot(data, i * stride)
 
@@ -344,7 +360,12 @@ func s2c_spawn_entity(id: int, kind: int, fighter_index: int, slot_index: int, a
 	if _match == null or fighter_index < 0 or fighter_index >= _match.fighters.size():
 		return
 	var source: CombatCharacter = _match.fighters[fighter_index]
-	var ability: AbilityData = source.abilities.get_ability(AbilityController.SLOTS[slot_index])
+	var ability: AbilityData
+	if slot_index >= 10:
+		var base: AbilityData = source.abilities.get_ability(AbilityController.SLOTS[slot_index - 10])
+		ability = base.expire_zone if base != null else null
+	elif slot_index >= 0:
+		ability = source.abilities.get_ability(AbilityController.SLOTS[slot_index])
 	if ability == null:
 		return
 	var entity: Node3D

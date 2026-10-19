@@ -8,6 +8,9 @@ extends Resource
 @export var look: ShinobiLook
 @export var max_health: float = 130.0
 @export var movement: MovementData
+## Passive id handled by CombatCharacter ("kurama"...), empty = none.
+@export var passive: StringName = &""
+@export_multiline var passive_description: String = ""
 
 @export_category("Abilities")
 @export var lmb: AbilityData

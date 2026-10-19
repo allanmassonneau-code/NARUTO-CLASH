@@ -150,8 +150,47 @@ static func area_decor(area: GroundArea) -> void:
 			area.add_child(spiral)
 
 
+## Lingering zone look (after detonation): burning ground, crater...
+static func zone_visual(area: GroundArea) -> void:
+	var r: float = area.ability.hit_radius
+	match area.ability.vfx:
+		&"fire_zone":
+			for i in 9:
+				var flame := _mesh_node(area, _sphere_mesh(randf_range(0.25, 0.45)), Color(1.0, randf_range(0.35, 0.6), 0.1, 0.7), true)
+				var at := Vector3.FORWARD.rotated(Vector3.UP, randf() * TAU) * randf() * r * 0.85
+				flame.position = at + Vector3.UP * 0.2
+				flame.set_meta(&"flame", randf() * TAU)
+			_mesh_node(area, _disk_mesh(r), Color(1.0, 0.35, 0.05, 0.25), true).position.y = 0.03
+		&"crater":
+			var crater := _mesh_node(area, _disk_mesh(r), Color(0.25, 0.18, 0.15, 0.55), false)
+			crater.position.y = 0.025
+			var im := ImmediateMesh.new()
+			im.surface_begin(Mesh.PRIMITIVE_LINES)
+			for i in 10:
+				var dir := Vector3.FORWARD.rotated(Vector3.UP, TAU * i / 10.0)
+				_jagged(im, Vector3.UP * 0.05, dir * r + Vector3.UP * 0.05, 4, 0.2)
+			im.surface_end()
+			_mesh_node(area, im, Color(0.15, 0.1, 0.08, 1.0), false)
+		_:
+			_mesh_node(area, _disk_mesh(r), Color(area.ability.color, 0.3), true).position.y = 0.03
+
+
+static func _disk_mesh(radius: float) -> CylinderMesh:
+	var m := CylinderMesh.new()
+	m.top_radius = radius
+	m.bottom_radius = radius
+	m.height = 0.01
+	m.radial_segments = 32
+	return m
+
+
 static func area_tick(area: GroundArea, delta: float) -> void:
 	for child: Node in area.get_children():
+		if child.has_meta(&"flame"):
+			var ph: float = child.get_meta(&"flame")
+			(child as Node3D).scale = Vector3(1.0, 1.0 + 0.5 * absf(sin(area.elapsed * 9.0 + ph)), 1.0)
+			if randf() < 0.04:
+				_ember(area, (child as Node3D).global_position, Color(1.0, 0.5, 0.1))
 		if child.has_meta(&"spin"):
 			(child as Node3D).rotate_y(delta * (2.0 + 8.0 * area.elapsed / maxf(area.ability.area_delay, 0.01)))
 
