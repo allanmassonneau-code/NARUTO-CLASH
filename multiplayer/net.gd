@@ -7,6 +7,10 @@ extends Node
 
 signal status_changed(text: String)
 signal connection_closed(reason: String)
+## Client: friend code -> "lobby" / "party" / "match" for friends on this server.
+signal friends_status(status: Dictionary)
+## Client: someone invites us to their party.
+signal invite_received(from_name: String, party: String)
 
 enum Fx { RING, ARC, LOG }
 
@@ -15,13 +19,20 @@ const SNAPSHOT_INTERVAL_TICKS: int = 2
 const RETURN_TO_LOBBY_DELAY: float = 6.0
 ## Lets players leave the queue before being thrown into the next match.
 const REQUEUE_DELAY: float = 5.0
+## 2v2: a party that can't be completed with queued players gets bots after this.
+const PARTY_FILL_WAIT: float = 12.0
 const SERVER_IDLE_SCENE: String = "res://multiplayer/server_idle.tscn"
 
 var server_mode: String = ""
 var status_text: String = ""
 
 var _match: MatchManager
-## Server: peer id -> {name:String, roster:int}. Insertion order = queue order.
+## Client: private party joined ("" = public queue).
+var party: String = ""
+## Server: party code -> time (s) it got its second member.
+var _party_since: Dictionary = {}
+var _match_timer: float = 0.0
+## Server: peer id -> {name, roster, code, party}. Insertion order = queue order.
 var _peers: Dictionary = {}
 var _match_peers: Array[int] = []
 var _in_match: bool = false
@@ -46,7 +57,8 @@ func _ready() -> void:
 	elif args.has("autojoin"):
 		_autopilot = args
 		var roster: int = int(args.get("roster", randi() % GameSession.ROSTER_PATHS.size()))
-		join.call_deferred(args.autojoin, args.get("mode", "1v1"), "Bot%d" % (randi() % 1000), roster)
+		GameSession.friend_code = str(args.get("code", GameSession._new_code()))
+		join.call_deferred(args.autojoin, args.get("mode", "1v1"), "Bot%d" % (randi() % 1000), roster, str(args.get("party", "")))
 
 
 func is_server() -> bool:
@@ -107,14 +119,15 @@ func _on_peer_disconnected(peer_id: int) -> void:
 
 
 @rpc("any_peer", "call_remote", "reliable")
-func c2s_hello(version: String, player_name: String, roster: int) -> void:
+func c2s_hello(version: String, player_name: String, roster: int, code: String, party_code: String) -> void:
 	if not is_server():
 		return
 	var sender: int = multiplayer.get_remote_sender_id()
 	if version != game_version():
 		s2c_error.rpc_id(sender, "Version mismatch (server %s, you %s). Update with the launcher." % [game_version(), version])
 		return
-	_peers[sender] = {"name": player_name.left(16), "roster": clampi(roster, 0, GameSession.ROSTER_PATHS.size() - 1)}
+	_peers[sender] = {"name": player_name.left(16), "roster": clampi(roster, 0, GameSession.ROSTER_PATHS.size() - 1),
+		"code": code.left(8).to_upper(), "party": party_code.left(8).to_upper()}
 	_broadcast_lobby()
 	_try_start_match()
 
@@ -127,20 +140,172 @@ func c2s_set_roster(roster: int) -> void:
 
 
 func _try_start_match() -> void:
-	if _in_match or _peers.size() < _players_needed():
+	if _in_match:
+		return
+	var lineup: Array[Dictionary] = _build_lineup()
+	if lineup.is_empty():
 		return
 	_match_peers.clear()
-	var lineup: Array[Dictionary] = []
-	for peer_id: int in _peers.keys().slice(0, _players_needed()):
-		_match_peers.append(peer_id)
-		lineup.append({"roster": _peers[peer_id].roster, "team": lineup.size() % 2, "control": "remote", "peer": peer_id})
+	for entry: Dictionary in lineup:
+		if entry.control == "remote":
+			_match_peers.append(entry.peer)
+			_party_since.erase(_peers[entry.peer].party)
 	_in_match = true
 	GameSession.lineup = lineup
-	print("[server] match starting: %s" % [_match_peers])
-	for i in _match_peers.size():
-		s2c_start_match.rpc_id(_match_peers[i], lineup, i)
+	print("[server] match starting: %s" % [lineup.map(func(e: Dictionary) -> String: return "%s:%d" % [e.control, e.peer])])
+	for i in lineup.size():
+		if lineup[i].control == "remote":
+			s2c_start_match.rpc_id(lineup[i].peer, lineup, i)
 	get_tree().change_scene_to_file(GameSession.ARENA_SCENE)
 	_broadcast_lobby()
+
+
+## Parties (friends) first, then the public queue. Empty = no match yet.
+func _build_lineup() -> Array[Dictionary]:
+	var needed: int = _players_needed()
+	var parties: Dictionary = {}  # party -> Array[int]
+	var singles: Array[int] = []
+	for peer_id: int in _peers:
+		var p: String = _peers[peer_id].party
+		if p == "":
+			singles.append(peer_id)
+		else:
+			if not parties.has(p):
+				var members: Array[int] = []
+				parties[p] = members
+			(parties[p] as Array[int]).append(peer_id)
+	var now: float = Time.get_ticks_msec() / 1000.0
+	for p: String in parties:
+		var members: Array[int] = parties[p]
+		if members.size() < 2:
+			_party_since.erase(p)
+			continue
+		if not _party_since.has(p):
+			_party_since[p] = now
+		members = members.slice(0, needed)
+		if needed == 2:
+			return _lineup_from(members, [0, 1])
+		if members.size() == 4:
+			return _lineup_from(members, [0, 1, 0, 1])  # friends vs friends
+		# 2-3 friends: same team (the 3rd plays against them), fill with
+		# queued players, or bots once the wait is over.
+		var teams: Array[int] = [0, 0]
+		if members.size() == 3:
+			teams.append(1)
+		var fill: Array[int] = singles.slice(0, needed - members.size())
+		if fill.size() < needed - members.size() and now - float(_party_since[p]) < PARTY_FILL_WAIT:
+			continue
+		var lineup: Array[Dictionary] = _lineup_from(members, teams)
+		var counts: Array[int] = [teams.count(0), teams.count(1)]
+		for i in needed - members.size():
+			var team: int = 0 if counts[0] < 2 else 1
+			counts[team] += 1
+			if i < fill.size():
+				lineup.append({"roster": _peers[fill[i]].roster, "team": team, "control": "remote", "peer": fill[i]})
+			else:
+				lineup.append({"roster": randi() % GameSession.ROSTER_PATHS.size(), "team": team, "control": "bot", "peer": 0})
+		return lineup
+	if singles.size() >= needed:
+		var teams: Array[int] = []
+		for i in needed:
+			teams.append(i % 2)
+		return _lineup_from(singles.slice(0, needed), teams)
+	return []
+
+
+func _lineup_from(peer_ids: Array[int], teams: Array[int]) -> Array[Dictionary]:
+	var lineup: Array[Dictionary] = []
+	for i in peer_ids.size():
+		lineup.append({"roster": _peers[peer_ids[i]].roster, "team": teams[i], "control": "remote", "peer": peer_ids[i]})
+	return lineup
+
+
+func _process(delta: float) -> void:
+	if not is_server() or _in_match:
+		return
+	_match_timer -= delta
+	if _match_timer <= 0.0:
+		_match_timer = 1.0
+		_try_start_match()  # parties waiting for bot fill
+
+
+# --- Friends & parties ------------------------------------------------------
+
+@rpc("any_peer", "call_remote", "reliable")
+func c2s_set_party(party_code: String) -> void:
+	var sender: int = multiplayer.get_remote_sender_id()
+	if is_server() and _peers.has(sender):
+		_peers[sender].party = party_code.left(8).to_upper()
+		_broadcast_lobby()
+		_try_start_match()
+
+
+@rpc("any_peer", "call_remote", "reliable")
+func c2s_invite(code: String) -> void:
+	var sender: int = multiplayer.get_remote_sender_id()
+	if not is_server() or not _peers.has(sender):
+		return
+	var target: int = _peer_by_code(code.to_upper())
+	if target == 0 or target == sender:
+		return
+	var me: Dictionary = _peers[sender]
+	if me.party == "":
+		me.party = me.code  # inviting opens your party
+		_broadcast_lobby()
+	s2c_invite.rpc_id(target, me.name, me.party)
+
+
+@rpc("any_peer", "call_remote", "reliable")
+func c2s_query_friends(codes: PackedStringArray) -> void:
+	var sender: int = multiplayer.get_remote_sender_id()
+	if not is_server() or not _peers.has(sender):
+		return
+	var status: Dictionary = {}
+	for code: String in codes.slice(0, 50):
+		var peer_id: int = _peer_by_code(code.to_upper())
+		if peer_id == 0:
+			continue
+		var state: String = "lobby"
+		if _in_match and _match_peers.has(peer_id):
+			state = "match"
+		elif _peers[peer_id].party != "":
+			state = "party"
+		status[code] = {"state": state, "name": _peers[peer_id].name}
+	s2c_friends_status.rpc_id(sender, status)
+
+
+func _peer_by_code(code: String) -> int:
+	for peer_id: int in _peers:
+		if _peers[peer_id].code == code:
+			return peer_id
+	return 0
+
+
+@rpc("authority", "call_remote", "reliable")
+func s2c_invite(from_name: String, party_code: String) -> void:
+	invite_received.emit(from_name, party_code)
+
+
+@rpc("authority", "call_remote", "reliable")
+func s2c_friends_status(status: Dictionary) -> void:
+	friends_status.emit(status)
+
+
+## Client: joins / leaves (party = "") a private party on the current server.
+func set_party(party_code: String) -> void:
+	party = party_code
+	if is_client() and is_online():
+		c2s_set_party.rpc_id(1, party_code)
+
+
+func invite(code: String) -> void:
+	if is_client() and is_online():
+		c2s_invite.rpc_id(1, code)
+
+
+func query_friends(codes: PackedStringArray) -> void:
+	if is_client() and is_online() and multiplayer.get_unique_id() != 1:
+		c2s_query_friends.rpc_id(1, codes)
 
 
 func _end_match() -> void:
@@ -161,11 +326,22 @@ func _broadcast_lobby() -> void:
 	if not is_server():
 		return
 	var waiting: int = _peers.size() - (_match_peers.size() if _in_match else 0)
-	var text: String = "%s server — %d connected, %s" % [server_mode, _peers.size(),
+	var base: String = "%s server — %d connected, %s" % [server_mode, _peers.size(),
 		"match in progress, %d waiting" % waiting if _in_match else "waiting for players %d/%d" % [_peers.size(), _players_needed()]]
 	for peer_id: int in _peers:
-		if not _match_peers.has(peer_id) or not _in_match:
-			s2c_lobby.rpc_id(peer_id, text)
+		if _match_peers.has(peer_id) and _in_match:
+			continue
+		var text: String = base
+		var p: String = _peers[peer_id].party
+		if p != "":
+			var names: PackedStringArray = []
+			for other: int in _peers:
+				if _peers[other].party == p:
+					names.append(_peers[other].name)
+			text = "%s server — private party [%s]: %s" % [server_mode, p, ", ".join(names)]
+			if names.size() < 2:
+				text += " — invite a friend"
+		s2c_lobby.rpc_id(peer_id, text)
 
 
 func fighter_index(c: CombatCharacter) -> int:
@@ -253,7 +429,7 @@ func broadcast_fx(kind: Fx, a: Vector3, b: Vector3, f1: float, f2: float, color:
 
 # --- Client -----------------------------------------------------------------
 
-func join(host: String, mode: String, player_name: String, roster: int) -> void:
+func join(host: String, mode: String, player_name: String, roster: int, party_code: String = "") -> void:
 	leave()
 	var peer := ENetMultiplayerPeer.new()
 	var port: int = int(_autopilot.get("port", PORTS.get(mode, 7777)))
@@ -264,6 +440,7 @@ func join(host: String, mode: String, player_name: String, roster: int) -> void:
 	multiplayer.multiplayer_peer = peer
 	GameSession.net_role = GameSession.NetRole.CLIENT
 	set_meta(&"hello", [player_name, roster])
+	party = party_code
 	_set_status("Connecting to %s (%s)..." % [host, mode])
 
 
@@ -299,7 +476,7 @@ func send_input(seq: int, intent: GameplayIntent, aim: Vector3) -> void:
 
 func _on_connected_to_server() -> void:
 	var hello: Array = get_meta(&"hello", ["Shinobi", 0])
-	c2s_hello.rpc_id(1, game_version(), hello[0], hello[1])
+	c2s_hello.rpc_id(1, game_version(), hello[0], hello[1], GameSession.friend_code, party)
 	_set_status("Connected. Waiting for players...")
 
 

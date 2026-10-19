@@ -276,12 +276,15 @@ func _update_overhead() -> void:
 ## land and fills up as the cast completes (enemy casts are red).
 func _update_cast_indicator() -> void:
 	_cast_mesh.clear_surfaces()
+	# Vertices are in world space: the (top-level) node must sit at the origin,
+	# not where the fighter spawned.
+	cast_indicator.global_transform = Transform3D.IDENTITY
 	var abilities: AbilityController = _character.abilities
 	if abilities.phase != AbilityController.Phase.STARTUP or _character.is_dead():
 		return
 	var a: AbilityData = abilities.current
-	if a.startup_time < 0.12 and _role != Role.LOCAL_PLAYER:
-		return
+	if a.startup_time < 0.15:
+		return  # basic hits are too fast to read, they'd only flicker
 	var progress: float = clampf(abilities.phase_elapsed / maxf(a.startup_time, 0.001), 0.0, 1.0)
 	var color: Color = Color(1.0, 0.22, 0.18) if _role == Role.ENEMY else a.color.lerp(Color.WHITE, 0.35)
 	var origin: Vector3 = HitQuery.flat(_character.global_position) + Vector3.UP * 0.05

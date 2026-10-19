@@ -35,6 +35,10 @@ var local_fighter: int = 0
 
 var player_name: String = "Shinobi"
 var server_host: String = "127.0.0.1"
+## Your friend code (generated once, shared with friends to add you).
+var friend_code: String = ""
+## Friends: Array of {code:String, name:String}.
+var friends: Array[Dictionary] = []
 
 const SETTINGS_PATH: String = "user://settings.cfg"
 
@@ -46,6 +50,13 @@ func _ready() -> void:
 	if cfg.load(SETTINGS_PATH) == OK:
 		player_name = cfg.get_value("online", "name", player_name)
 		server_host = cfg.get_value("online", "host", server_host)
+		friend_code = cfg.get_value("online", "friend_code", "")
+		for entry: Variant in cfg.get_value("online", "friends", []):
+			if entry is Dictionary:
+				friends.append(entry)
+	if friend_code == "":
+		friend_code = _new_code()
+		save_settings()
 	# The launcher passes the official server: game.exe -- --host=1.2.3.4
 	for arg: String in OS.get_cmdline_user_args():
 		if arg.begins_with("--host="):
@@ -56,7 +67,46 @@ func save_settings() -> void:
 	var cfg := ConfigFile.new()
 	cfg.set_value("online", "name", player_name)
 	cfg.set_value("online", "host", server_host)
+	cfg.set_value("online", "friend_code", friend_code)
+	cfg.set_value("online", "friends", friends)
 	cfg.save(SETTINGS_PATH)
+
+
+func add_friend(code: String, friend_name: String) -> bool:
+	code = code.strip_edges().to_upper()
+	if code.length() < 4 or code == friend_code:
+		return false
+	for entry: Dictionary in friends:
+		if entry.code == code:
+			return false
+	friends.append({"code": code, "name": friend_name if friend_name != "" else code})
+	save_settings()
+	return true
+
+
+func remove_friend(code: String) -> void:
+	for i in range(friends.size() - 1, -1, -1):
+		if friends[i].code == code:
+			friends.remove_at(i)
+	save_settings()
+
+
+## Keeps the stored name of a friend in sync with the name they play under.
+func update_friend_name(code: String, friend_name: String) -> void:
+	for entry: Dictionary in friends:
+		if entry.code == code and entry.name != friend_name and friend_name != "":
+			entry.name = friend_name
+			save_settings()
+
+
+static func _new_code() -> String:
+	const ALPHABET: String = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+	var rng := RandomNumberGenerator.new()
+	rng.randomize()
+	var code: String = ""
+	for i in 6:
+		code += ALPHABET[rng.randi_range(0, ALPHABET.length() - 1)]
+	return code
 
 
 func get_roster() -> Array[CharacterData]:
