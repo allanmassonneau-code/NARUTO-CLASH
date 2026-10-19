@@ -140,10 +140,12 @@ server {
     }
 }
 NGINX
+  rm -f /etc/nginx/sites-enabled/default  # would clash with our default_server
   ln -sf /etc/nginx/sites-available/naruto-clash /etc/nginx/sites-enabled/naruto-clash
   install -d /var/www/html
   echo "Naruto Clash" > /var/www/html/index.html
-  nginx -t && systemctl reload nginx
+  nginx -t
+  systemctl reload nginx
 
   ufw allow OpenSSH
   ufw allow 80/tcp
