@@ -11,11 +11,11 @@ const WALL_THICKNESS: float = 1.2
 static func build(root: Node3D) -> void:
 	var old: Node = root.get_node_or_null("Arena")
 	if old != null:
-		root.remove_child(old)
 		old.queue_free()
 	var field := Node3D.new()
 	field.name = "Battlefield"
-	root.add_child(field)
+	# Called while the arena scene is still being set up.
+	root.add_child.call_deferred(field)
 	var visuals: bool = CombatFx.is_enabled()
 	if visuals:
 		_floor(field)

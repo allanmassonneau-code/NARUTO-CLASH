@@ -32,6 +32,8 @@ static var active: ArenaRules
 var fight_time: float = 0.0
 var orb_hp: float = 0.0
 var authoritative: bool = true
+## Off in the 20v20 battle (no orb, no ring).
+var enabled: bool = true
 
 var _orb_timer: float = ORB_FIRST_SPAWN
 var _ring_tick: float = RING_TICK
@@ -81,6 +83,8 @@ func orb_position() -> Vector3:
 
 ## Authoritative tick while the round is being fought.
 func tick(delta: float, fighters: Array[CombatCharacter]) -> void:
+	if not enabled:
+		return
 	fight_time += delta
 	if not orb_alive():
 		_orb_timer -= delta
@@ -98,7 +102,7 @@ func tick(delta: float, fighters: Array[CombatCharacter]) -> void:
 
 ## Any damaging hit can strike the orb. Returns true if it was hit.
 static func hit_orb(source: CombatCharacter, center: Vector3, radius: float, damage: float) -> bool:
-	if active == null or not active.authoritative or not active.orb_alive() or damage <= 0.0:
+	if active == null or not active.enabled or not active.authoritative or not active.orb_alive() or damage <= 0.0:
 		return false
 	if not is_instance_valid(source) or source.is_dead():
 		return false
@@ -148,7 +152,7 @@ const HEADER_SIZE: int = 2
 # --- Presentation ---------------------------------------------------------
 
 func _process(delta: float) -> void:
-	if _orb_view == null:
+	if _orb_view == null or not enabled:
 		return
 	var alive: bool = orb_alive()
 	if _visual_hp > 0.0 and not alive:

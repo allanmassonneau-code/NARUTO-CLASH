@@ -51,7 +51,7 @@ static func damage_number(anchor: Node, at: Vector3, amount: float, color: Color
 		return
 	var label := Label3D.new()
 	label.text = text if text != "" else str(roundi(amount))
-	label.font_size = 64 if amount >= 15.0 or text != "" else 48
+	label.font_size = 38 if text != "" else (64 if amount >= 15.0 else 48)
 	label.outline_size = 14
 	label.modulate = color
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -66,6 +66,42 @@ static func damage_number(anchor: Node, at: Vector3, amount: float, color: Color
 	tween.tween_property(label, "scale", Vector3.ONE * 1.35, 0.08)
 	tween.tween_property(label, "modulate:a", 0.0, 0.35).set_delay(0.4)
 	tween.chain().tween_callback(label.queue_free)
+
+
+## Gerbe of physical sparks (one-shot particles) flying off a hit.
+static func sparks(anchor: Node, center: Vector3, color: Color, amount: int) -> void:
+	if not is_enabled():
+		return
+	var p := CPUParticles3D.new()
+	p.one_shot = true
+	p.emitting = false
+	p.amount = amount
+	p.lifetime = 0.45
+	p.explosiveness = 1.0
+	p.direction = Vector3.UP
+	p.spread = 80.0
+	p.initial_velocity_min = 4.0
+	p.initial_velocity_max = 10.0
+	p.gravity = Vector3(0, -18, 0)
+	p.scale_amount_min = 0.6
+	p.scale_amount_max = 1.2
+	var mesh := BoxMesh.new()
+	mesh.size = Vector3(0.05, 0.05, 0.22)
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = color.lightened(0.3)
+	mat.emission_enabled = true
+	mat.emission = color
+	mat.emission_energy_multiplier = 3.0
+	mesh.material = mat
+	p.mesh = mesh
+	p.particle_flag_align_y = true
+	p.add_to_group(&"round_entities")
+	var root: Node = anchor.get_parent() if anchor.get_parent() != null else anchor
+	root.add_child(p)
+	p.global_position = center
+	p.emitting = true
+	p.finished.connect(p.queue_free)
 
 
 ## Star burst of short lines: impact spark.

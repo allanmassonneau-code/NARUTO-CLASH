@@ -29,12 +29,16 @@ const PARRY_WINDOW: float = 0.22
 const PARRY_COOLDOWN: float = 0.9
 const PARRY_STUN: float = 1.2
 const PARRY_ENERGY: float = 15.0
+## Chakra gained per point of damage taken.
+const DAMAGE_TAKEN_ENERGY: float = 0.2
 
 @export var data: CharacterData
 @export var controller: IntentSource
 @export var team: int = 0
 
 var controls_enabled: bool = true
+## Last fighter who damaged us (kill feed credit).
+var last_attacker: CombatCharacter
 var guarding: bool = false
 ## > 0 right after a perfect parry or a guard break (presentation cue, synced).
 var parry_flash: float = 0.0
@@ -176,6 +180,8 @@ func receive_hit(hit: HitData) -> HitData.Result:
 			_perfect_parry(hit)
 			return HitData.Result.COUNTERED
 		return _block(hit)
+	if is_instance_valid(hit.source) and hit.source != self:
+		last_attacker = hit.source
 	var a: AbilityData = hit.ability
 	var damage: float = hit.damage
 	var stun: float = hit.stun_duration
@@ -194,6 +200,7 @@ func receive_hit(hit: HitData) -> HitData.Result:
 	health.apply_damage(damage)
 	if damage > 0.0:
 		status.remove_status(StatusController.Type.INCAPACITATE)  # genjutsu breaks on damage
+		energy.gain(damage * DAMAGE_TAKEN_ENERGY)  # comeback: getting hit charges the ultimate too
 	if is_dead():
 		hit_received.emit(hit)
 		return HitData.Result.HIT
@@ -261,6 +268,10 @@ func _block(hit: HitData) -> HitData.Result:
 	_guard_absorbed += damage
 	if is_instance_valid(hit.source):
 		hit.source.energy.gain(hit.energy_gain * 0.5)
+		if hit.ability != null and hit.ability.kind == AbilityData.Kind.MELEE_ARC:
+			# Striking a guard bounces the attacker back.
+			var push: Vector3 = HitQuery.flat(hit.source.global_position - global_position).normalized() * 7.0
+			hit.source.movement.apply_forced_motion(push, 0.14, true)
 	if _guard_absorbed >= GUARD_BREAK_DAMAGE and not is_dead():
 		_guard_absorbed = 0.0
 		guarding = false
@@ -307,6 +318,7 @@ func set_pass_through(enabled: bool) -> void:
 
 func reset_for_round(spawn: Transform3D) -> void:
 	dismiss_clone()
+	last_attacker = null
 	guarding = false
 	parry_flash = 0.0
 	guard_break_flash = 0.0

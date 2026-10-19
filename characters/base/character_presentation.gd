@@ -31,6 +31,11 @@ var _was_stunned: bool = false
 var _was_dead: bool = false
 var _was_immaterial: bool = false
 var _was_parry: bool = false
+var _was_silenced: bool = false
+var _was_rooted: bool = false
+var _was_genjutsu: bool = false
+## The fighter this machine controls (hitstop / feedback when it's involved).
+static var local_player: CombatCharacter
 var _was_break: bool = false
 
 const BAR_WIDTH_PX: int = 120
@@ -59,6 +64,8 @@ func setup(character: CombatCharacter) -> void:
 
 func set_role(role: Role) -> void:
 	_role = role
+	if role == Role.LOCAL_PLAYER:
+		local_player = _character
 	if not _enabled:
 		return
 	_hp_fill.modulate = ROLE_COLORS[role]
@@ -137,11 +144,17 @@ func _on_damaged(amount: float) -> void:
 	_flash = 0.12
 	var heavy: bool = amount >= 15.0
 	model.hitstop(0.09 if heavy else 0.05)
+	if _role == Role.LOCAL_PLAYER or _local_player_striking():
+		Hitstop.trigger(0.075 if heavy else 0.045)
+	CombatFx.sparks(_character, _character.global_position + Vector3.UP * 1.1, ROLE_COLORS[_role], 14 if heavy else 8)
 	if _character.guarding:
 		Sfx.play(&"orb_hit", _character.global_position, -2.0, 0.6)  # blocked: metallic clank
 	Sfx.play(&"hit_heavy" if heavy else &"hit", _character.global_position, 0.0 if _role == Role.LOCAL_PLAYER else -2.0)
 	var at: Vector3 = _character.global_position
-	CombatFx.damage_number(_character, at + Vector3.UP * 2.3, amount, Color(1.0, 0.85, 0.3) if heavy else Color.WHITE)
+	if _character.guarding:
+		CombatFx.damage_number(_character, at + Vector3.UP * 2.3, amount, Color(0.6, 0.8, 1.0), "BLOCKED %d" % roundi(amount))
+	else:
+		CombatFx.damage_number(_character, at + Vector3.UP * 2.3, amount, Color(1.0, 0.85, 0.3) if heavy else Color.WHITE)
 	CombatFx.burst(_character, at + Vector3.UP * 1.0, Color(1.0, 0.9, 0.6), 0.9 if heavy else 0.6)
 	var camera := get_viewport().get_camera_3d() as ArenaCamera
 	if camera != null:
@@ -149,6 +162,22 @@ func _on_damaged(amount: float) -> void:
 			camera.shake(0.35 if heavy else 0.18)
 		elif heavy:
 			camera.shake(0.12)
+
+
+## The local player is mid-swing within reach of this fighter (online the
+## client doesn't know who dealt a hit, this is close enough for feedback).
+func _local_player_striking() -> bool:
+	var me: CombatCharacter = local_player
+	if me == null or me == _character or not is_instance_valid(me):
+		return false
+	var a: AbilityData = me.abilities.current
+	if a == null or me.abilities.phase != AbilityController.Phase.ACTIVE:
+		return false
+	return me.global_position.distance_to(_character.global_position) <= a.get_reach() + 1.5
+
+
+func _word(text: String, color: Color) -> void:
+	CombatFx.damage_number(_character, _character.global_position + Vector3.UP * 2.9, 0.0, color, text)
 
 
 func _build_health_bar() -> void:
@@ -240,6 +269,9 @@ func _track_spell(delta: float) -> void:
 			# Previous cast ended (finished, cancelled or interrupted).
 			var interrupted: bool = _spell_phase == AbilityController.Phase.STARTUP
 			SpellVfx.on_end(_character, _spell_ability, _spell_held, interrupted)
+			if interrupted and _spell_ability.startup_time >= 0.2 and (_character.status.has_status(StatusController.Type.STUN) \
+					or _character.status.has_status(StatusController.Type.SILENCE) or Vector2(_character.velocity.x, _character.velocity.z).length() > 7.0):
+				_word("INTERRUPTED", Color(1.0, 0.6, 0.25))
 			_spell_held = null
 		_spell_ability = a
 		_spell_phase = AbilityController.Phase.IDLE
@@ -375,6 +407,19 @@ func _audio_cues() -> void:
 	var stunned: bool = status.has_status(StatusController.Type.STUN)
 	if stunned and not _was_stunned:
 		Sfx.play(&"stun", _character.global_position, -4.0)
+		_word("STUNNED", Color(1.0, 0.85, 0.3))
+	var silenced: bool = status.has_status(StatusController.Type.SILENCE)
+	if silenced and not _was_silenced:
+		_word("SILENCED", Color(0.7, 0.8, 1.0))
+	_was_silenced = silenced
+	var rooted: bool = status.has_status(StatusController.Type.ROOT)
+	if rooted and not _was_rooted:
+		_word("ROOTED", Color(0.6, 1.0, 0.45))
+	_was_rooted = rooted
+	var genjutsu: bool = status.has_status(StatusController.Type.INCAPACITATE)
+	if genjutsu and not _was_genjutsu:
+		_word("GENJUTSU", Color(0.85, 0.4, 1.0))
+	_was_genjutsu = genjutsu
 	_was_stunned = stunned
 	var dead: bool = _character.is_dead()
 	if dead and not _was_dead:
@@ -411,6 +456,11 @@ func _cast_sound(a: AbilityData, phase: int) -> void:
 				Sfx.play(&"charge", _character.global_position, -4.0)
 		return
 	var pos: Vector3 = _character.global_position
+	if a.energy_cost >= 100.0:
+		var camera := get_viewport().get_camera_3d() as ArenaCamera
+		if camera != null and camera.target != null and camera.target.global_position.distance_to(pos) < 25.0:
+			camera.shake(0.45)
+		Sfx.play(&"gong", pos, -8.0, 1.6)
 	match a.kind:
 		AbilityData.Kind.MELEE_ARC:
 			var heavy: bool = a.arc_degrees <= 60.0 or a.max_range >= 2.3 or a.knockback_speed > 0.0 or a.multi_hits > 1

@@ -36,7 +36,15 @@ var remote_inputs: Dictionary = {}
 var rules: ArenaRules
 
 var _timer: float = 0.0
-var _spawns: Dictionary = {}  # CombatCharacter -> Marker3D
+var _spawns: Dictionary = {}  # CombatCharacter -> Transform3D
+
+## 20v20 battle: reinforcement tickets, respawn timers, kill feed.
+signal kill_feed(killer: CombatCharacter, victim: CombatCharacter)
+const BATTLE_TICKETS: int = 60
+const RESPAWN_TIME: float = 5.0
+var tickets: Array[int] = [BATTLE_TICKETS, BATTLE_TICKETS]
+var _respawns: Dictionary = {}  # CombatCharacter -> seconds left
+var _battle_rng := RandomNumberGenerator.new()
 
 
 func _ready() -> void:
@@ -44,11 +52,14 @@ func _ready() -> void:
 	if GameSession.net_role == GameSession.NetRole.OFFLINE and GameSession.lineup.is_empty():
 		GameSession.build_offline_lineup()
 	var roster: Array[CharacterData] = GameSession.get_roster()
+	if is_battle():
+		Battlefield.build(get_parent() as Node3D)
+		pre_round_time = 2.5
 	var team_slots: Array[int] = [0, 0]
 	for i in GameSession.lineup.size():
 		var entry: Dictionary = GameSession.lineup[i]
 		var team: int = entry.team
-		var fighter := _spawn(roster[entry.roster], team, _make_controller(i, entry), _spawn_marker(team, team_slots[team]))
+		var fighter := _spawn(roster[entry.roster], team, _make_controller(i, entry), _spawn_transform(team, team_slots[team]))
 		team_slots[team] += 1
 		if GameSession.net_role == GameSession.NetRole.CLIENT:
 			fighter.net_mode = CombatCharacter.NetMode.PREDICTED if i == GameSession.local_fighter else CombatCharacter.NetMode.PUPPET
@@ -64,6 +75,7 @@ func _ready() -> void:
 	rules = ArenaRules.new()
 	rules.name = "ArenaRules"
 	rules.authoritative = is_authoritative()
+	rules.enabled = not is_battle()
 	characters_root.add_child(rules)
 	if GameSession.net_role != GameSession.NetRole.SERVER:
 		Sfx.warm_up()
@@ -81,7 +93,10 @@ func is_authoritative() -> bool:
 func _physics_process(delta: float) -> void:
 	if not is_authoritative():
 		return
-	if state == State.FIGHTING:
+	if state == State.FIGHTING and is_battle():
+		rules.fight_time += delta
+		_tick_respawns(delta)
+	elif state == State.FIGHTING:
 		var was_sudden_death: bool = rules.is_sudden_death()
 		rules.tick(delta, fighters)
 		if rules.is_sudden_death() and not was_sudden_death:
@@ -154,8 +169,16 @@ func _make_controller(index: int, entry: Dictionary) -> IntentSource:
 	return _make_bot() if is_authoritative() else null
 
 
-func _spawn_marker(team: int, slot: int) -> Marker3D:
-	return spawns_root.get_node_or_null("Team%d_%d" % [team, slot]) as Marker3D
+func is_battle() -> bool:
+	return GameSession.is_battle()
+
+
+func _spawn_transform(team: int, slot: int) -> Transform3D:
+	if is_battle():
+		return Battlefield.base_spawn(team, _battle_rng)
+	var marker := spawns_root.get_node_or_null("Team%d_%d" % [team, slot]) as Marker3D
+	assert(marker != null, "MatchManager: missing spawn marker for team %d." % team)
+	return marker.global_transform
 
 
 func _make_bot() -> BotController:
@@ -164,8 +187,7 @@ func _make_bot() -> BotController:
 	return bot
 
 
-func _spawn(data: CharacterData, team: int, controller: IntentSource, spawn: Marker3D) -> CombatCharacter:
-	assert(spawn != null, "MatchManager: missing spawn marker for team %d." % team)
+func _spawn(data: CharacterData, team: int, controller: IntentSource, spawn: Transform3D) -> CombatCharacter:
 	var character := character_scene.instantiate() as CombatCharacter
 	character.data = data
 	character.team = team
@@ -174,7 +196,7 @@ func _spawn(data: CharacterData, team: int, controller: IntentSource, spawn: Mar
 		controller.name = "Controller"
 		character.add_child(controller)
 		character.controller = controller
-	character.transform = spawn.global_transform
+	character.transform = spawn
 	characters_root.add_child(character)
 	character.died.connect(_on_character_died)
 	fighters.append(character)
@@ -188,14 +210,48 @@ func _start_round() -> void:
 	for node: Node in get_tree().get_nodes_in_group(&"round_entities"):
 		node.queue_free()
 	for fighter: CombatCharacter in fighters:
-		fighter.reset_for_round((_spawns[fighter] as Marker3D).global_transform)
+		fighter.reset_for_round(_spawns[fighter])
 	_set_controls(false)
 	_timer = pre_round_time
-	_set_state(State.PRE_ROUND, "Round %d" % round_number)
+	_set_state(State.PRE_ROUND, "BATTLE  ·  %d reinforcements each" % BATTLE_TICKETS if is_battle() else "Round %d" % round_number)
 
 
-func _on_character_died(_character: CombatCharacter) -> void:
+func _battle_death(victim: CombatCharacter) -> void:
+	var killer: CombatCharacter = victim.last_attacker if is_instance_valid(victim.last_attacker) else null
+	kill_feed.emit(killer, victim)
+	tickets[victim.team] = maxi(0, tickets[victim.team] - 1)
+	if tickets[victim.team] <= 0:
+		var winner: int = 1 - victim.team
+		scores[winner] += 1
+		score_changed.emit(scores)
+		_set_controls(false)
+		var hint: String = "[Enter] rematch   [Esc] menu"
+		_set_state(State.MATCH_OVER, "%s wins the battle!\n%s" % [TEAM_NAMES[winner], hint])
+		match_finished.emit()
+		return
+	_respawns[victim] = RESPAWN_TIME
+
+
+func _tick_respawns(delta: float) -> void:
+	for fighter: CombatCharacter in _respawns.keys():
+		_respawns[fighter] -= delta
+		if _respawns[fighter] <= 0.0:
+			_respawns.erase(fighter)
+			fighter.reset_for_round(Battlefield.base_spawn(fighter.team, _battle_rng))
+			fighter.energy.gain(30.0)
+			fighter.controls_enabled = true
+
+
+## Seconds before `fighter` respawns (0 when alive / not a battle).
+func respawn_left(fighter: CombatCharacter) -> float:
+	return _respawns.get(fighter, 0.0)
+
+
+func _on_character_died(victim: CombatCharacter) -> void:
 	if state != State.FIGHTING or not is_authoritative():
+		return
+	if is_battle():
+		_battle_death(victim)
 		return
 	var alive: Array[int] = [0, 0]
 	for fighter: CombatCharacter in fighters:

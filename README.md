@@ -6,7 +6,9 @@ Gameplay first, placeholder visuals (capsules, cubes, debug shapes).
 ## Play
 Open the folder in Godot 4.3+ and press F5 (main scene: character select).
 
-Modes: **1v1 vs bot**, **2v2 (you + bot ally) vs 2 bots**. Best of 5 (first to 3 rounds), no respawn.
+Modes: **1v1 vs bot**, **2v2 (you + bot ally) vs 2 bots** (best of 5, no respawn), **Battle 20v20** (big map, respawn after 5 s, 60 reinforcements per team, kill feed, minimap), online 1v1 / 2v2.
+
+Options: **O** (or the gear button) for volumes, mute, spatial sound, fullscreen, anti-aliasing. **M** mutes.
 
 | Input | Action |
 |---|---|

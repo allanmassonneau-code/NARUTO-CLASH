@@ -6,6 +6,7 @@ extends Control
 const MODES: Array[Dictionary] = [
 	{"label": "1v1  vs  BOT", "online": "", "mode": GameSession.Mode.DUEL_VS_BOT},
 	{"label": "2v2  vs  BOTS", "online": "", "mode": GameSession.Mode.TEAM_2V2_VS_BOTS},
+	{"label": "BATTLE 20v20", "online": "", "mode": GameSession.Mode.BATTLE_20V20},
 	{"label": "ONLINE 1v1", "online": "1v1", "mode": GameSession.Mode.DUEL_VS_BOT},
 	{"label": "ONLINE 2v2", "online": "2v2", "mode": GameSession.Mode.TEAM_2V2_VS_BOTS},
 ]
@@ -80,7 +81,7 @@ func _ready() -> void:
 	poll.timeout.connect(_poll_friends)
 	add_child(poll)
 	if Net.is_client() and Net.is_online():
-		_tab = 3 if Net.status_text.begins_with("2v2") else 2
+		_tab = 4 if Net.status_text.begins_with("2v2") else 3
 	_on_net_status(Net.status_text)
 	_refresh()
 
@@ -132,7 +133,7 @@ func _build_header(parent: Control) -> void:
 		var tab := Button.new()
 		tab.text = MODES[i].label
 		tab.toggle_mode = true
-		tab.custom_minimum_size = Vector2(170, 46)
+		tab.custom_minimum_size = Vector2(150, 46)
 		tab.add_theme_font_override("font", UiStyle.font(800))
 		tab.pressed.connect(_set_tab.bind(i))
 		tabs.add_child(tab)

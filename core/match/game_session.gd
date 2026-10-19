@@ -1,7 +1,7 @@
 extends Node
 ## Autoload (GameSession): carries menu choices into the match scene.
 
-enum Mode { DUEL_VS_BOT, TEAM_2V2_VS_BOTS }
+enum Mode { DUEL_VS_BOT, TEAM_2V2_VS_BOTS, BATTLE_20V20 }
 enum NetRole { OFFLINE, SERVER, CLIENT }
 
 const ROSTER_PATHS: Array[String] = [
@@ -184,7 +184,19 @@ func get_roster() -> Array[CharacterData]:
 
 
 func team_size() -> int:
-	return 2 if mode == Mode.TEAM_2V2_VS_BOTS else 1
+	match mode:
+		Mode.TEAM_2V2_VS_BOTS:
+			return 2
+		Mode.BATTLE_20V20:
+			return BATTLE_TEAM_SIZE
+	return 1
+
+
+const BATTLE_TEAM_SIZE: int = 20
+
+
+func is_battle() -> bool:
+	return mode == Mode.BATTLE_20V20 and net_role == NetRole.OFFLINE
 
 
 ## Fills ally / enemy slots for the current mode. `opponent_index` < 0 = random.

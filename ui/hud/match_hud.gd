@@ -33,6 +33,13 @@ var _announce_band: ColorRect
 var _announce_time: float = 0.0
 var _vignette: ColorRect
 var _guard_style: StyleBoxFlat
+var _flash_rect: ColorRect
+# 20v20 battle widgets.
+var _ticket_labels: Array[Label] = []
+var _feed: VBoxContainer
+var _minimap: BattleMinimap
+var _respawn_label: Label
+var _was_ult: bool = false
 var _time: float = 0.0
 
 
@@ -50,13 +57,20 @@ func _process(delta: float) -> void:
 	if _player == null:
 		return
 	_time += delta
-	for fighter: CombatCharacter in _fighters:
+	for fighter: CombatCharacter in _cards:
 		_update_card(fighter, _cards[fighter])
 	_update_player_frame()
+	if _manager.is_battle():
+		_update_battle(delta)
 	_update_clock()
 	for slot: StringName in _slots:
 		_update_slot(slot, _slots[slot])
 	_update_announcer(delta)
+	var ult: bool = _player.abilities.phase == AbilityController.Phase.ACTIVE and _player.abilities.current.energy_cost >= 100.0
+	if ult and not _was_ult:
+		_flash_rect.color.a = 0.45  # ultimate: white flash
+	_was_ult = ult
+	_flash_rect.color.a = maxf(0.0, _flash_rect.color.a - delta * 1.8)
 	var hp_ratio: float = _player.health.get_ratio()
 	var danger: float = 0.0 if _player.is_dead() else clampf((0.35 - hp_ratio) / 0.35, 0.0, 1.0)
 	(_vignette.material as ShaderMaterial).set_shader_parameter("strength", danger * (0.75 + 0.25 * sin(_time * 6.0)))
@@ -210,7 +224,7 @@ func _fill_status(row: HBoxContainer, fighter: CombatCharacter, max_chips: int) 
 # --- Announcer ------------------------------------------------------------
 
 func _on_state_changed(state: MatchManager.State, message: String) -> void:
-	_round_label.text = "ROUND %d" % maxi(_manager.round_number, 1)
+	_round_label.text = "BATTLE" if _manager.is_battle() else "ROUND %d" % maxi(_manager.round_number, 1)
 	var color: Color = Color.WHITE
 	if state == MatchManager.State.FIGHTING and message == "FIGHT!":
 		Sfx.play(&"gong", Vector3.INF, -4.0)
@@ -249,6 +263,76 @@ func _on_score_changed(scores: Array[int]) -> void:
 			(pips[i] as Panel).add_theme_stylebox_override("panel", style)
 
 
+# --- Battle (20v20) --------------------------------------------------------
+
+func _build_battle(root: Control) -> void:
+	_feed = VBoxContainer.new()
+	_feed.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+	_feed.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+	_feed.offset_right = -18.0
+	_feed.offset_top = 16.0
+	_feed.add_theme_constant_override("separation", 4)
+	_feed.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(_feed)
+	_manager.kill_feed.connect(_on_kill)
+	_minimap = BattleMinimap.new()
+	_minimap.manager = _manager
+	_minimap.player = _player
+	_minimap.custom_minimum_size = BattleMinimap.SIZE
+	_minimap.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
+	_minimap.offset_left = 18.0
+	_minimap.offset_top = -BattleMinimap.SIZE.y - 18.0
+	_minimap.offset_right = 18.0 + BattleMinimap.SIZE.x
+	_minimap.offset_bottom = -18.0
+	root.add_child(_minimap)
+	_respawn_label = UiStyle.label(root, "", 34, Color.WHITE, 900)
+	_respawn_label.add_theme_constant_override("outline_size", 10)
+	_respawn_label.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	_respawn_label.offset_left = -400
+	_respawn_label.offset_right = 400
+	_respawn_label.offset_top = 40
+	_respawn_label.offset_bottom = 100
+	_respawn_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+
+
+func _update_battle(_delta: float) -> void:
+	for team in _ticket_labels.size():
+		_ticket_labels[team].text = str(_manager.tickets[team])
+		_ticket_labels[team].add_theme_color_override("font_color", Color(1.0, 0.35, 0.3) if _manager.tickets[team] <= 10 else Color.WHITE)
+	var left: float = _manager.respawn_left(_player)
+	_respawn_label.text = "RESPAWN IN %d" % ceili(left) if left > 0.0 else ""
+
+
+func _on_kill(killer: CombatCharacter, victim: CombatCharacter) -> void:
+	var row := PanelContainer.new()
+	row.add_theme_stylebox_override("panel", UiStyle.panel(Color(0.04, 0.03, 0.07, 0.8), 6, Color(0, 0, 0, 0), 8))
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_feed.add_child(row)
+	var line := HBoxContainer.new()
+	line.add_theme_constant_override("separation", 8)
+	row.add_child(line)
+	if killer != null:
+		_feed_name(line, killer)
+		UiStyle.label(line, "✕", 14, Color(1, 1, 1, 0.7), 900)
+	_feed_name(line, victim)
+	if killer == _player or victim == _player:
+		row.add_theme_stylebox_override("panel", UiStyle.panel(Color(0.25, 0.15, 0.02, 0.9), 6, UiStyle.ACCENT, 8))
+	while _feed.get_child_count() > 6:
+		var old: Node = _feed.get_child(0)
+		_feed.remove_child(old)
+		old.queue_free()
+	var tween := row.create_tween()
+	tween.tween_interval(5.0)
+	tween.tween_property(row, "modulate:a", 0.0, 0.6)
+	tween.tween_callback(row.queue_free)
+
+
+func _feed_name(parent: Control, fighter: CombatCharacter) -> void:
+	var title: String = fighter.data.short_name if fighter.data.short_name != "" else fighter.data.display_name
+	var color: Color = PLAYER_COLOR if fighter == _player else UiStyle.TEAM_COLORS[fighter.team].lightened(0.3)
+	UiStyle.label(parent, title, 14, color, 800)
+
+
 # --- Build ----------------------------------------------------------------
 
 func _build() -> void:
@@ -259,10 +343,18 @@ func _build() -> void:
 	add_child(root)
 	_build_vignette(root)
 	_build_scoreboard(root)
-	_build_team_column(root, 0)
-	_build_team_column(root, 1)
+	if _manager.is_battle():
+		_build_battle(root)
+	else:
+		_build_team_column(root, 0)
+		_build_team_column(root, 1)
 	_build_player_frame(root)
 	_build_announcer(root)
+	_flash_rect = ColorRect.new()
+	_flash_rect.color = Color(1, 1, 1, 0)
+	_flash_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_flash_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(_flash_rect)
 
 
 func _build_vignette(root: Control) -> void:
@@ -335,6 +427,11 @@ func _build_scoreboard(root: Control) -> void:
 		side.add_child(pips)
 		if team == 1:
 			side.move_child(pips, 0)
+		if _manager.is_battle():
+			var tickets := UiStyle.label(pips, str(MatchManager.BATTLE_TICKETS), 24, Color.WHITE, 900)
+			tickets.tooltip_text = "Reinforcements"
+			_ticket_labels.append(tickets)
+			continue
 		for i in GameSession.rounds_to_win:
 			var pip := Panel.new()
 			pip.custom_minimum_size = Vector2(16, 16)
