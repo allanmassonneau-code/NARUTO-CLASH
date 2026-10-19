@@ -36,6 +36,7 @@ inventory() {
   find /etc/systemd/system -maxdepth 1 -name "*.service" -type f -printf "%f\n" || true
   if command -v docker >/dev/null; then echo "== Docker containers =="; docker ps -a || true; fi
   if command -v pm2 >/dev/null; then echo "== pm2 =="; pm2 list || true; fi
+  for svc in caddy apache2 nginx; do systemctl is-active --quiet "$svc" 2>/dev/null && echo "== $svc is running =="; done
   echo "== nginx sites =="; ls /etc/nginx/sites-enabled 2>/dev/null || echo "(no nginx)"
   echo "== /opt =="; ls -la /opt 2>/dev/null || true
   echo "== /srv =="; ls -la /srv 2>/dev/null || true
@@ -55,6 +56,11 @@ wipe() {
     docker system prune -af --volumes || true
   fi
   if command -v pm2 >/dev/null; then pm2 delete all || true; pm2 save --force || true; fi
+  # Other web servers would keep port 80 busy.
+  for svc in caddy apache2 httpd; do
+    systemctl disable --now "$svc" 2>/dev/null || true
+  done
+  rm -rf /etc/caddy 2>/dev/null || true
   for unit in /etc/systemd/system/*.service; do
     [[ -f "$unit" ]] || continue
     name="$(basename "$unit")"
