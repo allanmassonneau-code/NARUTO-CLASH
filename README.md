@@ -38,3 +38,20 @@ Modes: **1v1 vs bot**, **2v2 (you + bot ally) vs 2 bots**. Best of 5 (first to 3
 godot --headless --fixed-fps 60 --path . res://tests/smoke_test.tscn
 ```
 Unit checks (health, energy, statuses, Kawarimi, interrupt, feint) + a full 2v2 bot match.
+
+## Online
+Dedicated, server-authoritative: the server simulates every fighter, clients send inputs and
+mirror 30 Hz snapshots; the local fighter's movement is predicted and reconciled.
+
+```
+# 1v1 server (UDP 7777) and 2v2 server (UDP 7778)
+godot --headless --path . -- --server --mode=1v1 --port=7777
+godot --headless --path . -- --server --mode=2v2 --port=7778
+```
+In game: menu → Online → server address → "Online 1v1" / "Online 2v2". Players queue; a match starts
+when 2 (1v1) or 4 (2v2) players are waiting. A player who disconnects is replaced by a bot.
+
+Dev autopilot (headless bot clients, used for network tests):
+```
+godot --headless --path . -- --autojoin=127.0.0.1 --mode=1v1 --bot-client --quit-after-match
+```

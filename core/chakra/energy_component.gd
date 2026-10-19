@@ -33,3 +33,9 @@ func consume(cost: float) -> bool:
 		current_energy -= cost
 	energy_changed.emit(current_energy, max_energy)
 	return true
+
+
+## Client mirror of the server value.
+func sync_state(value: float) -> void:
+	current_energy = value
+	energy_changed.emit(current_energy, max_energy)

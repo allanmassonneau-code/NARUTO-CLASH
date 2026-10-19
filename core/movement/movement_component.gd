@@ -37,6 +37,12 @@ func on_post_move(real_velocity: Vector3) -> void:
 
 
 ## Dash (constant) or knockback (decaying) motion.
+## Client reconciliation: restart prediction from the server's velocity.
+func sync_velocity(server_velocity: Vector3) -> void:
+	_locomotion_velocity = Vector3(server_velocity.x, 0.0, server_velocity.z)
+	_forced_time_left = 0.0
+
+
 func apply_forced_motion(forced_velocity: Vector3, duration: float, decays: bool) -> void:
 	if duration <= 0.0:
 		return

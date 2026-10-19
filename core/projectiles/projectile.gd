@@ -8,6 +8,9 @@ var team: int = 0
 var ability: AbilityData
 var direction: Vector3 = Vector3.FORWARD
 var age: float = 0.0
+## Client-side replica: moves and renders, never hits (the server decides).
+var visual_only: bool = false
+var net_id: int = 0
 
 var _travelled: float = 0.0
 var _already_hit: Array[CombatCharacter] = []
@@ -21,6 +24,19 @@ static func spawn(from: CombatCharacter, data: AbilityData, dir: Vector3) -> Pro
 	p.direction = HitQuery.flat(dir).normalized()
 	from.get_parent().add_child(p)
 	p.global_position = from.global_position + Vector3.UP * HitQuery.BODY_HEIGHT + p.direction * 0.4
+	p.net_id = Net.on_entity_spawned(p, from, data, p.global_position, p.direction)
+	return p
+
+
+static func spawn_visual(from: CombatCharacter, data: AbilityData, at: Vector3, dir: Vector3) -> Projectile:
+	var p := Projectile.new()
+	p.source = from
+	p.team = from.team
+	p.ability = data
+	p.direction = dir
+	p.visual_only = true
+	from.get_parent().add_child(p)
+	p.global_position = at
 	return p
 
 
@@ -53,6 +69,10 @@ func _physics_process(delta: float) -> void:
 		return
 	global_position = from + step
 	_travelled += step.length()
+	if visual_only:
+		if _travelled >= ability.max_range:
+			queue_free()
+		return
 	for target: CombatCharacter in HitQuery.characters_in_sphere(get_world_3d(), global_position, ability.hit_radius):
 		if target.team == team or _already_hit.has(target):
 			continue
@@ -68,5 +88,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _expire(at: Vector3) -> void:
+	if visual_only:
+		queue_free()
+		return
+	Net.on_entity_despawned(net_id)
 	CombatFx.ring(self, HitQuery.flat(at), ability.hit_radius + 0.3, ability.color, 0.2)
 	queue_free()

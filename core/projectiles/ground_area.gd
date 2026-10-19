@@ -6,6 +6,9 @@ var source: CombatCharacter
 var team: int = 0
 var ability: AbilityData
 var elapsed: float = 0.0
+## Client-side replica: shows the telegraph, never deals damage.
+var visual_only: bool = false
+var net_id: int = 0
 
 var _fill: MeshInstance3D
 
@@ -17,6 +20,18 @@ static func spawn(from: CombatCharacter, data: AbilityData, point: Vector3) -> G
 	area.ability = data
 	from.get_parent().add_child(area)
 	area.global_position = Vector3(point.x, 0.0, point.z)
+	area.net_id = Net.on_entity_spawned(area, from, data, area.global_position, Vector3.ZERO)
+	return area
+
+
+static func spawn_visual(from: CombatCharacter, data: AbilityData, point: Vector3) -> GroundArea:
+	var area := GroundArea.new()
+	area.source = from
+	area.team = from.team
+	area.ability = data
+	area.visual_only = true
+	from.get_parent().add_child(area)
+	area.global_position = point
 	return area
 
 
@@ -41,6 +56,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _detonate() -> void:
+	if visual_only:
+		queue_free()
+		return
+	Net.on_entity_despawned(net_id)
 	var center: Vector3 = global_position + Vector3.UP * HitQuery.BODY_HEIGHT
 	var reach: float = ability.hit_radius + HitQuery.HURTBOX_RADIUS
 	for target: CombatCharacter in HitQuery.characters_in_sphere(get_world_3d(), center, reach):

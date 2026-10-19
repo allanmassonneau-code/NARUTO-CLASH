@@ -53,6 +53,13 @@ func heal(amount: float, true_heal: bool = false) -> float:
 	return healed
 
 
+## Client mirror of the server value.
+func sync_state(current: float, recoverable: float) -> void:
+	current_health = current
+	recoverable_health = recoverable
+	_emit()
+
+
 func is_dead() -> bool:
 	return current_health <= 0.0
 

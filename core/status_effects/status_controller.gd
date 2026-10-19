@@ -31,6 +31,14 @@ func get_remaining(type: Type) -> float:
 	return _remaining.get(type, 0.0)
 
 
+## Client mirror of the server value.
+func sync_remaining(type: Type, remaining: float) -> void:
+	if remaining > 0.0:
+		_remaining[type] = remaining
+	else:
+		_remaining.erase(type)
+
+
 func clear_all() -> void:
 	for type: Type in _remaining.keys():
 		remove_status(type)

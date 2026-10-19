@@ -1,9 +1,15 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=13 format=3]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://characters/base/character_data.gd" id="1"]
 [ext_resource type="Script" path="res://core/abilities/ability_data.gd" id="2"]
 [ext_resource type="Script" path="res://core/movement/movement_data.gd" id="3"]
 [ext_resource type="Script" path="res://characters/base/shinobi_look.gd" id="4"]
+[ext_resource type="Texture2D" path="res://ui/icons/sasuke_lmb.svg" id="icon_lmb"]
+[ext_resource type="Texture2D" path="res://ui/icons/sasuke_rmb.svg" id="icon_rmb"]
+[ext_resource type="Texture2D" path="res://ui/icons/sasuke_space.svg" id="icon_space"]
+[ext_resource type="Texture2D" path="res://ui/icons/sasuke_q.svg" id="icon_q"]
+[ext_resource type="Texture2D" path="res://ui/icons/sasuke_e.svg" id="icon_e"]
+[ext_resource type="Texture2D" path="res://ui/icons/sasuke_ult.svg" id="icon_ult"]
 
 [sub_resource type="Resource" id="movement"]
 script = ExtResource("3")
@@ -13,6 +19,7 @@ deceleration = 320.0
 
 [sub_resource type="Resource" id="lmb"]
 script = ExtResource("2")
+icon = ExtResource("icon_lmb")
 display_name = "Kunai"
 kind = 1
 color = Color(0.75, 0.75, 0.8, 1)
@@ -28,6 +35,7 @@ energy_gain_on_hit = 7.6
 
 [sub_resource type="Resource" id="rmb"]
 script = ExtResource("2")
+icon = ExtResource("icon_rmb")
 display_name = "Katon: Goukakyuu"
 kind = 1
 color = Color(1, 0.3, 0.1, 1)
@@ -45,6 +53,7 @@ energy_gain_on_hit = 14.8
 
 [sub_resource type="Resource" id="space"]
 script = ExtResource("2")
+icon = ExtResource("icon_space")
 display_name = "Shunshin"
 kind = 2
 color = Color(0.8, 0.9, 1, 1)
@@ -61,6 +70,7 @@ energy_gain_on_hit = 4.0
 
 [sub_resource type="Resource" id="q"]
 script = ExtResource("2")
+icon = ExtResource("icon_q")
 display_name = "Sharingan Counter"
 kind = 4
 color = Color(0.9, 0.1, 0.1, 1)
@@ -75,6 +85,7 @@ can_cancel_during_startup = false
 
 [sub_resource type="Resource" id="e"]
 script = ExtResource("2")
+icon = ExtResource("icon_e")
 display_name = "Chidori"
 kind = 2
 color = Color(0.4, 0.9, 1, 1)
@@ -92,6 +103,7 @@ energy_gain_on_hit = 13.6
 
 [sub_resource type="Resource" id="ult"]
 script = ExtResource("2")
+icon = ExtResource("icon_ult")
 display_name = "Kirin"
 kind = 3
 color = Color(0.5, 0.8, 1, 1)

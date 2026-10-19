@@ -10,7 +10,7 @@ const SLOT_KEYS: Dictionary = {
 var _player: CombatCharacter
 var _fighters: Array[CombatCharacter] = []
 var _bars: Dictionary = {}  # CombatCharacter -> {hp, rec, label}
-var _ability_labels: Dictionary = {}  # slot -> Label
+var _ability_widgets: Dictionary = {}  # slot -> {icon, shade, cd, frame}
 var _energy_bar: ProgressBar
 var _energy_label: Label
 var _score_label: Label
@@ -38,28 +38,33 @@ func _process(delta: float) -> void:
 		(w.label as Label).text = "%s%s  %d" % [fighter.data.display_name, " (you)" if fighter == _player else "", ceili(fighter.health.current_health)]
 	_energy_bar.value = _player.energy.current_energy
 	_energy_label.text = "Chakra Energy %d / %d" % [floori(_player.energy.current_energy), _player.energy.max_energy]
-	for slot: StringName in _ability_labels:
-		_update_ability_label(slot, _ability_labels[slot])
+	for slot: StringName in _ability_widgets:
+		_update_ability_widget(slot, _ability_widgets[slot])
 	if _announce_time > 0.0:
 		_announce_time -= delta
 		_announce.modulate.a = clampf(_announce_time, 0.0, 1.0)
 
 
-func _update_ability_label(slot: StringName, label: Label) -> void:
+func _update_ability_widget(slot: StringName, w: Dictionary) -> void:
 	var abilities: AbilityController = _player.abilities
 	var a: AbilityData = abilities.get_ability(slot)
 	var cd: float = abilities.get_cooldown_left(slot)
-	var state: String = "READY"
-	if abilities.current_slot == slot:
-		state = AbilityController.Phase.keys()[abilities.phase]
-	elif cd > 0.0:
-		state = "%.1f" % cd
+	var shade := w.shade as ColorRect
+	var cd_label := w.cd as Label
+	var frame := w.frame as Panel
+	var ratio: float = 0.0
+	cd_label.text = ""
+	if cd > 0.0:
+		ratio = cd / maxf(maxf(a.cooldown, a.cancel_cooldown), 0.01)
+		cd_label.text = "%.1f" % cd if cd < 10.0 else "%d" % ceili(cd)
 	elif not _player.energy.can_afford(a.energy_cost):
-		state = "%d EN" % a.energy_cost
-	label.text = "[%s]\n%s\n%s" % [SLOT_KEYS[slot], a.display_name, state]
-	label.modulate = Color.WHITE if state == "READY" else Color(1, 1, 1, 0.45)
-	if abilities.current_slot == slot:
-		label.modulate = a.color.lightened(0.3)
+		ratio = 1.0 - _player.energy.current_energy / a.energy_cost
+		cd_label.text = "%d%%" % floori(100.0 * _player.energy.current_energy / a.energy_cost)
+	shade.anchor_top = 1.0 - clampf(ratio, 0.0, 1.0)
+	(w.icon as TextureRect).modulate = Color.WHITE if ratio <= 0.0 else Color(0.55, 0.55, 0.6)
+	var casting: bool = abilities.current_slot == slot
+	var style := frame.get_theme_stylebox("panel") as StyleBoxFlat
+	style.border_color = a.color.lightened(0.4) if casting else Color(0, 0, 0, 0.8)
 
 
 func _on_state_changed(state: MatchManager.State, message: String) -> void:
@@ -104,14 +109,51 @@ func _build() -> void:
 	row.add_theme_constant_override("separation", 8)
 	bottom.add_child(row)
 	for slot: StringName in AbilityController.SLOTS:
-		if _player.abilities.get_ability(slot) == null:
-			continue
-		var panel := PanelContainer.new()
-		panel.custom_minimum_size = Vector2(88, 64)
-		panel.add_theme_stylebox_override("panel", _style(Color(0, 0, 0, 0.6)))
-		row.add_child(panel)
-		var label := _label(panel, "", 13)
-		_ability_labels[slot] = label
+		var a: AbilityData = _player.abilities.get_ability(slot)
+		if a != null:
+			_ability_widgets[slot] = _ability_widget(row, slot, a)
+
+
+func _ability_widget(parent: Control, slot: StringName, a: AbilityData) -> Dictionary:
+	var column := VBoxContainer.new()
+	column.add_theme_constant_override("separation", 2)
+	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	parent.add_child(column)
+	var box := Control.new()
+	box.custom_minimum_size = Vector2(64, 64)
+	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	column.add_child(box)
+	var icon := TextureRect.new()
+	icon.texture = a.icon
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_child(icon)
+	var shade := ColorRect.new()
+	shade.color = Color(0, 0, 0, 0.6)
+	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	shade.anchor_top = 1.0
+	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_child(shade)
+	var frame := Panel.new()
+	var style := StyleBoxFlat.new()
+	style.draw_center = false
+	style.set_border_width_all(3)
+	style.set_corner_radius_all(8)
+	frame.add_theme_stylebox_override("panel", style)
+	frame.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_child(frame)
+	var cd := _label(box, "", 22)
+	cd.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	cd.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	var key := _label(box, SLOT_KEYS[slot], 12)
+	key.position = Vector2(4, 0)
+	var name_label := _label(column, a.display_name, 11)
+	name_label.custom_minimum_size = Vector2(84, 0)
+	name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	return {"icon": icon, "shade": shade, "cd": cd, "frame": frame}
 
 
 func _team_column(root: Control, team: int) -> VBoxContainer:

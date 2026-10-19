@@ -55,6 +55,31 @@ func get_cooldown_left(slot: StringName) -> float:
 	return _cooldowns.get(slot, 0.0)
 
 
+func slot_index(slot: StringName) -> int:
+	return SLOTS.find(slot)
+
+
+func slot_of(ability: AbilityData) -> StringName:
+	for slot: StringName in _abilities:
+		if _abilities[slot] == ability:
+			return slot
+	return &""
+
+
+## Client mirror of the server cast state (no effects are executed).
+func sync_state(new_phase: int, new_slot_index: int, elapsed: float, cooldowns: Array[float]) -> void:
+	for i in SLOTS.size():
+		if _cooldowns.has(SLOTS[i]):
+			_cooldowns[SLOTS[i]] = cooldowns[i]
+	if new_slot_index < 0 or new_phase == Phase.IDLE:
+		_clear_cast()
+		return
+	phase = new_phase as Phase
+	current_slot = SLOTS[new_slot_index]
+	current = _abilities.get(current_slot)
+	phase_elapsed = elapsed
+
+
 func is_casting() -> bool:
 	return phase != Phase.IDLE
 

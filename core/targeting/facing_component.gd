@@ -16,6 +16,12 @@ func update_aim(origin: Vector3, target: Vector3) -> void:
 	var flat := Vector3(target.x - origin.x, 0.0, target.z - origin.z)
 	if flat.length() < min_aim_distance:
 		return
-	facing_direction = flat.normalized()
+	set_direction(flat.normalized())
+
+
+func set_direction(direction: Vector3) -> void:
+	if direction.length_squared() < 0.0001:
+		return
+	facing_direction = direction.normalized()
 	if visual_pivot != null:
 		visual_pivot.global_basis = Basis.looking_at(facing_direction, Vector3.UP)

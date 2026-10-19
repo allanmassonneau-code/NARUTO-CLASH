@@ -14,6 +14,9 @@ static func is_enabled() -> bool:
 
 
 static func ring(anchor: Node, center: Vector3, radius: float, color: Color, life: float) -> void:
+	Net.broadcast_fx(Net.Fx.RING, center, Vector3.ZERO, radius, life, color)
+	if not is_enabled():
+		return
 	var im := ImmediateMesh.new()
 	im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
 	for i in 33:
@@ -24,6 +27,9 @@ static func ring(anchor: Node, center: Vector3, radius: float, color: Color, lif
 
 
 static func arc(anchor: Node, origin: Vector3, direction: Vector3, radius: float, degrees: float, color: Color, life: float) -> void:
+	Net.broadcast_fx(Net.Fx.ARC, origin, direction, radius, degrees, color)
+	if not is_enabled():
+		return
 	var im := ImmediateMesh.new()
 	im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 	var half: float = deg_to_rad(degrees) * 0.5
@@ -40,6 +46,9 @@ static func arc(anchor: Node, origin: Vector3, direction: Vector3, radius: float
 
 ## Kawarimi placeholder: a brown log left where the character was.
 static func log_decoy(anchor: Node, at: Vector3) -> void:
+	Net.broadcast_fx(Net.Fx.LOG, at, Vector3.ZERO, 0.0, 0.0, Color.WHITE)
+	if not is_enabled():
+		return
 	var box := BoxMesh.new()
 	box.size = Vector3(0.5, 1.4, 0.5)
 	_spawn(anchor, box, Transform3D(Basis.IDENTITY, HitQuery.flat(at) + Vector3.UP * 0.7), Color(0.55, 0.35, 0.18), 1.2)

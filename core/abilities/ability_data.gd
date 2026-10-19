@@ -9,6 +9,7 @@ enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL }
 @export var display_name: String = "Jutsu"
 @export var kind: Kind = Kind.MELEE_ARC
 @export var color: Color = Color.WHITE
+@export var icon: Texture2D
 
 @export_category("Frame Data")
 @export var startup_time: float = 0.1
