@@ -39,6 +39,9 @@ func _ready() -> void:
 		_spawn(roster[GameSession.ally_indices[i]], 0, _make_bot(), _spawn_marker(0, i + 1))
 	for i in GameSession.enemy_indices.size():
 		_spawn(roster[GameSession.enemy_indices[i]], 1, _make_bot(), _spawn_marker(1, i))
+	for fighter: CombatCharacter in fighters:
+		var role := CharacterPresentation.Role.ALLY if fighter.team == player.team else CharacterPresentation.Role.ENEMY
+		fighter.presentation.set_role(CharacterPresentation.Role.LOCAL_PLAYER if fighter == player else role)
 	camera.target = player
 	aim_indicator.character = player
 	debug_overlay.character = player

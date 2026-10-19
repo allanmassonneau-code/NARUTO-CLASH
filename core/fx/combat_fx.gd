@@ -8,6 +8,11 @@ var _material: StandardMaterial3D
 var _base_alpha: float = 0.8
 
 
+## False on headless servers: no visuals are created there.
+static func is_enabled() -> bool:
+	return DisplayServer.get_name() != "headless"
+
+
 static func ring(anchor: Node, center: Vector3, radius: float, color: Color, life: float) -> void:
 	var im := ImmediateMesh.new()
 	im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
@@ -41,6 +46,8 @@ static func log_decoy(anchor: Node, at: Vector3) -> void:
 
 
 static func _spawn(anchor: Node, mesh: Mesh, xform: Transform3D, color: Color, life: float) -> void:
+	if not is_enabled():
+		return
 	var root: Node = anchor.get_parent() if anchor.get_parent() != null else anchor
 	var fx := CombatFx.new()
 	fx.mesh = mesh

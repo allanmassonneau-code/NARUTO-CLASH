@@ -5,6 +5,7 @@ extends Resource
 @export var display_name: String = "Shinobi"
 @export_multiline var identity: String = ""
 @export var body_color: Color = Color.WHITE
+@export var look: ShinobiLook
 @export var max_health: float = 130.0
 @export var movement: MovementData
 

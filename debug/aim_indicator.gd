@@ -24,7 +24,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	_mesh.clear_surfaces()
-	if character == null or not DebugSettings.show_aim:
+	if character == null or not DebugSettings.show_aim or not CombatFx.is_enabled():
 		return
 	var from: Vector3 = character.global_position
 	var to: Vector3 = character.facing.aim_point

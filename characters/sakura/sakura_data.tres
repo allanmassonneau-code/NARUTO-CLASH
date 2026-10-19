@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=10 format=3]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://characters/base/character_data.gd" id="1"]
 [ext_resource type="Script" path="res://core/abilities/ability_data.gd" id="2"]
 [ext_resource type="Script" path="res://core/movement/movement_data.gd" id="3"]
+[ext_resource type="Script" path="res://characters/base/shinobi_look.gd" id="4"]
 
 [sub_resource type="Resource" id="movement"]
 script = ExtResource("3")
@@ -100,6 +101,17 @@ true_heal = true
 cast_move_multiplier = 0.2
 energy_gain_on_hit = 0.0
 
+[sub_resource type="Resource" id="look"]
+script = ExtResource("4")
+skin = Color(0.99, 0.84, 0.74, 1)
+top = Color(0.82, 0.12, 0.2, 1)
+sleeves = Color(0.99, 0.84, 0.74, 1)
+pants = Color(0.15, 0.15, 0.18, 1)
+accent = Color(0.55, 0.55, 0.6, 1)
+hair_color = Color(1, 0.55, 0.75, 1)
+hair = 2
+eye_color = Color(0.2, 0.65, 0.3, 1)
+
 [resource]
 script = ExtResource("1")
 display_name = "Sakura Haruno"
@@ -107,6 +119,7 @@ identity = "Melee bruiser / combat healer. Huge punches, heals limited by recove
 body_color = Color(1, 0.45, 0.7, 1)
 max_health = 145.0
 movement = SubResource("movement")
+look = SubResource("look")
 lmb = SubResource("lmb")
 rmb = SubResource("rmb")
 space = SubResource("space")

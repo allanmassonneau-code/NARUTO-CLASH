@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=10 format=3]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://characters/base/character_data.gd" id="1"]
 [ext_resource type="Script" path="res://core/abilities/ability_data.gd" id="2"]
 [ext_resource type="Script" path="res://core/movement/movement_data.gd" id="3"]
+[ext_resource type="Script" path="res://characters/base/shinobi_look.gd" id="4"]
 
 [sub_resource type="Resource" id="movement"]
 script = ExtResource("3")
@@ -106,6 +107,17 @@ knockback_speed = 8.0
 cast_move_multiplier = 0.2
 energy_gain_on_hit = 0.0
 
+[sub_resource type="Resource" id="look"]
+script = ExtResource("4")
+skin = Color(0.98, 0.8, 0.64, 1)
+top = Color(1, 0.48, 0.08, 1)
+sleeves = Color(1, 0.48, 0.08, 1)
+pants = Color(1, 0.48, 0.08, 1)
+accent = Color(0.08, 0.08, 0.1, 1)
+hair_color = Color(1, 0.86, 0.2, 1)
+hair = 0
+eye_color = Color(0.15, 0.4, 0.95, 1)
+
 [resource]
 script = ExtResource("1")
 display_name = "Naruto Uzumaki"
@@ -113,6 +125,7 @@ identity = "Aggressive mobile pressure fighter. Rasengan rewards reads, Kawarimi
 body_color = Color(1, 0.5, 0.05, 1)
 max_health = 130.0
 movement = SubResource("movement")
+look = SubResource("look")
 lmb = SubResource("lmb")
 rmb = SubResource("rmb")
 space = SubResource("space")

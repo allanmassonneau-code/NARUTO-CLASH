@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3]
+[gd_scene load_steps=68 format=3]
 
 [ext_resource type="PackedScene" path="res://characters/base/shinobi.tscn" id="1"]
 [ext_resource type="Script" path="res://core/camera/arena_camera.gd" id="2"]
@@ -8,9 +8,10 @@
 [ext_resource type="Script" path="res://ui/hud/match_hud.gd" id="6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
-sky_top_color = Color(0.35, 0.45, 0.6, 1)
-sky_horizon_color = Color(0.6, 0.62, 0.66, 1)
-ground_horizon_color = Color(0.6, 0.62, 0.66, 1)
+sky_top_color = Color(0.32, 0.52, 0.82, 1)
+sky_horizon_color = Color(0.72, 0.78, 0.84, 1)
+ground_bottom_color = Color(0.2, 0.25, 0.18, 1)
+ground_horizon_color = Color(0.72, 0.78, 0.84, 1)
 
 [sub_resource type="Sky" id="sky"]
 sky_material = SubResource("sky_mat")
@@ -19,27 +20,17 @@ sky_material = SubResource("sky_mat")
 background_mode = 2
 sky = SubResource("sky")
 ambient_light_source = 3
-ambient_light_energy = 0.45
+ambient_light_color = Color(0.75, 0.8, 0.9, 1)
+ambient_light_sky_contribution = 0.6
+ambient_light_energy = 0.4
 tonemap_mode = 2
-
-[sub_resource type="StandardMaterial3D" id="mat_floor"]
-albedo_color = Color(0.42, 0.41, 0.37, 1)
-
-[sub_resource type="BoxShape3D" id="shape_floor"]
-size = Vector3(40, 1, 30)
-
-[sub_resource type="BoxMesh" id="mesh_floor"]
-material = SubResource("mat_floor")
-size = Vector3(40, 1, 30)
-
-[sub_resource type="StandardMaterial3D" id="mat_center"]
-albedo_color = Color(0.36, 0.35, 0.31, 1)
-
-[sub_resource type="CylinderMesh" id="mesh_center"]
-material = SubResource("mat_center")
-top_radius = 2.0
-bottom_radius = 2.0
-height = 0.02
+tonemap_exposure = 0.85
+glow_enabled = true
+glow_intensity = 0.3
+glow_bloom = 0.05
+fog_enabled = true
+fog_light_color = Color(0.7, 0.76, 0.82, 1)
+fog_density = 0.004
 
 [sub_resource type="StyleBoxFlat" id="panel_style"]
 bg_color = Color(0, 0, 0, 0.55)
@@ -48,98 +39,271 @@ content_margin_top = 8.0
 content_margin_right = 10.0
 content_margin_bottom = 8.0
 
-[sub_resource type="StandardMaterial3D" id="mat_wall"]
-albedo_color = Color(0.32, 0.33, 0.38, 1)
+[sub_resource type="StandardMaterial3D" id="mat_grass"]
+albedo_color = Color(0.3, 0.46, 0.22, 1)
+roughness = 0.9
 
-[sub_resource type="StandardMaterial3D" id="mat_pillar"]
-albedo_color = Color(0.42, 0.36, 0.3, 1)
 
-[sub_resource type="StandardMaterial3D" id="mat_cover"]
-albedo_color = Color(0.38, 0.42, 0.36, 1)
+[sub_resource type="StandardMaterial3D" id="mat_grass_out"]
+albedo_color = Color(0.22, 0.36, 0.18, 1)
+roughness = 0.9
+
+
+[sub_resource type="StandardMaterial3D" id="mat_dirt"]
+albedo_color = Color(0.52, 0.4, 0.27, 1)
+roughness = 0.9
+
+
+[sub_resource type="StandardMaterial3D" id="mat_stone"]
+albedo_color = Color(0.5, 0.49, 0.46, 1)
+roughness = 0.9
+
+
+[sub_resource type="StandardMaterial3D" id="mat_stone_dark"]
+albedo_color = Color(0.36, 0.35, 0.33, 1)
+roughness = 0.9
+
+
+[sub_resource type="StandardMaterial3D" id="mat_wood"]
+albedo_color = Color(0.45, 0.3, 0.17, 1)
+roughness = 0.9
+
+
+[sub_resource type="StandardMaterial3D" id="mat_wood_dark"]
+albedo_color = Color(0.33, 0.21, 0.12, 1)
+roughness = 0.9
+
+
+[sub_resource type="StandardMaterial3D" id="mat_rope"]
+albedo_color = Color(0.85, 0.78, 0.6, 1)
+roughness = 0.9
+
+
+[sub_resource type="StandardMaterial3D" id="mat_rock"]
+albedo_color = Color(0.46, 0.44, 0.4, 1)
+roughness = 0.9
+
+
+[sub_resource type="StandardMaterial3D" id="mat_leaf"]
+albedo_color = Color(0.2, 0.42, 0.18, 1)
+roughness = 0.9
+
+
+[sub_resource type="StandardMaterial3D" id="mat_leaf2"]
+albedo_color = Color(0.26, 0.5, 0.2, 1)
+roughness = 0.9
+
+
+[sub_resource type="StandardMaterial3D" id="mat_red"]
+albedo_color = Color(0.72, 0.13, 0.1, 1)
+roughness = 0.9
+
+
+[sub_resource type="StandardMaterial3D" id="mat_roof"]
+albedo_color = Color(0.25, 0.3, 0.28, 1)
+roughness = 0.9
+
+
+[sub_resource type="BoxShape3D" id="shape_floor"]
+size = Vector3(40, 1, 30)
+
+[sub_resource type="BoxMesh" id="mesh_floor"]
+material = SubResource("mat_grass")
+size = Vector3(32.0, 1, 22.0)
+
+[sub_resource type="BoxMesh" id="mesh_outer"]
+material = SubResource("mat_grass_out")
+size = Vector3(140, 1, 120)
+
+[sub_resource type="CylinderMesh" id="mesh_center"]
+material = SubResource("mat_dirt")
+top_radius = 4.0
+bottom_radius = 4.0
+height = 0.02
+radial_segments = 40
+
+[sub_resource type="CylinderMesh" id="mesh_center_ring"]
+material = SubResource("mat_stone_dark")
+top_radius = 4.4
+bottom_radius = 4.4
+height = 0.015
+radial_segments = 40
+
+[sub_resource type="CylinderMesh" id="mesh_spawn"]
+material = SubResource("mat_dirt")
+top_radius = 2.6
+bottom_radius = 2.6
+height = 0.02
+radial_segments = 32
 
 [sub_resource type="BoxShape3D" id="shape_WallNorth"]
 size = Vector3(34.0, 2.0, 1.0)
 
 [sub_resource type="BoxMesh" id="mesh_WallNorth"]
-material = SubResource("mat_wall")
-size = Vector3(34.0, 2.0, 1.0)
+material = SubResource("mat_stone")
+size = Vector3(34.0, 1.1, 1.0)
+
+[sub_resource type="BoxMesh" id="mesh_WallNorth_cap"]
+material = SubResource("mat_stone_dark")
+size = Vector3(34.1, 0.15, 1.1)
+
+[sub_resource type="CylinderMesh" id="mesh_post"]
+material = SubResource("mat_wood")
+top_radius = 0.08
+bottom_radius = 0.1
+height = 1.0
+radial_segments = 16
+
+[sub_resource type="BoxMesh" id="mesh_WallNorth_rail"]
+material = SubResource("mat_wood_dark")
+size = Vector3(34.0, 0.08, 0.08)
 
 [sub_resource type="BoxShape3D" id="shape_WallSouth"]
 size = Vector3(34.0, 2.0, 1.0)
 
 [sub_resource type="BoxMesh" id="mesh_WallSouth"]
-material = SubResource("mat_wall")
-size = Vector3(34.0, 2.0, 1.0)
+material = SubResource("mat_stone")
+size = Vector3(34.0, 1.1, 1.0)
+
+[sub_resource type="BoxMesh" id="mesh_WallSouth_cap"]
+material = SubResource("mat_stone_dark")
+size = Vector3(34.1, 0.15, 1.1)
+
+[sub_resource type="BoxMesh" id="mesh_WallSouth_rail"]
+material = SubResource("mat_wood_dark")
+size = Vector3(34.0, 0.08, 0.08)
 
 [sub_resource type="BoxShape3D" id="shape_WallWest"]
 size = Vector3(1.0, 2.0, 22.0)
 
 [sub_resource type="BoxMesh" id="mesh_WallWest"]
-material = SubResource("mat_wall")
-size = Vector3(1.0, 2.0, 22.0)
+material = SubResource("mat_stone")
+size = Vector3(1.0, 1.1, 22.0)
+
+[sub_resource type="BoxMesh" id="mesh_WallWest_cap"]
+material = SubResource("mat_stone_dark")
+size = Vector3(1.1, 0.15, 22.1)
+
+[sub_resource type="BoxMesh" id="mesh_WallWest_rail"]
+material = SubResource("mat_wood_dark")
+size = Vector3(0.08, 0.08, 22.0)
 
 [sub_resource type="BoxShape3D" id="shape_WallEast"]
 size = Vector3(1.0, 2.0, 22.0)
 
 [sub_resource type="BoxMesh" id="mesh_WallEast"]
-material = SubResource("mat_wall")
-size = Vector3(1.0, 2.0, 22.0)
+material = SubResource("mat_stone")
+size = Vector3(1.0, 1.1, 22.0)
 
-[sub_resource type="BoxShape3D" id="shape_Pillar1"]
-size = Vector3(1.4, 2.5, 1.4)
+[sub_resource type="BoxMesh" id="mesh_WallEast_cap"]
+material = SubResource("mat_stone_dark")
+size = Vector3(1.1, 0.15, 22.1)
 
-[sub_resource type="BoxMesh" id="mesh_Pillar1"]
-material = SubResource("mat_pillar")
-size = Vector3(1.4, 2.5, 1.4)
+[sub_resource type="BoxMesh" id="mesh_WallEast_rail"]
+material = SubResource("mat_wood_dark")
+size = Vector3(0.08, 0.08, 22.0)
 
-[sub_resource type="BoxShape3D" id="shape_Pillar2"]
-size = Vector3(1.4, 2.5, 1.4)
+[sub_resource type="CylinderShape3D" id="shape_post"]
+height = 2.6
+radius = 0.7
 
-[sub_resource type="BoxMesh" id="mesh_Pillar2"]
-material = SubResource("mat_pillar")
-size = Vector3(1.4, 2.5, 1.4)
+[sub_resource type="CylinderMesh" id="mesh_log"]
+material = SubResource("mat_wood")
+top_radius = 0.62
+bottom_radius = 0.7
+height = 2.6
+radial_segments = 20
 
-[sub_resource type="BoxShape3D" id="shape_Pillar3"]
-size = Vector3(1.4, 2.5, 1.4)
+[sub_resource type="CylinderMesh" id="mesh_log_top"]
+material = SubResource("mat_wood_dark")
+top_radius = 0.5
+bottom_radius = 0.62
+height = 0.12
+radial_segments = 20
 
-[sub_resource type="BoxMesh" id="mesh_Pillar3"]
-material = SubResource("mat_pillar")
-size = Vector3(1.4, 2.5, 1.4)
+[sub_resource type="CylinderMesh" id="mesh_rope"]
+material = SubResource("mat_rope")
+top_radius = 0.72
+bottom_radius = 0.72
+height = 0.12
+radial_segments = 20
 
-[sub_resource type="BoxShape3D" id="shape_Pillar4"]
-size = Vector3(1.4, 2.5, 1.4)
+[sub_resource type="BoxShape3D" id="shape_RockWest"]
+size = Vector3(1.0, 1.3, 3.0)
 
-[sub_resource type="BoxMesh" id="mesh_Pillar4"]
-material = SubResource("mat_pillar")
-size = Vector3(1.4, 2.5, 1.4)
+[sub_resource type="BoxMesh" id="mesh_RockWest"]
+material = SubResource("mat_rock")
+size = Vector3(1.1, 1.2, 3.1)
 
-[sub_resource type="BoxShape3D" id="shape_CoverWest"]
-size = Vector3(1.0, 1.2, 3.0)
+[sub_resource type="BoxMesh" id="mesh_chunk"]
+material = SubResource("mat_stone_dark")
+size = Vector3(1, 1, 1)
 
-[sub_resource type="BoxMesh" id="mesh_CoverWest"]
-material = SubResource("mat_cover")
-size = Vector3(1.0, 1.2, 3.0)
+[sub_resource type="BoxShape3D" id="shape_RockEast"]
+size = Vector3(1.0, 1.3, 3.0)
 
-[sub_resource type="BoxShape3D" id="shape_CoverEast"]
-size = Vector3(1.0, 1.2, 3.0)
+[sub_resource type="BoxMesh" id="mesh_RockEast"]
+material = SubResource("mat_rock")
+size = Vector3(1.1, 1.2, 3.1)
 
-[sub_resource type="BoxMesh" id="mesh_CoverEast"]
-material = SubResource("mat_cover")
-size = Vector3(1.0, 1.2, 3.0)
+[sub_resource type="BoxShape3D" id="shape_RockNorth"]
+size = Vector3(4.0, 1.3, 1.0)
 
-[sub_resource type="BoxShape3D" id="shape_CoverCenterN"]
-size = Vector3(4.0, 1.2, 1.0)
+[sub_resource type="BoxMesh" id="mesh_RockNorth"]
+material = SubResource("mat_rock")
+size = Vector3(4.1, 1.2, 1.1)
 
-[sub_resource type="BoxMesh" id="mesh_CoverCenterN"]
-material = SubResource("mat_cover")
-size = Vector3(4.0, 1.2, 1.0)
+[sub_resource type="BoxShape3D" id="shape_RockSouth"]
+size = Vector3(4.0, 1.3, 1.0)
 
-[sub_resource type="BoxShape3D" id="shape_CoverCenterS"]
-size = Vector3(4.0, 1.2, 1.0)
+[sub_resource type="BoxMesh" id="mesh_RockSouth"]
+material = SubResource("mat_rock")
+size = Vector3(4.1, 1.2, 1.1)
 
-[sub_resource type="BoxMesh" id="mesh_CoverCenterS"]
-material = SubResource("mat_cover")
-size = Vector3(4.0, 1.2, 1.0)
+[sub_resource type="CylinderMesh" id="mesh_trunk"]
+material = SubResource("mat_wood_dark")
+top_radius = 0.22
+bottom_radius = 0.32
+height = 3.2
+radial_segments = 10
+
+[sub_resource type="SphereMesh" id="mesh_leaf_a"]
+material = SubResource("mat_leaf")
+radius = 1.5
+height = 3.0
+radial_segments = 14
+rings = 8
+
+[sub_resource type="SphereMesh" id="mesh_leaf_b"]
+material = SubResource("mat_leaf2")
+radius = 1.1
+height = 2.2
+radial_segments = 14
+rings = 8
+
+[sub_resource type="CylinderMesh" id="mesh_gate_pillar"]
+material = SubResource("mat_red")
+top_radius = 0.3
+bottom_radius = 0.3
+height = 5.0
+radial_segments = 12
+
+[sub_resource type="BoxMesh" id="mesh_gate_beam"]
+material = SubResource("mat_red")
+size = Vector3(8.0, 0.4, 0.5)
+
+[sub_resource type="BoxMesh" id="mesh_gate_roof"]
+material = SubResource("mat_roof")
+size = Vector3(9.0, 0.3, 1.4)
+
+[sub_resource type="StandardMaterial3D" id="mat_sign"]
+albedo_color = Color(0.95, 0.92, 0.85, 1)
+roughness = 0.9
+
+
+[sub_resource type="BoxMesh" id="mesh_gate_sign"]
+material = SubResource("mat_sign")
+size = Vector3(1.6, 0.7, 0.1)
 
 [node name="Playground" type="Node3D"]
 
@@ -148,12 +312,15 @@ environment = SubResource("env")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 10, 0)
+light_color = Color(1, 0.95, 0.86, 1)
+light_energy = 1.0
 shadow_enabled = true
+directional_shadow_max_distance = 60.0
 
 [node name="Arena" type="Node3D" parent="."]
 
 [node name="Floor" type="StaticBody3D" parent="Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, -0.500, 0.000)
 collision_layer = 4
 collision_mask = 0
 
@@ -161,143 +328,1111 @@ collision_mask = 0
 shape = SubResource("shape_floor")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/Floor"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.000, 0.000)
 mesh = SubResource("mesh_floor")
 
-[node name="CenterMark" type="MeshInstance3D" parent="Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+[node name="OuterGround" type="MeshInstance3D" parent="Arena"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, -0.520, 0.000)
+cast_shadow = 0
+mesh = SubResource("mesh_outer")
+
+[node name="CenterDirt" type="MeshInstance3D" parent="Arena"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.010, 0.000)
+cast_shadow = 0
 mesh = SubResource("mesh_center")
 
+[node name="CenterDirtRing" type="MeshInstance3D" parent="Arena"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.005, 0.000)
+cast_shadow = 0
+mesh = SubResource("mesh_center_ring")
+
+[node name="SpawnDirt0" type="MeshInstance3D" parent="Arena"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -10.000, 0.010, 0.000)
+cast_shadow = 0
+mesh = SubResource("mesh_spawn")
+
+[node name="SpawnDirt1" type="MeshInstance3D" parent="Arena"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 10.000, 0.010, 0.000)
+cast_shadow = 0
+mesh = SubResource("mesh_spawn")
+
 [node name="WallNorth" type="StaticBody3D" parent="Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, -11.5)
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.000, -11.500)
 collision_layer = 1
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/WallNorth"]
 shape = SubResource("shape_WallNorth")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/WallNorth"]
+[node name="Wall" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, -0.450, 0.000)
 mesh = SubResource("mesh_WallNorth")
 
+[node name="Cap" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.170, 0.000)
+mesh = SubResource("mesh_WallNorth_cap")
+
+[node name="Post0" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -17.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post1" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -15.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post2" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -13.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post3" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -11.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post4" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -9.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post5" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -7.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post6" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -5.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post7" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -3.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post8" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -1.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post9" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 1.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post10" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 3.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post11" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 5.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post12" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 7.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post13" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 9.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post14" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 11.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post15" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 13.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post16" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 15.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post17" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 17.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Rail1" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.650, 0.000)
+mesh = SubResource("mesh_WallNorth_rail")
+
+[node name="Rail2" type="MeshInstance3D" parent="Arena/WallNorth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.000, 0.000)
+mesh = SubResource("mesh_WallNorth_rail")
+
 [node name="WallSouth" type="StaticBody3D" parent="Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, 11.5)
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.000, 11.500)
 collision_layer = 1
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/WallSouth"]
 shape = SubResource("shape_WallSouth")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/WallSouth"]
+[node name="Wall" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, -0.450, 0.000)
 mesh = SubResource("mesh_WallSouth")
 
+[node name="Cap" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.170, 0.000)
+mesh = SubResource("mesh_WallSouth_cap")
+
+[node name="Post0" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -17.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post1" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -15.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post2" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -13.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post3" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -11.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post4" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -9.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post5" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -7.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post6" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -5.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post7" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -3.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post8" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -1.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post9" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 1.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post10" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 3.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post11" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 5.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post12" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 7.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post13" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 9.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post14" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 11.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post15" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 13.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post16" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 15.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post17" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 17.000, 0.750, 0.000)
+mesh = SubResource("mesh_post")
+
+[node name="Rail1" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.650, 0.000)
+mesh = SubResource("mesh_WallSouth_rail")
+
+[node name="Rail2" type="MeshInstance3D" parent="Arena/WallSouth"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.000, 0.000)
+mesh = SubResource("mesh_WallSouth_rail")
+
 [node name="WallWest" type="StaticBody3D" parent="Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5, 1.0, 0)
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -16.500, 1.000, 0.000)
 collision_layer = 1
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/WallWest"]
 shape = SubResource("shape_WallWest")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/WallWest"]
+[node name="Wall" type="MeshInstance3D" parent="Arena/WallWest"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, -0.450, 0.000)
 mesh = SubResource("mesh_WallWest")
 
+[node name="Cap" type="MeshInstance3D" parent="Arena/WallWest"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.170, 0.000)
+mesh = SubResource("mesh_WallWest_cap")
+
+[node name="Post0" type="MeshInstance3D" parent="Arena/WallWest"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, -11.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post1" type="MeshInstance3D" parent="Arena/WallWest"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, -9.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post2" type="MeshInstance3D" parent="Arena/WallWest"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, -7.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post3" type="MeshInstance3D" parent="Arena/WallWest"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, -5.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post4" type="MeshInstance3D" parent="Arena/WallWest"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, -3.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post5" type="MeshInstance3D" parent="Arena/WallWest"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, -1.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post6" type="MeshInstance3D" parent="Arena/WallWest"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, 1.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post7" type="MeshInstance3D" parent="Arena/WallWest"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, 3.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post8" type="MeshInstance3D" parent="Arena/WallWest"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, 5.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post9" type="MeshInstance3D" parent="Arena/WallWest"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, 7.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post10" type="MeshInstance3D" parent="Arena/WallWest"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, 9.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post11" type="MeshInstance3D" parent="Arena/WallWest"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, 11.000)
+mesh = SubResource("mesh_post")
+
+[node name="Rail1" type="MeshInstance3D" parent="Arena/WallWest"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.650, 0.000)
+mesh = SubResource("mesh_WallWest_rail")
+
+[node name="Rail2" type="MeshInstance3D" parent="Arena/WallWest"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.000, 0.000)
+mesh = SubResource("mesh_WallWest_rail")
+
 [node name="WallEast" type="StaticBody3D" parent="Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 1.0, 0)
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 16.500, 1.000, 0.000)
 collision_layer = 1
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/WallEast"]
 shape = SubResource("shape_WallEast")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/WallEast"]
+[node name="Wall" type="MeshInstance3D" parent="Arena/WallEast"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, -0.450, 0.000)
 mesh = SubResource("mesh_WallEast")
 
-[node name="Pillar1" type="StaticBody3D" parent="Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.25, -4.5)
+[node name="Cap" type="MeshInstance3D" parent="Arena/WallEast"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.170, 0.000)
+mesh = SubResource("mesh_WallEast_cap")
+
+[node name="Post0" type="MeshInstance3D" parent="Arena/WallEast"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, -11.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post1" type="MeshInstance3D" parent="Arena/WallEast"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, -9.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post2" type="MeshInstance3D" parent="Arena/WallEast"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, -7.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post3" type="MeshInstance3D" parent="Arena/WallEast"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, -5.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post4" type="MeshInstance3D" parent="Arena/WallEast"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, -3.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post5" type="MeshInstance3D" parent="Arena/WallEast"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, -1.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post6" type="MeshInstance3D" parent="Arena/WallEast"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, 1.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post7" type="MeshInstance3D" parent="Arena/WallEast"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, 3.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post8" type="MeshInstance3D" parent="Arena/WallEast"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, 5.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post9" type="MeshInstance3D" parent="Arena/WallEast"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, 7.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post10" type="MeshInstance3D" parent="Arena/WallEast"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, 9.000)
+mesh = SubResource("mesh_post")
+
+[node name="Post11" type="MeshInstance3D" parent="Arena/WallEast"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.750, 11.000)
+mesh = SubResource("mesh_post")
+
+[node name="Rail1" type="MeshInstance3D" parent="Arena/WallEast"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.650, 0.000)
+mesh = SubResource("mesh_WallEast_rail")
+
+[node name="Rail2" type="MeshInstance3D" parent="Arena/WallEast"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.000, 0.000)
+mesh = SubResource("mesh_WallEast_rail")
+
+[node name="TrainingPost1" type="StaticBody3D" parent="Arena"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -6.000, 1.300, -4.500)
 collision_layer = 1
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/Pillar1"]
-shape = SubResource("shape_Pillar1")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/TrainingPost1"]
+shape = SubResource("shape_post")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/Pillar1"]
-mesh = SubResource("mesh_Pillar1")
+[node name="Log" type="MeshInstance3D" parent="Arena/TrainingPost1"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.000, 0.000)
+mesh = SubResource("mesh_log")
 
-[node name="Pillar2" type="StaticBody3D" parent="Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.25, -4.5)
+[node name="Top" type="MeshInstance3D" parent="Arena/TrainingPost1"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.350, 0.000)
+mesh = SubResource("mesh_log_top")
+
+[node name="Rope0" type="MeshInstance3D" parent="Arena/TrainingPost1"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, -0.300, 0.000)
+mesh = SubResource("mesh_rope")
+
+[node name="Rope1" type="MeshInstance3D" parent="Arena/TrainingPost1"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.350, 0.000)
+mesh = SubResource("mesh_rope")
+
+[node name="TrainingPost2" type="StaticBody3D" parent="Arena"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 6.000, 1.300, -4.500)
 collision_layer = 1
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/Pillar2"]
-shape = SubResource("shape_Pillar2")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/TrainingPost2"]
+shape = SubResource("shape_post")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/Pillar2"]
-mesh = SubResource("mesh_Pillar2")
+[node name="Log" type="MeshInstance3D" parent="Arena/TrainingPost2"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.000, 0.000)
+mesh = SubResource("mesh_log")
 
-[node name="Pillar3" type="StaticBody3D" parent="Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.25, 4.5)
+[node name="Top" type="MeshInstance3D" parent="Arena/TrainingPost2"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.350, 0.000)
+mesh = SubResource("mesh_log_top")
+
+[node name="Rope0" type="MeshInstance3D" parent="Arena/TrainingPost2"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, -0.300, 0.000)
+mesh = SubResource("mesh_rope")
+
+[node name="Rope1" type="MeshInstance3D" parent="Arena/TrainingPost2"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.350, 0.000)
+mesh = SubResource("mesh_rope")
+
+[node name="TrainingPost3" type="StaticBody3D" parent="Arena"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -6.000, 1.300, 4.500)
 collision_layer = 1
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/Pillar3"]
-shape = SubResource("shape_Pillar3")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/TrainingPost3"]
+shape = SubResource("shape_post")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/Pillar3"]
-mesh = SubResource("mesh_Pillar3")
+[node name="Log" type="MeshInstance3D" parent="Arena/TrainingPost3"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.000, 0.000)
+mesh = SubResource("mesh_log")
 
-[node name="Pillar4" type="StaticBody3D" parent="Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.25, 4.5)
+[node name="Top" type="MeshInstance3D" parent="Arena/TrainingPost3"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.350, 0.000)
+mesh = SubResource("mesh_log_top")
+
+[node name="Rope0" type="MeshInstance3D" parent="Arena/TrainingPost3"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, -0.300, 0.000)
+mesh = SubResource("mesh_rope")
+
+[node name="Rope1" type="MeshInstance3D" parent="Arena/TrainingPost3"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.350, 0.000)
+mesh = SubResource("mesh_rope")
+
+[node name="TrainingPost4" type="StaticBody3D" parent="Arena"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 6.000, 1.300, 4.500)
 collision_layer = 1
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/Pillar4"]
-shape = SubResource("shape_Pillar4")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/TrainingPost4"]
+shape = SubResource("shape_post")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/Pillar4"]
-mesh = SubResource("mesh_Pillar4")
+[node name="Log" type="MeshInstance3D" parent="Arena/TrainingPost4"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.000, 0.000)
+mesh = SubResource("mesh_log")
 
-[node name="CoverWest" type="StaticBody3D" parent="Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.6, 0)
+[node name="Top" type="MeshInstance3D" parent="Arena/TrainingPost4"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.350, 0.000)
+mesh = SubResource("mesh_log_top")
+
+[node name="Rope0" type="MeshInstance3D" parent="Arena/TrainingPost4"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, -0.300, 0.000)
+mesh = SubResource("mesh_rope")
+
+[node name="Rope1" type="MeshInstance3D" parent="Arena/TrainingPost4"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.350, 0.000)
+mesh = SubResource("mesh_rope")
+
+[node name="RockWest" type="StaticBody3D" parent="Arena"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -12.000, 0.650, 0.000)
 collision_layer = 1
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/CoverWest"]
-shape = SubResource("shape_CoverWest")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/RockWest"]
+shape = SubResource("shape_RockWest")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/CoverWest"]
-mesh = SubResource("mesh_CoverWest")
+[node name="Base" type="MeshInstance3D" parent="Arena/RockWest"]
+transform = Transform3D(0.9988, 0, -0.0500, 0, 1, 0, 0.0500, 0, 0.9988, 0.000, -0.050, 0.000)
+mesh = SubResource("mesh_RockWest")
 
-[node name="CoverEast" type="StaticBody3D" parent="Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.6, 0)
+[node name="Chunk0" type="MeshInstance3D" parent="Arena/RockWest"]
+transform = Transform3D(0.6228, 0, -0.1434, 0, 0.40667073384580343, 0, 0.1434, 0, 0.6228, 0.000, 0.724, -0.900)
+mesh = SubResource("mesh_chunk")
+
+[node name="Chunk1" type="MeshInstance3D" parent="Arena/RockWest"]
+transform = Transform3D(0.7247, 0, -0.0791, 0, 0.4639135327819744, 0, 0.0791, 0, 0.7247, 0.000, 0.749, 0.000)
+mesh = SubResource("mesh_chunk")
+
+[node name="Chunk2" type="MeshInstance3D" parent="Arena/RockWest"]
+transform = Transform3D(0.5951, 0, -0.3636, 0, 0.4437793507536706, 0, 0.3636, 0, 0.5951, 0.000, 0.740, 0.900)
+mesh = SubResource("mesh_chunk")
+
+[node name="RockEast" type="StaticBody3D" parent="Arena"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 12.000, 0.650, 0.000)
 collision_layer = 1
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/CoverEast"]
-shape = SubResource("shape_CoverEast")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/RockEast"]
+shape = SubResource("shape_RockEast")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/CoverEast"]
-mesh = SubResource("mesh_CoverEast")
+[node name="Base" type="MeshInstance3D" parent="Arena/RockEast"]
+transform = Transform3D(0.9988, 0, -0.0500, 0, 1, 0, 0.0500, 0, 0.9988, 0.000, -0.050, 0.000)
+mesh = SubResource("mesh_RockEast")
 
-[node name="CoverCenterN" type="StaticBody3D" parent="Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -7.5)
+[node name="Chunk0" type="MeshInstance3D" parent="Arena/RockEast"]
+transform = Transform3D(0.4098, 0, -0.3904, 0, 0.3601498118355737, 0, 0.3904, 0, 0.4098, 0.000, 0.704, -0.900)
+mesh = SubResource("mesh_chunk")
+
+[node name="Chunk1" type="MeshInstance3D" parent="Arena/RockEast"]
+transform = Transform3D(0.4459, 0, -0.3393, 0, 0.3565617402273473, 0, 0.3393, 0, 0.4459, 0.000, 0.703, 0.000)
+mesh = SubResource("mesh_chunk")
+
+[node name="Chunk2" type="MeshInstance3D" parent="Arena/RockEast"]
+transform = Transform3D(0.5639, 0, -0.0772, 0, 0.36222469912555827, 0, 0.0772, 0, 0.5639, 0.000, 0.705, 0.900)
+mesh = SubResource("mesh_chunk")
+
+[node name="RockNorth" type="StaticBody3D" parent="Arena"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.650, -7.500)
 collision_layer = 1
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/CoverCenterN"]
-shape = SubResource("shape_CoverCenterN")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/RockNorth"]
+shape = SubResource("shape_RockNorth")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/CoverCenterN"]
-mesh = SubResource("mesh_CoverCenterN")
+[node name="Base" type="MeshInstance3D" parent="Arena/RockNorth"]
+transform = Transform3D(0.9988, 0, -0.0500, 0, 1, 0, 0.0500, 0, 0.9988, 0.000, -0.050, 0.000)
+mesh = SubResource("mesh_RockNorth")
 
-[node name="CoverCenterS" type="StaticBody3D" parent="Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 7.5)
+[node name="Chunk0" type="MeshInstance3D" parent="Arena/RockNorth"]
+transform = Transform3D(0.2164, 0, -0.6307, 0, 0.42429085809993994, 0, 0.6307, 0, 0.2164, -1.200, 0.732, 0.000)
+mesh = SubResource("mesh_chunk")
+
+[node name="Chunk1" type="MeshInstance3D" parent="Arena/RockNorth"]
+transform = Transform3D(0.5516, 0, -0.1919, 0, 0.37166534320118794, 0, 0.1919, 0, 0.5516, 0.000, 0.709, 0.000)
+mesh = SubResource("mesh_chunk")
+
+[node name="Chunk2" type="MeshInstance3D" parent="Arena/RockNorth"]
+transform = Transform3D(0.1074, 0, -0.7145, 0, 0.4598008139209781, 0, 0.7145, 0, 0.1074, 1.200, 0.747, 0.000)
+mesh = SubResource("mesh_chunk")
+
+[node name="RockSouth" type="StaticBody3D" parent="Arena"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.650, 7.500)
 collision_layer = 1
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/CoverCenterS"]
-shape = SubResource("shape_CoverCenterS")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/RockSouth"]
+shape = SubResource("shape_RockSouth")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/CoverCenterS"]
-mesh = SubResource("mesh_CoverCenterS")
+[node name="Base" type="MeshInstance3D" parent="Arena/RockSouth"]
+transform = Transform3D(0.9988, 0, -0.0500, 0, 1, 0, 0.0500, 0, 0.9988, 0.000, -0.050, 0.000)
+mesh = SubResource("mesh_RockSouth")
+
+[node name="Chunk0" type="MeshInstance3D" parent="Arena/RockSouth"]
+transform = Transform3D(0.5869, 0, -0.3972, 0, 0.45099301600806224, 0, 0.3972, 0, 0.5869, -1.200, 0.743, 0.000)
+mesh = SubResource("mesh_chunk")
+
+[node name="Chunk1" type="MeshInstance3D" parent="Arena/RockSouth"]
+transform = Transform3D(0.8165, 0, -0.0571, 0, 0.520844643478761, 0, 0.0571, 0, 0.8165, 0.000, 0.773, 0.000)
+mesh = SubResource("mesh_chunk")
+
+[node name="Chunk2" type="MeshInstance3D" parent="Arena/RockSouth"]
+transform = Transform3D(0.7131, 0, -0.3308, 0, 0.5002319803335189, 0, 0.3308, 0, 0.7131, 1.200, 0.764, 0.000)
+mesh = SubResource("mesh_chunk")
+
+[node name="Trees" type="Node3D" parent="Arena"]
+
+[node name="Tree0" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(0.1813, 0, 0.9721, 0, 0.9888168208458705, 0, -0.9721, 0, 0.1813, -25.067, 0.000, -15.412)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree0"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree0"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree0"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree1" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.7006, 0, -0.8961, 0, 1.137511061016783, 0, 0.8961, 0, -0.7006, -18.958, 0.000, -17.036)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree1"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree1"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree1"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree2" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(0.2883, 0, -0.8281, 0, 0.8768205264848047, 0, 0.8281, 0, 0.2883, -11.857, 0.000, -15.220)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree2"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree2"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree2"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree3" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.9236, 0, 0.3601, 0, 0.9913662266695562, 0, -0.3601, 0, -0.9236, -5.459, 0.000, -16.497)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree3"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree3"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree3"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree4" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.9156, 0, 0.2882, 0, 0.9598434298249687, 0, -0.2882, 0, -0.9156, 6.883, 0.000, -17.446)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree4"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree4"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree4"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree5" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.1840, 0, -1.1638, 0, 1.1782503802476478, 0, 1.1638, 0, -0.1840, 12.076, 0.000, -18.063)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree5"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree5"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree5"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree6" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.1752, 0, 1.0233, 0, 1.0381552698033523, 0, -1.0233, 0, -0.1752, 19.441, 0.000, -15.413)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree6"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree6"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree6"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree7" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.5610, 0, 0.6619, 0, 0.867643265671347, 0, -0.6619, 0, -0.5610, 22.956, 0.000, -16.711)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree7"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree7"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree7"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree8" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.3815, 0, -1.1840, 0, 1.2439650153238997, 0, 1.1840, 0, -0.3815, -23.206, 0.000, 17.006)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree8"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree8"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree8"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree9" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-1.0214, 0, -0.4371, 0, 1.1109528419271215, 0, 0.4371, 0, -1.0214, -17.414, 0.000, 17.080)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree9"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree9"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree9"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree10" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.7071, 0, 0.7942, 0, 1.06334425183884, 0, -0.7942, 0, -0.7071, -10.980, 0.000, 18.306)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree10"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree10"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree10"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree11" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(1.0816, 0, 0.3640, 0, 1.141207984537451, 0, -0.3640, 0, 1.0816, -7.318, 0.000, 17.455)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree11"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree11"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree11"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree12" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.6598, 0, 0.7826, 0, 1.02360614910102, 0, -0.7826, 0, -0.6598, 0.966, 0.000, 15.996)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree12"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree12"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree12"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree13" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(0.7064, 0, -0.5981, 0, 0.925621770507945, 0, 0.5981, 0, 0.7064, 4.568, 0.000, 16.616)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree13"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree13"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree13"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree14" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(0.0772, 0, -0.9049, 0, 0.9082030999084079, 0, 0.9049, 0, 0.0772, 10.677, 0.000, 17.689)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree14"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree14"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree14"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree15" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.7994, 0, -0.3827, 0, 0.8862615855400624, 0, 0.3827, 0, -0.7994, 17.673, 0.000, 18.050)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree15"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree15"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree15"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree16" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(0.5536, 0, 1.0857, 0, 1.2186759270260836, 0, -1.0857, 0, 0.5536, 24.148, 0.000, 18.092)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree16"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree16"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree16"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree17" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(0.5651, 0, 0.8389, 0, 1.011447024399231, 0, -0.8389, 0, 0.5651, -21.661, 0.000, -14.443)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree17"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree17"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree17"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree18" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(0.1655, 0, -0.9144, 0, 0.9292979778206666, 0, 0.9144, 0, 0.1655, -20.604, 0.000, -9.585)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree18"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree18"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree18"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree19" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.0063, 0, -1.1151, 0, 1.115105576679515, 0, 1.1151, 0, -0.0063, -21.940, 0.000, -7.533)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree19"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree19"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree19"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree20" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.9829, 0, 0.2578, 0, 1.0161641078026264, 0, -0.2578, 0, -0.9829, -21.676, 0.000, -4.492)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree20"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree20"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree20"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree21" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.9144, 0, 0.5784, 0, 1.0819711448818503, 0, -0.5784, 0, -0.9144, -22.762, 0.000, 0.906)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree21"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree21"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree21"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree22" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.0409, 0, 1.2541, 0, 1.2547898545260785, 0, -1.2541, 0, -0.0409, -20.216, 0.000, 3.852)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree22"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree22"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree22"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree23" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.7527, 0, -0.6980, 0, 1.026570508101071, 0, 0.6980, 0, -0.7527, -23.191, 0.000, 7.749)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree23"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree23"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree23"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree24" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(0.8073, 0, -0.3452, 0, 0.8780115197284094, 0, 0.3452, 0, 0.8073, -22.537, 0.000, 9.707)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree24"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree24"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree24"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree25" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(0.9535, 0, -0.3112, 0, 1.0030241435045546, 0, 0.3112, 0, 0.9535, -20.649, 0.000, 13.418)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree25"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree25"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree25"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree26" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.5137, 0, -0.7337, 0, 0.8956589656101684, 0, 0.7337, 0, -0.5137, 20.605, 0.000, -15.000)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree26"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree26"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree26"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree27" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(0.7078, 0, -0.8762, 0, 1.1263310445048154, 0, 0.8762, 0, 0.7078, 23.497, 0.000, -11.449)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree27"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree27"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree27"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree28" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(0.7507, 0, -0.6814, 0, 1.013873547787727, 0, 0.6814, 0, 0.7507, 21.390, 0.000, -7.495)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree28"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree28"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree28"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree29" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-1.0297, 0, -0.2504, 0, 1.0596952566219702, 0, 0.2504, 0, -1.0297, 23.972, 0.000, -2.802)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree29"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree29"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree29"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree30" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.0178, 0, -1.0040, 0, 1.0041861272093509, 0, 1.0040, 0, -0.0178, 20.409, 0.000, -0.828)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree30"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree30"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree30"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree31" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(0.7210, 0, 0.4696, 0, 0.8603930744703616, 0, -0.4696, 0, 0.7210, 20.646, 0.000, 4.158)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree31"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree31"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree31"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree32" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(1.0801, 0, -0.1768, 0, 1.0944275916469515, 0, 0.1768, 0, 1.0801, 20.586, 0.000, 7.057)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree32"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree32"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree32"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree33" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.6317, 0, 1.0653, 0, 1.238496263630351, 0, -1.0653, 0, -0.6317, 23.914, 0.000, 10.556)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree33"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree33"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree33"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Tree34" type="Node3D" parent="Arena/Trees"]
+transform = Transform3D(-0.0746, 0, 0.9222, 0, 0.9251689155404513, 0, -0.9222, 0, -0.0746, 21.467, 0.000, 13.522)
+
+[node name="Trunk" type="MeshInstance3D" parent="Arena/Trees/Tree34"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 1.600, 0.000)
+mesh = SubResource("mesh_trunk")
+
+[node name="LeafA" type="MeshInstance3D" parent="Arena/Trees/Tree34"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.000)
+mesh = SubResource("mesh_leaf_a")
+
+[node name="LeafB" type="MeshInstance3D" parent="Arena/Trees/Tree34"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 0.8, 0, 0.0000, 0, 1.0000, 0.500, 4.600, 0.200)
+mesh = SubResource("mesh_leaf_b")
+
+[node name="Gate" type="Node3D" parent="Arena"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 0.000, -15.500)
+
+[node name="Pillar0" type="MeshInstance3D" parent="Arena/Gate"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, -3.200, 2.500, 0.000)
+mesh = SubResource("mesh_gate_pillar")
+
+[node name="Pillar1" type="MeshInstance3D" parent="Arena/Gate"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 3.200, 2.500, 0.000)
+mesh = SubResource("mesh_gate_pillar")
+
+[node name="Beam" type="MeshInstance3D" parent="Arena/Gate"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 4.300, 0.000)
+mesh = SubResource("mesh_gate_beam")
+
+[node name="Roof" type="MeshInstance3D" parent="Arena/Gate"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 5.150, 0.000)
+mesh = SubResource("mesh_gate_roof")
+
+[node name="Sign" type="MeshInstance3D" parent="Arena/Gate"]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.000, 3.600, 0.300)
+mesh = SubResource("mesh_gate_sign")
 
 [node name="Spawns" type="Node3D" parent="."]
 

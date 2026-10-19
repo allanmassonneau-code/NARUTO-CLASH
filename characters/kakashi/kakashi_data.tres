@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=10 format=3]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://characters/base/character_data.gd" id="1"]
 [ext_resource type="Script" path="res://core/abilities/ability_data.gd" id="2"]
 [ext_resource type="Script" path="res://core/movement/movement_data.gd" id="3"]
+[ext_resource type="Script" path="res://characters/base/shinobi_look.gd" id="4"]
 
 [sub_resource type="Resource" id="movement"]
 script = ExtResource("3")
@@ -105,6 +106,19 @@ damage = 45.0
 cast_move_multiplier = 0.25
 energy_gain_on_hit = 0.0
 
+[sub_resource type="Resource" id="look"]
+script = ExtResource("4")
+skin = Color(0.95, 0.8, 0.66, 1)
+top = Color(0.16, 0.2, 0.35, 1)
+sleeves = Color(0.16, 0.2, 0.35, 1)
+pants = Color(0.16, 0.2, 0.35, 1)
+accent = Color(0.1, 0.1, 0.14, 1)
+hair_color = Color(0.85, 0.87, 0.9, 1)
+hair = 3
+eye_color = Color(0.1, 0.1, 0.12, 1)
+mask = true
+flak_vest = true
+
 [resource]
 script = ExtResource("1")
 display_name = "Kakashi Hatake"
@@ -112,6 +126,7 @@ identity = "Versatile technical fighter. Kunai poke, Ninken roots set up Raikiri
 body_color = Color(0.7, 0.72, 0.78, 1)
 max_health = 125.0
 movement = SubResource("movement")
+look = SubResource("look")
 lmb = SubResource("lmb")
 rmb = SubResource("rmb")
 space = SubResource("space")

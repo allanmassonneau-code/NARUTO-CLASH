@@ -4,7 +4,7 @@ extends Node
 
 signal flags_changed
 
-var show_overlay: bool = true
+var show_overlay: bool = false
 var show_aim: bool = true
 var show_collisions: bool = false
 

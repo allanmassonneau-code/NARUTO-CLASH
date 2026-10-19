@@ -2,22 +2,31 @@ class_name CharacterPresentation
 extends Node
 ## Reads gameplay state and mirrors it visually. Never drives the simulation.
 
-@export var body_mesh: MeshInstance3D
+enum Role { LOCAL_PLAYER, ALLY, ENEMY }
+
+const ROLE_COLORS: Array[Color] = [Color(0.3, 1.0, 0.4), Color(0.3, 0.6, 1.0), Color(1.0, 0.25, 0.2)]
+
+@export var model: ShinobiModel
 @export var visual_pivot: Node3D
 @export var overhead: Label3D
 @export var counter_bubble: MeshInstance3D
 @export var cast_indicator: MeshInstance3D
+@export var team_ring: MeshInstance3D
 
 var _character: CombatCharacter
-var _material := StandardMaterial3D.new()
 var _flash: float = 0.0
+var _last_health: float = 0.0
 var _cast_mesh := ImmediateMesh.new()
+var _enabled: bool = true
 
 
 func setup(character: CombatCharacter) -> void:
 	_character = character
-	body_mesh.material_override = _material
-	character.hit_received.connect(func(_hit: HitData) -> void: _flash = 0.12)
+	_enabled = CombatFx.is_enabled()
+	_last_health = character.health.current_health
+	if not _enabled:
+		return
+	model.build(character.data.look if character.data.look != null else ShinobiLook.new())
 	cast_indicator.top_level = true
 	cast_indicator.mesh = _cast_mesh
 	var line_mat := StandardMaterial3D.new()
@@ -25,35 +34,65 @@ func setup(character: CombatCharacter) -> void:
 	line_mat.vertex_color_use_as_albedo = true
 	line_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	cast_indicator.material_override = line_mat
+	set_role(Role.ENEMY if character.team != 0 else Role.ALLY)
+
+
+func set_role(role: Role) -> void:
+	if not _enabled:
+		return
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = ROLE_COLORS[role]
+	team_ring.material_override = mat
+	overhead.modulate = ROLE_COLORS[role].lightened(0.5)
 
 
 func _process(delta: float) -> void:
-	if _character == null:
+	if _character == null or not _enabled:
 		return
+	var hp: float = _character.health.current_health
+	if hp < _last_health - 0.01:
+		_flash = 0.12
+	_last_health = hp
 	_flash = maxf(0.0, _flash - delta)
+
 	var status: StatusController = _character.status
 	var abilities: AbilityController = _character.abilities
-	var color: Color = _character.data.body_color
+	var tint := Color(1, 1, 1, 0)
+	var fade: float = 0.0
+	var pose: StringName = &""
 	if _character.is_dead():
-		color = Color(0.2, 0.2, 0.2)
+		tint = Color(0.1, 0.1, 0.1, 0.6)
 	elif status.has_status(StatusController.Type.STUN):
-		color = color.lerp(Color.YELLOW, 0.6)
-	elif status.has_status(StatusController.Type.IMMATERIAL):
-		color = Color(color, 0.35)
-	elif abilities.phase == AbilityController.Phase.STARTUP:
-		color = color.lerp(Color.WHITE, 0.35)
+		tint = Color(1.0, 0.9, 0.2, 0.45)
+		pose = &"stunned"
+	elif status.has_status(StatusController.Type.ROOT):
+		tint = Color(0.4, 0.3, 0.15, 0.35)
+	if status.has_status(StatusController.Type.IMMATERIAL):
+		fade = 0.65
+	if abilities.is_casting():
+		var kind: AbilityData.Kind = abilities.current.kind
+		if kind == AbilityData.Kind.COUNTER or kind == AbilityData.Kind.SELF_HEAL:
+			pose = &"guard"
+		elif abilities.phase == AbilityController.Phase.STARTUP:
+			pose = &"windup"
+			tint = Color(abilities.current.color, 0.25)
+		else:
+			pose = &"strike"
 	if _flash > 0.0:
-		color = Color(1.0, 0.25, 0.25)
-	_material.albedo_color = color
-	_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if color.a < 1.0 else BaseMaterial3D.TRANSPARENCY_DISABLED
-	visual_pivot.rotation.x = deg_to_rad(-80.0) if _character.is_dead() else 0.0
+		tint = Color(1.0, 0.15, 0.15, 0.6)
+	var planar_speed: float = Vector2(_character.velocity.x, _character.velocity.z).length()
+	model.animate(delta, planar_speed, pose, tint, fade)
+	visual_pivot.rotation.x = deg_to_rad(-85.0) if _character.is_dead() else 0.0
+	visual_pivot.position.y = 0.25 if _character.is_dead() else 0.0
+	team_ring.visible = not _character.is_dead()
 	counter_bubble.visible = status.has_status(StatusController.Type.COUNTER)
 	_update_overhead()
 	_update_cast_indicator()
 
 
 func _update_overhead() -> void:
-	var lines: PackedStringArray = ["%s  %d" % [_character.data.display_name, ceili(_character.health.current_health)]]
+	var lines: PackedStringArray = [_character.data.display_name]
 	var abilities: AbilityController = _character.abilities
 	if abilities.is_casting():
 		lines.append(abilities.current.display_name)
