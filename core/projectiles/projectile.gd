@@ -80,6 +80,9 @@ func _physics_process(delta: float) -> void:
 		if not ability.projectile_piercing or result == HitData.Result.COUNTERED:
 			_expire(global_position)
 			return
+	if ArenaRules.hit_orb(source, global_position, ability.hit_radius, ability.damage):
+		_expire(global_position)
+		return
 	if _travelled >= ability.max_range:
 		_expire(global_position)
 

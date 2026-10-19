@@ -106,6 +106,7 @@ func _detonate() -> void:
 		return  # replicas linger until the server despawns them
 	if not ability.trap and (ability.damage > 0.0 or ability.stun_duration > 0.0 or ability.root_duration > 0.0):
 		_hit_inside(ability.damage, true)
+		ArenaRules.hit_orb(source, global_position, ability.hit_radius, ability.damage)
 	if ability.zone_duration <= 0.0:
 		_finish()
 

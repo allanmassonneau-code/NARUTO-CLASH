@@ -44,11 +44,39 @@ func poll_intent() -> GameplayIntent:
 	intent.move_direction = _choose_movement(dir, dist, delta)
 	intent.aim_point = _choose_aim(dist, delta)
 	intent.has_aim_point = true
+	if _arena_objectives(dist):
+		return intent
 	_decision_timer -= delta
 	if _decision_timer <= 0.0:
 		_decision_timer = decision_interval
 		_decide(dir, dist)
 	return intent
+
+
+## Orb and sudden-death ring. Returns true when it took over this tick.
+func _arena_objectives(enemy_dist: float) -> bool:
+	var rules: ArenaRules = ArenaRules.active
+	if rules == null:
+		return false
+	var center: Vector3 = rules.global_position
+	var from_center: Vector3 = HitQuery.flat(_body.global_position - center)
+	if rules.is_sudden_death() and from_center.length() > rules.ring_radius() - 1.5:
+		intent.move_direction = (-from_center).normalized()
+		return false  # keep fighting while walking back in
+	if not rules.orb_alive() or _body.abilities.is_casting():
+		return false
+	var my_dist: float = from_center.length()
+	var enemy_orb_dist: float = HitQuery.flat(target.global_position - center).length()
+	# Go for the orb when not locked in melee and at least as close as the enemy.
+	if enemy_dist < 3.0 or my_dist > enemy_orb_dist + 3.0:
+		return false
+	intent.aim_point = center
+	if my_dist > 1.8:
+		intent.move_direction = (-from_center).normalized()
+	else:
+		intent.move_direction = Vector3.ZERO
+		_press(&"lmb")
+	return true
 
 
 ## Nearest living enemy among all fighters.

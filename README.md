@@ -12,11 +12,21 @@ Modes: **1v1 vs bot**, **2v2 (you + bot ally) vs 2 bots**. Best of 5 (first to 3
 |---|---|
 | WASD / ZQSD (physical keys) | Move |
 | Mouse | Aim / facing |
-| LMB / RMB / Space / Q(A on AZERTY) / E / F | Jutsu slots (F = ultimate, 100 energy) |
+| LMB / RMB / Space / Q(A on AZERTY) / E / F | Jutsu slots (F = ultimate, 100 energy). Hold LMB to keep attacking |
 | X or middle mouse | Cancel during startup (feint) |
 | F1 / F2 / F3 | Debug overlay / aim line / collision shapes |
 | F6 / F7 / F8 | Cheats: infinite HP / infinite energy / no cooldowns |
 | F5 / Esc | Restart match / back to menu |
+
+## Combat rules
+- Inputs are buffered for 0.25 s; the next hit of a combo can cut the previous recovery short,
+  and mobility / counters cancel any attack recovery.
+- Knockbacks that end in a wall (arena wall, rock, sand wall) slam: 6 damage + 0.6 s stun.
+- Stuns landing within 2 s of a previous stun last half as long (no endless stun chains).
+- Chakra orb: appears at the centre 10 s into a round (respawns 22 s after being taken).
+  The fighter landing the last hit heals 20 (true heal) and gains 25 energy.
+- Sudden death: from 1:00 a ring closes on the centre over 35 s; outside it you take 12 dps.
+- Enemy casts show a red telegraph on the ground and a cast bar above their head.
 
 ## Roster
 - **Naruto** — pressure: Taijutsu, Rasengan (dash strike), Shunshin, Kawarimi (counter-teleport), Kage Bunshin Rush (stun), Rasenshuriken.

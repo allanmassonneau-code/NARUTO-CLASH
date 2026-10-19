@@ -10,6 +10,8 @@ var aim_point: Vector3 = Vector3.ZERO
 var has_aim_point: bool = false
 ## Ability slots pressed this tick (see AbilityController.SLOTS).
 var pressed_slots: Array[StringName] = []
+## Ability slots currently held down (hold LMB = keep attacking).
+var held_slots: Array[StringName] = []
 var cancel_pressed: bool = false
 
 

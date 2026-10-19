@@ -126,6 +126,7 @@ static func melee_from(c: CombatCharacter, origin: Vector3, direction: Vector3, 
 	var center: Vector3 = origin + Vector3.UP * HitQuery.BODY_HEIGHT
 	var half_arc: float = deg_to_rad(a.arc_degrees) * 0.5
 	CombatFx.arc(c, origin, direction, a.max_range, a.arc_degrees, a.color, 0.15)
+	ArenaRules.hit_orb_arc(c, origin, direction, a, a.damage * damage_scale)
 	for target: CombatCharacter in HitQuery.characters_in_sphere(c.get_world_3d(), center, a.max_range + HitQuery.HURTBOX_RADIUS):
 		if target.team == c.team or already_hit.has(target):
 			continue

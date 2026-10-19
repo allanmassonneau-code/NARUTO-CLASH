@@ -150,6 +150,8 @@ static func projectile_tick(p: Projectile, delta: float) -> void:
 static func projectile_impact(anchor: Node, at: Vector3, a: AbilityData) -> void:
 	if not CombatFx.is_enabled():
 		return
+	if a.vfx == &"katon" or a.vfx == &"rasenshuriken":
+		Sfx.play(&"boom", at, -2.0)
 	match a.vfx:
 		&"clone":
 			smoke(anchor, HitQuery.flat(at), 0.9)
@@ -272,6 +274,10 @@ static func area_detonate(anchor: Node, at: Vector3, a: AbilityData) -> void:
 	if not CombatFx.is_enabled():
 		return
 	var r: float = a.hit_radius
+	if a.damage >= 15.0 or a.vfx == &"trap":
+		Sfx.play(&"boom", at, -1.0 if a.damage >= 25.0 else -4.0)
+	elif a.vfx == &"kirin":
+		Sfx.play(&"electric", at)
 	match a.vfx:
 		&"kirin":
 			_sky_bolt(anchor, at, Color(0.75, 0.9, 1.0))

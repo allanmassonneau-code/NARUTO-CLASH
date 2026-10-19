@@ -31,6 +31,9 @@ func poll_intent() -> GameplayIntent:
 	for slot: StringName in SLOT_ACTIONS:
 		if Input.is_action_just_pressed(SLOT_ACTIONS[slot]):
 			intent.pressed_slots.append(slot)
+	intent.held_slots.clear()
+	if Input.is_action_pressed(SLOT_ACTIONS[&"lmb"]):
+		intent.held_slots.append(&"lmb")
 	intent.cancel_pressed = Input.is_action_just_pressed("ability_cancel")
 	return intent
 

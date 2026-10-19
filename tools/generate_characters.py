@@ -8,6 +8,9 @@ stay editable in the Godot inspector; re-running this overwrites them.
 import os
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
+# Battlerite-like time-to-kill: rounds last long enough for orbs, cooldown
+# trades and outplays instead of being decided by the first combo.
+HEALTH_SCALE = 1.4
 KIND = {"MELEE": 0, "PROJ": 1, "DASH": 2, "AREA": 3, "COUNTER": 4, "HEAL": 5, "SUMMON": 6, "TELEPORT": 7}
 
 
@@ -396,7 +399,7 @@ def write(key, ch):
 
     res = ['[resource]', 'script = ExtResource("1")', f'display_name = "{ch["display_name"]}"', f'short_name = "{SHORT.get(key, ch["display_name"].split(" ")[0])}"',
            f'passive = "{ch.get("passive", "")}"', f'passive_description = "{ch.get("passive_description", "")}"',
-           f'identity = "{ch["identity"]}"', f'body_color = {ch["body_color"]}', f'max_health = {ch["max_health"]}',
+           f'identity = "{ch["identity"]}"', f'body_color = {ch["body_color"]}', f'max_health = {round(ch["max_health"] * HEALTH_SCALE)}.0',
            'movement = SubResource("movement")', 'look = SubResource("look")']
     res += [f'{slot} = SubResource("{rid}")' for slot, rid in slots.items()]
     steps = len(ext) + len(subs) + 1

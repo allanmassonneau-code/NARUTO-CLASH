@@ -12,10 +12,14 @@ var _pending_presses: Array[StringName] = []
 var _pending_cancel: bool = false
 
 
-func receive_input(seq: int, move: Vector2, aim: Vector2) -> void:
+func receive_input(seq: int, move: Vector2, aim: Vector2, held_mask: int = 0) -> void:
 	if seq <= last_seq:
 		return  # out of date
 	last_seq = seq
+	intent.held_slots.clear()
+	for i in SLOT_ORDER.size():
+		if held_mask & (1 << i):
+			intent.held_slots.append(SLOT_ORDER[i])
 	intent.move_direction = Vector3(move.x, 0.0, move.y).limit_length(1.0)
 	intent.aim_point = Vector3(aim.x, 0.0, aim.y)
 	intent.has_aim_point = true

@@ -18,11 +18,19 @@ signal status_removed(type: Type)
 
 var _remaining: Dictionary = {}  # Type -> seconds left
 var _stacks: Dictionary = {}  # Type -> stack count (stacking statuses like MARK)
+## Diminishing returns: a stun landing while this is > 0 lasts half as long
+## (stops endless stun chains, especially in 2v2).
+var _stun_resist_left: float = 0.0
+const STUN_RESIST_WINDOW: float = 2.0
 
 
 func apply_status(type: Type, duration: float) -> void:
 	if duration <= 0.0:
 		return
+	if type == Type.STUN or type == Type.INCAPACITATE:
+		if _stun_resist_left > 0.0:
+			duration *= 0.5
+		_stun_resist_left = maxf(_stun_resist_left, duration + STUN_RESIST_WINDOW)
 	_remaining[type] = maxf(_remaining.get(type, 0.0), duration)
 	status_applied.emit(type, duration)
 
@@ -79,11 +87,13 @@ func sync_stacks(type: Type, stacks: int) -> void:
 
 
 func clear_all() -> void:
+	_stun_resist_left = 0.0
 	for type: Type in _remaining.keys():
 		remove_status(type)
 
 
 func tick(delta: float) -> void:
+	_stun_resist_left = maxf(0.0, _stun_resist_left - delta)
 	for type: Type in _remaining.keys():
 		_remaining[type] -= delta
 		if _remaining[type] <= 0.0:

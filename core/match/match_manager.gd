@@ -32,6 +32,8 @@ var scores: Array[int] = [0, 0]
 var round_number: int = 0
 ## Server: peer id -> NetworkInputSource.
 var remote_inputs: Dictionary = {}
+## Orb + sudden death ring.
+var rules: ArenaRules
 
 var _timer: float = 0.0
 var _spawns: Dictionary = {}  # CombatCharacter -> Marker3D
@@ -59,6 +61,13 @@ func _ready() -> void:
 		aim_indicator.character = player
 		debug_overlay.character = player
 		hud.bind(player, fighters, self)
+	rules = ArenaRules.new()
+	rules.name = "ArenaRules"
+	rules.authoritative = is_authoritative()
+	characters_root.add_child(rules)
+	if GameSession.net_role != GameSession.NetRole.SERVER:
+		Sfx.warm_up()
+		_set_cursor()
 	Net.register_match(self)
 	if is_authoritative():
 		_start_round()
@@ -69,7 +78,14 @@ func is_authoritative() -> bool:
 
 
 func _physics_process(delta: float) -> void:
-	if not is_authoritative() or _timer <= 0.0:
+	if not is_authoritative():
+		return
+	if state == State.FIGHTING:
+		var was_sudden_death: bool = rules.is_sudden_death()
+		rules.tick(delta, fighters)
+		if rules.is_sudden_death() and not was_sudden_death:
+			_announce("SUDDEN DEATH")
+	if _timer <= 0.0:
 		return
 	_timer -= delta
 	if _timer > 0.0:
@@ -100,9 +116,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 ## Client: mirror of the authoritative match state.
 func apply_remote_state(new_state: State, message: String, new_scores: Array[int]) -> void:
-	if new_state == State.PRE_ROUND:
+	if new_state == State.PRE_ROUND and state != State.PRE_ROUND:
 		for node: Node in get_tree().get_nodes_in_group(&"round_entities"):
 			node.queue_free()
+		rules.reset_round()
 	scores = new_scores
 	score_changed.emit(scores)
 	_set_controls(new_state == State.FIGHTING)
@@ -166,6 +183,7 @@ func _spawn(data: CharacterData, team: int, controller: IntentSource, spawn: Mar
 
 func _start_round() -> void:
 	round_number += 1
+	rules.reset_round()
 	for node: Node in get_tree().get_nodes_in_group(&"round_entities"):
 		node.queue_free()
 	for fighter: CombatCharacter in fighters:
@@ -195,6 +213,35 @@ func _on_character_died(_character: CombatCharacter) -> void:
 func _set_controls(enabled: bool) -> void:
 	for fighter: CombatCharacter in fighters:
 		fighter.controls_enabled = enabled
+
+
+## Banner message without a state change (sudden death...).
+func _announce(message: String) -> void:
+	state_changed.emit(state, message)
+	Net.broadcast_match_state(state, message, scores)
+
+
+## Crosshair cursor for aiming.
+func _set_cursor() -> void:
+	var size: int = 32
+	var image := Image.create(size, size, false, Image.FORMAT_RGBA8)
+	var center := Vector2(size / 2.0, size / 2.0)
+	for y in size:
+		for x in size:
+			var d: float = Vector2(x + 0.5, y + 0.5).distance_to(center)
+			var on_ring: bool = absf(d - 9.0) < 1.3
+			var on_tick: bool = (absi(x - size / 2) <= 0 or absi(y - size / 2) <= 0) and d > 4.0 and d < 14.0 and not on_ring
+			var dot: bool = d < 1.6
+			if on_ring or dot or on_tick:
+				image.set_pixel(x, y, Color(1.0, 0.95, 0.85, 0.95))
+			elif absf(d - 9.0) < 2.4 or (d < 2.6):
+				image.set_pixel(x, y, Color(0, 0, 0, 0.6))
+	Input.set_custom_mouse_cursor(ImageTexture.create_from_image(image), Input.CURSOR_ARROW, center)
+
+
+func _exit_tree() -> void:
+	if GameSession.net_role != GameSession.NetRole.SERVER:
+		Input.set_custom_mouse_cursor(null)
 
 
 func _set_state(new_state: State, message: String) -> void:

@@ -201,6 +201,7 @@ func _physics_process(_delta: float) -> void:
 	if _tick % SNAPSHOT_INTERVAL_TICKS != 0:
 		return
 	var data := PackedFloat32Array()
+	_match.rules.write_header(data)
 	for fighter: CombatCharacter in _match.fighters:
 		var source := fighter.controller as NetworkInputSource
 		fighter.write_snapshot(data, source.last_seq if source != null else 0)
@@ -286,7 +287,10 @@ func set_roster(roster: int) -> void:
 func send_input(seq: int, intent: GameplayIntent, aim: Vector3) -> void:
 	if not is_online():
 		return
-	c2s_input.rpc_id(1, seq, Vector2(intent.move_direction.x, intent.move_direction.z), Vector2(aim.x, aim.z))
+	var held_mask: int = 0
+	for slot: StringName in intent.held_slots:
+		held_mask |= 1 << AbilityController.SLOTS.find(slot)
+	c2s_input.rpc_id(1, seq, Vector2(intent.move_direction.x, intent.move_direction.z), Vector2(aim.x, aim.z), held_mask)
 	for slot: StringName in intent.pressed_slots:
 		c2s_press.rpc_id(1, AbilityController.SLOTS.find(slot))
 	if intent.cancel_pressed:
@@ -345,8 +349,12 @@ func s2c_snapshot(_server_tick: int, data: PackedFloat32Array) -> void:
 	if _match == null:
 		return
 	var stride: int = CombatCharacter.snapshot_stride()
-	for i in mini(_match.fighters.size(), data.size() / stride):
-		_match.fighters[i].apply_snapshot(data, i * stride)
+	var header: int = ArenaRules.HEADER_SIZE
+	if data.size() < header:
+		return
+	_match.rules.apply_header(data)
+	for i in mini(_match.fighters.size(), (data.size() - header) / stride):
+		_match.fighters[i].apply_snapshot(data, header + i * stride)
 
 
 @rpc("authority", "call_remote", "reliable")
@@ -404,10 +412,10 @@ func s2c_fx(kind: int, a: Vector3, b: Vector3, f1: float, f2: float, color: Colo
 # --- In-match input relay (client -> server) -------------------------------
 
 @rpc("any_peer", "call_remote", "unreliable_ordered")
-func c2s_input(seq: int, move: Vector2, aim: Vector2) -> void:
+func c2s_input(seq: int, move: Vector2, aim: Vector2, held_mask: int) -> void:
 	var source: NetworkInputSource = _input_source_for_sender()
 	if source != null:
-		source.receive_input(seq, move, aim)
+		source.receive_input(seq, move, aim, held_mask)
 
 
 @rpc("any_peer", "call_remote", "reliable")

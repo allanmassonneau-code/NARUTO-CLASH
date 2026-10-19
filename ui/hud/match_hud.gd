@@ -22,6 +22,8 @@ var _cast_bar: ProgressBar
 var _cast_label: Label
 var _pips: Array = [[], []]  # per team: Array[Panel]
 var _round_label: Label
+## Round clock; turns red when the sudden-death ring is closing.
+var _clock: Label
 var _announce: Label
 var _announce_time: float = 0.0
 var _time: float = 0.0
@@ -44,6 +46,7 @@ func _process(delta: float) -> void:
 	for fighter: CombatCharacter in _fighters:
 		_update_card(fighter, _cards[fighter])
 	_update_player_frame()
+	_update_clock()
 	for slot: StringName in _slots:
 		_update_slot(slot, _slots[slot])
 	if _announce_time > 0.0:
@@ -81,6 +84,21 @@ func _update_player_frame() -> void:
 		_cast_bar.add_theme_stylebox_override("fill", UiStyle.bar_fill(abilities.current.color, 3))
 
 
+func _update_clock() -> void:
+	var rules: ArenaRules = _manager.rules
+	if rules == null:
+		return
+	var t: int = int(rules.fight_time)
+	_clock.text = "%d:%02d" % [t / 60, t % 60]
+	var until_sd: float = ArenaRules.SUDDEN_DEATH_AT - rules.fight_time
+	if rules.is_sudden_death():
+		_clock.add_theme_color_override("font_color", Color(1.0, 0.3, 0.45))
+	elif until_sd <= 10.0:
+		_clock.add_theme_color_override("font_color", Color(1.0, 0.75, 0.3).lerp(Color.WHITE, 0.5 + 0.5 * sin(_time * 8.0)))
+	else:
+		_clock.add_theme_color_override("font_color", Color.WHITE)
+
+
 func _update_slot(slot: StringName, w: Dictionary) -> void:
 	var abilities: AbilityController = _player.abilities
 	var a: AbilityData = abilities.get_ability(slot)
@@ -109,6 +127,12 @@ func _update_slot(slot: StringName, w: Dictionary) -> void:
 
 
 func _on_state_changed(state: MatchManager.State, message: String) -> void:
+	if state == MatchManager.State.FIGHTING and message == "FIGHT!":
+		Sfx.play(&"gong", Vector3.INF, -4.0)
+	elif message == "SUDDEN DEATH":
+		Sfx.play(&"gong", Vector3.INF, -2.0, 0.7)
+	elif state == MatchManager.State.ROUND_OVER:
+		Sfx.play(&"gong", Vector3.INF, -6.0, 1.25)
 	_round_label.text = "ROUND %d" % maxi(_manager.round_number, 1)
 	_announce.text = message
 	_announce.modulate.a = 1.0
@@ -167,8 +191,8 @@ func _build_scoreboard(root: Control) -> void:
 			row.add_child(mid)
 			_round_label = UiStyle.label(mid, "ROUND 1", 12, UiStyle.MUTED, 700)
 			_round_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			var vs := UiStyle.label(mid, "VS", 20, Color.WHITE, 800)
-			vs.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			_clock = UiStyle.label(mid, "0:00", 20, Color.WHITE, 800)
+			_clock.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		var side := HBoxContainer.new()
 		side.add_theme_constant_override("separation", 6)
 		side.alignment = BoxContainer.ALIGNMENT_CENTER

@@ -10,6 +10,9 @@ var _frames: int = 0
 var _hits: int = 0
 var _counters: int = 0
 var _manager: MatchManager
+var _orbs: int = 0
+var _slams: int = 0
+var _sudden_death: bool = false
 
 
 func _ready() -> void:
@@ -30,7 +33,15 @@ func _ready() -> void:
 	for fighter: CombatCharacter in _manager.fighters:
 		fighter.hit_received.connect(func(_h: HitData) -> void: _hits += 1)
 		fighter.counter_triggered.connect(func(_h: HitData) -> void: _counters += 1)
-	_manager.state_changed.connect(func(_s: MatchManager.State, msg: String) -> void: print("[match] ", msg.replace("\n", " ")))
+	_manager.state_changed.connect(func(_s: MatchManager.State, msg: String) -> void:
+		print("[match] ", msg.replace("\n", " "))
+		if msg == "SUDDEN DEATH":
+			_sudden_death = true)
+	_manager.rules.orb_taken.connect(func(_by: CombatCharacter) -> void: _orbs += 1)
+	for fighter: CombatCharacter in _manager.fighters:
+		fighter.hit_received.connect(func(h: HitData) -> void:
+			if h.ability == null and is_equal_approx(h.stun_duration, CombatCharacter.WALL_SLAM_STUN):
+				_slams += 1)
 
 
 func _physics_process(_delta: float) -> void:
@@ -40,7 +51,9 @@ func _physics_process(_delta: float) -> void:
 	if _manager.state == MatchManager.State.MATCH_OVER or _frames >= MAX_SIM_FRAMES:
 		_check(_manager.state == MatchManager.State.MATCH_OVER, "match reaches MATCH_OVER")
 		_check(_hits > 20, "bots land hits (%d)" % _hits)
-		print("[sim] frames=%d (%.0fs) hits=%d counters=%d scores=%s" % [_frames, _frames / 60.0, _hits, _counters, _manager.scores])
+		print("[sim] frames=%d (%.0fs) hits=%d counters=%d scores=%s orbs=%d wall_slams=%d sudden_death=%s" % [
+			_frames, _frames / 60.0, _hits, _counters, _manager.scores, _orbs, _slams, _sudden_death])
+		_check(_orbs > 0, "bots contest and take the chakra orb")
 		print("RESULT: %s (%d failures)" % ["PASS" if _failures == 0 else "FAIL", _failures])
 		get_tree().quit(1 if _failures > 0 else 0)
 
@@ -107,6 +120,7 @@ func _unit_tests() -> void:
 	sasuke.abilities.cancel()
 	_check(not sasuke.abilities.is_casting(), "katon can be cancelled (feint)")
 	_kit_tests(naruto, sasuke)
+	_feel_tests(naruto, sasuke)
 	naruto.queue_free()
 	sasuke.queue_free()
 
@@ -218,6 +232,55 @@ func _new_roster_tests(a: CombatCharacter, b: CombatCharacter) -> void:
 	_check(minato.global_position.distance_to(b.global_position) < 1.6, "hiraishin teleports to the sealed target")
 	for n: Node in [hinata, itachi, gaara, minato]:
 		n.queue_free()
+
+
+## Combat feel mechanics: hold-to-attack, recovery cancels, stun DR, orb.
+func _feel_tests(a: CombatCharacter, b: CombatCharacter) -> void:
+	var status := StatusController.new()
+	status.apply_status(StatusController.Type.STUN, 1.0)
+	status.tick(1.1)
+	status.apply_status(StatusController.Type.STUN, 1.0)
+	_check(is_equal_approx(status.get_remaining(StatusController.Type.STUN), 0.5), "back-to-back stuns are halved (diminishing returns)")
+	status.free()
+
+	for c: CombatCharacter in [a, b]:
+		c.status.clear_all()
+		c.abilities.reset()
+		c.health.reset()
+	a.global_position = Vector3(20, 0, 20)  # out of reach: whiffs only
+	var intent := GameplayIntent.new()
+	intent.held_slots.append(&"lmb")
+	var casts: Array[int] = [0]
+	var on_cast := func(_slot: StringName, _a: AbilityData) -> void: casts[0] += 1
+	a.abilities.cast_started.connect(on_cast)
+	for i in 90:
+		a.abilities.tick(1.0 / 60.0, intent)
+	_check(casts[0] >= 4, "holding LMB keeps attacking (%d swings in 1.5 s)" % casts[0])
+	a.abilities.cast_started.disconnect(on_cast)
+	a.abilities.reset()
+	a.abilities.try_cast(&"lmb")
+	while a.abilities.phase != AbilityController.Phase.RECOVERY:
+		a.abilities.tick(1.0 / 60.0, null)
+	var dash := GameplayIntent.new()
+	dash.pressed_slots.append(&"space")
+	a.abilities.tick(1.0 / 60.0, dash)
+	_check(a.abilities.current_slot == &"space", "mobility cancels attack recovery")
+	a.abilities.reset()
+
+	var rules := ArenaRules.new()
+	add_child(rules)
+	rules.orb_hp = ArenaRules.ORB_MAX_HP
+	a.global_position = Vector3(0, 0, 1.0)
+	a.health.apply_damage(40.0)
+	var hp_before: float = a.health.current_health
+	_check(ArenaRules.hit_orb(a, Vector3.ZERO, 0.5, ArenaRules.ORB_MAX_HP), "damaging hits strike the orb")
+	_check(not rules.orb_alive() and a.health.current_health > hp_before and a.energy.current_energy >= ArenaRules.ORB_ENERGY,
+		"last hit on the orb heals and grants chakra")
+	rules.fight_time = ArenaRules.SUDDEN_DEATH_AT + ArenaRules.RING_CLOSE_TIME
+	_check(is_equal_approx(rules.ring_radius(), ArenaRules.RING_END_RADIUS), "sudden death ring closes")
+	rules.free()
+	a.health.reset()
+	a.energy.reset()
 
 
 func _check(condition: bool, label: String) -> void:

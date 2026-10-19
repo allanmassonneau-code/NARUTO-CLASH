@@ -14,7 +14,9 @@ signal cast_finished(slot: StringName, ability: AbilityData)
 const SLOTS: Array[StringName] = [&"lmb", &"rmb", &"space", &"q", &"e", &"ult"]
 
 ## An input pressed this long before the character is free is still executed.
-@export var input_buffer_window: float = 0.15
+@export var input_buffer_window: float = 0.25
+## Fraction of a combo hit's recovery after which the next hit may cut it short.
+const COMBO_CANCEL_RATIO: float = 0.4
 
 var character: CombatCharacter
 var cooldowns_disabled: bool = false
@@ -202,9 +204,31 @@ func tick(delta: float, intent: GameplayIntent) -> void:
 			_buffered_slot = slot
 			_buffer_left = input_buffer_window
 	_advance(delta)
-	if phase == Phase.IDLE and _buffered_slot != &"" and try_cast(_buffered_slot):
+	var wanted: StringName = _buffered_slot
+	if wanted == &"" and intent != null and not intent.held_slots.is_empty():
+		wanted = intent.held_slots[0]  # holding LMB keeps the string going
+	if phase == Phase.RECOVERY and wanted != &"" and _can_cancel_recovery(wanted):
+		_finish_recovery()
+	if phase != Phase.IDLE or wanted == &"":
+		return
+	if try_cast(wanted) and wanted == _buffered_slot:
 		_buffered_slot = &""
 		_buffer_left = 0.0
+
+
+## Recovery can be cut short by the next hit of a combo string, or by a
+## mobility / defensive jutsu (dash out of a whiffed attack).
+func _can_cancel_recovery(slot: StringName) -> bool:
+	if slot == current_slot:
+		return current.combo_next != null and phase_elapsed >= current.recovery_time * COMBO_CANCEL_RATIO
+	var next: AbilityData = get_castable(slot)
+	if next == null or next.energy_cost >= 100.0:
+		return false
+	match next.kind:
+		AbilityData.Kind.DASH, AbilityData.Kind.TELEPORT, AbilityData.Kind.COUNTER:
+			return character.status.can_cast(slot) and is_ready(slot) \
+				and not (next.kind == AbilityData.Kind.DASH and character.status.has_status(StatusController.Type.ROOT))
+	return false
 
 
 ## Ability the slot would cast right now (combo follow-up if one is pending).
@@ -287,13 +311,17 @@ func _advance(delta: float) -> void:
 				_end_active()
 		Phase.RECOVERY:
 			if phase_elapsed >= current.recovery_time:
-				var slot: StringName = current_slot
-				var ability: AbilityData = current
-				_clear_cast()
-				if ability.combo_next != null:
-					_combo_next[slot] = ability.combo_next
-					_combo_left[slot] = ability.combo_window
-				cast_finished.emit(slot, ability)
+				_finish_recovery()
+
+
+func _finish_recovery() -> void:
+	var slot: StringName = current_slot
+	var ability: AbilityData = current
+	_clear_cast()
+	if ability.combo_next != null:
+		_combo_next[slot] = ability.combo_next
+		_combo_left[slot] = ability.combo_window
+	cast_finished.emit(slot, ability)
 
 
 func _activate() -> void:

@@ -13,6 +13,10 @@ enum NetMode { AUTHORITY, PUPPET, PREDICTED }
 const LAYER_CHARACTERS: int = 2
 const MASK_DEFAULT: int = 1 | 2
 const MASK_PASS_THROUGH: int = 1
+## Knockbacks faster than this stun the target if they end in a wall.
+const WALL_SLAM_MIN_SPEED: float = 7.0
+const WALL_SLAM_DAMAGE: float = 6.0
+const WALL_SLAM_STUN: float = 0.6
 
 @export var data: CharacterData
 @export var controller: IntentSource
@@ -23,6 +27,8 @@ var controls_enabled: bool = true
 var clone: ShadowClone
 var _passive_used: bool = false
 var _passive_timer: float = 0.0
+## Who knocked us back (credited for a wall slam).
+var _slam_source: CombatCharacter
 ## AUTHORITY: simulates (offline / server). PUPPET: mirrors snapshots.
 ## PREDICTED: local client fighter, predicts movement and reconciles.
 var net_mode: NetMode = NetMode.AUTHORITY
@@ -86,10 +92,31 @@ func _physics_process(delta: float) -> void:
 	var wish: Vector3 = intent.move_direction if intent != null and status.can_move() else Vector3.ZERO
 	movement.speed_multiplier = abilities.get_move_multiplier() * status.speed_multiplier()
 	_tick_status_effects(delta)
+	var knockback_speed: float = movement.forced_speed() if movement.is_knockback else 0.0
 	velocity = movement.compute_velocity(wish, delta)
 	move_and_slide()
 	movement.on_post_move(get_real_velocity())
 	global_position.y = 0.0  # planar arena
+	if knockback_speed >= WALL_SLAM_MIN_SPEED:
+		_check_wall_slam()
+
+
+## Knocked hard into a wall (arena wall, rock, sand wall): stun + damage.
+func _check_wall_slam() -> void:
+	for i in get_slide_collision_count():
+		var collision: KinematicCollision3D = get_slide_collision(i)
+		if collision.get_collider() is CombatCharacter:
+			continue
+		if collision.get_normal().dot(movement.forced_direction()) > -0.5:
+			continue  # grazing the wall, not a slam
+		movement.cancel_forced()
+		var hit := HitData.new()
+		hit.source = _slam_source if is_instance_valid(_slam_source) else null
+		hit.damage = WALL_SLAM_DAMAGE
+		hit.stun_duration = WALL_SLAM_STUN
+		CombatFx.ring(self, global_position, 1.3, Color(1.0, 0.85, 0.4), 0.35)
+		receive_hit(hit)
+		return
 
 
 ## Central damage pipeline: immaterial -> counter -> modifiers (empower,
@@ -129,7 +156,8 @@ func receive_hit(hit: HitData) -> HitData.Result:
 		status.apply_status(StatusController.Type.ROOT, hit.root_duration)
 	if hit.knockback_velocity != Vector3.ZERO:
 		abilities.interrupt()
-		movement.apply_forced_motion(hit.knockback_velocity, hit.knockback_duration, true)
+		movement.apply_forced_motion(hit.knockback_velocity, hit.knockback_duration, true, true)
+		_slam_source = hit.source
 	if a != null:
 		if a.slow_duration > 0.0:
 			status.apply_status(StatusController.Type.SLOW, a.slow_duration)
@@ -154,7 +182,7 @@ func receive_hit(hit: HitData) -> HitData.Result:
 			var stolen: float = minf(a.energy_drain, energy.current_energy)
 			energy.sync_state(energy.current_energy - stolen)
 			hit.source.energy.gain(stolen)
-	if is_instance_valid(hit.source):
+	if is_instance_valid(hit.source) and hit.source != self:
 		hit.source.energy.gain(hit.energy_gain)
 	_check_passive()
 	hit_received.emit(hit)
