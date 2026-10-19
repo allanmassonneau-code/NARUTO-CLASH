@@ -74,7 +74,7 @@ wipe() {
   echo "Wipe done."
 }
 
-install() {
+setup_naruto() {
   [[ -n "$DEPLOY_KEY" ]] || { echo "--deploy-key \"<public key>\" is required."; exit 1; }
   export DEBIAN_FRONTEND=noninteractive
   apt-get update -y
@@ -157,4 +157,4 @@ NGINX
 
 if [[ $INVENTORY -eq 1 ]]; then inventory; exit 0; fi
 if [[ $WIPE -eq 1 ]]; then inventory; wipe; fi
-install
+setup_naruto

@@ -57,6 +57,8 @@ jobs:
             SSH="sshpass -e ssh $OPTS"; SCP="sshpass -e scp $OPTS"
           fi
           SUDO=""; [ "$ROOT_USER" = "root" ] || SUDO="sudo"
+          # Stop leftovers of a previous (looping) run before starting again.
+          $SSH "$ROOT_USER@$HOST" "$SUDO pkill -f vps_setup.sh; $SUDO pkill -x apt-get; sleep 2; $SUDO rm -f /var/cache/apt/*.bin; true"
           $SCP deploy/vps_setup.sh deploy.pub "$ROOT_USER@$HOST:/tmp/"
           FLAGS='--deploy-key "$(cat /tmp/deploy.pub)"'
           if [ "$WIPE" = "true" ]; then
