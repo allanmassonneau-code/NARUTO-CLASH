@@ -31,6 +31,9 @@ var _cooldowns: Dictionary = {}
 var _buffered_slot: StringName = &""
 var _buffer_left: float = 0.0
 var _hit_this_cast: Array[CombatCharacter] = []
+## Pending combo follow-up per slot (AbilityData) and time left to use it.
+var _combo_next: Dictionary = {}
+var _combo_left: Dictionary = {}
 
 
 func setup(owner_character: CombatCharacter, data: CharacterData) -> void:
@@ -45,6 +48,8 @@ func reset() -> void:
 	_clear_cast()
 	_buffered_slot = &""
 	_buffer_left = 0.0
+	_combo_next.clear()
+	_combo_left.clear()
 
 
 func get_ability(slot: StringName) -> AbilityData:
@@ -105,6 +110,11 @@ func get_move_multiplier() -> float:
 func tick(delta: float, intent: GameplayIntent) -> void:
 	for slot: StringName in _cooldowns:
 		_cooldowns[slot] = maxf(0.0, _cooldowns[slot] - delta)
+	for slot: StringName in _combo_left.keys():
+		_combo_left[slot] -= delta
+		if _combo_left[slot] <= 0.0:
+			_combo_left.erase(slot)
+			_combo_next.erase(slot)
 	if _buffer_left > 0.0:
 		_buffer_left -= delta
 		if _buffer_left <= 0.0:
@@ -121,14 +131,21 @@ func tick(delta: float, intent: GameplayIntent) -> void:
 		_buffer_left = 0.0
 
 
+## Ability the slot would cast right now (combo follow-up if one is pending).
+func get_castable(slot: StringName) -> AbilityData:
+	return _combo_next.get(slot, get_ability(slot))
+
+
 func try_cast(slot: StringName) -> bool:
-	var ability: AbilityData = get_ability(slot)
+	var ability: AbilityData = get_castable(slot)
 	if ability == null or phase != Phase.IDLE or character.is_dead():
 		return false
 	if not character.status.can_act() or not is_ready(slot):
 		return false
 	if ability.kind == AbilityData.Kind.DASH and character.status.has_status(StatusController.Type.ROOT):
 		return false
+	_combo_next.erase(slot)
+	_combo_left.erase(slot)
 	current = ability
 	current_slot = slot
 	phase = Phase.STARTUP
@@ -197,6 +214,9 @@ func _advance(delta: float) -> void:
 				var slot: StringName = current_slot
 				var ability: AbilityData = current
 				_clear_cast()
+				if ability.combo_next != null:
+					_combo_next[slot] = ability.combo_next
+					_combo_left[slot] = ability.combo_window
 				cast_finished.emit(slot, ability)
 
 

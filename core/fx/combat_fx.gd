@@ -54,6 +54,47 @@ static func log_decoy(anchor: Node, at: Vector3) -> void:
 	_spawn(anchor, box, Transform3D(Basis.IDENTITY, HitQuery.flat(at) + Vector3.UP * 0.7), Color(0.55, 0.35, 0.18), 1.2)
 
 
+## Rising, fading damage number (client-side feedback only).
+static func damage_number(anchor: Node, at: Vector3, amount: float, color: Color) -> void:
+	if not is_enabled():
+		return
+	var label := Label3D.new()
+	label.text = str(roundi(amount))
+	label.font_size = 64 if amount >= 15.0 else 48
+	label.outline_size = 14
+	label.modulate = color
+	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label.no_depth_test = true
+	label.pixel_size = 0.01
+	label.add_to_group(&"round_entities")
+	var root: Node = anchor.get_parent() if anchor.get_parent() != null else anchor
+	root.add_child(label)
+	label.global_position = at + Vector3(randf_range(-0.3, 0.3), 0.0, 0.0)
+	var tween := label.create_tween().set_parallel(true)
+	tween.tween_property(label, "global_position", label.global_position + Vector3.UP * 0.9, 0.7).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(label, "scale", Vector3.ONE * 1.35, 0.08)
+	tween.tween_property(label, "modulate:a", 0.0, 0.35).set_delay(0.4)
+	tween.chain().tween_callback(label.queue_free)
+
+
+## Star burst of short lines: impact spark.
+static func burst(anchor: Node, center: Vector3, color: Color, size: float) -> void:
+	if not is_enabled():
+		return
+	var im := ImmediateMesh.new()
+	im.surface_begin(Mesh.PRIMITIVE_LINES)
+	for i in 10:
+		var dir := Vector3(randf_range(-1, 1), randf_range(-0.6, 1), randf_range(-1, 1)).normalized()
+		im.surface_add_vertex(dir * size * 0.25)
+		im.surface_add_vertex(dir * size * randf_range(0.7, 1.1))
+	im.surface_end()
+	_spawn(anchor, im, Transform3D(Basis.IDENTITY, center), color, 0.18)
+	var flash := SphereMesh.new()
+	flash.radius = size * 0.35
+	flash.height = size * 0.7
+	_spawn(anchor, flash, Transform3D(Basis.IDENTITY, center), Color(1, 1, 1, 0.7), 0.1)
+
+
 static func _spawn(anchor: Node, mesh: Mesh, xform: Transform3D, color: Color, life: float) -> void:
 	if not is_enabled():
 		return

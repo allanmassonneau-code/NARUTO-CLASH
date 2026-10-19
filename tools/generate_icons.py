@@ -54,6 +54,10 @@ GLYPHS = {
     "rasenshuriken": f'''<polygon points="{star(64, 64, 50, 14, 4, math.pi / 4)}" fill="{W}" fill-opacity="0.85"/>
 <circle cx="64" cy="64" r="16" fill="#4fa3ff" stroke="{W}" stroke-width="4"/>
 {spiral(64, 64, 1.6, 14, 3, W)}''',
+    "sword": f'''<g transform="rotate(-45 64 64)"><polygon points="60,10 68,10 68,84 64,92 60,84" fill="{W}"/>
+<rect x="50" y="84" width="28" height="7" rx="2" fill="#c9a24a"/>
+<rect x="60" y="91" width="8" height="26" rx="3" fill="#3a2a5a" stroke="{W}" stroke-width="2"/></g>
+<path d="M30 98 Q64 70 98 30" fill="none" stroke="{W}" stroke-width="4" stroke-opacity="0.45" stroke-linecap="round"/>''',
     "fireball": f'''<path d="M64 20c10 18 34 26 34 54a34 34 0 0 1-68 0c0-14 8-22 14-28 0 10 6 16 12 16-6-16 0-30 8-42z" fill="#ffd34d"/>
 <path d="M64 52c6 10 18 14 18 28a18 18 0 0 1-36 0c0-8 6-14 10-16 0 6 4 10 8 10-2-8 0-16 0-22z" fill="{W}"/>''',
     "sharingan": f'''<ellipse cx="64" cy="64" rx="48" ry="28" fill="{W}"/>
@@ -89,11 +93,11 @@ ICONS = {
     "naruto_q": ("log", "#99663a"),
     "naruto_e": ("clones", "#ff8c1a"),
     "naruto_ult": ("rasenshuriken", "#7fd0ff"),
-    "sasuke_lmb": ("kunai", "#8c8c99"),
-    "sasuke_rmb": ("fireball", "#ff4d1a"),
+    "sasuke_lmb": ("sword", "#7f8fb3"),
+    "sasuke_rmb": ("bolt", "#33b3e6"),
     "sasuke_space": ("dash", "#9fb7d9"),
     "sasuke_q": ("sharingan", "#b31a1a"),
-    "sasuke_e": ("bolt", "#33b3e6"),
+    "sasuke_e": ("fireball", "#ff4d1a"),
     "sasuke_ult": ("kirin", "#6699ff"),
     "sakura_lmb": ("fist", "#ff8cc6"),
     "sakura_rmb": ("crack", "#e6668c"),

@@ -22,6 +22,14 @@ enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL }
 @export_range(0.0, 1.0) var cast_move_multiplier: float = 0.5
 @export_range(0.0, 1.0) var recovery_move_multiplier: float = 0.8
 
+@export_category("Combo")
+## Next hit of a basic-attack string, available for `combo_window` seconds
+## after this one ends (press the same key again).
+@export var combo_next: AbilityData
+@export var combo_window: float = 0.45
+## Short forward step when a melee hit comes out (weight / commitment).
+@export var lunge_distance: float = 0.0
+
 @export_category("Cancel / Interrupt")
 @export var can_cancel_during_startup: bool = true
 ## Cooldown applied when cancelled (feint cost) or interrupted during startup.

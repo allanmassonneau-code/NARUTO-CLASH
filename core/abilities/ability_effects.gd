@@ -6,6 +6,8 @@ static func activate(ctrl: AbilityController, a: AbilityData) -> void:
 	var c: CombatCharacter = ctrl.character
 	match a.kind:
 		AbilityData.Kind.MELEE_ARC:
+			if a.lunge_distance > 0.0:
+				c.movement.apply_forced_motion(ctrl.cast_direction * (a.lunge_distance / 0.08), 0.08, true)
 			_melee(ctrl, a)
 		AbilityData.Kind.PROJECTILE:
 			Projectile.spawn(c, a, ctrl.cast_direction)

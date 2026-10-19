@@ -18,6 +18,14 @@ var _flash: float = 0.0
 var _last_health: float = 0.0
 var _cast_mesh := ImmediateMesh.new()
 var _enabled: bool = true
+var _role: Role = Role.ENEMY
+var _hp_fill: Sprite3D
+var _hp_recoverable: Sprite3D
+var _hp_bar_texture: ImageTexture
+
+const BAR_WIDTH_PX: int = 120
+const BAR_HEIGHT_PX: int = 12
+const BAR_HEIGHT: float = 2.55
 
 
 func setup(character: CombatCharacter) -> void:
@@ -34,12 +42,15 @@ func setup(character: CombatCharacter) -> void:
 	line_mat.vertex_color_use_as_albedo = true
 	line_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	cast_indicator.material_override = line_mat
+	_build_health_bar()
 	set_role(Role.ENEMY if character.team != 0 else Role.ALLY)
 
 
 func set_role(role: Role) -> void:
+	_role = role
 	if not _enabled:
 		return
+	_hp_fill.modulate = ROLE_COLORS[role]
 	var mat := StandardMaterial3D.new()
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat.albedo_color = ROLE_COLORS[role]
@@ -52,8 +63,9 @@ func _process(delta: float) -> void:
 		return
 	var hp: float = _character.health.current_health
 	if hp < _last_health - 0.01:
-		_flash = 0.12
+		_on_damaged(_last_health - hp)
 	_last_health = hp
+	_update_health_bar()
 	_flash = maxf(0.0, _flash - delta)
 
 	var status: StatusController = _character.status
@@ -89,6 +101,61 @@ func _process(delta: float) -> void:
 	counter_bubble.visible = status.has_status(StatusController.Type.COUNTER)
 	_update_overhead()
 	_update_cast_indicator()
+
+
+## Hit feedback: flash, hitstop, damage number, sparks, camera shake.
+func _on_damaged(amount: float) -> void:
+	_flash = 0.12
+	var heavy: bool = amount >= 15.0
+	model.hitstop(0.09 if heavy else 0.05)
+	var at: Vector3 = _character.global_position
+	CombatFx.damage_number(_character, at + Vector3.UP * 2.3, amount, Color(1.0, 0.85, 0.3) if heavy else Color.WHITE)
+	CombatFx.burst(_character, at + Vector3.UP * 1.0, Color(1.0, 0.9, 0.6), 0.9 if heavy else 0.6)
+	var camera := get_viewport().get_camera_3d() as ArenaCamera
+	if camera != null:
+		if _role == Role.LOCAL_PLAYER:
+			camera.shake(0.35 if heavy else 0.18)
+		elif heavy:
+			camera.shake(0.12)
+
+
+func _build_health_bar() -> void:
+	var image := Image.create(BAR_WIDTH_PX, BAR_HEIGHT_PX, false, Image.FORMAT_RGBA8)
+	image.fill(Color.WHITE)
+	_hp_bar_texture = ImageTexture.create_from_image(image)
+	var back := _bar_sprite(Color(0.05, 0.05, 0.08, 0.85), 0)
+	back.scale = Vector3(1.04, 1.4, 1.0)
+	_hp_recoverable = _bar_sprite(Color(0.85, 0.85, 0.85, 0.55), 1)
+	_hp_fill = _bar_sprite(Color.WHITE, 2)
+
+
+func _bar_sprite(color: Color, priority: int) -> Sprite3D:
+	var sprite := Sprite3D.new()
+	sprite.texture = _hp_bar_texture
+	sprite.pixel_size = 0.01
+	sprite.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	sprite.no_depth_test = true
+	sprite.shaded = false
+	sprite.modulate = color
+	sprite.render_priority = priority
+	sprite.centered = false
+	sprite.offset = Vector2(-BAR_WIDTH_PX / 2.0, -BAR_HEIGHT_PX / 2.0)
+	sprite.region_enabled = true
+	sprite.region_rect = Rect2(0, 0, BAR_WIDTH_PX, BAR_HEIGHT_PX)
+	sprite.position = Vector3(0, BAR_HEIGHT, 0)
+	_character.add_child(sprite)
+	return sprite
+
+
+func _update_health_bar() -> void:
+	var health: HealthComponent = _character.health
+	var alive: bool = not _character.is_dead()
+	_hp_fill.visible = alive
+	_hp_recoverable.visible = alive
+	var w: float = BAR_WIDTH_PX * clampf(health.current_health / health.max_health, 0.0, 1.0)
+	var w_rec: float = BAR_WIDTH_PX * clampf((health.current_health + health.recoverable_health) / health.max_health, 0.0, 1.0)
+	_hp_fill.region_rect = Rect2(0, 0, maxf(w, 0.01), BAR_HEIGHT_PX)
+	_hp_recoverable.region_rect = Rect2(0, 0, maxf(w_rec, 0.01), BAR_HEIGHT_PX)
 
 
 func _update_overhead() -> void:

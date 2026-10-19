@@ -14,6 +14,7 @@ extends Camera3D
 @export var follow_smoothing: float = 0.0
 
 var _focus: Vector3 = Vector3.ZERO
+var _trauma: float = 0.0
 
 
 func _ready() -> void:
@@ -32,6 +33,20 @@ func _physics_process(delta: float) -> void:
 	else:
 		_focus = _focus.lerp(desired, 1.0 - exp(-follow_smoothing * delta))
 	_apply()
+
+
+## Screen shake (0..1). Decays quickly; presentation only.
+func shake(amount: float) -> void:
+	_trauma = clampf(_trauma + amount, 0.0, 1.0)
+
+
+func _process(delta: float) -> void:
+	if _trauma <= 0.0:
+		return
+	_trauma = maxf(0.0, _trauma - delta * 2.5)
+	var strength: float = _trauma * _trauma * 0.6
+	h_offset = randf_range(-1.0, 1.0) * strength
+	v_offset = randf_range(-1.0, 1.0) * strength
 
 
 func _cursor_offset() -> Vector3:
