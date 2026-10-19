@@ -11,7 +11,8 @@ CHANGELOG="${3:-}"
 GODOT="${GODOT:-godot}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$ROOT/build/publish"
-BASE_URL="http://$HOST/naruto-clash/"
+# PUBLIC_URL (e.g. https://ninjabattle.fr/naruto-clash/) overrides the IP URL.
+BASE_URL="${PUBLIC_URL:-http://$HOST/naruto-clash/}"
 
 cd "$ROOT"
 mkdir -p "$OUT" build/game

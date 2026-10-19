@@ -4,6 +4,7 @@
 #   sudo bash vps_setup.sh --inventory                 # show what is on the box, change nothing
 #   sudo bash vps_setup.sh --deploy-key "ssh-ed25519 AAAA... ci"          # install
 #   sudo bash vps_setup.sh --wipe --deploy-key "ssh-ed25519 AAAA... ci"   # clean first, then install
+#   sudo bash vps_setup.sh --https ninjabattle.fr      # only add HTTPS (Let's Encrypt) for a domain
 #
 # Installs: nginx (serves launcher updates on :80 /naruto-clash/), Godot headless,
 # two game servers as systemd services (1v1 on UDP 7777, 2v2 on UDP 7778),
@@ -16,12 +17,14 @@ WWW=/var/www/naruto-clash
 WIPE=0
 INVENTORY=0
 DEPLOY_KEY=""
+DOMAIN=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --wipe) WIPE=1 ;;
     --inventory) INVENTORY=1 ;;
     --deploy-key) DEPLOY_KEY="$2"; shift ;;
+    --https) DOMAIN="$2"; shift ;;
     *) echo "Unknown option $1"; exit 1 ;;
   esac
   shift
@@ -160,6 +163,59 @@ NGINX
   echo "Launcher update URL: http://<this server>/naruto-clash/"
 }
 
+# HTTPS for a domain pointing at this box. The plain-HTTP site on the IP
+# stays as it is (installed launchers use it); the domain gets a Let's
+# Encrypt certificate and redirects HTTP -> HTTPS.
+setup_https() {
+  local domain="$1"
+  export DEBIAN_FRONTEND=noninteractive
+  apt-get update -qq
+  apt-get install -y -qq certbot >/dev/null
+  install -d /var/www/acme
+  cat > /etc/nginx/sites-available/ninja-domain <<NGINX
+server {
+    listen 80;
+    listen [::]:80;
+    server_name $domain www.$domain;
+    location /.well-known/acme-challenge/ { root /var/www/acme; }
+    location / { return 301 https://$domain\$request_uri; }
+}
+NGINX
+  ln -sf /etc/nginx/sites-available/ninja-domain /etc/nginx/sites-enabled/ninja-domain
+  nginx -t
+  systemctl reload nginx
+  ufw allow 443/tcp || true
+  certbot certonly --webroot -w /var/www/acme -d "$domain" -d "www.$domain" \
+    --non-interactive --agree-tos --register-unsafely-without-email --keep-until-expiring
+  cat > /etc/nginx/sites-available/ninja-domain-tls <<NGINX
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name $domain www.$domain;
+    ssl_certificate /etc/letsencrypt/live/$domain/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/$domain/privkey.pem;
+    root $WWW;
+    index index.html;
+    location = /naruto-clash { return 301 /naruto-clash/; }
+    location /naruto-clash/ {
+        alias $WWW/;
+        index index.html;
+        location ~ version\.json\$ { add_header Cache-Control "no-cache"; }
+    }
+    location ~ version\.json\$ { add_header Cache-Control "no-cache"; }
+}
+NGINX
+  ln -sf /etc/nginx/sites-available/ninja-domain-tls /etc/nginx/sites-enabled/ninja-domain-tls
+  nginx -t
+  systemctl reload nginx
+  # Renewals (certbot timer) reload nginx to pick up the new certificate.
+  install -d /etc/letsencrypt/renewal-hooks/deploy
+  printf '#!/bin/sh\nsystemctl reload nginx\n' > /etc/letsencrypt/renewal-hooks/deploy/reload-nginx
+  chmod +x /etc/letsencrypt/renewal-hooks/deploy/reload-nginx
+  echo "HTTPS ready: https://$domain/"
+}
+
+if [[ -n "$DOMAIN" ]]; then setup_https "$DOMAIN"; exit 0; fi
 if [[ $INVENTORY -eq 1 ]]; then inventory; exit 0; fi
 if [[ $WIPE -eq 1 ]]; then inventory; wipe; fi
 setup_naruto

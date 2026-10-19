@@ -14,6 +14,10 @@ on:
         description: "Type WIPE to confirm the wipe"
         type: string
         default: ""
+      https_domain:
+        description: "Only set up HTTPS for this domain (leave empty for a full setup)"
+        type: string
+        default: ""
 
 jobs:
   setup:
@@ -27,6 +31,7 @@ jobs:
       DEPLOY_KEY: ${{ secrets.VPS_SSH_KEY }}
       WIPE: ${{ inputs.wipe }}
       CONFIRM: ${{ inputs.confirm }}
+      HTTPS_DOMAIN: ${{ inputs.https_domain }}
     steps:
       - uses: actions/checkout@v4
 
@@ -61,11 +66,15 @@ jobs:
           $SSH "$ROOT_USER@$HOST" "$SUDO pkill -f vps_setu[p].sh; $SUDO pkill -x apt-get; sleep 2; $SUDO rm -f /var/cache/apt/*.bin; true"
           $SCP deploy/vps_setup.sh deploy.pub "$ROOT_USER@$HOST:/tmp/"
           FLAGS='--deploy-key "$(cat /tmp/deploy.pub)"'
-          if [ "$WIPE" = "true" ]; then
+          if [ -n "$HTTPS_DOMAIN" ]; then
+            $SSH "$ROOT_USER@$HOST" "$SUDO bash /tmp/vps_setup.sh --https '$HTTPS_DOMAIN'"
+          elif [ "$WIPE" = "true" ]; then
             $SSH "$ROOT_USER@$HOST" "echo WIPE | $SUDO bash /tmp/vps_setup.sh --wipe $FLAGS"
           else
             $SSH "$ROOT_USER@$HOST" "$SUDO bash /tmp/vps_setup.sh $FLAGS"
           fi
 
       - name: Check web server
-        run: curl -fsS "http://$HOST/" && echo "VPS ready"
+        run: |
+          curl -fsS "http://$HOST/" >/dev/null && echo "VPS ready"
+          if [ -n "$HTTPS_DOMAIN" ]; then curl -fsSI "https://$HTTPS_DOMAIN/" && echo "HTTPS ready"; fi
