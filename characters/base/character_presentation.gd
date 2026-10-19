@@ -159,14 +159,13 @@ func _update_health_bar() -> void:
 
 
 func _update_overhead() -> void:
-	var lines: PackedStringArray = [_character.data.display_name]
-	var abilities: AbilityController = _character.abilities
-	if abilities.is_casting():
-		lines.append(abilities.current.display_name)
-	var status_text: String = _character.status.describe()
-	if status_text != "":
-		lines.append(status_text)
-	overhead.text = "\n".join(lines)
+	# Only what you can't read from the body: name and crowd control.
+	var text: String = _character.data.display_name.get_slice(" ", 0)
+	if _character.status.has_status(StatusController.Type.STUN):
+		text = "STUN"
+	elif _character.status.has_status(StatusController.Type.ROOT):
+		text = "ROOT"
+	overhead.text = text
 
 
 ## Telegraph: during startup, show where the jutsu is aimed and how far it reaches.

@@ -179,6 +179,7 @@ func _build_scoreboard(root: Control) -> void:
 		for i in GameSession.rounds_to_win:
 			var pip := Panel.new()
 			pip.custom_minimum_size = Vector2(14, 14)
+			pip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 			pip.add_theme_stylebox_override("panel", UiStyle.panel(Color(1, 1, 1, 0.12), 7, Color(0, 0, 0, 0), 0))
 			side.add_child(pip)
 			if team == 0:
