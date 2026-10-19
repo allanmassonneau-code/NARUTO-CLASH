@@ -48,13 +48,13 @@ jobs:
       - name: Run vps_setup.sh on the VPS
         run: |
           OPTS="-o StrictHostKeyChecking=accept-new"
-          # Password first (works on a fresh Hetzner reset), key otherwise.
-          if [ -n "$ROOT_PASSWORD" ]; then
+          # Root key first, root password as fallback.
+          if [ -n "$ROOT_KEY" ]; then
+            SSH="ssh $OPTS -i $HOME/.ssh/root"; SCP="scp $OPTS -i $HOME/.ssh/root"
+          else
             export SSHPASS="$ROOT_PASSWORD"
             OPTS="$OPTS -o PreferredAuthentications=password,keyboard-interactive -o PubkeyAuthentication=no"
             SSH="sshpass -e ssh $OPTS"; SCP="sshpass -e scp $OPTS"
-          else
-            SSH="ssh $OPTS -i $HOME/.ssh/root"; SCP="scp $OPTS -i $HOME/.ssh/root"
           fi
           SUDO=""; [ "$ROOT_USER" = "root" ] || SUDO="sudo"
           $SCP deploy/vps_setup.sh deploy.pub "$ROOT_USER@$HOST:/tmp/"
