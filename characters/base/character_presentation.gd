@@ -77,20 +77,20 @@ func _process(delta: float) -> void:
 		tint = Color(0.1, 0.1, 0.1, 0.6)
 	elif status.has_status(StatusController.Type.STUN):
 		tint = Color(1.0, 0.9, 0.2, 0.45)
-		pose = &"stunned"
+		pose = &"stunned:"
 	elif status.has_status(StatusController.Type.ROOT):
 		tint = Color(0.4, 0.3, 0.15, 0.35)
 	if status.has_status(StatusController.Type.IMMATERIAL):
 		fade = 0.65
-	if abilities.is_casting():
-		var kind: AbilityData.Kind = abilities.current.kind
-		if kind == AbilityData.Kind.COUNTER or kind == AbilityData.Kind.SELF_HEAL:
-			pose = &"guard"
-		elif abilities.phase == AbilityController.Phase.STARTUP:
-			pose = &"windup"
-			tint = Color(abilities.current.color, 0.25)
+	if abilities.is_casting() and pose == &"":
+		var a: AbilityData = abilities.current
+		var anim: String = String(a.anim) if a.anim != &"" else _default_anim(a)
+		if abilities.phase == AbilityController.Phase.STARTUP:
+			pose = StringName(anim + ":windup")
+			tint = Color(a.color, 0.18)
 		else:
-			pose = &"strike"
+			pose = StringName(anim + ":strike")
+	_track_spell(delta)
 	if _flash > 0.0:
 		tint = Color(1.0, 0.15, 0.15, 0.6)
 	var planar_speed: float = Vector2(_character.velocity.x, _character.velocity.z).length()
@@ -156,6 +156,62 @@ func _update_health_bar() -> void:
 	var w_rec: float = BAR_WIDTH_PX * clampf((health.current_health + health.recoverable_health) / health.max_health, 0.0, 1.0)
 	_hp_fill.region_rect = Rect2(0, 0, maxf(w, 0.01), BAR_HEIGHT_PX)
 	_hp_recoverable.region_rect = Rect2(0, 0, maxf(w_rec, 0.01), BAR_HEIGHT_PX)
+
+
+func _default_anim(a: AbilityData) -> String:
+	match a.kind:
+		AbilityData.Kind.COUNTER:
+			return "guard"
+		AbilityData.Kind.SELF_HEAL:
+			return "heal"
+		AbilityData.Kind.DASH:
+			return "dash"
+		AbilityData.Kind.PROJECTILE:
+			return "throw"
+		AbilityData.Kind.GROUND_AREA:
+			return "seal"
+	return "jab"
+
+
+## Spell effects follow the cast phases (works for local, server-mirrored
+## and puppet fighters since it only reads the synced cast state).
+var _spell_ability: AbilityData
+var _spell_phase: int = AbilityController.Phase.IDLE
+var _spell_held: Node3D
+var _afterimage_timer: float = 0.0
+
+
+func _track_spell(delta: float) -> void:
+	var abilities: AbilityController = _character.abilities
+	var a: AbilityData = abilities.current
+	var phase: int = abilities.phase
+	if a != _spell_ability:
+		if _spell_ability != null:
+			# Previous cast ended (finished, cancelled or interrupted).
+			var interrupted: bool = _spell_phase == AbilityController.Phase.STARTUP
+			SpellVfx.on_end(_character, _spell_ability, _spell_held, interrupted)
+			_spell_held = null
+		_spell_ability = a
+		_spell_phase = AbilityController.Phase.IDLE
+		if a != null and phase == AbilityController.Phase.STARTUP:
+			_spell_held = SpellVfx.on_startup(_character, a, model)
+	if a == null:
+		_spell_phase = phase
+		return
+	if phase != _spell_phase:
+		if _spell_phase == AbilityController.Phase.IDLE and phase != AbilityController.Phase.STARTUP and _spell_held == null:
+			_spell_held = SpellVfx.on_startup(_character, a, model)  # startup was too short to observe
+		if phase == AbilityController.Phase.ACTIVE:
+			SpellVfx.on_active(_character, a, _spell_held)
+		if phase == AbilityController.Phase.RECOVERY and _spell_phase == AbilityController.Phase.ACTIVE:
+			SpellVfx.on_end(_character, a, _spell_held, false)
+			_spell_held = null
+		_spell_phase = phase
+	if phase == AbilityController.Phase.ACTIVE and a.kind == AbilityData.Kind.DASH:
+		_afterimage_timer -= delta
+		if _afterimage_timer <= 0.0:
+			_afterimage_timer = 0.035
+			SpellVfx.afterimage(_character, a.color)
 
 
 func _update_overhead() -> void:

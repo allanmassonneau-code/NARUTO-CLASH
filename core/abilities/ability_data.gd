@@ -10,6 +10,11 @@ enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL }
 @export var kind: Kind = Kind.MELEE_ARC
 @export var color: Color = Color.WHITE
 @export var icon: Texture2D
+## Presentation: body pose ("jab", "kick", "slash", "palm", "chidori",
+## "seal", "breath", "stomp", "throw", "guard", "heal", "dash", "leap"...).
+@export var anim: StringName = &""
+## Presentation: spell effect id used by SpellVfx ("rasengan", "chidori"...).
+@export var vfx: StringName = &""
 
 @export_category("Frame Data")
 @export var startup_time: float = 0.1

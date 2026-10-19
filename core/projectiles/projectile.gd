@@ -43,20 +43,17 @@ static func spawn_visual(from: CombatCharacter, data: AbilityData, at: Vector3, 
 func _ready() -> void:
 	add_to_group(&"projectiles")
 	add_to_group(&"round_entities")
-	if not CombatFx.is_enabled():
-		return
-	var mesh := SphereMesh.new()
-	mesh.radius = ability.hit_radius
-	mesh.height = ability.hit_radius * 2.0
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = ability.color
-	mat.emission_enabled = true
-	mat.emission = ability.color
-	mat.emission_energy_multiplier = 0.6
-	mesh.material = mat
-	var view := MeshInstance3D.new()
-	view.mesh = mesh
-	add_child(view)
+	SpellVfx.projectile_visual(self)
+
+
+func _process(delta: float) -> void:
+	SpellVfx.projectile_tick(self, delta)
+
+
+## Client: the server says this projectile is gone (hit or wall).
+func impact() -> void:
+	SpellVfx.projectile_impact(self, global_position, ability)
+	queue_free()
 
 
 func _physics_process(delta: float) -> void:
@@ -89,8 +86,8 @@ func _physics_process(delta: float) -> void:
 
 func _expire(at: Vector3) -> void:
 	if visual_only:
-		queue_free()
+		queue_free()  # the server's despawn triggers impact() on clients
 		return
 	Net.on_entity_despawned(net_id)
-	CombatFx.ring(self, HitQuery.flat(at), ability.hit_radius + 0.3, ability.color, 0.2)
+	SpellVfx.projectile_impact(self, at, ability)
 	queue_free()

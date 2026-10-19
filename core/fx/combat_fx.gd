@@ -30,18 +30,8 @@ static func arc(anchor: Node, origin: Vector3, direction: Vector3, radius: float
 	Net.broadcast_fx(Net.Fx.ARC, origin, direction, radius, degrees, color)
 	if not is_enabled():
 		return
-	var im := ImmediateMesh.new()
-	im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
-	var half: float = deg_to_rad(degrees) * 0.5
-	var steps: int = 12
-	for i in steps:
-		var a0: float = -half + (2.0 * half) * i / steps
-		var a1: float = -half + (2.0 * half) * (i + 1) / steps
-		im.surface_add_vertex(Vector3(0.0, 0.05, 0.0))
-		im.surface_add_vertex(direction.rotated(Vector3.UP, a0) * radius + Vector3.UP * 0.05)
-		im.surface_add_vertex(direction.rotated(Vector3.UP, a1) * radius + Vector3.UP * 0.05)
-	im.surface_end()
-	_spawn(anchor, im, Transform3D(Basis.IDENTITY, HitQuery.flat(origin)), Color(color, 0.45), life)
+	# Narrow or long swings are the heavy finishers.
+	SpellVfx.swipe(anchor, origin, direction, radius, degrees, color, degrees <= 60.0 or radius >= 2.3)
 
 
 ## Kawarimi placeholder: a brown log left where the character was.
@@ -49,6 +39,7 @@ static func log_decoy(anchor: Node, at: Vector3) -> void:
 	Net.broadcast_fx(Net.Fx.LOG, at, Vector3.ZERO, 0.0, 0.0, Color.WHITE)
 	if not is_enabled():
 		return
+	SpellVfx.smoke(anchor, at, 0.9)
 	var box := BoxMesh.new()
 	box.size = Vector3(0.5, 1.4, 0.5)
 	_spawn(anchor, box, Transform3D(Basis.IDENTITY, HitQuery.flat(at) + Vector3.UP * 0.7), Color(0.55, 0.35, 0.18), 1.2)

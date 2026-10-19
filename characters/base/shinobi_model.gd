@@ -26,6 +26,8 @@ var _arm_r: Node3D
 var _elbow_l: Node3D
 var _elbow_r: Node3D
 var _sword: Node3D
+var _hand_r: Node3D
+var _hand_l: Node3D
 var _cycle: float = 0.0
 var _time: float = 0.0
 var _freeze: float = 0.0
@@ -56,6 +58,8 @@ func build(look: ShinobiLook) -> void:
 	_build_head(look)
 	if look.weapon == ShinobiLook.Weapon.SWORD:
 		_build_sword()
+	elif look.weapon == ShinobiLook.Weapon.KUNAI:
+		_build_kunai()
 
 
 ## Short visual freeze on hits (hitstop): sells the impact.
@@ -63,7 +67,50 @@ func hitstop(duration: float) -> void:
 	_freeze = maxf(_freeze, duration)
 
 
+## Per-jutsu poses: rotations (x, y, z) per joint, applied over the
+## locomotion pose and blended. "<anim>:windup" during startup,
+## "<anim>:strike" during active/recovery. "hips" is a height offset.
+const POSES: Dictionary = {
+	"jab:windup": {"torso": Vector3(-0.1, 0.45, 0), "arm_r": Vector3(0.5, 0, 0.4), "elbow_r": Vector3(-1.7, 0, 0), "arm_l": Vector3(-1.1, 0, -0.3), "elbow_l": Vector3(-1.2, 0, 0)},
+	"jab:strike": {"torso": Vector3(-0.3, -0.4, 0), "arm_r": Vector3(-1.6, 0, -0.1), "elbow_r": Vector3(-0.05, 0, 0), "arm_l": Vector3(0.3, 0, -0.3), "elbow_l": Vector3(-1.3, 0, 0), "leg_l": Vector3(-0.5, 0, 0), "leg_r": Vector3(0.4, 0, 0)},
+	"hook:windup": {"torso": Vector3(-0.1, -0.45, 0), "arm_l": Vector3(0.5, 0, -0.4), "elbow_l": Vector3(-1.7, 0, 0), "arm_r": Vector3(-1.1, 0, 0.3), "elbow_r": Vector3(-1.2, 0, 0)},
+	"hook:strike": {"torso": Vector3(-0.3, 0.45, 0), "arm_l": Vector3(-1.5, 0, 0.5), "elbow_l": Vector3(-0.3, 0, 0), "arm_r": Vector3(0.3, 0, 0.3), "elbow_r": Vector3(-1.3, 0, 0), "leg_r": Vector3(-0.5, 0, 0), "leg_l": Vector3(0.4, 0, 0)},
+	"kick:windup": {"torso": Vector3(0.2, 0.5, 0), "leg_r": Vector3(0.7, 0, 0), "knee_r": Vector3(-1.5, 0, 0), "arm_l": Vector3(-0.8, 0, -0.6), "arm_r": Vector3(0.4, 0, 0.5)},
+	"kick:strike": {"torso": Vector3(0.35, -0.3, 0), "leg_r": Vector3(-1.5, 0, 0), "knee_r": Vector3(0, 0, 0), "leg_l": Vector3(0.2, 0, 0), "arm_l": Vector3(0.3, 0, -1.0), "arm_r": Vector3(0.3, 0, 1.0), "hips": 0.06},
+	"slash:windup": {"torso": Vector3(-0.1, 0.7, 0), "arm_r": Vector3(-1.2, 0, 1.3), "elbow_r": Vector3(-0.6, 0, 0), "arm_l": Vector3(-0.6, 0, -0.5)},
+	"slash:strike": {"torso": Vector3(-0.3, -0.7, 0), "arm_r": Vector3(-1.3, 0, -0.7), "elbow_r": Vector3(-0.1, 0, 0), "arm_l": Vector3(0.4, 0, -0.6), "leg_l": Vector3(-0.5, 0, 0), "leg_r": Vector3(0.4, 0, 0)},
+	"slash2:windup": {"torso": Vector3(-0.1, -0.6, 0), "arm_r": Vector3(-0.6, 0, -0.8), "elbow_r": Vector3(-1.2, 0, 0)},
+	"slash2:strike": {"torso": Vector3(-0.3, 0.7, 0), "arm_r": Vector3(-1.4, 0, 1.2), "elbow_r": Vector3(-0.05, 0, 0), "arm_l": Vector3(0.3, 0, -0.5), "leg_r": Vector3(-0.5, 0, 0), "leg_l": Vector3(0.4, 0, 0)},
+	"thrust:windup": {"torso": Vector3(0.05, 0.6, 0), "arm_r": Vector3(0.6, 0, 0.3), "elbow_r": Vector3(-1.8, 0, 0), "arm_l": Vector3(-1.3, 0, -0.2), "elbow_l": Vector3(-0.2, 0, 0), "hips": -0.08},
+	"thrust:strike": {"torso": Vector3(-0.55, -0.2, 0), "arm_r": Vector3(-1.65, 0, 0), "elbow_r": Vector3(0, 0, 0), "arm_l": Vector3(0.6, 0, -0.4), "leg_l": Vector3(-0.9, 0, 0), "knee_l": Vector3(-0.6, 0, 0), "leg_r": Vector3(0.7, 0, 0), "hips": -0.14},
+	"palm:windup": {"torso": Vector3(-0.1, 0.25, 0), "arm_r": Vector3(-1.3, 0, 0.1), "elbow_r": Vector3(-0.7, 0, 0), "arm_l": Vector3(-1.1, 0, 0.55), "elbow_l": Vector3(-1.1, 0, 0), "hips": -0.06},
+	"palm:strike": {"torso": Vector3(-0.5, -0.15, 0), "arm_r": Vector3(-1.6, 0, 0), "elbow_r": Vector3(0, 0, 0), "arm_l": Vector3(0.5, 0, -0.5), "leg_l": Vector3(-0.8, 0, 0), "knee_l": Vector3(-0.5, 0, 0), "leg_r": Vector3(0.8, 0, 0), "hips": -0.12},
+	"chidori:windup": {"torso": Vector3(-0.35, 0.5, 0), "arm_r": Vector3(0.6, 0, 0.35), "elbow_r": Vector3(-0.3, 0, 0), "arm_l": Vector3(-0.9, 0, 0.5), "elbow_l": Vector3(-1.4, 0, 0), "leg_l": Vector3(-0.6, 0, 0), "knee_l": Vector3(-0.7, 0, 0), "leg_r": Vector3(0.5, 0, 0), "hips": -0.18},
+	"chidori:strike": {"torso": Vector3(-0.65, -0.1, 0), "arm_r": Vector3(-1.7, 0, 0), "elbow_r": Vector3(0, 0, 0), "arm_l": Vector3(0.8, 0, -0.3), "leg_l": Vector3(-1.0, 0, 0), "knee_l": Vector3(-0.4, 0, 0), "leg_r": Vector3(0.9, 0, 0), "hips": -0.16},
+	"seal:windup": {"torso": Vector3(-0.05, 0, 0), "arm_r": Vector3(-1.05, 0, -0.55), "elbow_r": Vector3(-1.7, 0, 0), "arm_l": Vector3(-1.05, 0, 0.55), "elbow_l": Vector3(-1.7, 0, 0), "head": Vector3(0.15, 0, 0)},
+	"seal:strike": {"torso": Vector3(-0.2, 0, 0), "arm_r": Vector3(-1.5, 0, 0.3), "elbow_r": Vector3(-0.2, 0, 0), "arm_l": Vector3(-1.5, 0, -0.3), "elbow_l": Vector3(-0.2, 0, 0)},
+	"breath:windup": {"torso": Vector3(0.2, 0, 0), "arm_r": Vector3(-1.05, 0, -0.55), "elbow_r": Vector3(-1.8, 0, 0), "arm_l": Vector3(-1.05, 0, 0.55), "elbow_l": Vector3(-1.8, 0, 0), "head": Vector3(-0.2, 0, 0)},
+	"breath:strike": {"torso": Vector3(-0.35, 0, 0), "arm_r": Vector3(-1.3, 0, -0.35), "elbow_r": Vector3(-2.0, 0, 0), "arm_l": Vector3(-1.3, 0, 0.35), "elbow_l": Vector3(-2.0, 0, 0), "head": Vector3(0.1, 0, 0)},
+	"stomp:windup": {"torso": Vector3(0.25, 0, 0), "leg_r": Vector3(-1.7, 0, 0), "knee_r": Vector3(-0.2, 0, 0), "arm_r": Vector3(-2.4, 0, 0.2), "elbow_r": Vector3(-0.2, 0, 0), "arm_l": Vector3(0.2, 0, -0.8), "hips": 0.08},
+	"stomp:strike": {"torso": Vector3(-0.6, 0, 0), "leg_r": Vector3(-0.3, 0, 0), "knee_r": Vector3(-0.4, 0, 0), "leg_l": Vector3(0.6, 0, 0), "knee_l": Vector3(-1.2, 0, 0), "arm_r": Vector3(-0.9, 0, 0), "elbow_r": Vector3(0, 0, 0), "arm_l": Vector3(0.4, 0, -0.9), "hips": -0.28},
+	"throw:windup": {"torso": Vector3(0, 0.6, 0), "arm_r": Vector3(0.2, 0, 1.2), "elbow_r": Vector3(-1.0, 0, 0), "arm_l": Vector3(-1.2, 0, -0.2)},
+	"throw:strike": {"torso": Vector3(-0.3, -0.5, 0), "arm_r": Vector3(-1.5, 0, -0.4), "elbow_r": Vector3(0, 0, 0), "arm_l": Vector3(0.3, 0, -0.4), "leg_l": Vector3(-0.5, 0, 0)},
+	"guard:windup": {"arm_r": Vector3(-1.2, 0, -0.6), "arm_l": Vector3(-1.2, 0, 0.6), "elbow_r": Vector3(-1.3, 0, 0), "elbow_l": Vector3(-1.3, 0, 0), "hips": -0.1},
+	"guard:strike": {"arm_r": Vector3(-1.2, 0, -0.6), "arm_l": Vector3(-1.2, 0, 0.6), "elbow_r": Vector3(-1.3, 0, 0), "elbow_l": Vector3(-1.3, 0, 0), "hips": -0.1},
+	"heal:windup": {"torso": Vector3(-0.15, 0, 0), "arm_r": Vector3(-1.2, 0, 0.15), "elbow_r": Vector3(-0.5, 0, 0), "arm_l": Vector3(-1.2, 0, -0.15), "elbow_l": Vector3(-0.5, 0, 0), "head": Vector3(0.25, 0, 0)},
+	"heal:strike": {"torso": Vector3(0.1, 0, 0), "arm_r": Vector3(-2.6, 0, -0.4), "elbow_r": Vector3(-0.1, 0, 0), "arm_l": Vector3(-2.6, 0, 0.4), "elbow_l": Vector3(-0.1, 0, 0), "head": Vector3(-0.2, 0, 0)},
+	"dash:windup": {"torso": Vector3(-0.5, 0, 0), "arm_r": Vector3(0.9, 0, 0.3), "arm_l": Vector3(0.9, 0, -0.3), "hips": -0.12},
+	"dash:strike": {"torso": Vector3(-0.7, 0, 0), "arm_r": Vector3(1.2, 0, 0.2), "arm_l": Vector3(1.2, 0, -0.2), "elbow_r": Vector3(-0.2, 0, 0), "elbow_l": Vector3(-0.2, 0, 0), "leg_l": Vector3(-0.8, 0, 0), "leg_r": Vector3(0.9, 0, 0)},
+	"leap:windup": {"torso": Vector3(-0.3, 0, 0), "knee_l": Vector3(-1.2, 0, 0), "knee_r": Vector3(-1.2, 0, 0), "leg_l": Vector3(-0.6, 0, 0), "leg_r": Vector3(-0.6, 0, 0), "hips": -0.25},
+	"leap:strike": {"torso": Vector3(-0.2, 0, 0), "leg_l": Vector3(-1.1, 0, 0), "knee_l": Vector3(-1.6, 0, 0), "leg_r": Vector3(-0.4, 0, 0), "knee_r": Vector3(-1.4, 0, 0), "arm_r": Vector3(-2.6, 0, 0.3), "arm_l": Vector3(-2.6, 0, -0.3), "hips": 0.6},
+	"stunned:": {"torso": Vector3(0.2, 0, 0.15), "head": Vector3(0.4, 0, 0), "arm_l": Vector3(0.2, 0, -0.6), "arm_r": Vector3(0.2, 0, 0.6), "knee_l": Vector3(-0.4, 0, 0), "knee_r": Vector3(-0.4, 0, 0), "hips": -0.08},
+}
+
+var _rig: Dictionary = {}
+
+
 ## Per-frame visual state from CharacterPresentation.
+## `pose` is "" (locomotion), "<anim>:windup", "<anim>:strike" or "stunned:".
 func animate(delta: float, planar_speed: float, pose: StringName, tint: Color, fade: float) -> void:
 	_overlay.albedo_color = tint
 	for part: GeometryInstance3D in _parts:
@@ -72,56 +119,58 @@ func animate(delta: float, planar_speed: float, pose: StringName, tint: Color, f
 		_freeze -= delta
 		return
 	_time += delta
+	if _rig.is_empty():
+		_rig = {"hips": _hips, "torso": _torso, "head": _head, "leg_l": _leg_l, "leg_r": _leg_r, "knee_l": _knee_l,
+			"knee_r": _knee_r, "arm_l": _arm_l, "arm_r": _arm_r, "elbow_l": _elbow_l, "elbow_r": _elbow_r}
 	var run: float = clampf(planar_speed / 7.0, 0.0, 1.0)
+	var casting: bool = pose != &""
+	if casting:
+		run *= 0.35
 	_cycle += delta * (3.0 + 9.5 * run)
 	var swing: float = sin(_cycle) * 0.85 * run
 	var breathe: float = sin(_time * 2.2) * 0.015 * (1.0 - run)
 
-	# Legs: hip swing + knee bend on the back-swing.
-	_leg_l.rotation.x = swing
-	_leg_r.rotation.x = -swing
-	_knee_l.rotation.x = -maxf(0.0, -sin(_cycle)) * 1.1 * run - 0.05
-	_knee_r.rotation.x = -maxf(0.0, sin(_cycle)) * 1.1 * run - 0.05
-	_hips.position.y = 0.82 + absf(sin(_cycle)) * 0.05 * run + breathe
-	# Naruto-style forward lean when sprinting, arms trailing.
-	_torso.rotation = Vector3(-0.32 * run, sin(_cycle) * 0.12 * run, 0.0)
-	_arm_l.rotation = Vector3(-swing * 0.6 + 0.35 * run, 0.0, -0.18)
-	_arm_r.rotation = Vector3(swing * 0.6 + 0.35 * run, 0.0, 0.18)
-	_elbow_l.rotation.x = -0.35 - 0.5 * run
-	_elbow_r.rotation.x = -0.35 - 0.5 * run
-	_head.rotation.x = 0.22 * run
-
-	match pose:
-		&"windup":
-			_torso.rotation.y = 0.55
-			_torso.rotation.x = -0.1
-			_arm_r.rotation = Vector3(0.6, 0.0, 0.6)
-			_elbow_r.rotation.x = -1.6
-			_arm_l.rotation = Vector3(-1.1, 0.0, -0.3)
-			_elbow_l.rotation.x = -0.4
-		&"strike":
-			_torso.rotation.y = -0.45
-			_torso.rotation.x = -0.3
-			_arm_r.rotation = Vector3(-1.6, 0.0, -0.15)
-			_elbow_r.rotation.x = -0.05
-			_arm_l.rotation = Vector3(0.4, 0.0, -0.3)
-			_elbow_l.rotation.x = -1.0
-			_leg_l.rotation.x = -0.6
-			_leg_r.rotation.x = 0.5
-		&"guard":
-			_arm_r.rotation = Vector3(-1.2, 0.0, -0.6)
-			_arm_l.rotation = Vector3(-1.2, 0.0, 0.6)
-			_elbow_r.rotation.x = -1.3
-			_elbow_l.rotation.x = -1.3
-			_hips.position.y -= 0.08
-		&"stunned":
-			_torso.rotation.z = sin(_time * 9.0) * 0.12
-			_head.rotation.x = 0.35
-			_arm_l.rotation = Vector3(0.2, 0.0, -0.5)
-			_arm_r.rotation = Vector3(0.2, 0.0, 0.5)
+	# Locomotion targets.
+	var target: Dictionary = {
+		"leg_l": Vector3(swing, 0, 0),
+		"leg_r": Vector3(-swing, 0, 0),
+		"knee_l": Vector3(-maxf(0.0, -sin(_cycle)) * 1.1 * run - 0.05, 0, 0),
+		"knee_r": Vector3(-maxf(0.0, sin(_cycle)) * 1.1 * run - 0.05, 0, 0),
+		"torso": Vector3(-0.32 * run, sin(_cycle) * 0.12 * run, 0),
+		"arm_l": Vector3(-swing * 0.6 + 0.35 * run, 0, -0.18),
+		"arm_r": Vector3(swing * 0.6 + 0.35 * run, 0, 0.18),
+		"elbow_l": Vector3(-0.35 - 0.5 * run, 0, 0),
+		"elbow_r": Vector3(-0.35 - 0.5 * run, 0, 0),
+		"head": Vector3(0.22 * run, 0, 0),
+	}
+	var hips_y: float = 0.82 + absf(sin(_cycle)) * 0.05 * run + breathe
+	var overrides: Dictionary = POSES.get(String(pose), {})
+	for key: String in overrides:
+		if key == "hips":
+			hips_y += overrides[key]
+		else:
+			target[key] = overrides[key]
+	if pose == &"stunned:":
+		target["torso"] = Vector3(0.2, 0, sin(_time * 9.0) * 0.15)
+	# Strikes snap fast, wind-ups and locomotion blend smoothly.
+	var speed: float = 40.0 if String(pose).ends_with(":strike") else 16.0
+	var k: float = 1.0 - exp(-speed * delta)
+	for key: String in target:
+		var node: Node3D = _rig[key]
+		node.rotation = node.rotation.lerp(target[key], k)
+	_hips.position.y = lerpf(_hips.position.y, hips_y, k)
 	if _sword != null:
-		# Blade follows the right hand; points forward while attacking.
-		_sword.rotation.x = -1.3 if pose == &"strike" else (-0.2 if pose == &"windup" else -0.9)
+		var striking: bool = String(pose).ends_with(":strike")
+		_sword.rotation.x = lerpf(_sword.rotation.x, -1.5 if striking else (-0.4 if casting else -0.9), k)
+
+
+## Right hand anchor (held jutsu: Rasengan, Chidori...).
+func hand_r() -> Node3D:
+	return _hand_r
+
+
+func hand_l() -> Node3D:
+	return _hand_l
 
 
 func _build_legs(look: ShinobiLook) -> void:
@@ -172,10 +221,13 @@ func _build_arms(look: ShinobiLook) -> void:
 		_capsule(elbow, Vector3(0, -0.13, 0), 0.068, 0.3, look.sleeves)
 		var hand_color: Color = look.gloves if look.gloves.a > 0.0 else look.skin
 		_sphere(elbow, Vector3(0, -0.3, 0), 0.075, hand_color)
+		var hand := _pivot(elbow, Vector3(0, -0.36, 0))
 		if arm == _arm_l:
 			_elbow_l = elbow
+			_hand_l = hand
 		else:
 			_elbow_r = elbow
+			_hand_r = hand
 
 
 func _build_head(look: ShinobiLook) -> void:
@@ -250,6 +302,15 @@ func _build_sword() -> void:
 	_cylinder(_sword, Vector3(0, 0, 0), 0.03, 0.2, Color(0.2, 0.15, 0.3))  # grip
 	_box(_sword, Vector3(0, -0.11, 0), Vector3(0.11, 0.025, 0.06), Color(0.75, 0.62, 0.3))  # guard
 	var blade := _box(_sword, Vector3(0, -0.52, 0), Vector3(0.035, 0.78, 0.012), Color(0.85, 0.88, 0.95))
+	(blade.mesh.surface_get_material(0) as StandardMaterial3D).metallic = 0.6
+
+
+func _build_kunai() -> void:
+	_sword = _pivot(_elbow_r, Vector3(0, -0.3, -0.02))
+	_cylinder(_sword, Vector3(0, 0, 0), 0.022, 0.12, Color(0.15, 0.12, 0.2))  # wrapped grip
+	var ring := _cylinder(_sword, Vector3(0, 0.08, 0), 0.03, 0.012, Color(0.6, 0.6, 0.65))
+	ring.rotation_degrees.x = 90.0
+	var blade := _spike(_sword, Vector3(0, -0.06, 0), Vector3.DOWN, 0.045, 0.24, Color(0.75, 0.78, 0.85))
 	(blade.mesh.surface_get_material(0) as StandardMaterial3D).metallic = 0.6
 
 

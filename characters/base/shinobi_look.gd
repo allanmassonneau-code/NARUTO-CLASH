@@ -3,7 +3,7 @@ extends Resource
 ## Placeholder appearance built from primitives. Presentation only.
 
 enum Hair { SPIKY, DUCK_TAIL, LONG, SWEPT }
-enum Weapon { NONE, SWORD }
+enum Weapon { NONE, SWORD, KUNAI }
 
 @export var skin: Color = Color(0.98, 0.8, 0.65)
 @export var top: Color = Color.ORANGE

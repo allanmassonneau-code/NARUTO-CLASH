@@ -360,7 +360,10 @@ func s2c_despawn_entity(id: int) -> void:
 	var entity: Variant = _entities.get(id)
 	_entities.erase(id)
 	if is_instance_valid(entity):
-		(entity as Node).queue_free()
+		if entity is Projectile:
+			(entity as Projectile).impact()
+		else:
+			(entity as Node).queue_free()
 
 
 @rpc("authority", "call_remote", "unreliable")

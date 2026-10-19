@@ -44,6 +44,7 @@ func _ready() -> void:
 	_fill = _make_disk(Color(ability.color, 0.4), 0.025)
 	_fill.scale = Vector3(0.01, 1.0, 0.01)
 	add_child(_fill)
+	SpellVfx.area_decor(self)
 
 
 func _physics_process(delta: float) -> void:
@@ -51,11 +52,14 @@ func _physics_process(delta: float) -> void:
 	if _fill != null:
 		var t: float = clampf(elapsed / maxf(ability.area_delay, 0.001), 0.01, 1.0)
 		_fill.scale = Vector3(t, 1.0, t)
+	if CombatFx.is_enabled():
+		SpellVfx.area_tick(self, delta)
 	if elapsed >= ability.area_delay:
 		_detonate()
 
 
 func _detonate() -> void:
+	SpellVfx.area_detonate(self, global_position, ability)
 	if visual_only:
 		queue_free()
 		return
@@ -69,7 +73,6 @@ func _detonate() -> void:
 			continue
 		var dir: Vector3 = HitQuery.flat(target.global_position - global_position)
 		target.receive_hit(HitData.from_ability(source, ability, dir if dir.length() > 0.01 else Vector3.FORWARD))
-	CombatFx.ring(self, global_position, ability.hit_radius, ability.color, 0.3)
 	queue_free()
 
 
