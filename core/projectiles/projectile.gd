@@ -27,6 +27,8 @@ static func spawn(from: CombatCharacter, data: AbilityData, dir: Vector3) -> Pro
 func _ready() -> void:
 	add_to_group(&"projectiles")
 	add_to_group(&"round_entities")
+	if not CombatFx.is_enabled():
+		return
 	var mesh := SphereMesh.new()
 	mesh.radius = ability.hit_radius
 	mesh.height = ability.hit_radius * 2.0

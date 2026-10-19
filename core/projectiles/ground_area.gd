@@ -23,6 +23,8 @@ static func spawn(from: CombatCharacter, data: AbilityData, point: Vector3) -> G
 func _ready() -> void:
 	add_to_group(&"ground_areas")
 	add_to_group(&"round_entities")
+	if not CombatFx.is_enabled():
+		return
 	add_child(_make_disk(Color(ability.color, 0.18), 0.015))
 	_fill = _make_disk(Color(ability.color, 0.4), 0.025)
 	_fill.scale = Vector3(0.01, 1.0, 0.01)
@@ -31,8 +33,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	elapsed += delta
-	var t: float = clampf(elapsed / maxf(ability.area_delay, 0.001), 0.01, 1.0)
-	_fill.scale = Vector3(t, 1.0, t)
+	if _fill != null:
+		var t: float = clampf(elapsed / maxf(ability.area_delay, 0.001), 0.01, 1.0)
+		_fill.scale = Vector3(t, 1.0, t)
 	if elapsed >= ability.area_delay:
 		_detonate()
 

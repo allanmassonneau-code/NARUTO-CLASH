@@ -11,6 +11,9 @@ var _mesh := ImmediateMesh.new()
 
 
 func _ready() -> void:
+	if not CombatFx.is_enabled():
+		set_process(false)
+		return
 	top_level = true
 	mesh = _mesh
 	var mat := StandardMaterial3D.new()
