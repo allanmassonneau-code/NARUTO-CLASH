@@ -1,0 +1,3248 @@
+[gd_resource type="Resource" script_class="ProgressionDatabase" load_steps=238 format=3]
+
+[ext_resource type="Script" path="res://core/progression/data/clan_data.gd" id="1_kf7su"]
+[ext_resource type="Script" path="res://core/progression/data/jutsu_data.gd" id="2_jihmj"]
+[ext_resource type="Script" path="res://core/progression/data/grade_data.gd" id="3_kruyx"]
+[ext_resource type="Script" path="res://core/progression/data/chakra_nature_data.gd" id="4_i0bhe"]
+[ext_resource type="Script" path="res://core/progression/data/progression_database.gd" id="5_b2umr"]
+[ext_resource type="Script" path="res://core/progression/data/specialization_data.gd" id="6_7w6jp"]
+[ext_resource type="Script" path="res://core/progression/data/sub_jutsu_data.gd" id="7_l4bkk"]
+[ext_resource type="Script" path="res://core/progression/data/tenketsu_node_data.gd" id="8_xmld1"]
+[ext_resource type="Script" path="res://core/progression/data/tenketsu_tree_data.gd" id="9_m7344"]
+[ext_resource type="Script" path="res://core/progression/data/village_data.gd" id="10_kjo8x"]
+
+[sub_resource type="Resource" id="Resource_7pyot"]
+script = ExtResource("2_jihmj")
+id = &"clan_senju_d_pousse_de_bois"
+display_name = "Pousse de bois"
+description = "Racines qui entravent la cible."
+source = 1
+rank = 0
+owner_id = &"clan_senju"
+chakra_cost = 14.0
+cooldown = 9.0
+tags = Array[StringName]([&"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_hsjft"]
+script = ExtResource("2_jihmj")
+id = &"clan_senju_c_mur_de_bois"
+display_name = "Mur de bois"
+description = "Rempart de bois qui protège les alliés."
+source = 1
+rank = 1
+owner_id = &"clan_senju"
+chakra_cost = 20.0
+cooldown = 12.0
+tags = Array[StringName]([&"DEFENSIVE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_ojv20"]
+script = ExtResource("2_jihmj")
+id = &"clan_senju_b_foret_naissante"
+display_name = "Forêt naissante"
+description = "Une forêt jaillit et entrave la zone."
+source = 1
+rank = 2
+owner_id = &"clan_senju"
+chakra_cost = 30.0
+cooldown = 15.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_1pyid"]
+script = ExtResource("2_jihmj")
+id = &"clan_senju_a_dragon_de_bois"
+display_name = "Dragon de bois"
+description = "Dragon qui enserre et draine le chakra."
+source = 1
+rank = 3
+owner_id = &"clan_senju"
+chakra_cost = 45.0
+cooldown = 18.0
+tags = Array[StringName]([&"CC", &"DEBUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_m10or"]
+script = ExtResource("2_jihmj")
+id = &"clan_senju_s_bouddha_aux_mille_mains"
+display_name = "Bouddha aux mille mains"
+description = "Statue colossale qui pilonne la zone."
+source = 1
+rank = 4
+owner_id = &"clan_senju"
+chakra_cost = 75.0
+cooldown = 34.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_q6ac6"]
+script = ExtResource("1_kf7su")
+id = &"clan_senju"
+display_name = "Senju"
+village_id = &"konoha"
+description = "Lignée du bois et de la vitalité."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_7pyot"), SubResource("Resource_hsjft"), SubResource("Resource_ojv20"), SubResource("Resource_1pyid"), SubResource("Resource_m10or")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_053h3"]
+script = ExtResource("2_jihmj")
+id = &"clan_uchiha_d_sharingan"
+display_name = "Sharingan"
+description = "Lit les mouvements : marque les ennemis touchés."
+source = 1
+rank = 0
+owner_id = &"clan_uchiha"
+chakra_cost = 10.0
+cooldown = 12.0
+tags = Array[StringName]([&"BUFF", &"DEBUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_rmlpg"]
+script = ExtResource("2_jihmj")
+id = &"clan_uchiha_c_corbeaux_illusoires"
+display_name = "Corbeaux illusoires"
+description = "Nuée de corbeaux qui aveugle."
+source = 1
+rank = 1
+owner_id = &"clan_uchiha"
+chakra_cost = 18.0
+cooldown = 10.0
+tags = Array[StringName]([&"CC", &"DEBUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_o5mim"]
+script = ExtResource("2_jihmj")
+id = &"clan_uchiha_b_magen__narakumi"
+display_name = "Magen : Narakumi"
+description = "Illusion qui paralyse la cible."
+source = 1
+rank = 2
+owner_id = &"clan_uchiha"
+chakra_cost = 28.0
+cooldown = 14.0
+tags = Array[StringName]([&"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_hkhtf"]
+script = ExtResource("2_jihmj")
+id = &"clan_uchiha_a_amaterasu"
+display_name = "Amaterasu"
+description = "Flammes noires qui brûlent longtemps."
+source = 1
+rank = 3
+owner_id = &"clan_uchiha"
+chakra_cost = 45.0
+cooldown = 18.0
+tags = Array[StringName]([&"RANGED", &"DOT"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_himvh"]
+script = ExtResource("2_jihmj")
+id = &"clan_uchiha_s_susanoo"
+display_name = "Susanoo"
+description = "Guerrier spectral qui protège et frappe."
+source = 1
+rank = 4
+owner_id = &"clan_uchiha"
+chakra_cost = 75.0
+cooldown = 36.0
+tags = Array[StringName]([&"DEFENSIVE", &"BUFF", &"MELEE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_x70cm"]
+script = ExtResource("1_kf7su")
+id = &"clan_uchiha"
+display_name = "Uchiha"
+village_id = &"konoha"
+description = "Sharingan, feu et illusions."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_053h3"), SubResource("Resource_rmlpg"), SubResource("Resource_o5mim"), SubResource("Resource_hkhtf"), SubResource("Resource_himvh")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_wrxny"]
+script = ExtResource("2_jihmj")
+id = &"clan_uzumaki_d_sceau_d_entrave"
+display_name = "Sceau d'entrave"
+description = "Sceau au sol qui fige l'ennemi."
+source = 1
+rank = 0
+owner_id = &"clan_uzumaki"
+chakra_cost = 12.0
+cooldown = 9.0
+tags = Array[StringName]([&"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_mo3gl"]
+script = ExtResource("2_jihmj")
+id = &"clan_uzumaki_c_chaines_de_chakra"
+display_name = "Chaînes de chakra"
+description = "Chaînes qui attirent la cible."
+source = 1
+rank = 1
+owner_id = &"clan_uzumaki"
+chakra_cost = 20.0
+cooldown = 11.0
+tags = Array[StringName]([&"CC", &"RANGED"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_le7yc"]
+script = ExtResource("2_jihmj")
+id = &"clan_uzumaki_b_vitalite_uzumaki"
+display_name = "Vitalité Uzumaki"
+description = "Régénère rapidement les PV."
+source = 1
+rank = 2
+owner_id = &"clan_uzumaki"
+chakra_cost = 25.0
+cooldown = 18.0
+tags = Array[StringName]([&"HEAL", &"BUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_1tnj7"]
+script = ExtResource("2_jihmj")
+id = &"clan_uzumaki_a_sceau_des_quatre_symboles"
+display_name = "Sceau des quatre symboles"
+description = "Scelle les techniques de la cible."
+source = 1
+rank = 3
+owner_id = &"clan_uzumaki"
+chakra_cost = 40.0
+cooldown = 20.0
+tags = Array[StringName]([&"DEBUFF", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_roepx"]
+script = ExtResource("2_jihmj")
+id = &"clan_uzumaki_s_prison_adamantine"
+display_name = "Prison adamantine"
+description = "Barrière de chaînes qui emprisonne une zone."
+source = 1
+rank = 4
+owner_id = &"clan_uzumaki"
+chakra_cost = 70.0
+cooldown = 32.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_ngutn"]
+script = ExtResource("1_kf7su")
+id = &"clan_uzumaki"
+display_name = "Uzumaki"
+village_id = &"konoha"
+description = "Sceaux et vitalité hors norme."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_wrxny"), SubResource("Resource_mo3gl"), SubResource("Resource_le7yc"), SubResource("Resource_1tnj7"), SubResource("Resource_roepx")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_25mgu"]
+script = ExtResource("2_jihmj")
+id = &"clan_nara_d_possession_des_ombres"
+display_name = "Possession des ombres"
+description = "Lie l'ombre de la cible à la sienne."
+source = 1
+rank = 0
+owner_id = &"clan_nara"
+chakra_cost = 14.0
+cooldown = 10.0
+tags = Array[StringName]([&"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_kls4i"]
+script = ExtResource("2_jihmj")
+id = &"clan_nara_c_etranglement_des_ombres"
+display_name = "Étranglement des ombres"
+description = "Étrangle la cible immobilisée."
+source = 1
+rank = 1
+owner_id = &"clan_nara"
+chakra_cost = 20.0
+cooldown = 10.0
+tags = Array[StringName]([&"DOT", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_cofk0"]
+script = ExtResource("2_jihmj")
+id = &"clan_nara_b_couture_des_ombres"
+display_name = "Couture des ombres"
+description = "Aiguilles d'ombre qui transpercent plusieurs ennemis."
+source = 1
+rank = 2
+owner_id = &"clan_nara"
+chakra_cost = 30.0
+cooldown = 14.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_wx3wh"]
+script = ExtResource("2_jihmj")
+id = &"clan_nara_a_rassemblement_des_ombres"
+display_name = "Rassemblement des ombres"
+description = "Attire et lie tous les ennemis proches."
+source = 1
+rank = 3
+owner_id = &"clan_nara"
+chakra_cost = 45.0
+cooldown = 18.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_ieurq"]
+script = ExtResource("2_jihmj")
+id = &"clan_nara_s_domaine_des_ombres"
+display_name = "Domaine des ombres"
+description = "L'arène entière devient piège d'ombres."
+source = 1
+rank = 4
+owner_id = &"clan_nara"
+chakra_cost = 70.0
+cooldown = 34.0
+tags = Array[StringName]([&"AOE", &"CC", &"CHANNELING"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_t53yu"]
+script = ExtResource("1_kf7su")
+id = &"clan_nara"
+display_name = "Nara"
+village_id = &"konoha"
+description = "Manipulation des ombres."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_25mgu"), SubResource("Resource_kls4i"), SubResource("Resource_cofk0"), SubResource("Resource_wx3wh"), SubResource("Resource_ieurq")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_4mj44"]
+script = ExtResource("2_jihmj")
+id = &"clan_akimichi_d_expansion"
+display_name = "Expansion"
+description = "Grossit : plus de PV et de recul."
+source = 1
+rank = 0
+owner_id = &"clan_akimichi"
+chakra_cost = 12.0
+cooldown = 12.0
+tags = Array[StringName]([&"BUFF", &"DEFENSIVE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_u4wur"]
+script = ExtResource("2_jihmj")
+id = &"clan_akimichi_c_char_humain"
+display_name = "Char humain"
+description = "Roule à grande vitesse et renverse."
+source = 1
+rank = 1
+owner_id = &"clan_akimichi"
+chakra_cost = 20.0
+cooldown = 10.0
+tags = Array[StringName]([&"DASH", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_pfg0m"]
+script = ExtResource("2_jihmj")
+id = &"clan_akimichi_b_poing_geant"
+display_name = "Poing géant"
+description = "Bras géant qui écrase devant soi."
+source = 1
+rank = 2
+owner_id = &"clan_akimichi"
+chakra_cost = 28.0
+cooldown = 11.0
+tags = Array[StringName]([&"MELEE", &"AOE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_ele2g"]
+script = ExtResource("2_jihmj")
+id = &"clan_akimichi_a_pilule_de_sur_expansion"
+display_name = "Pilule de sur-expansion"
+description = "Forme géante temporaire."
+source = 1
+rank = 3
+owner_id = &"clan_akimichi"
+chakra_cost = 40.0
+cooldown = 22.0
+tags = Array[StringName]([&"BUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_3nfsw"]
+script = ExtResource("2_jihmj")
+id = &"clan_akimichi_s_mode_papillon"
+display_name = "Mode papillon"
+description = "Ailes de chakra : puissance démesurée."
+source = 1
+rank = 4
+owner_id = &"clan_akimichi"
+chakra_cost = 70.0
+cooldown = 36.0
+tags = Array[StringName]([&"BUFF", &"MELEE", &"MOVEMENT"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_lvjbm"]
+script = ExtResource("1_kf7su")
+id = &"clan_akimichi"
+display_name = "Akimichi"
+village_id = &"konoha"
+description = "Expansion corporelle et force brute."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_4mj44"), SubResource("Resource_u4wur"), SubResource("Resource_pfg0m"), SubResource("Resource_ele2g"), SubResource("Resource_3nfsw")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_n8535"]
+script = ExtResource("2_jihmj")
+id = &"clan_roran_d_pulsation_de_la_veine"
+display_name = "Pulsation de la veine"
+description = "Onde de chakra qui repousse."
+source = 1
+rank = 0
+owner_id = &"clan_roran"
+chakra_cost = 12.0
+cooldown = 8.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_t6ucy"]
+script = ExtResource("2_jihmj")
+id = &"clan_roran_c_mirage_du_desert"
+display_name = "Mirage du désert"
+description = "Mirage qui crée des leurres."
+source = 1
+rank = 1
+owner_id = &"clan_roran"
+chakra_cost = 18.0
+cooldown = 12.0
+tags = Array[StringName]([&"DEFENSIVE", &"BUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_0jm1o"]
+script = ExtResource("2_jihmj")
+id = &"clan_roran_b_sceau_de_roran"
+display_name = "Sceau de Rōran"
+description = "Sceau qui réduit les dégâts reçus par les alliés."
+source = 1
+rank = 2
+owner_id = &"clan_roran"
+chakra_cost = 28.0
+cooldown = 16.0
+tags = Array[StringName]([&"BUFF", &"DEFENSIVE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_yhban"]
+script = ExtResource("2_jihmj")
+id = &"clan_roran_a_torrent_de_la_veine"
+display_name = "Torrent de la veine"
+description = "Flux de chakra dévastateur en ligne."
+source = 1
+rank = 3
+owner_id = &"clan_roran"
+chakra_cost = 45.0
+cooldown = 16.0
+tags = Array[StringName]([&"RANGED", &"HITSCAN"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_2q6j2"]
+script = ExtResource("2_jihmj")
+id = &"clan_roran_s_renaissance_de_la_veine"
+display_name = "Renaissance de la veine"
+description = "Ramène un allié tombé avec une partie de ses PV."
+source = 1
+rank = 4
+owner_id = &"clan_roran"
+chakra_cost = 80.0
+cooldown = 60.0
+tags = Array[StringName]([&"HEAL"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_vh3v0"]
+script = ExtResource("1_kf7su")
+id = &"clan_roran"
+display_name = "Rōran"
+village_id = &"suna"
+description = "Gardiens de la veine du dragon."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_n8535"), SubResource("Resource_t6ucy"), SubResource("Resource_0jm1o"), SubResource("Resource_yhban"), SubResource("Resource_2q6j2")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_p8lts"]
+script = ExtResource("2_jihmj")
+id = &"clan_sabaku_d_shuriken_de_sable"
+display_name = "Shuriken de sable"
+description = "Salve de shuriken de sable."
+source = 1
+rank = 0
+owner_id = &"clan_sabaku"
+chakra_cost = 10.0
+cooldown = 5.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_ab3u0"]
+script = ExtResource("2_jihmj")
+id = &"clan_sabaku_c_cercueil_de_sable"
+display_name = "Cercueil de sable"
+description = "Enveloppe et immobilise la cible."
+source = 1
+rank = 1
+owner_id = &"clan_sabaku"
+chakra_cost = 22.0
+cooldown = 12.0
+tags = Array[StringName]([&"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_0gx4w"]
+script = ExtResource("2_jihmj")
+id = &"clan_sabaku_b_armure_de_sable"
+display_name = "Armure de sable"
+description = "Bouclier qui absorbe les dégâts."
+source = 1
+rank = 2
+owner_id = &"clan_sabaku"
+chakra_cost = 28.0
+cooldown = 16.0
+tags = Array[StringName]([&"DEFENSIVE", &"BUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_4rgmb"]
+script = ExtResource("2_jihmj")
+id = &"clan_sabaku_a_enterrement_du_desert"
+display_name = "Enterrement du désert"
+description = "Écrase la cible prisonnière du sable."
+source = 1
+rank = 3
+owner_id = &"clan_sabaku"
+chakra_cost = 45.0
+cooldown = 18.0
+tags = Array[StringName]([&"CC", &"AOE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_gjlar"]
+script = ExtResource("2_jihmj")
+id = &"clan_sabaku_s_tsunami_de_sable"
+display_name = "Tsunami de sable"
+description = "Vague de sable qui engloutit l'arène."
+source = 1
+rank = 4
+owner_id = &"clan_sabaku"
+chakra_cost = 75.0
+cooldown = 34.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_b46cl"]
+script = ExtResource("1_kf7su")
+id = &"clan_sabaku"
+display_name = "Sabaku"
+village_id = &"suna"
+description = "Maîtres du sable."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_p8lts"), SubResource("Resource_ab3u0"), SubResource("Resource_0gx4w"), SubResource("Resource_4rgmb"), SubResource("Resource_gjlar")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_q661i"]
+script = ExtResource("2_jihmj")
+id = &"clan_hoki_d_transfert_de_chakra"
+display_name = "Transfert de chakra"
+description = "Donne du chakra à un allié."
+source = 1
+rank = 0
+owner_id = &"clan_hoki"
+chakra_cost = 10.0
+cooldown = 10.0
+tags = Array[StringName]([&"BUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_ms5b3"]
+script = ExtResource("2_jihmj")
+id = &"clan_hoki_c_lien_mental"
+display_name = "Lien mental"
+description = "Relie deux alliés : dégâts partagés."
+source = 1
+rank = 1
+owner_id = &"clan_hoki"
+chakra_cost = 18.0
+cooldown = 14.0
+tags = Array[StringName]([&"DEFENSIVE", &"BUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_o1pjp"]
+script = ExtResource("2_jihmj")
+id = &"clan_hoki_b_sceau_de_soutien"
+display_name = "Sceau de soutien"
+description = "Augmente les dégâts de l'équipe."
+source = 1
+rank = 2
+owner_id = &"clan_hoki"
+chakra_cost = 28.0
+cooldown = 18.0
+tags = Array[StringName]([&"BUFF", &"AOE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_rraht"]
+script = ExtResource("2_jihmj")
+id = &"clan_hoki_a_esprit_partage"
+display_name = "Esprit partagé"
+description = "Les alliés voient les télégraphes plus tôt."
+source = 1
+rank = 3
+owner_id = &"clan_hoki"
+chakra_cost = 40.0
+cooldown = 24.0
+tags = Array[StringName]([&"BUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_0csq2"]
+script = ExtResource("2_jihmj")
+id = &"clan_hoki_s_connaissance_absolue"
+display_name = "Connaissance absolue"
+description = "Réduit tous les temps de recharge de l'équipe."
+source = 1
+rank = 4
+owner_id = &"clan_hoki"
+chakra_cost = 70.0
+cooldown = 40.0
+tags = Array[StringName]([&"BUFF", &"AOE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_fem53"]
+script = ExtResource("1_kf7su")
+id = &"clan_hoki"
+display_name = "Hōki"
+village_id = &"suna"
+description = "Transmission et partage du chakra."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_q661i"), SubResource("Resource_ms5b3"), SubResource("Resource_o1pjp"), SubResource("Resource_rraht"), SubResource("Resource_0csq2")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_v087x"]
+script = ExtResource("2_jihmj")
+id = &"clan_kugutsu_d_fils_de_chakra"
+display_name = "Fils de chakra"
+description = "Fils qui attirent et ralentissent."
+source = 1
+rank = 0
+owner_id = &"clan_kugutsu"
+chakra_cost = 10.0
+cooldown = 7.0
+tags = Array[StringName]([&"CC", &"RANGED"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_kjol1"]
+script = ExtResource("2_jihmj")
+id = &"clan_kugutsu_c_marionnette_karasu"
+display_name = "Marionnette Karasu"
+description = "Marionnette qui attaque à distance."
+source = 1
+rank = 1
+owner_id = &"clan_kugutsu"
+chakra_cost = 20.0
+cooldown = 10.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_ib250"]
+script = ExtResource("2_jihmj")
+id = &"clan_kugutsu_b_lames_empoisonnees"
+display_name = "Lames empoisonnées"
+description = "Lames qui empoisonnent."
+source = 1
+rank = 2
+owner_id = &"clan_kugutsu"
+chakra_cost = 26.0
+cooldown = 11.0
+tags = Array[StringName]([&"MELEE", &"DOT"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_hpli2"]
+script = ExtResource("2_jihmj")
+id = &"clan_kugutsu_a_marionnette_bouclier"
+display_name = "Marionnette bouclier"
+description = "Marionnette qui protège de face."
+source = 1
+rank = 3
+owner_id = &"clan_kugutsu"
+chakra_cost = 40.0
+cooldown = 18.0
+tags = Array[StringName]([&"DEFENSIVE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_5byjr"]
+script = ExtResource("2_jihmj")
+id = &"clan_kugutsu_s_armee_des_cent_marionnettes"
+display_name = "Armée des cent marionnettes"
+description = "Cent marionnettes envahissent l'arène."
+source = 1
+rank = 4
+owner_id = &"clan_kugutsu"
+chakra_cost = 75.0
+cooldown = 36.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_7x4jy"]
+script = ExtResource("1_kf7su")
+id = &"clan_kugutsu"
+display_name = "Kugutsu"
+village_id = &"suna"
+description = "Marionnettistes."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_v087x"), SubResource("Resource_kjol1"), SubResource("Resource_ib250"), SubResource("Resource_hpli2"), SubResource("Resource_5byjr")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_doe7n"]
+script = ExtResource("2_jihmj")
+id = &"clan_hakumei_d_eclat_de_l_aube"
+display_name = "Éclat de l'aube"
+description = "Éclair lumineux qui aveugle."
+source = 1
+rank = 0
+owner_id = &"clan_hakumei"
+chakra_cost = 12.0
+cooldown = 8.0
+tags = Array[StringName]([&"CC", &"RANGED"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_t0sek"]
+script = ExtResource("2_jihmj")
+id = &"clan_hakumei_c_voile_crepusculaire"
+display_name = "Voile crépusculaire"
+description = "Rend invisible quelques instants."
+source = 1
+rank = 1
+owner_id = &"clan_hakumei"
+chakra_cost = 18.0
+cooldown = 14.0
+tags = Array[StringName]([&"MOVEMENT", &"DEFENSIVE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_th435"]
+script = ExtResource("2_jihmj")
+id = &"clan_hakumei_b_rayon_d_aurore"
+display_name = "Rayon d'aurore"
+description = "Rayon de lumière perforant."
+source = 1
+rank = 2
+owner_id = &"clan_hakumei"
+chakra_cost = 28.0
+cooldown = 11.0
+tags = Array[StringName]([&"RANGED", &"HITSCAN"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_vwu87"]
+script = ExtResource("2_jihmj")
+id = &"clan_hakumei_a_brume_de_l_aube"
+display_name = "Brume de l'aube"
+description = "Zone lumineuse qui soigne les alliés."
+source = 1
+rank = 3
+owner_id = &"clan_hakumei"
+chakra_cost = 40.0
+cooldown = 18.0
+tags = Array[StringName]([&"HEAL", &"AOE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_y2xx8"]
+script = ExtResource("2_jihmj")
+id = &"clan_hakumei_s_aube_eternelle"
+display_name = "Aube éternelle"
+description = "Lumière écrasante qui étourdit l'arène."
+source = 1
+rank = 4
+owner_id = &"clan_hakumei"
+chakra_cost = 70.0
+cooldown = 34.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_coipi"]
+script = ExtResource("1_kf7su")
+id = &"clan_hakumei"
+display_name = "Hakumei"
+village_id = &"suna"
+description = "Lumière de l'aube et illusions solaires."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_doe7n"), SubResource("Resource_t0sek"), SubResource("Resource_th435"), SubResource("Resource_vwu87"), SubResource("Resource_y2xx8")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_r8rm7"]
+script = ExtResource("2_jihmj")
+id = &"clan_chinoike_d_ketsuryugan"
+display_name = "Ketsuryūgan"
+description = "Yeux de sang : les coups saignent."
+source = 1
+rank = 0
+owner_id = &"clan_chinoike"
+chakra_cost = 12.0
+cooldown = 12.0
+tags = Array[StringName]([&"BUFF", &"DOT"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_kv0f0"]
+script = ExtResource("2_jihmj")
+id = &"clan_chinoike_c_lame_de_sang"
+display_name = "Lame de sang"
+description = "Lame de sang durci."
+source = 1
+rank = 1
+owner_id = &"clan_chinoike"
+chakra_cost = 18.0
+cooldown = 7.0
+tags = Array[StringName]([&"MELEE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_o4d0b"]
+script = ExtResource("2_jihmj")
+id = &"clan_chinoike_b_ebullition_du_sang"
+display_name = "Ébullition du sang"
+description = "Fait bouillir le sang de la cible."
+source = 1
+rank = 2
+owner_id = &"clan_chinoike"
+chakra_cost = 28.0
+cooldown = 14.0
+tags = Array[StringName]([&"DOT", &"DEBUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_y04ml"]
+script = ExtResource("2_jihmj")
+id = &"clan_chinoike_a_genjutsu_sanglant"
+display_name = "Genjutsu sanglant"
+description = "Illusion qui terrifie."
+source = 1
+rank = 3
+owner_id = &"clan_chinoike"
+chakra_cost = 42.0
+cooldown = 18.0
+tags = Array[StringName]([&"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_mf7m7"]
+script = ExtResource("2_jihmj")
+id = &"clan_chinoike_s_lune_de_sang"
+display_name = "Lune de sang"
+description = "Œil maudit qui paralyse et vide la vie."
+source = 1
+rank = 4
+owner_id = &"clan_chinoike"
+chakra_cost = 75.0
+cooldown = 36.0
+tags = Array[StringName]([&"AOE", &"CC", &"DOT"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_6urth"]
+script = ExtResource("1_kf7su")
+id = &"clan_chinoike"
+display_name = "Chinoike"
+village_id = &"ame"
+description = "Ketsuryūgan et sang."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_r8rm7"), SubResource("Resource_kv0f0"), SubResource("Resource_o4d0b"), SubResource("Resource_y04ml"), SubResource("Resource_mf7m7")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_addlh"]
+script = ExtResource("2_jihmj")
+id = &"clan_fuma_d_fuma_shuriken"
+display_name = "Fūma shuriken"
+description = "Grand shuriken qui revient."
+source = 1
+rank = 0
+owner_id = &"clan_fuma"
+chakra_cost = 10.0
+cooldown = 6.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_l3q1b"]
+script = ExtResource("2_jihmj")
+id = &"clan_fuma_c_moulin_geant"
+display_name = "Moulin géant"
+description = "Shuriken tournoyant autour de soi."
+source = 1
+rank = 1
+owner_id = &"clan_fuma"
+chakra_cost = 18.0
+cooldown = 9.0
+tags = Array[StringName]([&"AOE", &"MELEE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_h4ob3"]
+script = ExtResource("2_jihmj")
+id = &"clan_fuma_b_tempete_de_lames"
+display_name = "Tempête de lames"
+description = "Pluie de shuriken sur une zone."
+source = 1
+rank = 2
+owner_id = &"clan_fuma"
+chakra_cost = 28.0
+cooldown = 12.0
+tags = Array[StringName]([&"AOE", &"RANGED"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_8bne3"]
+script = ExtResource("2_jihmj")
+id = &"clan_fuma_a_ombre_de_shuriken"
+display_name = "Ombre de shuriken"
+description = "Shuriken caché dans l'ombre d'un autre."
+source = 1
+rank = 3
+owner_id = &"clan_fuma"
+chakra_cost = 40.0
+cooldown = 14.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_3qqq7"]
+script = ExtResource("2_jihmj")
+id = &"clan_fuma_s_danse_des_mille_lames"
+display_name = "Danse des mille lames"
+description = "Mille shuriken balaient l'arène."
+source = 1
+rank = 4
+owner_id = &"clan_fuma"
+chakra_cost = 70.0
+cooldown = 32.0
+tags = Array[StringName]([&"AOE", &"RANGED"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_topwy"]
+script = ExtResource("1_kf7su")
+id = &"clan_fuma"
+display_name = "Fūma"
+village_id = &"ame"
+description = "Maîtres des grands shuriken."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_addlh"), SubResource("Resource_l3q1b"), SubResource("Resource_h4ob3"), SubResource("Resource_8bne3"), SubResource("Resource_3qqq7")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_0ip6x"]
+script = ExtResource("2_jihmj")
+id = &"clan_salamandre_d_poison_de_salamandre"
+display_name = "Poison de salamandre"
+description = "Poison qui ronge les PV."
+source = 1
+rank = 0
+owner_id = &"clan_salamandre"
+chakra_cost = 10.0
+cooldown = 7.0
+tags = Array[StringName]([&"DOT", &"RANGED"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_spogl"]
+script = ExtResource("2_jihmj")
+id = &"clan_salamandre_c_ibuse"
+display_name = "Ibuse"
+description = "Invoque la salamandre géante."
+source = 1
+rank = 1
+owner_id = &"clan_salamandre"
+chakra_cost = 22.0
+cooldown = 16.0
+tags = Array[StringName]([&"AOE", &"DOT"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_thsc2"]
+script = ExtResource("2_jihmj")
+id = &"clan_salamandre_b_brume_toxique"
+display_name = "Brume toxique"
+description = "Nuage empoisonné persistant."
+source = 1
+rank = 2
+owner_id = &"clan_salamandre"
+chakra_cost = 28.0
+cooldown = 14.0
+tags = Array[StringName]([&"AOE", &"DOT", &"DEBUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_hxhw1"]
+script = ExtResource("2_jihmj")
+id = &"clan_salamandre_a_kusarigama_de_hanzo"
+display_name = "Kusarigama de Hanzō"
+description = "Faucille enchaînée empoisonnée."
+source = 1
+rank = 3
+owner_id = &"clan_salamandre"
+chakra_cost = 40.0
+cooldown = 14.0
+tags = Array[StringName]([&"MELEE", &"RANGED", &"DOT"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_rawp0"]
+script = ExtResource("2_jihmj")
+id = &"clan_salamandre_s_gardien_ibuse"
+display_name = "Gardien Ibuse"
+description = "Ibuse protège et empoisonne la zone."
+source = 1
+rank = 4
+owner_id = &"clan_salamandre"
+chakra_cost = 70.0
+cooldown = 34.0
+tags = Array[StringName]([&"AOE", &"DEFENSIVE", &"DOT"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_ycy12"]
+script = ExtResource("1_kf7su")
+id = &"clan_salamandre"
+display_name = "Salamandre"
+village_id = &"ame"
+description = "Poison et invocation d'Ibuse."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_0ip6x"), SubResource("Resource_spogl"), SubResource("Resource_thsc2"), SubResource("Resource_hxhw1"), SubResource("Resource_rawp0")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_n3kg8"]
+script = ExtResource("2_jihmj")
+id = &"clan_kaguya_d_balles_d_os"
+display_name = "Balles d'os"
+description = "Tire des fragments d'os."
+source = 1
+rank = 0
+owner_id = &"clan_kaguya"
+chakra_cost = 10.0
+cooldown = 5.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_uso6r"]
+script = ExtResource("2_jihmj")
+id = &"clan_kaguya_c_danse_du_camelia"
+display_name = "Danse du camélia"
+description = "Épée d'os rapide."
+source = 1
+rank = 1
+owner_id = &"clan_kaguya"
+chakra_cost = 16.0
+cooldown = 6.0
+tags = Array[StringName]([&"MELEE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_u5lnr"]
+script = ExtResource("2_jihmj")
+id = &"clan_kaguya_b_danse_du_saule"
+display_name = "Danse du saule"
+description = "Os qui jaillissent de tout le corps."
+source = 1
+rank = 2
+owner_id = &"clan_kaguya"
+chakra_cost = 26.0
+cooldown = 12.0
+tags = Array[StringName]([&"AOE", &"COUNTER"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_dn5b2"]
+script = ExtResource("2_jihmj")
+id = &"clan_kaguya_a_danse_du_meleze"
+display_name = "Danse du mélèze"
+description = "Armure d'os acérée."
+source = 1
+rank = 3
+owner_id = &"clan_kaguya"
+chakra_cost = 40.0
+cooldown = 16.0
+tags = Array[StringName]([&"DEFENSIVE", &"MELEE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_mljrt"]
+script = ExtResource("2_jihmj")
+id = &"clan_kaguya_s_foret_d_os"
+display_name = "Forêt d'os"
+description = "Forêt de lances d'os en zone."
+source = 1
+rank = 4
+owner_id = &"clan_kaguya"
+chakra_cost = 72.0
+cooldown = 34.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_t0ogo"]
+script = ExtResource("1_kf7su")
+id = &"clan_kaguya"
+display_name = "Kaguya"
+village_id = &"ame"
+description = "Shikotsumyaku : manipulation des os."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_n3kg8"), SubResource("Resource_uso6r"), SubResource("Resource_u5lnr"), SubResource("Resource_dn5b2"), SubResource("Resource_mljrt")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_ncqe5"]
+script = ExtResource("2_jihmj")
+id = &"clan_kami_d_papillons_de_papier"
+display_name = "Papillons de papier"
+description = "Nuée qui aveugle et suit la cible."
+source = 1
+rank = 0
+owner_id = &"clan_kami"
+chakra_cost = 10.0
+cooldown = 7.0
+tags = Array[StringName]([&"RANGED", &"DEBUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_lmos6"]
+script = ExtResource("2_jihmj")
+id = &"clan_kami_c_lances_de_papier"
+display_name = "Lances de papier"
+description = "Lances de papier tranchant."
+source = 1
+rank = 1
+owner_id = &"clan_kami"
+chakra_cost = 18.0
+cooldown = 8.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_y2blt"]
+script = ExtResource("2_jihmj")
+id = &"clan_kami_b_ailes_de_papier"
+display_name = "Ailes de papier"
+description = "Envol qui rend insaisissable."
+source = 1
+rank = 2
+owner_id = &"clan_kami"
+chakra_cost = 26.0
+cooldown = 14.0
+tags = Array[StringName]([&"MOVEMENT", &"DEFENSIVE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_0swp4"]
+script = ExtResource("2_jihmj")
+id = &"clan_kami_a_clone_de_papier"
+display_name = "Clone de papier"
+description = "Clone qui explose."
+source = 1
+rank = 3
+owner_id = &"clan_kami"
+chakra_cost = 40.0
+cooldown = 16.0
+tags = Array[StringName]([&"AOE", &"DEFENSIVE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_yo3j6"]
+script = ExtResource("2_jihmj")
+id = &"clan_kami_s_mer_de_papier"
+display_name = "Mer de papier"
+description = "Océan de papier qui ensevelit l'arène."
+source = 1
+rank = 4
+owner_id = &"clan_kami"
+chakra_cost = 75.0
+cooldown = 36.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_56jk5"]
+script = ExtResource("1_kf7su")
+id = &"clan_kami"
+display_name = "Kami"
+village_id = &"ame"
+description = "Origami de chakra."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_ncqe5"), SubResource("Resource_lmos6"), SubResource("Resource_y2blt"), SubResource("Resource_0swp4"), SubResource("Resource_yo3j6")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_3jw1b"]
+script = ExtResource("2_jihmj")
+id = &"clan_hozuki_d_liquefaction"
+display_name = "Liquéfaction"
+description = "Devient eau : esquive les coups."
+source = 1
+rank = 0
+owner_id = &"clan_hozuki"
+chakra_cost = 12.0
+cooldown = 10.0
+tags = Array[StringName]([&"DEFENSIVE", &"MOVEMENT"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_761mk"]
+script = ExtResource("2_jihmj")
+id = &"clan_hozuki_c_balle_d_eau"
+display_name = "Balle d'eau"
+description = "Tir d'eau sous pression."
+source = 1
+rank = 1
+owner_id = &"clan_hozuki"
+chakra_cost = 12.0
+cooldown = 5.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_5catp"]
+script = ExtResource("2_jihmj")
+id = &"clan_hozuki_b_bras_gonfle"
+display_name = "Bras gonflé"
+description = "Bras hypertrophié qui écrase."
+source = 1
+rank = 2
+owner_id = &"clan_hozuki"
+chakra_cost = 22.0
+cooldown = 9.0
+tags = Array[StringName]([&"MELEE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_7khff"]
+script = ExtResource("2_jihmj")
+id = &"clan_hozuki_a_corps_d_eau"
+display_name = "Corps d'eau"
+description = "Intangible pendant plusieurs secondes."
+source = 1
+rank = 3
+owner_id = &"clan_hozuki"
+chakra_cost = 38.0
+cooldown = 20.0
+tags = Array[StringName]([&"DEFENSIVE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_1tmmf"]
+script = ExtResource("2_jihmj")
+id = &"clan_hozuki_s_dragon_d_eau_colossal"
+display_name = "Dragon d'eau colossal"
+description = "Se transforme en dragon d'eau."
+source = 1
+rank = 4
+owner_id = &"clan_hozuki"
+chakra_cost = 70.0
+cooldown = 34.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_i8fov"]
+script = ExtResource("1_kf7su")
+id = &"clan_hozuki"
+display_name = "Hōzuki"
+village_id = &"kiri"
+description = "Corps liquide."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_3jw1b"), SubResource("Resource_761mk"), SubResource("Resource_5catp"), SubResource("Resource_7khff"), SubResource("Resource_1tmmf")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_djmvr"]
+script = ExtResource("2_jihmj")
+id = &"clan_hoshigaki_d_peau_de_requin"
+display_name = "Peau de requin"
+description = "Réduit les dégâts reçus."
+source = 1
+rank = 0
+owner_id = &"clan_hoshigaki"
+chakra_cost = 10.0
+cooldown = 12.0
+tags = Array[StringName]([&"DEFENSIVE", &"BUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_iqboq"]
+script = ExtResource("2_jihmj")
+id = &"clan_hoshigaki_c_absorption_de_chakra"
+display_name = "Absorption de chakra"
+description = "Vole le chakra au contact."
+source = 1
+rank = 1
+owner_id = &"clan_hoshigaki"
+chakra_cost = 16.0
+cooldown = 8.0
+tags = Array[StringName]([&"MELEE", &"DEBUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_fye0q"]
+script = ExtResource("2_jihmj")
+id = &"clan_hoshigaki_b_charge_du_requin"
+display_name = "Charge du requin"
+description = "Plongée qui percute."
+source = 1
+rank = 2
+owner_id = &"clan_hoshigaki"
+chakra_cost = 26.0
+cooldown = 10.0
+tags = Array[StringName]([&"DASH", &"MELEE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_sfvkq"]
+script = ExtResource("2_jihmj")
+id = &"clan_hoshigaki_a_fusion_requin"
+display_name = "Fusion requin"
+description = "Forme de requin : vitesse et dégâts."
+source = 1
+rank = 3
+owner_id = &"clan_hoshigaki"
+chakra_cost = 40.0
+cooldown = 20.0
+tags = Array[StringName]([&"BUFF", &"MOVEMENT"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_m0mjb"]
+script = ExtResource("2_jihmj")
+id = &"clan_hoshigaki_s_mille_requins"
+display_name = "Mille requins"
+description = "Banc de requins qui dévore l'arène."
+source = 1
+rank = 4
+owner_id = &"clan_hoshigaki"
+chakra_cost = 72.0
+cooldown = 34.0
+tags = Array[StringName]([&"AOE", &"DEBUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_e4ixo"]
+script = ExtResource("1_kf7su")
+id = &"clan_hoshigaki"
+display_name = "Hoshigaki"
+village_id = &"kiri"
+description = "Hommes-requins."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_djmvr"), SubResource("Resource_iqboq"), SubResource("Resource_fye0q"), SubResource("Resource_sfvkq"), SubResource("Resource_m0mjb")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_spu6y"]
+script = ExtResource("2_jihmj")
+id = &"clan_yuki_d_senbon_de_glace"
+display_name = "Senbon de glace"
+description = "Aiguilles de glace qui ralentissent."
+source = 1
+rank = 0
+owner_id = &"clan_yuki"
+chakra_cost = 10.0
+cooldown = 5.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE", &"DEBUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_uc5km"]
+script = ExtResource("2_jihmj")
+id = &"clan_yuki_c_miroirs_de_glace"
+display_name = "Miroirs de glace"
+description = "Cage de miroirs autour de la cible."
+source = 1
+rank = 1
+owner_id = &"clan_yuki"
+chakra_cost = 22.0
+cooldown = 14.0
+tags = Array[StringName]([&"CC", &"AOE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_xh70j"]
+script = ExtResource("2_jihmj")
+id = &"clan_yuki_b_lances_de_glace"
+display_name = "Lances de glace"
+description = "Lances qui jaillissent du sol."
+source = 1
+rank = 2
+owner_id = &"clan_yuki"
+chakra_cost = 28.0
+cooldown = 11.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_dgi8j"]
+script = ExtResource("2_jihmj")
+id = &"clan_yuki_a_prison_de_glace"
+display_name = "Prison de glace"
+description = "Gèle la cible sur place."
+source = 1
+rank = 3
+owner_id = &"clan_yuki"
+chakra_cost = 40.0
+cooldown = 16.0
+tags = Array[StringName]([&"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_1648s"]
+script = ExtResource("2_jihmj")
+id = &"clan_yuki_s_dragon_noir_de_glace"
+display_name = "Dragon noir de glace"
+description = "Dragon de glace qui gèle la zone."
+source = 1
+rank = 4
+owner_id = &"clan_yuki"
+chakra_cost = 72.0
+cooldown = 34.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_r8j4i"]
+script = ExtResource("1_kf7su")
+id = &"clan_yuki"
+display_name = "Yuki"
+village_id = &"kiri"
+description = "Hyōton : la glace."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_spu6y"), SubResource("Resource_uc5km"), SubResource("Resource_xh70j"), SubResource("Resource_dgi8j"), SubResource("Resource_1648s")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_xnj7b"]
+script = ExtResource("2_jihmj")
+id = &"clan_karatachi_d_corail"
+display_name = "Corail"
+description = "Corail qui enracine la cible."
+source = 1
+rank = 0
+owner_id = &"clan_karatachi"
+chakra_cost = 12.0
+cooldown = 9.0
+tags = Array[StringName]([&"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_eaoef"]
+script = ExtResource("2_jihmj")
+id = &"clan_karatachi_c_miroir_d_eau"
+display_name = "Miroir d'eau"
+description = "Renvoie la prochaine technique."
+source = 1
+rank = 1
+owner_id = &"clan_karatachi"
+chakra_cost = 20.0
+cooldown = 14.0
+tags = Array[StringName]([&"COUNTER", &"DEFENSIVE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_oanwl"]
+script = ExtResource("2_jihmj")
+id = &"clan_karatachi_b_baton_a_crochets"
+display_name = "Bâton à crochets"
+description = "Frappe qui attire."
+source = 1
+rank = 2
+owner_id = &"clan_karatachi"
+chakra_cost = 24.0
+cooldown = 9.0
+tags = Array[StringName]([&"MELEE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_cnklt"]
+script = ExtResource("2_jihmj")
+id = &"clan_karatachi_a_sceau_de_corail"
+display_name = "Sceau de corail"
+description = "Corail qui pétrifie en zone."
+source = 1
+rank = 3
+owner_id = &"clan_karatachi"
+chakra_cost = 40.0
+cooldown = 18.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_bso48"]
+script = ExtResource("2_jihmj")
+id = &"clan_karatachi_s_reflexion_totale"
+display_name = "Réflexion totale"
+description = "Copie la dernière technique ennemie."
+source = 1
+rank = 4
+owner_id = &"clan_karatachi"
+chakra_cost = 70.0
+cooldown = 34.0
+tags = Array[StringName]([&"COUNTER", &"BUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_ecbps"]
+script = ExtResource("1_kf7su")
+id = &"clan_karatachi"
+display_name = "Karatachi"
+village_id = &"kiri"
+description = "Corail et miroirs d'eau."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_xnj7b"), SubResource("Resource_eaoef"), SubResource("Resource_oanwl"), SubResource("Resource_cnklt"), SubResource("Resource_bso48")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_3i0it"]
+script = ExtResource("2_jihmj")
+id = &"clan_epeistes_d_kubikiribocho"
+display_name = "Kubikiribōchō"
+description = "Tranche lourde qui se répare en touchant."
+source = 1
+rank = 0
+owner_id = &"clan_epeistes"
+chakra_cost = 10.0
+cooldown = 6.0
+tags = Array[StringName]([&"MELEE", &"HEAL"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_f6ts8"]
+script = ExtResource("2_jihmj")
+id = &"clan_epeistes_c_kiba"
+display_name = "Kiba"
+description = "Lames de foudre jumelles."
+source = 1
+rank = 1
+owner_id = &"clan_epeistes"
+chakra_cost = 18.0
+cooldown = 8.0
+tags = Array[StringName]([&"MELEE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_quhej"]
+script = ExtResource("2_jihmj")
+id = &"clan_epeistes_b_hiramekarei"
+display_name = "Hiramekarei"
+description = "Lame de chakra étendue."
+source = 1
+rank = 2
+owner_id = &"clan_epeistes"
+chakra_cost = 26.0
+cooldown = 11.0
+tags = Array[StringName]([&"MELEE", &"AOE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_y430c"]
+script = ExtResource("2_jihmj")
+id = &"clan_epeistes_a_nuibari"
+display_name = "Nuibari"
+description = "Aiguille qui coud plusieurs ennemis ensemble."
+source = 1
+rank = 3
+owner_id = &"clan_epeistes"
+chakra_cost = 40.0
+cooldown = 16.0
+tags = Array[StringName]([&"RANGED", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_a2xhw"]
+script = ExtResource("2_jihmj")
+id = &"clan_epeistes_s_samehada"
+display_name = "Samehada"
+description = "L'épée dévore le chakra et soigne son porteur."
+source = 1
+rank = 4
+owner_id = &"clan_epeistes"
+chakra_cost = 70.0
+cooldown = 32.0
+tags = Array[StringName]([&"MELEE", &"HEAL", &"DEBUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_ujra3"]
+script = ExtResource("1_kf7su")
+id = &"clan_epeistes"
+display_name = "Épéistes"
+village_id = &"kiri"
+description = "Héritiers des sept épées de Kiri."
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_3i0it"), SubResource("Resource_f6ts8"), SubResource("Resource_quhej"), SubResource("Resource_y430c"), SubResource("Resource_a2xhw")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_d1d4n"]
+script = ExtResource("3_kruyx")
+grade = 0
+display_name = "Genin"
+base_hp = 100.0
+base_chakra = 100.0
+tenketsu_points = 2
+max_jutsu_rank = 1
+granted_choices = Array[int]([0])
+sub_jutsu_event = 0
+xp_to_next = 300
+placeholder_stats = false
+
+[sub_resource type="Resource" id="Resource_as84i"]
+script = ExtResource("3_kruyx")
+grade = 1
+display_name = "Chunin"
+base_hp = 120.0
+base_chakra = 130.0
+tenketsu_points = 2
+max_jutsu_rank = 2
+granted_choices = Array[int]([1])
+sub_jutsu_event = 1
+xp_to_next = 700
+placeholder_stats = false
+
+[sub_resource type="Resource" id="Resource_h2gb4"]
+script = ExtResource("3_kruyx")
+grade = 2
+display_name = "Konin"
+base_hp = 135.0
+base_chakra = 150.0
+tenketsu_points = 2
+max_jutsu_rank = 2
+granted_choices = Array[int]([])
+sub_jutsu_event = 0
+xp_to_next = 1300
+placeholder_stats = false
+
+[sub_resource type="Resource" id="Resource_wwphx"]
+script = ExtResource("3_kruyx")
+grade = 3
+display_name = "Tokubetsu"
+base_hp = 155.0
+base_chakra = 180.0
+tenketsu_points = 2
+max_jutsu_rank = 3
+granted_choices = Array[int]([2])
+sub_jutsu_event = 2
+xp_to_next = 2200
+placeholder_stats = false
+
+[sub_resource type="Resource" id="Resource_r7mbq"]
+script = ExtResource("3_kruyx")
+grade = 4
+display_name = "Jonin"
+base_hp = 180.0
+base_chakra = 220.0
+tenketsu_points = 2
+max_jutsu_rank = 4
+granted_choices = Array[int]([])
+sub_jutsu_event = 0
+xp_to_next = 0
+placeholder_stats = false
+
+[sub_resource type="Resource" id="Resource_unkn2"]
+script = ExtResource("2_jihmj")
+id = &"katon_d_goukakyuu"
+display_name = "Boule de feu suprême"
+description = "Grosse boule de feu qui explose à l'impact."
+source = 0
+rank = 0
+owner_id = &"katon"
+chakra_cost = 15.0
+cooldown = 6.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE", &"AOE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_5etc2"]
+script = ExtResource("2_jihmj")
+id = &"katon_d_housenka"
+display_name = "Pluie de phénix"
+description = "Salve de petites flammes guidées qui brûlent."
+source = 0
+rank = 0
+owner_id = &"katon"
+chakra_cost = 12.0
+cooldown = 5.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE", &"DOT"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_lyb0v"]
+script = ExtResource("2_jihmj")
+id = &"katon_c_ryuuka"
+display_name = "Feu du dragon"
+description = "Jet de flammes en ligne droite qui traverse."
+source = 0
+rank = 1
+owner_id = &"katon"
+chakra_cost = 20.0
+cooldown = 8.0
+tags = Array[StringName]([&"RANGED", &"HITSCAN"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_0ib4p"]
+script = ExtResource("2_jihmj")
+id = &"katon_c_haisekishou"
+display_name = "Cendres ardentes"
+description = "Nuage de cendres qui s'enflamme en zone."
+source = 0
+rank = 1
+owner_id = &"katon"
+chakra_cost = 22.0
+cooldown = 10.0
+tags = Array[StringName]([&"AOE", &"DOT", &"DEBUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_b2omo"]
+script = ExtResource("2_jihmj")
+id = &"katon_b_karyuu_endan"
+display_name = "Missile du dragon de feu"
+description = "Long dragon de feu qui laisse le sol en flammes."
+source = 0
+rank = 2
+owner_id = &"katon"
+chakra_cost = 30.0
+cooldown = 10.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE", &"DOT"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_48xf5"]
+script = ExtResource("2_jihmj")
+id = &"katon_b_bakuen"
+display_name = "Brasier"
+description = "Explosion autour de soi qui repousse."
+source = 0
+rank = 2
+owner_id = &"katon"
+chakra_cost = 28.0
+cooldown = 12.0
+tags = Array[StringName]([&"AOE", &"CC", &"DEFENSIVE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_kbn4x"]
+script = ExtResource("2_jihmj")
+id = &"katon_a_gouryuuka"
+display_name = "Grand dragon de feu"
+description = "Plusieurs dragons de feu tombent sur une zone."
+source = 0
+rank = 3
+owner_id = &"katon"
+chakra_cost = 45.0
+cooldown = 16.0
+tags = Array[StringName]([&"AOE", &"RANGED"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_gv3wl"]
+script = ExtResource("2_jihmj")
+id = &"katon_a_bakufuu_ranbu"
+display_name = "Tempête de flammes"
+description = "Tourbillon de feu canalisé qui aspire les ennemis."
+source = 0
+rank = 3
+owner_id = &"katon"
+chakra_cost = 45.0
+cooldown = 18.0
+tags = Array[StringName]([&"AOE", &"CHANNELING", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_b373x"]
+script = ExtResource("2_jihmj")
+id = &"katon_s_goka_messhitsu"
+display_name = "Annihilation des flammes"
+description = "Mur de feu gigantesque qui balaie l'arène."
+source = 0
+rank = 4
+owner_id = &"katon"
+chakra_cost = 70.0
+cooldown = 30.0
+tags = Array[StringName]([&"AOE", &"RANGED"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_ilp0f"]
+script = ExtResource("2_jihmj")
+id = &"katon_s_karura"
+display_name = "Phénix de Karura"
+description = "Phénix qui renaît une fois et brûle tout sur son passage."
+source = 0
+rank = 4
+owner_id = &"katon"
+chakra_cost = 70.0
+cooldown = 32.0
+tags = Array[StringName]([&"AOE", &"DOT", &"BUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_vk57q"]
+script = ExtResource("4_i0bhe")
+id = &"katon"
+display_name = "Katon"
+description = "Feu : dégâts en zone et brûlures."
+color = Color(1, 0.478431, 0.101961, 1)
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_unkn2"), SubResource("Resource_5etc2"), SubResource("Resource_lyb0v"), SubResource("Resource_0ib4p"), SubResource("Resource_b2omo"), SubResource("Resource_48xf5"), SubResource("Resource_kbn4x"), SubResource("Resource_gv3wl"), SubResource("Resource_b373x"), SubResource("Resource_ilp0f")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_ddur8"]
+script = ExtResource("2_jihmj")
+id = &"suiton_d_mizurappa"
+display_name = "Vague d'eau"
+description = "Vague frontale qui repousse et ralentit."
+source = 0
+rank = 0
+owner_id = &"suiton"
+chakra_cost = 12.0
+cooldown = 6.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_n1fw2"]
+script = ExtResource("2_jihmj")
+id = &"suiton_d_mizu_bunshin"
+display_name = "Clone d'eau"
+description = "Clone qui distrait et absorbe un coup."
+source = 0
+rank = 0
+owner_id = &"suiton"
+chakra_cost = 15.0
+cooldown = 10.0
+tags = Array[StringName]([&"DEFENSIVE", &"BUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_yuc5p"]
+script = ExtResource("2_jihmj")
+id = &"suiton_c_suiryuudan"
+display_name = "Dragon d'eau"
+description = "Dragon d'eau qui percute et projette."
+source = 0
+rank = 1
+owner_id = &"suiton"
+chakra_cost = 22.0
+cooldown = 9.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_qh0rl"]
+script = ExtResource("2_jihmj")
+id = &"suiton_c_suijinheki"
+display_name = "Mur d'eau"
+description = "Mur qui bloque les projectiles."
+source = 0
+rank = 1
+owner_id = &"suiton"
+chakra_cost = 20.0
+cooldown = 12.0
+tags = Array[StringName]([&"DEFENSIVE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_4nrvd"]
+script = ExtResource("2_jihmj")
+id = &"suiton_b_suikoudan"
+display_name = "Requin d'eau"
+description = "Requin qui traque la cible la plus proche."
+source = 0
+rank = 2
+owner_id = &"suiton"
+chakra_cost = 28.0
+cooldown = 10.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_g8yhf"]
+script = ExtResource("2_jihmj")
+id = &"suiton_b_suirou"
+display_name = "Prison d'eau"
+description = "Enferme une cible au contact (entrave)."
+source = 0
+rank = 2
+owner_id = &"suiton"
+chakra_cost = 30.0
+cooldown = 14.0
+tags = Array[StringName]([&"MELEE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_5s2sa"]
+script = ExtResource("2_jihmj")
+id = &"suiton_a_daibakufu"
+display_name = "Grande cascade"
+description = "Torrent qui balaie une grande zone."
+source = 0
+rank = 3
+owner_id = &"suiton"
+chakra_cost = 45.0
+cooldown = 16.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_t6xj7"]
+script = ExtResource("2_jihmj")
+id = &"suiton_a_kirigakure"
+display_name = "Brume cachée"
+description = "Brume qui masque les alliés et ralentit les ennemis."
+source = 0
+rank = 3
+owner_id = &"suiton"
+chakra_cost = 40.0
+cooldown = 20.0
+tags = Array[StringName]([&"AOE", &"BUFF", &"DEBUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_witwe"]
+script = ExtResource("2_jihmj")
+id = &"suiton_s_daikoudan"
+display_name = "Grand requin"
+description = "Requin titanesque qui dévore le chakra."
+source = 0
+rank = 4
+owner_id = &"suiton"
+chakra_cost = 70.0
+cooldown = 30.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE", &"DEBUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_1g0wl"]
+script = ExtResource("2_jihmj")
+id = &"suiton_s_suishouha"
+display_name = "Déferlante"
+description = "Raz-de-marée qui inonde l'arène."
+source = 0
+rank = 4
+owner_id = &"suiton"
+chakra_cost = 75.0
+cooldown = 34.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_3ij8n"]
+script = ExtResource("4_i0bhe")
+id = &"suiton"
+display_name = "Suiton"
+description = "Eau : contrôle, ralentissements et prisons."
+color = Color(0.301961, 0.607843, 1, 1)
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_ddur8"), SubResource("Resource_n1fw2"), SubResource("Resource_yuc5p"), SubResource("Resource_qh0rl"), SubResource("Resource_4nrvd"), SubResource("Resource_g8yhf"), SubResource("Resource_5s2sa"), SubResource("Resource_t6xj7"), SubResource("Resource_witwe"), SubResource("Resource_1g0wl")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_m8xjm"]
+script = ExtResource("2_jihmj")
+id = &"raiton_d_raikyuu"
+display_name = "Sphère de foudre"
+description = "Boule électrique rapide qui paralyse brièvement."
+source = 0
+rank = 0
+owner_id = &"raiton"
+chakra_cost = 12.0
+cooldown = 5.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_hgb24"]
+script = ExtResource("2_jihmj")
+id = &"raiton_d_jibashi"
+display_name = "Décharge"
+description = "Décharge au contact qui interrompt."
+source = 0
+rank = 0
+owner_id = &"raiton"
+chakra_cost = 10.0
+cooldown = 6.0
+tags = Array[StringName]([&"MELEE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_mrwap"]
+script = ExtResource("2_jihmj")
+id = &"raiton_c_kangekiha"
+display_name = "Onde électrique"
+description = "Arc électrique en cône."
+source = 0
+rank = 1
+owner_id = &"raiton"
+chakra_cost = 20.0
+cooldown = 8.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_wkxlj"]
+script = ExtResource("2_jihmj")
+id = &"raiton_c_raikou_senbon"
+display_name = "Aiguilles de foudre"
+description = "Pluie d'aiguilles électriques."
+source = 0
+rank = 1
+owner_id = &"raiton"
+chakra_cost = 18.0
+cooldown = 7.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE", &"DOT"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_apave"]
+script = ExtResource("2_jihmj")
+id = &"raiton_b_raiton_yoroi"
+display_name = "Armure de foudre"
+description = "Armure qui augmente la vitesse et les dégâts."
+source = 0
+rank = 2
+owner_id = &"raiton"
+chakra_cost = 30.0
+cooldown = 18.0
+tags = Array[StringName]([&"BUFF", &"MOVEMENT"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_hhy3d"]
+script = ExtResource("2_jihmj")
+id = &"raiton_b_raiga"
+display_name = "Croc de foudre"
+description = "Ruée électrique qui traverse les ennemis."
+source = 0
+rank = 2
+owner_id = &"raiton"
+chakra_cost = 28.0
+cooldown = 10.0
+tags = Array[StringName]([&"DASH", &"MELEE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_32h7y"]
+script = ExtResource("2_jihmj")
+id = &"raiton_a_raigeki_ryuu"
+display_name = "Dragon de foudre"
+description = "Dragon électrique qui enchaîne les cibles."
+source = 0
+rank = 3
+owner_id = &"raiton"
+chakra_cost = 45.0
+cooldown = 16.0
+tags = Array[StringName]([&"RANGED", &"AOE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_pu3x2"]
+script = ExtResource("2_jihmj")
+id = &"raiton_a_gian"
+display_name = "Fausse obscurité"
+description = "Rayon perforant à longue portée."
+source = 0
+rank = 3
+owner_id = &"raiton"
+chakra_cost = 42.0
+cooldown = 14.0
+tags = Array[StringName]([&"RANGED", &"HITSCAN"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_o28iy"]
+script = ExtResource("2_jihmj")
+id = &"raiton_s_kuropansa"
+display_name = "Panthère noire"
+description = "Panthère de foudre qui paralyse en zone."
+source = 0
+rank = 4
+owner_id = &"raiton"
+chakra_cost = 70.0
+cooldown = 30.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_50jq2"]
+script = ExtResource("2_jihmj")
+id = &"raiton_s_raijin_no_ken"
+display_name = "Épée du dieu du tonnerre"
+description = "Lame de foudre étendue, frappes en série."
+source = 0
+rank = 4
+owner_id = &"raiton"
+chakra_cost = 65.0
+cooldown = 28.0
+tags = Array[StringName]([&"MELEE", &"BUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_t78a5"]
+script = ExtResource("4_i0bhe")
+id = &"raiton"
+display_name = "Raiton"
+description = "Foudre : vitesse, perforation et paralysie."
+color = Color(0.623529, 0.847059, 1, 1)
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_m8xjm"), SubResource("Resource_hgb24"), SubResource("Resource_mrwap"), SubResource("Resource_wkxlj"), SubResource("Resource_apave"), SubResource("Resource_hhy3d"), SubResource("Resource_32h7y"), SubResource("Resource_pu3x2"), SubResource("Resource_o28iy"), SubResource("Resource_50jq2")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_jgbm2"]
+script = ExtResource("2_jihmj")
+id = &"doton_d_doryuuheki"
+display_name = "Mur de terre"
+description = "Mur qui bloque coups et projectiles."
+source = 0
+rank = 0
+owner_id = &"doton"
+chakra_cost = 12.0
+cooldown = 10.0
+tags = Array[StringName]([&"DEFENSIVE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_dqbx5"]
+script = ExtResource("2_jihmj")
+id = &"doton_d_ganchuurou"
+display_name = "Prison rocheuse"
+description = "Piliers qui entravent la cible."
+source = 0
+rank = 0
+owner_id = &"doton"
+chakra_cost = 14.0
+cooldown = 9.0
+tags = Array[StringName]([&"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_7508d"]
+script = ExtResource("2_jihmj")
+id = &"doton_c_doryuudan"
+display_name = "Dragon de terre"
+description = "Tête de dragon qui crache des boulets de boue."
+source = 0
+rank = 1
+owner_id = &"doton"
+chakra_cost = 20.0
+cooldown = 9.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_swoxv"]
+script = ExtResource("2_jihmj")
+id = &"doton_c_yomi_numa"
+display_name = "Marais des enfers"
+description = "Sol boueux qui ralentit fortement."
+source = 0
+rank = 1
+owner_id = &"doton"
+chakra_cost = 22.0
+cooldown = 12.0
+tags = Array[StringName]([&"AOE", &"DEBUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_prih7"]
+script = ExtResource("2_jihmj")
+id = &"doton_b_doryuu_sou"
+display_name = "Lances de terre"
+description = "Pointes qui jaillissent du sol en ligne."
+source = 0
+rank = 2
+owner_id = &"doton"
+chakra_cost = 28.0
+cooldown = 11.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_32heu"]
+script = ExtResource("2_jihmj")
+id = &"doton_b_kajuugan"
+display_name = "Poids lourd"
+description = "Alourdit la cible (ralentit, empêche les dashs)."
+source = 0
+rank = 2
+owner_id = &"doton"
+chakra_cost = 26.0
+cooldown = 12.0
+tags = Array[StringName]([&"DEBUFF", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_miyqw"]
+script = ExtResource("2_jihmj")
+id = &"doton_a_iwa_gaeshi"
+display_name = "Retournement de terrain"
+description = "Soulève le sol et projette tout le monde."
+source = 0
+rank = 3
+owner_id = &"doton"
+chakra_cost = 45.0
+cooldown = 18.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_301dw"]
+script = ExtResource("2_jihmj")
+id = &"doton_a_kengan"
+display_name = "Poing de roche"
+description = "Bras de pierre qui protège puis frappe."
+source = 0
+rank = 3
+owner_id = &"doton"
+chakra_cost = 40.0
+cooldown = 15.0
+tags = Array[StringName]([&"MELEE", &"DEFENSIVE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_jqwx8"]
+script = ExtResource("2_jihmj")
+id = &"doton_s_chidou_kaku"
+display_name = "Montagne mouvante"
+description = "Gigantesque bloc qui écrase la zone."
+source = 0
+rank = 4
+owner_id = &"doton"
+chakra_cost = 70.0
+cooldown = 32.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_lvhvv"]
+script = ExtResource("2_jihmj")
+id = &"doton_s_kekkai_doumu"
+display_name = "Dôme de terre"
+description = "Dôme qui protège l'équipe puis explose."
+source = 0
+rank = 4
+owner_id = &"doton"
+chakra_cost = 70.0
+cooldown = 34.0
+tags = Array[StringName]([&"DEFENSIVE", &"AOE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_i2vtc"]
+script = ExtResource("4_i0bhe")
+id = &"doton"
+display_name = "Doton"
+description = "Terre : défense, murs et lourds impacts."
+color = Color(0.658824, 0.501961, 0.301961, 1)
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_jgbm2"), SubResource("Resource_dqbx5"), SubResource("Resource_7508d"), SubResource("Resource_swoxv"), SubResource("Resource_prih7"), SubResource("Resource_32heu"), SubResource("Resource_miyqw"), SubResource("Resource_301dw"), SubResource("Resource_jqwx8"), SubResource("Resource_lvhvv")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_gp673"]
+script = ExtResource("2_jihmj")
+id = &"futon_d_daitoppa"
+display_name = "Grande bourrasque"
+description = "Rafale qui repousse en cône."
+source = 0
+rank = 0
+owner_id = &"futon"
+chakra_cost = 12.0
+cooldown = 6.0
+tags = Array[StringName]([&"AOE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_gqdnj"]
+script = ExtResource("2_jihmj")
+id = &"futon_d_shinkuu_gyoku"
+display_name = "Balle de vide"
+description = "Projectiles d'air rapides."
+source = 0
+rank = 0
+owner_id = &"futon"
+chakra_cost = 10.0
+cooldown = 4.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_kpgfc"]
+script = ExtResource("2_jihmj")
+id = &"futon_c_kamaitachi"
+display_name = "Faucheuse"
+description = "Lames de vent qui saignent."
+source = 0
+rank = 1
+owner_id = &"futon"
+chakra_cost = 20.0
+cooldown = 8.0
+tags = Array[StringName]([&"RANGED", &"DOT"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_1gc1d"]
+script = ExtResource("2_jihmj")
+id = &"futon_c_kaze_no_yoroi"
+display_name = "Voile de vent"
+description = "Dévie les projectiles quelques instants."
+source = 0
+rank = 1
+owner_id = &"futon"
+chakra_cost = 22.0
+cooldown = 14.0
+tags = Array[StringName]([&"DEFENSIVE", &"COUNTER"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_a74yh"]
+script = ExtResource("2_jihmj")
+id = &"futon_b_atsugai"
+display_name = "Pression"
+description = "Explosion de vent concentrée."
+source = 0
+rank = 2
+owner_id = &"futon"
+chakra_cost = 30.0
+cooldown = 11.0
+tags = Array[StringName]([&"AOE", &"RANGED"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_51f06"]
+script = ExtResource("2_jihmj")
+id = &"futon_b_kaze_no_yaiba"
+display_name = "Lame de vent"
+description = "Lame invisible à longue portée."
+source = 0
+rank = 2
+owner_id = &"futon"
+chakra_cost = 28.0
+cooldown = 10.0
+tags = Array[StringName]([&"RANGED", &"HITSCAN"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_2jh83"]
+script = ExtResource("2_jihmj")
+id = &"futon_a_shinkuu_taigyoku"
+display_name = "Grande sphère de vide"
+description = "Énorme sphère d'air comprimé."
+source = 0
+rank = 3
+owner_id = &"futon"
+chakra_cost = 45.0
+cooldown = 16.0
+tags = Array[StringName]([&"RANGED", &"PROJECTILE", &"AOE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_tkv4s"]
+script = ExtResource("2_jihmj")
+id = &"futon_a_fuujin"
+display_name = "Pas du vent"
+description = "Saut porté par le vent qui frappe à l'atterrissage."
+source = 0
+rank = 3
+owner_id = &"futon"
+chakra_cost = 40.0
+cooldown = 14.0
+tags = Array[StringName]([&"MOVEMENT", &"DASH", &"AOE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_quoin"]
+script = ExtResource("2_jihmj")
+id = &"futon_s_rasen_tatsumaki"
+display_name = "Tornade spirale"
+description = "Tornade qui aspire et lacère."
+source = 0
+rank = 4
+owner_id = &"futon"
+chakra_cost = 70.0
+cooldown = 30.0
+tags = Array[StringName]([&"AOE", &"CC", &"CHANNELING"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_0m17g"]
+script = ExtResource("2_jihmj")
+id = &"futon_s_shinkuu_renpa"
+display_name = "Rafale du vide"
+description = "Mitraille de vide sur une grande zone."
+source = 0
+rank = 4
+owner_id = &"futon"
+chakra_cost = 70.0
+cooldown = 28.0
+tags = Array[StringName]([&"RANGED", &"AOE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_e3jes"]
+script = ExtResource("4_i0bhe")
+id = &"futon"
+display_name = "Futon"
+description = "Vent : portée, coupures et repoussements."
+color = Color(0.611765, 1, 0.721569, 1)
+jutsu = Array[ExtResource("2_jihmj")]([SubResource("Resource_gp673"), SubResource("Resource_gqdnj"), SubResource("Resource_kpgfc"), SubResource("Resource_1gc1d"), SubResource("Resource_a74yh"), SubResource("Resource_51f06"), SubResource("Resource_2jh83"), SubResource("Resource_tkv4s"), SubResource("Resource_quoin"), SubResource("Resource_0m17g")])
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_ctf18"]
+script = ExtResource("2_jihmj")
+id = &"medic_paume_mystique"
+display_name = "Paume mystique"
+description = "Soigne un allié (ou soi-même)."
+source = 2
+rank = 0
+owner_id = &"medic"
+chakra_cost = 20.0
+cooldown = 10.0
+tags = Array[StringName]([&"HEAL"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_fs33r"]
+script = ExtResource("2_jihmj")
+id = &"medic_extraction"
+display_name = "Extraction"
+description = "Retire poisons et altérations d'un allié."
+source = 2
+rank = 0
+owner_id = &"medic"
+chakra_cost = 15.0
+cooldown = 14.0
+tags = Array[StringName]([&"HEAL", &"BUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_e80wi"]
+script = ExtResource("2_jihmj")
+id = &"medic_scalpel_de_chakra"
+display_name = "Scalpel de chakra"
+description = "Coupe les muscles : ralentit et affaiblit."
+source = 2
+rank = 0
+owner_id = &"medic"
+chakra_cost = 15.0
+cooldown = 8.0
+tags = Array[StringName]([&"MELEE", &"DEBUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_4f8x1"]
+script = ExtResource("2_jihmj")
+id = &"medic_passive_medecine_ninja"
+display_name = "Médecine ninja"
+description = "Les soins prodigués sont plus efficaces."
+source = 2
+rank = 0
+owner_id = &"medic"
+chakra_cost = 0.0
+cooldown = 0.0
+tags = Array[StringName]([&"HEAL"])
+requirements = Array[StringName]([])
+passive = true
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_m40kk"]
+script = ExtResource("6_7w6jp")
+id = &"medic"
+display_name = "Médecin"
+description = "Soigne, purifie et maintient l'équipe en vie."
+role = "Soutien"
+active_skills = Array[ExtResource("2_jihmj")]([SubResource("Resource_ctf18"), SubResource("Resource_fs33r"), SubResource("Resource_e80wi")])
+passive_skill = SubResource("Resource_4f8x1")
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_y2p3j"]
+script = ExtResource("2_jihmj")
+id = &"tracker_marque_de_traque"
+display_name = "Marque de traque"
+description = "Révèle et marque une cible."
+source = 2
+rank = 0
+owner_id = &"tracker"
+chakra_cost = 10.0
+cooldown = 10.0
+tags = Array[StringName]([&"DEBUFF", &"RANGED"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_pidwj"]
+script = ExtResource("2_jihmj")
+id = &"tracker_chiens_pisteurs"
+display_name = "Chiens pisteurs"
+description = "Invoque des chiens qui harcèlent la cible."
+source = 2
+rank = 0
+owner_id = &"tracker"
+chakra_cost = 20.0
+cooldown = 14.0
+tags = Array[StringName]([&"DOT", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_8eilo"]
+script = ExtResource("2_jihmj")
+id = &"tracker_piege_a_fil"
+display_name = "Piège à fil"
+description = "Piège qui entrave le premier ennemi."
+source = 2
+rank = 0
+owner_id = &"tracker"
+chakra_cost = 15.0
+cooldown = 12.0
+tags = Array[StringName]([&"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_mt5xq"]
+script = ExtResource("2_jihmj")
+id = &"tracker_passive_il_du_chasseur"
+display_name = "Œil du chasseur"
+description = "Dégâts accrus contre les cibles marquées ou isolées."
+source = 2
+rank = 0
+owner_id = &"tracker"
+chakra_cost = 0.0
+cooldown = 0.0
+tags = Array[StringName]([&"BUFF"])
+requirements = Array[StringName]([])
+passive = true
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_qs8l8"]
+script = ExtResource("6_7w6jp")
+id = &"tracker"
+display_name = "Traqueur"
+description = "Marque, piste et achève les cibles isolées."
+role = "Traque"
+active_skills = Array[ExtResource("2_jihmj")]([SubResource("Resource_y2p3j"), SubResource("Resource_pidwj"), SubResource("Resource_8eilo")])
+passive_skill = SubResource("Resource_mt5xq")
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_3e54p"]
+script = ExtResource("2_jihmj")
+id = &"fighter_ruee"
+display_name = "Ruée"
+description = "Fonce sur la cible et frappe."
+source = 2
+rank = 0
+owner_id = &"fighter"
+chakra_cost = 10.0
+cooldown = 8.0
+tags = Array[StringName]([&"DASH", &"MELEE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_ir0qa"]
+script = ExtResource("2_jihmj")
+id = &"fighter_enchainement"
+display_name = "Enchaînement"
+description = "Série de coups rapides."
+source = 2
+rank = 0
+owner_id = &"fighter"
+chakra_cost = 15.0
+cooldown = 7.0
+tags = Array[StringName]([&"MELEE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_d4vxb"]
+script = ExtResource("2_jihmj")
+id = &"fighter_brise_garde"
+display_name = "Brise-garde"
+description = "Coup lourd qui brise la garde."
+source = 2
+rank = 0
+owner_id = &"fighter"
+chakra_cost = 20.0
+cooldown = 12.0
+tags = Array[StringName]([&"MELEE", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_fi31y"]
+script = ExtResource("2_jihmj")
+id = &"fighter_passive_instinct_de_combat"
+display_name = "Instinct de combat"
+description = "Chaque coup au corps à corps réduit les temps de recharge."
+source = 2
+rank = 0
+owner_id = &"fighter"
+chakra_cost = 0.0
+cooldown = 0.0
+tags = Array[StringName]([&"BUFF"])
+requirements = Array[StringName]([])
+passive = true
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_fv7jp"]
+script = ExtResource("6_7w6jp")
+id = &"fighter"
+display_name = "Combattant"
+description = "Taijutsu offensif et enchaînements."
+role = "Dégâts"
+active_skills = Array[ExtResource("2_jihmj")]([SubResource("Resource_3e54p"), SubResource("Resource_ir0qa"), SubResource("Resource_d4vxb")])
+passive_skill = SubResource("Resource_fi31y")
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_uyiya"]
+script = ExtResource("2_jihmj")
+id = &"bulwark_provocation"
+display_name = "Provocation"
+description = "Force les ennemis proches à vous cibler."
+source = 2
+rank = 0
+owner_id = &"bulwark"
+chakra_cost = 10.0
+cooldown = 14.0
+tags = Array[StringName]([&"CC", &"DEFENSIVE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_xfjgo"]
+script = ExtResource("2_jihmj")
+id = &"bulwark_bouclier_de_chakra"
+display_name = "Bouclier de chakra"
+description = "Bouclier sur soi ou un allié."
+source = 2
+rank = 0
+owner_id = &"bulwark"
+chakra_cost = 20.0
+cooldown = 14.0
+tags = Array[StringName]([&"DEFENSIVE", &"BUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_vxkf4"]
+script = ExtResource("2_jihmj")
+id = &"bulwark_mur_protecteur"
+display_name = "Mur protecteur"
+description = "Se place devant un allié et bloque."
+source = 2
+rank = 0
+owner_id = &"bulwark"
+chakra_cost = 15.0
+cooldown = 12.0
+tags = Array[StringName]([&"DEFENSIVE", &"MOVEMENT"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_5rd5d"]
+script = ExtResource("2_jihmj")
+id = &"bulwark_passive_peau_de_fer"
+display_name = "Peau de fer"
+description = "Réduit les dégâts subis."
+source = 2
+rank = 0
+owner_id = &"bulwark"
+chakra_cost = 0.0
+cooldown = 0.0
+tags = Array[StringName]([&"DEFENSIVE"])
+requirements = Array[StringName]([])
+passive = true
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_34x3n"]
+script = ExtResource("6_7w6jp")
+id = &"bulwark"
+display_name = "Rempart"
+description = "Encaisse et protège ses alliés."
+role = "Protection"
+active_skills = Array[ExtResource("2_jihmj")]([SubResource("Resource_uyiya"), SubResource("Resource_xfjgo"), SubResource("Resource_vxkf4")])
+passive_skill = SubResource("Resource_5rd5d")
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_bdwqd"]
+script = ExtResource("7_l4bkk")
+weight = 4.0
+exclusions = Array[StringName]([])
+allowed_villages = Array[StringName]([])
+rollable = true
+id = &"sub_b_kage_bunshin"
+display_name = "Multiclonage"
+description = "Plusieurs clones solides combattent à vos côtés."
+source = 3
+rank = 2
+owner_id = &""
+chakra_cost = 30.0
+cooldown = 18.0
+tags = Array[StringName]([&"BUFF", &"AOE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_iml37"]
+script = ExtResource("7_l4bkk")
+weight = 4.0
+exclusions = Array[StringName]([])
+allowed_villages = Array[StringName]([])
+rollable = true
+id = &"sub_b_shunshin"
+display_name = "Shunshin avancé"
+description = "Téléportation courte à répétition."
+source = 3
+rank = 2
+owner_id = &""
+chakra_cost = 15.0
+cooldown = 6.0
+tags = Array[StringName]([&"MOVEMENT", &"DASH"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_3nu83"]
+script = ExtResource("7_l4bkk")
+weight = 4.0
+exclusions = Array[StringName]([])
+allowed_villages = Array[StringName]([])
+rollable = true
+id = &"sub_b_choju_giga"
+display_name = "Bêtes d'encre"
+description = "Fauves d'encre qui attaquent et entravent."
+source = 3
+rank = 2
+owner_id = &""
+chakra_cost = 25.0
+cooldown = 12.0
+tags = Array[StringName]([&"RANGED", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_3vc8h"]
+script = ExtResource("7_l4bkk")
+weight = 4.0
+exclusions = Array[StringName]([])
+allowed_villages = Array[StringName]([])
+rollable = true
+id = &"sub_b_kuchiyose_gama"
+display_name = "Invocation : crapauds"
+description = "Un crapaud combat et vous protège."
+source = 3
+rank = 2
+owner_id = &""
+chakra_cost = 30.0
+cooldown = 20.0
+tags = Array[StringName]([&"DEFENSIVE", &"AOE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_i56ml"]
+script = ExtResource("7_l4bkk")
+weight = 4.0
+exclusions = Array[StringName]([])
+allowed_villages = Array[StringName]([])
+rollable = true
+id = &"sub_b_senbon_doku"
+display_name = "Senbon empoisonnés"
+description = "Aiguilles au poison paralysant."
+source = 3
+rank = 2
+owner_id = &""
+chakra_cost = 18.0
+cooldown = 8.0
+tags = Array[StringName]([&"RANGED", &"DOT", &"CC"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_rnrp6"]
+script = ExtResource("7_l4bkk")
+weight = 2.0
+exclusions = Array[StringName]([])
+allowed_villages = Array[StringName]([])
+rollable = true
+id = &"sub_a_hachimon_life"
+display_name = "Porte de la vie"
+description = "Ouvre les premières portes : puissance au prix des PV."
+source = 3
+rank = 3
+owner_id = &""
+chakra_cost = 0.0
+cooldown = 30.0
+tags = Array[StringName]([&"BUFF", &"MELEE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_50c0m"]
+script = ExtResource("7_l4bkk")
+weight = 2.0
+exclusions = Array[StringName]([])
+allowed_villages = Array[StringName]([])
+rollable = true
+id = &"sub_a_rashomon"
+display_name = "Rashōmon"
+description = "Porte démoniaque qui bloque tout."
+source = 3
+rank = 3
+owner_id = &""
+chakra_cost = 45.0
+cooldown = 30.0
+tags = Array[StringName]([&"DEFENSIVE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_u8n60"]
+script = ExtResource("7_l4bkk")
+weight = 2.0
+exclusions = Array[StringName]([])
+allowed_villages = Array[StringName]([])
+rollable = true
+id = &"sub_a_hiraishin"
+display_name = "Dieu du tonnerre volant"
+description = "Kunai marqués : téléportation instantanée."
+source = 3
+rank = 3
+owner_id = &""
+chakra_cost = 40.0
+cooldown = 14.0
+tags = Array[StringName]([&"MOVEMENT", &"DASH"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_84llo"]
+script = ExtResource("7_l4bkk")
+weight = 2.0
+exclusions = Array[StringName]([])
+allowed_villages = Array[StringName]([])
+rollable = true
+id = &"sub_a_senjutsu"
+display_name = "Mode ermite"
+description = "Énergie naturelle : dégâts et portée accrus."
+source = 3
+rank = 3
+owner_id = &""
+chakra_cost = 50.0
+cooldown = 40.0
+tags = Array[StringName]([&"BUFF"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_wywlj"]
+script = ExtResource("7_l4bkk")
+weight = 1.0
+exclusions = Array[StringName]([])
+allowed_villages = Array[StringName]([])
+rollable = true
+id = &"sub_s_hachimon_death"
+display_name = "Porte de la mort"
+description = "Huitième porte : puissance absolue, puis épuisement."
+source = 3
+rank = 4
+owner_id = &""
+chakra_cost = 0.0
+cooldown = 90.0
+tags = Array[StringName]([&"BUFF", &"MELEE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_4jv72"]
+script = ExtResource("7_l4bkk")
+weight = 1.0
+exclusions = Array[StringName]([])
+allowed_villages = Array[StringName]([])
+rollable = true
+id = &"sub_s_kamui"
+display_name = "Kamui"
+description = "Dimension parallèle : intangibilité et absorption."
+source = 3
+rank = 4
+owner_id = &""
+chakra_cost = 70.0
+cooldown = 36.0
+tags = Array[StringName]([&"DEFENSIVE", &"COUNTER"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_w4xdi"]
+script = ExtResource("7_l4bkk")
+weight = 1.0
+exclusions = Array[StringName]([])
+allowed_villages = Array[StringName]([])
+rollable = true
+id = &"sub_s_edo_tensei"
+display_name = "Réincarnation des âmes"
+description = "Rappelle un combattant tombé pour se battre à vos côtés."
+source = 3
+rank = 4
+owner_id = &""
+chakra_cost = 90.0
+cooldown = 60.0
+tags = Array[StringName]([&"BUFF", &"AOE"])
+requirements = Array[StringName]([])
+passive = false
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_sryjy"]
+script = ExtResource("8_xmld1")
+id = &"tenketsu_vitality"
+display_name = "Vitalité"
+description = "+8 PV max par niveau."
+cost = 1
+prerequisites = Array[StringName]([])
+stat_modifiers = {
+"hp": 8.0
+}
+position_in_tree = Vector2(0, 0)
+max_level = 3
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_v87fy"]
+script = ExtResource("8_xmld1")
+id = &"tenketsu_flow"
+display_name = "Flux de chakra"
+description = "+10 chakra max par niveau."
+cost = 1
+prerequisites = Array[StringName]([])
+stat_modifiers = {
+"chakra": 10.0
+}
+position_in_tree = Vector2(2, 0)
+max_level = 3
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_rmp3d"]
+script = ExtResource("8_xmld1")
+id = &"tenketsu_agility"
+display_name = "Agilité"
+description = "+3 % de vitesse par niveau."
+cost = 1
+prerequisites = Array[StringName]([])
+stat_modifiers = {
+"mobility": 0.03
+}
+position_in_tree = Vector2(4, 0)
+max_level = 2
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_2cij4"]
+script = ExtResource("8_xmld1")
+id = &"tenketsu_regeneration"
+display_name = "Régénération"
+description = "+0,5 PV/s par niveau."
+cost = 1
+prerequisites = Array[StringName]([&"tenketsu_vitality"])
+stat_modifiers = {
+"hp_regen": 0.5
+}
+position_in_tree = Vector2(0, 1)
+max_level = 2
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_ex764"]
+script = ExtResource("8_xmld1")
+id = &"tenketsu_circulation"
+display_name = "Circulation"
+description = "+1 chakra/s par niveau."
+cost = 1
+prerequisites = Array[StringName]([&"tenketsu_flow"])
+stat_modifiers = {
+"chakra_regen": 1.0
+}
+position_in_tree = Vector2(2, 1)
+max_level = 2
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_5stp6"]
+script = ExtResource("8_xmld1")
+id = &"tenketsu_reflexes"
+display_name = "Réflexes"
+description = "-4 % de temps de recharge par niveau."
+cost = 2
+prerequisites = Array[StringName]([&"tenketsu_agility"])
+stat_modifiers = {
+"cooldown_reduction": 0.04
+}
+position_in_tree = Vector2(4, 1)
+max_level = 2
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_7uj6t"]
+script = ExtResource("8_xmld1")
+id = &"tenketsu_iron_body"
+display_name = "Corps de fer"
+description = "-4 % de dégâts subis par niveau."
+cost = 2
+prerequisites = Array[StringName]([&"tenketsu_regeneration"])
+stat_modifiers = {
+"resistance": 0.04
+}
+position_in_tree = Vector2(0, 2)
+max_level = 2
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_1oywt"]
+script = ExtResource("8_xmld1")
+id = &"tenketsu_focus"
+display_name = "Concentration"
+description = "+5 % de dégâts des techniques par niveau."
+cost = 2
+prerequisites = Array[StringName]([&"tenketsu_circulation"])
+stat_modifiers = {
+"jutsu_power": 0.05
+}
+position_in_tree = Vector2(2, 2)
+max_level = 2
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_eye2b"]
+script = ExtResource("8_xmld1")
+id = &"tenketsu_pressure_points"
+display_name = "Points vitaux"
+description = "+5 % de dégâts au corps à corps par niveau."
+cost = 2
+prerequisites = Array[StringName]([&"tenketsu_reflexes"])
+stat_modifiers = {
+"melee_power": 0.05
+}
+position_in_tree = Vector2(4, 2)
+max_level = 2
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_d2oxf"]
+script = ExtResource("8_xmld1")
+id = &"tenketsu_eight_gates"
+display_name = "Ouverture des portes"
+description = "Ultime : +10 % de dégâts et de vitesse sous 30 % de PV."
+cost = 3
+prerequisites = Array[StringName]([&"tenketsu_iron_body", &"tenketsu_focus", &"tenketsu_pressure_points"])
+stat_modifiers = {
+"last_stand": 0.1
+}
+position_in_tree = Vector2(2, 3)
+max_level = 1
+placeholder = false
+
+[sub_resource type="Resource" id="Resource_2wg16"]
+script = ExtResource("9_m7344")
+id = &"tenketsu"
+nodes = Array[ExtResource("8_xmld1")]([SubResource("Resource_sryjy"), SubResource("Resource_v87fy"), SubResource("Resource_rmp3d"), SubResource("Resource_2cij4"), SubResource("Resource_ex764"), SubResource("Resource_5stp6"), SubResource("Resource_7uj6t"), SubResource("Resource_1oywt"), SubResource("Resource_eye2b"), SubResource("Resource_d2oxf")])
+
+[sub_resource type="Resource" id="Resource_4km45"]
+script = ExtResource("10_kjo8x")
+id = &"konoha"
+display_name = "Konoha"
+
+[sub_resource type="Resource" id="Resource_jsfh7"]
+script = ExtResource("10_kjo8x")
+id = &"suna"
+display_name = "Suna"
+
+[sub_resource type="Resource" id="Resource_ujfkc"]
+script = ExtResource("10_kjo8x")
+id = &"ame"
+display_name = "Ame"
+
+[sub_resource type="Resource" id="Resource_8uuiw"]
+script = ExtResource("10_kjo8x")
+id = &"kiri"
+display_name = "Kiri"
+
+[resource]
+script = ExtResource("5_b2umr")
+grades = Array[ExtResource("3_kruyx")]([SubResource("Resource_d1d4n"), SubResource("Resource_as84i"), SubResource("Resource_h2gb4"), SubResource("Resource_wwphx"), SubResource("Resource_r7mbq")])
+villages = Array[ExtResource("10_kjo8x")]([SubResource("Resource_4km45"), SubResource("Resource_jsfh7"), SubResource("Resource_ujfkc"), SubResource("Resource_8uuiw")])
+natures = Array[ExtResource("4_i0bhe")]([SubResource("Resource_vk57q"), SubResource("Resource_3ij8n"), SubResource("Resource_t78a5"), SubResource("Resource_i2vtc"), SubResource("Resource_e3jes")])
+clans = Array[ExtResource("1_kf7su")]([SubResource("Resource_q6ac6"), SubResource("Resource_x70cm"), SubResource("Resource_ngutn"), SubResource("Resource_t53yu"), SubResource("Resource_lvjbm"), SubResource("Resource_vh3v0"), SubResource("Resource_b46cl"), SubResource("Resource_fem53"), SubResource("Resource_7x4jy"), SubResource("Resource_coipi"), SubResource("Resource_6urth"), SubResource("Resource_topwy"), SubResource("Resource_ycy12"), SubResource("Resource_t0ogo"), SubResource("Resource_56jk5"), SubResource("Resource_i8fov"), SubResource("Resource_e4ixo"), SubResource("Resource_r8j4i"), SubResource("Resource_ecbps"), SubResource("Resource_ujra3")])
+specializations = Array[ExtResource("6_7w6jp")]([SubResource("Resource_m40kk"), SubResource("Resource_qs8l8"), SubResource("Resource_fv7jp"), SubResource("Resource_34x3n")])
+tenketsu_tree = SubResource("Resource_2wg16")
+sub_jutsu = Array[ExtResource("7_l4bkk")]([SubResource("Resource_bdwqd"), SubResource("Resource_iml37"), SubResource("Resource_3nu83"), SubResource("Resource_3vc8h"), SubResource("Resource_i56ml"), SubResource("Resource_rnrp6"), SubResource("Resource_50c0m"), SubResource("Resource_u8n60"), SubResource("Resource_84llo"), SubResource("Resource_wywlj"), SubResource("Resource_4jv72"), SubResource("Resource_w4xdi")])
+mob_xp = {
+"bandit": 12,
+"bandit_thrower": 14,
+"boss_akatsuki": 250,
+"elite_missing_nin": 70,
+"rogue_kunoichi": 32,
+"rogue_ninja": 30,
+"ronin": 65
+}
+max_kills_per_minute = 30
+sub_jutsu_roll_ranks = Array[int]([2, 3, 4])
+max_equipped_jutsu = 6
+specialization_grants_skills = true

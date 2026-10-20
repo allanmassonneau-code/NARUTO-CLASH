@@ -144,8 +144,6 @@ func _on_damaged(amount: float) -> void:
 	_flash = 0.12
 	var heavy: bool = amount >= 15.0
 	model.hitstop(0.09 if heavy else 0.05)
-	if _role == Role.LOCAL_PLAYER or _local_player_striking():
-		Hitstop.trigger(0.075 if heavy else 0.045)
 	CombatFx.sparks(_character, _character.global_position + Vector3.UP * 1.1, ROLE_COLORS[_role], 14 if heavy else 8)
 	if _character.guarding:
 		Sfx.play(&"orb_hit", _character.global_position, -2.0, 0.6)  # blocked: metallic clank
@@ -162,18 +160,6 @@ func _on_damaged(amount: float) -> void:
 			camera.shake(0.35 if heavy else 0.18)
 		elif heavy:
 			camera.shake(0.12)
-
-
-## The local player is mid-swing within reach of this fighter (online the
-## client doesn't know who dealt a hit, this is close enough for feedback).
-func _local_player_striking() -> bool:
-	var me: CombatCharacter = local_player
-	if me == null or me == _character or not is_instance_valid(me):
-		return false
-	var a: AbilityData = me.abilities.current
-	if a == null or me.abilities.phase != AbilityController.Phase.ACTIVE:
-		return false
-	return me.global_position.distance_to(_character.global_position) <= a.get_reach() + 1.5
 
 
 func _word(text: String, color: Color) -> void:

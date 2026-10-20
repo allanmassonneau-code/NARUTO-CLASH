@@ -39,6 +39,8 @@ static func create(data: CharacterData, framing: Framing, pixel_size: Vector2i) 
 
 
 func set_character(data: CharacterData) -> void:
+	if _model == null:
+		return
 	_model.build(data.look if data.look != null else ShinobiLook.new())
 	_pose = &"seal:windup"
 	_pose_left = 0.5
@@ -46,11 +48,15 @@ func set_character(data: CharacterData) -> void:
 
 ## Strike a pose for a moment (selection feedback).
 func play(pose: StringName, duration: float) -> void:
+	if _model == null:
+		return
 	_pose = pose
 	_pose_left = duration
 
 
 func _build_scene(viewport: SubViewport, data: CharacterData) -> void:
+	if not CombatFx.is_enabled():
+		return  # headless (dedicated server boot, tests): no 3D
 	var env := Environment.new()
 	env.background_mode = Environment.BG_CLEAR_COLOR
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR

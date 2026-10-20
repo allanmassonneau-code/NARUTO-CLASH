@@ -48,6 +48,10 @@ jobs:
           "$GODOT" --headless --path . --import >/dev/null 2>&1 || true
           "$GODOT" --headless --fixed-fps 60 --path . res://tests/smoke_test.tscn 2>&1 | tee test.log
           grep -q "RESULT: PASS" test.log
+          "$GODOT" --headless --path . res://tests/progression_test.tscn 2>&1 | tee progression.log
+          grep -q "RESULT: PASS" progression.log
+          "$GODOT" --headless --fixed-fps 60 --path . res://tests/world_test.tscn 2>&1 | tee world.log
+          grep -q "RESULT: PASS" world.log
 
       - name: Windows icon tooling (wine + rcedit)
         run: |

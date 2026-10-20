@@ -119,7 +119,7 @@ func _on_peer_disconnected(peer_id: int) -> void:
 
 
 @rpc("any_peer", "call_remote", "reliable")
-func c2s_hello(version: String, player_name: String, roster: int, code: String, party_code: String) -> void:
+func c2s_hello(version: String, player_name: String, roster: int, code: String, party_code: String, token: String, queue: bool) -> void:
 	if not is_server():
 		return
 	var sender: int = multiplayer.get_remote_sender_id()
@@ -127,7 +127,8 @@ func c2s_hello(version: String, player_name: String, roster: int, code: String, 
 		s2c_error.rpc_id(sender, "Version mismatch (server %s, you %s). Update with the launcher." % [game_version(), version])
 		return
 	_peers[sender] = {"name": player_name.left(16), "roster": clampi(roster, 0, GameSession.ROSTER_PATHS.size() - 1),
-		"code": code.left(8).to_upper(), "party": party_code.left(8).to_upper()}
+		"code": code.left(8).to_upper(), "party": party_code.left(8).to_upper(),
+		"account": "acc_" + token.sha256_text().left(20), "queue": queue}
 	_broadcast_lobby()
 	_try_start_match()
 
@@ -166,6 +167,8 @@ func _build_lineup() -> Array[Dictionary]:
 	var parties: Dictionary = {}  # party -> Array[int]
 	var singles: Array[int] = []
 	for peer_id: int in _peers:
+		if not _peers[peer_id].get("queue", true):
+			continue  # profile-only connection (shinobi screen), not looking for a match
 		var p: String = _peers[peer_id].party
 		if p == "":
 			singles.append(peer_id)
@@ -279,6 +282,58 @@ func _peer_by_code(code: String) -> int:
 		if _peers[peer_id].code == code:
 			return peer_id
 	return 0
+
+
+# --- Shinobi profiles (server authority) -------------------------------------
+
+func profile_create(character_name: String, village_id: StringName, origin: int, clan_id: StringName) -> void:
+	if is_client() and is_online():
+		c2s_profile_create.rpc_id(1, character_name, village_id, origin, clan_id)
+
+
+func profile_request(action: Dictionary) -> void:
+	if is_client() and is_online():
+		c2s_profile_request.rpc_id(1, action)
+
+
+@rpc("any_peer", "call_remote", "reliable")
+func c2s_profile_get() -> void:
+	var account: String = _account_of_sender()
+	if account != "":
+		_send_profile(multiplayer.get_remote_sender_id(), Profiles.server_load(account), ProgressionResult.success())
+
+
+@rpc("any_peer", "call_remote", "reliable")
+func c2s_profile_create(character_name: String, village_id: StringName, origin: int, clan_id: StringName) -> void:
+	var account: String = _account_of_sender()
+	if account == "":
+		return
+	var created: Dictionary = Profiles.server_create(account, character_name, village_id, origin, clan_id)
+	_send_profile(multiplayer.get_remote_sender_id(), created.profile, created.result)
+
+
+@rpc("any_peer", "call_remote", "reliable")
+func c2s_profile_request(action: Dictionary) -> void:
+	var account: String = _account_of_sender()
+	if account == "":
+		return
+	var handled: Dictionary = Profiles.server_request(account, action)
+	_send_profile(multiplayer.get_remote_sender_id(), handled.profile, handled.result)
+
+
+@rpc("authority", "call_remote", "reliable")
+func s2c_profile(profile_data: Dictionary, ok: bool, error: String, events: Array) -> void:
+	Profiles.apply_remote(profile_data, ok, error, events)
+
+
+func _send_profile(peer_id: int, profile: CharacterProfile, result: ProgressionResult) -> void:
+	s2c_profile.rpc_id(peer_id, profile.to_dict() if profile != null else {}, result.ok, String(result.error), result.events)
+
+
+func _account_of_sender() -> String:
+	if not is_server():
+		return ""
+	return str(_peers.get(multiplayer.get_remote_sender_id(), {}).get("account", ""))
 
 
 @rpc("authority", "call_remote", "reliable")
@@ -429,7 +484,7 @@ func broadcast_fx(kind: Fx, a: Vector3, b: Vector3, f1: float, f2: float, color:
 
 # --- Client -----------------------------------------------------------------
 
-func join(host: String, mode: String, player_name: String, roster: int, party_code: String = "") -> void:
+func join(host: String, mode: String, player_name: String, roster: int, party_code: String = "", queue: bool = true) -> void:
 	leave()
 	var peer := ENetMultiplayerPeer.new()
 	var port: int = int(_autopilot.get("port", PORTS.get(mode, 7777)))
@@ -439,12 +494,14 @@ func join(host: String, mode: String, player_name: String, roster: int, party_co
 		return
 	multiplayer.multiplayer_peer = peer
 	GameSession.net_role = GameSession.NetRole.CLIENT
-	set_meta(&"hello", [player_name, roster])
+	set_meta(&"hello", [player_name, roster, queue])
 	party = party_code
 	_set_status("Connecting to %s (%s)..." % [host, mode])
 
 
 func leave() -> void:
+	if is_client() and Profiles.is_remote():
+		Profiles.use_remote(false)
 	if is_online():
 		multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
@@ -478,7 +535,9 @@ func send_input(seq: int, intent: GameplayIntent, aim: Vector3) -> void:
 
 func _on_connected_to_server() -> void:
 	var hello: Array = get_meta(&"hello", ["Shinobi", 0])
-	c2s_hello.rpc_id(1, game_version(), hello[0], hello[1], GameSession.friend_code, party)
+	c2s_hello.rpc_id(1, game_version(), hello[0], hello[1], GameSession.friend_code, party, GameSession.account_token, bool(hello[2]) if hello.size() > 2 else true)
+	Profiles.use_remote(true)
+	c2s_profile_get.rpc_id(1)
 	_set_status("Connected. Waiting for players...")
 
 

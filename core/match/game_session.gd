@@ -16,7 +16,7 @@ const ROSTER_PATHS: Array[String] = [
 	"res://characters/itachi/itachi_data.tres",
 	"res://characters/minato/minato_data.tres",
 ]
-const MENU_SCENE: String = "res://ui/menu/character_select.tscn"
+const MENU_SCENE: String = "res://ui/main/main_menu.tscn"
 const ARENA_SCENE: String = "res://arenas/playground/playground.tscn"
 
 var mode: Mode = Mode.DUEL_VS_BOT
@@ -39,6 +39,8 @@ var server_host: String = "127.0.0.1"
 var friend_code: String = ""
 ## Friends: Array of {code:String, name:String}.
 var friends: Array[Dictionary] = []
+## Secret identifying this player's account on the servers (profile owner).
+var account_token: String = ""
 ## Options (O in game / gear button): audio and display.
 var master_volume: float = 70.0
 var sfx_volume: float = 80.0
@@ -65,6 +67,7 @@ func _ready() -> void:
 		player_name = cfg.get_value("online", "name", player_name)
 		server_host = cfg.get_value("online", "host", server_host)
 		friend_code = cfg.get_value("online", "friend_code", "")
+		account_token = cfg.get_value("online", "account_token", "")
 		for entry: Variant in cfg.get_value("online", "friends", []):
 			if entry is Dictionary:
 				friends.append(entry)
@@ -74,8 +77,12 @@ func _ready() -> void:
 		spatial_sound = cfg.get_value("options", "spatial_sound", spatial_sound)
 		fullscreen = cfg.get_value("options", "fullscreen", fullscreen)
 		anti_aliasing = cfg.get_value("options", "anti_aliasing", anti_aliasing)
-	if friend_code == "":
-		friend_code = _new_code()
+	if friend_code == "" or account_token == "":
+		if friend_code == "":
+			friend_code = _new_code()
+		if account_token == "":
+			var crypto := Crypto.new()
+			account_token = crypto.generate_random_bytes(24).hex_encode()
 		save_settings()
 	apply_options()
 	# The launcher passes the official server: game.exe -- --host=1.2.3.4
@@ -89,6 +96,7 @@ func save_settings() -> void:
 	cfg.set_value("online", "name", player_name)
 	cfg.set_value("online", "host", server_host)
 	cfg.set_value("online", "friend_code", friend_code)
+	cfg.set_value("online", "account_token", account_token)
 	cfg.set_value("online", "friends", friends)
 	for key: String in ["master_volume", "sfx_volume", "muted", "spatial_sound", "fullscreen", "anti_aliasing"]:
 		cfg.set_value("options", key, get(key))

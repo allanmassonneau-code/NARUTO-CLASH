@@ -4,7 +4,7 @@ extends IntentSource
 
 const SLOT_ORDER: Array[StringName] = AbilityController.SLOTS
 ## Bit of the held mask carrying the guard key.
-const GUARD_BIT: int = 1 << 6
+const GUARD_BIT: int = 1 << 20
 
 var peer_id: int = 0
 ## Last input sequence number received (acked back in snapshots).
