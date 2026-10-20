@@ -83,7 +83,7 @@ func _bonus(stat: StringName) -> float:
 # --- Queries ------------------------------------------------------------------------
 
 func is_enemy(f: CombatCharacter) -> bool:
-	return f != null and is_instance_valid(f) and f.team != caster.team and not f.is_dead()
+	return f != null and is_instance_valid(f) and f.team != caster.team and not f.is_dead() and f.visible
 
 
 func is_ally(f: CombatCharacter) -> bool:
@@ -176,7 +176,7 @@ func clear_point(from: Vector3, direction: Vector3, dist: float) -> Vector3:
 ## push (distance, away from push_from or the caster), push_from (Vector3),
 ## launch (seconds), unblockable (bool: ignores guard), no_interrupt.
 func hit(target: CombatCharacter, damage: float, opts: Dictionary = {}) -> HitData.Result:
-	if not is_enemy(target):
+	if not is_enemy(target) or _replay():
 		return HitData.Result.IGNORED
 	var h := HitData.new()
 	h.source = caster
@@ -185,14 +185,25 @@ func hit(target: CombatCharacter, damage: float, opts: Dictionary = {}) -> HitDa
 	h.stun_duration = float(opts.get("stun", 0.0))
 	h.root_duration = float(opts.get("root", 0.0))
 	h.energy_gain = 4.0
+	h.opts = opts.duplicate()
+	if opts.has("push") and not opts.has("push_from"):
+		h.opts.push_from = origin
 	var was_guarding: bool = target.guarding
 	if opts.get("unblockable", false):
 		target.guarding = false
 	var result: HitData.Result = target.receive_hit(h)
 	if opts.get("unblockable", false):
 		target.guarding = was_guarding and not target.is_dead()
-	if result != HitData.Result.HIT or target.is_dead():
-		return result
+	if result != HitData.Result.HIT or target.is_dead() or _remote(target):
+		return result   # a forwarded hit gets its extras on the owner's machine
+	apply_opts(target, h.opts, dir)
+	return result
+
+
+## Extras of a landed hit, and effects forwarded from another machine (open world).
+static func apply_opts(target: CombatCharacter, opts: Dictionary, fallback_dir: Vector3 = Vector3.FORWARD) -> void:
+	if target == null or target.is_dead():
+		return
 	if opts.has("slow"):
 		target.status.apply_status(StatusController.Type.SLOW, float(opts.slow))
 	if opts.has("silence"):
@@ -204,12 +215,52 @@ func hit(target: CombatCharacter, damage: float, opts: Dictionary = {}) -> HitDa
 		target.abilities.interrupt()
 	if opts.has("seal"):
 		target.status.apply_status(StatusController.Type.SEAL, float(opts.seal))
+	if opts.has("status_type"):
+		var type: StatusController.Type = int(opts.status_type) as StatusController.Type
+		if not (type == StatusController.Type.STUN and target.kit.has_flag("cc_immune")):
+			target.status.apply_status(type, float(opts.status_dur))
+			if type == StatusController.Type.STUN or type == StatusController.Type.INCAPACITATE:
+				target.abilities.interrupt()
 	if opts.has("push"):
-		var from: Vector3 = opts.get("push_from", origin)
-		push(target, HitQuery.flat(target.global_position - from), float(opts.push))
-	if opts.has("launch"):
-		launch(target, float(opts.launch))
-	return result
+		var direction: Vector3 = opts.push_vec if opts.has("push_vec") else HitQuery.flat(target.global_position - (opts.get("push_from", target.global_position) as Vector3))
+		if direction.length() < 0.01:
+			direction = fallback_dir
+		var duration: float = float(opts.get("push_dur", 0.18))
+		var d: float = float(opts.push) * _tenacity_of(target)
+		target.movement.apply_forced_motion(HitQuery.flat(direction).normalized() * (d / duration), duration, true, true)
+	if opts.has("pull_to"):
+		var to: Vector3 = HitQuery.flat((opts.pull_to as Vector3) - target.global_position)
+		var dist: float = float(opts.get("pull_dist", -1.0))
+		var duration: float = float(opts.get("pull_dur", 0.2))
+		var d: float = (to.length() - 1.0 if dist < 0.0 else minf(dist, to.length() - 1.0)) * _tenacity_of(target)
+		if d > 0.05:
+			target.movement.apply_forced_motion(to.normalized() * (d / duration), duration, false, true)
+	if opts.has("launch") and not target.data.launch_immune and not target.kit.has_flag("tenacity") and not target.is_launched():
+		target.launch(float(opts.launch))
+	if opts.has("heal"):
+		target.health.heal(float(opts.heal))
+	if opts.has("shield"):
+		target.health.add_shield(float(opts.shield), float(opts.get("shield_dur", 3.0)))
+
+
+## Open world: this cast is a puppet replay (visual only, it affects no one).
+func _replay() -> bool:
+	return caster.net_mode == CombatCharacter.NetMode.PUPPET
+
+
+## Open world: `target` is owned by another machine (effects are forwarded to it).
+func _remote(target: CombatCharacter) -> bool:
+	return WorldNet.active and target != null and target.net_mode == CombatCharacter.NetMode.PUPPET
+
+
+## Forwards an effect to a remote target; true when the caller must stop there.
+func _forwarded(target: CombatCharacter, opts: Dictionary) -> bool:
+	if _replay():
+		return true
+	if _remote(target):
+		WorldNet.forward_effect(caster, target, opts)
+		return true
+	return false
 
 
 ## Hits every enemy in a radius; returns those actually hit.
@@ -258,6 +309,8 @@ func melee(reach: float, degrees: float, damage: float, opts: Dictionary = {}) -
 
 
 func heal(target: CombatCharacter, amount: float) -> void:
+	if _forwarded(target, {"heal": amount}):
+		return
 	if target != null and not target.is_dead():
 		target.health.heal(amount)
 		if CombatFx.is_enabled():
@@ -265,11 +318,15 @@ func heal(target: CombatCharacter, amount: float) -> void:
 
 
 func shield(target: CombatCharacter, amount: float, duration: float) -> void:
+	if _forwarded(target, {"shield": amount, "shield_dur": duration}):
+		return
 	if target != null and not target.is_dead():
 		target.health.add_shield(amount, duration)
 
 
 func status(target: CombatCharacter, type: StatusController.Type, duration: float) -> void:
+	if _forwarded(target, {"status_type": int(type), "status_dur": duration}):
+		return
 	if target != null and not target.is_dead():
 		if type == StatusController.Type.STUN and target.kit.has_flag("cc_immune"):
 			return
@@ -294,18 +351,26 @@ func cleanse(target: CombatCharacter, hard: bool = false) -> int:
 # --- Forced movement (push / pull / launch / drag) ----------------------------------
 
 func _tenacity(target: CombatCharacter) -> float:
+	return _tenacity_of(target)
+
+
+static func _tenacity_of(target: CombatCharacter) -> float:
 	return 0.25 if target.kit.has_flag("tenacity") else 1.0
 
 
 func push(target: CombatCharacter, direction: Vector3, dist: float, duration: float = 0.18) -> void:
 	if target == null or target.is_dead() or direction.length() < 0.01:
 		direction = dir
+	if _forwarded(target, {"push": dist, "push_vec": direction, "push_dur": duration}):
+		return
 	var d: float = dist * _tenacity(target)
 	target.movement.apply_forced_motion(HitQuery.flat(direction).normalized() * (d / duration), duration, true, true)
 
 
 func pull(target: CombatCharacter, to_point: Vector3, dist: float = -1.0, duration: float = 0.2) -> void:
 	if target == null or target.is_dead():
+		return
+	if _forwarded(target, {"pull_to": to_point, "pull_dist": dist, "pull_dur": duration}):
 		return
 	var to: Vector3 = HitQuery.flat(to_point - target.global_position)
 	var d: float = (to.length() - 1.0 if dist < 0.0 else minf(dist, to.length() - 1.0)) * _tenacity(target)
@@ -318,6 +383,8 @@ func launch(target: CombatCharacter, duration: float) -> void:
 	if target == null or target.is_dead() or target.data.launch_immune or target.kit.has_flag("tenacity"):
 		return
 	if target.is_launched():
+		return
+	if _forwarded(target, {"launch": duration}):
 		return
 	target.launch(duration)
 

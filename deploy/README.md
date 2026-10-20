@@ -1,8 +1,8 @@
 # Mise en ligne (VPS + launcher Windows)
 
 Architecture :
-- **VPS** : 2 serveurs de jeu Godot headless (1v1 sur UDP 7777, 2v2 sur UDP 7778, services
-  `naruto-server@1v1` / `naruto-server@2v2`) + nginx qui sert les mises à jour sur
+- **VPS** : 2 processus Godot headless : le monde partagé persistant (UDP 7777,
+  `naruto-server@1v1`) et le service de comptes du launcher (UDP 7778, `naruto-server@2v2`) + nginx qui sert les mises à jour sur
   `http://<IP>/naruto-clash/`.
 - **GitHub Actions** (`.github/workflows/release.yml`) : à chaque push sur `main`, tests →
   build Windows → publication sur le VPS → redémarrage des serveurs.

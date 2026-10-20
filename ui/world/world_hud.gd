@@ -45,6 +45,11 @@ func bind(world: World, player: CombatCharacter) -> void:
 	rebuild_slots()
 
 
+## Shared world online: party frame, players list (P), invitations.
+func attach_online(net: WorldNet) -> void:
+	_root.add_child(PartyHud.new(net, self))
+
+
 ## Kit resources (Vigueur, Charges...), active modes and recasts.
 func _update_kit_row() -> void:
 	var lines: Array[Dictionary] = _player.kit.hud_lines()

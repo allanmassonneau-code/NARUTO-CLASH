@@ -62,16 +62,22 @@ godot --headless --fixed-fps 60 --path . res://tests/smoke_test.tscn
 Unit checks (health, energy, statuses, Kawarimi, interrupt, feint) + a full 2v2 bot match.
 
 ## Online
-Dedicated, server-authoritative: the server simulates every fighter, clients send inputs and
-mirror 30 Hz snapshots; the local fighter's movement is predicted and reconciled.
+Persistent shared world (`multiplayer/world_net.gd`), 10 players max: a cross map with the four
+villages (Suna north, Konoha west, Kiri east, Ame south) around a neutral centre (hard zone +
+Akatsuki boss), all connected without loading. Owner-authoritative: each client simulates its
+own shinobi, the server simulates the mobs and grants the XP; hits on another machine's
+fighter are forwarded to its owner. PvP everywhere outside the villages (same village too),
+except inside a party (P: online players, invitations, party frame and arrows).
+
+Accounts are created in the launcher (`core/net/account_store.gd`), 10 characters per account.
 
 ```
-# 1v1 server (UDP 7777) and 2v2 server (UDP 7778)
+# world server (UDP 7777) and account service (UDP 7778)
 godot --headless --path . -- --server --mode=1v1 --port=7777
 godot --headless --path . -- --server --mode=2v2 --port=7778
 ```
-In game: menu → Online → server address → "Online 1v1" / "Online 2v2". Players queue; a match starts
-when 2 (1v1) or 4 (2v2) players are waiting. A player who disconnects is replaced by a bot.
+The legacy arena (server-authoritative 1v1 / 2v2 matches) is still in the code but no longer
+reachable from the menus.
 
 Dev autopilot (headless bot clients, used for network tests):
 ```

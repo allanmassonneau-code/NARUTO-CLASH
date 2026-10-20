@@ -112,6 +112,8 @@ var _slam_source: CombatCharacter
 ## AUTHORITY: simulates (offline / server). PUPPET: mirrors snapshots.
 ## PREDICTED: local client fighter, predicts movement and reconciles.
 var net_mode: NetMode = NetMode.AUTHORITY
+## Open world puppet: casts are replayed locally (see WorldNet), their hits ignored.
+var replay_casts: bool = false
 
 var _net_target: Vector3 = Vector3.ZERO
 var _net_velocity: Vector3 = Vector3.ZERO
@@ -160,6 +162,9 @@ func _physics_process(delta: float) -> void:
 	match net_mode:
 		NetMode.PUPPET:
 			_follow_server(delta)
+			if replay_casts:   # open world: replays the owner's casts (visual only)
+				abilities.tick(delta, null)
+				kit.tick(delta)
 			return
 		NetMode.PREDICTED:
 			_predicted_process(delta)
@@ -441,6 +446,13 @@ func _is_frontal(hit: HitData) -> bool:
 ## Central damage pipeline: immaterial -> counter -> modifiers (empower,
 ## marks, rooted bonus) -> damage -> CC -> knockback -> on-hit effects.
 func receive_hit(hit: HitData) -> HitData.Result:
+	if WorldNet.active:
+		# Owner-authoritative open world: a replayed (puppet) cast never hits; a hit
+		# on a puppet goes to the machine that owns it.
+		if is_instance_valid(hit.source) and hit.source.net_mode == NetMode.PUPPET and not hit.remote:
+			return HitData.Result.IGNORED
+		if net_mode == NetMode.PUPPET:
+			return WorldNet.forward_hit(self, hit)
 	if is_dead() or status.has_status(StatusController.Type.IMMATERIAL) or kit.has_flag("untargetable"):
 		return HitData.Result.IGNORED
 	if status.has_status(StatusController.Type.COUNTER):
@@ -462,8 +474,6 @@ func receive_hit(hit: HitData) -> HitData.Result:
 	var a: AbilityData = hit.ability
 	var damage: float = hit.damage
 	var stun: float = hit.stun_duration
-	if is_instance_valid(hit.source) and hit.source.status.has_status(StatusController.Type.EMPOWER):
-		damage *= StatusController.EMPOWER_MULTIPLIER
 	if a != null:
 		var marks: int = status.get_stacks(StatusController.Type.MARK)
 		if a.mark_bonus_damage > 0.0 and marks > 0:
@@ -475,11 +485,8 @@ func receive_hit(hit: HitData) -> HitData.Result:
 			damage += a.bonus_vs_rooted
 			status.remove_status(StatusController.Type.ROOT)
 	# Technique kits: damage modifiers, on-deal / on-take hooks, resistances.
-	if is_instance_valid(hit.source) and hit.source != self:
-		damage *= hit.source.kit.modifier_mult("damage_dealt")
-		if a != null and hit.source.abilities.is_basic_attack(a):
-			damage *= hit.source.kit.modifier_mult("basic_damage") * (1.0 + float(hit.source.data.stat_bonuses.get(&"melee_power", 0.0)))
-		damage = hit.source.kit.on_deal(self, hit, damage)
+	if not hit.remote:
+		damage = attacker_damage(hit, damage)
 	damage *= kit.modifier_mult("damage_taken") * (1.0 - float(data.stat_bonuses.get(&"resistance", 0.0)))
 	damage = kit.on_take(hit, damage)
 	if kit.has_flag("cc_immune"):
@@ -505,7 +512,7 @@ func receive_hit(hit: HitData) -> HitData.Result:
 		sprinting = false
 		if is_instance_valid(hit.source) and hit.source != self:
 			hit.source._combat_left = COMBAT_TIMEOUT
-	if damage > 0.0 and is_instance_valid(hit.source) and hit.source != self:
+	if damage > 0.0 and is_instance_valid(hit.source) and hit.source != self and not hit.remote:
 		var steal: float = hit.source.kit.modifier_sum("lifesteal")
 		if steal > 0.0:
 			hit.source.health.heal(damage * steal)
@@ -549,11 +556,24 @@ func receive_hit(hit: HitData) -> HitData.Result:
 			var stolen: float = minf(a.energy_drain, energy.current_energy)
 			energy.sync_state(energy.current_energy - stolen)
 			hit.source.energy.gain(stolen)
-	if is_instance_valid(hit.source) and hit.source != self:
+	if is_instance_valid(hit.source) and hit.source != self and not hit.remote:
 		hit.source.energy.gain(hit.energy_gain)
 	_check_passive()
 	hit_received.emit(hit)
 	return HitData.Result.HIT
+
+
+## Attacker side of the damage: empower, kit modifiers, on-deal hooks (run on
+## the attacker's machine when the hit is forwarded).
+func attacker_damage(hit: HitData, damage: float) -> float:
+	if not is_instance_valid(hit.source) or hit.source == self:
+		return damage
+	if hit.source.status.has_status(StatusController.Type.EMPOWER):
+		damage *= StatusController.EMPOWER_MULTIPLIER
+	damage *= hit.source.kit.modifier_mult("damage_dealt")
+	if hit.ability != null and hit.source.abilities.is_basic_attack(hit.ability):
+		damage *= hit.source.kit.modifier_mult("basic_damage") * (1.0 + float(hit.source.data.stat_bonuses.get(&"melee_power", 0.0)))
+	return hit.source.kit.on_deal(self, hit, damage)
 
 
 func _perfect_parry(hit: HitData) -> void:
@@ -748,6 +768,46 @@ func apply_snapshot(data: PackedFloat32Array, o: int) -> void:
 		velocity = _net_velocity
 	else:
 		_reconcile(acked)
+
+
+## Open world: compact state of an owned fighter (owner -> server -> others).
+const WORLD_STATUSES: Array[StatusController.Type] = [StatusController.Type.STUN, StatusController.Type.LAUNCHED,
+	StatusController.Type.IMMATERIAL, StatusController.Type.ROOT, StatusController.Type.SLOW, StatusController.Type.EMPOWER,
+	StatusController.Type.INCAPACITATE]
+const WORLD_STRIDE: int = 12 + 7
+
+
+func write_world_state(out: PackedFloat32Array) -> void:
+	var f: Vector3 = facing.facing_direction
+	var flags: int = (1 if guarding else 0) | (2 if concentrating else 0) | (4 if sprinting else 0) | (8 if walking else 0) | (16 if visible else 0)
+	out.append_array([global_position.x, global_position.z, velocity.x, velocity.z, atan2(f.x, f.z),
+		health.current_health, health.max_health, health.shield, float(flags), air_time, facing.aim_point.x, facing.aim_point.z])
+	for type: StatusController.Type in WORLD_STATUSES:
+		out.append(status.get_remaining(type))
+
+
+func apply_world_state(data: PackedFloat32Array, o: int) -> void:
+	_net_target = Vector3(data[o], 0.0, data[o + 1])
+	_net_velocity = Vector3(data[o + 2], 0.0, data[o + 3])
+	_net_age = 0.0
+	var angle: float = data[o + 4]
+	facing.set_direction(Vector3(sin(angle), 0.0, cos(angle)))
+	health.max_health = maxf(data[o + 6], 1.0)
+	health.sync_state(data[o + 5], health.recoverable_health)
+	health.shield = data[o + 7]
+	var flags: int = int(data[o + 8])
+	guarding = flags & 1 != 0
+	concentrating = flags & 2 != 0
+	sprinting = flags & 4 != 0
+	walking = flags & 8 != 0
+	visible = flags & 16 != 0
+	air_time = data[o + 9]
+	facing.aim_point = Vector3(data[o + 10], 0.0, data[o + 11])
+	for i in WORLD_STATUSES.size():
+		status.sync_remaining(WORLD_STATUSES[i], data[o + 12 + i])
+	collision_layer = 0 if is_dead() or not visible else LAYER_CHARACTERS
+	if global_position.distance_to(_net_target) > 12.0:
+		global_position = _net_target   # first state / respawn: no slide across the map
 
 
 ## Client: keeps a visual clone replica in sync with the server's clone.

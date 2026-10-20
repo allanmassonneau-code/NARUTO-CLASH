@@ -12,6 +12,11 @@ var root_duration: float = 0.0
 var knockback_velocity: Vector3 = Vector3.ZERO
 var knockback_duration: float = 0.0
 var energy_gain: float = 0.0
+## Open world online: the hit was computed on another machine (attacker-side
+## modifiers already applied) and forwarded to the target's owner.
+var remote: bool = false
+## Technique extras (Tk.hit opts) applied after a landed hit.
+var opts: Dictionary = {}
 
 
 static func from_ability(from: CombatCharacter, data: AbilityData, direction: Vector3) -> HitData:

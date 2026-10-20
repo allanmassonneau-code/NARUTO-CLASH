@@ -46,6 +46,9 @@ var _accounts := AccountStore.new()
 
 
 func _ready() -> void:
+	var world_net := WorldNet.new()
+	world_net.name = "World"
+	add_child(world_net)
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
@@ -96,7 +99,8 @@ func start_server(mode: String, port: int) -> void:
 	server_mode = mode
 	Engine.max_fps = 60
 	print("[server] %s v%s listening on UDP %d" % [mode, game_version(), port])
-	get_tree().change_scene_to_file.call_deferred(SERVER_IDLE_SCENE)
+	# The persistent server runs the shared open world (mobs, players, parties).
+	get_tree().change_scene_to_file.call_deferred(ShinobiScreen.WORLD_SCENE if mode == "1v1" else SERVER_IDLE_SCENE)
 
 
 ## The second server instance (UDP 7778) is the launcher's account service.
@@ -126,6 +130,7 @@ func _on_peer_disconnected(peer_id: int) -> void:
 	if not is_server():
 		return
 	print("[server] peer %d left" % peer_id)
+	($World as WorldNet).on_peer_left(peer_id)
 	_peers.erase(peer_id)
 	if _in_match and _match_peers.has(peer_id):
 		_match_peers.erase(peer_id)
@@ -410,8 +415,8 @@ func delete_character(character_id: String) -> void:
 @rpc("any_peer", "call_remote", "reliable")
 func c2s_profile_request(action: Dictionary) -> void:
 	var account: String = _account_of_sender()
-	if account == "":
-		return
+	if account == "" or str(action.get("action", "")) == "report_kill":
+		return   # kills are granted by the shared world (server), never claimed
 	var handled: Dictionary = Profiles.server_request(account, action)
 	_send_profile(multiplayer.get_remote_sender_id(), handled.profile, handled.result)
 
@@ -423,6 +428,20 @@ func s2c_profile(profile_data: Dictionary, ok: bool, error: String, events: Arra
 
 func _send_profile(peer_id: int, profile: CharacterProfile, result: ProgressionResult) -> void:
 	s2c_profile.rpc_id(peer_id, profile.to_dict() if profile != null else {}, result.ok, String(result.error), result.events)
+
+
+## Server: character id selected by a peer ("" if none).
+func account_of(peer_id: int) -> String:
+	return str(_peers.get(peer_id, {}).get("account", ""))
+
+
+## Server: XP for a mob killed in the shared world.
+func grant_kill(peer_id: int, mob_id: StringName) -> void:
+	var account: String = account_of(peer_id)
+	if account == "":
+		return
+	var handled: Dictionary = Profiles.server_request(account, {"action": "report_kill", "mob": mob_id})
+	_send_profile(peer_id, handled.profile, handled.result)
 
 
 func _account_of_sender() -> String:

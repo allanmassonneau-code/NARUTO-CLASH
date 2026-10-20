@@ -10,6 +10,8 @@ signal cast_activated(slot: StringName, ability: AbilityData)
 signal cast_cancelled(slot: StringName, ability: AbilityData)
 signal cast_interrupted(slot: StringName, ability: AbilityData)
 signal cast_finished(slot: StringName, ability: AbilityData)
+## A design-bible recast fired (second press inside the window).
+signal recast_fired(slot: StringName)
 
 ## j1..j6: the six technique slots of the shinobi (keys 1 to 6).
 const SLOTS: Array[StringName] = [&"lmb", &"rmb", &"space", &"q", &"e", &"ult", &"j1", &"j2", &"j3", &"j4", &"j5", &"j6"]
@@ -21,6 +23,8 @@ const COMBO_CANCEL_RATIO: float = 0.4
 
 var character: CombatCharacter
 var cooldowns_disabled: bool = false
+## Open world puppet: replayed casts cost nothing (the owner already paid).
+var free_casts: bool = false
 var phase: Phase = Phase.IDLE
 var current: AbilityData
 var current_slot: StringName = &""
@@ -330,6 +334,7 @@ func try_cast(slot: StringName) -> bool:
 			and phase != Phase.STARTUP and character.status.can_act() and not character.is_dead():
 		# Design-bible recast: second press inside the window (free).
 		character.kit.fire_recast(ability.source_id)
+		recast_fired.emit(slot)
 		return true
 	if ability == null or phase != Phase.IDLE or character.is_dead():
 		return false
@@ -420,10 +425,11 @@ func _finish_recovery() -> void:
 
 
 func _activate() -> void:
-	if not character.energy.consume(current.energy_cost):
-		_clear_cast()
-		return
-	character.spend_stamina(current.stamina_cost)
+	if not free_casts:
+		if not character.energy.consume(current.energy_cost):
+			_clear_cast()
+			return
+		character.spend_stamina(current.stamina_cost)
 	phase = Phase.ACTIVE
 	phase_elapsed = 0.0
 	cast_direction = character.facing.facing_direction
@@ -452,3 +458,56 @@ func _clear_cast() -> void:
 	current = null
 	current_slot = &""
 	phase_elapsed = 0.0
+
+
+# --- Open world replay (see WorldNet) ----------------------------------------------
+
+## Network reference of an ability: slot index + depth in its combo string.
+func ability_ref(a: AbilityData) -> Vector2i:
+	if a == null:
+		return Vector2i(-1, 0)
+	for i in SLOTS.size():
+		var depth: int = 0
+		var b: AbilityData = get_base_ability(SLOTS[i])
+		while b != null and depth < 16:
+			if b == a:
+				return Vector2i(i, depth)
+			b = b.combo_next
+			depth += 1
+		if a == get_ability(SLOTS[i]):
+			return Vector2i(i, 0)
+	return Vector2i(-1, 0)
+
+
+func ability_from_ref(ref: Vector2i) -> AbilityData:
+	if ref.x < 0 or ref.x >= SLOTS.size():
+		return null
+	var a: AbilityData = get_base_ability(SLOTS[ref.x])
+	for i in ref.y:
+		if a == null:
+			break
+		a = a.combo_next
+	return a if a != null else get_ability(SLOTS[ref.x])
+
+
+## Puppet: plays the owner's cast (same ability, toward `aim`), whatever its state.
+func replay_cast(ref: Vector2i, aim: Vector3) -> void:
+	var ability: AbilityData = ability_from_ref(ref)
+	if ability == null or character.is_dead():
+		return
+	if phase != Phase.IDLE:
+		interrupt()
+	character.facing.update_aim(character.global_position, aim)
+	current = ability
+	current_slot = SLOTS[ref.x]
+	phase = Phase.STARTUP
+	phase_elapsed = 0.0
+	_hit_this_cast.clear()
+	if ability.startup_time <= 0.0:
+		_activate()
+
+
+func replay_recast(slot_index: int) -> void:
+	var a: AbilityData = get_ability(SLOTS[slot_index]) if slot_index >= 0 and slot_index < SLOTS.size() else null
+	if a != null and a.source_id != &"" and character.kit.has_recast(a.source_id):
+		character.kit.fire_recast(a.source_id)
