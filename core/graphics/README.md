@@ -77,6 +77,16 @@ icône à **chaque technique** (`BY_ID`, choisie d'après l'effet ; repli par ki
 universelles et les persos du roster). Affichées dans la barre du HUD, le menu des techniques (B) et
 l'écran SHINOBI (arbres, équipement, compétences).
 
+## Sons et musiques Shinobi Striker
+
+`_ss_local\export_audio.ps1` lit `SD_Default.bnk` (+ son listing `.txt`) et les musiques streamées
+(`.wem` des paks), décode l'ADPCM Wwise (`_ss_local\WemAdpcm.cs`, aucun outil externe) et écrit
+`_ss_local/sfx` (combat, déplacements, pas par sol, UI, ambiances, sons par jutsu SS dans `sfx/tech/`),
+`_ss_local/music` (titre, village, forêt, combat, boss, victoire / défaite) et `sfx/catalog.json`.
+Import Godot en QOA, musiques et ambiances en boucle. `core/fx/ss_audio.gd` : `Sfx.play` prend le son
+SS quand il existe ; chaque technique joue le son de lancement / impact de son jutsu SS (même nom que
+son icône, repli sur l'élément) ; musique + ambiance selon la zone (`World`), le combat et le menu.
+
 ## Vrais décors Shinobi Striker
 
 `nsdump glbstatic <ziel.glb> <StaticMesh> [texOrdner]` décode un StaticMesh SS (LOD0, palette BC,

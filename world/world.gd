@@ -131,6 +131,37 @@ func _physics_process(delta: float) -> void:
 		_player_respawn -= delta
 		if _player_respawn <= 0.0:
 			_respawn_player()
+	_update_audio()
+
+
+const ZONE_SURFACE: Dictionary = {&"grass": &"grass", &"forest_ground": &"grass", &"sand": &"sand", &"stone": &"rock"}
+
+
+## Shinobi Striker music, ambience and footstep surface for the zone the player is in.
+func _update_audio() -> void:
+	var at: Vector3 = player.global_position
+	if absf(at.x) <= VILLAGE_HALF and absf(at.z) <= VILLAGE_HALF:
+		SSAudio.music(&"village")
+		SSAudio.ambience(&"amb_village")
+		SSAudio.surface = &"sand" if Profiles.profile != null and Profiles.profile.village_id == &"suna" else &"dirt"
+		return
+	var zone: Dictionary = {}
+	for z: Dictionary in ZONES:
+		if at.x >= z.from and at.x < z.to:
+			zone = z
+	SSAudio.surface = ZONE_SURFACE.get(zone.get("surface", &"grass"), &"dirt")
+	SSAudio.ambience(&"amb_forest")
+	if zone.get("level", "") == "Boss":
+		SSAudio.music(&"boss")
+	elif zone.get("level", "") == "Difficile":
+		SSAudio.music(&"forest_battle")
+	else:
+		SSAudio.music(&"forest")
+
+
+func _exit_tree() -> void:
+	SSAudio.music(&"")
+	SSAudio.ambience(&"")
 
 
 ## Zone the player stands in ("Village" inside the walls).

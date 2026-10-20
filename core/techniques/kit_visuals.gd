@@ -165,6 +165,7 @@ static func fx(anchor: Node, effect: String, at: Vector3, radius: float, color: 
 	# Shinobi Striker sprites (local assets): the technique's SS profile replaces the
 	# procedural shape when SS has an equivalent; telegraph-like shapes are kept.
 	if tech_id != &"":
+		SSAudio.play_tech(tech_id, "impact", ground, -3.0)  # SS jutsu impact sound (throttled)
 		if SSVfx.tech_effect(tech_id, anchor, effect, ground, radius):
 			return
 	else:

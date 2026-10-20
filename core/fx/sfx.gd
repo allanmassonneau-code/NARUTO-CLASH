@@ -33,8 +33,23 @@ static func warm_up() -> void:
 static func play(id: StringName, at: Vector3 = Vector3.INF, gain_db: float = 0.0, pitch: float = 1.0) -> void:
 	if not CombatFx.is_enabled():
 		return
-	var stream: AudioStreamWAV = _stream(id)
+	# Shinobi Striker sound when exported, else the synthesised one.
+	var stream: AudioStream = SSAudio.event(id)
+	if stream != null:
+		gain_db += SS_GAIN_DB
+	else:
+		stream = _stream(id)
 	if stream == null:
+		return
+	play_stream(stream, at, gain_db, pitch)
+
+
+## Gain added to Shinobi Striker samples (mastered quieter than the synth).
+const SS_GAIN_DB: float = 4.0
+
+
+static func play_stream(stream: AudioStream, at: Vector3 = Vector3.INF, gain_db: float = 0.0, pitch: float = 1.0) -> void:
+	if not CombatFx.is_enabled() or stream == null:
 		return
 	var player: AudioStreamPlayer = _player()
 	if player == null:

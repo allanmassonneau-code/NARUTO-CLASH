@@ -29,6 +29,8 @@ var _dot_pending: float = 0.0
 var _dot_timer: float = 0.0
 var _was_stunned: bool = false
 var _was_dead: bool = false
+var _was_airborne: bool = false
+var _step_timer: float = 0.0
 var _was_immaterial: bool = false
 var _was_parry: bool = false
 var _was_silenced: bool = false
@@ -146,6 +148,7 @@ func _process(delta: float) -> void:
 	if _flash > 0.0:
 		tint = Color(1.0, 0.15, 0.15, 0.6)
 	var planar_speed: float = Vector2(_character.velocity.x, _character.velocity.z).length()
+	_movement_sounds(delta, planar_speed)
 	model.animate(delta, planar_speed, pose, tint, fade)
 	visual_pivot.rotation.x = deg_to_rad(-85.0) if _character.is_dead() else (deg_to_rad(-35.0) if _character.is_launched() else 0.0)
 	visual_pivot.position.y = 0.25 if _character.is_dead() else _character.jump_height()
@@ -162,7 +165,10 @@ func _on_damaged(amount: float) -> void:
 	model.hitstop(0.09 if heavy else 0.05)
 	CombatFx.sparks(_character, _character.global_position + Vector3.UP * 1.1, ROLE_COLORS[_role], 14 if heavy else 8)
 	if _character.guarding:
-		Sfx.play(&"orb_hit", _character.global_position, -2.0, 0.6)  # blocked: metallic clank
+		if SSAudio.has_event(&"guard"):
+			Sfx.play(&"guard", _character.global_position, -2.0)
+		else:
+			Sfx.play(&"orb_hit", _character.global_position, -2.0, 0.6)  # blocked: metallic clank
 	Sfx.play(&"hit_heavy" if heavy else &"hit", _character.global_position, 0.0 if _role == Role.LOCAL_PLAYER else -2.0)
 	var at: Vector3 = _character.global_position
 	if _character.guarding:
@@ -457,7 +463,33 @@ func _audio_cues() -> void:
 	_was_break = broken
 
 
+## Shinobi Striker footsteps, jump and landing (only with SS sounds exported).
+func _movement_sounds(delta: float, planar_speed: float) -> void:
+	if not SSAudio.available() or _character.is_dead():
+		return
+	var gain: float = -8.0 if _role == Role.LOCAL_PLAYER else -13.0
+	var pos: Vector3 = _character.global_position
+	var airborne: bool = _character.is_airborne()
+	if airborne and not _was_airborne:
+		Sfx.play(&"jump", pos, gain + 2.0)
+	elif not airborne and _was_airborne:
+		Sfx.play(&"land", pos, gain + 2.0)
+		_step_timer = 0.2
+	_was_airborne = airborne
+	if airborne or planar_speed < 1.5:
+		_step_timer = minf(_step_timer, 0.1)
+		return
+	_step_timer -= delta
+	if _step_timer <= 0.0:
+		_step_timer = clampf(2.4 / planar_speed, 0.2, 0.42)
+		SSAudio.step(pos, gain)
+
+
 func _cast_sound(a: AbilityData, phase: int) -> void:
+	# The technique's own Shinobi Striker jutsu sound, when it has one.
+	if phase == AbilityController.Phase.STARTUP and a.source_id != &"" \
+			and SSAudio.play_tech(a.source_id, "cast", _character.global_position, -2.0, a.display_name):
+		return
 	if phase == AbilityController.Phase.STARTUP:
 		match a.vfx:
 			&"chidori", &"raikiri", &"kirin":

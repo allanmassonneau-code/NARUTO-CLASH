@@ -79,6 +79,9 @@ func _ready() -> void:
 	characters_root.add_child(rules)
 	if GameSession.net_role != GameSession.NetRole.SERVER:
 		Sfx.warm_up()
+		SSAudio.music(&"battle")
+		SSAudio.ambience(&"amb_forest" if is_battle() else &"")
+		state_changed.connect(_state_audio)
 		_set_cursor()
 		OptionsPanel.attach(self)
 	Net.register_match(self)
@@ -299,6 +302,14 @@ func _set_cursor() -> void:
 func _exit_tree() -> void:
 	if GameSession.net_role != GameSession.NetRole.SERVER:
 		Input.set_custom_mouse_cursor(null)
+		SSAudio.music(&"")
+		SSAudio.ambience(&"")
+
+
+## Shinobi Striker result music for the local player's team.
+func _state_audio(new_state: State, _message: String) -> void:
+	if new_state == State.MATCH_OVER and player != null:
+		SSAudio.music(&"win" if scores[player.team] > scores[1 - player.team] else &"lose")
 
 
 func _set_state(new_state: State, message: String) -> void:

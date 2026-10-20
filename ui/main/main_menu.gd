@@ -15,6 +15,8 @@ func _ready() -> void:
 	_screen.embedded = true
 	add_child(_screen)
 	OptionsPanel.attach(self)
+	SSAudio.music(&"title")
+	SSAudio.ambience(&"")
 	Net.status_changed.connect(_on_status)
 	Net.connection_closed.connect(func(_reason: String) -> void: _retry.start())
 	_retry = Timer.new()
