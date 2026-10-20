@@ -10,7 +10,7 @@ const CHARACTER_SHADER: Shader = preload("res://core/graphics/shaders/ss_charact
 ## Avatar built from the SS character-creation parts (face, body upper/lower, hair).
 const DEFAULT_AVATAR: StringName = &"avatar_male"
 ## Clips that loop.
-const LOOPS: Array[StringName] = [&"idle", &"run", &"walk", &"fall", &"guard", &"stunned", &"charge_run", &"concentrate"]
+const LOOPS: Array[StringName] = [&"idle", &"run", &"walk", &"fall", &"guard", &"stunned", &"charge_run", &"concentrate", &"jog"]
 
 static var _scenes: Dictionary = {}
 static var _materials: Dictionary = {}

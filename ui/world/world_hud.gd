@@ -247,7 +247,7 @@ func _build() -> void:
 	_move_mode.offset_right = 300
 	_move_mode.offset_top = -215
 	_move_mode.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var hint_text: String = "B : techniques  ·  Alt : marcher / courir  ·  %s %s : course de chakra  ·  Espace : saut  ·  %s (maintenir) : concentration  ·  F : garde  ·  Échap : menu SHINOBI  ·  O : options" % [key_label(KEY_W), key_label(KEY_W), key_label(KEY_R)]
+	var hint_text: String = "B : techniques  ·  Alt : marcher / courir  ·  déplacement ×2 : course de chakra  ·  Espace : saut  ·  %s (maintenir) : concentration  ·  F : garde  ·  Échap : menu SHINOBI  ·  O : options" % key_label(KEY_R)
 	var hint := UiStyle.label(_root, hint_text, 13, UiStyle.MUTED, 700)
 	hint.position = Vector2(20, 104)
 	_toast = UiStyle.label(_root, "", 20, Color.WHITE, 900)

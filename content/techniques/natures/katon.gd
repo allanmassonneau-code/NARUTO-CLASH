@@ -161,7 +161,7 @@ class CometeIncendiaire extends Technique:
 						for e: CombatCharacter in o.enemies_inside():
 							t.hit(e, t.dmg(0.12))})})
 		t.recast(1.5, func(rt: Tk) -> void:
-			if not ball.is_alive():
+			if not is_instance_valid(ball) or not ball.is_alive():
 				return
 			var at: Vector3 = ball.ground_point()
 			ball.end("recast")

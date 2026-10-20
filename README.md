@@ -18,7 +18,7 @@ Options: **O** (or the gear button) for volumes, mute, spatial sound, fullscreen
 | 1 – 6 | Equipped techniques (cost chakra + cooldown) |
 | Shift | Universal dash (brief invulnerability, 3.5 s cooldown) |
 | Space | Jump (clears ground areas) |
-| (default) | Run · **Alt** toggles walk / run · **double tap forward (Z on AZERTY)**: chakra sprint (×1.75 speed, drains 6 chakra/s, no chakra regen; refused in combat = 5 s after dealing or taking damage; ends when you stop, act or get hit) |
+| (default) | Run · **Alt** toggles walk / run · **double tap any movement key**: chakra sprint (×1.75 speed, drains 6 chakra/s, no chakra regen; refused in combat = 5 s after dealing or taking damage; ends when you stop, act or get hit) |
 | Q (A on AZERTY) | Substitution: saves your spot and shows a zone; while you stay in it, the next hit is negated and you reappear on the spot. 1 charge, 50 s recharge |
 | R (hold) | Concentration: immobile, chakra regenerates 6x faster; hits deal +25% and break it |
 | B | Combat menu (no pause): learned techniques by category (favorites, natures, clan, specialization, sub-jutsu); click to place one in the selected bar slot, or hover + 1–6. Cooldowns follow the technique |

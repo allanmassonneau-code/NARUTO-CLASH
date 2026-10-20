@@ -506,6 +506,11 @@ func _ss_hand(skel: Skeleton3D, names: Array, fallback: Vector3) -> Node3D:
 	return _pivot(self, fallback)
 
 
+## Set by the presentation: chakra sprint uses the ninja run clip, normal
+## running a distinct "jog" clip when the model has one.
+var sprinting: bool = false
+
+
 func _animate_ss(delta: float, planar_speed: float, pose: StringName) -> void:
 	if _ss_anim == null:
 		return
@@ -518,8 +523,12 @@ func _animate_ss(delta: float, planar_speed: float, pose: StringName) -> void:
 	var speed: float = 1.0
 	if p == "":
 		if planar_speed > 3.5:
-			clip = &"run"
-			speed = clampf(planar_speed / 7.0, 0.75, 1.5)
+			if sprinting or not _ss_anim.has_animation(&"jog"):
+				clip = &"run"
+				speed = clampf(planar_speed / (12.0 if sprinting else 7.0), 0.75, 1.5)
+			else:
+				clip = &"jog"
+				speed = clampf(planar_speed / 7.0, 0.75, 1.5)
 		elif planar_speed > 0.3:
 			clip = &"walk"
 			speed = clampf(planar_speed / 1.8, 0.6, 1.5)

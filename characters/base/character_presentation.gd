@@ -122,6 +122,7 @@ func _process(delta: float) -> void:
 	if _character.guarding and pose == &"" and not abilities.is_casting():
 		pose = &"guard:windup"
 		tint = Color(0.6, 0.8, 1.0, 0.12)
+	model.sprinting = _character.sprinting
 	if _character.sprinting:
 		_sprint_trail -= delta
 		if _sprint_trail <= 0.0:

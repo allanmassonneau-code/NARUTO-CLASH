@@ -36,6 +36,7 @@ var travelled: float = 0.0
 var age: float = 0.0
 var _start: Vector3
 var _flight_time: float = 0.0
+var _started: bool = false
 var _already: Array[CombatCharacter] = []
 var _done: bool = false
 var _visual: Node3D
@@ -44,9 +45,6 @@ var _visual: Node3D
 func _ready() -> void:
 	add_to_group(&"tk_projectiles")
 	add_to_group(&"round_entities")
-	_start = global_position
-	if lob:
-		_flight_time = maxf(0.15, HitQuery.flat(lob_to - _start).length() / maxf(speed, 0.1))
 	if CombatFx.is_enabled():
 		_visual = KitVisuals.projectile_visual(self)
 		add_child(_visual)
@@ -55,6 +53,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if _done:
 		return
+	if not _started:
+		# The spawner places us after add_child (_ready runs before that).
+		_started = true
+		_start = global_position
+		if lob:
+			_flight_time = maxf(0.15, HitQuery.flat(lob_to - _start).length() / maxf(speed, 0.1))
 	age += delta
 	if on_tick.is_valid():
 		on_tick.call(self, delta)
