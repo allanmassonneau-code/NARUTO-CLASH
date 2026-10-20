@@ -168,8 +168,12 @@ func _run() -> void:
 	_check(not menu.is_open(), "and closes it")
 
 	# Projection: launch, automatic aerial pursuit, fall.
-	var launcher: AbilityData = JutsuAbilityFactory.build(Profiles.db.get_jutsu(&"katon_c_comete_incendiaire"), Profiles.db)
-	_check(launcher.launch_duration > 0.0, "LAUNCH-tagged techniques project the target")
+	# Projection system itself (the bible's launchers call it from their scripts).
+	var launcher := AbilityData.new()
+	launcher.launch_duration = 1.1
+	var scripted: AbilityData = JutsuAbilityFactory.build(Profiles.db.get_jutsu(&"katon_c_comete_incendiaire"), Profiles.db)
+	_check(scripted.kind == AbilityData.Kind.SCRIPTED and scripted.launch_duration == 0.0,
+		"bible techniques are scripted (no generic tag effects)")
 	var mob: CombatCharacter = _world.mobs[0]
 	mob.controls_enabled = false
 	mob.global_position = _player.global_position + Vector3(3.0, 0.0, 0.0)

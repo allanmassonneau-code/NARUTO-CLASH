@@ -96,6 +96,20 @@ static func build(jutsu: JutsuData, db: ProgressionDatabase) -> AbilityData:
 		# script runs the mechanics.
 		a.kind = AbilityData.Kind.SCRIPTED
 		a.technique = technique
+		# The script owns every effect: drop the generic tag effects (slow on
+		# DEBUFF hits, Empower on BUFF casts, CC, heals...).
+		a.damage = 0.0
+		a.stun_duration = 0.0
+		a.root_duration = 0.0
+		a.slow_duration = 0.0
+		a.burn_duration = 0.0
+		a.knockback_speed = 0.0
+		a.launch_duration = 0.0
+		a.buff_empower = 0.0
+		a.buff_haste = 0.0
+		a.grant_shield = 0.0
+		a.heal_amount = 0.0
+		a.active_time = 0.05
 		a.max_range = maxf(a.max_range, 8.0)
 		technique.configure(a)
 	if tags.has(&"DEBUFF"):
