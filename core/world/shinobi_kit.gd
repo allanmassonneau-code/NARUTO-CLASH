@@ -2,9 +2,9 @@ class_name ShinobiKit
 ## Builds the combat definition (CharacterData) of the player's shinobi from
 ## the progression profile: grade + Tenketsu HP and speed, look from the
 ## village / clan, LMB taijutsu, Space shunshin, and the equipped techniques
-## on RMB, Q, E and R.
+## on the keys 1 to 6.
 
-const JUTSU_SLOTS: Array[StringName] = [&"rmb", &"q", &"e", &"ult"]
+const JUTSU_SLOTS: Array[StringName] = [&"j1", &"j2", &"j3", &"j4", &"j5", &"j6"]
 const VILLAGE_COLORS: Dictionary = {
 	&"konoha": [Color(0.32, 0.42, 0.28), Color(0.15, 0.2, 0.3)],
 	&"suna": [Color(0.7, 0.6, 0.42), Color(0.45, 0.35, 0.25)],

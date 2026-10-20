@@ -11,6 +11,12 @@ const SLOT_ACTIONS: Dictionary = {
 	&"q": "ability_q",
 	&"e": "ability_e",
 	&"ult": "ability_ult",
+	&"j1": "jutsu_1",
+	&"j2": "jutsu_2",
+	&"j3": "jutsu_3",
+	&"j4": "jutsu_4",
+	&"j5": "jutsu_5",
+	&"j6": "jutsu_6",
 }
 
 @export var camera: Camera3D

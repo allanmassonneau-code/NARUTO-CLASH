@@ -11,7 +11,8 @@ signal cast_cancelled(slot: StringName, ability: AbilityData)
 signal cast_interrupted(slot: StringName, ability: AbilityData)
 signal cast_finished(slot: StringName, ability: AbilityData)
 
-const SLOTS: Array[StringName] = [&"lmb", &"rmb", &"space", &"q", &"e", &"ult"]
+## j1..j6: the six technique slots of the shinobi (keys 1 to 6).
+const SLOTS: Array[StringName] = [&"lmb", &"rmb", &"space", &"q", &"e", &"ult", &"j1", &"j2", &"j3", &"j4", &"j5", &"j6"]
 
 ## An input pressed this long before the character is free is still executed.
 @export var input_buffer_window: float = 0.25

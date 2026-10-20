@@ -309,7 +309,7 @@ func _try_attack(dir: Vector3, dist: float) -> void:
 		if buff != null and buff.buff_empower > 0.0 and dist < 4.0 and _body.abilities.is_ready(slot):
 			_press(slot)
 			return
-	for slot: StringName in [&"ult", &"e", &"rmb", &"q", &"lmb"]:
+	for slot: StringName in [&"ult", &"j6", &"j5", &"j4", &"j3", &"j2", &"j1", &"e", &"rmb", &"q", &"lmb"]:
 		var a: AbilityData = _body.abilities.get_ability(slot)
 		if a != null and a.kind == AbilityData.Kind.COUNTER:
 			continue

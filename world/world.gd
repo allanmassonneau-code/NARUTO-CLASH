@@ -59,6 +59,7 @@ func _ready() -> void:
 	_spawn_mobs()
 	camera = ArenaCamera.new()
 	camera.fov = 40.0
+	camera.distance = 28.0
 	camera.cursor_offset_strength = 0.12
 	camera.max_cursor_offset = 2.5
 	camera.follow_smoothing = 16.0
@@ -254,198 +255,129 @@ func _build_environment(village: StringName) -> void:
 
 
 func _build_village(village: StringName) -> void:
-	var ground_color: Color = VILLAGE_GROUND.get(village, Color(0.42, 0.58, 0.32))
-	_ground(Vector3(0, -0.02, 0), Vector2(VILLAGE_HALF * 2.0, VILLAGE_HALF * 2.0), ground_color)
-	_ground(Vector3(0, -0.01, 0), Vector2(14, 14), ground_color.lerp(Color(0.7, 0.6, 0.45), 0.6))  # plaza
-	_ground(Vector3(VILLAGE_HALF * 0.5, -0.01, 0), Vector2(VILLAGE_HALF, 6), Color(0.7, 0.6, 0.45))  # road to the gate
-	var wall_color := Color(0.62, 0.5, 0.38) if village != &"suna" else Color(0.8, 0.7, 0.5)
+	var d := WorldDecor.new(self, 11)
 	var h: float = VILLAGE_HALF
-	_wall(Vector3(0, 0, -h), Vector3(h * 2.0, 3.0, 1.2), wall_color)
-	_wall(Vector3(0, 0, h), Vector3(h * 2.0, 3.0, 1.2), wall_color)
-	_wall(Vector3(-h, 0, 0), Vector3(1.2, 3.0, h * 2.0), wall_color)
+	var grass: Color = VILLAGE_GROUND.get(village, Color(0.42, 0.58, 0.32))
+	var stone := Color(0.5, 0.47, 0.43)
+	var wall_color := Color(0.55, 0.42, 0.3) if village != &"suna" else Color(0.8, 0.7, 0.5)
+	var roof_color: Color = {&"konoha": Color(0.25, 0.35, 0.5), &"suna": Color(0.72, 0.6, 0.42),
+		&"ame": Color(0.3, 0.3, 0.38), &"kiri": Color(0.28, 0.42, 0.55)}.get(village, Color(0.3, 0.35, 0.5))
+	d.ground(Vector3(0, -0.02, 0), Vector2(h * 2.0, h * 2.0), grass.darkened(0.25))
+	# Roads (main street to the gate, cross street) and the round plaza.
+	d.ground(Vector3(h * 0.5, -0.01, 0), Vector2(h, 5.0), stone.darkened(0.15))
+	d.ground(Vector3(0, -0.012, 0), Vector2(4.0, h * 2.0), stone.darkened(0.15))
+	d.disk(Vector3(0, 0.0, 0), 8.0, stone)
+	d.disk(Vector3(0, 0.01, 0), 7.2, stone.lightened(0.08))
+	var on_road := func(p: Vector3) -> bool:
+		return absf(p.z) < 3.2 and p.x > -1.0 or absf(p.x) < 2.6 or p.length() < 8.5
+	d.grass(Vector2(-h + 1, -h + 1), Vector2(h - 1, h - 1), 900, grass.lightened(0.05), on_road)
+	d.flowers(Vector2(-h + 1, -h + 1), Vector2(h - 1, h - 1), 240, on_road)
+	# Walls with a darker cap, and the gate.
 	var side: float = (h * 2.0 - GATE_HALF_WIDTH * 2.0) / 2.0
-	_wall(Vector3(h, 0, -(GATE_HALF_WIDTH + side / 2.0)), Vector3(1.2, 3.0, side), wall_color)
-	_wall(Vector3(h, 0, GATE_HALF_WIDTH + side / 2.0), Vector3(1.2, 3.0, side), wall_color)
-	# Gate.
-	var gate_color := Color(0.25, 0.45, 0.25) if village == &"konoha" else wall_color.darkened(0.3)
-	for z: float in [-GATE_HALF_WIDTH, GATE_HALF_WIDTH]:
-		_solid_box(Vector3(h, 0, z), Vector3(1.6, 6.0, 1.6), gate_color)
-	_box(Vector3(h, 6.2, 0), Vector3(2.0, 1.2, GATE_HALF_WIDTH * 2.0 + 1.6), gate_color)
-	_label(Vector3(h + 1.1, 6.2, 0), VILLAGE_NAMES.get(village, ""), 96, Color.WHITE, Vector3(0, 90, 0))
-	# Kage tower and houses.
-	_solid_box(Vector3(-14, 0, -12), Vector3(9, 9, 9), Color(0.75, 0.3, 0.25) if village == &"konoha" else wall_color.lightened(0.15))
-	_roof(Vector3(-14, 9, -12), 7.0, Color(0.55, 0.15, 0.12))
-	_label(Vector3(-14, 11.5, -12), "Bureau du Kage", 64, Color.WHITE)
-	var houses: Array = [[-16, 10], [-4, -16], [8, -16], [-6, 16], [8, 15], [17, -6], [17, 10], [-18, 1]]
+	for wall: Array in [[Vector3(0, 0, -h), Vector3(h * 2.0, 3.0, 1.2)], [Vector3(0, 0, h), Vector3(h * 2.0, 3.0, 1.2)],
+			[Vector3(-h, 0, 0), Vector3(1.2, 3.0, h * 2.0)], [Vector3(h, 0, -(GATE_HALF_WIDTH + side / 2.0)), Vector3(1.2, 3.0, side)],
+			[Vector3(h, 0, GATE_HALF_WIDTH + side / 2.0), Vector3(1.2, 3.0, side)]]:
+		d.solid_box(wall[0], wall[1], wall_color)
+		d.box(wall[0] + Vector3.UP * 3.1, wall[1] + Vector3(0.3, -2.8, 0.3), wall_color.darkened(0.35))
+	d.torii(Vector3(h, 0, 0), GATE_HALF_WIDTH * 2.0, Color(0.75, 0.15, 0.12) if village == &"konoha" else wall_color.darkened(0.2))
+	d.label(Vector3(h + 0.8, 7.6, 0), VILLAGE_NAMES.get(village, ""), 110, Color.WHITE)
+	# Kage building, statue, houses.
+	d.kage_tower(Vector3(-15, 0, -13), Color(0.85, 0.35, 0.28) if village == &"konoha" else wall_color.lightened(0.25), Color(0.7, 0.15, 0.12), "火" if village == &"konoha" else VILLAGE_NAMES.get(village, "").left(1))
+	d.label(Vector3(-15, 14.0, -13), "Bureau du Kage", 64, Color.WHITE)
+	d.statue(Vector3(-3, 0, 2), Color(0.55, 0.55, 0.6))
+	var houses: Array = [[-15, 12, 0], [-4, -18, 0], [7, -18, 0], [-17, 1, 90], [-5, 18, 180], [8, 18, 180], [16, -10, 0], [16, 11, 180], [-8, -8, 45], [9, -8, 0], [9, 9, 180]]
 	for p: Array in houses:
-		var size := Vector3(_rng.randf_range(5, 7), _rng.randf_range(3.5, 5.0), _rng.randf_range(5, 7))
-		_solid_box(Vector3(p[0], 0, p[1]), size, Color(0.85, 0.8, 0.7).darkened(_rng.randf_range(0.0, 0.2)))
-		_roof(Vector3(p[0], size.y, p[1]), maxf(size.x, size.z) * 0.62, Color(0.3, 0.42, 0.55).darkened(_rng.randf_range(0.0, 0.3)))
-	# Training posts on the plaza.
+		var size := Vector3(d.rng.randf_range(5.0, 7.0), d.rng.randf_range(3.5, 4.8), d.rng.randf_range(4.5, 6.0))
+		d.house(Vector3(p[0], 0, p[1]), size, Color(0.88, 0.83, 0.72).darkened(d.rng.randf_range(0.0, 0.15)), roof_color.darkened(d.rng.randf_range(0.0, 0.25)), p[2])
+	for x in range(4, int(h) - 2, 5):
+		for z: float in [-3.6, 3.6]:
+			d.lantern(Vector3(x, 0, z))
+	for t: Array in [[-22, -22], [-22, 22], [20, -21], [20, 21], [-10, 22], [2, -22], [-22, -6]]:
+		d.round_tree(Vector3(t[0], 0, t[1]), Color(1.0, 0.68, 0.8) if village == &"konoha" else Color(0.3, 0.55, 0.3), 0.9)
+	# Training ground.
+	d.fence(Vector3(-12, 0, 4), Vector3(-12, 0, 10))
 	for i in 3:
-		_solid_cylinder(Vector3(-2 + i * 2.2, 0, 5), 0.3, 1.6, Color(0.5, 0.35, 0.2))
-	_label(Vector3(0, 3.0, 5), "Terrain d'entraînement", 48, Color(1, 1, 0.8))
-	_label(Vector3(h - 4, 3.5, 0), "→ Terrains de chasse", 56, Color(1.0, 0.85, 0.4), Vector3(0, -90, 0))
+		d.solid_round(Vector3(-9 + i * 2.2, 0, 7), 0.3, 1.6)
+		d.cylinder(Vector3(-9 + i * 2.2, 0.8, 7), 0.28, 0.3, 1.6, Color(0.55, 0.38, 0.22), 8)
+	d.label(Vector3(-7, 3.0, 7), "Terrain d'entraînement", 46, Color(1, 1, 0.8))
+	d.label(Vector3(h - 4, 3.5, 0), "→ Terrains de chasse", 56, Color(1.0, 0.85, 0.4))
+	# Mountains around the village.
+	for i in 9:
+		var a: float = PI * 0.55 + i * PI * 0.11
+		d.mountain(Vector3(cos(a), 0, sin(a)) * 62.0, d.rng.randf_range(14.0, 22.0), d.rng.randf_range(16.0, 28.0), Color(0.42, 0.45, 0.42))
 
 
 func _build_field() -> void:
+	var d := WorldDecor.new(self, 23)
 	var length: float = FIELD_END_X - VILLAGE_HALF
-	_ground(Vector3(VILLAGE_HALF + length / 2.0, -0.03, 0), Vector2(length, FIELD_HALF_Z * 2.0), Color(0.45, 0.58, 0.32))
-	_ground(Vector3(VILLAGE_HALF + length / 2.0, -0.04, 0), Vector2(600, 400), Color(0.3, 0.42, 0.25))  # outside
+	var center_x: float = VILLAGE_HALF + length / 2.0
+	d.ground(Vector3(center_x, -0.05, 0), Vector2(800, 500), Color(0.22, 0.32, 0.2))  # beyond the borders
 	for zone: Dictionary in ZONES:
 		var w: float = zone.to - zone.from
-		_ground(Vector3(zone.from + w / 2.0, -0.02, 0), Vector2(w, FIELD_HALF_Z * 2.0 - 2.0), zone.ground)
-		_label(Vector3(zone.from + 2.0, 4.0, -FIELD_HALF_Z + 4.0), "%s\n%s" % [zone.name, zone.level], 72, Color(1, 0.95, 0.8), Vector3(0, -90, 0))
-	# Field borders (the village wall closes the west side).
-	var center_x: float = VILLAGE_HALF + length / 2.0
-	_wall(Vector3(center_x, 0, -FIELD_HALF_Z), Vector3(length, 3.0, 1.2), Color(0.4, 0.33, 0.25))
-	_wall(Vector3(center_x, 0, FIELD_HALF_Z), Vector3(length, 3.0, 1.2), Color(0.4, 0.33, 0.25))
-	_wall(Vector3(FIELD_END_X, 0, 0), Vector3(1.2, 3.0, FIELD_HALF_Z * 2.0), Color(0.4, 0.33, 0.25))
-	_wall(Vector3(VILLAGE_HALF + 3.0, 0, -(VILLAGE_HALF + FIELD_HALF_Z) / 2.0 - 0.0), Vector3(1.2, 3.0, FIELD_HALF_Z - VILLAGE_HALF), Color(0.4, 0.33, 0.25))
-	_wall(Vector3(VILLAGE_HALF + 3.0, 0, (VILLAGE_HALF + FIELD_HALF_Z) / 2.0), Vector3(1.2, 3.0, FIELD_HALF_Z - VILLAGE_HALF), Color(0.4, 0.33, 0.25))
-	# Cover: trees in the forest, rocks in the ravine, scattered elsewhere.
-	for i in 140:
-		var at := Vector3(_rng.randf_range(VILLAGE_HALF + 8.0, FIELD_END_X - 4.0), 0, _rng.randf_range(-FIELD_HALF_Z + 3.0, FIELD_HALF_Z - 3.0))
-		if absf(at.z) < 4.0:
-			continue  # keep the main path clear
-		if at.x > 140.0 and at.x < 192.0:
-			_rock(at, _rng.randf_range(1.0, 2.4))
-		elif (at.x > 85.0 and at.x < 140.0) or _rng.randf() < 0.35:
-			_tree(at)
-	_ground(Vector3(VILLAGE_HALF + length / 2.0, -0.015, 0), Vector2(length, 6.0), Color(0.62, 0.53, 0.4))  # path
+		d.ground(Vector3(zone.from + w / 2.0, -0.03, 0), Vector2(w + 0.5, FIELD_HALF_Z * 2.0), (zone.ground as Color).darkened(0.3))
+		d.label(Vector3(zone.from + 2.0, 4.5, -8.0), "%s\n%s" % [zone.name, zone.level], 72, Color(1, 0.95, 0.8))
+	d.ground(Vector3(VILLAGE_HALF + 3.0, -0.04, 0), Vector2(8.0, VILLAGE_HALF * 2.0), Color(0.42, 0.55, 0.32).darkened(0.3))
+	# Winding dirt path with stepping stones.
+	var path_color := Color(0.6, 0.5, 0.36).darkened(0.25)
+	for i in 60:
+		var x: float = VILLAGE_HALF + 2.0 + i * (length - 4.0) / 60.0
+		var z: float = sin(x * 0.05) * 6.0
+		d.disk(Vector3(x, -0.015, z), 3.2, path_color)
+	var on_path := func(p: Vector3) -> bool: return absf(p.z - sin(p.x * 0.05) * 6.0) < 3.4
+	d.grass(Vector2(VILLAGE_HALF + 1, -FIELD_HALF_Z + 1), Vector2(FIELD_END_X - 1, FIELD_HALF_Z - 1), 4200, Color(0.4, 0.58, 0.3), on_path)
+	d.flowers(Vector2(32, -FIELD_HALF_Z + 1), Vector2(85, FIELD_HALF_Z - 1), 450, on_path)
+	# Borders: invisible walls behind a line of trees / rocks.
+	for wall: Array in [[Vector3(center_x, 0, -FIELD_HALF_Z), Vector3(length, 3.0, 1.2)], [Vector3(center_x, 0, FIELD_HALF_Z), Vector3(length, 3.0, 1.2)],
+			[Vector3(FIELD_END_X, 0, 0), Vector3(1.2, 3.0, FIELD_HALF_Z * 2.0)],
+			[Vector3(VILLAGE_HALF + 3.0, 0, -(VILLAGE_HALF + FIELD_HALF_Z) / 2.0), Vector3(1.2, 3.0, FIELD_HALF_Z - VILLAGE_HALF)],
+			[Vector3(VILLAGE_HALF + 3.0, 0, (VILLAGE_HALF + FIELD_HALF_Z) / 2.0), Vector3(1.2, 3.0, FIELD_HALF_Z - VILLAGE_HALF)]]:
+		var shape := BoxShape3D.new()
+		shape.size = wall[1]
+		d.collider(wall[0], shape, 3.0)
+	for x in range(int(VILLAGE_HALF) + 4, int(FIELD_END_X), 5):
+		for z: float in [-FIELD_HALF_Z - 1.5, FIELD_HALF_Z + 1.5]:
+			if x > 140 and x < 192:
+				d.rock(Vector3(x, 0, z), d.rng.randf_range(1.5, 2.6), Color(0.5, 0.46, 0.42))
+			else:
+				d.pine(Vector3(x + d.rng.randf_range(-1, 1), 0, z), d.rng.randf_range(1.0, 1.4))
+	for i in 10:
+		d.mountain(Vector3(VILLAGE_HALF + 20.0 + i * 20.0, 0, (-1 if i % 2 == 0 else 1) * (FIELD_HALF_Z + 30.0)), d.rng.randf_range(16, 24), d.rng.randf_range(18, 30), Color(0.4, 0.42, 0.4))
+	# Zone props.
+	for i in 170:
+		var at := Vector3(d.rng.randf_range(VILLAGE_HALF + 8.0, FIELD_END_X - 4.0), 0, d.rng.randf_range(-FIELD_HALF_Z + 3.0, FIELD_HALF_Z - 3.0))
+		if on_path.call(at):
+			continue
+		if at.x < 85.0:
+			if d.rng.randf() < 0.35:
+				d.round_tree(at, Color(0.3, 0.55, 0.28))
+			else:
+				d.bush(at, Color(0.28, 0.5, 0.25))
+		elif at.x < 140.0:
+			if d.rng.randf() < 0.65:
+				d.pine(at, d.rng.randf_range(1.0, 1.5))
+			else:
+				d.bush(at, Color(0.2, 0.42, 0.22))
+		elif at.x < 192.0:
+			if d.rng.randf() < 0.7:
+				d.rock(at, d.rng.randf_range(1.0, 2.4), Color(0.55, 0.48, 0.42))
+			else:
+				d.ruin_pillar(at)
+	# Bandit camps.
+	for camp: Vector3 in [Vector3(50, 0, -24), Vector3(70, 0, 22)]:
+		d.campfire(camp)
+		d.tent(camp + Vector3(-3.5, 0, -2.5), Color(0.6, 0.48, 0.3), 30.0)
+		d.tent(camp + Vector3(3.0, 0, -3.0), Color(0.55, 0.42, 0.28), -20.0)
+		d.fence(camp + Vector3(-6, 0, 4), camp + Vector3(6, 0, 4))
+	# Deserters' hideout in the forest, renegades' ruins, Akatsuki lair.
+	d.campfire(Vector3(112, 0, -18))
+	d.tent(Vector3(108, 0, -21), Color(0.2, 0.2, 0.25), 10.0)
+	d.campfire(Vector3(165, 0, 20))
+	d.ground(Vector3(203.5, -0.025, 0), Vector2(23.0, FIELD_HALF_Z * 2.0), Color(0.18, 0.15, 0.2))
+	d.torii(Vector3(194.0, 0, 0), 9.0, Color(0.35, 0.08, 0.08))
+	d.campfire(Vector3(206, 0, -6))
+	d.campfire(Vector3(206, 0, 6))
+	d.label(Vector3(204, 6.0, 0), "暁", 200, Color(0.85, 0.1, 0.1))
 
 
-# --- Primitives ---------------------------------------------------------------------
-
-func _mat(color: Color) -> StandardMaterial3D:
-	var m := StandardMaterial3D.new()
-	m.albedo_color = color
-	m.roughness = 0.95
-	return m
-
-
-func _ground(center: Vector3, size: Vector2, color: Color) -> void:
-	if not CombatFx.is_enabled():
-		return
-	var mesh := MeshInstance3D.new()
-	var plane := PlaneMesh.new()
-	plane.size = size
-	mesh.mesh = plane
-	mesh.material_override = _mat(color.darkened(0.3))  # ground reads lighter than props under the sun
-	mesh.position = center
-	add_child(mesh)
-
-
-func _box(center: Vector3, size: Vector3, color: Color) -> void:
-	if not CombatFx.is_enabled():
-		return
-	var mesh := MeshInstance3D.new()
-	var box := BoxMesh.new()
-	box.size = size
-	mesh.mesh = box
-	mesh.material_override = _mat(color)
-	mesh.position = center
-	add_child(mesh)
-
-
-## Static obstacle (collision layer 1, blocks movement and projectiles).
-func _solid(center: Vector3, shape: Shape3D, height: float) -> StaticBody3D:
-	var body := StaticBody3D.new()
-	body.collision_layer = 1
-	body.collision_mask = 0
-	body.position = center
-	var col := CollisionShape3D.new()
-	col.shape = shape
-	col.position.y = height / 2.0
-	body.add_child(col)
-	add_child(body)
-	return body
-
-
-func _solid_box(base: Vector3, size: Vector3, color: Color) -> void:
-	var box := BoxShape3D.new()
-	box.size = size
-	_solid(base, box, size.y)
-	_box(base + Vector3.UP * size.y / 2.0, size, color)
-
-
-func _wall(base: Vector3, size: Vector3, color: Color) -> void:
-	_solid_box(base, size, color)
-
-
-func _solid_cylinder(base: Vector3, radius: float, height: float, color: Color) -> void:
-	var shape := CylinderShape3D.new()
-	shape.radius = radius
-	shape.height = height
-	_solid(base, shape, height)
-	if CombatFx.is_enabled():
-		var mesh := MeshInstance3D.new()
-		var cyl := CylinderMesh.new()
-		cyl.top_radius = radius
-		cyl.bottom_radius = radius
-		cyl.height = height
-		mesh.mesh = cyl
-		mesh.material_override = _mat(color)
-		mesh.position = base + Vector3.UP * height / 2.0
-		add_child(mesh)
-
-
-func _roof(at: Vector3, radius: float, color: Color) -> void:
-	if not CombatFx.is_enabled():
-		return
-	var mesh := MeshInstance3D.new()
-	var cone := CylinderMesh.new()
-	cone.top_radius = 0.0
-	cone.bottom_radius = radius
-	cone.height = radius * 0.55
-	cone.radial_segments = 4
-	mesh.mesh = cone
-	mesh.material_override = _mat(color)
-	mesh.position = at + Vector3.UP * cone.height / 2.0
-	mesh.rotation_degrees.y = 45.0
-	add_child(mesh)
-
-
-func _tree(at: Vector3) -> void:
-	_solid_cylinder(at, 0.45, 2.4, Color(0.42, 0.28, 0.16))
-	if CombatFx.is_enabled():
-		for i in 2:
-			var leaves := MeshInstance3D.new()
-			var sphere := SphereMesh.new()
-			sphere.radius = 1.9 - i * 0.5
-			sphere.height = 3.0 - i * 0.6
-			leaves.mesh = sphere
-			leaves.material_override = _mat(Color(0.22, 0.48, 0.22).lightened(i * 0.1))
-			leaves.position = at + Vector3(0, 3.3 + i * 1.3, 0)
-			add_child(leaves)
-
-
-func _rock(at: Vector3, radius: float) -> void:
-	var shape := CylinderShape3D.new()
-	shape.radius = radius
-	shape.height = 2.0
-	_solid(at, shape, 2.0)
-	if CombatFx.is_enabled():
-		var mesh := MeshInstance3D.new()
-		var sphere := SphereMesh.new()
-		sphere.radius = radius
-		sphere.height = radius * 1.3
-		mesh.mesh = sphere
-		mesh.material_override = _mat(Color(0.5, 0.48, 0.47))
-		mesh.position = at + Vector3.UP * radius * 0.35
-		add_child(mesh)
-
-
-func _label(at: Vector3, text: String, size: int, color: Color, rotation_deg: Vector3 = Vector3.ZERO) -> void:
-	if not CombatFx.is_enabled():
-		return
-	var label := Label3D.new()
-	label.text = text
-	label.font_size = size
-	label.outline_size = 16
-	label.modulate = color
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.pixel_size = 0.01
-	label.position = at
-	label.rotation_degrees = rotation_deg
-	add_child(label)
+func _label(at: Vector3, text: String, size: int, color: Color, _rotation: Vector3 = Vector3.ZERO) -> void:
+	WorldDecor.new(self, 0).label(at, text, size, color)

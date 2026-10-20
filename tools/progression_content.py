@@ -302,7 +302,7 @@ def build():
         "mobs": {m[0]: {"name": m[1], "xp": m[2]} for m in MOBS},
         "villages": [{"id": v[0], "name": v[1]} for v in VILLAGES],
         "natures": [], "clans": [], "specializations": [], "tenketsu": [], "sub_jutsu": [],
-        "rules": {"sub_jutsu_roll_ranks": ["B", "A", "S"], "max_equipped_jutsu": 4, "specialization_grants_skills": True},
+        "rules": {"sub_jutsu_roll_ranks": ["B", "A", "S"], "max_equipped_jutsu": 6, "specialization_grants_skills": True},
     }
     for nid, (name, desc, color, rows) in NATURES.items():
         data["natures"].append({"id": nid, "name": name, "description": desc, "color": color,

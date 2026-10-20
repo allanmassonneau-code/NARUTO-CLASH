@@ -21,6 +21,12 @@ extends Resource
 @export var q: AbilityData
 @export var e: AbilityData
 @export var ult: AbilityData
+@export var j1: AbilityData
+@export var j2: AbilityData
+@export var j3: AbilityData
+@export var j4: AbilityData
+@export var j5: AbilityData
+@export var j6: AbilityData
 
 
 func get_ability_map() -> Dictionary:

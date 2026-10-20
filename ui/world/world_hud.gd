@@ -5,8 +5,10 @@ extends CanvasLayer
 
 const SLOT_SIZE: float = 64.0
 const SLOT_KEYS: Dictionary = {
-	&"lmb": "LMB", &"rmb": "RMB", &"space": "ESPACE", &"q": "A/Q", &"e": "E", &"ult": "R",
+	&"lmb": "CLIC G", &"space": "ESPACE", &"j1": "1", &"j2": "2", &"j3": "3", &"j4": "4", &"j5": "5", &"j6": "6",
 }
+## Bar order: basic attack, dash, then the six techniques.
+const BAR: Array[StringName] = [&"lmb", &"space", &"j1", &"j2", &"j3", &"j4", &"j5", &"j6"]
 
 var _world: World
 var _player: CombatCharacter
@@ -70,7 +72,7 @@ func rebuild_slots() -> void:
 	for child: Node in _slots_row.get_children():
 		child.queue_free()
 	_slots.clear()
-	for slot: StringName in AbilityController.SLOTS:
+	for slot: StringName in BAR:
 		var a: AbilityData = _player.abilities.get_ability(slot)
 		_slots[slot] = _slot(slot, a) if a != null else _empty_slot(slot)
 	for slot: StringName in _slots.keys():
