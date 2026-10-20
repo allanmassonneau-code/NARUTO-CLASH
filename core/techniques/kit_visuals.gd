@@ -33,6 +33,8 @@ static func _mesh(mesh: Mesh, mat: Material, at: Vector3 = Vector3.ZERO) -> Mesh
 static func object_visual(o: KitObject) -> Node3D:
 	var root := Node3D.new()
 	var c: Color = o.color
+	if SSVfx.available():   # SS colours for the gameplay shapes too (walls, pillars, discs)
+		c = Color(SSVfxProfiles.profile(o.technique_id).color, o.color.a)
 	match o.look:
 		KitObject.Look.DISC, KitObject.Look.GLYPH, KitObject.Look.RING:
 			if o.look != KitObject.Look.RING:
@@ -75,6 +77,13 @@ static func object_visual(o: KitObject) -> Node3D:
 			cap.height = 1.7
 			var body := _mesh(cap, _mat(Color(c, 0.55)), Vector3.UP * 0.85)
 			root.add_child(body)
+	# Shinobi Striker layers (local assets). Zones / glyphs / orbs keep only a faint contour
+	# under them (gameplay reach stays readable); walls, pillars and decoys stay solid.
+	if o.look != KitObject.Look.DECOY and o.look != KitObject.Look.NONE and SSVfx.object_layers(o, root):
+		if o.look in [KitObject.Look.DISC, KitObject.Look.RING, KitObject.Look.GLYPH, KitObject.Look.ORB]:
+			for child: Node in root.get_children():
+				if child is GeometryInstance3D and not (child as GeometryInstance3D).material_override is ShaderMaterial:
+					(child as GeometryInstance3D).transparency = 0.6
 	return root
 
 
@@ -88,6 +97,9 @@ static func object_tick(o: KitObject, visual: Node3D, _delta: float) -> void:
 
 
 static func projectile_visual(p: TkProjectile) -> Node3D:
+	var ss: Node3D = SSVfx.projectile_body(p, p.technique_id, p.size)
+	if ss != null:
+		return ss
 	var root := Node3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = p.size
@@ -107,10 +119,13 @@ static func projectile_visual(p: TkProjectile) -> Node3D:
 
 ## Line between two fighters / points (tether, chain). Returns the node; the
 ## caller updates it with update_line.
-static func line_visual(anchor: Node, color: Color) -> MeshInstance3D:
+static func line_visual(anchor: Node, color: Color, tech_id: StringName = &"") -> MeshInstance3D:
 	var mi := MeshInstance3D.new()
 	mi.mesh = ImmediateMesh.new()
-	mi.material_override = _mat(Color(color, 0.9), 1.5)
+	var ss: Material = SSVfx.line_material(tech_id) if tech_id != &"" else null
+	mi.material_override = ss if ss != null else _mat(Color(color, 0.9), 1.5)
+	if ss != null:
+		mi.set_meta(&"ss_ribbon", true)
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	mi.add_to_group(&"round_entities")
 	anchor.add_child(mi)
@@ -121,6 +136,20 @@ static func line_visual(anchor: Node, color: Color) -> MeshInstance3D:
 static func update_line(mi: MeshInstance3D, from: Vector3, to: Vector3) -> void:
 	var im := mi.mesh as ImmediateMesh
 	im.clear_surfaces()
+	if mi.has_meta(&"ss_ribbon"):   # SS tether: flat textured ribbon, UV.x in metres
+		var a := Vector3(from.x, 1.0, from.z)
+		var b := Vector3(to.x, 1.0, to.z)
+		var side: Vector3 = (b - a).cross(Vector3.UP).normalized() * 0.22
+		var length: float = a.distance_to(b)
+		if length < 0.01:
+			return
+		im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+		for v: Array in [[a - side, 0.0, 0.0], [b - side, length, 0.0], [b + side, length, 1.0],
+				[a - side, 0.0, 0.0], [b + side, length, 1.0], [a + side, 0.0, 1.0]]:
+			im.surface_set_uv(Vector2(v[1], v[2]))
+			im.surface_add_vertex(v[0])
+		im.surface_end()
+		return
 	im.surface_begin(Mesh.PRIMITIVE_LINES)
 	for h: float in [0.8, 1.0, 1.2]:
 		im.surface_add_vertex(Vector3(from.x, h, from.z))
@@ -129,11 +158,17 @@ static func update_line(mi: MeshInstance3D, from: Vector3, to: Vector3) -> void:
 
 
 ## One-shot effect by name (see EFFECTS).
-static func fx(anchor: Node, effect: String, at: Vector3, radius: float, color: Color) -> void:
+static func fx(anchor: Node, effect: String, at: Vector3, radius: float, color: Color, tech_id: StringName = &"") -> void:
 	if not CombatFx.is_enabled() or anchor == null or not anchor.is_inside_tree():
 		return
 	var ground := Vector3(at.x, 0.0, at.z)
-	SSVfx.for_effect(anchor, effect, ground, radius, color)   # Shinobi Striker sprites (local assets)
+	# Shinobi Striker sprites (local assets): the technique's SS profile replaces the
+	# procedural shape when SS has an equivalent; telegraph-like shapes are kept.
+	if tech_id != &"":
+		if SSVfx.tech_effect(tech_id, anchor, effect, ground, radius):
+			return
+	else:
+		SSVfx.for_effect(anchor, effect, ground, radius, color)
 	match effect:
 		"explosion":
 			SpellVfx._explosion(anchor, ground, color, radius)

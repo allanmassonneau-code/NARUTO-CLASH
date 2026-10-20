@@ -5,7 +5,7 @@ render_mode unshaded, blend_add, cull_disabled, depth_draw_never, shadows_disabl
 
 uniform sampler2D flipbook : filter_linear_mipmap, hint_default_black;
 uniform ivec2 grid = ivec2(1, 1);
-uniform float emission = 1.5;
+uniform float emission = 1.2;
 uniform bool billboard = true;
 instance uniform float frame = 0.0;
 instance uniform vec4 tint : source_color = vec4(1.0);

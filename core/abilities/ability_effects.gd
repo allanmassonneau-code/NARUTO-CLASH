@@ -53,7 +53,9 @@ static func activate(ctrl: AbilityController, a: AbilityData) -> void:
 			c.clone = ShadowClone.spawn(c, dest, a.summon_duration)
 		AbilityData.Kind.SCRIPTED:
 			if a.technique != null:
-				a.technique.cast(Tk.from_cast(ctrl, a, a.technique))
+				var tk := Tk.from_cast(ctrl, a, a.technique)
+				SSVfx.tech_cast(tk)   # Shinobi Striker cast effect (visual only)
+				a.technique.cast(tk)
 		AbilityData.Kind.SUBSTITUTION:
 			c.arm_substitution(a.substitution_radius)
 

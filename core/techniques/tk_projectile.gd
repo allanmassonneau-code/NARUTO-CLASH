@@ -122,7 +122,7 @@ func end(reason: String, point: Vector3 = Vector3.INF) -> void:
 	if on_end.is_valid():
 		on_end.call(at, self, reason)
 	if CombatFx.is_enabled():
-		KitVisuals.fx(self, "burst", at, size * 3.0, color)
+		KitVisuals.fx(self, "burst", at, size * 3.0, color, technique_id)
 	queue_free()
 
 

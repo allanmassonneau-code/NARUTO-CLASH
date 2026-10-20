@@ -51,6 +51,17 @@ dictionnaire cosmétique (`CharacterProfile.appearance`, action `set_appearance`
 `sanitize_appearance`) ; l'onglet **Apparence** de l'écran SHINOBI l'édite. Les mobs reçoivent un
 avatar SS stable par type (`MobCatalog`), le joueur sans apparence un avatar stable par profil.
 
+## VFX Shinobi Striker par sort
+
+`ss_vfx.gd` joue les planches `T_EFF_*` de SS (`_ss_local/vfx`, ~40 formes : feu, braises, fumée, éclairs,
+eau, bulles, vent, glace, éclats, pointes, sable, encre, fissures, lave, sceaux, anneaux, éclats d'impact…).
+`ss_vfx_profiles.gd` donne à **chaque technique** un profil : élément SS du kit (nature / clan / sub-jutsu,
+affiné par mots-clés : dragon, requin, miroir, chaîne, shuriken, armure, prison…), couleurs SS, taille selon
+le rang. Branchements : lancement (`ability_effects.gd`), impacts (`Tk.fx` → `KitVisuals.fx`), corps et
+sillage des projectiles, couches des zones / objets, liens texturés (fils, chaînes, ombres). Les formes de
+gameplay restent en contour discret sous les VFX. Direction validée : intensité « fidèle SS », couleurs SS,
+Hakumei = clan assassin araignée (toiles), Hôki = chimie, Karatachi = corail, Roran = vent d'éventail.
+
 ## Vrais décors Shinobi Striker (local)
 
 `nsdump glbstatic <ziel.glb> <StaticMesh> [texOrdner]` décode un StaticMesh SS (LOD0, palette BC,

@@ -242,7 +242,7 @@ func line(length: float, width: float, damage: float, opts: Dictionary = {}, fro
 	var o_from: Vector3 = origin if from == Vector3.INF else from
 	var o_dir: Vector3 = dir if direction == Vector3.ZERO else direction
 	if CombatFx.is_enabled():
-		var mi := KitVisuals.line_visual(caster.get_parent(), color)
+		var mi := KitVisuals.line_visual(caster.get_parent(), color, id)
 		KitVisuals.update_line(mi, o_from, o_from + o_dir * length)
 		caster.get_tree().create_timer(0.2).timeout.connect(mi.queue_free)
 	var out: Array[CombatCharacter] = []
@@ -471,7 +471,7 @@ func tether(b: CombatCharacter, max_dist: float, lifetime: float, opts: Dictiona
 	var from_char: CombatCharacter = caster if a == null else a
 	var on_break: Callable = opts.get("on_break", Callable())
 	var user_tick: Callable = opts.get("on_tick", Callable())
-	var line_node: MeshInstance3D = KitVisuals.line_visual(caster.get_parent(), color) if CombatFx.is_enabled() else null
+	var line_node: MeshInstance3D = KitVisuals.line_visual(caster.get_parent(), color, id) if CombatFx.is_enabled() else null
 	var o: KitObject = object(from_char.global_position, {"radius": 0.1, "lifetime": lifetime, "look": KitObject.Look.NONE,
 		"targetable": false, "kind": "tether", "tick_interval": float(opts.get("interval", 0.0)),
 		"on_tick": func(obj: KitObject) -> void:
@@ -591,7 +591,7 @@ func objects(kind_filter: String = "", technique: StringName = &"self") -> Array
 # --- Feedback -----------------------------------------------------------------------
 
 func fx(effect: String, at: Vector3, radius: float = 1.5, fx_color: Color = Color(0, 0, 0, 0)) -> void:
-	KitVisuals.fx(caster, effect, at, radius, color if fx_color.a == 0.0 else fx_color)
+	KitVisuals.fx(caster, effect, at, radius, color if fx_color.a == 0.0 else fx_color, id)
 
 
 func text(target: CombatCharacter, words: String, text_color: Color = Color(0, 0, 0, 0)) -> void:
