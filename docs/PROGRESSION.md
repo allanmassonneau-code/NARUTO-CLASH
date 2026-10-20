@@ -37,19 +37,25 @@ natures + **choix par rang** (`nature_choices`), spécialité, techniques **appr
 - `ProgressionSaveService` : JSON par personnage (même format qu'une base de données).
 - `ProgressionDebug` : profils de test par grade (clan / sans clan), commandes `promote_to_*`.
 
-## Données encore à fournir (placeholders marqués `placeholder = true`)
+## Contenu (première passe, à ajuster)
 
-- PV et chakra de base par grade ;
-- techniques des natures (noms génériques « Katon D1 »…), coûts, cooldowns ;
-- liste des clans et leurs techniques (1 clan factice par village) ;
-- compétences des 4 spécialités ;
-- nœuds Tenketsu et leurs bonus ;
-- liste des Sub-jutsu, poids, exclusions.
+Source éditable : `tools/progression_content.py` → `data/progression/content.json` →
+`tools/build_progression_db.gd` → `progression_db.tres` (validé : 2 techniques par rang et par nature,
+1 par rang et par clan, 3 actifs + 1 passif par spécialité, Sub-jutsu en B/A/S, ids uniques).
 
-Règles ouvertes (dans `ProgressionDatabase`, modifiables sans code) :
-- rangs du tirage Chunin et du tirage « conserver » (`sub_jutsu_roll_ranks`, actuellement B/A/S pondérés) ;
-- nombre d'emplacements équipés (`max_equipped_jutsu`, 6) ;
-- la spécialité donne-t-elle ses 4 compétences dès le choix (`specialization_grants_skills`, oui).
+- Grades : PV / chakra 100/100, 120/130, 135/150, 155/180, 180/220 ; +2 Tenketsu chacun.
+- 5 natures (Katon, Suiton, Raiton, Doton, Futon), 10 techniques chacune.
+- 20 clans : Konoha (Senju, Uchiha, Uzumaki, Nara, Akimichi), Suna (Rōran, Sabaku, Hōki, Kugutsu, Hakumei),
+  Ame (Chinoike, Fūma, Salamandre, Kaguya, Kami), Kiri (Hōzuki, Hoshigaki, Yuki, Karatachi, Épéistes).
+- Spécialités : Médecin, Traqueur, Combattant, Rempart (3 actifs + 1 passif).
+- Tenketsu : 10 nœuds (vitalité, chakra, agilité, régénérations, réflexes, corps de fer, concentration,
+  points vitaux, ouverture des portes).
+- 12 Sub-jutsu : 5 B (poids 4), 4 A (poids 2), 3 S (poids 1).
+
+Règles choisies faute de précision (modifiables dans `rules`) :
+- tirage Chunin et tirage « conserver » : rangs B/A/S pondérés (≈ 65 % B, 26 % A, 10 % S) ;
+- 6 techniques équipables ;
+- la spécialité donne ses 4 compétences dès le choix.
 
 ## Tests
 

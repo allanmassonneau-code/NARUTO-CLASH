@@ -1,22 +1,20 @@
 extends SceneTree
-## Writes data/progression/progression_db.tres: the rules given by the design
-## (grades, access, rewards, villages, specializations) + PLACEHOLDER content
-## (natures' techniques, clans, Tenketsu nodes, sub-jutsu, HP / chakra) that
-## is clearly flagged and waits for the real data.
+## Builds data/progression/progression_db.tres (the Resource the game loads)
+## from data/progression/content.json (the designer-editable content, see
+## tools/progression_content.py). Validates the content before saving.
 ##   godot --headless --path . -s tools/build_progression_db.gd
 
+const SOURCE: String = "res://data/progression/content.json"
 const OUT: String = "res://data/progression/progression_db.tres"
 
 
 func _init() -> void:
-	var db := ProgressionDatabase.new()
-	db.grades = _grades()
-	db.villages = _villages()
-	db.natures = _natures()
-	db.clans = _clans(db.villages)
-	db.specializations = _specializations()
-	db.tenketsu_tree = _tenketsu()
-	db.sub_jutsu = _sub_jutsu()
+	var content: Variant = JSON.parse_string(FileAccess.get_file_as_string(SOURCE))
+	if not content is Dictionary:
+		push_error("Cannot read %s" % SOURCE)
+		quit(1)
+		return
+	var db: ProgressionDatabase = build(content)
 	var errors: PackedStringArray = db.validate()
 	if not errors.is_empty():
 		push_error("Invalid progression data:\n" + "\n".join(errors))
@@ -24,159 +22,106 @@ func _init() -> void:
 		return
 	DirAccess.make_dir_recursive_absolute(OUT.get_base_dir())
 	var err: Error = ResourceSaver.save(db, OUT)
-	print("progression db -> %s (%s)" % [OUT, error_string(err)])
+	print("progression db -> %s (%s): %d natures, %d clans, %d sub-jutsu" % [OUT, error_string(err),
+		db.natures.size(), db.clans.size(), db.sub_jutsu.size()])
 	quit(0 if err == OK else 1)
 
 
-# Grades: access and rewards are the design rules; HP / chakra are placeholders.
-func _grades() -> Array[GradeData]:
-	var rows: Array = [
-		[ProgressionTypes.Grade.GENIN, "Genin", ProgressionTypes.Rank.C, [ProgressionTypes.Choice.PRIMARY_NATURE], ProgressionTypes.SubJutsuEvent.NONE, 100.0],
-		[ProgressionTypes.Grade.CHUNIN, "Chunin", ProgressionTypes.Rank.B, [ProgressionTypes.Choice.SPECIALIZATION], ProgressionTypes.SubJutsuEvent.FIRST_ROLL, 120.0],
-		[ProgressionTypes.Grade.KONIN, "Konin", ProgressionTypes.Rank.B, [], ProgressionTypes.SubJutsuEvent.NONE, 135.0],
-		[ProgressionTypes.Grade.TOKUBETSU, "Tokubetsu", ProgressionTypes.Rank.A, [ProgressionTypes.Choice.SECONDARY_NATURE], ProgressionTypes.SubJutsuEvent.EVOLUTION, 150.0],
-		[ProgressionTypes.Grade.JONIN, "Jonin", ProgressionTypes.Rank.S, [], ProgressionTypes.SubJutsuEvent.NONE, 170.0],
-	]
-	var out: Array[GradeData] = []
-	for row: Array in rows:
+static func build(content: Dictionary) -> ProgressionDatabase:
+	var db := ProgressionDatabase.new()
+	for row: Dictionary in content.grades:
 		var g := GradeData.new()
-		g.grade = row[0]
-		g.display_name = row[1]
-		g.max_jutsu_rank = row[2]
+		g.grade = ProgressionTypes.Grade[row.grade]
+		g.display_name = row.name
+		g.max_jutsu_rank = ProgressionTypes.Rank[row.max_rank]
 		var choices: Array[int] = []
-		choices.assign(row[3])
+		for c: String in row.choices:
+			choices.append(ProgressionTypes.Choice[c])
 		g.granted_choices = choices
-		g.sub_jutsu_event = row[4]
-		g.tenketsu_points = 2
-		g.base_hp = row[5]
-		g.base_chakra = row[5]
-		g.placeholder_stats = true
-		out.append(g)
-	return out
-
-
-func _villages() -> Array[VillageData]:
-	var out: Array[VillageData] = []
-	for row: Array in [[&"konoha", "Konoha"], [&"suna", "Suna"], [&"ame", "Ame"], [&"kiri", "Kiri"]]:
+		g.sub_jutsu_event = ProgressionTypes.SubJutsuEvent[row.sub_jutsu_event]
+		g.base_hp = row.base_hp
+		g.base_chakra = row.base_chakra
+		g.tenketsu_points = int(row.tenketsu_points)
+		db.grades.append(g)
+	for row: Dictionary in content.villages:
 		var v := VillageData.new()
-		v.id = row[0]
-		v.display_name = row[1]
-		out.append(v)
-	return out
-
-
-# PLACEHOLDER: example natures, 2 techniques per rank with generic names.
-func _natures() -> Array[ChakraNatureData]:
-	var out: Array[ChakraNatureData] = []
-	var rows: Array = [[&"katon", "Katon", Color(1, 0.45, 0.1)], [&"suiton", "Suiton", Color(0.3, 0.6, 1)],
-		[&"raiton", "Raiton", Color(0.6, 0.85, 1)], [&"doton", "Doton", Color(0.65, 0.5, 0.3)], [&"futon", "Futon", Color(0.6, 1, 0.7)]]
-	for row: Array in rows:
+		v.id = row.id
+		v.display_name = row.name
+		db.villages.append(v)
+	for row: Dictionary in content.natures:
 		var n := ChakraNatureData.new()
-		n.id = row[0]
-		n.display_name = row[1]
-		n.color = row[2]
-		n.placeholder = true
-		var jutsu: Array[JutsuData] = []
-		for rank in ProgressionTypes.Rank.values():
-			for i in 2:
-				var key: String = "%s%d" % [ProgressionTypes.rank_key(rank), i + 1]
-				jutsu.append(_jutsu(StringName("%s_%s" % [n.id, key.to_lower()]), "%s %s" % [n.display_name, key],
-					ProgressionTypes.JutsuSource.NATURE, rank, n.id))
-		n.jutsu = jutsu
-		out.append(n)
-	return out
-
-
-# PLACEHOLDER: one test clan per village until the clan list is given.
-func _clans(villages: Array[VillageData]) -> Array[ClanData]:
-	var out: Array[ClanData] = []
-	for v: VillageData in villages:
+		n.id = row.id
+		n.display_name = row.name
+		n.description = row.description
+		n.color = Color(row.color)
+		for j: Dictionary in row.jutsu:
+			n.jutsu.append(_jutsu(j, JutsuData.new(), ProgressionTypes.JutsuSource.NATURE, n.id))
+		db.natures.append(n)
+	for row: Dictionary in content.clans:
 		var c := ClanData.new()
-		c.id = StringName("clan_placeholder_%s" % v.id)
-		c.display_name = "Placeholder clan (%s)" % v.display_name
-		c.village_id = v.id
-		c.placeholder = true
-		var jutsu: Array[JutsuData] = []
-		for rank in ProgressionTypes.Rank.values():
-			jutsu.append(_jutsu(StringName("%s_%s" % [c.id, ProgressionTypes.rank_key(rank).to_lower()]), "%s %s" % [c.display_name, ProgressionTypes.rank_key(rank)],
-				ProgressionTypes.JutsuSource.CLAN, rank, c.id))
-		c.jutsu = jutsu
-		out.append(c)
-	return out
-
-
-# The 4 specializations are design rules; their skills are placeholders.
-func _specializations() -> Array[SpecializationData]:
-	var out: Array[SpecializationData] = []
-	var rows: Array = [[&"medic", "Médecin", "Soins"], [&"tracker", "Traqueur", "Traque"],
-		[&"fighter", "Combattant", "Dégâts"], [&"bulwark", "Rempart", "Protection"]]
-	for row: Array in rows:
+		c.id = row.id
+		c.display_name = row.name
+		c.village_id = row.village
+		c.description = row.description
+		for j: Dictionary in row.jutsu:
+			c.jutsu.append(_jutsu(j, JutsuData.new(), ProgressionTypes.JutsuSource.CLAN, c.id))
+		db.clans.append(c)
+	for row: Dictionary in content.specializations:
 		var s := SpecializationData.new()
-		s.id = row[0]
-		s.display_name = row[1]
-		s.role = row[2]
-		s.placeholder = true
-		var actives: Array[JutsuData] = []
-		for i in 3:
-			actives.append(_jutsu(StringName("%s_active_%d" % [s.id, i + 1]), "%s — actif %d" % [s.display_name, i + 1],
-				ProgressionTypes.JutsuSource.SPECIALIZATION, ProgressionTypes.Rank.D, s.id))
-		s.active_skills = actives
-		s.passive_skill = _jutsu(StringName("%s_passive" % s.id), "%s — passif" % s.display_name, ProgressionTypes.JutsuSource.SPECIALIZATION, ProgressionTypes.Rank.D, s.id)
-		s.passive_skill.passive = true
-		out.append(s)
-	return out
-
-
-# PLACEHOLDER: a small tree to exercise costs, prerequisites and levels.
-func _tenketsu() -> TenketsuTreeData:
-	var tree := TenketsuTreeData.new()
-	var rows: Array = [
-		[&"tenketsu_vitality", "Vitalité", 1, [], {&"hp": 5.0}, Vector2(0, 0), 3],
-		[&"tenketsu_flow", "Flux", 1, [], {&"chakra": 5.0}, Vector2(1, 0), 3],
-		[&"tenketsu_regen", "Régénération", 2, [&"tenketsu_vitality"], {&"regen": 1.0}, Vector2(0, 1), 2],
-		[&"tenketsu_swiftness", "Mobilité", 2, [&"tenketsu_flow"], {&"mobility": 0.05}, Vector2(1, 1), 2],
-		[&"tenketsu_guard", "Résistance", 3, [&"tenketsu_regen", &"tenketsu_swiftness"], {&"resistance": 0.05}, Vector2(0.5, 2), 1],
-	]
-	var nodes: Array[TenketsuNodeData] = []
-	for row: Array in rows:
+		s.id = row.id
+		s.display_name = row.name
+		s.role = row.role
+		s.description = row.description
+		for j: Dictionary in row.active:
+			s.active_skills.append(_jutsu(j, JutsuData.new(), ProgressionTypes.JutsuSource.SPECIALIZATION, s.id))
+		s.passive_skill = _jutsu(row.passive, JutsuData.new(), ProgressionTypes.JutsuSource.SPECIALIZATION, s.id)
+		db.specializations.append(s)
+	db.tenketsu_tree = TenketsuTreeData.new()
+	for row: Dictionary in content.tenketsu:
 		var node := TenketsuNodeData.new()
-		node.id = row[0]
-		node.display_name = row[1]
-		node.cost = row[2]
-		var prereq: Array[StringName] = []
-		prereq.assign(row[3])
-		node.prerequisites = prereq
-		node.stat_modifiers = row[4]
-		node.position_in_tree = row[5]
-		node.max_level = row[6]
-		node.placeholder = true
-		nodes.append(node)
-	tree.nodes = nodes
-	return tree
+		node.id = row.id
+		node.display_name = row.name
+		node.description = row.description
+		node.cost = int(row.cost)
+		for p: String in row.prerequisites:
+			node.prerequisites.append(StringName(p))
+		var mods: Dictionary = {}
+		for stat: String in row.modifiers:
+			mods[StringName(stat)] = float(row.modifiers[stat])
+		node.stat_modifiers = mods
+		node.position_in_tree = Vector2(row.position[0], row.position[1])
+		node.max_level = int(row.max_level)
+		db.tenketsu_tree.nodes.append(node)
+	for row: Dictionary in content.sub_jutsu:
+		var sub := _jutsu(row, SubJutsuData.new(), ProgressionTypes.JutsuSource.SUB_JUTSU, &"") as SubJutsuData
+		sub.weight = float(row.get("weight", 1.0))
+		for e: String in row.get("exclusions", []):
+			sub.exclusions.append(StringName(e))
+		for v: String in row.get("villages", []):
+			sub.allowed_villages.append(StringName(v))
+		db.sub_jutsu.append(sub)
+	var rules: Dictionary = content.get("rules", {})
+	var ranks: Array[int] = []
+	for r: String in rules.get("sub_jutsu_roll_ranks", ["B", "A", "S"]):
+		ranks.append(ProgressionTypes.Rank[r])
+	db.sub_jutsu_roll_ranks = ranks
+	db.max_equipped_jutsu = int(rules.get("max_equipped_jutsu", 6))
+	db.specialization_grants_skills = bool(rules.get("specialization_grants_skills", true))
+	return db
 
 
-# PLACEHOLDER: 3 sub-jutsu per rank, equal weights.
-func _sub_jutsu() -> Array[SubJutsuData]:
-	var out: Array[SubJutsuData] = []
-	for rank in [ProgressionTypes.Rank.B, ProgressionTypes.Rank.A, ProgressionTypes.Rank.S]:
-		for i in 3:
-			var s := SubJutsuData.new()
-			s.id = StringName("sub_%s_placeholder_%d" % [ProgressionTypes.rank_key(rank).to_lower(), i + 1])
-			s.display_name = "Technique cachée %s%d" % [ProgressionTypes.rank_key(rank), i + 1]
-			s.source = ProgressionTypes.JutsuSource.SUB_JUTSU
-			s.rank = rank
-			s.weight = 1.0
-			s.placeholder = true
-			out.append(s)
-	return out
-
-
-func _jutsu(id: StringName, display: String, source: int, rank: int, owner: StringName) -> JutsuData:
-	var j := JutsuData.new()
-	j.id = id
-	j.display_name = display
+static func _jutsu(row: Dictionary, j: JutsuData, source: int, owner: StringName) -> JutsuData:
+	j.id = row.id
+	j.display_name = row.name
+	j.description = row.get("description", "")
 	j.source = source
-	j.rank = rank
+	j.rank = ProgressionTypes.Rank[row.rank]
 	j.owner_id = owner
-	j.placeholder = true
+	j.chakra_cost = float(row.get("chakra_cost", 0.0))
+	j.cooldown = float(row.get("cooldown", 0.0))
+	for t: String in row.get("tags", []):
+		j.tags.append(StringName(t))
+	for r: String in row.get("requirements", []):
+		j.requirements.append(StringName(r))
+	j.passive = bool(row.get("passive", false))
 	return j

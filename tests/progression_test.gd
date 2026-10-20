@@ -29,6 +29,10 @@ func _nature_jutsu(nature: StringName, rank: int, index: int) -> StringName:
 	return db.get_nature(nature).jutsu_of_rank(rank)[index].id
 
 
+func _sub_of_rank(rank: int, index: int) -> StringName:
+	return db.sub_jutsu.filter(func(x: SubJutsuData) -> bool: return x.rank == rank)[index].id
+
+
 func _profile(grade: int, clan: bool = false) -> CharacterProfile:
 	return ProgressionDebug.make_test_profile(service, grade, clan)
 
@@ -95,7 +99,7 @@ func _clan_tests() -> void:
 	var genin_clan := _profile(G.GENIN, true)
 	_check(service.learn_jutsu(genin_clan, db.get_clan(genin_clan.clan_id).jutsu[2].id).error == &"RANK_LOCKED_BY_GRADE",
 		"clan ranks follow the grade (Genin can't learn clan B)")
-	var wrong := service.create_character("x", "x", &"suna", ProgressionTypes.Origin.CLAN, &"clan_placeholder_konoha")
+	var wrong := service.create_character("x", "x", &"suna", ProgressionTypes.Origin.CLAN, &"clan_senju")
 	_check(wrong.profile == null and (wrong.result as ProgressionResult).error == &"CLAN_NOT_IN_VILLAGE", "clan must belong to the village")
 
 
@@ -118,7 +122,7 @@ func _sub_jutsu_tests() -> void:
 	_check(keep.ok and keeper.owned_sub_jutsu.has(first) and keeper.owned_sub_jutsu.size() == 2, "T12 keep: first sub-jutsu kept + second roll")
 	# Sacrifice: force a rank B first sub-jutsu for a deterministic check.
 	var sacrificer: CharacterProfile = CharacterProfile.from_dict(clanless.to_dict())
-	var b_sub: StringName = &"sub_b_placeholder_1"
+	var b_sub: StringName = _sub_of_rank(R.B, 0)
 	sacrificer.owned_sub_jutsu = [b_sub] as Array[StringName]
 	sacrificer.learned_jutsu.append(b_sub)
 	var unconfirmed := service.resolve_sub_jutsu_evolution(sacrificer, false, false)
@@ -128,7 +132,7 @@ func _sub_jutsu_tests() -> void:
 	_check(sacrifice.ok and new_sub != null and new_sub.rank == R.A, "T13 sacrifice rolls one rank higher (B -> A)")
 	_check(not sacrificer.owned_sub_jutsu.has(b_sub) and not sacrificer.knows(b_sub), "T14 sacrifice really removes the old sub-jutsu")
 	var top: CharacterProfile = CharacterProfile.from_dict(clanless.to_dict())
-	top.owned_sub_jutsu = [&"sub_s_placeholder_1"] as Array[StringName]
+	top.owned_sub_jutsu = [_sub_of_rank(R.S, 0)] as Array[StringName]
 	_check(service.resolve_sub_jutsu_evolution(top, false, true).error == &"NO_HIGHER_RANK"
 		and SubJutsuRollService.higher_rank(R.S) == -1, "rank S has no higher rank (no SS invented)")
 	_check(service.resolve_sub_jutsu_evolution(keeper, true).error == &"CHOICE_NOT_AVAILABLE", "evolution can't be resolved twice")
@@ -139,7 +143,7 @@ func _sub_jutsu_tests() -> void:
 		if sub == null or sub.rank != R.B or clanless.owned_sub_jutsu.has(sub.id):
 			_check(false, "rolls respect rank and never give an owned sub-jutsu")
 			break
-	_check(service.learn_jutsu(clanless, &"sub_a_placeholder_1").error == &"NOT_LEARNABLE", "sub-jutsu can't be learned directly")
+	_check(service.learn_jutsu(clanless, _sub_of_rank(R.A, 0)).error == &"NOT_LEARNABLE", "sub-jutsu can't be learned directly")
 
 
 # Tests 15-16 + spending rules.
@@ -155,18 +159,18 @@ func _tenketsu_tests() -> void:
 	_check(ok, "T15 every grade gives exactly +2 Tenketsu")
 	_check(p.tenketsu_earned == 10 and service.tenketsu.available_points(p) == 10, "T16 a Jonin has earned 10 points in total")
 	var t := service.tenketsu
-	_check(t.unlock(p, &"tenketsu_regen").error == &"MISSING_PREREQUISITE", "Tenketsu prerequisites enforced")
+	_check(t.unlock(p, &"tenketsu_regeneration").error == &"MISSING_PREREQUISITE", "Tenketsu prerequisites enforced")
 	for i in 3:
 		t.unlock(p, &"tenketsu_vitality")
 	_check(t.unlock(p, &"tenketsu_vitality").error == &"MAX_LEVEL", "Tenketsu max level enforced")
-	t.unlock(p, &"tenketsu_regen")
-	t.unlock(p, &"tenketsu_regen")
-	t.unlock(p, &"tenketsu_flow")
-	_check(t.available_points(p) == 2 and t.unlock(p, &"tenketsu_guard").error == &"NOT_ENOUGH_POINTS"
-		or t.unlock(p, &"tenketsu_guard").error == &"MISSING_PREREQUISITE", "cannot overspend Tenketsu")
-	_check(t.available_points(p) >= 0, "available points never negative")
+	t.unlock(p, &"tenketsu_regeneration")
+	t.unlock(p, &"tenketsu_regeneration")
+	for i in 3:
+		t.unlock(p, &"tenketsu_flow")
+	_check(t.unlock(p, &"tenketsu_iron_body").ok and t.available_points(p) == 0, "all 10 points spent")
+	_check(t.unlock(p, &"tenketsu_agility").error == &"NOT_ENOUGH_POINTS", "cannot overspend Tenketsu")
 	var bonus: Dictionary = t.stat_bonuses(p)
-	_check(is_equal_approx(float(bonus.get(&"hp", 0.0)), 15.0), "Tenketsu stat bonuses add up")
+	_check(is_equal_approx(float(bonus.get(&"hp", 0.0)), 24.0), "Tenketsu stat bonuses add up")
 	_check(service.max_resources(p).hp > db.get_grade(G.JONIN).base_hp, "max HP = grade base + Tenketsu")
 
 
@@ -181,7 +185,8 @@ func _specialization_and_nature_tests() -> void:
 	_check(service.choose_specialization(created, &"bulwark").ok and created.specialization_id == &"bulwark", "T17 a Chunin selects a specialization")
 	_check(service.choose_specialization(created, &"medic").error == &"CHOICE_NOT_AVAILABLE" and created.specialization_id == &"bulwark",
 		"T18 only one specialization")
-	_check(created.knows(&"bulwark_passive") and created.knows(&"bulwark_active_1"), "specialization skills are granted")
+	var bulwark: SpecializationData = db.get_specialization(&"bulwark")
+	_check(created.knows(bulwark.passive_skill.id) and created.knows(bulwark.active_skills[0].id), "specialization skills are granted")
 	var tokubetsu := _profile(G.TOKUBETSU)
 	_check(tokubetsu.primary_nature != &"" and tokubetsu.secondary_nature != &"", "T19 a Tokubetsu can own two natures")
 	var g2: CharacterProfile = service.create_character("g", "g", &"kiri", ProgressionTypes.Origin.CLANLESS).profile
@@ -222,9 +227,9 @@ func _robustness_tests() -> void:
 	admin.set_grade(fresh, G.JONIN)
 	_check(fresh.grade == G.JONIN and fresh.tenketsu_earned == 10, "admin set_grade promotes with rewards")
 	_check(admin.add_tenketsu_points(fresh, 3).ok and fresh.tenketsu_earned == 13, "admin adds Tenketsu points")
-	admin.give_sub_jutsu(fresh, &"sub_s_placeholder_2")
-	admin.remove_sub_jutsu(fresh, &"sub_s_placeholder_2")
-	_check(not fresh.owned_sub_jutsu.has(&"sub_s_placeholder_2"), "admin gives / removes sub-jutsu")
+	admin.give_sub_jutsu(fresh, _sub_of_rank(R.S, 1))
+	admin.remove_sub_jutsu(fresh, _sub_of_rank(R.S, 1))
+	_check(not fresh.owned_sub_jutsu.has(_sub_of_rank(R.S, 1)), "admin gives / removes sub-jutsu")
 	_check(admin.inspect(fresh).contains("JONIN"), "admin inspect")
 	_check(ProgressionDebug.run_command(service, _profile(G.GENIN), "promote_to_konin").ok, "debug promote_to_konin")
 	# Rewards are never granted twice.
