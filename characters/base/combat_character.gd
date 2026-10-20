@@ -40,6 +40,13 @@ const CONCENTRATE_HIT_LOCKOUT: float = 0.6
 const JUMP_DURATION: float = 0.55
 const JUMP_HEIGHT: float = 1.6
 const JUMP_COOLDOWN: float = 0.15
+## Locomotion: running by default, walking (Alt toggle) and chakra sprint
+## (double tap forward): faster, drains chakra, not usable in combat.
+const WALK_MULTIPLIER: float = 0.45
+const SPRINT_MULTIPLIER: float = 1.75
+const SPRINT_CHAKRA_PER_SECOND: float = 6.0
+## In combat for this long after dealing or taking damage.
+const COMBAT_TIMEOUT: float = 5.0
 ## Stamina: spent by basic attack stances, regenerates after a short pause.
 const MAX_STAMINA: float = 100.0
 const STAMINA_REGEN: float = 35.0
@@ -77,6 +84,11 @@ var _concentrate_lock: float = 0.0
 var air_time: float = 0.0
 var _jump_cooldown: float = 0.0
 var stamina: float = MAX_STAMINA
+var walking: bool = false
+var sprinting: bool = false
+## > 0: a chakra sprint was refused (in combat) — HUD cue.
+var sprint_denied: float = 0.0
+var _combat_left: float = 0.0
 ## Technique kits: resources, marks, recasts, modifiers, signatures.
 var kit: KitState
 var _stamina_delay: float = 0.0
@@ -167,13 +179,14 @@ func _physics_process(delta: float) -> void:
 	_tick_concentration(delta, intent, can_act)
 	_tick_jump(delta, intent, can_act)
 	_tick_substitution()
+	_tick_locomotion(delta, intent, can_act)
 	abilities.tick(delta, intent if can_act and not guarding and not concentrating else null)
-	energy.tick(delta, (CONCENTRATE_REGEN_MULTIPLIER if concentrating else 1.0) * kit.modifier_mult("chakra_regen"))
+	energy.tick(delta, 0.0 if sprinting else (CONCENTRATE_REGEN_MULTIPLIER if concentrating else 1.0) * kit.modifier_mult("chakra_regen"))
 	_tick_stamina(delta)
 	kit.tick(delta)
 	var wish: Vector3 = intent.move_direction if intent != null and status.can_move() and not concentrating else Vector3.ZERO
 	movement.speed_multiplier = abilities.get_move_multiplier() * status.speed_multiplier() * (GUARD_MOVE_MULTIPLIER if guarding else 1.0) \
-		* kit.modifier_mult("speed")
+		* kit.modifier_mult("speed") * (SPRINT_MULTIPLIER if sprinting else (WALK_MULTIPLIER if walking else 1.0))
 	_tick_status_effects(delta)
 	var knockback_speed: float = movement.forced_speed() if movement.is_knockback else 0.0
 	velocity = movement.compute_velocity(wish, delta)
@@ -216,6 +229,29 @@ func _tick_guard(delta: float, intent: GameplayIntent, can_act: bool) -> void:
 	if intent.pressed_slots.has(&"lmb") and _parry_cooldown <= 0.0:
 		_parry_left = PARRY_WINDOW
 		_parry_cooldown = PARRY_COOLDOWN
+
+
+func in_combat() -> bool:
+	return _combat_left > 0.0
+
+
+func _tick_locomotion(delta: float, intent: GameplayIntent, can_act: bool) -> void:
+	_combat_left = maxf(0.0, _combat_left - delta)
+	sprint_denied = maxf(0.0, sprint_denied - delta)
+	walking = intent != null and intent.walk
+	if intent != null and intent.sprint_pressed and not sprinting:
+		if in_combat():
+			sprint_denied = 1.5
+		elif can_act and energy.current_energy > SPRINT_CHAKRA_PER_SECOND * 0.5:
+			sprinting = true
+	if not sprinting:
+		return
+	var moving: bool = intent != null and intent.move_direction.length() > 0.2
+	if not moving or not can_act or guarding or concentrating or abilities.is_casting() or in_combat() \
+			or is_launched() or energy.current_energy <= 0.0:
+		sprinting = false
+		return
+	energy.sync_state(maxf(0.0, energy.current_energy - SPRINT_CHAKRA_PER_SECOND * delta))
 
 
 ## (Re)creates the signature mechanics of the kits in data.kits.
@@ -464,6 +500,11 @@ func receive_hit(hit: HitData) -> HitData.Result:
 		concentrating = false
 		_concentrate_lock = CONCENTRATE_HIT_LOCKOUT
 	health.apply_damage(damage)
+	if damage > 0.0:
+		_combat_left = COMBAT_TIMEOUT
+		sprinting = false
+		if is_instance_valid(hit.source) and hit.source != self:
+			hit.source._combat_left = COMBAT_TIMEOUT
 	if damage > 0.0 and is_instance_valid(hit.source) and hit.source != self:
 		var steal: float = hit.source.kit.modifier_sum("lifesteal")
 		if steal > 0.0:
@@ -605,6 +646,8 @@ func reset_for_round(spawn: Transform3D) -> void:
 	pursuing = null
 	stamina = MAX_STAMINA
 	_stamina_delay = 0.0
+	sprinting = false
+	_combat_left = 0.0
 	kit.reset()
 	_disarm_substitution()
 	_passive_used = false

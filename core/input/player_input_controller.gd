@@ -23,6 +23,10 @@ const SLOT_ACTIONS: Dictionary = {
 ## UI that may claim a press before it becomes a cast (combat menu):
 ## any object with `blocks_slot(slot: StringName) -> bool`.
 var ui_blocker: Object
+## Two presses of forward within this time = chakra sprint.
+const DOUBLE_TAP_WINDOW: float = 0.3
+var _walk: bool = false
+var _last_forward_tap: float = -10.0
 ## Height of the plane used for mouse aiming (arena floor).
 @export var aim_plane_height: float = 0.0
 
@@ -47,6 +51,16 @@ func poll_intent() -> GameplayIntent:
 	intent.guard_held = Input.is_action_pressed("guard")
 	intent.concentrate_held = Input.is_action_pressed("concentrate")
 	intent.jump_pressed = Input.is_action_just_pressed("jump")
+	if Input.is_action_just_pressed("walk_toggle"):
+		_walk = not _walk
+	intent.walk = _walk
+	if Input.is_action_just_pressed("move_up"):
+		var now: float = Time.get_ticks_msec() / 1000.0
+		if now - _last_forward_tap <= DOUBLE_TAP_WINDOW:
+			intent.sprint_pressed = true
+			_last_forward_tap = -10.0
+		else:
+			_last_forward_tap = now
 	return intent
 
 

@@ -34,6 +34,7 @@ var _was_parry: bool = false
 var _was_silenced: bool = false
 var _was_rooted: bool = false
 var _was_launched: bool = false
+var _sprint_trail: float = 0.0
 var _was_genjutsu: bool = false
 ## The fighter this machine controls (hitstop / feedback when it's involved).
 static var local_player: CombatCharacter
@@ -119,6 +120,13 @@ func _process(delta: float) -> void:
 	if _character.guarding and pose == &"" and not abilities.is_casting():
 		pose = &"guard:windup"
 		tint = Color(0.6, 0.8, 1.0, 0.12)
+	if _character.sprinting:
+		_sprint_trail -= delta
+		if _sprint_trail <= 0.0:
+			_sprint_trail = 0.07
+			SpellVfx.afterimage(_character, UiStyle.CHAKRA)
+		if tint.a < 0.15:
+			tint = Color(0.4, 0.7, 1.0, 0.2)
 	if _character.concentrating and pose == &"":
 		pose = &"seal:windup"
 		tint = Color(0.35, 0.65, 1.0, 0.18 + 0.1 * sin(Time.get_ticks_msec() * 0.012))
