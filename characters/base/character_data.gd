@@ -9,6 +9,10 @@ extends Resource
 @export var body_color: Color = Color.WHITE
 @export var look: ShinobiLook
 @export var max_health: float = 130.0
+## > 0: chakra mode (starts full, regenerates, techniques cost chakra).
+@export var max_chakra: float = 0.0
+## Chakra regenerated per second in chakra mode.
+@export var chakra_regen: float = 0.0
 @export var movement: MovementData
 ## Passive id handled by CombatCharacter ("kurama"...), empty = none.
 @export var passive: StringName = &""

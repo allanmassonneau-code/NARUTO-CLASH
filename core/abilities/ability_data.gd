@@ -3,7 +3,7 @@ extends Resource
 ## Data-driven definition of a jutsu: frame data, costs, hit properties.
 ## The `kind` selects a generic executor in AbilityEffects.
 
-enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL, SUMMON_CLONE, TELEPORT }
+enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL, SUMMON_CLONE, TELEPORT, SUBSTITUTION }
 
 @export_category("Identity")
 @export var display_name: String = "Jutsu"
@@ -157,6 +157,11 @@ enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL, SUMMON
 @export var clone_mirror: bool = false
 ## DASH: swap places with the clone instead of dashing when one is out.
 @export var swap_with_clone: bool = false
+
+@export_category("Substitution")
+## SUBSTITUTION: radius of the zone the caster must stay in for the
+## substitution to stay armed.
+@export var substitution_radius: float = 4.0
 
 
 func does_damage() -> bool:

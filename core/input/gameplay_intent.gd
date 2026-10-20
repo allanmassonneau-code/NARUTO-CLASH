@@ -15,8 +15,13 @@ var held_slots: Array[StringName] = []
 var cancel_pressed: bool = false
 ## Guard (F) held down.
 var guard_held: bool = false
+## Concentration (hold R): immobile, fast chakra regeneration.
+var concentrate_held: bool = false
+## Jump (Space) pressed this tick.
+var jump_pressed: bool = false
 
 
 func clear_actions() -> void:
 	pressed_slots.clear()
 	cancel_pressed = false
+	jump_pressed = false

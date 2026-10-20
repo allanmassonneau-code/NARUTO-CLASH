@@ -181,6 +181,23 @@ func is_ready(slot: StringName) -> bool:
 	return ability != null and get_cooldown_left(slot) <= 0.0 and character.energy.can_afford(ability.energy_cost)
 
 
+## Why the slot can't be cast right now, for the HUD: "" (castable),
+## "RECHARGE" (cooldown), "CHAKRA" (not enough chakra) or "BLOQUÉ" (stunned,
+## silenced, concentrating...).
+func unavailable_reason(slot: StringName) -> String:
+	var ability: AbilityData = get_castable(slot)
+	if ability == null:
+		return ""
+	if get_cooldown_left(slot) > 0.0 and ability != copied:
+		return "RECHARGE"
+	if not character.energy.can_afford(ability.energy_cost):
+		return "CHAKRA"
+	if character.is_dead() or not character.status.can_act() or not character.status.can_cast(slot) \
+			or character.concentrating or character.guarding:
+		return "BLOQUÉ"
+	return ""
+
+
 func is_facing_locked() -> bool:
 	return phase == Phase.ACTIVE or phase == Phase.RECOVERY
 

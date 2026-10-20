@@ -42,6 +42,8 @@ func poll_intent() -> GameplayIntent:
 		intent.held_slots.append(&"lmb")
 	intent.cancel_pressed = Input.is_action_just_pressed("ability_cancel")
 	intent.guard_held = Input.is_action_pressed("guard")
+	intent.concentrate_held = Input.is_action_pressed("concentrate")
+	intent.jump_pressed = Input.is_action_just_pressed("jump")
 	return intent
 
 

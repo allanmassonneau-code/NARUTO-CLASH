@@ -31,6 +31,15 @@ const PARRY_STUN: float = 1.2
 const PARRY_ENERGY: float = 15.0
 ## Chakra gained per point of damage taken.
 const DAMAGE_TAKEN_ENERGY: float = 0.2
+## Concentration (hold R): immobile, chakra regenerates this many times
+## faster, but hits deal more damage and break it for a moment.
+const CONCENTRATE_REGEN_MULTIPLIER: float = 6.0
+const CONCENTRATE_DAMAGE_TAKEN: float = 1.25
+const CONCENTRATE_HIT_LOCKOUT: float = 0.6
+## Jump (Space): short hop that clears ground areas.
+const JUMP_DURATION: float = 0.55
+const JUMP_HEIGHT: float = 1.6
+const JUMP_COOLDOWN: float = 0.15
 
 @export var data: CharacterData
 @export var controller: IntentSource
@@ -46,6 +55,17 @@ var guard_break_flash: float = 0.0
 var _parry_left: float = 0.0
 var _parry_cooldown: float = 0.0
 var _guard_absorbed: float = 0.0
+var concentrating: bool = false
+var _concentrate_lock: float = 0.0
+## Time left in the air (> 0 while jumping).
+var air_time: float = 0.0
+var _jump_cooldown: float = 0.0
+## Substitution (Kawarimi): while armed and inside its zone, the next hit
+## is negated and teleports us back to the anchor.
+var substitution_armed: bool = false
+var substitution_anchor: Vector3 = Vector3.ZERO
+var substitution_radius: float = 0.0
+var _substitution_zone: Node3D
 ## Naruto's active shadow clone (null when none).
 var clone: ShadowClone
 var _passive_used: bool = false
@@ -83,7 +103,10 @@ func _ready() -> void:
 	collision_mask = MASK_DEFAULT
 	movement.data = data.movement
 	health.setup(data.max_health)
-	energy.reset()
+	if data.max_chakra > 0.0:
+		energy.configure_chakra(data.max_chakra, data.chakra_regen)
+	else:
+		energy.reset()
 	abilities.setup(self, data)
 	hurtbox.character = self
 	_net_target = global_position
@@ -112,8 +135,12 @@ func _physics_process(delta: float) -> void:
 	if intent != null and intent.has_aim_point and can_act and not abilities.is_facing_locked():
 		facing.update_aim(global_position, intent.aim_point)
 	_tick_guard(delta, intent, can_act)
-	abilities.tick(delta, intent if can_act and not guarding else null)
-	var wish: Vector3 = intent.move_direction if intent != null and status.can_move() else Vector3.ZERO
+	_tick_concentration(delta, intent, can_act)
+	_tick_jump(delta, intent, can_act)
+	_tick_substitution()
+	abilities.tick(delta, intent if can_act and not guarding and not concentrating else null)
+	energy.tick(delta, CONCENTRATE_REGEN_MULTIPLIER if concentrating else 1.0)
+	var wish: Vector3 = intent.move_direction if intent != null and status.can_move() and not concentrating else Vector3.ZERO
 	movement.speed_multiplier = abilities.get_move_multiplier() * status.speed_multiplier() * (GUARD_MOVE_MULTIPLIER if guarding else 1.0)
 	_tick_status_effects(delta)
 	var knockback_speed: float = movement.forced_speed() if movement.is_knockback else 0.0
@@ -159,6 +186,73 @@ func _tick_guard(delta: float, intent: GameplayIntent, can_act: bool) -> void:
 		_parry_cooldown = PARRY_COOLDOWN
 
 
+## Concentration: hold to stand still and regenerate chakra fast.
+func _tick_concentration(delta: float, intent: GameplayIntent, can_act: bool) -> void:
+	_concentrate_lock = maxf(0.0, _concentrate_lock - delta)
+	concentrating = intent != null and intent.concentrate_held and can_act and not guarding \
+		and not abilities.is_casting() and not is_airborne() and _concentrate_lock <= 0.0 and not is_dead()
+
+
+func _tick_jump(delta: float, intent: GameplayIntent, can_act: bool) -> void:
+	if air_time > 0.0:
+		air_time = maxf(0.0, air_time - delta)
+		if air_time <= 0.0:
+			_jump_cooldown = JUMP_COOLDOWN
+		return
+	_jump_cooldown = maxf(0.0, _jump_cooldown - delta)
+	if intent != null and intent.jump_pressed and can_act and status.can_move() and not guarding \
+			and not concentrating and not abilities.is_casting() and _jump_cooldown <= 0.0:
+		air_time = JUMP_DURATION
+
+
+func is_airborne() -> bool:
+	return air_time > 0.0
+
+
+## Visual height of the jump arc (presentation).
+func jump_height() -> float:
+	if air_time <= 0.0:
+		return 0.0
+	var t: float = 1.0 - air_time / JUMP_DURATION
+	return 4.0 * JUMP_HEIGHT * t * (1.0 - t)
+
+
+## Saves the current position; the next hit taken inside the zone is negated.
+func arm_substitution(radius: float) -> void:
+	_disarm_substitution()
+	substitution_armed = true
+	substitution_anchor = HitQuery.flat(global_position)
+	substitution_radius = radius
+	_substitution_zone = CombatFx.zone_marker(self, substitution_anchor, radius, Color(1.0, 0.8, 0.35, 0.8))
+	CombatFx.ring(self, substitution_anchor, 0.8, Color(1.0, 0.85, 0.4), 0.35)
+
+
+func _tick_substitution() -> void:
+	if substitution_armed and HitQuery.flat(global_position).distance_to(substitution_anchor) > substitution_radius:
+		CombatFx.ring(self, substitution_anchor, substitution_radius, Color(1.0, 0.35, 0.3, 0.8), 0.3)
+		_disarm_substitution()
+
+
+func _disarm_substitution() -> void:
+	substitution_armed = false
+	if is_instance_valid(_substitution_zone):
+		_substitution_zone.queue_free()
+	_substitution_zone = null
+
+
+## Kawarimi: a log takes the hit and we reappear at the saved position.
+func _trigger_substitution() -> void:
+	CombatFx.log_decoy(self, global_position)
+	abilities.interrupt()
+	movement.stop()
+	air_time = 0.0
+	global_position = substitution_anchor
+	velocity = Vector3.ZERO
+	status.apply_status(StatusController.Type.IMMATERIAL, 0.35)
+	CombatFx.ring(self, substitution_anchor, 1.2, Color(1.0, 0.85, 0.4), 0.35)
+	_disarm_substitution()
+
+
 func _is_frontal(hit: HitData) -> bool:
 	if not is_instance_valid(hit.source) or hit.source == self:
 		return false
@@ -175,6 +269,11 @@ func receive_hit(hit: HitData) -> HitData.Result:
 		abilities.resolve_counter(hit)
 		counter_triggered.emit(hit)
 		return HitData.Result.COUNTERED
+	if is_airborne() and hit.ability != null and hit.ability.kind == AbilityData.Kind.GROUND_AREA:
+		return HitData.Result.IGNORED  # jumped over it
+	if substitution_armed and is_instance_valid(hit.source) and hit.source != self:
+		_trigger_substitution()
+		return HitData.Result.IGNORED
 	if guarding and _is_frontal(hit):
 		if _parry_left > 0.0 and hit.ability != null and hit.source.abilities.is_basic_attack(hit.ability):
 			_perfect_parry(hit)
@@ -197,6 +296,10 @@ func receive_hit(hit: HitData) -> HitData.Result:
 		if a.bonus_vs_rooted > 0.0 and status.has_status(StatusController.Type.ROOT):
 			damage += a.bonus_vs_rooted
 			status.remove_status(StatusController.Type.ROOT)
+	if concentrating and damage > 0.0:
+		damage *= CONCENTRATE_DAMAGE_TAKEN
+		concentrating = false
+		_concentrate_lock = CONCENTRATE_HIT_LOCKOUT
 	health.apply_damage(damage)
 	if damage > 0.0:
 		status.remove_status(StatusController.Type.INCAPACITATE)  # genjutsu breaks on damage
@@ -325,6 +428,11 @@ func reset_for_round(spawn: Transform3D) -> void:
 	_parry_left = 0.0
 	_parry_cooldown = 0.0
 	_guard_absorbed = 0.0
+	concentrating = false
+	_concentrate_lock = 0.0
+	air_time = 0.0
+	_jump_cooldown = 0.0
+	_disarm_substitution()
 	_passive_used = false
 	_passive_timer = 0.0
 	abilities.reset()
@@ -344,7 +452,7 @@ func reset_for_round(spawn: Transform3D) -> void:
 
 ## Floats per fighter in a snapshot (see write_snapshot for the layout).
 static func snapshot_stride() -> int:
-	return 11 + StatusController.Type.size() + AbilityController.SLOTS.size() + 5 + 3 + 4 + 4 + 3
+	return 11 + StatusController.Type.size() + AbilityController.SLOTS.size() + 5 + 3 + 4 + 4 + 3 + 2
 
 
 ## Server: appends this fighter's state to a snapshot buffer.
@@ -371,6 +479,7 @@ func write_snapshot(out: PackedFloat32Array, acked_seq: int) -> void:
 	else:
 		out.append_array([-1.0, -1.0, 0.0, 0.0])
 	out.append_array([1.0 if guarding else 0.0, parry_flash, guard_break_flash])
+	out.append_array([1.0 if concentrating else 0.0, air_time])
 
 
 ## Client: applies the state written by write_snapshot.
@@ -411,6 +520,9 @@ func apply_snapshot(data: PackedFloat32Array, o: int) -> void:
 	guarding = data[r] > 0.5
 	parry_flash = data[r + 1]
 	guard_break_flash = data[r + 2]
+	r += 3
+	concentrating = data[r] > 0.5
+	air_time = data[r + 1]
 	abilities.sync_state(phase, slot_index, elapsed, cooldowns)
 	if net_mode == NetMode.PUPPET:
 		facing.set_direction(Vector3(sin(angle), 0.0, cos(angle)))
@@ -451,6 +563,8 @@ func _predicted_process(delta: float) -> void:
 	var multiplier: float = abilities.get_move_multiplier() * status.speed_multiplier()
 	if intent.guard_held and status.can_act() and not abilities.is_casting():
 		multiplier *= GUARD_MOVE_MULTIPLIER
+	elif intent.concentrate_held and status.can_act() and not abilities.is_casting():
+		multiplier = 0.0
 	_simulate_locomotion(intent.move_direction, multiplier, delta)
 	_pending_inputs.append({"seq": _input_seq, "wish": intent.move_direction, "mult": multiplier, "dt": delta})
 	if _pending_inputs.size() > 120:
@@ -499,6 +613,8 @@ func dismiss_clone() -> void:
 
 func _on_died() -> void:
 	dismiss_clone()
+	_disarm_substitution()
+	concentrating = false
 	abilities.interrupt()
 	status.clear_all()
 	movement.stop()

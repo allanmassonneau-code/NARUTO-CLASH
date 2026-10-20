@@ -1,14 +1,17 @@
 class_name WorldHud
 extends CanvasLayer
 ## Open world HUD: identity + grade + XP, current zone, health / chakra
-## energy, technique slots with radial cooldowns, toasts and announcements.
+## chakra, technique slots with radial cooldowns and the reason a technique
+## can't be cast, toasts and announcements.
 
 const SLOT_SIZE: float = 64.0
+## Physical keys of the slots (labels follow the keyboard layout).
 const SLOT_KEYS: Dictionary = {
-	&"lmb": "CLIC G", &"space": "ESPACE", &"j1": "1", &"j2": "2", &"j3": "3", &"j4": "4", &"j5": "5", &"j6": "6",
+	&"space": KEY_SHIFT, &"q": KEY_Q, &"j1": KEY_1, &"j2": KEY_2, &"j3": KEY_3, &"j4": KEY_4, &"j5": KEY_5, &"j6": KEY_6,
 }
-## Bar order: basic attack, dash, then the six techniques.
-const BAR: Array[StringName] = [&"lmb", &"space", &"j1", &"j2", &"j3", &"j4", &"j5", &"j6"]
+## Bar order: basic attack, dash, substitution, then the six techniques.
+const BAR: Array[StringName] = [&"lmb", &"space", &"q", &"j1", &"j2", &"j3", &"j4", &"j5", &"j6"]
+const REASON_COLORS: Dictionary = {"CHAKRA": Color(0.45, 0.7, 1.0), "BLOQUÉ": Color(1.0, 0.5, 0.4), "ACTIVE": Color(1.0, 0.85, 0.4)}
 
 var _world: World
 var _player: CombatCharacter
@@ -21,6 +24,8 @@ var _zone: Label
 var _hp: HealthBar
 var _hp_text: Label
 var _energy: ProgressBar
+var _energy_text: Label
+var _concentrate: Label
 var _slots_row: HBoxContainer
 var _slots: Dictionary = {}
 var _toast: Label
@@ -56,13 +61,26 @@ func _process(_delta: float) -> void:
 	var health: HealthComponent = _player.health
 	_hp.set_values(health.current_health, health.max_health, health.recoverable_health, health.shield)
 	_hp_text.text = "%d / %d" % [ceili(health.current_health), roundi(health.max_health)]
-	_energy.value = _player.energy.current_energy
+	var energy: EnergyComponent = _player.energy
+	_energy.max_value = energy.max_energy
+	_energy.value = energy.current_energy
+	_energy_text.text = "CHAKRA %d / %d" % [floori(energy.current_energy), roundi(energy.max_energy)]
+	_concentrate.visible = _player.concentrating
 	for slot: StringName in _slots:
 		var w: Dictionary = _slots[slot]
 		var a: AbilityData = _player.abilities.get_ability(slot)
 		var cd: float = _player.abilities.get_cooldown_left(slot)
 		(w.sweep as CooldownSweep).ratio = clampf(cd / maxf(a.cooldown, 0.01), 0.0, 1.0) if cd > 0.0 else 0.0
 		(w.cd as Label).text = ("%.1f" % cd) if cd > 0.0 else ""
+		var reason: String = _player.abilities.unavailable_reason(slot)
+		if reason == "RECHARGE":
+			reason = ""  # the sweep already shows it
+		if slot == &"q" and _player.substitution_armed:
+			reason = "ACTIVE"
+		var reason_label: Label = w.reason
+		reason_label.text = reason
+		reason_label.add_theme_color_override("font_color", REASON_COLORS.get(reason, Color.WHITE))
+		(w.box as Control).modulate = Color(0.55, 0.65, 1.0) if reason == "CHAKRA" else (Color(0.7, 0.7, 0.7) if reason == "BLOQUÉ" else Color.WHITE)
 	var respawn: float = _world.respawn_left()
 	_death.visible = respawn > 0.0
 	_death.text = "K.O.\nRetour au village dans %d" % ceili(respawn)
@@ -156,15 +174,30 @@ func _build() -> void:
 	_hp_text.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_hp_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_hp_text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_energy = UiStyle.bar(fcol, UiStyle.CHAKRA, 8, 3)
-	_energy.max_value = 100.0
+	var chakra_stack := Control.new()
+	chakra_stack.custom_minimum_size = Vector2(0, 14)
+	fcol.add_child(chakra_stack)
+	_energy = UiStyle.bar(chakra_stack, UiStyle.CHAKRA, 14, 4)
+	_energy.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_energy_text = UiStyle.label(chakra_stack, "", 11, Color.WHITE, 900)
+	_energy_text.add_theme_constant_override("outline_size", 4)
+	_energy_text.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_energy_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_energy_text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_slots_row = HBoxContainer.new()
 	_slots_row.add_theme_constant_override("separation", 8)
 	fcol.add_child(_slots_row)
-	var hint := UiStyle.label(_root, "Échap : menu SHINOBI (équiper tes techniques)  ·  F : garde  ·  O : options", 13, UiStyle.MUTED, 700)
-	hint.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
-	hint.offset_left = 18
-	hint.offset_top = -34
+	_concentrate = UiStyle.label(_root, "CONCENTRATION", 18, UiStyle.CHAKRA, 900)
+	_concentrate.add_theme_constant_override("outline_size", 8)
+	_concentrate.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+	_concentrate.offset_left = -300
+	_concentrate.offset_right = 300
+	_concentrate.offset_top = -190
+	_concentrate.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_concentrate.visible = false
+	var hint_text: String = "Espace : saut  ·  %s (maintenir) : concentration  ·  F : garde  ·  Échap : menu SHINOBI  ·  O : options" % key_label(KEY_R)
+	var hint := UiStyle.label(_root, hint_text, 13, UiStyle.MUTED, 700)
+	hint.position = Vector2(20, 104)
 	_toast = UiStyle.label(_root, "", 20, Color.WHITE, 900)
 	_toast.add_theme_constant_override("outline_size", 8)
 	_toast.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
@@ -215,9 +248,21 @@ func _slot(slot: StringName, a: AbilityData) -> Dictionary:
 	cd.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	cd.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	cd.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	var key := UiStyle.label(stack, SLOT_KEYS[slot], 10, UiStyle.ACCENT, 900)
+	var key := UiStyle.label(stack, _slot_key(slot), 10, UiStyle.ACCENT, 900)
 	key.position = Vector2(0, -4)
-	return {"sweep": sweep, "cd": cd}
+	if a.energy_cost > 0.0:
+		var cost := UiStyle.label(stack, str(roundi(a.energy_cost)), 10, UiStyle.CHAKRA, 900)
+		cost.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+		cost.offset_left = -24
+		cost.offset_top = -4
+		cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	var reason := UiStyle.label(stack, "", 10, Color.WHITE, 900)
+	reason.add_theme_constant_override("outline_size", 4)
+	reason.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	reason.offset_top = -12
+	reason.offset_bottom = 2
+	reason.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	return {"sweep": sweep, "cd": cd, "reason": reason, "box": box}
 
 
 func _empty_slot(slot: StringName) -> Dictionary:
@@ -226,7 +271,21 @@ func _empty_slot(slot: StringName) -> Dictionary:
 	box.add_theme_stylebox_override("panel", UiStyle.panel(Color(0.08, 0.08, 0.1, 0.8), 10, Color(1, 1, 1, 0.12), 6))
 	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_slots_row.add_child(box)
-	var l := UiStyle.label(box, "%s\nlibre" % SLOT_KEYS[slot], 11, UiStyle.MUTED, 700)
+	var l := UiStyle.label(box, "%s\nlibre" % _slot_key(slot), 11, UiStyle.MUTED, 700)
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	return {}
+
+
+func _slot_key(slot: StringName) -> String:
+	return "CLIC G" if slot == &"lmb" else key_label(SLOT_KEYS[slot])
+
+
+## Label of a physical key on the player's keyboard layout (Q -> A on AZERTY).
+static func key_label(physical: Key) -> String:
+	if physical == KEY_SHIFT:
+		return "MAJ"
+	var k: Key = KEY_NONE
+	if DisplayServer.get_name() != "headless":
+		k = DisplayServer.keyboard_get_label_from_physical(physical)
+	return OS.get_keycode_string(k if k != KEY_NONE else physical).to_upper()

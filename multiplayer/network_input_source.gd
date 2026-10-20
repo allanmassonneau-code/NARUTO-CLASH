@@ -5,6 +5,8 @@ extends IntentSource
 const SLOT_ORDER: Array[StringName] = AbilityController.SLOTS
 ## Bit of the held mask carrying the guard key.
 const GUARD_BIT: int = 1 << 20
+const CONCENTRATE_BIT: int = 1 << 21
+const JUMP_BIT: int = 1 << 22
 
 var peer_id: int = 0
 ## Last input sequence number received (acked back in snapshots).
@@ -12,6 +14,7 @@ var last_seq: int = 0
 
 var _pending_presses: Array[StringName] = []
 var _pending_cancel: bool = false
+var _pending_jump: bool = false
 
 
 func receive_input(seq: int, move: Vector2, aim: Vector2, held_mask: int = 0) -> void:
@@ -19,6 +22,8 @@ func receive_input(seq: int, move: Vector2, aim: Vector2, held_mask: int = 0) ->
 		return  # out of date
 	last_seq = seq
 	intent.guard_held = held_mask & GUARD_BIT != 0
+	intent.concentrate_held = held_mask & CONCENTRATE_BIT != 0
+	_pending_jump = _pending_jump or held_mask & JUMP_BIT != 0
 	intent.held_slots.clear()
 	for i in SLOT_ORDER.size():
 		if held_mask & (1 << i):
@@ -41,6 +46,8 @@ func poll_intent() -> GameplayIntent:
 	intent.clear_actions()
 	intent.pressed_slots.append_array(_pending_presses)
 	intent.cancel_pressed = _pending_cancel
+	intent.jump_pressed = _pending_jump
+	_pending_jump = false
 	_pending_presses.clear()
 	_pending_cancel = false
 	return intent

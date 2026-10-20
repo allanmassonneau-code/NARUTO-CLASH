@@ -49,6 +49,8 @@ static func activate(ctrl: AbilityController, a: AbilityData) -> void:
 			c.dismiss_clone()
 			var dest: Vector3 = _clear_point(c, ctrl.cast_direction, a.summon_distance)
 			c.clone = ShadowClone.spawn(c, dest, a.summon_duration)
+		AbilityData.Kind.SUBSTITUTION:
+			c.arm_substitution(a.substitution_radius)
 
 
 static func tick_active(ctrl: AbilityController, a: AbilityData, _delta: float) -> void:

@@ -20,6 +20,7 @@ static func build(jutsu: JutsuData, db: ProgressionDatabase) -> AbilityData:
 	var damage: float = RANK_DAMAGE[rank]
 	var tags: Array[StringName] = jutsu.tags
 	a.cooldown = maxf(jutsu.cooldown, 3.0)
+	a.energy_cost = jutsu.chakra_cost
 	a.startup_time = 0.15 + rank * 0.06
 	a.active_time = 0.05
 	a.recovery_time = 0.25
@@ -139,7 +140,46 @@ static func taijutsu() -> AbilityData:
 	return hits[0]
 
 
-## Shunshin (Space) every shinobi has.
+## Universal dash (Shift): short, brief invulnerability.
+static func dash() -> AbilityData:
+	var a := AbilityData.new()
+	a.display_name = "Dash"
+	a.kind = AbilityData.Kind.DASH
+	a.color = Color(0.8, 0.9, 1.0)
+	a.startup_time = 0.0
+	a.active_time = 0.12
+	a.recovery_time = 0.06
+	a.cooldown = 3.5
+	a.dash_distance = 4.5
+	a.dash_immaterial = true
+	a.cast_move_multiplier = 1.0
+	a.recovery_move_multiplier = 1.0
+	a.can_cancel_during_startup = false
+	a.anim = &"dash"
+	a.vfx = &"shunshin"
+	return a
+
+
+## Substitution (Kawarimi): one charge, 50 s recharge. Saves the position;
+## while you stay in the zone, the next hit is negated and you reappear there.
+static func substitution() -> AbilityData:
+	var a := AbilityData.new()
+	a.display_name = "Substitution"
+	a.kind = AbilityData.Kind.SUBSTITUTION
+	a.color = Color(1.0, 0.8, 0.35)
+	a.startup_time = 0.0
+	a.active_time = 0.05
+	a.recovery_time = 0.1
+	a.cooldown = 50.0
+	a.substitution_radius = 4.0
+	a.cast_move_multiplier = 1.0
+	a.recovery_move_multiplier = 1.0
+	a.can_cancel_during_startup = false
+	a.anim = &"seal"
+	return a
+
+
+## Shunshin: the mobs' dash.
 static func shunshin() -> AbilityData:
 	var a := AbilityData.new()
 	a.display_name = "Shunshin"

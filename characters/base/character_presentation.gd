@@ -118,6 +118,11 @@ func _process(delta: float) -> void:
 	if _character.guarding and pose == &"" and not abilities.is_casting():
 		pose = &"guard:windup"
 		tint = Color(0.6, 0.8, 1.0, 0.12)
+	if _character.concentrating and pose == &"":
+		pose = &"seal:windup"
+		tint = Color(0.35, 0.65, 1.0, 0.18 + 0.1 * sin(Time.get_ticks_msec() * 0.012))
+	if _character.is_airborne() and pose == &"" and not abilities.is_casting():
+		pose = &"leap:strike"
 	if abilities.is_casting() and pose == &"":
 		var a: AbilityData = abilities.current
 		var anim: String = String(a.anim) if a.anim != &"" else _default_anim(a)
@@ -132,7 +137,7 @@ func _process(delta: float) -> void:
 	var planar_speed: float = Vector2(_character.velocity.x, _character.velocity.z).length()
 	model.animate(delta, planar_speed, pose, tint, fade)
 	visual_pivot.rotation.x = deg_to_rad(-85.0) if _character.is_dead() else 0.0
-	visual_pivot.position.y = 0.25 if _character.is_dead() else 0.0
+	visual_pivot.position.y = 0.25 if _character.is_dead() else _character.jump_height()
 	team_ring.visible = not _character.is_dead()
 	counter_bubble.visible = status.has_status(StatusController.Type.COUNTER)
 	_update_overhead()

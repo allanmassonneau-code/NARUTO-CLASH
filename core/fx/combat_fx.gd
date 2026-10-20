@@ -45,6 +45,47 @@ static func log_decoy(anchor: Node, at: Vector3) -> void:
 	_spawn(anchor, box, Transform3D(Basis.IDENTITY, HitQuery.flat(at) + Vector3.UP * 0.7), Color(0.55, 0.35, 0.18), 1.2)
 
 
+## Persistent ground zone (substitution area). The caller frees it; null
+## on headless servers.
+static func zone_marker(anchor: Node, center: Vector3, radius: float, color: Color) -> Node3D:
+	if not is_enabled():
+		return null
+	var root: Node = anchor.get_parent() if anchor.get_parent() != null else anchor
+	var zone := Node3D.new()
+	zone.add_to_group(&"round_entities")
+	root.add_child(zone)
+	zone.global_position = HitQuery.flat(center) + Vector3.UP * 0.04
+	var disc := MeshInstance3D.new()
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = radius
+	cyl.bottom_radius = radius
+	cyl.height = 0.02
+	cyl.radial_segments = 48
+	disc.mesh = cyl
+	disc.material_override = _zone_material(Color(color, 0.12))
+	disc.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	zone.add_child(disc)
+	var edge := MeshInstance3D.new()
+	var torus := TorusMesh.new()
+	torus.inner_radius = radius - 0.1
+	torus.outer_radius = radius
+	torus.rings = 48
+	edge.mesh = torus
+	edge.material_override = _zone_material(color)
+	edge.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	zone.add_child(edge)
+	return zone
+
+
+static func _zone_material(color: Color) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = color
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	return m
+
+
 ## Rising, fading damage number (client-side feedback only).
 static func damage_number(anchor: Node, at: Vector3, amount: float, color: Color, text: String = "") -> void:
 	if not is_enabled():

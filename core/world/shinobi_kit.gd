@@ -1,9 +1,11 @@
 class_name ShinobiKit
 ## Builds the combat definition (CharacterData) of the player's shinobi from
 ## the progression profile: grade + Tenketsu HP and speed, look from the
-## village / clan, LMB taijutsu, Space shunshin, and the equipped techniques
-## on the keys 1 to 6.
+## village / clan, chakra pool, LMB taijutsu, Shift dash, substitution, and
+## the equipped techniques on the keys 1 to 6.
 
+## Chakra regenerated per second before Tenketsu bonuses.
+const BASE_CHAKRA_REGEN: float = 4.0
 const JUTSU_SLOTS: Array[StringName] = [&"j1", &"j2", &"j3", &"j4", &"j5", &"j6"]
 const VILLAGE_COLORS: Dictionary = {
 	&"konoha": [Color(0.32, 0.42, 0.28), Color(0.15, 0.2, 0.3)],
@@ -17,9 +19,12 @@ static func build(profile: CharacterProfile, db: ProgressionDatabase, service: P
 	var data := CharacterData.new()
 	data.display_name = profile.character_name
 	data.short_name = profile.character_name
-	data.max_health = service.max_resources(profile).hp
-	var movement := MovementData.new()
+	var resources: Dictionary = service.max_resources(profile)
 	var bonus: Dictionary = service.tenketsu.stat_bonuses(profile)
+	data.max_health = resources.hp
+	data.max_chakra = resources.chakra
+	data.chakra_regen = BASE_CHAKRA_REGEN + float(bonus.get(&"chakra_regen", 0.0))
+	var movement := MovementData.new()
 	movement.move_speed = 7.0 * (1.0 + float(bonus.get(&"mobility", 0.0)))
 	movement.acceleration = 300.0
 	movement.deceleration = 360.0
@@ -27,7 +32,8 @@ static func build(profile: CharacterProfile, db: ProgressionDatabase, service: P
 	data.look = look_for(profile)
 	data.body_color = data.look.top
 	data.lmb = JutsuAbilityFactory.taijutsu()
-	data.space = JutsuAbilityFactory.shunshin()
+	data.space = JutsuAbilityFactory.dash()
+	data.q = JutsuAbilityFactory.substitution()
 	var slot: int = 0
 	for id: StringName in profile.equipped_jutsu:
 		var jutsu: JutsuData = db.get_jutsu(id)
