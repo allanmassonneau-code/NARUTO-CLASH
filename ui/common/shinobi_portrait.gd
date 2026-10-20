@@ -24,6 +24,8 @@ var flourishes: bool = true
 var yaw: float = 0.0
 ## Gentle automatic sway (off while the user turns the model).
 var auto_sway: bool = true
+## > 1 brings the camera closer (set_zoom).
+var zoom: float = 1.0
 
 
 static func create(data: CharacterData, framing: Framing, pixel_size: Vector2i) -> ShinobiPortrait:
@@ -91,7 +93,7 @@ func _build_scene(viewport: SubViewport, data: CharacterData) -> void:
 	_camera.fov = 30.0
 	match _framing:
 		Framing.FULL_BODY:
-			_aim_camera(Vector3(0, 1.15, 5.4), Vector3(0, 1.0, 0))
+			_aim_camera(Vector3(0, 1.15, 5.4 / zoom), Vector3(0, 1.0, 0))
 		Framing.BUST:
 			_aim_camera(Vector3(0, 1.75, 2.9), Vector3(0, 1.55, 0))
 		Framing.FACE:
@@ -100,6 +102,12 @@ func _build_scene(viewport: SubViewport, data: CharacterData) -> void:
 	viewport.add_child(_camera)
 	_pivot.rotation_degrees.y = 18.0
 	_next_flourish = randf_range(2.0, 7.0)
+
+
+func set_zoom(value: float) -> void:
+	zoom = value
+	if _camera != null and _framing == Framing.FULL_BODY:
+		_aim_camera(Vector3(0, 1.15, 5.4 / zoom), Vector3(0, 1.0, 0))
 
 
 func _aim_camera(from: Vector3, target: Vector3) -> void:

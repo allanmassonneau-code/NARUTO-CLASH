@@ -59,6 +59,20 @@ const VILLAGE_STYLES: Dictionary = {
 }
 
 
+## Place of the map shown behind the menus for a clan (World.BACKDROP_SPOTS).
+const CLAN_SPOTS: Dictionary = {
+	&"clan_senju": &"forest", &"clan_uchiha": &"plaza", &"clan_uzumaki": &"gate", &"clan_nara": &"forest",
+	&"clan_akimichi": &"plaza", &"clan_roran": &"gate", &"clan_sabaku": &"plain", &"clan_hoki": &"plaza",
+	&"clan_kugutsu": &"training", &"clan_hakumei": &"plain", &"clan_chinoike": &"ravine", &"clan_fuma": &"training",
+	&"clan_salamandre": &"forest", &"clan_kaguya": &"ravine", &"clan_kami": &"gate", &"clan_hozuki": &"plain",
+	&"clan_hoshigaki": &"ravine", &"clan_yuki": &"plaza", &"clan_karatachi": &"plain", &"clan_epeistes": &"training",
+}
+
+
+static func spot(clan_id: StringName) -> StringName:
+	return CLAN_SPOTS.get(clan_id, &"plaza")
+
+
 static func style(clan_id: StringName) -> Dictionary:
 	return STYLES.get(clan_id, NO_CLAN)
 

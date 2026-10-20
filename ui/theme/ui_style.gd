@@ -18,9 +18,50 @@ const TEAM_COLORS: Array[Color] = [Color(0.3, 0.62, 1.0), Color(1.0, 0.3, 0.25)]
 static var _theme: Theme
 
 
-static func font(weight: int = 600) -> SystemFont:
+const BODY_FONT: String = "res://assets/fonts/Inter.ttf"
+const DISPLAY_FONTS: Dictionary = {500: "res://assets/fonts/Rajdhani-Medium.ttf",
+	600: "res://assets/fonts/Rajdhani-SemiBold.ttf", 700: "res://assets/fonts/Rajdhani-Bold.ttf"}
+static var _fonts: Dictionary = {}
+
+
+## Text font: Inter (variable weight); weights >= 800 use the Rajdhani display
+## face (titles, numbers). Both fall back to system fonts for kanji crests.
+static func font(weight: int = 600) -> Font:
+	if weight >= 800:
+		return display(700)
+	var key: String = "body%d" % weight
+	if not _fonts.has(key):
+		var base: Font = load(BODY_FONT) if ResourceLoader.exists(BODY_FONT) else null
+		if base == null:
+			_fonts[key] = _system(weight)
+		else:
+			var v := FontVariation.new()
+			v.base_font = base
+			v.variation_opentype = {TextServerManager.get_primary_interface().name_to_tag("wght"): weight}
+			v.fallbacks = [_system(weight)]
+			_fonts[key] = v
+	return _fonts[key]
+
+
+## Display font (Rajdhani): buttons, titles, HUD numbers.
+static func display(weight: int = 600) -> Font:
+	var key: String = "display%d" % weight
+	if not _fonts.has(key):
+		var path: String = DISPLAY_FONTS.get(clampi(weight / 100 * 100, 500, 700), DISPLAY_FONTS[600])
+		var base: Font = load(path) if ResourceLoader.exists(path) else null
+		if base == null:
+			_fonts[key] = _system(weight)
+		else:
+			var v := FontVariation.new()
+			v.base_font = base
+			v.fallbacks = [_system(weight)]
+			_fonts[key] = v
+	return _fonts[key]
+
+
+static func _system(weight: int) -> SystemFont:
 	var f := SystemFont.new()
-	f.font_names = PackedStringArray(["Segoe UI", "Inter", "Noto Sans", "Arial", "sans-serif"])
+	f.font_names = PackedStringArray(["Segoe UI", "Noto Sans CJK JP", "Yu Gothic", "Meiryo", "MS Gothic", "Noto Sans", "Arial", "sans-serif"])
 	f.font_weight = weight
 	f.antialiasing = TextServer.FONT_ANTIALIASING_GRAY
 	return f
@@ -62,19 +103,22 @@ static func theme() -> Theme:
 	t.set_color("font_color", "Label", TEXT)
 	t.set_color("font_outline_color", "Label", Color(0, 0, 0, 0.8))
 	t.set_constant("outline_size", "Label", 3)
-	t.set_stylebox("panel", "PanelContainer", panel())
-	t.set_stylebox("panel", "Panel", panel())
-	# Buttons
-	t.set_stylebox("normal", "Button", panel(Color(0.17, 0.17, 0.18, 0.95), 10, BORDER, 14))
-	t.set_stylebox("hover", "Button", _ss_selected(panel(Color(SS_RED, 0.97), 10, SS_GOLD, 14)))
-	t.set_stylebox("pressed", "Button", _ss_selected(panel(Color(SS_GOLD, 0.95), 10, SS_GOLD.lightened(0.4), 14)))
-	t.set_stylebox("hover_pressed", "Button", _ss_selected(panel(Color(SS_GOLD.lightened(0.1), 0.95), 10, SS_GOLD.lightened(0.5), 14)))
-	t.set_stylebox("disabled", "Button", panel(Color(0.1, 0.1, 0.12, 0.6), 10, BORDER, 14))
+	t.set_stylebox("panel", "PanelContainer", panel(Color(0.06, 0.06, 0.09, 0.82), 12, Color(1, 1, 1, 0.08), 12))
+	t.set_stylebox("panel", "Panel", panel(Color(0.06, 0.06, 0.09, 0.82), 12, Color(1, 1, 1, 0.08), 12))
+	# Buttons: dark glass, thin border; accent outline on hover, accent fill when pressed / selected.
+	t.set_font("font", "Button", display(600))
+	t.set_font_size("font_size", "Button", 18)
+	t.set_stylebox("normal", "Button", panel(Color(0.07, 0.07, 0.1, 0.82), 8, Color(1, 1, 1, 0.1), 16))
+	t.set_stylebox("hover", "Button", panel(Color(ACCENT, 0.16), 8, ACCENT, 16))
+	t.set_stylebox("pressed", "Button", panel(Color(ACCENT, 0.92), 8, ACCENT.lightened(0.3), 16))
+	t.set_stylebox("hover_pressed", "Button", panel(Color(ACCENT.lightened(0.08), 0.95), 8, ACCENT.lightened(0.4), 16))
+	t.set_stylebox("disabled", "Button", panel(Color(0.05, 0.05, 0.07, 0.5), 8, Color(1, 1, 1, 0.05), 16))
 	t.set_stylebox("focus", "Button", StyleBoxEmpty.new())
 	t.set_color("font_color", "Button", TEXT)
-	t.set_color("font_pressed_color", "Button", Color(0.1, 0.05, 0.02))
-	t.set_color("font_hover_pressed_color", "Button", Color(0.1, 0.05, 0.02))
+	t.set_color("font_pressed_color", "Button", Color(0.08, 0.05, 0.02))
+	t.set_color("font_hover_pressed_color", "Button", Color(0.08, 0.05, 0.02))
 	t.set_color("font_hover_color", "Button", Color.WHITE)
+	t.set_color("font_disabled_color", "Button", Color(TEXT, 0.35))
 	# Line edits
 	t.set_stylebox("normal", "LineEdit", panel(Color(0.05, 0.05, 0.08, 0.95), 8, BORDER, 10))
 	t.set_stylebox("focus", "LineEdit", panel(Color(0.05, 0.05, 0.08, 0.95), 8, ACCENT, 10))

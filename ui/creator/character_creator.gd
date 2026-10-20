@@ -25,7 +25,7 @@ var _avatar: Dictionary = {}
 var _look_tab: int = 0
 var _cloth_page: int = 0
 
-var _bg: ColorRect
+var _bg: MenuBackdrop
 var _watermark: Label
 var _steps_box: VBoxContainer
 var _content: VBoxContainer
@@ -74,15 +74,12 @@ func _ready() -> void:
 # --- Layout -------------------------------------------------------------------------
 
 func _build() -> void:
-	_bg = ColorRect.new()
-	_bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var solid := ColorRect.new()
+	solid.color = Color(0.03, 0.03, 0.05)
+	solid.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(solid)
+	_bg = MenuBackdrop.new()
 	add_child(_bg)
-	var shade := TextureRect.new()
-	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	shade.texture = _gradient()
-	shade.stretch_mode = TextureRect.STRETCH_SCALE
-	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(shade)
 	_watermark = UiStyle.label(self, "", 520, Color(1, 1, 1, 0.05), 900)
 	_watermark.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
 	_watermark.offset_left = -500
@@ -126,6 +123,7 @@ func _build() -> void:
 	stage.mouse_filter = Control.MOUSE_FILTER_STOP
 	centre.add_child(stage)
 	_portrait = ShinobiPortrait.create(_preview_data(), ShinobiPortrait.Framing.FULL_BODY, Vector2i(720, 900))
+	_portrait.set_zoom(1.25)
 	_portrait.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_portrait.flourishes = false
 	stage.add_child(_portrait)
@@ -167,23 +165,11 @@ func _build() -> void:
 	_next.add_theme_font_override("font", UiStyle.font(900))
 
 
-func _gradient() -> GradientTexture2D:
-	var g := Gradient.new()
-	g.set_color(0, Color(0, 0, 0, 0.0))
-	g.set_color(1, Color(0, 0, 0, 0.65))
-	var tex := GradientTexture2D.new()
-	tex.gradient = g
-	tex.fill = GradientTexture2D.FILL_RADIAL
-	tex.fill_from = Vector2(0.45, 0.45)
-	tex.fill_to = Vector2(1.1, 1.1)
-	return tex
-
-
 func _refresh() -> void:
 	var accent: Color = _accent()
-	_bg.color = accent.darkened(0.82)
+	_bg.show_place(_village, ClanStyles.spot(_clan_or_none()) if _step >= Step.CLAN or edit_mode else &"plaza", accent)
 	_watermark.text = _crest()
-	_watermark.add_theme_color_override("font_color", Color(accent, 0.07))
+	_watermark.add_theme_color_override("font_color", Color(accent, 0.1))
 	var v: VillageData = _db.get_village(_village) if _db.has_method("get_village") else null
 	var clan: ClanData = _db.get_clan(_clan) if _with_clan else null
 	_banner.text = "%s  ·  %s" % [v.display_name if v != null else String(_village).capitalize(),

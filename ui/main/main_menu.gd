@@ -11,11 +11,18 @@ var _retry: Timer
 var _status: String = ""
 var _ui: Control
 var _options: OptionsPanel
+var _backdrop: MenuBackdrop
 
 
 func _ready() -> void:
 	theme = UiStyle.theme()
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var solid := ColorRect.new()
+	solid.color = Color(0.03, 0.03, 0.05)
+	solid.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(solid)
+	_backdrop = MenuBackdrop.new()
+	add_child(_backdrop)
 	_options = OptionsPanel.attach(self)
 	SSAudio.music(&"title")
 	SSAudio.ambience(&"")
@@ -53,13 +60,22 @@ func _rebuild() -> void:
 	_ui = Control.new()
 	_ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(_ui)
-	move_child(_ui, 0)
+	move_child(_ui, _backdrop.get_index() + 1)
 	var p: CharacterProfile = Profiles.profile
 	var accent: Color = ClanStyles.style(p.clan_id).color if p != null else UiStyle.ACCENT
-	var bg := ColorRect.new()
-	bg.color = accent.darkened(0.85)
-	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_ui.add_child(bg)
+	_backdrop.show_place(p.village_id if p != null else &"konoha", ClanStyles.spot(p.clan_id) if p != null else &"plaza", accent)
+	var side := TextureRect.new()
+	side.set_anchors_and_offsets_preset(Control.PRESET_LEFT_WIDE)
+	side.offset_right = 760
+	side.stretch_mode = TextureRect.STRETCH_SCALE
+	side.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var g := Gradient.new()
+	g.set_color(0, Color(0.02, 0.02, 0.04, 0.85))
+	g.set_color(1, Color(0.02, 0.02, 0.04, 0.0))
+	var tex := GradientTexture2D.new()
+	tex.gradient = g
+	side.texture = tex
+	_ui.add_child(side)
 	if p != null:
 		var crest := UiStyle.label(_ui, ClanStyles.style(p.clan_id).crest, 560, Color(accent, 0.06), 900)
 		crest.set_anchors_and_offsets_preset(Control.PRESET_CENTER_RIGHT)
@@ -69,6 +85,7 @@ func _rebuild() -> void:
 		var data := CharacterData.new()
 		data.look = ShinobiKit.look_for(p)
 		var portrait := ShinobiPortrait.create(data, ShinobiPortrait.Framing.FULL_BODY, Vector2i(640, 900))
+		portrait.set_zoom(1.15)
 		portrait.set_anchors_and_offsets_preset(Control.PRESET_RIGHT_WIDE)
 		portrait.offset_left = -760
 		portrait.offset_right = -80
@@ -80,8 +97,15 @@ func _rebuild() -> void:
 	col.alignment = BoxContainer.ALIGNMENT_CENTER
 	col.add_theme_constant_override("separation", 14)
 	_ui.add_child(col)
-	var title := UiStyle.label(col, "NINJA BATTLE", 72, UiStyle.ACCENT, 900)
-	title.add_theme_constant_override("outline_size", 12)
+	var title := UiStyle.label(col, "NINJA BATTLE", 96, Color.WHITE, 900)
+	title.add_theme_constant_override("outline_size", 0)
+	title.add_theme_constant_override("shadow_offset_y", 4)
+	title.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.6))
+	var rule := ColorRect.new()
+	rule.color = accent
+	rule.custom_minimum_size = Vector2(120, 4)
+	rule.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	col.add_child(rule)
 	UiStyle.label(col, ("Profil en ligne" if Profiles.is_remote() else "Profil hors ligne") + ("  ·  " + _status if _status != "" else ""), 14, UiStyle.MUTED, 700)
 	var gap := Control.new()
 	gap.custom_minimum_size = Vector2(0, 30)
@@ -113,16 +137,31 @@ func _open_shinobi() -> void:
 
 func _menu_button(parent: Control, text: String, primary: bool, callback: Callable) -> Button:
 	var b := Button.new()
-	b.text = text
+	b.text = "   " + text
 	b.focus_mode = Control.FOCUS_NONE
 	b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	b.custom_minimum_size = Vector2(440, 64 if primary else 50)
-	b.add_theme_font_size_override("font_size", 22 if primary else 17)
-	b.add_theme_font_override("font", UiStyle.font(900 if primary else 700))
-	var color: Color = UiStyle.ACCENT if primary else Color(1, 1, 1, 0.12)
-	b.add_theme_stylebox_override("normal", UiStyle.panel(Color(color, 0.25) if primary else Color(0.06, 0.05, 0.09, 0.85), 12, color, 18))
-	b.add_theme_stylebox_override("hover", UiStyle.panel(Color(UiStyle.ACCENT, 0.32), 12, UiStyle.ACCENT, 18))
-	b.add_theme_stylebox_override("pressed", UiStyle.panel(Color(UiStyle.ACCENT, 0.4), 12, UiStyle.ACCENT, 18))
+	b.custom_minimum_size = Vector2(460, 62 if primary else 50)
+	b.add_theme_font_size_override("font_size", 26 if primary else 20)
+	b.add_theme_font_override("font", UiStyle.display(700 if primary else 600))
+	var base: Color = UiStyle.ACCENT if primary else Color(1, 1, 1, 0.0)
+	b.add_theme_stylebox_override("normal", _bar_style(Color(base, 0.9) if primary else Color(0.05, 0.05, 0.08, 0.55), UiStyle.ACCENT if primary else Color(1, 1, 1, 0.25)))
+	b.add_theme_stylebox_override("hover", _bar_style(Color(UiStyle.ACCENT, 1.0) if primary else Color(UiStyle.ACCENT, 0.2), Color.WHITE if primary else UiStyle.ACCENT))
+	b.add_theme_stylebox_override("pressed", _bar_style(UiStyle.ACCENT.darkened(0.15), Color.WHITE))
+	if primary:
+		b.add_theme_color_override("font_color", Color(0.06, 0.04, 0.02))
+		b.add_theme_color_override("font_hover_color", Color(0.06, 0.04, 0.02))
 	b.pressed.connect(callback)
 	parent.add_child(b)
 	return b
+
+
+## Flat button with a thick accent bar on the left edge.
+static func _bar_style(fill: Color, bar: Color) -> StyleBoxFlat:
+	var s := StyleBoxFlat.new()
+	s.bg_color = fill
+	s.border_color = bar
+	s.border_width_left = 5
+	s.set_corner_radius_all(4)
+	s.content_margin_left = 18
+	s.content_margin_right = 18
+	return s

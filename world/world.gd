@@ -46,7 +46,55 @@ var _characters: Node3D
 var _rebuild_look: bool = false
 
 
+## Menu backdrop: only the map of `backdrop_village` (no player, mobs, HUD,
+## audio) with a slow cinematic camera around `backdrop_focus`.
+var backdrop_village: StringName = &""
+var backdrop_focus: Vector3 = Vector3.ZERO
+var _orbit: float = 0.0
+var _backdrop_camera: Camera3D
+
+## Places of the map shown behind the menus (clan-dependent).
+const BACKDROP_SPOTS: Dictionary = {
+	&"plaza": Vector3(0, 0, 0), &"gate": Vector3(26, 0, 0), &"training": Vector3(-14, 0, 8),
+	&"plain": Vector3(55, 0, 0), &"forest": Vector3(110, 0, 0), &"ravine": Vector3(165, 0, 0),
+}
+
+
+static func backdrop(village: StringName, spot: StringName) -> World:
+	var w := (load("res://world/world.tscn") as PackedScene).instantiate() as World
+	w.backdrop_village = village if village != &"" else &"konoha"
+	w.backdrop_focus = BACKDROP_SPOTS.get(spot, Vector3.ZERO)
+	return w
+
+
+func _ready_backdrop() -> void:
+	_rng.seed = 7
+	_build_environment(backdrop_village)
+	_build_village(backdrop_village)
+	_build_field()
+	_backdrop_camera = Camera3D.new()
+	_backdrop_camera.fov = 50.0
+	add_child(_backdrop_camera)
+	_backdrop_camera.current = true
+	_orbit = randf() * TAU
+	_place_backdrop_camera()
+
+
+func _place_backdrop_camera() -> void:
+	var from: Vector3 = backdrop_focus + Vector3(cos(_orbit) * 18.0, 13.0, sin(_orbit) * 18.0)
+	_backdrop_camera.transform = Transform3D(Basis.looking_at(backdrop_focus + Vector3.UP * 2.0 - from, Vector3.UP), from)
+
+
+func _process(delta: float) -> void:
+	if _backdrop_camera != null:
+		_orbit += delta * 0.05
+		_place_backdrop_camera()
+
+
 func _ready() -> void:
+	if backdrop_village != &"":
+		_ready_backdrop()
+		return
 	var profile: CharacterProfile = Profiles.profile
 	if profile == null:
 		get_tree().change_scene_to_file.call_deferred(GameSession.MENU_SCENE)
@@ -62,7 +110,7 @@ func _ready() -> void:
 	_spawn_mobs()
 	camera = ArenaCamera.new()
 	camera.fov = 40.0
-	camera.distance = 28.0
+	camera.distance = 22.0
 	camera.cursor_offset_strength = 0.12
 	camera.max_cursor_offset = 2.5
 	camera.follow_smoothing = 16.0
@@ -82,6 +130,8 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if backdrop_village != &"":
+		return
 	if event.is_action_pressed("ui_cancel"):
 		open_shinobi_menu()
 		get_viewport().set_input_as_handled()
@@ -160,6 +210,8 @@ func _update_audio() -> void:
 
 
 func _exit_tree() -> void:
+	if backdrop_village != &"":
+		return
 	SSAudio.music(&"")
 	SSAudio.ambience(&"")
 
