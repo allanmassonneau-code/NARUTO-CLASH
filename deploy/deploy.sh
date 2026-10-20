@@ -23,6 +23,10 @@ rsync -az --delete --chmod=Dg+rwxs,Fg+rw -e "ssh $SSH_OPTS" \
   --exclude "_ss_local" \
   ./ "$TARGET:/opt/naruto-clash/server/"
 
+# rsync --delete keeps excluded paths: drop any old copy of the SS assets
+# (the service would re-import them on every start).
+ssh $SSH_OPTS "$TARGET" "rm -rf /opt/naruto-clash/server/_ss_local"
+
 # Archive + launcher first, manifest last so clients never see a half-published release.
 rsync -az -e "ssh $SSH_OPTS" --exclude version.json build/publish/ "$TARGET:/var/www/naruto-clash/"
 rsync -az -e "ssh $SSH_OPTS" build/publish/version.json "$TARGET:/var/www/naruto-clash/version.json"
