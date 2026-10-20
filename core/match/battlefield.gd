@@ -62,14 +62,14 @@ static func _floor(field: Node3D) -> void:
 	var plane := PlaneMesh.new()
 	plane.size = HALF_SIZE * 2.0 + Vector2(60, 60)
 	ground.mesh = plane
-	ground.material_override = _mat(Color(0.38, 0.55, 0.3))
+	ground.material_override = _mat(Color(0.43, 0.55, 0.32), &"grass")
 	ground.position.y = -0.01
 	field.add_child(ground)
 	var lane := MeshInstance3D.new()
 	var lane_mesh := PlaneMesh.new()
 	lane_mesh.size = Vector2(HALF_SIZE.x * 2.0, 10.0)
 	lane.mesh = lane_mesh
-	lane.material_override = _mat(Color(0.62, 0.52, 0.38))
+	lane.material_override = _mat(Color(0.64, 0.53, 0.38), &"sand")
 	field.add_child(lane)
 	for team in 2:
 		var base := MeshInstance3D.new()
@@ -78,7 +78,7 @@ static func _floor(field: Node3D) -> void:
 		disk.bottom_radius = 8.0
 		disk.height = 0.02
 		base.mesh = disk
-		base.material_override = _mat(Color(UiStyle.TEAM_COLORS[team].darkened(0.3), 1.0))
+		base.material_override = _mat(Color(UiStyle.TEAM_COLORS[team].darkened(0.3), 1.0), &"slabs")
 		base.position = Vector3(-BASE_X if team == 0 else BASE_X, 0.01, 0)
 		field.add_child(base)
 
@@ -99,7 +99,7 @@ static func _wall(field: Node3D, at: Vector3, size: Vector3, visuals: bool) -> v
 		bm.size = Vector3(size.x, 1.2, size.z)
 		mesh.mesh = bm
 		mesh.position.y = -0.4
-		mesh.material_override = _mat(Color(0.55, 0.5, 0.45))
+		mesh.material_override = _mat(Color(0.55, 0.5, 0.45), &"stone")
 		body.add_child(mesh)
 	field.add_child(body)
 
@@ -125,20 +125,17 @@ static func _obstacle(field: Node3D, at: Vector3, radius: float, tall: bool, vis
 			pillar.height = 2.6
 			mesh.mesh = pillar
 			mesh.position.y = 1.3
-			mesh.material_override = _mat(Color(0.55, 0.38, 0.26))
+			mesh.material_override = _mat(Color(0.55, 0.38, 0.26), &"wood")
 		else:
 			var rock := SphereMesh.new()
 			rock.radius = radius
 			rock.height = radius * 1.3
 			mesh.mesh = rock
 			mesh.position.y = radius * 0.35
-			mesh.material_override = _mat(Color(0.5, 0.5, 0.53))
+			mesh.material_override = _mat(Color(0.5, 0.5, 0.53), &"stone")
 		body.add_child(mesh)
 	field.add_child(body)
 
 
-static func _mat(color: Color) -> StandardMaterial3D:
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = color
-	mat.roughness = 0.95
-	return mat
+static func _mat(color: Color, surface: StringName = &"") -> Material:
+	return SSGraphics.prop_material(color, surface)

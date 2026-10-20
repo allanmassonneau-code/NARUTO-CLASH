@@ -20,13 +20,13 @@ const VILLAGE_GROUND: Dictionary = {
 
 ## Hunting zones from the village gate eastwards.
 const ZONES: Array[Dictionary] = [
-	{"name": "Plaine des bandits", "from": 32.0, "to": 85.0, "ground": Color(0.5, 0.6, 0.34),
+	{"name": "Plaine des bandits", "from": 32.0, "to": 85.0, "ground": Color(0.5, 0.6, 0.34), "surface": &"grass",
 		"mobs": [[&"bandit", 7], [&"bandit_thrower", 4]], "level": "Facile"},
-	{"name": "Forêt des déserteurs", "from": 85.0, "to": 140.0, "ground": Color(0.3, 0.45, 0.28),
+	{"name": "Forêt des déserteurs", "from": 85.0, "to": 140.0, "ground": Color(0.3, 0.45, 0.28), "surface": &"forest_ground",
 		"mobs": [[&"rogue_ninja", 5], [&"rogue_kunoichi", 5]], "level": "Moyen"},
-	{"name": "Ravin des renégats", "from": 140.0, "to": 192.0, "ground": Color(0.5, 0.42, 0.34),
+	{"name": "Ravin des renégats", "from": 140.0, "to": 192.0, "ground": Color(0.5, 0.42, 0.34), "surface": &"sand",
 		"mobs": [[&"elite_missing_nin", 4], [&"ronin", 3]], "level": "Difficile"},
-	{"name": "Repaire de l'Akatsuki", "from": 192.0, "to": 215.0, "ground": Color(0.32, 0.28, 0.32),
+	{"name": "Repaire de l'Akatsuki", "from": 192.0, "to": 215.0, "ground": Color(0.32, 0.28, 0.32), "surface": &"stone",
 		"mobs": [[&"boss_akatsuki", 1]], "level": "Boss"},
 ]
 
@@ -43,6 +43,7 @@ var _timers: Dictionary = {}  # CombatCharacter -> {"t": seconds, "what": "hide"
 var _player_respawn: float = 0.0
 var _rng := RandomNumberGenerator.new()
 var _characters: Node3D
+var _rebuild_look: bool = false
 
 
 func _ready() -> void:
@@ -252,6 +253,9 @@ func _on_profile_updated(_profile: CharacterProfile, result: ProgressionResult) 
 				promotion = true
 			&"loadout_changed", &"jutsu_equipped":
 				rebuild = true
+			&"appearance_changed":
+				rebuild = true
+				_rebuild_look = true
 			&"choice_required":
 				hud.toast("Nouveau choix disponible dans SHINOBI (Échap).", Color(1.0, 0.85, 0.4))
 			&"sub_jutsu_obtained":
@@ -259,42 +263,21 @@ func _on_profile_updated(_profile: CharacterProfile, result: ProgressionResult) 
 				hud.toast("Technique cachée obtenue : %s" % (sub.display_name if sub else ""), Color(0.8, 0.5, 1.0))
 	if rebuild:
 		_refresh_player_kit(promotion)
+		if _rebuild_look and CombatFx.is_enabled() and player.presentation.model != null:
+			player.presentation.model.build(player.data.look)
+		_rebuild_look = false
 
 
 # --- Map ---------------------------------------------------------------------------
 
 func _build_environment(village: StringName) -> void:
-	var sky_mat := ProceduralSkyMaterial.new()
-	sky_mat.sky_top_color = Color(0.32, 0.52, 0.82)
-	sky_mat.sky_horizon_color = Color(0.72, 0.78, 0.84)
-	sky_mat.ground_bottom_color = Color(0.2, 0.25, 0.18)
-	sky_mat.ground_horizon_color = Color(0.72, 0.78, 0.84)
-	var sky := Sky.new()
-	sky.sky_material = sky_mat
-	var env := Environment.new()
-	env.background_mode = Environment.BG_SKY
-	env.sky = sky
-	env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
-	env.ambient_light_color = Color(0.75, 0.8, 0.9)
-	env.ambient_light_sky_contribution = 0.6
-	env.ambient_light_energy = 0.4
-	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
-	env.tonemap_exposure = 0.85
-	env.glow_enabled = true
-	env.glow_intensity = 0.3
-	env.glow_bloom = 0.05
-	env.fog_enabled = true
-	env.fog_light_color = Color(0.7, 0.76, 0.82)
-	env.fog_density = 0.0025 if village == &"ame" or village == &"kiri" else 0.0008
+	# Shinobi Striker lighting presets (see core/graphics/ss_env_presets.gd).
+	var preset: StringName = SSEnvPresets.for_village(village)
 	var world_env := WorldEnvironment.new()
-	world_env.environment = env
+	world_env.environment = SSGraphics.build_environment(preset)
 	add_child(world_env)
 	var sun := DirectionalLight3D.new()
-	sun.rotation_degrees = Vector3(-55, -35, 0)
-	sun.light_color = Color(1, 0.95, 0.86)
-	sun.light_energy = 1.1
-	sun.shadow_enabled = true
-	sun.directional_shadow_max_distance = 60.0
+	SSGraphics.configure_sun(sun, preset)
 	add_child(sun)
 
 
@@ -306,10 +289,10 @@ func _build_village(village: StringName) -> void:
 	var wall_color := Color(0.55, 0.42, 0.3) if village != &"suna" else Color(0.8, 0.7, 0.5)
 	var roof_color: Color = {&"konoha": Color(0.25, 0.35, 0.5), &"suna": Color(0.72, 0.6, 0.42),
 		&"ame": Color(0.3, 0.3, 0.38), &"kiri": Color(0.28, 0.42, 0.55)}.get(village, Color(0.3, 0.35, 0.5))
-	d.ground(Vector3(0, -0.02, 0), Vector2(h * 2.0, h * 2.0), grass.darkened(0.25))
+	d.ground(Vector3(0, -0.02, 0), Vector2(h * 2.0, h * 2.0), grass.darkened(0.12), &"sand" if village == &"suna" or d.ss_kit else &"grass")
 	# Roads (main street to the gate, cross street) and the round plaza.
-	d.ground(Vector3(h * 0.5, -0.01, 0), Vector2(h, 5.0), stone.darkened(0.15))
-	d.ground(Vector3(0, -0.012, 0), Vector2(4.0, h * 2.0), stone.darkened(0.15))
+	d.ground(Vector3(h * 0.5, -0.01, 0), Vector2(h, 5.0), stone.darkened(0.15), &"slabs")
+	d.ground(Vector3(0, -0.012, 0), Vector2(4.0, h * 2.0), stone.darkened(0.15), &"slabs")
 	d.disk(Vector3(0, 0.0, 0), 8.0, stone)
 	d.disk(Vector3(0, 0.01, 0), 7.2, stone.lightened(0.08))
 	var on_road := func(p: Vector3) -> bool:
@@ -321,14 +304,30 @@ func _build_village(village: StringName) -> void:
 	for wall: Array in [[Vector3(0, 0, -h), Vector3(h * 2.0, 3.0, 1.2)], [Vector3(0, 0, h), Vector3(h * 2.0, 3.0, 1.2)],
 			[Vector3(-h, 0, 0), Vector3(1.2, 3.0, h * 2.0)], [Vector3(h, 0, -(GATE_HALF_WIDTH + side / 2.0)), Vector3(1.2, 3.0, side)],
 			[Vector3(h, 0, GATE_HALF_WIDTH + side / 2.0), Vector3(1.2, 3.0, side)]]:
-		d.solid_box(wall[0], wall[1], wall_color)
-		d.box(wall[0] + Vector3.UP * 3.1, wall[1] + Vector3(0.3, -2.8, 0.3), wall_color.darkened(0.35))
+		if d.ss_kit:   # real SS Konoha wall (64 m piece) stretched over the same collider
+			var shape := BoxShape3D.new()
+			shape.size = wall[1]
+			d.collider(wall[0], shape, (wall[1] as Vector3).y)
+			var along_x: bool = (wall[1] as Vector3).x > (wall[1] as Vector3).z
+			var length: float = maxf((wall[1] as Vector3).x, (wall[1] as Vector3).z)
+			d.ss_visual("SM_ENV_KNVLLG_Wall_03", wall[0], 90.0 if along_x else 0.0, Vector2.ZERO, 1.0, Vector3(1.4, 0.55, length / 64.25))
+			continue
+		d.solid_box(wall[0], wall[1], wall_color, 0.0, &"stone")
+		d.box(wall[0] + Vector3.UP * 3.1, wall[1] + Vector3(0.3, -2.8, 0.3), wall_color.darkened(0.35), 0.0, 0.0, &"roof")
 	d.torii(Vector3(h, 0, 0), GATE_HALF_WIDTH * 2.0, Color(0.75, 0.15, 0.12) if village == &"konoha" else wall_color.darkened(0.2))
-	d.label(Vector3(h + 0.8, 7.6, 0), VILLAGE_NAMES.get(village, ""), 110, Color.WHITE)
+	d.label(Vector3(h + 0.8, 15.5 if d.ss_kit else 7.6, 0), VILLAGE_NAMES.get(village, ""), 110, Color.WHITE)
 	# Kage building, statue, houses.
 	d.kage_tower(Vector3(-15, 0, -13), Color(0.85, 0.35, 0.28) if village == &"konoha" else wall_color.lightened(0.25), Color(0.7, 0.15, 0.12), "火" if village == &"konoha" else VILLAGE_NAMES.get(village, "").left(1))
-	d.label(Vector3(-15, 14.0, -13), "Bureau du Kage", 64, Color.WHITE)
+	d.label(Vector3(-15, 20.0 if d.ss_kit else 14.0, -13), "Bureau du Kage", 64, Color.WHITE)
 	d.statue(Vector3(-3, 0, 2), Color(0.55, 0.55, 0.6))
+	if d.ss_kit:   # Konoha street props (visual only, off the walkways)
+		for prop: Array in [["SM_ENV_KNVLLG_Stall_A", Vector3(5.5, 0, -6.0), 200.0], ["SM_ENV_KNVLLG_Stall_C", Vector3(-6.0, 0, 6.5), 30.0],
+				["SM_ENV_KNVLLG_Stall_B", Vector3(6.0, 0, 6.2), 150.0], ["SM_ENV_Props_Bench_01", Vector3(-6.8, 0, -4.5), 60.0],
+				["SM_ENV_Props_Bench_01", Vector3(4.0, 0, 7.6), 0.0], ["SM_ENV_Props_Barrel_01", Vector3(13.0, 0, -5.2), 0.0],
+				["SM_ENV_Props_Barrel_02", Vector3(13.8, 0, -4.4), 0.0], ["SM_ENV_Props_Crate_01", Vector3(12.2, 0, 5.0), 15.0],
+				["SM_ENV_Props_Crate_02", Vector3(12.9, 0, 6.0), 40.0], ["SM_ENV_Props_CardboardBox", Vector3(-12.0, 0, -5.0), 10.0],
+				["SM_ENV_KNVLLG_WaterTank_A", Vector3(-20.0, 0, -3.5), 0.0], ["SM_ENV_Manhole", Vector3(14.0, 0.01, 0.0), 0.0]]:
+			d.ss_visual(prop[0], prop[1], prop[2], Vector2.ZERO)
 	var houses: Array = [[-15, 12, 0], [-4, -18, 0], [7, -18, 0], [-17, 1, 90], [-5, 18, 180], [8, 18, 180], [16, -10, 0], [16, 11, 180], [-8, -8, 45], [9, -8, 0], [9, 9, 180]]
 	for p: Array in houses:
 		var size := Vector3(d.rng.randf_range(5.0, 7.0), d.rng.randf_range(3.5, 4.8), d.rng.randf_range(4.5, 6.0))
@@ -342,7 +341,7 @@ func _build_village(village: StringName) -> void:
 	d.fence(Vector3(-12, 0, 4), Vector3(-12, 0, 10))
 	for i in 3:
 		d.solid_round(Vector3(-9 + i * 2.2, 0, 7), 0.3, 1.6)
-		d.cylinder(Vector3(-9 + i * 2.2, 0.8, 7), 0.28, 0.3, 1.6, Color(0.55, 0.38, 0.22), 8)
+		d.cylinder(Vector3(-9 + i * 2.2, 0.8, 7), 0.28, 0.3, 1.6, Color(0.55, 0.38, 0.22), 8, 0.0, &"wood")
 	d.label(Vector3(-7, 3.0, 7), "Terrain d'entraînement", 46, Color(1, 1, 0.8))
 	d.label(Vector3(h - 4, 3.5, 0), "→ Terrains de chasse", 56, Color(1.0, 0.85, 0.4))
 	# Mountains around the village.
@@ -358,15 +357,15 @@ func _build_field() -> void:
 	d.ground(Vector3(center_x, -0.05, 0), Vector2(800, 500), Color(0.22, 0.32, 0.2))  # beyond the borders
 	for zone: Dictionary in ZONES:
 		var w: float = zone.to - zone.from
-		d.ground(Vector3(zone.from + w / 2.0, -0.03, 0), Vector2(w + 0.5, FIELD_HALF_Z * 2.0), (zone.ground as Color).darkened(0.3))
+		d.ground(Vector3(zone.from + w / 2.0, -0.03, 0), Vector2(w + 0.5, FIELD_HALF_Z * 2.0), (zone.ground as Color).darkened(0.18), zone.surface)
 		d.label(Vector3(zone.from + 2.0, 4.5, -8.0), "%s\n%s" % [zone.name, zone.level], 72, Color(1, 0.95, 0.8))
-	d.ground(Vector3(VILLAGE_HALF + 3.0, -0.04, 0), Vector2(8.0, VILLAGE_HALF * 2.0), Color(0.42, 0.55, 0.32).darkened(0.3))
+	d.ground(Vector3(VILLAGE_HALF + 3.0, -0.04, 0), Vector2(8.0, VILLAGE_HALF * 2.0), Color(0.42, 0.55, 0.32).darkened(0.18))
 	# Winding dirt path with stepping stones.
 	var path_color := Color(0.6, 0.5, 0.36).darkened(0.25)
 	for i in 60:
 		var x: float = VILLAGE_HALF + 2.0 + i * (length - 4.0) / 60.0
 		var z: float = sin(x * 0.05) * 6.0
-		d.disk(Vector3(x, -0.015, z), 3.2, path_color)
+		d.disk(Vector3(x, -0.015, z), 3.2, path_color, &"sand")
 	var on_path := func(p: Vector3) -> bool: return absf(p.z - sin(p.x * 0.05) * 6.0) < 3.4
 	d.grass(Vector2(VILLAGE_HALF + 1, -FIELD_HALF_Z + 1), Vector2(FIELD_END_X - 1, FIELD_HALF_Z - 1), 4200, Color(0.4, 0.58, 0.3), on_path)
 	d.flowers(Vector2(32, -FIELD_HALF_Z + 1), Vector2(85, FIELD_HALF_Z - 1), 450, on_path)
@@ -416,8 +415,8 @@ func _build_field() -> void:
 	d.campfire(Vector3(112, 0, -18))
 	d.tent(Vector3(108, 0, -21), Color(0.2, 0.2, 0.25), 10.0)
 	d.campfire(Vector3(165, 0, 20))
-	d.ground(Vector3(203.5, -0.025, 0), Vector2(23.0, FIELD_HALF_Z * 2.0), Color(0.18, 0.15, 0.2))
-	d.torii(Vector3(194.0, 0, 0), 9.0, Color(0.35, 0.08, 0.08))
+	d.ground(Vector3(203.5, -0.025, 0), Vector2(23.0, FIELD_HALF_Z * 2.0), Color(0.24, 0.2, 0.26), &"stone")
+	d.torii(Vector3(194.0, 0, 0), 9.0, Color(0.35, 0.08, 0.08), false)
 	d.campfire(Vector3(206, 0, -6))
 	d.campfire(Vector3(206, 0, 6))
 	d.label(Vector3(204, 6.0, 0), "暁", 200, Color(0.85, 0.1, 0.1))

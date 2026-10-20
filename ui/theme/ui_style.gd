@@ -1,12 +1,17 @@
 class_name UiStyle
 ## Shared look for every UI screen: palette, fonts, panel styles, theme.
+## Palette follows the Shinobi Striker menus (T_ui_Menu_ColWindow / T_ui_Menu_Btn_*_Sel):
+## charcoal windows with a light bevel, deep red selected buttons framed in gold.
 
-const BG := Color(0.07, 0.06, 0.1, 0.82)
-const BG_SOLID := Color(0.09, 0.08, 0.13)
-const BORDER := Color(1, 1, 1, 0.09)
+const BG := Color(0.11, 0.11, 0.12, 0.88)
+const BG_SOLID := Color(0.13, 0.13, 0.14)
+const BORDER := Color(0.62, 0.62, 0.64, 0.35)
+const SS_RED := Color(0.58, 0.16, 0.1)
+const SS_GOLD := Color(0.95, 0.72, 0.05)
+const SS_BLUE := Color(0.1, 0.36, 0.72)
 const TEXT := Color(0.95, 0.93, 0.9)
 const MUTED := Color(0.62, 0.6, 0.68)
-const ACCENT := Color(1.0, 0.55, 0.12)
+const ACCENT := Color(1.0, 0.62, 0.12)
 const CHAKRA := Color(0.3, 0.62, 1.0)
 const TEAM_COLORS: Array[Color] = [Color(0.3, 0.62, 1.0), Color(1.0, 0.3, 0.25)]
 
@@ -35,6 +40,12 @@ static func panel(color: Color = BG, radius: int = 10, border: Color = BORDER, p
 	return s
 
 
+## SS selected-button frame: thicker gold border.
+static func _ss_selected(s: StyleBoxFlat) -> StyleBoxFlat:
+	s.set_border_width_all(2)
+	return s
+
+
 static func bar_fill(color: Color, radius: int = 4) -> StyleBoxFlat:
 	var s := StyleBoxFlat.new()
 	s.bg_color = color
@@ -54,10 +65,10 @@ static func theme() -> Theme:
 	t.set_stylebox("panel", "PanelContainer", panel())
 	t.set_stylebox("panel", "Panel", panel())
 	# Buttons
-	t.set_stylebox("normal", "Button", panel(Color(0.14, 0.12, 0.2, 0.95), 10, BORDER, 14))
-	t.set_stylebox("hover", "Button", panel(Color(0.2, 0.17, 0.28, 0.95), 10, Color(1, 1, 1, 0.2), 14))
-	t.set_stylebox("pressed", "Button", panel(Color(ACCENT, 0.9), 10, ACCENT.lightened(0.3), 14))
-	t.set_stylebox("hover_pressed", "Button", panel(Color(ACCENT.lightened(0.1), 0.95), 10, ACCENT.lightened(0.4), 14))
+	t.set_stylebox("normal", "Button", panel(Color(0.17, 0.17, 0.18, 0.95), 10, BORDER, 14))
+	t.set_stylebox("hover", "Button", _ss_selected(panel(Color(SS_RED, 0.97), 10, SS_GOLD, 14)))
+	t.set_stylebox("pressed", "Button", _ss_selected(panel(Color(SS_GOLD, 0.95), 10, SS_GOLD.lightened(0.4), 14)))
+	t.set_stylebox("hover_pressed", "Button", _ss_selected(panel(Color(SS_GOLD.lightened(0.1), 0.95), 10, SS_GOLD.lightened(0.5), 14)))
 	t.set_stylebox("disabled", "Button", panel(Color(0.1, 0.1, 0.12, 0.6), 10, BORDER, 14))
 	t.set_stylebox("focus", "Button", StyleBoxEmpty.new())
 	t.set_color("font_color", "Button", TEXT)

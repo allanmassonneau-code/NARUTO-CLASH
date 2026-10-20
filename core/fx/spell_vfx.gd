@@ -12,6 +12,8 @@ const SMOKE := Color(0.92, 0.92, 0.95, 0.75)
 static func on_startup(c: CombatCharacter, a: AbilityData, model: ShinobiModel) -> Node3D:
 	if not CombatFx.is_enabled():
 		return null
+	var hand: Node3D = model.hand_r() if model != null else null
+	SSVfx.for_spell(c, a.vfx, hand.global_position if hand != null and hand.is_inside_tree() else c.global_position + Vector3.UP * 1.1, a.color, false)
 	match a.vfx:
 		&"rasengan":
 			return _orb(model.hand_r(), Color(0.35, 0.65, 1.0), 0.3, a.startup_time)
@@ -52,6 +54,7 @@ static func on_startup(c: CombatCharacter, a: AbilityData, model: ShinobiModel) 
 static func on_active(c: CombatCharacter, a: AbilityData, held: Node3D) -> void:
 	if not CombatFx.is_enabled():
 		return
+	SSVfx.for_spell(c, a.vfx, c.global_position + Vector3.UP * 1.0 + c.facing.facing_direction * 1.2, a.color, true)
 	match a.vfx:
 		&"leap":
 			dust_ring(c, c.global_position, 1.4)
@@ -239,10 +242,7 @@ static func sand_wall(area: GroundArea, body: Node3D, length: float) -> void:
 	mesh.size = Vector3(length, 2.0, 0.8)
 	var wall := MeshInstance3D.new()
 	wall.mesh = mesh
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(0.82, 0.68, 0.42)
-	mat.roughness = 1.0
-	wall.material_override = mat
+	wall.material_override = SSGraphics.prop_material(Color(0.82, 0.68, 0.42), &"sand")
 	body.add_child(wall)
 	wall.position.y = -1.0
 	var tween := wall.create_tween()

@@ -40,6 +40,9 @@ var equipped_jutsu: Array[StringName] = []
 # Sub-jutsu (clanless)
 var owned_sub_jutsu: Array[StringName] = []
 
+# Appearance (SS character creator, cosmetic only): see SSAvatars.
+var appearance: Dictionary = {}
+
 # Tenketsu
 var tenketsu_earned: int = 0
 ## Node id -> level.
@@ -121,12 +124,27 @@ static func from_dict(data: Dictionary) -> CharacterProfile:
 	p.learned_jutsu = _names(skills.get("learned", []))
 	p.equipped_jutsu = _names(skills.get("equipped", []))
 	p.owned_sub_jutsu = _names(data.get("sub_jutsu", []))
+	var look: Variant = data.get("appearance", {})
+	p.appearance = sanitize_appearance(look if look is Dictionary else {})
 	var tenketsu: Dictionary = data.get("tenketsu", {})
 	p.tenketsu_earned = int(tenketsu.get("earned", 0))
 	var levels: Dictionary = tenketsu.get("levels", {})
 	for node_id: Variant in levels:
 		p.tenketsu_levels[StringName(str(node_id))] = int(levels[node_id])
 	return p
+
+
+## Keeps only known appearance keys with short string values (cosmetic data from clients).
+static func sanitize_appearance(data: Dictionary) -> Dictionary:
+	var out: Dictionary = {}
+	for key: String in ["sex", "hair", "upper", "lower", "skin", "forehead", "accessory"]:
+		if data.get(key) is String and (data[key] as String).length() <= 64:
+			out[key] = data[key]
+	for key: String in ["hair_colors", "upper_colors", "lower_colors"]:
+		var ids: Variant = data.get(key)
+		if ids is Array and (ids as Array).size() == 2:
+			out[key] = [str(ids[0]).left(64), str(ids[1]).left(64)]
+	return out
 
 
 ## Upgrades older save formats to SAVE_VERSION (one step per version).

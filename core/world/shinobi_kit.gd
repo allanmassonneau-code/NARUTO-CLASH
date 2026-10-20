@@ -52,6 +52,9 @@ static func look_for(profile: CharacterProfile) -> ShinobiLook:
 	var look := ShinobiLook.new()
 	var palette: Array = VILLAGE_COLORS.get(profile.village_id, VILLAGE_COLORS[&"konoha"])
 	var h: int = absi(hash(profile.character_id + profile.character_name))
+	# SS character creator (local SS assets): the saved appearance, else a stable default.
+	look.ss_avatar = profile.appearance.duplicate(true)
+	look.ss_avatar["seed"] = h
 	look.top = palette[0]
 	look.top_accent = palette[1]
 	look.sleeves = palette[1]

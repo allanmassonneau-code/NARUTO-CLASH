@@ -39,6 +39,11 @@ var _new_name: String = ""
 var _new_village: StringName = &"konoha"
 var _new_clan: bool = true
 var _new_clan_id: StringName = &""
+# Appearance editor (SS character creator) state.
+var _look_edit: Dictionary = {}
+var _look_portrait: ShinobiPortrait
+var _look_controls: VBoxContainer
+var _cloth_page: int = 0
 
 
 func _ready() -> void:
@@ -94,6 +99,8 @@ func _on_profile_updated(_profile: CharacterProfile, result: ProgressionResult) 
 				_show_toast("PROMU %s !" % GRADE_NAMES[int(event.grade)].to_upper(), UiStyle.ACCENT)
 			&"jutsu_learned":
 				_show_toast("Technique apprise : %s" % _jutsu_name(event.jutsu), Color(0.5, 1.0, 0.6))
+			&"appearance_changed":
+				_show_toast("Apparence enregistrée.", Color(0.5, 1.0, 0.6))
 			&"sub_jutsu_roll_empty":
 				_show_toast("Aucune technique cachée disponible pour ce tirage.", Color(1.0, 0.8, 0.4))
 	_rebuild()
@@ -127,6 +134,8 @@ func _rebuild() -> void:
 			_tenketsu_view(p)
 		"loadout":
 			_loadout_view(p)
+		"look":
+			_appearance_view(p)
 
 
 func _header_bar() -> void:
@@ -206,6 +215,8 @@ func _tabs(p: CharacterProfile) -> void:
 		tabs.append(["nature2", "Nature 2"])
 	tabs.append(["clan", "Clan"] if p.is_clan() else ["sub", "Sub-jutsu"])
 	tabs.append_array([["spec", "Spécialité"], ["tenketsu", "Tenketsu"], ["loadout", "Équipement"]])
+	if SSAvatars.available():
+		tabs.append(["look", "Apparence"])
 	for t: Array in tabs:
 		var b := _button(row, t[1], func() -> void:
 			_tab = t[0]
@@ -463,6 +474,182 @@ func _loadout_view(p: CharacterProfile) -> void:
 			Profiles.request({"action": "unequip_jutsu" if equipped else "equip_jutsu", "jutsu": id}))
 		b.custom_minimum_size = Vector2(110, 0)
 		UiStyle.label(row, "%s  [%s]" % [j.display_name, ProgressionTypes.rank_key(j.rank)], 15, Color(0.5, 1.0, 0.6) if equipped else Color.WHITE, 700)
+
+
+# --- Appearance (Shinobi Striker character creator) ------------------------------
+
+const LOOK_SLOTS: Array[Array] = [["hair", "Coiffure"], ["upper", "Haut"], ["lower", "Bas"]]
+const CLOTH_PAGE: int = 30
+
+
+func _appearance_view(p: CharacterProfile) -> void:
+	if _look_edit.is_empty():
+		var start: Dictionary = p.appearance.duplicate(true)
+		start["seed"] = absi(hash(p.character_id + p.character_name))
+		_look_edit = SSAvatars.complete(start)
+	UiStyle.label(_body, "APPARENCE — créateur de personnage Shinobi Striker", 18, UiStyle.ACCENT, 900)
+	UiStyle.label(_body, "Pièces et couleurs du jeu (local). Cosmétique : aucun effet en combat.", 13, UiStyle.MUTED, 600)
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 24)
+	_body.add_child(row)
+	_look_portrait = ShinobiPortrait.create(_look_data(), ShinobiPortrait.Framing.FULL_BODY, Vector2i(420, 560))
+	_look_portrait.custom_minimum_size = Vector2(420, 560)
+	_look_portrait.flourishes = false
+	row.add_child(_look_portrait)
+	_look_controls = VBoxContainer.new()
+	_look_controls.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_look_controls.add_theme_constant_override("separation", 10)
+	row.add_child(_look_controls)
+	_look_rebuild_controls()
+
+
+func _look_data() -> CharacterData:
+	var data := CharacterData.new()
+	data.look = ShinobiLook.new()
+	data.look.ss_avatar = _look_edit.duplicate(true)
+	return data
+
+
+func _look_changed() -> void:
+	if _look_portrait != null:
+		_look_portrait.set_character(_look_data())
+	_look_rebuild_controls()
+
+
+func _look_rebuild_controls() -> void:
+	for child: Node in _look_controls.get_children():
+		child.queue_free()
+	var sex_row := HBoxContainer.new()
+	sex_row.add_theme_constant_override("separation", 8)
+	_look_controls.add_child(sex_row)
+	UiStyle.label(sex_row, "Sexe", 15, Color.WHITE, 800).custom_minimum_size = Vector2(110, 0)
+	for sex: Array in [["Male", "Homme"], ["Female", "Femme"]]:
+		var b := _button(sex_row, sex[1], func() -> void:
+			_look_edit = SSAvatars.complete({"seed": int(_look_edit.get("seed", 1)), "sex": sex[0], "skin": _look_edit.get("skin", "")})
+			_look_changed())
+		b.toggle_mode = true
+		b.button_pressed = _look_edit.get("sex", "") == sex[0]
+	for slot: Array in LOOK_SLOTS:
+		_look_part_row(slot[0], slot[1])
+	var fronts: Array = [""]
+	for o: Dictionary in SSAvatars.forehead_options():
+		fronts.append(o.material)
+	_look_choice_row("Bandeau", "forehead", fronts, "Celui de la coiffure")
+	var accs: Array = [""]
+	for o: Dictionary in SSAvatars.accessory_options():
+		accs.append(o.mesh)
+	_look_choice_row("Accessoire", "accessory", accs, "Aucun")
+	_look_swatches("Peau", SSAvatars.colour_ids("Skin"), _look_edit.get("skin", ""), func(id: String) -> void: _look_edit.skin = id)
+	_look_swatches("Cheveux", SSAvatars.colour_ids("Hair").slice(0, CLOTH_PAGE), _look_colour("hair", 0), func(id: String) -> void: _set_look_colour("hair", 0, id))
+	var cloth: Array[String] = SSAvatars.colour_ids("Cloth")
+	var page: Array[String] = cloth.slice(_cloth_page * CLOTH_PAGE, (_cloth_page + 1) * CLOTH_PAGE)
+	var nav := HBoxContainer.new()
+	nav.add_theme_constant_override("separation", 8)
+	_look_controls.add_child(nav)
+	UiStyle.label(nav, "Tissus  %d / %d" % [_cloth_page + 1, ceili(cloth.size() / float(CLOTH_PAGE))], 13, UiStyle.MUTED, 700)
+	_button(nav, "◀", func() -> void:
+		_cloth_page = posmod(_cloth_page - 1, ceili(cloth.size() / float(CLOTH_PAGE)))
+		_look_rebuild_controls())
+	_button(nav, "▶", func() -> void:
+		_cloth_page = posmod(_cloth_page + 1, ceili(cloth.size() / float(CLOTH_PAGE)))
+		_look_rebuild_controls())
+	for slot: Array in [["upper", "Haut"], ["lower", "Bas"]]:
+		for k in 2:
+			_look_swatches("%s %d" % [slot[1], k + 1], page, _look_colour(slot[0], k), func(id: String) -> void: _set_look_colour(slot[0], k, id))
+	var actions := HBoxContainer.new()
+	actions.add_theme_constant_override("separation", 10)
+	_look_controls.add_child(actions)
+	_button(actions, "Aléatoire", func() -> void:
+		_look_edit = SSAvatars.complete({"seed": randi()})
+		_look_changed())
+	var save := _button(actions, "ENREGISTRER", func() -> void:
+		var out: Dictionary = _look_edit.duplicate(true)
+		out.erase("seed")
+		Profiles.request({"action": "set_appearance", "appearance": out}))
+	save.add_theme_color_override("font_color", UiStyle.ACCENT)
+
+
+func _look_part_row(slot: String, title: String) -> void:
+	var opts: Array[Dictionary] = SSAvatars.options(slot, _look_edit.get("sex", "Male"))
+	if opts.is_empty():
+		return
+	var current: int = 0
+	for i in opts.size():
+		if opts[i].mesh == _look_edit.get(slot, ""):
+			current = i
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	_look_controls.add_child(row)
+	UiStyle.label(row, title, 15, Color.WHITE, 800).custom_minimum_size = Vector2(110, 0)
+	var step := func(delta: int) -> void:
+		var pick: Dictionary = opts[posmod(current + delta, opts.size())]
+		_look_edit[slot] = pick.mesh
+		_look_edit[slot + "_colors"] = [pick.color0, pick.color1]
+		_look_changed()
+	_button(row, "◀", step.bind(-1))
+	var name_label := UiStyle.label(row, "%s   (%d / %d)" % [_part_name(opts[current].mesh), current + 1, opts.size()], 14, UiStyle.TEXT, 700)
+	name_label.custom_minimum_size = Vector2(300, 0)
+	_button(row, "▶", step.bind(1))
+
+
+func _look_choice_row(title: String, key: String, values: Array, empty_label: String) -> void:
+	if values.size() <= 1:
+		return
+	var current: int = maxi(0, values.find(_look_edit.get(key, "")))
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	_look_controls.add_child(row)
+	UiStyle.label(row, title, 15, Color.WHITE, 800).custom_minimum_size = Vector2(110, 0)
+	var step := func(delta: int) -> void:
+		_look_edit[key] = values[posmod(current + delta, values.size())]
+		_look_changed()
+	_button(row, "◀", step.bind(-1))
+	var v: String = values[current]
+	var text: String = empty_label if v == "" else v.trim_prefix("MI_CHR_").trim_prefix("SM_CHR_").trim_prefix("SM_").replace("_", " ")
+	UiStyle.label(row, "%s   (%d / %d)" % [text, current + 1, values.size()], 14, UiStyle.TEXT, 700).custom_minimum_size = Vector2(300, 0)
+	_button(row, "▶", step.bind(1))
+
+
+func _look_swatches(title: String, ids: Array, selected: String, on_pick: Callable) -> void:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 4)
+	_look_controls.add_child(row)
+	UiStyle.label(row, title, 13, Color.WHITE, 800).custom_minimum_size = Vector2(110, 0)
+	var grid := HFlowContainer.new()
+	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	grid.add_theme_constant_override("h_separation", 3)
+	grid.add_theme_constant_override("v_separation", 3)
+	row.add_child(grid)
+	for id: String in ids:
+		var b := Button.new()
+		b.custom_minimum_size = Vector2(24, 24)
+		b.focus_mode = Control.FOCUS_NONE
+		b.tooltip_text = id.trim_prefix("ID_PartsColor_")
+		var style := UiStyle.panel(SSAvatars.colour(id), 4, Color.WHITE if id == selected else Color(0, 0, 0, 0.6), 0)
+		style.set_border_width_all(3 if id == selected else 1)
+		for state: String in ["normal", "hover", "pressed"]:
+			b.add_theme_stylebox_override(state, style)
+		b.pressed.connect(func() -> void:
+			on_pick.call(id)
+			_look_changed())
+		grid.add_child(b)
+
+
+func _look_colour(slot: String, k: int) -> String:
+	var ids: Array = _look_edit.get(slot + "_colors", ["", ""])
+	return str(ids[k]) if ids.size() > k else ""
+
+
+func _set_look_colour(slot: String, k: int, id: String) -> void:
+	var ids: Array = (_look_edit.get(slot + "_colors", ["", ""]) as Array).duplicate()
+	while ids.size() < 2:
+		ids.append("")
+	ids[k] = id
+	_look_edit[slot + "_colors"] = ids
+
+
+func _part_name(mesh: String) -> String:
+	return mesh.trim_prefix("SK_CHR_").replace("Man_", "").replace("Woman_", "").replace("_", " ")
 
 
 func _skill_line(parent: Control, j: JutsuData, tag: String) -> void:

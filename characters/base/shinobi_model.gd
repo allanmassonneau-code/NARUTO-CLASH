@@ -1,18 +1,22 @@
 class_name ShinobiModel
 extends Node3D
-## Builds a stylised, cel-shaded shinobi out of primitives from a ShinobiLook
-## and animates it procedurally (idle, run cycle, cast poses, hitstop).
+## Builds a stylised shinobi out of primitives from a ShinobiLook and animates it
+## procedurally (idle, run cycle, cast poses, hitstop). Rendered with the Shinobi Striker
+## character shading (SSGraphics.character_material: BC/SC toon + M_Line outline).
 ## Never affects gameplay.
 
 const HEADBAND_CLOTH := Color(0.12, 0.16, 0.3)
 const HEADBAND_PLATE := Color(0.8, 0.82, 0.86)
 const SANDAL := Color(0.18, 0.22, 0.4)
-const OUTLINE_WIDTH: float = 0.018
+## SS avatars are ~6 heads tall: the primitive head is scaled down from the chibi size.
+const HEAD_SCALE: float = 0.86
+const LASH := Color(0.12, 0.08, 0.08)
 
 var _parts: Array[GeometryInstance3D] = []
 var _overlay := StandardMaterial3D.new()
-var _outline := StandardMaterial3D.new()
 var _look: ShinobiLook
+## False while building small face details (no hull outline on them).
+var _outlined: bool = true
 
 var _hips: Node3D
 var _torso: Node3D
@@ -32,6 +36,24 @@ var _cycle: float = 0.0
 var _time: float = 0.0
 var _freeze: float = 0.0
 
+## Real Shinobi Striker figure (local assets, SSCharacters): when present it replaces the
+## primitive body and its SS animation clips replace the procedural poses.
+const SS_SCALE: float = 1.12
+## Pose -> SS clips to try, in order (first one the figure has wins).
+const SS_POSE_CLIPS: Dictionary = {
+	"chidori:windup": [&"charge"], "chidori:strike": [&"chidori", &"charge_run", &"dash"],
+	"dash:windup": [&"dash"], "dash:strike": [&"dash"],
+	"leap:windup": [&"leap"], "leap:strike": [&"leap", &"fall"],
+	"guard:windup": [&"guard"], "guard:strike": [&"guard"],
+	"seal:windup": [&"seal", &"concentrate"], "seal:strike": [&"seal"],
+	"throw:windup": [&"throw", &"jab"], "throw:strike": [&"throw", &"jab"],
+	"stunned:": [&"stunned", &"hit"],
+}
+var _ss: Node3D
+var _ss_anim: AnimationPlayer
+var _ss_clip: StringName = &""
+var _ss_pose: String = ""
+
 
 func build(look: ShinobiLook) -> void:
 	_look = look
@@ -41,11 +63,12 @@ func build(look: ShinobiLook) -> void:
 	_overlay.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	_overlay.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	_overlay.albedo_color = Color(1, 1, 1, 0)
-	_outline.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	_outline.albedo_color = Color(0.05, 0.04, 0.08)
-	_outline.cull_mode = BaseMaterial3D.CULL_FRONT
-	_outline.grow = true
-	_outline.grow_amount = OUTLINE_WIDTH
+	_ss = null
+	_ss_anim = null
+	var ss: Node3D = SSCharacters.instantiate(look)
+	if ss != null:
+		_build_ss(ss)
+		return
 	scale = Vector3.ONE * 1.12
 
 	_hips = _pivot(self, Vector3(0, 0.82, 0))
@@ -54,7 +77,8 @@ func build(look: ShinobiLook) -> void:
 	_torso = _pivot(_hips, Vector3(0, 0.06, 0))
 	_build_torso(look)
 	_build_arms(look)
-	_head = _pivot(_torso, Vector3(0, 0.72, 0))
+	_head = _pivot(_torso, Vector3(0, 0.7, 0))
+	_head.scale = Vector3.ONE * HEAD_SCALE
 	_build_head(look)
 	if look.weapon == ShinobiLook.Weapon.SWORD:
 		_build_sword()
@@ -115,6 +139,9 @@ func animate(delta: float, planar_speed: float, pose: StringName, tint: Color, f
 	_overlay.albedo_color = tint
 	for part: GeometryInstance3D in _parts:
 		part.transparency = fade
+	if _ss != null:
+		_animate_ss(delta, planar_speed, pose)
+		return
 	if _freeze > 0.0:
 		_freeze -= delta
 		return
@@ -264,11 +291,13 @@ func _build_head(look: ShinobiLook) -> void:
 	skull.scale = Vector3(1.0, 1.05, 0.98)
 	_sphere(_head, Vector3(0, -0.07, -0.06), 0.17, look.skin)  # jaw
 	var covered_left: bool = look.headband and look.hair == ShinobiLook.Hair.SWEPT
+	_outlined = false
 	for x: float in [-0.085, 0.085]:
 		if covered_left and x < 0.0:
 			continue
 		_box(_head, Vector3(x, 0.02, -0.205), Vector3(0.085, 0.07, 0.02), Color.WHITE)
 		_box(_head, Vector3(x, 0.015, -0.218), Vector3(0.045, 0.06, 0.02), Color(0.88, 0.85, 0.95) if look.eye_white else look.eye_color)
+		_box(_head, Vector3(x, 0.055, -0.214), Vector3(0.095, 0.016, 0.02), LASH)  # SS anime upper lash line
 		var brow := Vector3(0.1, 0.045, 0.03) if look.thick_brows else Vector3(0.09, 0.02, 0.02)
 		_box(_head, Vector3(x, 0.088, -0.205), brow, look.hair_color.darkened(0.3))  # brow
 	if look.forehead_mark:
@@ -279,10 +308,12 @@ func _build_head(look: ShinobiLook) -> void:
 				var w := _box(_head, Vector3(side * 0.13, -0.05 + i * 0.03, -0.17), Vector3(0.07, 0.008, 0.01), Color(0.3, 0.2, 0.15))
 				w.rotation.z = side * (0.15 - i * 0.15)
 	if look.mask:
+		_outlined = true
 		var mask := _sphere(_head, Vector3(0, -0.07, -0.03), 0.2, HEADBAND_CLOTH)
 		mask.scale = Vector3(1.12, 0.62, 1.05)
 	else:
 		_box(_head, Vector3(0, -0.1, -0.2), Vector3(0.07, 0.012, 0.02), Color(0.35, 0.18, 0.15))  # mouth
+	_outlined = true
 	if look.headband:
 		var band := _cylinder(_head, Vector3(0, 0.1, 0), 0.24, 0.075, HEADBAND_CLOTH)
 		var plate := _box(_head, Vector3(0, 0.1, -0.235), Vector3(0.19, 0.085, 0.025), HEADBAND_PLATE)
@@ -366,7 +397,7 @@ func _build_sword() -> void:
 	_cylinder(_sword, Vector3(0, 0, 0), 0.03, 0.2, Color(0.2, 0.15, 0.3))  # grip
 	_box(_sword, Vector3(0, -0.11, 0), Vector3(0.11, 0.025, 0.06), Color(0.75, 0.62, 0.3))  # guard
 	var blade := _box(_sword, Vector3(0, -0.52, 0), Vector3(0.035, 0.78, 0.012), Color(0.85, 0.88, 0.95))
-	(blade.mesh.surface_get_material(0) as StandardMaterial3D).metallic = 0.6
+	(blade.mesh as PrimitiveMesh).material = SSGraphics.character_material(Color(0.85, 0.88, 0.95), true)
 
 
 func _build_kunai() -> void:
@@ -375,7 +406,7 @@ func _build_kunai() -> void:
 	var ring := _cylinder(_sword, Vector3(0, 0.08, 0), 0.03, 0.012, Color(0.6, 0.6, 0.65))
 	ring.rotation_degrees.x = 90.0
 	var blade := _spike(_sword, Vector3(0, -0.06, 0), Vector3.DOWN, 0.045, 0.24, Color(0.75, 0.78, 0.85))
-	(blade.mesh.surface_get_material(0) as StandardMaterial3D).metallic = 0.6
+	(blade.mesh as PrimitiveMesh).material = SSGraphics.character_material(Color(0.75, 0.78, 0.85), true)
 
 
 func _pivot(parent: Node3D, at: Vector3) -> Node3D:
@@ -386,14 +417,7 @@ func _pivot(parent: Node3D, at: Vector3) -> Node3D:
 
 
 func _add(parent: Node3D, mesh: PrimitiveMesh, at: Vector3, color: Color) -> MeshInstance3D:
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = color
-	mat.roughness = 0.8
-	mat.rim_enabled = true
-	mat.rim = 0.35
-	mat.rim_tint = 0.6
-	mat.next_pass = _outline
-	mesh.material = mat
+	mesh.material = SSGraphics.character_material(color, false, _outlined)
 	var inst := MeshInstance3D.new()
 	inst.mesh = mesh
 	inst.position = at
@@ -448,3 +472,74 @@ func _spike(parent: Node3D, at: Vector3, dir: Vector3, radius: float, length: fl
 	var side: Vector3 = up.cross(Vector3.FORWARD if absf(up.z) < 0.9 else Vector3.RIGHT).normalized()
 	inst.basis = Basis(side, up, side.cross(up)).orthonormalized()
 	return inst
+
+
+# --- Real Shinobi Striker figure ---------------------------------------------------------
+
+func _build_ss(ss: Node3D) -> void:
+	scale = Vector3.ONE * SS_SCALE
+	ss.rotation.y = PI  # converted SS figures face +Z, the fighter's front is -Z
+	add_child(ss)
+	_ss = ss
+	var players: Array[Node] = ss.find_children("*", "AnimationPlayer", true, false)
+	_ss_anim = players[0] as AnimationPlayer if not players.is_empty() else null
+	for node: Node in ss.find_children("*", "MeshInstance3D", true, false):
+		var mi := node as MeshInstance3D
+		mi.material_overlay = _overlay
+		_parts.append(mi)
+	var skeletons: Array[Node] = ss.find_children("*", "Skeleton3D", true, false)
+	var skel: Skeleton3D = skeletons[0] as Skeleton3D if not skeletons.is_empty() else null
+	_hand_r = _ss_hand(skel, ["RightHand", "Hand_R", "hand_r", "R_Hand"], Vector3(0.3, 1.0, 0))
+	_hand_l = _ss_hand(skel, ["LeftHand", "Hand_L", "hand_l", "L_Hand"], Vector3(-0.3, 1.0, 0))
+	_ss_clip = &""
+	_ss_pose = ""
+
+
+func _ss_hand(skel: Skeleton3D, names: Array, fallback: Vector3) -> Node3D:
+	if skel != null:
+		for n: String in names:
+			if skel.find_bone(n) >= 0:
+				var attach := BoneAttachment3D.new()
+				attach.bone_name = n
+				skel.add_child(attach)
+				return attach
+	return _pivot(self, fallback)
+
+
+func _animate_ss(delta: float, planar_speed: float, pose: StringName) -> void:
+	if _ss_anim == null:
+		return
+	if _freeze > 0.0:
+		_freeze -= delta
+		_ss_anim.speed_scale = 0.0
+		return
+	var p: String = String(pose)
+	var clip: StringName = &"idle"
+	var speed: float = 1.0
+	if p == "":
+		if planar_speed > 3.5:
+			clip = &"run"
+			speed = clampf(planar_speed / 7.0, 0.75, 1.5)
+		elif planar_speed > 0.3:
+			clip = &"walk"
+			speed = clampf(planar_speed / 1.8, 0.6, 1.5)
+	else:
+		var candidates: Array = SS_POSE_CLIPS.get(p, [StringName(p.get_slice(":", 0))])
+		clip = &""
+		for c: StringName in candidates:
+			if _ss_anim.has_animation(c):
+				clip = c
+				break
+		if clip == &"":
+			clip = &"jab" if p.ends_with(":strike") else (&"charge" if _ss_anim.has_animation(&"charge") else &"idle")
+	if not _ss_anim.has_animation(clip):
+		clip = &"idle"
+	_ss_anim.speed_scale = speed
+	# A new wind-up (next hit of a string) restarts the clip; its strike just continues it.
+	var restart: bool = clip != _ss_clip or (p.ends_with(":windup") and p != _ss_pose)
+	if restart:
+		_ss_anim.play(clip, 0.1)
+		if clip == _ss_clip:
+			_ss_anim.seek(0.0, true)
+	_ss_clip = clip
+	_ss_pose = p

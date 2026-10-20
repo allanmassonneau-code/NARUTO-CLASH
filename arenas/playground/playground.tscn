@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3]
+[gd_scene load_steps=69 format=3]
 
 [ext_resource type="PackedScene" path="res://characters/base/shinobi.tscn" id="1"]
 [ext_resource type="Script" path="res://core/camera/arena_camera.gd" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://ui/debug/debug_overlay.gd" id="4"]
 [ext_resource type="Script" path="res://core/match/match_manager.gd" id="5"]
 [ext_resource type="Script" path="res://ui/hud/match_hud.gd" id="6"]
+[ext_resource type="Script" path="res://core/graphics/ss_stage.gd" id="7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
 sky_top_color = Color(0.32, 0.52, 0.82, 1)
@@ -1486,3 +1487,6 @@ camera = NodePath("../ArenaCamera")
 aim_indicator = NodePath("../AimIndicator")
 debug_overlay = NodePath("../DebugOverlay")
 hud = NodePath("../MatchHud")
+
+[node name="SSStage" type="Node" parent="."]
+script = ExtResource("7")

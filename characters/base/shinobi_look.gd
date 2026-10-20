@@ -34,3 +34,8 @@ enum Weapon { NONE, SWORD, KUNAI }
 ## Kanji tattoo on the forehead (Gaara).
 @export var forehead_mark: bool = false
 @export var eye_white: bool = false
+## Real Shinobi Striker model (res://_ss_local/characters/<id>, local only). Empty = the SS
+## character-creation avatar (SSCharacters.DEFAULT_AVATAR); primitives when no local asset.
+@export var ss_model: StringName = &""
+## SS character-creator avatar (SSAvatars dictionary: parts + SS colour ids). Empty = default.
+@export var ss_avatar: Dictionary = {}

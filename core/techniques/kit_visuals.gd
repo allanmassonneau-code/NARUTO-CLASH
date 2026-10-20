@@ -133,6 +133,7 @@ static func fx(anchor: Node, effect: String, at: Vector3, radius: float, color: 
 	if not CombatFx.is_enabled() or anchor == null or not anchor.is_inside_tree():
 		return
 	var ground := Vector3(at.x, 0.0, at.z)
+	SSVfx.for_effect(anchor, effect, ground, radius, color)   # Shinobi Striker sprites (local assets)
 	match effect:
 		"explosion":
 			SpellVfx._explosion(anchor, ground, color, radius)

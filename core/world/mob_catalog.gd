@@ -133,6 +133,8 @@ static func _area(name: String, damage: float, cooldown: float, radius: float, c
 
 static func _look(mob_id: StringName) -> ShinobiLook:
 	var look := ShinobiLook.new()
+	# SS creator avatar per mob type (same seed -> same outfit for every bandit, ronin...).
+	look.ss_avatar = {"seed": absi(hash(String(mob_id))), "sex": "Female" if mob_id == &"rogue_kunoichi" else "Male"}
 	look.headband = false
 	match mob_id:
 		&"bandit", &"bandit_thrower":

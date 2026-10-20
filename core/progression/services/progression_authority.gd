@@ -43,6 +43,11 @@ func handle_request(profile: CharacterProfile, request: Dictionary) -> Progressi
 			result = service.resolve_sub_jutsu_evolution(profile, true)
 		"report_kill":
 			result = _report_kill(profile, _id(request, "mob"))
+		"set_appearance":
+			var look: Variant = request.get("appearance", {})
+			profile.appearance = CharacterProfile.sanitize_appearance(look if look is Dictionary else {})
+			result = ProgressionResult.success()
+			result.events.append({"type": &"appearance_changed"})
 		"sub_jutsu_sacrifice":
 			result = service.resolve_sub_jutsu_evolution(profile, false, bool(request.get("confirmed", false)))
 		_:

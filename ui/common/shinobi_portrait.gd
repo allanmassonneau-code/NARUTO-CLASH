@@ -57,22 +57,26 @@ func play(pose: StringName, duration: float) -> void:
 func _build_scene(viewport: SubViewport, data: CharacterData) -> void:
 	if not CombatFx.is_enabled():
 		return  # headless (dedicated server boot, tests): no 3D
+	# Shinobi Striker character lighting: one white key over the SS bluish indirect
+	# light, plus a weak warm back light that draws a second toon band on the edges.
 	var env := Environment.new()
 	env.background_mode = Environment.BG_CLEAR_COLOR
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	env.ambient_light_color = Color(0.75, 0.72, 0.85)
-	env.ambient_light_energy = 0.6
+	env.ambient_light_color = SSEnvPresets.get_preset(SSEnvPresets.KONOHA_DAY).ambient
+	env.ambient_light_energy = 0.4
+	env.tonemap_mode = Environment.TONE_MAPPER_LINEAR
 	var world_env := WorldEnvironment.new()
 	world_env.environment = env
 	viewport.add_child(world_env)
 	var key := DirectionalLight3D.new()
 	key.rotation_degrees = Vector3(-35, 30, 0)
-	key.light_energy = 1.3
+	key.light_energy = 1.0
+	key.light_color = Color8(246, 250, 251)
 	viewport.add_child(key)
 	var rim := DirectionalLight3D.new()
 	rim.rotation_degrees = Vector3(-20, 200, 0)
-	rim.light_energy = 0.9
-	rim.light_color = Color(1.0, 0.75, 0.5)
+	rim.light_energy = 0.35
+	rim.light_color = Color(1.0, 0.8, 0.6)
 	viewport.add_child(rim)
 	_pivot = Node3D.new()
 	viewport.add_child(_pivot)

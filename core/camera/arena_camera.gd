@@ -22,6 +22,7 @@ func _ready() -> void:
 	if target != null:
 		_focus = target.global_position
 	_apply()
+	SSGraphics.attach_post_outline(self)
 
 
 func _physics_process(delta: float) -> void:

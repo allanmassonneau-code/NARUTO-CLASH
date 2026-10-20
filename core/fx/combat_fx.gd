@@ -149,6 +149,7 @@ static func sparks(anchor: Node, center: Vector3, color: Color, amount: int) -> 
 static func burst(anchor: Node, center: Vector3, color: Color, size: float) -> void:
 	if not is_enabled():
 		return
+	SSVfx.sprite(anchor, &"shock", center, size * 1.3, color, 0.22, false, 0.0, 1.8)
 	var im := ImmediateMesh.new()
 	im.surface_begin(Mesh.PRIMITIVE_LINES)
 	for i in 10:
