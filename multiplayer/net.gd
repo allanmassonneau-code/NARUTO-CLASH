@@ -119,7 +119,7 @@ func _on_peer_disconnected(peer_id: int) -> void:
 
 
 @rpc("any_peer", "call_remote", "reliable")
-func c2s_hello(version: String, player_name: String, roster: int, code: String, party_code: String, token: String) -> void:
+func c2s_hello(version: String, player_name: String, roster: int, code: String, party_code: String, token: String, queue: bool) -> void:
 	if not is_server():
 		return
 	var sender: int = multiplayer.get_remote_sender_id()
@@ -128,7 +128,7 @@ func c2s_hello(version: String, player_name: String, roster: int, code: String, 
 		return
 	_peers[sender] = {"name": player_name.left(16), "roster": clampi(roster, 0, GameSession.ROSTER_PATHS.size() - 1),
 		"code": code.left(8).to_upper(), "party": party_code.left(8).to_upper(),
-		"account": "acc_" + token.sha256_text().left(20)}
+		"account": "acc_" + token.sha256_text().left(20), "queue": queue}
 	_broadcast_lobby()
 	_try_start_match()
 
@@ -167,6 +167,8 @@ func _build_lineup() -> Array[Dictionary]:
 	var parties: Dictionary = {}  # party -> Array[int]
 	var singles: Array[int] = []
 	for peer_id: int in _peers:
+		if not _peers[peer_id].get("queue", true):
+			continue  # profile-only connection (shinobi screen), not looking for a match
 		var p: String = _peers[peer_id].party
 		if p == "":
 			singles.append(peer_id)
@@ -482,7 +484,7 @@ func broadcast_fx(kind: Fx, a: Vector3, b: Vector3, f1: float, f2: float, color:
 
 # --- Client -----------------------------------------------------------------
 
-func join(host: String, mode: String, player_name: String, roster: int, party_code: String = "") -> void:
+func join(host: String, mode: String, player_name: String, roster: int, party_code: String = "", queue: bool = true) -> void:
 	leave()
 	var peer := ENetMultiplayerPeer.new()
 	var port: int = int(_autopilot.get("port", PORTS.get(mode, 7777)))
@@ -492,7 +494,7 @@ func join(host: String, mode: String, player_name: String, roster: int, party_co
 		return
 	multiplayer.multiplayer_peer = peer
 	GameSession.net_role = GameSession.NetRole.CLIENT
-	set_meta(&"hello", [player_name, roster])
+	set_meta(&"hello", [player_name, roster, queue])
 	party = party_code
 	_set_status("Connecting to %s (%s)..." % [host, mode])
 
@@ -533,7 +535,7 @@ func send_input(seq: int, intent: GameplayIntent, aim: Vector3) -> void:
 
 func _on_connected_to_server() -> void:
 	var hello: Array = get_meta(&"hello", ["Shinobi", 0])
-	c2s_hello.rpc_id(1, game_version(), hello[0], hello[1], GameSession.friend_code, party, GameSession.account_token)
+	c2s_hello.rpc_id(1, game_version(), hello[0], hello[1], GameSession.friend_code, party, GameSession.account_token, bool(hello[2]) if hello.size() > 2 else true)
 	Profiles.use_remote(true)
 	c2s_profile_get.rpc_id(1)
 	_set_status("Connected. Waiting for players...")

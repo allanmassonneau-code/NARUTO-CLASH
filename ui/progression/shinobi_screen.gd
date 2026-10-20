@@ -22,6 +22,10 @@ const STATE_LABELS: Dictionary = {
 }
 const GRADE_NAMES: Array[String] = ["Genin", "Chunin", "Konin", "Tokubetsu", "Jonin"]
 
+## Main screen of the game (no close button, Esc does nothing).
+var embedded: bool = false
+## Extra line under the title (connection state), set by the main menu.
+var status_text: String = ""
 var _db: ProgressionDatabase
 var _body: VBoxContainer
 var _tab: String = "nature1"
@@ -71,7 +75,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") and visible:
 		if _modal != null:
 			_close_modal()
-		else:
+		elif not embedded:
 			queue_free()
 		get_viewport().set_input_as_handled()
 
@@ -125,14 +129,18 @@ func _rebuild() -> void:
 func _header_bar() -> void:
 	var row := HBoxContainer.new()
 	_body.add_child(row)
-	var title := UiStyle.label(row, "SHINOBI", 34, UiStyle.ACCENT, 900)
-	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	UiStyle.label(row, "Profil en ligne (serveur)" if Profiles.is_remote() else "Profil hors ligne", 13, UiStyle.MUTED, 700) \
-		.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	var titles := VBoxContainer.new()
+	titles.add_theme_constant_override("separation", -6)
+	titles.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(titles)
+	UiStyle.label(titles, "NINJA BATTLE" if embedded else "SHINOBI", 34, UiStyle.ACCENT, 900)
+	var online: String = "Profil en ligne (serveur)" if Profiles.is_remote() else "Profil hors ligne"
+	UiStyle.label(titles, online + ("  ·  " + status_text if status_text != "" else ""), 13, UiStyle.MUTED, 700)
 	if not Profiles.is_remote() and Profiles.profile != null:
 		_button(row, "Promouvoir (test)", Profiles.dev_promote).tooltip_text = "Outil de test hors ligne : les grades s'obtiennent normalement en jeu."
 		_button(row, "Supprimer (test)", func() -> void: _confirm("Supprimer ce personnage hors ligne ?", Profiles.dev_reset))
-	_button(row, "✕  Fermer", queue_free)
+	if not embedded:
+		_button(row, "✕  Fermer", queue_free)
 
 
 func _profile_header(p: CharacterProfile) -> void:

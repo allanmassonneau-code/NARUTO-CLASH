@@ -16,7 +16,7 @@ const ROSTER_PATHS: Array[String] = [
 	"res://characters/itachi/itachi_data.tres",
 	"res://characters/minato/minato_data.tres",
 ]
-const MENU_SCENE: String = "res://ui/menu/character_select.tscn"
+const MENU_SCENE: String = "res://ui/main/main_menu.tscn"
 const ARENA_SCENE: String = "res://arenas/playground/playground.tscn"
 
 var mode: Mode = Mode.DUEL_VS_BOT
