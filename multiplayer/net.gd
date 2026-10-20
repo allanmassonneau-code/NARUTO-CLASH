@@ -42,6 +42,7 @@ var _next_entity_id: int = 1
 var _entities: Dictionary = {}
 ## Dev/test autopilot: --autojoin=<host> --mode=<1v1|2v2> --bot-client --quit-after-match
 var _autopilot: Dictionary = {}
+var _accounts := AccountStore.new()
 
 
 func _ready() -> void:
@@ -81,6 +82,9 @@ func game_version() -> String:
 
 func start_server(mode: String, port: int) -> void:
 	assert(PORTS.has(mode), "Unknown server mode: %s" % mode)
+	if mode == "2v2":
+		_start_account_service(port)
+		return
 	var peer := ENetMultiplayerPeer.new()
 	var err: Error = peer.create_server(port, 16)
 	if err != OK:
@@ -92,6 +96,20 @@ func start_server(mode: String, port: int) -> void:
 	server_mode = mode
 	Engine.max_fps = 60
 	print("[server] %s v%s listening on UDP %d" % [mode, game_version(), port])
+	get_tree().change_scene_to_file.call_deferred(SERVER_IDLE_SCENE)
+
+
+## The second server instance (UDP 7778) is the launcher's account service.
+func _start_account_service(port: int) -> void:
+	GameSession.net_role = GameSession.NetRole.SERVER
+	server_mode = "accounts"
+	Engine.max_fps = 30
+	var service := AccountService.new()
+	add_child(service)
+	if service.start(port) != OK:
+		push_error("Net: account service cannot listen on %d" % port)
+		get_tree().quit(1)
+		return
 	get_tree().change_scene_to_file.call_deferred(SERVER_IDLE_SCENE)
 
 
@@ -119,16 +137,26 @@ func _on_peer_disconnected(peer_id: int) -> void:
 
 
 @rpc("any_peer", "call_remote", "reliable")
-func c2s_hello(version: String, player_name: String, roster: int, code: String, party_code: String, token: String, queue: bool) -> void:
+func c2s_hello(version: String, player_name: String, roster: int, code: String, party_code: String, token: String, queue: bool,
+		user: String = "", auth: String = "") -> void:
 	if not is_server():
 		return
 	var sender: int = multiplayer.get_remote_sender_id()
 	if version != game_version():
 		s2c_error.rpc_id(sender, "Version mismatch (server %s, you %s). Update with the launcher." % [game_version(), version])
 		return
+	if user == "" or not _accounts.verify(user, auth):
+		s2c_error.rpc_id(sender, "Compte inconnu ou mot de passe incorrect : connecte-toi depuis le launcher.")
+		return
+	user = AccountStore.normalize(user)
+	# First login of an account: adopt the character of the old per-machine token.
+	var legacy: String = "acc_" + token.sha256_text().left(20)
+	if _accounts.characters(user).is_empty() and Profiles.server_load(legacy) != null:
+		_accounts.add_character(user, legacy)
 	_peers[sender] = {"name": player_name.left(16), "roster": clampi(roster, 0, GameSession.ROSTER_PATHS.size() - 1),
 		"code": code.left(8).to_upper(), "party": party_code.left(8).to_upper(),
-		"account": "acc_" + token.sha256_text().left(20), "queue": queue}
+		"user": user, "account": "", "queue": queue}
+	s2c_characters.rpc_id(sender, _character_summaries(user))
 	_broadcast_lobby()
 	_try_start_match()
 
@@ -301,15 +329,82 @@ func c2s_profile_get() -> void:
 	var account: String = _account_of_sender()
 	if account != "":
 		_send_profile(multiplayer.get_remote_sender_id(), Profiles.server_load(account), ProgressionResult.success())
+	else:
+		c2s_characters()
 
 
 @rpc("any_peer", "call_remote", "reliable")
 func c2s_profile_create(character_name: String, village_id: StringName, origin: int, clan_id: StringName) -> void:
-	var account: String = _account_of_sender()
-	if account == "":
+	var sender: int = multiplayer.get_remote_sender_id()
+	var user: String = str(_peers.get(sender, {}).get("user", ""))
+	if user == "":
 		return
-	var created: Dictionary = Profiles.server_create(account, character_name, village_id, origin, clan_id)
-	_send_profile(multiplayer.get_remote_sender_id(), created.profile, created.result)
+	if _accounts.characters(user).size() >= AccountStore.MAX_CHARACTERS:
+		_send_profile(sender, null, ProgressionResult.fail(&"TOO_MANY_CHARACTERS"))
+		return
+	var id: String = "c_" + Crypto.new().generate_random_bytes(8).hex_encode()
+	var created: Dictionary = Profiles.server_create(id, character_name, village_id, origin, clan_id)
+	if (created.result as ProgressionResult).ok:
+		_accounts.add_character(user, id)
+		_peers[sender].account = id
+	_send_profile(sender, created.profile, created.result)
+	s2c_characters.rpc_id(sender, _character_summaries(user))
+
+
+## Account characters: list, select (the profile then follows), delete.
+@rpc("any_peer", "call_remote", "reliable")
+func c2s_characters() -> void:
+	var sender: int = multiplayer.get_remote_sender_id()
+	var user: String = str(_peers.get(sender, {}).get("user", ""))
+	if user != "":
+		s2c_characters.rpc_id(sender, _character_summaries(user))
+
+
+@rpc("any_peer", "call_remote", "reliable")
+func c2s_select_character(character_id: String) -> void:
+	var sender: int = multiplayer.get_remote_sender_id()
+	var user: String = str(_peers.get(sender, {}).get("user", ""))
+	if user == "" or not _accounts.characters(user).has(character_id):
+		return
+	_peers[sender].account = character_id
+	_send_profile(sender, Profiles.server_load(character_id), ProgressionResult.success())
+
+
+@rpc("any_peer", "call_remote", "reliable")
+func c2s_delete_character(character_id: String) -> void:
+	var sender: int = multiplayer.get_remote_sender_id()
+	var user: String = str(_peers.get(sender, {}).get("user", ""))
+	if user == "" or not _accounts.remove_character(user, character_id):
+		return
+	Profiles.server_delete(character_id)
+	if _peers[sender].account == character_id:
+		_peers[sender].account = ""
+		_send_profile(sender, null, ProgressionResult.success())
+	s2c_characters.rpc_id(sender, _character_summaries(user))
+
+
+@rpc("authority", "call_remote", "reliable")
+func s2c_characters(list: Array) -> void:
+	Profiles.apply_characters(list)
+
+
+func _character_summaries(user: String) -> Array:
+	var out: Array = []
+	for id: String in _accounts.characters(user):
+		var p: CharacterProfile = Profiles.server_load(id)
+		if p != null:
+			out.append(Profiles.summary(p))
+	return out
+
+
+func select_character(character_id: String) -> void:
+	if is_client() and is_online():
+		c2s_select_character.rpc_id(1, character_id)
+
+
+func delete_character(character_id: String) -> void:
+	if is_client() and is_online():
+		c2s_delete_character.rpc_id(1, character_id)
 
 
 @rpc("any_peer", "call_remote", "reliable")
@@ -539,9 +634,11 @@ func send_input(seq: int, intent: GameplayIntent, aim: Vector3) -> void:
 
 func _on_connected_to_server() -> void:
 	var hello: Array = get_meta(&"hello", ["Shinobi", 0])
-	c2s_hello.rpc_id(1, game_version(), hello[0], hello[1], GameSession.friend_code, party, GameSession.account_token, bool(hello[2]) if hello.size() > 2 else true)
+	c2s_hello.rpc_id(1, game_version(), hello[0], hello[1], GameSession.friend_code, party, GameSession.account_token,
+		bool(hello[2]) if hello.size() > 2 else true, GameSession.account_user, GameSession.account_auth)
 	Profiles.use_remote(true)
-	c2s_profile_get.rpc_id(1)
+	if GameSession.last_character != "":
+		c2s_select_character.rpc_id(1, GameSession.last_character)
 	_set_status("Connected. Waiting for players...")
 
 

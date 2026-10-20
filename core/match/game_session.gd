@@ -41,6 +41,12 @@ var friend_code: String = ""
 var friends: Array[Dictionary] = []
 ## Secret identifying this player's account on the servers (profile owner).
 var account_token: String = ""
+## Launcher account (game.exe -- --account=<user> --auth=<sha256>): required
+## to play online; empty = offline only.
+var account_user: String = ""
+var account_auth: String = ""
+## Last character played (selected again at the next start).
+var last_character: String = ""
 ## Options (O in game / gear button): audio and display.
 var master_volume: float = 70.0
 var sfx_volume: float = 80.0
@@ -68,6 +74,7 @@ func _ready() -> void:
 		server_host = cfg.get_value("online", "host", server_host)
 		friend_code = cfg.get_value("online", "friend_code", "")
 		account_token = cfg.get_value("online", "account_token", "")
+		last_character = cfg.get_value("online", "last_character", "")
 		for entry: Variant in cfg.get_value("online", "friends", []):
 			if entry is Dictionary:
 				friends.append(entry)
@@ -89,6 +96,10 @@ func _ready() -> void:
 	for arg: String in OS.get_cmdline_user_args():
 		if arg.begins_with("--host="):
 			server_host = arg.trim_prefix("--host=")
+		elif arg.begins_with("--account="):
+			account_user = arg.trim_prefix("--account=")
+		elif arg.begins_with("--auth="):
+			account_auth = arg.trim_prefix("--auth=")
 
 
 func save_settings() -> void:
@@ -97,6 +108,7 @@ func save_settings() -> void:
 	cfg.set_value("online", "host", server_host)
 	cfg.set_value("online", "friend_code", friend_code)
 	cfg.set_value("online", "account_token", account_token)
+	cfg.set_value("online", "last_character", last_character)
 	cfg.set_value("online", "friends", friends)
 	for key: String in ["master_volume", "sfx_volume", "muted", "spatial_sound", "fullscreen", "anti_aliasing"]:
 		cfg.set_value("options", key, get(key))

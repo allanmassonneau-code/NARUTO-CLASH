@@ -29,6 +29,7 @@ func _ready() -> void:
 	Net.status_changed.connect(_on_status)
 	Net.connection_closed.connect(func(_reason: String) -> void: _retry.start())
 	Profiles.profile_updated.connect(func(_p: CharacterProfile, _r: ProgressionResult) -> void: _rebuild.call_deferred())
+	Profiles.characters_updated.connect(func(_l: Array) -> void: _rebuild.call_deferred())
 	_retry = Timer.new()
 	_retry.one_shot = true
 	_retry.wait_time = RETRY_DELAY
@@ -43,6 +44,9 @@ func _connect() -> void:
 		return
 	if GameSession.server_host == "" or GameSession.server_host == "127.0.0.1" and not OS.has_feature("editor"):
 		_on_status("Pas de serveur configuré : mode hors ligne.")
+		return
+	if GameSession.account_user == "":
+		_on_status("Hors ligne : lance le jeu depuis le launcher (compte) pour jouer en ligne.")
 		return
 	Net.join(GameSession.server_host, "1v1", GameSession.player_name, 0, "", false)
 
@@ -106,15 +110,13 @@ func _rebuild() -> void:
 	rule.custom_minimum_size = Vector2(120, 4)
 	rule.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	col.add_child(rule)
-	UiStyle.label(col, ("Profil en ligne" if Profiles.is_remote() else "Profil hors ligne") + ("  ·  " + _status if _status != "" else ""), 14, UiStyle.MUTED, 700)
+	var who: String = ("Compte " + GameSession.account_user) if Profiles.is_remote() and GameSession.account_user != "" else "Hors ligne"
+	UiStyle.label(col, who + ("  ·  " + _status if _status != "" else ""), 14, UiStyle.MUTED, 700)
 	var gap := Control.new()
 	gap.custom_minimum_size = Vector2(0, 30)
 	col.add_child(gap)
-	if p == null:
-		UiStyle.label(col, "Aucun shinobi pour l'instant.", 18, Color.WHITE, 700)
-		_menu_button(col, "CRÉER UN PERSONNAGE", true, func() -> void:
-			CharacterCreator.open(self).finished.connect(func(_done: bool) -> void: _rebuild()))
-	else:
+	_character_list(col, p)
+	if p != null:
 		var v: VillageData = Profiles.db.get_village(p.village_id)
 		var clan: ClanData = Profiles.db.get_clan(p.clan_id)
 		UiStyle.label(col, p.character_name, 34, Color.WHITE, 900)
@@ -126,6 +128,59 @@ func _rebuild() -> void:
 			CharacterCreator.open(self, true).finished.connect(func(_done: bool) -> void: _rebuild()))
 	_menu_button(col, "OPTIONS", false, func() -> void: _options.toggle())
 	_menu_button(col, "QUITTER", false, func() -> void: get_tree().quit())
+
+
+## Characters of the account (10 max): pick one, create, delete.
+func _character_list(col: VBoxContainer, current: CharacterProfile) -> void:
+	UiStyle.label(col, "PERSONNAGES  %d / %d" % [Profiles.characters.size(), Profiles.MAX_CHARACTERS], 14, UiStyle.ACCENT, 900)
+	var grid := GridContainer.new()
+	grid.columns = 2
+	grid.add_theme_constant_override("h_separation", 8)
+	grid.add_theme_constant_override("v_separation", 8)
+	col.add_child(grid)
+	for c: Dictionary in Profiles.characters:
+		var selected: bool = current != null and current.character_id == c.id
+		var clan: ClanData = Profiles.db.get_clan(StringName(c.clan))
+		var b := Button.new()
+		b.focus_mode = Control.FOCUS_NONE
+		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		b.custom_minimum_size = Vector2(226, 52)
+		b.text = "%s\n%s · %s" % [c.name, ShinobiScreen.GRADE_NAMES[clampi(int(c.grade), 0, 4)], clan.display_name if clan != null else "Sans clan"]
+		b.add_theme_font_size_override("font_size", 15)
+		var color: Color = ClanStyles.style(StringName(c.clan)).color
+		b.add_theme_stylebox_override("normal", _bar_style(Color(color, 0.28) if selected else Color(0.05, 0.05, 0.08, 0.6), color))
+		b.add_theme_stylebox_override("hover", _bar_style(Color(color, 0.35), color))
+		var id: String = c.id
+		b.pressed.connect(func() -> void: Profiles.select_character(id))
+		grid.add_child(b)
+	if Profiles.can_create():
+		var add := Button.new()
+		add.text = "+  NOUVEAU PERSONNAGE"
+		add.focus_mode = Control.FOCUS_NONE
+		add.custom_minimum_size = Vector2(226, 52)
+		add.pressed.connect(func() -> void: CharacterCreator.open(self).finished.connect(func(_done: bool) -> void: _rebuild()))
+		grid.add_child(add)
+	if current != null:
+		var del := Button.new()
+		del.text = "Supprimer « %s »" % current.character_name
+		del.flat = true
+		del.focus_mode = Control.FOCUS_NONE
+		del.add_theme_color_override("font_color", Color(1.0, 0.5, 0.45))
+		del.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+		var id: String = current.character_id
+		del.pressed.connect(func() -> void: _confirm_delete(id, current.character_name))
+		col.add_child(del)
+
+
+func _confirm_delete(character_id: String, character_name: String) -> void:
+	var dialog := ConfirmationDialog.new()
+	dialog.title = "Supprimer"
+	dialog.dialog_text = "Supprimer définitivement %s ?" % character_name
+	dialog.ok_button_text = "Supprimer"
+	dialog.cancel_button_text = "Annuler"
+	dialog.confirmed.connect(func() -> void: Profiles.delete_character(character_id))
+	add_child(dialog)
+	dialog.popup_centered()
 
 
 func _open_shinobi() -> void:

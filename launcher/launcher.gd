@@ -24,6 +24,20 @@ var _download_path: String = ""
 @onready var _news: RichTextLabel = %News
 @onready var _version: Label = %Version
 
+## Account (created / checked against the account service, UDP 7778).
+const ACCOUNT_PORT: int = 7778
+const ACCOUNT_FILE: String = "account.cfg"
+var _user: String = ""
+var _auth: String = ""
+var _account_box: HBoxContainer
+var _user_edit: LineEdit
+var _pass_edit: LineEdit
+var _account_status: Label
+var _enet: ENetConnection
+var _enet_peer: ENetPacketPeer
+var _enet_request: Dictionary = {}
+var _enet_wait: float = 0.0
+
 
 func _ready() -> void:
 	DisplayServer.window_set_title("Ninja Battle Launcher")
@@ -34,10 +48,12 @@ func _ready() -> void:
 	_play.pressed.connect(_launch_game)
 	_retry.pressed.connect(_check_for_update)
 	_installed_version = _read_installed_version()
+	_build_account_box()
 	_check_for_update()
 
 
 func _process(delta: float) -> void:
+	_poll_account(delta)
 	if _step == Step.DOWNLOADING:
 		var got: int = _http.get_downloaded_bytes()
 		if got != _last_bytes:
@@ -132,8 +148,11 @@ func _on_offline(reason: String) -> void:
 func _launch_game() -> void:
 	var args: PackedStringArray = []
 	var host: String = str(_manifest.get("server_host", ""))
+	args.append("--")
 	if host != "":
-		args.append_array(["--", "--host=%s" % host])
+		args.append("--host=%s" % host)
+	if _user != "":
+		args.append_array(["--account=%s" % _user, "--auth=%s" % _auth])
 	var pid: int = OS.create_process(_game_exe(), args)
 	if pid <= 0:
 		_status.text = "Could not start the game."
@@ -207,3 +226,120 @@ static func _remove_dir(path: String) -> void:
 	for sub: String in dir.get_directories():
 		_remove_dir(path.path_join(sub))
 	DirAccess.remove_absolute(path)
+
+
+# --- Account --------------------------------------------------------------------
+
+func _build_account_box() -> void:
+	var cfg := ConfigFile.new()
+	if cfg.load(LauncherConfig.install_dir().path_join(ACCOUNT_FILE)) == OK:
+		_user = str(cfg.get_value("account", "user", ""))
+		_auth = str(cfg.get_value("account", "auth", ""))
+	_account_box = HBoxContainer.new()
+	_account_box.add_theme_constant_override("separation", 8)
+	var buttons: Node = _play.get_parent()
+	buttons.get_parent().add_child(_account_box)
+	buttons.get_parent().move_child(_account_box, buttons.get_index())
+	_account_status = Label.new()
+	_account_status.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_account_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_refresh_account_box()
+
+
+func _refresh_account_box() -> void:
+	for child: Node in _account_box.get_children():
+		if child != _account_status:
+			child.queue_free()
+	if _account_status.get_parent() == null:
+		_account_box.add_child(_account_status)
+	if _user != "":
+		_account_status.text = "Compte : %s" % _user
+		var out := Button.new()
+		out.text = "Changer de compte"
+		out.pressed.connect(func() -> void:
+			_user = ""
+			_auth = ""
+			_save_account()
+			_refresh_account_box())
+		_account_box.add_child(out)
+		return
+	_account_status.text = "Connecte-toi ou crée un compte (sinon : jeu hors ligne)."
+	_user_edit = LineEdit.new()
+	_user_edit.placeholder_text = "Identifiant"
+	_user_edit.custom_minimum_size = Vector2(150, 0)
+	_account_box.add_child(_user_edit)
+	_pass_edit = LineEdit.new()
+	_pass_edit.placeholder_text = "Mot de passe"
+	_pass_edit.secret = true
+	_pass_edit.custom_minimum_size = Vector2(150, 0)
+	_account_box.add_child(_pass_edit)
+	for op: Array in [["login", "Connexion"], ["register", "Créer un compte"]]:
+		var b := Button.new()
+		b.text = op[1]
+		b.pressed.connect(_account_request.bind(op[0]))
+		_account_box.add_child(b)
+	_account_box.move_child(_account_status, _account_box.get_child_count() - 1)
+
+
+func _account_request(op: String) -> void:
+	var user: String = _user_edit.text.strip_edges().to_lower()
+	var password: String = _pass_edit.text
+	if user.length() < 3 or password.length() < 4:
+		_account_status.text = "Identifiant (3-16 : a-z 0-9 _) et mot de passe (4+) requis."
+		return
+	var host: String = str(_manifest.get("server_host", ""))
+	if host == "":
+		_account_status.text = "Serveur inconnu : attends la vérification des mises à jour."
+		return
+	# Same formula as AccountStore.auth_hash in the game: the password never leaves the PC.
+	var auth: String = ("ninjabattle:%s:%s" % [user, password]).sha256_text()
+	_enet = ENetConnection.new()
+	_enet.create_host(1, 1)
+	_enet_peer = _enet.connect_to_host(host, ACCOUNT_PORT, 1)
+	_enet_request = {"op": op, "user": user, "auth": auth}
+	_enet_wait = 8.0
+	_account_status.text = "Connexion au serveur de comptes..."
+
+
+func _poll_account(delta: float) -> void:
+	if _enet == null:
+		return
+	_enet_wait -= delta
+	if _enet_wait <= 0.0:
+		_account_done({"ok": false, "error": "TIMEOUT"})
+		return
+	var event: Array = _enet.service(0)
+	match event[0]:
+		ENetConnection.EVENT_CONNECT:
+			_enet_peer.send(0, JSON.stringify(_enet_request).to_utf8_buffer(), ENetPacketPeer.FLAG_RELIABLE)
+		ENetConnection.EVENT_RECEIVE:
+			var reply: Variant = JSON.parse_string((event[1] as ENetPacketPeer).get_packet().get_string_from_utf8())
+			_account_done(reply if reply is Dictionary else {"ok": false, "error": "BAD_REPLY"})
+		ENetConnection.EVENT_DISCONNECT:
+			_account_done({"ok": false, "error": "DISCONNECTED"})
+
+
+const ACCOUNT_ERRORS: Dictionary = {"NAME_TAKEN": "Identifiant déjà pris.", "INVALID_NAME": "Identifiant invalide (3-16 : a-z 0-9 _).",
+	"BAD_LOGIN": "Identifiant ou mot de passe incorrect.", "TIMEOUT": "Serveur de comptes injoignable.",
+	"DISCONNECTED": "Serveur de comptes injoignable."}
+
+
+func _account_done(reply: Dictionary) -> void:
+	if _enet_peer != null:
+		_enet_peer.peer_disconnect_now()
+	_enet.destroy()
+	_enet = null
+	if not reply.get("ok", false):
+		_account_status.text = ACCOUNT_ERRORS.get(str(reply.get("error", "")), "Erreur : %s" % reply.get("error", "?"))
+		return
+	_user = str(_enet_request.user)
+	_auth = str(_enet_request.auth)
+	_save_account()
+	_refresh_account_box()
+
+
+func _save_account() -> void:
+	var cfg := ConfigFile.new()
+	cfg.set_value("account", "user", _user)
+	cfg.set_value("account", "auth", _auth)
+	cfg.save(LauncherConfig.install_dir().path_join(ACCOUNT_FILE))
