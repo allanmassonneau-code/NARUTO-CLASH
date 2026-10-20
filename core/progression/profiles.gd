@@ -24,7 +24,15 @@ func _ready() -> void:
 	_saves = ProgressionSaveService.new()
 	_authority = ProgressionAuthority.new(_service, _saves)
 	if not Net.is_server():
-		profile = _saves.load_profile(local_id())
+		profile = _load(local_id())
+
+
+## Loads a saved profile, cleaned of content that no longer exists.
+func _load(character_id: String) -> CharacterProfile:
+	var p: CharacterProfile = _saves.load_profile(character_id)
+	if p != null and _service.prune_unknown_content(p):
+		_saves.save_profile(p)
+	return p
 
 
 ## Offline profile id (one character per machine for now).
@@ -84,7 +92,7 @@ func dev_reset() -> void:
 func use_remote(enabled: bool) -> void:
 	backend = Backend.REMOTE if enabled else Backend.LOCAL
 	if not enabled:
-		profile = _saves.load_profile(local_id())
+		profile = _load(local_id())
 		profile_updated.emit(profile, ProgressionResult.success())
 
 
@@ -101,12 +109,12 @@ func apply_remote(profile_data: Dictionary, ok: bool, error: String, events: Arr
 
 ## Server: profile of an account (loaded from disk), null if none yet.
 func server_load(account_id: String) -> CharacterProfile:
-	return _saves.load_profile(account_id)
+	return _load(account_id)
 
 
 func server_create(account_id: String, character_name: String, village_id: StringName, origin: int, clan_id: StringName) -> Dictionary:
-	if _saves.load_profile(account_id) != null:
-		return {"profile": _saves.load_profile(account_id), "result": ProgressionResult.fail(&"ALREADY_EXISTS")}
+	if _load(account_id) != null:
+		return {"profile": _load(account_id), "result": ProgressionResult.fail(&"ALREADY_EXISTS")}
 	var created: Dictionary = _service.create_character(account_id, character_name.left(20), village_id, origin as ProgressionTypes.Origin, clan_id)
 	if (created.result as ProgressionResult).ok:
 		_saves.save_profile(created.profile)
@@ -114,6 +122,6 @@ func server_create(account_id: String, character_name: String, village_id: Strin
 
 
 func server_request(account_id: String, action: Dictionary) -> Dictionary:
-	var p: CharacterProfile = _saves.load_profile(account_id)
+	var p: CharacterProfile = _load(account_id)
 	var result: ProgressionResult = _authority.handle_request(p, action)
 	return {"profile": p, "result": result}

@@ -55,6 +55,8 @@ static func build(content: Dictionary) -> ProgressionDatabase:
 		n.display_name = row.name
 		n.description = row.description
 		n.color = Color(row.color)
+		n.identity = row.get("identity", "")
+		n.signature = row.get("signature", "")
 		for j: Dictionary in row.jutsu:
 			n.jutsu.append(_jutsu(j, JutsuData.new(), ProgressionTypes.JutsuSource.NATURE, n.id))
 		db.natures.append(n)
@@ -64,6 +66,8 @@ static func build(content: Dictionary) -> ProgressionDatabase:
 		c.display_name = row.name
 		c.village_id = row.village
 		c.description = row.description
+		c.identity = row.get("identity", "")
+		c.signature = row.get("signature", "")
 		for j: Dictionary in row.jutsu:
 			c.jutsu.append(_jutsu(j, JutsuData.new(), ProgressionTypes.JutsuSource.CLAN, c.id))
 		db.clans.append(c)
@@ -127,4 +131,6 @@ static func _jutsu(row: Dictionary, j: JutsuData, source: int, owner: StringName
 	for r: String in row.get("requirements", []):
 		j.requirements.append(StringName(r))
 	j.passive = bool(row.get("passive", false))
+	j.design_tags = PackedStringArray(row.get("design_tags", []))
+	j.details = row.get("details", "")
 	return j

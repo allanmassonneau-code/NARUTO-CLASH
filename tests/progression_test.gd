@@ -220,6 +220,18 @@ func _robustness_tests() -> void:
 	_check(service.equip_jutsu_at(p, passive_id, 0).error == &"PASSIVE_NOT_EQUIPPABLE", "passives can't be placed")
 	_check(ProgressionAuthority.new(service).handle_request(p, {"action": "equip_jutsu_at", "jutsu": d0, "slot": 0}).ok
 		and p.equipped_jutsu == ([d0, c1] as Array[StringName]), "authority handles equip_jutsu_at")
+	# Content renamed by the design bible: unknown ids are pruned, ranks freed.
+	var old := _profile(G.GENIN, false)
+	old.learned_jutsu.append(&"katon_d_goukakyuu")
+	old.equipped_jutsu.append(&"katon_d_goukakyuu")
+	old.nature_choices[old.primary_nature] = {R.D: &"katon_d_goukakyuu"}
+	_check(service.prune_unknown_content(old) and not old.learned_jutsu.has(&"katon_d_goukakyuu")
+		and not old.equipped_jutsu.has(&"katon_d_goukakyuu") and not (old.nature_choices[old.primary_nature] as Dictionary).has(R.D),
+		"removed techniques are pruned from old profiles")
+	_check(not service.prune_unknown_content(old), "pruning a clean profile changes nothing")
+	_check(db.natures.all(func(n: ChakraNatureData) -> bool: return n.jutsu.size() == 10 and n.signature != "")
+		and db.clans.all(func(c: ClanData) -> bool: return c.jutsu.size() == 5 and c.signature != "")
+		and db.sub_jutsu.size() == 30, "design bible content: 50 nature, 100 clan, 30 sub-jutsu techniques")
 	# Save / load roundtrip.
 	var saves := ProgressionSaveService.new("user://test_profiles")
 	saves.save_profile(p)

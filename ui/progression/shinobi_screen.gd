@@ -291,6 +291,7 @@ func _nature_tree(p: CharacterProfile, nature_id: StringName, title: String) -> 
 		UiStyle.label(_body, hint, 16, UiStyle.MUTED, 700)
 		return
 	UiStyle.label(_body, "%s : %s — %s" % [title.to_upper(), nature.display_name.to_upper(), nature.description], 18, nature.color, 900)
+	_signature(nature.identity, nature.signature, nature.color)
 	UiStyle.label(_body, "Une seule technique par rang : le choix est définitif.", 13, UiStyle.MUTED, 600)
 	for rank in ProgressionTypes.Rank.values():
 		var row := HBoxContainer.new()
@@ -309,6 +310,7 @@ func _clan_tree(p: CharacterProfile) -> void:
 	if clan == null:
 		return
 	UiStyle.label(_body, "CLAN %s — %s" % [clan.display_name.to_upper(), clan.description], 18, UiStyle.ACCENT, 900)
+	_signature(clan.identity, clan.signature, UiStyle.ACCENT)
 	for rank in ProgressionTypes.Rank.values():
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 14)
@@ -338,7 +340,8 @@ func _jutsu_node(parent: Control, p: CharacterProfile, j: JutsuData) -> void:
 	UiStyle.label(top, STATE_LABELS[state], 12, color.lightened(0.2), 800)
 	var desc := UiStyle.label(col, j.description, 13, UiStyle.MUTED, 600)
 	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	UiStyle.label(col, "%d chakra  ·  %ss  ·  %s" % [roundi(j.chakra_cost), str(j.cooldown), " ".join(j.tags.map(func(t: StringName) -> String: return String(t)))], 11, Color(0.6, 0.7, 0.9), 700)
+	UiStyle.label(col, "%d chakra  ·  %ss  ·  %s" % [roundi(j.chakra_cost), str(j.cooldown), _tag_text(j)], 11, Color(0.6, 0.7, 0.9), 700)
+	_details(col, j)
 	if state == ProgressionTypes.NodeState.AVAILABLE:
 		var learn := _button(col, "Apprendre", func() -> void:
 			var warning: String = "Apprendre %s ?" % j.display_name
@@ -346,6 +349,43 @@ func _jutsu_node(parent: Control, p: CharacterProfile, j: JutsuData) -> void:
 				warning += "\nL'autre technique de ce rang sera définitivement verrouillée."
 			_confirm(warning, func() -> void: Profiles.request({"action": "learn_jutsu", "jutsu": j.id})))
 		learn.size_flags_horizontal = Control.SIZE_SHRINK_END
+
+
+## Kit identity + signature mechanic from the design bible.
+func _signature(identity: String, signature: String, color: Color) -> void:
+	if signature != "":
+		var sig := UiStyle.label(_body, "Mécanique signature — " + signature, 14, color.lightened(0.35), 800)
+		sig.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	if identity != "":
+		var id_label := UiStyle.label(_body, identity, 13, UiStyle.MUTED, 600)
+		id_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+
+
+static func _tag_text(j: JutsuData) -> String:
+	if not j.design_tags.is_empty():
+		return " · ".join(j.design_tags).to_upper()
+	return " ".join(j.tags.map(func(t: StringName) -> String: return String(t)))
+
+
+## "Détails" toggle showing the full design text (mechanic, synergies, counter).
+func _details(col: VBoxContainer, j: JutsuData) -> void:
+	if j.details == "":
+		return
+	var text := UiStyle.label(col, j.details, 12, Color(0.85, 0.83, 0.8), 600)
+	text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	text.visible = false
+	var toggle := Button.new()
+	toggle.text = "▸ Détails"
+	toggle.flat = true
+	toggle.focus_mode = Control.FOCUS_NONE
+	toggle.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	toggle.add_theme_font_size_override("font_size", 12)
+	toggle.add_theme_color_override("font_color", UiStyle.ACCENT)
+	toggle.pressed.connect(func() -> void:
+		text.visible = not text.visible
+		toggle.text = "▾ Détails" if text.visible else "▸ Détails")
+	col.add_child(toggle)
+	col.move_child(toggle, text.get_index())
 
 
 func _rank_badge(parent: Control, rank: int) -> void:
@@ -507,9 +547,10 @@ func _reveal_sub_jutsu(sub_id: StringName) -> void:
 	name_label.add_theme_constant_override("outline_size", 10)
 	var rank := UiStyle.label(col, "RANG " + ProgressionTypes.rank_key(sub.rank), 24, color, 900)
 	rank.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var desc := UiStyle.label(col, sub.description, 16, Color.WHITE, 600)
+	var desc := UiStyle.label(col, sub.details if sub.details != "" else sub.description, 14 if sub.details != "" else 16, Color.WHITE, 600)
 	desc.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	desc.custom_minimum_size = Vector2(620, 0)
 	name_label.pivot_offset = Vector2(300, 25)
 	name_label.scale = Vector2(0.2, 0.2)
 	name_label.modulate.a = 0.0

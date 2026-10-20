@@ -39,6 +39,12 @@ natures + **choix par rang** (`nature_choices`), spécialité, techniques **appr
 
 ## Contenu (première passe, à ajuster)
 
+Natures, clans et Sub-jutsu viennent de la **bible de game design** (`docs/BIBLE_JUTSU.md`, export pandoc
+du .docx) : `python3 tools/bible_import.py` → `data/progression/bible.json` (noms, textes activation /
+mécanique / synergies / contre-jeu, tags de la bible, tags moteur déduits, coûts provisoires par rang :
+chakra 12/20/28/40/70, cooldown 6/10/14/20/32). Les profils sont nettoyés au chargement des ids qui
+n'existent plus (`ProgressionService.prune_unknown_content`, le choix du rang redevient libre).
+
 Source éditable : `tools/progression_content.py` → `data/progression/content.json` →
 `tools/build_progression_db.gd` → `progression_db.tres` (validé : 2 techniques par rang et par nature,
 1 par rang et par clan, 3 actifs + 1 passif par spécialité, Sub-jutsu en B/A/S, ids uniques).

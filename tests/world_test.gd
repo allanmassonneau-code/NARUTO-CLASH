@@ -18,10 +18,10 @@ func _ready() -> void:
 	Profiles.dev_reset()
 	Profiles.create("Testeur", &"konoha", ProgressionTypes.Origin.CLAN, &"clan_uchiha")
 	Profiles.request({"action": "choose_primary_nature", "nature": &"katon"})
-	Profiles.request({"action": "learn_jutsu", "jutsu": &"katon_d_goukakyuu"})
-	Profiles.request({"action": "learn_jutsu", "jutsu": &"katon_c_haisekishou"})
-	Profiles.request({"action": "learn_jutsu", "jutsu": &"clan_uchiha_d_sharingan"})
-	for id: StringName in [&"katon_d_goukakyuu", &"katon_c_haisekishou", &"clan_uchiha_d_sharingan"]:
+	Profiles.request({"action": "learn_jutsu", "jutsu": &"katon_d_braise_tracante"})
+	Profiles.request({"action": "learn_jutsu", "jutsu": &"katon_c_anneau_de_cendres"})
+	Profiles.request({"action": "learn_jutsu", "jutsu": &"clan_uchiha_d_sharingan_observation"})
+	for id: StringName in [&"katon_d_braise_tracante", &"katon_c_anneau_de_cendres", &"clan_uchiha_d_sharingan_observation"]:
 		Profiles.request({"action": "equip_jutsu", "jutsu": id})
 	Profiles.profile_updated.connect(_on_update)
 	_world = (load("res://world/world.tscn") as PackedScene).instantiate() as World

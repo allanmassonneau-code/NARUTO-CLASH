@@ -289,20 +289,29 @@ def slug(text):
     return "".join(c if c.isalnum() else "_" for c in t).strip("_").replace("__", "_")
 
 
-# Projection: these techniques launch the target into the air (it can't
-# act; attacking it again pursues it automatically, then it falls).
-LAUNCH = {
-    "futon_d_daitoppa", "futon_s_rasen_tatsumaki", "doton_b_doryuu_sou", "doton_a_iwa_gaeshi",
-    "clan_senju_d_pousse_de_bois", "clan_akimichi_b_poing_geant", "clan_kaguya_s_foret_d_os",
-    "clan_hozuki_b_bras_gonfle", "fighter_enchainement",
-}
-
-
 def jutsu(id_, name, desc, rank, tags, chakra, cd, passive=False):
-    if id_ in LAUNCH:
-        tags = tags + ["LAUNCH"]
     return {"id": id_, "name": name, "description": desc, "rank": rank, "tags": tags,
             "chakra_cost": chakra, "cooldown": cd, "passive": passive}
+
+
+def load_bible():
+    """Natures, clans and sub-jutsu from the design bible (tools/bible_import.py)."""
+    path = os.path.join(ROOT, "data", "progression", "bible.json")
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def bible_jutsu(j):
+    entry = jutsu(j["id"], j["name"], j["description"], j["rank"], j["tags"], j["chakra_cost"], j["cooldown"])
+    entry["design_tags"] = j["design_tags"]
+    parts = [j.get("activation", "")]
+    for label, key in (("Mécanique", "mechanic"), ("Synergies", "synergies"), ("Contre-jeu", "counter")):
+        if j.get(key):
+            parts.append(f"{label} : {j[key]}")
+    entry["details"] = "\n\n".join(parts)
+    return entry
 
 
 def build():
@@ -315,11 +324,24 @@ def build():
         "natures": [], "clans": [], "specializations": [], "tenketsu": [], "sub_jutsu": [],
         "rules": {"sub_jutsu_roll_ranks": ["B", "A", "S"], "max_equipped_jutsu": 6, "specialization_grants_skills": True},
     }
+    bible = load_bible()
     for nid, (name, desc, color, rows) in NATURES.items():
+        if bible:
+            kit = bible["natures"][nid]
+            data["natures"].append({"id": nid, "name": name, "description": desc, "color": color,
+                "identity": kit.get("identity", ""), "signature": kit.get("signature", ""),
+                "jutsu": [bible_jutsu(j) for j in kit["jutsu"]]})
+            continue
         data["natures"].append({"id": nid, "name": name, "description": desc, "color": color,
             "jutsu": [jutsu(f"{nid}_{r[0].lower()}_{r[1]}", r[2], r[3], r[0], r[4], r[5], r[6]) for r in rows]})
     for village, clans in CLANS.items():
         for cid, (name, desc, rows) in clans.items():
+            if bible:
+                kit = bible["clans"][cid]
+                data["clans"].append({"id": f"clan_{cid}", "name": kit["name"], "village": village, "description": desc,
+                    "identity": kit.get("identity", ""), "signature": kit.get("signature", ""),
+                    "jutsu": [bible_jutsu(j) for j in kit["jutsu"]]})
+                continue
             data["clans"].append({"id": f"clan_{cid}", "name": name, "village": village, "description": desc,
                 "jutsu": [jutsu(f"clan_{cid}_{rank.lower()}_{slug(r[0])}", r[0], r[1], rank, r[2], r[3], r[4])
                           for rank, r in zip("DCBAS", rows)]})
@@ -330,10 +352,15 @@ def build():
     for t in TENKETSU:
         data["tenketsu"].append({"id": f"tenketsu_{t[0]}", "name": t[1], "description": t[2], "cost": t[3],
             "prerequisites": [f"tenketsu_{p}" for p in t[4]], "modifiers": t[5], "position": t[6], "max_level": t[7]})
-    for s in SUB_JUTSU:
+    for s in ([] if bible else SUB_JUTSU):
         entry = jutsu(f"sub_{s[0].lower()}_{s[1]}", s[2], s[3], s[0], s[4], s[5], s[6])
         entry["weight"] = s[7]
         data["sub_jutsu"].append(entry)
+    if bible:
+        for j in bible["sub_jutsu"]:
+            entry = bible_jutsu(j)
+            entry["weight"] = 4
+            data["sub_jutsu"].append(entry)
     os.makedirs(os.path.join(ROOT, "data", "progression"), exist_ok=True)
     with open(os.path.join(ROOT, "data", "progression", "content.json"), "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=1)

@@ -29,9 +29,9 @@ func _ready() -> void:
 	Profiles.dev_reset()
 	Profiles.create("Testeur", &"konoha", ProgressionTypes.Origin.CLAN, &"clan_uchiha")
 	Profiles.request({"action": "choose_primary_nature", "nature": &"katon"})
-	Profiles.request({"action": "learn_jutsu", "jutsu": &"katon_d_goukakyuu"})
-	Profiles.request({"action": "equip_jutsu", "jutsu": &"katon_d_goukakyuu"})
-	Profiles.request({"action": "learn_jutsu", "jutsu": &"katon_c_haisekishou"})
+	Profiles.request({"action": "learn_jutsu", "jutsu": &"katon_d_braise_tracante"})
+	Profiles.request({"action": "equip_jutsu", "jutsu": &"katon_d_braise_tracante"})
+	Profiles.request({"action": "learn_jutsu", "jutsu": &"katon_c_anneau_de_cendres"})
 	_world = (load("res://world/world.tscn") as PackedScene).instantiate() as World
 	add_child(_world)
 	_player = _world.player
@@ -153,13 +153,13 @@ func _run() -> void:
 	_check(cd > 0.0, "technique on cooldown before the swap")
 	hp = _player.health.current_health
 	var chakra: float = energy.current_energy
-	Profiles.request({"action": "equip_jutsu_at", "jutsu": &"katon_c_haisekishou", "slot": 0})
-	_check(abilities.get_ability(&"j1").source_id == &"katon_c_haisekishou", "menu places a technique in slot 1")
+	Profiles.request({"action": "equip_jutsu_at", "jutsu": &"katon_c_anneau_de_cendres", "slot": 0})
+	_check(abilities.get_ability(&"j1").source_id == &"katon_c_anneau_de_cendres", "menu places a technique in slot 1")
 	_check(abilities.get_cooldown_left(&"j1") == 0.0, "the new technique is ready")
-	_check(abilities.technique_cooldown(&"katon_d_goukakyuu") > cd - 0.1, "swapped-out technique keeps its cooldown")
+	_check(abilities.technique_cooldown(&"katon_d_braise_tracante") > cd - 0.1, "swapped-out technique keeps its cooldown")
 	_check(is_equal_approx(_player.health.current_health, hp) and energy.current_energy >= chakra - 0.1, "swap keeps HP and chakra")
-	Profiles.request({"action": "equip_jutsu_at", "jutsu": &"katon_d_goukakyuu", "slot": 1})
-	_check(abilities.get_ability(&"j2").source_id == &"katon_d_goukakyuu" and abilities.get_cooldown_left(&"j2") > cd - 0.2,
+	Profiles.request({"action": "equip_jutsu_at", "jutsu": &"katon_d_braise_tracante", "slot": 1})
+	_check(abilities.get_ability(&"j2").source_id == &"katon_d_braise_tracante" and abilities.get_cooldown_left(&"j2") > cd - 0.2,
 		"cooldown follows the technique to its new slot")
 	var menu: CombatMenu = _world.combat_menu
 	menu.toggle()
@@ -168,7 +168,7 @@ func _run() -> void:
 	_check(not menu.is_open(), "and closes it")
 
 	# Projection: launch, automatic aerial pursuit, fall.
-	var launcher: AbilityData = JutsuAbilityFactory.build(Profiles.db.get_jutsu(&"futon_d_daitoppa"), Profiles.db)
+	var launcher: AbilityData = JutsuAbilityFactory.build(Profiles.db.get_jutsu(&"katon_c_comete_incendiaire"), Profiles.db)
 	_check(launcher.launch_duration > 0.0, "LAUNCH-tagged techniques project the target")
 	var mob: CombatCharacter = _world.mobs[0]
 	mob.controls_enabled = false

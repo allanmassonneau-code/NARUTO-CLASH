@@ -6,6 +6,9 @@ extends Resource
 @export var display_name: String = ""
 @export var village_id: StringName
 @export_multiline var description: String = ""
+## Design bible: kit identity and signature mechanic.
+@export_multiline var identity: String = ""
+@export_multiline var signature: String = ""
 @export var icon: Texture2D
 @export var jutsu: Array[JutsuData] = []
 @export var placeholder: bool = false

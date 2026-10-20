@@ -14,6 +14,10 @@ extends Resource
 @export var chakra_cost: float = 0.0
 @export var cooldown: float = 0.0
 @export var tags: Array[StringName] = []
+## Design-bible tags shown to the player (French, e.g. "Projectile, Marque").
+@export var design_tags: PackedStringArray = []
+## Full design text: activation, real mechanic, synergies, counter-play.
+@export_multiline var details: String = ""
 ## Other techniques (ids) that must be learned first.
 @export var requirements: Array[StringName] = []
 @export var passive: bool = false

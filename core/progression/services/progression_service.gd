@@ -166,6 +166,25 @@ func learn_jutsu(profile: CharacterProfile, jutsu_id: StringName) -> Progression
 
 
 ## Equipping is separate from owning: only learned techniques, limited slots.
+## Drops techniques that no longer exist in the content (renamed / removed
+## when the design bible changes). Their rank choices become free again.
+## Returns true if the profile changed.
+func prune_unknown_content(profile: CharacterProfile) -> bool:
+	var changed: bool = false
+	for list: Array[StringName] in [profile.learned_jutsu, profile.equipped_jutsu, profile.owned_sub_jutsu]:
+		for id: StringName in list.duplicate():
+			if db.get_jutsu(id) == null:
+				list.erase(id)
+				changed = true
+	for nature: StringName in profile.nature_choices:
+		var per_rank: Dictionary = profile.nature_choices[nature]
+		for rank: int in per_rank.keys():
+			if db.get_jutsu(per_rank[rank]) == null:
+				per_rank.erase(rank)
+				changed = true
+	return changed
+
+
 func equip_jutsu(profile: CharacterProfile, jutsu_id: StringName) -> ProgressionResult:
 	if not profile.knows(jutsu_id):
 		return ProgressionResult.fail(&"NOT_LEARNED")
