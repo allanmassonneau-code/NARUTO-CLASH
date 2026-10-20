@@ -40,6 +40,10 @@ const CONCENTRATE_HIT_LOCKOUT: float = 0.6
 const JUMP_DURATION: float = 0.55
 const JUMP_HEIGHT: float = 1.6
 const JUMP_COOLDOWN: float = 0.15
+## Stamina: spent by basic attack stances, regenerates after a short pause.
+const MAX_STAMINA: float = 100.0
+const STAMINA_REGEN: float = 35.0
+const STAMINA_REGEN_DELAY: float = 0.6
 ## Projection: launched fighters rise to LAUNCH_HEIGHT, each hit taken in the
 ## air keeps them up a little longer (capped), then they fall.
 const LAUNCH_HEIGHT: float = 2.6
@@ -72,6 +76,8 @@ var _concentrate_lock: float = 0.0
 ## Time left in the air (> 0 while jumping).
 var air_time: float = 0.0
 var _jump_cooldown: float = 0.0
+var stamina: float = MAX_STAMINA
+var _stamina_delay: float = 0.0
 ## Time since the current launch started (projection arc).
 var _launch_elapsed: float = 0.0
 var _was_launched: bool = false
@@ -158,6 +164,7 @@ func _physics_process(delta: float) -> void:
 	_tick_substitution()
 	abilities.tick(delta, intent if can_act and not guarding and not concentrating else null)
 	energy.tick(delta, CONCENTRATE_REGEN_MULTIPLIER if concentrating else 1.0)
+	_tick_stamina(delta)
 	var wish: Vector3 = intent.move_direction if intent != null and status.can_move() and not concentrating else Vector3.ZERO
 	movement.speed_multiplier = abilities.get_move_multiplier() * status.speed_multiplier() * (GUARD_MOVE_MULTIPLIER if guarding else 1.0)
 	_tick_status_effects(delta)
@@ -221,6 +228,20 @@ func _tick_jump(delta: float, intent: GameplayIntent, can_act: bool) -> void:
 	if intent != null and intent.jump_pressed and can_act and status.can_move() and not guarding \
 			and not concentrating and not abilities.is_casting() and _jump_cooldown <= 0.0:
 		air_time = JUMP_DURATION
+
+
+func spend_stamina(cost: float) -> void:
+	if cost <= 0.0:
+		return
+	stamina = maxf(0.0, stamina - cost)
+	_stamina_delay = STAMINA_REGEN_DELAY
+
+
+func _tick_stamina(delta: float) -> void:
+	if _stamina_delay > 0.0:
+		_stamina_delay -= delta
+	else:
+		stamina = minf(MAX_STAMINA, stamina + STAMINA_REGEN * delta)
 
 
 func is_airborne() -> bool:
@@ -550,6 +571,8 @@ func reset_for_round(spawn: Transform3D) -> void:
 	_launch_elapsed = 0.0
 	_was_launched = false
 	pursuing = null
+	stamina = MAX_STAMINA
+	_stamina_delay = 0.0
 	_disarm_substitution()
 	_passive_used = false
 	_passive_timer = 0.0
@@ -570,7 +593,7 @@ func reset_for_round(spawn: Transform3D) -> void:
 
 ## Floats per fighter in a snapshot (see write_snapshot for the layout).
 static func snapshot_stride() -> int:
-	return 11 + StatusController.Type.size() + AbilityController.SLOTS.size() + 5 + 3 + 4 + 4 + 3 + 2
+	return 11 + StatusController.Type.size() + AbilityController.SLOTS.size() + 5 + 3 + 4 + 4 + 3 + 3
 
 
 ## Server: appends this fighter's state to a snapshot buffer.
@@ -597,7 +620,7 @@ func write_snapshot(out: PackedFloat32Array, acked_seq: int) -> void:
 	else:
 		out.append_array([-1.0, -1.0, 0.0, 0.0])
 	out.append_array([1.0 if guarding else 0.0, parry_flash, guard_break_flash])
-	out.append_array([1.0 if concentrating else 0.0, air_time])
+	out.append_array([1.0 if concentrating else 0.0, air_time, stamina])
 
 
 ## Client: applies the state written by write_snapshot.
@@ -641,6 +664,7 @@ func apply_snapshot(data: PackedFloat32Array, o: int) -> void:
 	r += 3
 	concentrating = data[r] > 0.5
 	air_time = data[r + 1]
+	stamina = data[r + 2]
 	abilities.sync_state(phase, slot_index, elapsed, cooldowns)
 	if net_mode == NetMode.PUPPET:
 		facing.set_direction(Vector3(sin(angle), 0.0, cos(angle)))

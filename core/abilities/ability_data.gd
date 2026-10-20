@@ -46,6 +46,8 @@ enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL, SUMMON
 @export_category("Chakra Energy")
 @export var energy_cost: float = 0.0
 @export var energy_gain_on_hit: float = 5.0
+## Stamina spent by this hit (basic attack stances).
+@export var stamina_cost: float = 0.0
 
 @export_category("Hit")
 @export var damage: float = 0.0

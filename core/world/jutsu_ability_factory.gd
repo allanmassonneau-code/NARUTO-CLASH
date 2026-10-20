@@ -117,30 +117,52 @@ static func _color(jutsu: JutsuData, db: ProgressionDatabase) -> Color:
 	return Color.WHITE
 
 
-## Basic taijutsu string every shinobi has (LMB).
+## Taijutsu stance (LMB): a string of hits; each one costs stamina, the
+## last one stuns and pushes. Hold LMB to keep the string going.
+## Per hit: [anim, damage, startup, recovery, range, lunge, stamina].
+const TAIJUTSU_STANCE: Array = [
+	[&"jab", 5.0, 0.08, 0.13, 1.9, 0.5, 13.0],
+	[&"hook", 5.0, 0.08, 0.13, 1.9, 0.5, 13.0],
+	[&"jab", 6.0, 0.08, 0.14, 1.9, 0.5, 13.0],
+	[&"hook", 6.0, 0.09, 0.15, 2.0, 0.6, 13.0],
+	[&"kick", 12.0, 0.14, 0.35, 2.3, 1.0, 15.0],
+]
+const STANCE_FINISHER_STUN: float = 0.6
+const STANCE_FINISHER_KNOCKBACK: float = 11.0
+
+
 static func taijutsu() -> AbilityData:
+	return stance("Taijutsu", TAIJUTSU_STANCE, Color(1.0, 0.85, 0.6))
+
+
+## Builds a basic attack stance from its hit table (see TAIJUTSU_STANCE).
+static func stance(display_name: String, table: Array, color: Color) -> AbilityData:
 	var hits: Array[AbilityData] = []
-	for i in 3:
+	for i in table.size():
+		var row: Array = table[i]
+		var last: bool = i == table.size() - 1
 		var a := AbilityData.new()
-		a.display_name = "Taijutsu"
+		a.display_name = display_name
 		a.kind = AbilityData.Kind.MELEE_ARC
-		a.color = Color(1.0, 0.85, 0.6)
-		a.startup_time = 0.08 if i < 2 else 0.12
+		a.color = color
+		a.anim = row[0]
+		a.damage = row[1]
+		a.startup_time = row[2]
 		a.active_time = 0.05
-		a.recovery_time = 0.14 if i < 2 else 0.3
-		a.max_range = 1.9 if i < 2 else 2.2
+		a.recovery_time = row[3]
+		a.max_range = row[4]
+		a.lunge_distance = row[5]
+		a.stamina_cost = row[6]
 		a.arc_degrees = 100.0
-		a.damage = 6.0 if i < 2 else 11.0
-		a.lunge_distance = 0.5 if i < 2 else 0.9
-		a.knockback_speed = 0.0 if i < 2 else 9.0
+		a.stun_duration = STANCE_FINISHER_STUN if last else 0.0
+		a.knockback_speed = STANCE_FINISHER_KNOCKBACK if last else 0.0
 		a.cast_move_multiplier = 0.55
 		a.recovery_move_multiplier = 0.85
 		a.combo_window = 0.45
 		a.energy_gain_on_hit = 6.0
-		a.anim = [&"jab", &"hook", &"kick"][i]
+		if i > 0:
+			hits[i - 1].combo_next = a
 		hits.append(a)
-	hits[0].combo_next = hits[1]
-	hits[1].combo_next = hits[2]
 	return hits[0]
 
 

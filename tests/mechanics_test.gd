@@ -198,6 +198,39 @@ func _run() -> void:
 	_check(_player.pursuing == null and _player.jump_height() == 0.0, "the pursuer lands too")
 	mob.controls_enabled = true
 
+	# Taijutsu stance: N hits costing stamina, finisher stuns and pushes.
+	await _wait(1.0)
+	var step: Vector2i = _player.abilities.combo_step(&"lmb")
+	_check(step == Vector2i(0, JutsuAbilityFactory.TAIJUTSU_STANCE.size()), "stance string of %d hits" % step.y)
+	mob.controls_enabled = false
+	mob.health.invulnerable_debug = true
+	mob.status.clear_all()
+	mob.global_position = _player.global_position + Vector3(1.6, 0.0, 0.0)
+	_input.intent.aim_point = mob.global_position
+	_input.intent.has_aim_point = true
+	_input.intent.held_slots.append(&"lmb")
+	var stunned_at: int = -1
+	var max_step: int = 0
+	for frame in 150:
+		await get_tree().physics_frame
+		max_step = maxi(max_step, _player.abilities.combo_step(&"lmb").x)
+		if stunned_at < 0 and mob.status.has_status(StatusController.Type.STUN):
+			stunned_at = frame
+			_check(mob.movement.is_forced(), "the last hit pushes")
+		mob.global_position = _player.global_position + Vector3(1.6, 0.0, 0.0) if stunned_at < 0 else mob.global_position
+	_check(stunned_at > 0 and max_step == step.y, "the last hit of the string stuns (after %d hits)" % max_step)
+	for frame in 240:
+		await get_tree().physics_frame
+		mob.global_position = _player.global_position + Vector3(1.6, 0.0, 0.0)
+		if _player.abilities.unavailable_reason(&"lmb") == "ENDURANCE":
+			break
+	_check(_player.abilities.unavailable_reason(&"lmb") == "ENDURANCE", "attacking drains stamina until empty")
+	_input.intent.held_slots.clear()
+	await _wait(3.5)
+	_check(is_equal_approx(_player.stamina, CombatCharacter.MAX_STAMINA), "stamina regenerates")
+	mob.health.invulnerable_debug = false
+	mob.controls_enabled = true
+
 	Profiles.dev_reset()
 	print("RESULT: %s (%d failures)" % ["PASS" if _failures == 0 else "FAIL", _failures])
 	get_tree().quit(0 if _failures == 0 else 1)

@@ -14,7 +14,7 @@ Options: **O** (or the gear button) for volumes, mute, spatial sound, fullscreen
 |---|---|
 | WASD / ZQSD (physical keys) | Move |
 | Mouse | Aim / facing |
-| LMB | Taijutsu string (hold to keep attacking) |
+| LMB | Taijutsu stance: a 5-hit string (hold to keep attacking). Each hit costs stamina (yellow bar, regenerates after a short pause); the 5th hit stuns and pushes. Slot pips show the string progress |
 | 1 – 6 | Equipped techniques (cost chakra + cooldown) |
 | Shift | Universal dash (brief invulnerability, 3.5 s cooldown) |
 | Space | Jump (clears ground areas) |

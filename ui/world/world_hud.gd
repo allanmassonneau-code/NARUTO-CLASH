@@ -11,7 +11,7 @@ const SLOT_KEYS: Dictionary = {
 }
 ## Bar order: basic attack, dash, substitution, then the six techniques.
 const BAR: Array[StringName] = [&"lmb", &"space", &"q", &"j1", &"j2", &"j3", &"j4", &"j5", &"j6"]
-const REASON_COLORS: Dictionary = {"CHAKRA": Color(0.45, 0.7, 1.0), "BLOQUÉ": Color(1.0, 0.5, 0.4), "ACTIVE": Color(1.0, 0.85, 0.4)}
+const REASON_COLORS: Dictionary = {"CHAKRA": Color(0.45, 0.7, 1.0), "BLOQUÉ": Color(1.0, 0.5, 0.4), "ENDURANCE": Color(1.0, 0.8, 0.3), "ACTIVE": Color(1.0, 0.85, 0.4)}
 
 var _world: World
 var _player: CombatCharacter
@@ -25,6 +25,7 @@ var _hp: HealthBar
 var _hp_text: Label
 var _energy: ProgressBar
 var _energy_text: Label
+var _stamina: ProgressBar
 var _concentrate: Label
 var _slots_row: HBoxContainer
 var _slots: Dictionary = {}
@@ -66,6 +67,7 @@ func _process(_delta: float) -> void:
 	_energy.value = energy.current_energy
 	_energy_text.text = "CHAKRA %d / %d" % [floori(energy.current_energy), roundi(energy.max_energy)]
 	_concentrate.visible = _player.concentrating
+	_stamina.value = _player.stamina
 	for slot: StringName in _slots:
 		var w: Dictionary = _slots[slot]
 		var a: AbilityData = _player.abilities.get_ability(slot)
@@ -77,6 +79,9 @@ func _process(_delta: float) -> void:
 			reason = ""  # the sweep already shows it
 		if slot == &"q" and _player.substitution_armed:
 			reason = "ACTIVE"
+		elif slot == &"lmb" and reason == "":
+			var step: Vector2i = _player.abilities.combo_step(slot)
+			reason = "●".repeat(step.x) + "○".repeat(step.y - step.x)
 		var reason_label: Label = w.reason
 		reason_label.text = reason
 		reason_label.add_theme_color_override("font_color", REASON_COLORS.get(reason, Color.WHITE))
@@ -184,6 +189,9 @@ func _build() -> void:
 	_energy_text.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_energy_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_energy_text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_stamina = UiStyle.bar(fcol, Color(1.0, 0.8, 0.3), 5, 2)
+	_stamina.max_value = CombatCharacter.MAX_STAMINA
+	_stamina.tooltip_text = "Endurance"
 	_slots_row = HBoxContainer.new()
 	_slots_row.add_theme_constant_override("separation", 8)
 	fcol.add_child(_slots_row)

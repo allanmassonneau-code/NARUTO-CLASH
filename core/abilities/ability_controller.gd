@@ -220,10 +220,27 @@ func unavailable_reason(slot: StringName) -> String:
 		return "RECHARGE"
 	if not character.energy.can_afford(ability.energy_cost):
 		return "CHAKRA"
+	if ability.stamina_cost > character.stamina:
+		return "ENDURANCE"
 	if character.is_dead() or not character.status.can_act() or not character.status.can_cast(slot) \
 			or character.concentrating or character.guarding:
 		return "BLOQUÉ"
 	return ""
+
+
+## Position in a combo string: x = hits already thrown (the next one is x + 1),
+## y = number of hits in the string.
+func combo_step(slot: StringName) -> Vector2i:
+	var chain: Array[AbilityData] = []
+	var a: AbilityData = get_base_ability(slot)
+	while a != null and chain.size() < 16:
+		chain.append(a)
+		a = a.combo_next
+	var next: AbilityData = _combo_next.get(slot)
+	var done: int = chain.find(next) if next != null else 0
+	if current_slot == slot and current != null:
+		done = chain.find(current) + 1
+	return Vector2i(maxi(done, 0), chain.size())
 
 
 func is_facing_locked() -> bool:
@@ -305,6 +322,8 @@ func try_cast(slot: StringName) -> bool:
 	if not character.status.can_act() or not character.status.can_cast(slot) or not is_ready(slot):
 		return false
 	if ability.kind == AbilityData.Kind.DASH and character.status.has_status(StatusController.Type.ROOT):
+		return false
+	if ability.stamina_cost > character.stamina:
 		return false
 	_combo_next.erase(slot)
 	_combo_left.erase(slot)
@@ -390,6 +409,7 @@ func _activate() -> void:
 	if not character.energy.consume(current.energy_cost):
 		_clear_cast()
 		return
+	character.spend_stamina(current.stamina_cost)
 	phase = Phase.ACTIVE
 	phase_elapsed = 0.0
 	cast_direction = character.facing.facing_direction
