@@ -3,7 +3,7 @@ extends Node
 ## Single source of truth for every status on a character.
 ## Ticked by the owning character inside its physics step.
 
-enum Type { STUN, ROOT, IMMATERIAL, COUNTER, SLOW, HASTE, EMPOWER, REGEN, MARK, SILENCE, INCAPACITATE, BURN, DRAIN, LOCK, SEAL }
+enum Type { STUN, ROOT, IMMATERIAL, COUNTER, SLOW, HASTE, EMPOWER, REGEN, MARK, SILENCE, INCAPACITATE, BURN, DRAIN, LOCK, SEAL, LAUNCHED }
 
 const SLOW_MULTIPLIER: float = 0.6
 const HASTE_MULTIPLIER: float = 1.3
@@ -101,11 +101,13 @@ func tick(delta: float) -> void:
 
 
 func can_move() -> bool:
-	return not has_status(Type.STUN) and not has_status(Type.ROOT) and not has_status(Type.INCAPACITATE)
+	return not has_status(Type.STUN) and not has_status(Type.ROOT) and not has_status(Type.INCAPACITATE) \
+		and not has_status(Type.LAUNCHED)
 
 
+## Launched (projection) fighters are helpless in the air until they land.
 func can_act() -> bool:
-	return not has_status(Type.STUN) and not has_status(Type.INCAPACITATE)
+	return not has_status(Type.STUN) and not has_status(Type.INCAPACITATE) and not has_status(Type.LAUNCHED)
 
 
 ## Silenced fighters can only use their basic attack.

@@ -161,6 +161,11 @@ enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL, SUMMON
 ## DASH: swap places with the clone instead of dashing when one is out.
 @export var swap_with_clone: bool = false
 
+@export_category("Projection")
+## > 0: the hit launches the target into the air for this long (it can't act;
+## attacks pursue it automatically and keep it up, then it falls).
+@export var launch_duration: float = 0.0
+
 @export_category("Substitution")
 ## SUBSTITUTION: radius of the zone the caster must stay in for the
 ## substitution to stay armed.

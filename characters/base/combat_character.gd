@@ -40,6 +40,18 @@ const CONCENTRATE_HIT_LOCKOUT: float = 0.6
 const JUMP_DURATION: float = 0.55
 const JUMP_HEIGHT: float = 1.6
 const JUMP_COOLDOWN: float = 0.15
+## Projection: launched fighters rise to LAUNCH_HEIGHT, each hit taken in the
+## air keeps them up a little longer (capped), then they fall.
+const LAUNCH_HEIGHT: float = 2.6
+const LAUNCH_RISE: float = 0.2
+const LAUNCH_FALL: float = 0.3
+const JUGGLE_EXTEND: float = 0.45
+const JUGGLE_MAX: float = 3.0
+const LANDING_DAMAGE: float = 5.0
+const LANDING_STUN: float = 0.4
+## Melee attacks pursue a launched enemy within this range automatically.
+const PURSUIT_RANGE: float = 7.0
+const PURSUIT_BREAK: float = 4.0
 
 @export var data: CharacterData
 @export var controller: IntentSource
@@ -60,6 +72,11 @@ var _concentrate_lock: float = 0.0
 ## Time left in the air (> 0 while jumping).
 var air_time: float = 0.0
 var _jump_cooldown: float = 0.0
+## Time since the current launch started (projection arc).
+var _launch_elapsed: float = 0.0
+var _was_launched: bool = false
+## Launched enemy we are pursuing in the air (null when grounded).
+var pursuing: CombatCharacter
 ## Substitution (Kawarimi): while armed and inside its zone, the next hit
 ## is negated and teleports us back to the anchor.
 var substitution_armed: bool = false
@@ -128,6 +145,7 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector3.ZERO
 		return
 	status.tick(delta)
+	_tick_launch(delta)
 	var intent: GameplayIntent = null
 	if controls_enabled and controller != null:
 		intent = controller.poll_intent()
@@ -206,11 +224,97 @@ func _tick_jump(delta: float, intent: GameplayIntent, can_act: bool) -> void:
 
 
 func is_airborne() -> bool:
-	return air_time > 0.0
+	return air_time > 0.0 or is_launched() or is_instance_valid(pursuing)
 
 
-## Visual height of the jump arc (presentation).
+func is_launched() -> bool:
+	return status.has_status(StatusController.Type.LAUNCHED)
+
+
+## Projection: helpless in the air for `duration`, then falls.
+func launch(duration: float) -> void:
+	status.apply_status(StatusController.Type.LAUNCHED, duration)
+	_launch_elapsed = 0.0
+	_was_launched = true
+	air_time = 0.0
+	concentrating = false
+	guarding = false
+	pursuing = null
+	abilities.interrupt()
+	movement.stop()
+
+
+## A hit taken in the air keeps us up a little longer (capped).
+func _extend_launch() -> void:
+	var left: float = status.get_remaining(StatusController.Type.LAUNCHED)
+	var extended: float = minf(left + JUGGLE_EXTEND, JUGGLE_MAX - _launch_elapsed)
+	if extended > left:
+		status.apply_status(StatusController.Type.LAUNCHED, extended)
+
+
+func _tick_launch(delta: float) -> void:
+	if is_launched():
+		_launch_elapsed += delta
+	elif _was_launched:
+		_was_launched = false
+		_land()
+	if is_instance_valid(pursuing) and (not pursuing.is_launched() or pursuing.is_dead()
+			or HitQuery.flat(pursuing.global_position - global_position).length() > PURSUIT_BREAK):
+		pursuing = null
+
+
+## End of a projection: thrown to the ground (small damage, short stun).
+func _land() -> void:
+	if is_dead():
+		return
+	CombatFx.ring(self, global_position, 1.4, Color(0.75, 0.65, 0.5), 0.35)
+	health.apply_damage(LANDING_DAMAGE)
+	if not is_dead():
+		status.apply_status(StatusController.Type.STUN, LANDING_STUN)
+
+
+## Called when a melee attack comes out: if a launched enemy is in reach,
+## blink next to it and follow it in the air. Returns true if pursuing.
+func try_pursue(ctrl: AbilityController) -> bool:
+	var target: CombatCharacter = _pursuit_target(ctrl.cast_direction)
+	if target == null:
+		return false
+	var to: Vector3 = HitQuery.flat(target.global_position - global_position)
+	var dir: Vector3 = to.normalized() if to.length() > 0.05 else ctrl.cast_direction
+	if to.length() > 1.3:
+		CombatFx.ring(self, global_position, 0.8, Color(0.8, 0.9, 1.0), 0.25)
+		global_position = target.global_position - dir * 1.1
+		global_position.y = 0.0
+	facing.set_direction(dir)
+	ctrl.cast_direction = dir
+	pursuing = target
+	air_time = 0.0
+	return true
+
+
+func _pursuit_target(direction: Vector3) -> CombatCharacter:
+	var best: CombatCharacter = null
+	var best_distance: float = PURSUIT_RANGE
+	for node: Node in get_tree().get_nodes_in_group(&"fighters"):
+		var other := node as CombatCharacter
+		if other == null or other == self or other.team == team or other.is_dead() or not other.is_launched():
+			continue
+		var to: Vector3 = HitQuery.flat(other.global_position - global_position)
+		var d: float = to.length()
+		if d > best_distance or (d > 2.5 and direction.dot(to / d) < 0.35):
+			continue  # far targets must be roughly where we aim
+		best = other
+		best_distance = d
+	return best
+
+
+## Visual height of the jump / projection arc (presentation).
 func jump_height() -> float:
+	if is_launched():
+		var left: float = status.get_remaining(StatusController.Type.LAUNCHED)
+		return LAUNCH_HEIGHT * clampf(_launch_elapsed / LAUNCH_RISE, 0.0, 1.0) * clampf(left / LAUNCH_FALL, 0.0, 1.0)
+	if is_instance_valid(pursuing):
+		return pursuing.jump_height()
 	if air_time <= 0.0:
 		return 0.0
 	var t: float = 1.0 - air_time / JUMP_DURATION
@@ -296,6 +400,17 @@ func receive_hit(hit: HitData) -> HitData.Result:
 		if a.bonus_vs_rooted > 0.0 and status.has_status(StatusController.Type.ROOT):
 			damage += a.bonus_vs_rooted
 			status.remove_status(StatusController.Type.ROOT)
+	# Projection: a launched fighter stays up (no stun / knockback while in
+	# the air); a launch hit sends a grounded one up.
+	var aerial: bool = false
+	if is_launched():
+		_extend_launch()
+		aerial = true
+	elif a != null and a.launch_duration > 0.0 and not data.launch_immune:
+		launch(a.launch_duration)
+		aerial = true
+	if aerial:
+		stun = 0.0
 	if concentrating and damage > 0.0:
 		damage *= CONCENTRATE_DAMAGE_TAKEN
 		concentrating = false
@@ -312,7 +427,7 @@ func receive_hit(hit: HitData) -> HitData.Result:
 		abilities.interrupt()
 	if hit.root_duration > 0.0:
 		status.apply_status(StatusController.Type.ROOT, hit.root_duration)
-	if hit.knockback_velocity != Vector3.ZERO:
+	if hit.knockback_velocity != Vector3.ZERO and not aerial:
 		abilities.interrupt()
 		movement.apply_forced_motion(hit.knockback_velocity, hit.knockback_duration, true, true)
 		_slam_source = hit.source
@@ -432,6 +547,9 @@ func reset_for_round(spawn: Transform3D) -> void:
 	_concentrate_lock = 0.0
 	air_time = 0.0
 	_jump_cooldown = 0.0
+	_launch_elapsed = 0.0
+	_was_launched = false
+	pursuing = null
 	_disarm_substitution()
 	_passive_used = false
 	_passive_timer = 0.0

@@ -8,7 +8,9 @@ static func activate(ctrl: AbilityController, a: AbilityData) -> void:
 	_apply_self_buffs(c, a)
 	match a.kind:
 		AbilityData.Kind.MELEE_ARC:
-			if a.lunge_distance > 0.0:
+			if c.try_pursue(ctrl):
+				pass  # blinked next to a launched enemy: no lunge
+			elif a.lunge_distance > 0.0:
 				c.movement.apply_forced_motion(ctrl.cast_direction * (a.lunge_distance / 0.08), 0.08, true)
 			var hits: Array[CombatCharacter] = []
 			ctrl.pulse_count = 1

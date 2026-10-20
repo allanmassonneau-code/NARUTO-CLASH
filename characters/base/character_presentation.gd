@@ -33,6 +33,7 @@ var _was_immaterial: bool = false
 var _was_parry: bool = false
 var _was_silenced: bool = false
 var _was_rooted: bool = false
+var _was_launched: bool = false
 var _was_genjutsu: bool = false
 ## The fighter this machine controls (hitstop / feedback when it's involved).
 static var local_player: CombatCharacter
@@ -121,7 +122,9 @@ func _process(delta: float) -> void:
 	if _character.concentrating and pose == &"":
 		pose = &"seal:windup"
 		tint = Color(0.35, 0.65, 1.0, 0.18 + 0.1 * sin(Time.get_ticks_msec() * 0.012))
-	if _character.is_airborne() and pose == &"" and not abilities.is_casting():
+	if _character.is_launched():
+		pose = &"stunned:"
+	elif _character.is_airborne() and pose == &"" and not abilities.is_casting():
 		pose = &"leap:strike"
 	if abilities.is_casting() and pose == &"":
 		var a: AbilityData = abilities.current
@@ -136,7 +139,7 @@ func _process(delta: float) -> void:
 		tint = Color(1.0, 0.15, 0.15, 0.6)
 	var planar_speed: float = Vector2(_character.velocity.x, _character.velocity.z).length()
 	model.animate(delta, planar_speed, pose, tint, fade)
-	visual_pivot.rotation.x = deg_to_rad(-85.0) if _character.is_dead() else 0.0
+	visual_pivot.rotation.x = deg_to_rad(-85.0) if _character.is_dead() else (deg_to_rad(-35.0) if _character.is_launched() else 0.0)
 	visual_pivot.position.y = 0.25 if _character.is_dead() else _character.jump_height()
 	team_ring.visible = not _character.is_dead()
 	counter_bubble.visible = status.has_status(StatusController.Type.COUNTER)
@@ -407,6 +410,10 @@ func _audio_cues() -> void:
 	if rooted and not _was_rooted:
 		_word("ROOTED", Color(0.6, 1.0, 0.45))
 	_was_rooted = rooted
+	var launched: bool = status.has_status(StatusController.Type.LAUNCHED)
+	if launched and not _was_launched:
+		_word("PROJETÉ", Color(1.0, 0.7, 0.3))
+	_was_launched = launched
 	var genjutsu: bool = status.has_status(StatusController.Type.INCAPACITATE)
 	if genjutsu and not _was_genjutsu:
 		_word("GENJUTSU", Color(0.85, 0.4, 1.0))

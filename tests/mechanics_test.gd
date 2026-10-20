@@ -167,6 +167,37 @@ func _run() -> void:
 	menu.toggle()
 	_check(not menu.is_open(), "and closes it")
 
+	# Projection: launch, automatic aerial pursuit, fall.
+	var launcher: AbilityData = JutsuAbilityFactory.build(Profiles.db.get_jutsu(&"futon_d_daitoppa"), Profiles.db)
+	_check(launcher.launch_duration > 0.0, "LAUNCH-tagged techniques project the target")
+	var mob: CombatCharacter = _world.mobs[0]
+	mob.controls_enabled = false
+	mob.global_position = _player.global_position + Vector3(3.0, 0.0, 0.0)
+	var mob_hp: float = mob.health.current_health
+	var launch_hit := HitData.new()
+	launch_hit.source = _player
+	launch_hit.ability = launcher
+	launch_hit.damage = 5.0
+	mob.receive_hit(launch_hit)
+	_check(mob.is_launched() and not mob.status.can_act(), "launched target can't act")
+	await _wait(0.3)
+	_check(mob.jump_height() > 2.0, "launched target is up in the air (%.1f)" % mob.jump_height())
+	var left: float = mob.status.get_remaining(StatusController.Type.LAUNCHED)
+	_input.intent.aim_point = mob.global_position
+	_input.intent.has_aim_point = true
+	_input.pressed.append(&"lmb")
+	await _wait(0.12)
+	_check(_player.pursuing == mob, "attacking pursues the launched target automatically")
+	_check(HitQuery.flat(_player.global_position).distance_to(HitQuery.flat(mob.global_position)) < 1.6, "pursuit blinks next to it")
+	_check(_player.jump_height() > 1.5, "the pursuer follows it in the air")
+	_check(mob.status.get_remaining(StatusController.Type.LAUNCHED) > left - 0.12 + 0.2, "hits in the air keep it up")
+	await _wait(3.2)
+	_check(not mob.is_launched() and mob.jump_height() == 0.0, "it falls back down")
+	_check(mob.status.has_status(StatusController.Type.STUN) or mob.health.current_health <= mob_hp - 5.0 - CombatCharacter.LANDING_DAMAGE,
+		"landing hurts")
+	_check(_player.pursuing == null and _player.jump_height() == 0.0, "the pursuer lands too")
+	mob.controls_enabled = true
+
 	Profiles.dev_reset()
 	print("RESULT: %s (%d failures)" % ["PASS" if _failures == 0 else "FAIL", _failures])
 	get_tree().quit(0 if _failures == 0 else 1)

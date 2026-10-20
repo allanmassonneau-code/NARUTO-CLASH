@@ -55,6 +55,7 @@ static func build(mob_id: StringName) -> CharacterData:
 			data.q = _area("Dragon de foudre", 30.0, 10.0, 3.2, Color(0.6, 0.85, 1.0))
 			data.e = _dash("Shunshin assassin", 18.0, 7.0)
 			data.space = JutsuAbilityFactory.shunshin()
+			data.launch_immune = true
 	return data
 
 

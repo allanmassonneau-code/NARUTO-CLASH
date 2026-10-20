@@ -13,6 +13,8 @@ extends Resource
 @export var max_chakra: float = 0.0
 ## Chakra regenerated per second in chakra mode.
 @export var chakra_regen: float = 0.0
+## Can't be launched by projection techniques (bosses).
+@export var launch_immune: bool = false
 @export var movement: MovementData
 ## Passive id handled by CombatCharacter ("kurama"...), empty = none.
 @export var passive: StringName = &""

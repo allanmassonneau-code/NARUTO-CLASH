@@ -289,7 +289,18 @@ def slug(text):
     return "".join(c if c.isalnum() else "_" for c in t).strip("_").replace("__", "_")
 
 
+# Projection: these techniques launch the target into the air (it can't
+# act; attacking it again pursues it automatically, then it falls).
+LAUNCH = {
+    "futon_d_daitoppa", "futon_s_rasen_tatsumaki", "doton_b_doryuu_sou", "doton_a_iwa_gaeshi",
+    "clan_senju_d_pousse_de_bois", "clan_akimichi_b_poing_geant", "clan_kaguya_s_foret_d_os",
+    "clan_hozuki_b_bras_gonfle", "fighter_enchainement",
+}
+
+
 def jutsu(id_, name, desc, rank, tags, chakra, cd, passive=False):
+    if id_ in LAUNCH:
+        tags = tags + ["LAUNCH"]
     return {"id": id_, "name": name, "description": desc, "rank": rank, "tags": tags,
             "chakra_cost": chakra, "cooldown": cd, "passive": passive}
 

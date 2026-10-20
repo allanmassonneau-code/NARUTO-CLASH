@@ -88,6 +88,8 @@ static func build(jutsu: JutsuData, db: ProgressionDatabase) -> AbilityData:
 			a.root_duration = 0.8 + rank * 0.15
 		else:
 			a.stun_duration = 0.5 + rank * 0.1
+	if tags.has(&"LAUNCH"):
+		a.launch_duration = 1.0 + rank * 0.1
 	if tags.has(&"DEBUFF"):
 		a.slow_duration = 1.5
 	if tags.has(&"DOT"):
