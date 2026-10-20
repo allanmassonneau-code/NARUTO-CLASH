@@ -70,6 +70,13 @@ sillage des projectiles, couches des zones / objets, liens texturés (fils, cha�
 gameplay restent en contour discret sous les VFX. Direction validée : intensité « fidèle SS », couleurs SS,
 Hakumei = clan assassin araignée (toiles), Hôki = chimie, Karatachi = corail, Roran = vent d'éventail.
 
+## Icônes de sorts Shinobi Striker
+
+`_ss_local/icons/` : les 209 icônes `T_UI_Skill_*_BC` de SS (`nsdump textur`). `ss_icons.gd` associe une
+icône à **chaque technique** (`BY_ID`, choisie d'après l'effet ; repli par kit puis par nom pour les actions
+universelles et les persos du roster). Affichées dans la barre du HUD, le menu des techniques (B) et
+l'écran SHINOBI (arbres, équipement, compétences).
+
 ## Vrais décors Shinobi Striker
 
 `nsdump glbstatic <ziel.glb> <StaticMesh> [texOrdner]` décode un StaticMesh SS (LOD0, palette BC,

@@ -346,6 +346,9 @@ func _jutsu_node(parent: Control, p: CharacterProfile, j: JutsuData) -> void:
 	panel.add_child(col)
 	var top := HBoxContainer.new()
 	col.add_child(top)
+	var icon := SSIcons.add_rect(top, j.id, j.display_name, 44)
+	if icon != null and state == ProgressionTypes.NodeState.LOCKED_BY_CHOICE:
+		icon.modulate = Color(0.45, 0.4, 0.4)
 	var name_label := UiStyle.label(top, j.display_name, 16, Color.WHITE if state != ProgressionTypes.NodeState.LOCKED_BY_CHOICE else Color(0.6, 0.5, 0.5), 800)
 	name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	UiStyle.label(top, STATE_LABELS[state], 12, color.lightened(0.2), 800)
@@ -473,6 +476,7 @@ func _loadout_view(p: CharacterProfile) -> void:
 		var b := _button(row, "Retirer" if equipped else "Équiper", func() -> void:
 			Profiles.request({"action": "unequip_jutsu" if equipped else "equip_jutsu", "jutsu": id}))
 		b.custom_minimum_size = Vector2(110, 0)
+		SSIcons.add_rect(row, j.id, j.display_name, 32)
 		UiStyle.label(row, "%s  [%s]" % [j.display_name, ProgressionTypes.rank_key(j.rank)], 15, Color(0.5, 1.0, 0.6) if equipped else Color.WHITE, 700)
 
 
@@ -654,8 +658,13 @@ func _part_name(mesh: String) -> String:
 
 func _skill_line(parent: Control, j: JutsuData, tag: String) -> void:
 	var panel := _panel(parent, Color(1, 1, 1, 0.2))
+	var line := HBoxContainer.new()
+	line.add_theme_constant_override("separation", 10)
+	panel.add_child(line)
+	SSIcons.add_rect(line, j.id, j.display_name, 48)
 	var col := VBoxContainer.new()
-	panel.add_child(col)
+	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	line.add_child(col)
 	UiStyle.label(col, "%s   ·   %s" % [j.display_name, tag], 16, Color.WHITE, 800)
 	var desc := UiStyle.label(col, j.description, 13, UiStyle.MUTED, 600)
 	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

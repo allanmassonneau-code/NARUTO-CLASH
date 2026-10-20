@@ -131,8 +131,9 @@ func _update_slot(slot: StringName, w: Dictionary) -> void:
 	sweep.color = Color(0.03, 0.06, 0.18, 0.74) if lacks_energy else Color(0.02, 0.02, 0.05, 0.74)
 	(w.cd as Label).text = text
 	(w.icon as TextureRect).modulate = Color.WHITE if ratio <= 0.0 else Color(0.62, 0.62, 0.68)
-	if w.icon.texture != a.icon:
-		(w.icon as TextureRect).texture = a.icon  # copied jutsu (Kakashi)
+	var icon_tex := _icon_of(a)
+	if w.icon.texture != icon_tex:
+		(w.icon as TextureRect).texture = icon_tex  # copied jutsu (Kakashi)
 	var style := w.style as StyleBoxFlat
 	var ready: bool = ratio <= 0.0
 	if abilities.current_slot == slot:
@@ -670,7 +671,7 @@ func _build_slot(parent: Control, slot: StringName, a: AbilityData) -> Dictionar
 	clip.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	box.add_child(clip)
 	var icon := TextureRect.new()
-	icon.texture = a.icon
+	icon.texture = _icon_of(a)
 	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -737,3 +738,15 @@ void fragment() {
 	_announce.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_announce.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_announce.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+
+
+## Shinobi Striker skill icon for an ability (cached per ability).
+var _icons: Dictionary = {}
+
+
+func _icon_of(a: AbilityData) -> Texture2D:
+	if a == null:
+		return null
+	if not _icons.has(a):
+		_icons[a] = SSIcons.for_ability(a)
+	return _icons[a]
