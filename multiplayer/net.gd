@@ -124,6 +124,7 @@ func _players_needed() -> int:
 func _on_peer_connected(peer_id: int) -> void:
 	if is_server():
 		print("[server] peer %d connected" % peer_id)
+		_long_timeout(peer_id)
 
 
 func _on_peer_disconnected(peer_id: int) -> void:
@@ -651,7 +652,17 @@ func send_input(seq: int, intent: GameplayIntent, aim: Vector3) -> void:
 		c2s_cancel.rpc_id(1)
 
 
+## Loading the open world blocks the game for several seconds: a short ENet
+## timeout would drop the connection (back to the menu, profile lost).
+func _long_timeout(peer_id: int) -> void:
+	var enet := multiplayer.multiplayer_peer as ENetMultiplayerPeer
+	var p: ENetPacketPeer = enet.get_peer(peer_id) if enet != null else null
+	if p != null:
+		p.set_timeout(0, 60000, 120000)
+
+
 func _on_connected_to_server() -> void:
+	_long_timeout(1)
 	var hello: Array = get_meta(&"hello", ["Shinobi", 0])
 	c2s_hello.rpc_id(1, game_version(), hello[0], hello[1], GameSession.friend_code, party, GameSession.account_token,
 		bool(hello[2]) if hello.size() > 2 else true, GameSession.account_user, GameSession.account_auth)

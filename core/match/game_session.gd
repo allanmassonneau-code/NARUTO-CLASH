@@ -28,6 +28,8 @@ var rounds_to_win: int = 3
 var bot_passive: bool = false
 
 var net_role: NetRole = NetRole.OFFLINE
+## Why the game went back to the title screen (shown there once).
+var menu_notice: String = ""
 ## Fighters of the next match. Entries: {roster:int, team:int, control:String, peer:int}
 ## control = "local" (this machine's player), "bot", "remote" (server: a client).
 var lineup: Array[Dictionary] = []

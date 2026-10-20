@@ -165,6 +165,7 @@ func _ready() -> void:
 	online = Net.is_client() and Net.is_online()
 	var profile: CharacterProfile = Profiles.profile
 	if profile == null:
+		GameSession.menu_notice = "Retour au menu : aucun personnage chargé (%s)." % (Net.status_text if Net.status_text != "" else "hors ligne")
 		get_tree().change_scene_to_file.call_deferred(GameSession.MENU_SCENE)
 		return
 	_rng.seed = 7
@@ -469,7 +470,9 @@ func _on_mob_died(mob: CombatCharacter) -> void:
 
 func _on_profile_updated(_profile: CharacterProfile, result: ProgressionResult) -> void:
 	if Profiles.profile == null:
-		_quit_to_menu()  # character deleted (offline test tool)
+		# Character deleted, or the connection dropped (the online profile is gone).
+		GameSession.menu_notice = "Retour au menu : personnage perdu (%s)." % (Net.status_text if Net.status_text != "" else "connexion perdue")
+		_quit_to_menu()
 		return
 	var rebuild: bool = false
 	var promotion: bool = false
