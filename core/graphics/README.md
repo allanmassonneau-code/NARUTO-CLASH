@@ -59,6 +59,15 @@ dictionnaire cosmétique (`CharacterProfile.appearance`, action `set_appearance`
 `sanitize_appearance`) ; l'onglet **Apparence** de l'écran SHINOBI l'édite. Les mobs reçoivent un
 avatar SS stable par type (`MobCatalog`), le joueur sans apparence un avatar stable par profil.
 
+Visage : le corps `SK_CHR_Face` est exporté avec ses morphs SS (`NSGLB_MORPHS`, formes yeux / sourcils /
+bouche / nez de chaque perso SS) et son second jeu d'UV (maquillage). Clés d'apparence `eye` (DT_CustomEye :
+matériaux d'yeux + forme du visage du perso, cuite une fois dans un mesh partagé — pas de blend shapes
+en jeu), `eye_color`, `facepaint` (motif `FacePaint_Map` posé par `FacePaint_UV` / `FacePaint_UVOffset`
+sur l'UV2 du visage, `ss_character.gdshader`) et `facepaint_color`. `export_creator.ps1` exporte aussi
+plus de pièces (40 hauts / 24 bas par sexe, 40 coiffures unisexes, 50 accessoires), `parts/face.json`,
+`eyes.json`, `facepaints.json` et `facepaint_decals.json`. Les femmes SS utilisent les mêmes animations
+que les hommes (seules les poses de lobby diffèrent) : le sexe change les pièces et la forme du visage.
+
 ## VFX Shinobi Striker par sort
 
 `ss_vfx.gd` joue les planches `T_EFF_*` de SS (`_ss_local/vfx`, ~40 formes : feu, braises, fumée, éclairs,

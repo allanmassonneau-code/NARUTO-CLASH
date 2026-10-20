@@ -164,9 +164,10 @@ static func _crossfade(old: AudioStreamPlayer, stream: AudioStream, volume: floa
 	p.stream = stream
 	p.bus = bus if AudioServer.get_bus_index(bus) >= 0 else &"Master"
 	p.volume_db = -60.0
-	tree.root.add_child(p)
-	p.play()
-	p.create_tween().tween_property(p, "volume_db", volume, FADE)
+	p.autoplay = true
+	# Deferred: music often starts from a scene's _ready, while the root is still adding children.
+	tree.root.add_child.call_deferred(p)
+	p.ready.connect(func() -> void: p.create_tween().tween_property(p, "volume_db", volume, FADE), CONNECT_ONE_SHOT)
 	return p
 
 

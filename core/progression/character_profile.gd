@@ -137,7 +137,7 @@ static func from_dict(data: Dictionary) -> CharacterProfile:
 ## Keeps only known appearance keys with short string values (cosmetic data from clients).
 static func sanitize_appearance(data: Dictionary) -> Dictionary:
 	var out: Dictionary = {}
-	for key: String in ["sex", "hair", "upper", "lower", "skin", "forehead", "accessory"]:
+	for key: String in ["sex", "hair", "upper", "lower", "skin", "forehead", "accessory", "eye", "eye_color", "facepaint", "facepaint_color"]:
 		if data.get(key) is String and (data[key] as String).length() <= 64:
 			out[key] = data[key]
 	for key: String in ["hair_colors", "upper_colors", "lower_colors"]:

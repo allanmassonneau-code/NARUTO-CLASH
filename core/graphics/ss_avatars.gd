@@ -20,6 +20,7 @@ static var _loaded: bool = false
 static var _scenes: Dictionary = {}
 static var _sidecars: Dictionary = {}
 static var _foreheads: Dictionary = {}
+static var _baked: Dictionary = {}  # "face:<who>" -> ArrayMesh with that SS face shape baked in
 
 
 static func available() -> bool:
@@ -84,6 +85,32 @@ static func colour(id: String) -> Color:
 	return Color(String(c[0])) if c.size() > 0 else Color.WHITE
 
 
+## Eyes (DT_CustomEye) of a sex: {"id", "morph" (face shape, e.g. "eyes_w_hinata"), "l", "r" (materials)}.
+static func eye_options(sex: String) -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	var mats: Dictionary = _material_set("eyes.json")
+	for e: Dictionary in _face_data().get("eyes", []):
+		if e.get("sex", "") != sex and e.get("sex", "") != "Unisex":
+			continue
+		if mats.has(String(e.get("l", "")).get_file()):
+			out.append(e)
+	return out
+
+
+## Face paints (DT_CustomFacePaint): {"id", "material", "color0"}; the bare face first.
+static func facepaint_options() -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	var seen: Dictionary = {}
+	var mats: Dictionary = _material_set("facepaints.json")
+	for row: Dictionary in _catalog_data().get("facepaint", []):
+		var m: String = String(row.get("material", "")).get_file()
+		if m == "" or seen.has(m) or not mats.has(m):
+			continue
+		seen[m] = true
+		out.append({"id": row.get("id", ""), "material": m, "color0": row.get("color0", "")})
+	return out
+
+
 ## Deterministic avatar for a seed (player default, mobs): real SS parts and colours.
 static func random(seed_value: int, sex: String = "") -> Dictionary:
 	var rng := RandomNumberGenerator.new()
@@ -100,6 +127,12 @@ static func random(seed_value: int, sex: String = "") -> Dictionary:
 		var pick: Dictionary = opts[rng.randi() % opts.size()]
 		avatar[slot] = pick.mesh
 		avatar[slot + "_colors"] = [pick.color0, pick.color1]
+	var eyes: Array[Dictionary] = eye_options(sex)
+	if not eyes.is_empty():
+		avatar.eye = eyes[rng.randi() % eyes.size()].id
+	var eye_colours: Array[String] = colour_ids("Eye")
+	if not eye_colours.is_empty():
+		avatar.eye_color = eye_colours[rng.randi() % mini(eye_colours.size(), 6)]
 	return avatar
 
 
@@ -132,7 +165,8 @@ static func instantiate(avatar: Dictionary) -> Node3D:
 		return root
 	var skel := skeletons[0] as Skeleton3D
 	var skin_tint: Color = colour(avatar.get("skin", ""))
-	_tint(root, BODY, skin_tint, Color.WHITE, Color.WHITE)
+	_tint(root, BODY, skin_tint, Color.WHITE, Color.WHITE, "", avatar)
+	_face_shape(root, avatar)
 	var forehead: String = avatar.get("forehead", "")
 	for slot: String in SLOTS:
 		var mesh_name: String = avatar.get(slot, "")
@@ -224,10 +258,11 @@ static func _wear_accessory(skel: Skeleton3D, mesh_name: String) -> void:
 	attach.add_child(acc)
 
 
-static func _tint(root: Node, mesh_name: String, skin: Color, c0: Color, c1: Color, forehead: String = "") -> void:
+static func _tint(root: Node, mesh_name: String, skin: Color, c0: Color, c1: Color, forehead: String = "", face: Dictionary = {}) -> void:
 	var entries: Dictionary = {}
 	for e: Dictionary in _sidecar(mesh_name).get("materials", []):
 		entries[e.name] = e
+	var eye: Dictionary = _eye_row(face) if not face.is_empty() else {}
 	for node: Node in root.find_children("*", "MeshInstance3D", true, false):
 		var mi := node as MeshInstance3D
 		for i in mi.mesh.get_surface_count():
@@ -236,16 +271,122 @@ static func _tint(root: Node, mesh_name: String, skin: Color, c0: Color, c1: Col
 			if not entries.has(key):
 				continue
 			var entry: Dictionary = entries[key]
+			var t0: Color = c0
+			var t1: Color = c1
+			var paint: Dictionary = {}
+			var source: String = entry.get("source", "")
 			# Forehead protector: the hair's Hachigane slot takes the chosen SS headband material.
-			if forehead != "" and String(entry.get("source", "")).contains("Hachigane") and _forehead_materials().has(forehead):
+			if forehead != "" and source.contains("Hachigane") and _forehead_materials().has(forehead):
 				entry = _forehead_materials()[forehead]
+			# Body: eye slots take the chosen SS eyes, the face slot the chosen face paint.
+			if not face.is_empty():
+				var eyes: Dictionary = _material_set("eyes.json")
+				if source.contains("/Eyes/") and not eye.is_empty():
+					var side: String = eye.l if source.ends_with("L_01") else eye.r
+					entry = eyes.get(side.get_file(), entry)
+					t0 = colour(face.get("eye_color", ""))
+					t1 = t0
+				elif source.ends_with("/MI_CHR_Face") and face.get("facepaint", "") != "":
+					paint = _sidecar_at(ROOT + "parts/facepaint_decals.json").get(face.facepaint, {})
 			var m: Material = SSCharacters.material_from(ROOT + "parts/", entry)
+			if not paint.is_empty() and m is ShaderMaterial:
+				var pm := (m as ShaderMaterial).duplicate() as ShaderMaterial
+				var r: Array = paint.get("uv", [128, 128, 0.2, 0.2])
+				pm.set_shader_parameter("use_paint", true)
+				pm.set_shader_parameter("paint_map", SSCharacters._texture(ROOT + "parts/", paint.get("map", "")))
+				pm.set_shader_parameter("paint_rect", Vector4(r[0], r[1], r[2], r[3]))
+				var r2: Variant = paint.get("uv2")
+				if r2 is Array and (r2 as Array).size() == 4 and float(r2[2]) < 1.0:
+					pm.set_shader_parameter("use_paint2", true)
+					pm.set_shader_parameter("paint_rect2", Vector4(r2[0], r2[1], r2[2], r2[3]))
+				pm.set_shader_parameter("paint_rot", float((paint.get("rot", [0.0]) if paint.get("rot") is Array else [0.0])[0]))
+				pm.set_shader_parameter("paint_color", colour(face.get("facepaint_color", _paint_colour(face.facepaint))))
+				m = pm
+				paint = {}
 			if m is ShaderMaterial and (m as ShaderMaterial).get_shader_parameter("use_mask"):
 				m = (m as ShaderMaterial).duplicate()
 				(m as ShaderMaterial).set_shader_parameter("tint_skin", skin)
-				(m as ShaderMaterial).set_shader_parameter("tint_color0", c0)
-				(m as ShaderMaterial).set_shader_parameter("tint_color1", c1)
+				(m as ShaderMaterial).set_shader_parameter("tint_color0", t0)
+				(m as ShaderMaterial).set_shader_parameter("tint_color1", t1)
 			mi.set_surface_override_material(i, m)
+
+
+## SS face shape: the morphs of the chosen eyes' character (eyes, and its brows / mouth / nose when SS
+## has them), baked once into a plain mesh shared by every avatar with that face. Live blend shapes
+## (200+ on the SS face) would be recomputed for every avatar each frame.
+static func _face_shape(root: Node, avatar: Dictionary) -> void:
+	var eye: Dictionary = _eye_row(avatar)
+	var who: String = String(eye.get("morph", "")).trim_prefix("eyes_")
+	for node: Node in root.find_children("*", "MeshInstance3D", true, false):
+		var mi := node as MeshInstance3D
+		var src := mi.mesh as ArrayMesh
+		if src == null or src.get_blend_shape_count() == 0:
+			continue
+		var key: String = "face:" + who
+		if not _baked.has(key):
+			var shapes: Array[int] = []
+			for part: String in ["eyes", "eyebrows", "mouth", "nose"]:
+				for b in src.get_blend_shape_count():
+					if src.get_blend_shape_name(b) == StringName("%s_%s" % [part, who]):
+						shapes.append(b)
+			_baked[key] = _bake(src, shapes)
+		var overrides: Array[Material] = []
+		for s in src.get_surface_count():
+			overrides.append(mi.get_surface_override_material(s))
+		mi.mesh = _baked[key]
+		for s in overrides.size():
+			mi.set_surface_override_material(s, overrides[s])
+
+
+## Copy of `src` with the given blend shapes applied at full weight and no blend shapes left.
+static func _bake(src: ArrayMesh, shapes: Array[int]) -> ArrayMesh:
+	var out := ArrayMesh.new()
+	for s in src.get_surface_count():
+		var arrays: Array = src.surface_get_arrays(s)
+		if not shapes.is_empty():
+			var base: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+			var verts: PackedVector3Array = base.duplicate()
+			var blends: Array = src.surface_get_blend_shape_arrays(s)
+			var relative: bool = src.blend_shape_mode == Mesh.BLEND_SHAPE_MODE_RELATIVE
+			for b: int in shapes:
+				var target: PackedVector3Array = blends[b][Mesh.ARRAY_VERTEX]
+				for v in verts.size():
+					verts[v] += target[v] if relative else target[v] - base[v]
+			arrays[Mesh.ARRAY_VERTEX] = verts
+		out.add_surface_from_arrays(src.surface_get_primitive_type(s), arrays, [], {}, src.surface_get_format(s) & Mesh.ARRAY_FLAG_USE_8_BONE_WEIGHTS)
+		out.surface_set_material(s, src.surface_get_material(s))
+		out.surface_set_name(s, src.surface_get_name(s))
+	return out
+
+
+static func _eye_row(avatar: Dictionary) -> Dictionary:
+	var id: String = avatar.get("eye", "")
+	for e: Dictionary in _face_data().get("eyes", []):
+		if e.get("id", "") == id:
+			return e
+	return {}
+
+
+static func _paint_colour(material: String) -> String:
+	for o: Dictionary in facepaint_options():
+		if o.material == material:
+			return o.color0
+	return ""
+
+
+static func _face_data() -> Dictionary:
+	return _sidecar_at(ROOT + "parts/face.json")
+
+
+## Materials of a glbmat sidecar (eyes.json, facepaints.json, foreheads.json), by short name.
+static func _material_set(file: String) -> Dictionary:
+	var key: String = "set:" + file
+	if not _sidecars.has(key):
+		var out: Dictionary = {}
+		for e: Dictionary in _sidecar_at(ROOT + "parts/" + file).get("materials", []):
+			out[e.name] = e
+		_sidecars[key] = out
+	return _sidecars[key]
 
 
 static func _acc_glb(mesh_name: String) -> String:

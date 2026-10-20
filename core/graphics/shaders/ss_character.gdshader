@@ -28,6 +28,17 @@ uniform vec4 tint_color0 : source_color = vec4(1.0);
 uniform vec4 tint_color1 : source_color = vec4(1.0);
 
 // Ground / tiling surfaces: sample the SS maps in world space (metres per repeat).
+// SS face paint (MI_CHR_FacePaint_*): FacePaint_Map mask placed on the face UV by FacePaint_UV
+// on the face's second UV set (centre in 1/256 of the UV square, size as a fraction of it) and FacePaint_Rot (turns).
+uniform bool use_paint = false;
+uniform sampler2D paint_map : filter_linear_mipmap, hint_default_black;
+uniform vec4 paint_rect = vec4(128.0, 128.0, 0.2, 0.2);
+uniform float paint_rot = 0.0;
+// Second copy (FacePaint_UVOffset, when its size is set below 1).
+uniform bool use_paint2 = false;
+uniform vec4 paint_rect2 = vec4(165.0, 175.0, 0.2, 0.2);
+uniform vec4 paint_color : source_color = vec4(0.5, 0.05, 0.06, 1.0);
+
 uniform bool world_uv = false;
 uniform float uv_tile = 6.0;
 varying vec2 v_world_xz;
@@ -59,7 +70,27 @@ void fragment() {
 		tint = (1.0 + w.r * (tint_skin.rgb - 1.0)) * (1.0 + w.g * (tint_color0.rgb - 1.0)) * (1.0 + w.b * (tint_color1.rgb - 1.0));
 		bc.rgb *= tint;
 	}
+	float paint = 0.0;
+	if (use_paint) {
+		vec2 d = (UV2 - paint_rect.xy / 256.0) / max(paint_rect.zw, vec2(0.001));
+		float a = paint_rot * 6.2831853;
+		d = mat2(vec2(cos(a), sin(a)), vec2(-sin(a), cos(a))) * d + 0.5;
+		if (d.x >= 0.0 && d.x <= 1.0 && d.y >= 0.0 && d.y <= 1.0) {
+			paint = texture(paint_map, d).r;
+		}
+		if (use_paint2) {
+			vec2 d2 = (UV2 - paint_rect2.xy / 256.0) / max(paint_rect2.zw, vec2(0.001));
+			d2 = mat2(vec2(cos(a), sin(a)), vec2(-sin(a), cos(a))) * d2 + 0.5;
+			if (d2.x >= 0.0 && d2.x <= 1.0 && d2.y >= 0.0 && d2.y <= 1.0) {
+				paint = max(paint, texture(paint_map, d2).r);
+			}
+		}
+		bc.rgb = mix(bc.rgb, paint_color.rgb, paint);
+	}
 	vec3 sc = use_sc_map ? texture(sc_map, uv).rgb : shade_color.rgb;
+	if (use_paint) {
+		sc = mix(sc, paint_color.rgb * 0.7, paint);
+	}
 	if (derive_shade) {
 		sc = pow(bc.rgb, vec3(1.9)) * vec3(1.0, 0.92, 0.95);
 	}

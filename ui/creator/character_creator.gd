@@ -10,7 +10,7 @@ signal finished(created: bool)
 
 enum Step { VILLAGE, ORIGIN, CLAN, LOOK, IDENTITY }
 const STEP_NAMES: Array[String] = ["Village", "Origine", "Clan", "Apparence", "Identité"]
-const LOOK_TABS: Array[String] = ["Corps", "Cheveux", "Tenue", "Accessoires"]
+const LOOK_TABS: Array[String] = ["Corps", "Visage", "Cheveux", "Tenue", "Accessoires"]
 const SWATCH: Vector2 = Vector2(30, 30)
 
 var edit_mode: bool = false
@@ -340,11 +340,26 @@ func _look_step() -> void:
 			_section("Peau" + ("  (traits du clan)" if _restricted("Skin") else ""))
 			_swatches(ClanStyles.allowed_ids(_clan_or_none(), "Skin"), _avatar.get("skin", ""), func(id: String) -> void: _avatar.skin = id)
 		1:
+			var eyes: Array = []
+			for o: Dictionary in SSAvatars.eye_options(_avatar.get("sex", "Male")):
+				eyes.append(o.id)
+			_choice_picker("Yeux", "eye", eyes, "", _eye_label)
+			_section("Couleur des yeux")
+			_swatches(SSAvatars.colour_ids("Eye"), _avatar.get("eye_color", ""), func(id: String) -> void: _avatar.eye_color = id)
+			var paints: Array = [""]
+			for o: Dictionary in SSAvatars.facepaint_options():
+				if o.material != "MI_CHR_Face":
+					paints.append(o.material)
+			_choice_picker("Maquillage", "facepaint", paints, "Aucun", func(m: String) -> String: return _pretty(m.trim_prefix("MI_CHR_FacePaint_")))
+			if _avatar.get("facepaint", "") != "":
+				_section("Couleur du maquillage")
+				_swatches(SSAvatars.colour_ids("FacePaint"), _avatar.get("facepaint_color", ""), func(id: String) -> void: _avatar.facepaint_color = id)
+		2:
 			_part_picker("Coiffure", "hair")
 			_section("Couleur" + ("  (traits du clan)" if _restricted("Hair") else ""))
 			var hair: Array[String] = ClanStyles.allowed_ids(_clan_or_none(), "Hair")
 			_swatches(hair, _colour("hair", 0), func(id: String) -> void: _avatar.hair_colors = [id, id])
-		2:
+		3:
 			_part_picker("Haut", "upper")
 			_part_picker("Bas", "lower")
 			var cloth: Array[String] = SSAvatars.colour_ids("Cloth")
@@ -371,7 +386,7 @@ func _look_step() -> void:
 				for k in 2:
 					_section("%s — couleur %d" % [slot[1], k + 1])
 					_swatches(page, _colour(slot[0], k), func(id: String) -> void: _set_colour(slot[0], k, id))
-		3:
+		4:
 			var fronts: Array = [""]
 			for o: Dictionary in SSAvatars.forehead_options():
 				fronts.append(o.material)
@@ -418,7 +433,15 @@ func _part_picker(title: String, slot: String) -> void:
 	_button(row, "▶", step.bind(1), Vector2(48, 44))
 
 
-func _choice_picker(title: String, key: String, values: Array, empty_label: String) -> void:
+func _eye_label(id: String) -> String:
+	for o: Dictionary in SSAvatars.eye_options(_avatar.get("sex", "Male")):
+		if o.id == id:
+			var who: String = String(o.morph).substr(7)  # eyes_m_ / eyes_w_
+			return who.replace("original0", "Original ").capitalize()
+	return id
+
+
+func _choice_picker(title: String, key: String, values: Array, empty_label: String, label_of: Callable = Callable()) -> void:
 	if values.size() <= 1:
 		return
 	var current: int = maxi(0, values.find(_avatar.get(key, "")))
@@ -434,7 +457,7 @@ func _choice_picker(title: String, key: String, values: Array, empty_label: Stri
 			_avatar[key] = v
 		_look_changed()
 	_button(row, "◀", step.bind(-1), Vector2(48, 44))
-	var text: String = empty_label if values[current] == "" else _pretty(values[current])
+	var text: String = empty_label if values[current] == "" else (str(label_of.call(values[current])) if label_of.is_valid() else _pretty(values[current]))
 	var label := UiStyle.label(row, "%s   (%d / %d)" % [text, current + 1, values.size()], 15, Color.WHITE, 800)
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
