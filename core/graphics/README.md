@@ -23,7 +23,15 @@ exporté), `SSGraphics` bascule sur des textures procédurales : le jeu tourne t
 Pour ajouter une texture : l'extraire avec `shinobi_extract` (ou `_SS_REFERENCE\tools\ss.cmd extract`),
 puis ajouter son chemin dans `SSGraphics.TEXTURES` (et sa taille de répétition dans `TEXTURE_TILE`).
 
-## Vrais personnages Shinobi Striker (local)
+## Assets SS convertis (`_ss_local/`, versionné)
+
+`_ss_local/` (persos, pièces du créateur, décors, VFX convertis) **est versionné** dans le dépôt GitHub
+privé (voir `CLAUDE.md`) et embarqué dans le build du jeu, dont le téléchargement est protégé par mot de
+passe (usage perso). Le preset d'export n'embarque pas les outils de conversion : scènes `_probe`
+(`_ss_local/_*.gd`, `_ss_local/_*.tscn`), `kit.txt`, scripts `*.ps1` et `_ss_local/creator/tables/`.
+Seuls les dossiers de travail (`_SS_REFERENCE/`, `.data/`, `ss_dumps/`, `Logs/`) restent locaux.
+
+## Vrais personnages Shinobi Striker
 
 Les persos sont les **vrais meshes SS** (squelette, skinning, animations, palettes BC/SC d'origine),
 convertis depuis la copie Steam par la commande ajoutée à l'outil local :
@@ -34,13 +42,13 @@ nsdump glbfigur <filtre>                 # figures et pièces (avatars du créat
 nsdump glbanims <squelette> [filtre]     # clips d'un squelette
 ```
 
-Sortie dans `res://_ss_local/characters/<id>/` (ignoré par Git) : `<id>.glb`, textures `tex/`, et
+Sortie dans `res://_ss_local/characters/<id>/` (versionné) : `<id>.glb`, textures `tex/`, et
 `<id>.glb.ss.json` (matériaux toon). `anims.txt` associe un clip SS à un nom de pose du jeu
 (`idle`, `run`, `jab`, `guard`…). `SSCharacters` charge le GLB, `ShinobiModel` l'utilise à la place
 des primitives (`ShinobiLook.ss_model`, vide = avatar du créateur `avatar_male`). Sans fichiers
 locaux, retour automatique aux primitives.
 
-## Créateur de personnage Shinobi Striker (local)
+## Créateur de personnage Shinobi Striker
 
 `_ss_local\creator\` : tables du créateur extraites (`tables\DT_Custom*.txt`, `DT_PartsColors`),
 `build_catalog.ps1` → `catalog.json`, `export_creator.ps1` → `parts\` (corps `SK_CHR_Face` + clips,
@@ -51,7 +59,7 @@ dictionnaire cosmétique (`CharacterProfile.appearance`, action `set_appearance`
 `sanitize_appearance`) ; l'onglet **Apparence** de l'écran SHINOBI l'édite. Les mobs reçoivent un
 avatar SS stable par type (`MobCatalog`), le joueur sans apparence un avatar stable par profil.
 
-## Vrais décors Shinobi Striker (local)
+## Vrais décors Shinobi Striker
 
 `nsdump glbstatic <ziel.glb> <StaticMesh> [texOrdner]` décode un StaticMesh SS (LOD0, palette BC,
 teinte `AA_BaseMixColor` / `AA_ShadowColor`) en GLB centré, base à y = 0. Le kit Konoha se
