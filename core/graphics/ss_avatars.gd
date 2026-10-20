@@ -322,6 +322,8 @@ static func _face_shape(root: Node, avatar: Dictionary) -> void:
 		var src := mi.mesh as ArrayMesh
 		if src == null or src.get_blend_shape_count() == 0:
 			continue
+		if DisplayServer.get_name() == "headless":
+			return  # no mesh data without a renderer (server, tests): the plain face is enough
 		var key: String = "face:" + who
 		if not _baked.has(key):
 			var shapes: Array[int] = []

@@ -46,6 +46,7 @@ const SS_POSE_CLIPS: Dictionary = {
 	"leap:windup": [&"leap"], "leap:strike": [&"leap", &"fall"],
 	"guard:windup": [&"guard"], "guard:strike": [&"guard"],
 	"seal:windup": [&"seal", &"concentrate"], "seal:strike": [&"seal"],
+	"concentrate:": [&"concentrate", &"seal"],  # chakra recovery (SS CustomMan_RecoveryChakra)
 	"throw:windup": [&"throw", &"jab"], "throw:strike": [&"throw", &"jab"],
 	"stunned:": [&"stunned", &"hit"],
 }
@@ -171,7 +172,7 @@ func animate(delta: float, planar_speed: float, pose: StringName, tint: Color, f
 		"head": Vector3(0.22 * run, 0, 0),
 	}
 	var hips_y: float = 0.82 + absf(sin(_cycle)) * 0.05 * run + breathe
-	var overrides: Dictionary = POSES.get(String(pose), {})
+	var overrides: Dictionary = POSES.get(String(pose), POSES.get("seal:windup", {}) if pose == &"concentrate:" else {})
 	for key: String in overrides:
 		if key == "hips":
 			hips_y += overrides[key]

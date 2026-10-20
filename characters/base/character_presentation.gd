@@ -131,7 +131,7 @@ func _process(delta: float) -> void:
 		if tint.a < 0.15:
 			tint = Color(0.4, 0.7, 1.0, 0.2)
 	if _character.concentrating and pose == &"":
-		pose = &"seal:windup"
+		pose = &"concentrate:"
 		tint = Color(0.35, 0.65, 1.0, 0.18 + 0.1 * sin(Time.get_ticks_msec() * 0.012))
 	if _character.is_launched():
 		pose = &"stunned:"
