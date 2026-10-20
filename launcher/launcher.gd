@@ -7,6 +7,11 @@ const LauncherConfig = preload("res://launcher_config.gd")
 enum Step { CHECKING, DOWNLOADING, INSTALLING, READY, OFFLINE }
 
 var _http: HTTPRequest
+## The archive download has no total time limit (it is large); it only fails
+## when no data arrives for this long.
+const STALL_TIMEOUT: float = 30.0
+var _stall_time: float = 0.0
+var _last_bytes: int = 0
 var _manifest: Dictionary = {}
 var _installed_version: String = ""
 var _step: Step = Step.CHECKING
@@ -24,6 +29,7 @@ func _ready() -> void:
 	DisplayServer.window_set_title("Ninja Battle Launcher")
 	_http = HTTPRequest.new()
 	_http.timeout = 20.0
+	_http.download_chunk_size = 1 << 20
 	add_child(_http)
 	_play.pressed.connect(_launch_game)
 	_retry.pressed.connect(_check_for_update)
@@ -31,8 +37,21 @@ func _ready() -> void:
 	_check_for_update()
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if _step == Step.DOWNLOADING:
+		var got: int = _http.get_downloaded_bytes()
+		if got != _last_bytes:
+			_last_bytes = got
+			_stall_time = 0.0
+		else:
+			_stall_time += delta
+			if _stall_time >= STALL_TIMEOUT:
+				_http.cancel_request()
+				_http.download_file = ""
+				if _http.request_completed.is_connected(_on_downloaded):
+					_http.request_completed.disconnect(_on_downloaded)
+				_on_offline("Download stalled (no data for %ds)." % int(STALL_TIMEOUT))
+				return
 		var total: int = int(_manifest.get("size", 0))
 		if total > 0:
 			_progress.value = 100.0 * _http.get_downloaded_bytes() / total
@@ -43,6 +62,7 @@ func _check_for_update() -> void:
 	_set_step(Step.CHECKING, "Checking for updates...")
 	var url: String = LauncherConfig.base_url().path_join("version.json")
 	_http.download_file = ""
+	_http.timeout = 20.0
 	if _http.request_completed.is_connected(_on_manifest):
 		_http.request_completed.disconnect(_on_manifest)
 	_http.request_completed.connect(_on_manifest, CONNECT_ONE_SHOT)
@@ -69,6 +89,9 @@ func _on_manifest(result: int, code: int, _headers: PackedStringArray, body: Pac
 func _start_download() -> void:
 	_download_path = LauncherConfig.install_dir().path_join("download.zip")
 	_http.download_file = _download_path
+	_http.timeout = 0.0  # no total limit: stalls are caught in _process
+	_stall_time = 0.0
+	_last_bytes = 0
 	_http.request_completed.connect(_on_downloaded, CONNECT_ONE_SHOT)
 	var url: String = LauncherConfig.base_url().path_join(str(_manifest.file))
 	_set_step(Step.DOWNLOADING, "Downloading v%s..." % _manifest.version)
