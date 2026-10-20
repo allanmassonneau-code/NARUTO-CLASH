@@ -27,5 +27,11 @@ rsync -az --delete --chmod=Dg+rwxs,Fg+rw -e "ssh $SSH_OPTS" \
 rsync -az -e "ssh $SSH_OPTS" --exclude version.json build/publish/ "$TARGET:/var/www/naruto-clash/"
 rsync -az -e "ssh $SSH_OPTS" build/publish/version.json "$TARGET:/var/www/naruto-clash/version.json"
 
-ssh $SSH_OPTS "$TARGET" "sudo systemctl restart naruto-server@1v1 && sudo systemctl restart naruto-server@2v2"
+if ! ssh $SSH_OPTS "$TARGET" "sudo systemctl restart naruto-server@1v1 && sudo systemctl restart naruto-server@2v2"; then
+  echo "Game server failed to start; diagnostics:"
+  ssh $SSH_OPTS "$TARGET" "systemctl status naruto-server@1v1 --no-pager -l | tail -40; \
+    nproc; free -m; du -sh /opt/naruto-clash/server /opt/naruto-clash/server/.godot 2>/dev/null; \
+    ls /opt/naruto-clash/server; journalctl -u naruto-server@1v1 --no-pager -n 60 2>&1 | tail -60" || true
+  exit 1
+fi
 echo "Deployed $(python3 -c 'import json;print(json.load(open("build/publish/version.json"))["version"])') to $HOST"
