@@ -42,6 +42,7 @@ static func build(content: Dictionary) -> ProgressionDatabase:
 		g.base_hp = row.base_hp
 		g.base_chakra = row.base_chakra
 		g.tenketsu_points = int(row.tenketsu_points)
+		g.xp_to_next = int(row.get("xp_to_next", 0))
 		db.grades.append(g)
 	for row: Dictionary in content.villages:
 		var v := VillageData.new()
@@ -100,6 +101,8 @@ static func build(content: Dictionary) -> ProgressionDatabase:
 		for v: String in row.get("villages", []):
 			sub.allowed_villages.append(StringName(v))
 		db.sub_jutsu.append(sub)
+	for mob_id: String in content.get("mobs", {}):
+		db.mob_xp[StringName(mob_id)] = int(content.mobs[mob_id].xp)
 	var rules: Dictionary = content.get("rules", {})
 	var ranks: Array[int] = []
 	for r: String in rules.get("sub_jutsu_roll_ranks", ["B", "A", "S"]):

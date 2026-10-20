@@ -9,6 +9,13 @@ extends IntentSource
 ## Chance per decision tick to answer a detected threat with a defensive.
 @export_range(0.0, 1.0) var defend_chance: float = 0.35
 @export var passive: bool = false
+## Open world: only targets within this range (0 = everyone, arena mode)...
+@export var aggro_range: float = 0.0
+## ...and gives up beyond this distance from `home`, walking back to it.
+@export var leash_range: float = 30.0
+
+var home: Vector3 = Vector3.ZERO
+var _engaged: bool = false
 
 var target: CombatCharacter
 
@@ -35,6 +42,9 @@ func poll_intent() -> GameplayIntent:
 	var delta: float = get_physics_process_delta_time()
 	intent.clear_actions()
 	target = _pick_target()
+	if aggro_range > 0.0 and not _aggro_check():
+		intent.move_direction = _walk_home()
+		return intent
 	if passive or target == null:
 		intent.move_direction = Vector3.ZERO
 		return intent
@@ -159,6 +169,29 @@ func _arena_objectives(enemy_dist: float) -> bool:
 		intent.move_direction = Vector3.ZERO
 		_press(&"lmb")
 	return true
+
+
+## Open world: keeps the target only while it is close and we are near home.
+func _aggro_check() -> bool:
+	var from_home: float = HitQuery.flat(_body.global_position - home).length()
+	if target == null or from_home > leash_range:
+		_engaged = false
+		target = null
+		return false
+	var dist: float = HitQuery.flat(target.global_position - _body.global_position).length()
+	_engaged = dist < (aggro_range * 1.8 if _engaged else aggro_range)
+	if not _engaged:
+		target = null
+	return _engaged
+
+
+func _walk_home() -> Vector3:
+	var to_home: Vector3 = HitQuery.flat(home - _body.global_position)
+	if to_home.length() < 1.5:
+		if not _body.is_dead():
+			_body.health.heal(_body.health.max_health * 0.2 * get_physics_process_delta_time(), true)
+		return Vector3.ZERO
+	return to_home.normalized()
 
 
 ## Nearest living enemy among all fighters.

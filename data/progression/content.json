@@ -11,7 +11,8 @@
    "sub_jutsu_event": "NONE",
    "base_hp": 100,
    "base_chakra": 100,
-   "tenketsu_points": 2
+   "tenketsu_points": 2,
+   "xp_to_next": 300
   },
   {
    "grade": "CHUNIN",
@@ -23,7 +24,8 @@
    "sub_jutsu_event": "FIRST_ROLL",
    "base_hp": 120,
    "base_chakra": 130,
-   "tenketsu_points": 2
+   "tenketsu_points": 2,
+   "xp_to_next": 700
   },
   {
    "grade": "KONIN",
@@ -33,7 +35,8 @@
    "sub_jutsu_event": "NONE",
    "base_hp": 135,
    "base_chakra": 150,
-   "tenketsu_points": 2
+   "tenketsu_points": 2,
+   "xp_to_next": 1300
   },
   {
    "grade": "TOKUBETSU",
@@ -45,7 +48,8 @@
    "sub_jutsu_event": "EVOLUTION",
    "base_hp": 155,
    "base_chakra": 180,
-   "tenketsu_points": 2
+   "tenketsu_points": 2,
+   "xp_to_next": 2200
   },
   {
    "grade": "JONIN",
@@ -55,9 +59,40 @@
    "sub_jutsu_event": "NONE",
    "base_hp": 180,
    "base_chakra": 220,
-   "tenketsu_points": 2
+   "tenketsu_points": 2,
+   "xp_to_next": 0
   }
  ],
+ "mobs": {
+  "bandit": {
+   "name": "Bandit",
+   "xp": 12
+  },
+  "bandit_thrower": {
+   "name": "Lanceur de kunai",
+   "xp": 14
+  },
+  "rogue_ninja": {
+   "name": "Ninja déserteur",
+   "xp": 30
+  },
+  "rogue_kunoichi": {
+   "name": "Kunoichi déserteuse",
+   "xp": 32
+  },
+  "elite_missing_nin": {
+   "name": "Nukenin d'élite",
+   "xp": 70
+  },
+  "ronin": {
+   "name": "Samouraï renégat",
+   "xp": 65
+  },
+  "boss_akatsuki": {
+   "name": "Membre de l'Akatsuki",
+   "xp": 250
+  }
+ },
  "villages": [
   {
    "id": "konoha",
@@ -2811,7 +2846,7 @@
    "A",
    "S"
   ],
-  "max_equipped_jutsu": 6,
+  "max_equipped_jutsu": 4,
   "specialization_grants_skills": true
  }
 }

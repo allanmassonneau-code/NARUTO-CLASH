@@ -15,5 +15,7 @@ extends Resource
 @export var granted_choices: Array[int] = []
 ## Sub-jutsu event for clanless characters.
 @export var sub_jutsu_event: ProgressionTypes.SubJutsuEvent = ProgressionTypes.SubJutsuEvent.NONE
+## Experience needed at this grade to be promoted to the next (0 = top grade).
+@export var xp_to_next: int = 0
 ## base_hp / base_chakra are not final balancing values yet.
 @export var placeholder_stats: bool = false

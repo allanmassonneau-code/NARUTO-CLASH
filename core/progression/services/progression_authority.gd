@@ -9,6 +9,8 @@ signal profile_changed(profile: CharacterProfile, result: ProgressionResult)
 
 var service: ProgressionService
 var saves: ProgressionSaveService
+## character id -> recent kill timestamps (msec), for the rate limit.
+var _kills: Dictionary = {}
 
 
 func _init(progression: ProgressionService, save_service: ProgressionSaveService = null) -> void:
@@ -37,6 +39,8 @@ func handle_request(profile: CharacterProfile, request: Dictionary) -> Progressi
 			result = service.tenketsu.unlock(profile, _id(request, "node"))
 		"sub_jutsu_keep":
 			result = service.resolve_sub_jutsu_evolution(profile, true)
+		"report_kill":
+			result = _report_kill(profile, _id(request, "mob"))
 		"sub_jutsu_sacrifice":
 			result = service.resolve_sub_jutsu_evolution(profile, false, bool(request.get("confirmed", false)))
 		_:
@@ -47,6 +51,20 @@ func handle_request(profile: CharacterProfile, request: Dictionary) -> Progressi
 			saves.save_profile(profile)
 		profile_changed.emit(profile, result)
 	return result
+
+
+## XP comes from the server's mob table, never from the client; kills are
+## rate limited per character.
+func _report_kill(profile: CharacterProfile, mob_id: StringName) -> ProgressionResult:
+	if not service.db.mob_xp.has(mob_id):
+		return ProgressionResult.fail(&"UNKNOWN_MOB")
+	var now: int = Time.get_ticks_msec()
+	var recent: Array = (_kills.get(profile.character_id, []) as Array).filter(func(t: int) -> bool: return now - t < 60000)
+	if recent.size() >= service.db.max_kills_per_minute:
+		return ProgressionResult.fail(&"TOO_MANY_KILLS")
+	recent.append(now)
+	_kills[profile.character_id] = recent
+	return service.grant_xp(profile, int(service.db.mob_xp[mob_id]))
 
 
 static func _id(request: Dictionary, key: String) -> StringName:

@@ -13,6 +13,11 @@ const DEFAULT_PATH: String = "res://data/progression/progression_db.tres"
 @export var specializations: Array[SpecializationData] = []
 @export var tenketsu_tree: TenketsuTreeData
 @export var sub_jutsu: Array[SubJutsuData] = []
+## Experience granted per mob kill (mob id -> xp). The server reads it here,
+## clients only report which mob they killed.
+@export var mob_xp: Dictionary = {}
+## Anti-abuse: kills accepted per minute for one character.
+@export var max_kills_per_minute: int = 30
 
 @export_category("Open rules (not defined by the design yet)")
 ## Ranks the Chunin roll and the "keep" roll draw from (weights decide rarity).

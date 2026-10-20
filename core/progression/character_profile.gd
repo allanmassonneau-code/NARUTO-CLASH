@@ -21,6 +21,8 @@ var grade: ProgressionTypes.Grade = ProgressionTypes.Grade.GENIN
 var rewarded_grades: Array[int] = []
 ## Choices granted by grades and not made yet (ProgressionTypes.Choice).
 var pending_choices: Array[int] = []
+## Experience gathered in the current grade.
+var xp: int = 0
 
 # Chakra natures
 var primary_nature: StringName = &""
@@ -75,6 +77,7 @@ func to_dict() -> Dictionary:
 			"grade": ProgressionTypes.grade_key(grade),
 			"rewarded_grades": rewarded_grades.map(func(g: int) -> String: return ProgressionTypes.grade_key(g)),
 			"pending_choices": pending_choices.map(func(c: int) -> String: return ProgressionTypes.Choice.keys()[c]),
+			"xp": xp,
 		},
 		"chakra": {"primary_nature": String(primary_nature), "secondary_nature": String(secondary_nature), "nature_choices": choices},
 		"specialization": String(specialization_id),
@@ -102,6 +105,7 @@ static func from_dict(data: Dictionary) -> CharacterProfile:
 	for c: String in prog.get("pending_choices", []):
 		if ProgressionTypes.Choice.has(c):
 			p.pending_choices.append(ProgressionTypes.Choice[c])
+	p.xp = int(prog.get("xp", 0))
 	var chakra: Dictionary = data.get("chakra", {})
 	p.primary_nature = StringName(chakra.get("primary_nature", ""))
 	p.secondary_nature = StringName(chakra.get("secondary_nature", ""))

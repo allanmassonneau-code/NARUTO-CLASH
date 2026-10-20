@@ -43,6 +43,26 @@ func create_character(character_id: String, character_name: String, village_id: 
 	return {"profile": profile, "result": result}
 
 
+## Experience (mob kills...). Reaching the grade's threshold promotes and
+## keeps the surplus. Server / offline authority only.
+func grant_xp(profile: CharacterProfile, amount: int) -> ProgressionResult:
+	var result := ProgressionResult.success()
+	if amount <= 0:
+		return result
+	profile.xp += amount
+	result.add_event(&"xp_gained", {"amount": amount})
+	while true:
+		var data: GradeData = db.get_grade(profile.grade)
+		if data == null or data.xp_to_next <= 0 or profile.xp < data.xp_to_next:
+			break
+		profile.xp -= data.xp_to_next
+		result.events.append_array(promote(profile).events)
+	var top: GradeData = db.get_grade(profile.grade)
+	if top != null and top.xp_to_next <= 0:
+		profile.xp = 0  # top grade: nothing more to gather
+	return result
+
+
 ## Promotes to the next grade and grants its rewards.
 func promote(profile: CharacterProfile) -> ProgressionResult:
 	var next: int = db.next_grade(profile.grade)

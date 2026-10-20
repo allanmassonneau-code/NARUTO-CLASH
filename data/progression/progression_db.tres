@@ -1,18 +1,18 @@
 [gd_resource type="Resource" script_class="ProgressionDatabase" load_steps=238 format=3]
 
-[ext_resource type="Script" path="res://core/progression/data/clan_data.gd" id="1_gqkqd"]
-[ext_resource type="Script" path="res://core/progression/data/jutsu_data.gd" id="2_n6y1t"]
-[ext_resource type="Script" path="res://core/progression/data/grade_data.gd" id="3_nv6x4"]
-[ext_resource type="Script" path="res://core/progression/data/chakra_nature_data.gd" id="4_4i3ef"]
-[ext_resource type="Script" path="res://core/progression/data/progression_database.gd" id="5_edetc"]
-[ext_resource type="Script" path="res://core/progression/data/specialization_data.gd" id="6_n8wsr"]
-[ext_resource type="Script" path="res://core/progression/data/sub_jutsu_data.gd" id="7_6ntxc"]
-[ext_resource type="Script" path="res://core/progression/data/tenketsu_node_data.gd" id="8_gm4xx"]
-[ext_resource type="Script" path="res://core/progression/data/tenketsu_tree_data.gd" id="9_iejm0"]
-[ext_resource type="Script" path="res://core/progression/data/village_data.gd" id="10_c5wkk"]
+[ext_resource type="Script" path="res://core/progression/data/clan_data.gd" id="1_wavea"]
+[ext_resource type="Script" path="res://core/progression/data/jutsu_data.gd" id="2_yopqh"]
+[ext_resource type="Script" path="res://core/progression/data/grade_data.gd" id="3_nlep2"]
+[ext_resource type="Script" path="res://core/progression/data/chakra_nature_data.gd" id="4_vu886"]
+[ext_resource type="Script" path="res://core/progression/data/progression_database.gd" id="5_kv0hm"]
+[ext_resource type="Script" path="res://core/progression/data/specialization_data.gd" id="6_rfxa7"]
+[ext_resource type="Script" path="res://core/progression/data/sub_jutsu_data.gd" id="7_tmfox"]
+[ext_resource type="Script" path="res://core/progression/data/tenketsu_node_data.gd" id="8_eqbnf"]
+[ext_resource type="Script" path="res://core/progression/data/tenketsu_tree_data.gd" id="9_utktj"]
+[ext_resource type="Script" path="res://core/progression/data/village_data.gd" id="10_1lptm"]
 
-[sub_resource type="Resource" id="Resource_2y1f6"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_4yqvp"]
+script = ExtResource("2_yopqh")
 id = &"clan_senju_d_pousse_de_bois"
 display_name = "Pousse de bois"
 description = "Racines qui entravent la cible."
@@ -26,8 +26,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_grhjt"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_3f135"]
+script = ExtResource("2_yopqh")
 id = &"clan_senju_c_mur_de_bois"
 display_name = "Mur de bois"
 description = "Rempart de bois qui protège les alliés."
@@ -41,8 +41,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_0gqvs"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_0u3o7"]
+script = ExtResource("2_yopqh")
 id = &"clan_senju_b_foret_naissante"
 display_name = "Forêt naissante"
 description = "Une forêt jaillit et entrave la zone."
@@ -56,8 +56,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_2n4wl"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_itgik"]
+script = ExtResource("2_yopqh")
 id = &"clan_senju_a_dragon_de_bois"
 display_name = "Dragon de bois"
 description = "Dragon qui enserre et draine le chakra."
@@ -71,8 +71,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_g758n"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_bfyro"]
+script = ExtResource("2_yopqh")
 id = &"clan_senju_s_bouddha_aux_mille_mains"
 display_name = "Bouddha aux mille mains"
 description = "Statue colossale qui pilonne la zone."
@@ -86,17 +86,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_wgg81"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_k5fng"]
+script = ExtResource("1_wavea")
 id = &"clan_senju"
 display_name = "Senju"
 village_id = &"konoha"
 description = "Lignée du bois et de la vitalité."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_2y1f6"), SubResource("Resource_grhjt"), SubResource("Resource_0gqvs"), SubResource("Resource_2n4wl"), SubResource("Resource_g758n")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_4yqvp"), SubResource("Resource_3f135"), SubResource("Resource_0u3o7"), SubResource("Resource_itgik"), SubResource("Resource_bfyro")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_iw8iy"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_av5qc"]
+script = ExtResource("2_yopqh")
 id = &"clan_uchiha_d_sharingan"
 display_name = "Sharingan"
 description = "Lit les mouvements : marque les ennemis touchés."
@@ -110,8 +110,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_5bf54"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_nd31s"]
+script = ExtResource("2_yopqh")
 id = &"clan_uchiha_c_corbeaux_illusoires"
 display_name = "Corbeaux illusoires"
 description = "Nuée de corbeaux qui aveugle."
@@ -125,8 +125,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_0glis"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_sec0h"]
+script = ExtResource("2_yopqh")
 id = &"clan_uchiha_b_magen__narakumi"
 display_name = "Magen : Narakumi"
 description = "Illusion qui paralyse la cible."
@@ -140,8 +140,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_0h87h"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_cj4ar"]
+script = ExtResource("2_yopqh")
 id = &"clan_uchiha_a_amaterasu"
 display_name = "Amaterasu"
 description = "Flammes noires qui brûlent longtemps."
@@ -155,8 +155,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_mx01g"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_2r8tt"]
+script = ExtResource("2_yopqh")
 id = &"clan_uchiha_s_susanoo"
 display_name = "Susanoo"
 description = "Guerrier spectral qui protège et frappe."
@@ -170,17 +170,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_kckgg"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_qabdv"]
+script = ExtResource("1_wavea")
 id = &"clan_uchiha"
 display_name = "Uchiha"
 village_id = &"konoha"
 description = "Sharingan, feu et illusions."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_iw8iy"), SubResource("Resource_5bf54"), SubResource("Resource_0glis"), SubResource("Resource_0h87h"), SubResource("Resource_mx01g")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_av5qc"), SubResource("Resource_nd31s"), SubResource("Resource_sec0h"), SubResource("Resource_cj4ar"), SubResource("Resource_2r8tt")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_cbwqd"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_4g4at"]
+script = ExtResource("2_yopqh")
 id = &"clan_uzumaki_d_sceau_d_entrave"
 display_name = "Sceau d'entrave"
 description = "Sceau au sol qui fige l'ennemi."
@@ -194,8 +194,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_vwhs8"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_fw7nf"]
+script = ExtResource("2_yopqh")
 id = &"clan_uzumaki_c_chaines_de_chakra"
 display_name = "Chaînes de chakra"
 description = "Chaînes qui attirent la cible."
@@ -209,8 +209,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_2hb5o"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_cnfb8"]
+script = ExtResource("2_yopqh")
 id = &"clan_uzumaki_b_vitalite_uzumaki"
 display_name = "Vitalité Uzumaki"
 description = "Régénère rapidement les PV."
@@ -224,8 +224,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_tjb4m"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_qsqtu"]
+script = ExtResource("2_yopqh")
 id = &"clan_uzumaki_a_sceau_des_quatre_symboles"
 display_name = "Sceau des quatre symboles"
 description = "Scelle les techniques de la cible."
@@ -239,8 +239,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_lar8p"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_4tgbq"]
+script = ExtResource("2_yopqh")
 id = &"clan_uzumaki_s_prison_adamantine"
 display_name = "Prison adamantine"
 description = "Barrière de chaînes qui emprisonne une zone."
@@ -254,17 +254,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_3721o"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_1lwg0"]
+script = ExtResource("1_wavea")
 id = &"clan_uzumaki"
 display_name = "Uzumaki"
 village_id = &"konoha"
 description = "Sceaux et vitalité hors norme."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_cbwqd"), SubResource("Resource_vwhs8"), SubResource("Resource_2hb5o"), SubResource("Resource_tjb4m"), SubResource("Resource_lar8p")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_4g4at"), SubResource("Resource_fw7nf"), SubResource("Resource_cnfb8"), SubResource("Resource_qsqtu"), SubResource("Resource_4tgbq")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_ntve0"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_anuoe"]
+script = ExtResource("2_yopqh")
 id = &"clan_nara_d_possession_des_ombres"
 display_name = "Possession des ombres"
 description = "Lie l'ombre de la cible à la sienne."
@@ -278,8 +278,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_6xumb"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_lee2y"]
+script = ExtResource("2_yopqh")
 id = &"clan_nara_c_etranglement_des_ombres"
 display_name = "Étranglement des ombres"
 description = "Étrangle la cible immobilisée."
@@ -293,8 +293,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_kejiu"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_xkus3"]
+script = ExtResource("2_yopqh")
 id = &"clan_nara_b_couture_des_ombres"
 display_name = "Couture des ombres"
 description = "Aiguilles d'ombre qui transpercent plusieurs ennemis."
@@ -308,8 +308,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_bye7b"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_pf5mg"]
+script = ExtResource("2_yopqh")
 id = &"clan_nara_a_rassemblement_des_ombres"
 display_name = "Rassemblement des ombres"
 description = "Attire et lie tous les ennemis proches."
@@ -323,8 +323,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_i0ps3"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_75xmd"]
+script = ExtResource("2_yopqh")
 id = &"clan_nara_s_domaine_des_ombres"
 display_name = "Domaine des ombres"
 description = "L'arène entière devient piège d'ombres."
@@ -338,17 +338,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_cxrvt"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_dk61f"]
+script = ExtResource("1_wavea")
 id = &"clan_nara"
 display_name = "Nara"
 village_id = &"konoha"
 description = "Manipulation des ombres."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_ntve0"), SubResource("Resource_6xumb"), SubResource("Resource_kejiu"), SubResource("Resource_bye7b"), SubResource("Resource_i0ps3")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_anuoe"), SubResource("Resource_lee2y"), SubResource("Resource_xkus3"), SubResource("Resource_pf5mg"), SubResource("Resource_75xmd")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_3xky7"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_aefka"]
+script = ExtResource("2_yopqh")
 id = &"clan_akimichi_d_expansion"
 display_name = "Expansion"
 description = "Grossit : plus de PV et de recul."
@@ -362,8 +362,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_mwsby"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_84v8u"]
+script = ExtResource("2_yopqh")
 id = &"clan_akimichi_c_char_humain"
 display_name = "Char humain"
 description = "Roule à grande vitesse et renverse."
@@ -377,8 +377,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_gooyw"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_ig724"]
+script = ExtResource("2_yopqh")
 id = &"clan_akimichi_b_poing_geant"
 display_name = "Poing géant"
 description = "Bras géant qui écrase devant soi."
@@ -392,8 +392,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_qxj34"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_b4eu1"]
+script = ExtResource("2_yopqh")
 id = &"clan_akimichi_a_pilule_de_sur_expansion"
 display_name = "Pilule de sur-expansion"
 description = "Forme géante temporaire."
@@ -407,8 +407,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_j4l25"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_1pikj"]
+script = ExtResource("2_yopqh")
 id = &"clan_akimichi_s_mode_papillon"
 display_name = "Mode papillon"
 description = "Ailes de chakra : puissance démesurée."
@@ -422,17 +422,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_uweky"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_4f212"]
+script = ExtResource("1_wavea")
 id = &"clan_akimichi"
 display_name = "Akimichi"
 village_id = &"konoha"
 description = "Expansion corporelle et force brute."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_3xky7"), SubResource("Resource_mwsby"), SubResource("Resource_gooyw"), SubResource("Resource_qxj34"), SubResource("Resource_j4l25")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_aefka"), SubResource("Resource_84v8u"), SubResource("Resource_ig724"), SubResource("Resource_b4eu1"), SubResource("Resource_1pikj")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_yp4t4"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_l4lsn"]
+script = ExtResource("2_yopqh")
 id = &"clan_roran_d_pulsation_de_la_veine"
 display_name = "Pulsation de la veine"
 description = "Onde de chakra qui repousse."
@@ -446,8 +446,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_y43w7"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_vft8a"]
+script = ExtResource("2_yopqh")
 id = &"clan_roran_c_mirage_du_desert"
 display_name = "Mirage du désert"
 description = "Mirage qui crée des leurres."
@@ -461,8 +461,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_ximlj"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_i2tmn"]
+script = ExtResource("2_yopqh")
 id = &"clan_roran_b_sceau_de_roran"
 display_name = "Sceau de Rōran"
 description = "Sceau qui réduit les dégâts reçus par les alliés."
@@ -476,8 +476,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_2w7fs"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_54msn"]
+script = ExtResource("2_yopqh")
 id = &"clan_roran_a_torrent_de_la_veine"
 display_name = "Torrent de la veine"
 description = "Flux de chakra dévastateur en ligne."
@@ -491,8 +491,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_q00fr"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_c11fh"]
+script = ExtResource("2_yopqh")
 id = &"clan_roran_s_renaissance_de_la_veine"
 display_name = "Renaissance de la veine"
 description = "Ramène un allié tombé avec une partie de ses PV."
@@ -506,17 +506,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_e0hmo"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_mn3rw"]
+script = ExtResource("1_wavea")
 id = &"clan_roran"
 display_name = "Rōran"
 village_id = &"suna"
 description = "Gardiens de la veine du dragon."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_yp4t4"), SubResource("Resource_y43w7"), SubResource("Resource_ximlj"), SubResource("Resource_2w7fs"), SubResource("Resource_q00fr")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_l4lsn"), SubResource("Resource_vft8a"), SubResource("Resource_i2tmn"), SubResource("Resource_54msn"), SubResource("Resource_c11fh")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_a1ygf"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_khvma"]
+script = ExtResource("2_yopqh")
 id = &"clan_sabaku_d_shuriken_de_sable"
 display_name = "Shuriken de sable"
 description = "Salve de shuriken de sable."
@@ -530,8 +530,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_selrn"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_o3rmm"]
+script = ExtResource("2_yopqh")
 id = &"clan_sabaku_c_cercueil_de_sable"
 display_name = "Cercueil de sable"
 description = "Enveloppe et immobilise la cible."
@@ -545,8 +545,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_ky2uj"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_5kpmo"]
+script = ExtResource("2_yopqh")
 id = &"clan_sabaku_b_armure_de_sable"
 display_name = "Armure de sable"
 description = "Bouclier qui absorbe les dégâts."
@@ -560,8 +560,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_46va0"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_14kj1"]
+script = ExtResource("2_yopqh")
 id = &"clan_sabaku_a_enterrement_du_desert"
 display_name = "Enterrement du désert"
 description = "Écrase la cible prisonnière du sable."
@@ -575,8 +575,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_58nfc"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_gc2rv"]
+script = ExtResource("2_yopqh")
 id = &"clan_sabaku_s_tsunami_de_sable"
 display_name = "Tsunami de sable"
 description = "Vague de sable qui engloutit l'arène."
@@ -590,17 +590,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_bkfcf"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_ihfk7"]
+script = ExtResource("1_wavea")
 id = &"clan_sabaku"
 display_name = "Sabaku"
 village_id = &"suna"
 description = "Maîtres du sable."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_a1ygf"), SubResource("Resource_selrn"), SubResource("Resource_ky2uj"), SubResource("Resource_46va0"), SubResource("Resource_58nfc")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_khvma"), SubResource("Resource_o3rmm"), SubResource("Resource_5kpmo"), SubResource("Resource_14kj1"), SubResource("Resource_gc2rv")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_8ayyp"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_mdck1"]
+script = ExtResource("2_yopqh")
 id = &"clan_hoki_d_transfert_de_chakra"
 display_name = "Transfert de chakra"
 description = "Donne du chakra à un allié."
@@ -614,8 +614,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_8i13k"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_v71yo"]
+script = ExtResource("2_yopqh")
 id = &"clan_hoki_c_lien_mental"
 display_name = "Lien mental"
 description = "Relie deux alliés : dégâts partagés."
@@ -629,8 +629,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_0h55b"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_2m1nb"]
+script = ExtResource("2_yopqh")
 id = &"clan_hoki_b_sceau_de_soutien"
 display_name = "Sceau de soutien"
 description = "Augmente les dégâts de l'équipe."
@@ -644,8 +644,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_o4csu"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_ud0tx"]
+script = ExtResource("2_yopqh")
 id = &"clan_hoki_a_esprit_partage"
 display_name = "Esprit partagé"
 description = "Les alliés voient les télégraphes plus tôt."
@@ -659,8 +659,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_7prit"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_8p4vo"]
+script = ExtResource("2_yopqh")
 id = &"clan_hoki_s_connaissance_absolue"
 display_name = "Connaissance absolue"
 description = "Réduit tous les temps de recharge de l'équipe."
@@ -674,17 +674,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_8jtat"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_ofjai"]
+script = ExtResource("1_wavea")
 id = &"clan_hoki"
 display_name = "Hōki"
 village_id = &"suna"
 description = "Transmission et partage du chakra."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_8ayyp"), SubResource("Resource_8i13k"), SubResource("Resource_0h55b"), SubResource("Resource_o4csu"), SubResource("Resource_7prit")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_mdck1"), SubResource("Resource_v71yo"), SubResource("Resource_2m1nb"), SubResource("Resource_ud0tx"), SubResource("Resource_8p4vo")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_ssy7l"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_e1nil"]
+script = ExtResource("2_yopqh")
 id = &"clan_kugutsu_d_fils_de_chakra"
 display_name = "Fils de chakra"
 description = "Fils qui attirent et ralentissent."
@@ -698,8 +698,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_yti0q"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_4tu6y"]
+script = ExtResource("2_yopqh")
 id = &"clan_kugutsu_c_marionnette_karasu"
 display_name = "Marionnette Karasu"
 description = "Marionnette qui attaque à distance."
@@ -713,8 +713,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_1bm1g"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_xa8t8"]
+script = ExtResource("2_yopqh")
 id = &"clan_kugutsu_b_lames_empoisonnees"
 display_name = "Lames empoisonnées"
 description = "Lames qui empoisonnent."
@@ -728,8 +728,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_1jdif"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_3hjng"]
+script = ExtResource("2_yopqh")
 id = &"clan_kugutsu_a_marionnette_bouclier"
 display_name = "Marionnette bouclier"
 description = "Marionnette qui protège de face."
@@ -743,8 +743,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_uada2"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_134yp"]
+script = ExtResource("2_yopqh")
 id = &"clan_kugutsu_s_armee_des_cent_marionnettes"
 display_name = "Armée des cent marionnettes"
 description = "Cent marionnettes envahissent l'arène."
@@ -758,17 +758,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_j3iwh"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_6sqk3"]
+script = ExtResource("1_wavea")
 id = &"clan_kugutsu"
 display_name = "Kugutsu"
 village_id = &"suna"
 description = "Marionnettistes."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_ssy7l"), SubResource("Resource_yti0q"), SubResource("Resource_1bm1g"), SubResource("Resource_1jdif"), SubResource("Resource_uada2")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_e1nil"), SubResource("Resource_4tu6y"), SubResource("Resource_xa8t8"), SubResource("Resource_3hjng"), SubResource("Resource_134yp")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_qsus4"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_2pcws"]
+script = ExtResource("2_yopqh")
 id = &"clan_hakumei_d_eclat_de_l_aube"
 display_name = "Éclat de l'aube"
 description = "Éclair lumineux qui aveugle."
@@ -782,8 +782,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_4ysww"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_piire"]
+script = ExtResource("2_yopqh")
 id = &"clan_hakumei_c_voile_crepusculaire"
 display_name = "Voile crépusculaire"
 description = "Rend invisible quelques instants."
@@ -797,8 +797,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_o0syq"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_4x8uw"]
+script = ExtResource("2_yopqh")
 id = &"clan_hakumei_b_rayon_d_aurore"
 display_name = "Rayon d'aurore"
 description = "Rayon de lumière perforant."
@@ -812,8 +812,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_2y1mt"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_h6wbl"]
+script = ExtResource("2_yopqh")
 id = &"clan_hakumei_a_brume_de_l_aube"
 display_name = "Brume de l'aube"
 description = "Zone lumineuse qui soigne les alliés."
@@ -827,8 +827,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_m1pjq"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_br1tl"]
+script = ExtResource("2_yopqh")
 id = &"clan_hakumei_s_aube_eternelle"
 display_name = "Aube éternelle"
 description = "Lumière écrasante qui étourdit l'arène."
@@ -842,17 +842,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_umm11"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_8chi8"]
+script = ExtResource("1_wavea")
 id = &"clan_hakumei"
 display_name = "Hakumei"
 village_id = &"suna"
 description = "Lumière de l'aube et illusions solaires."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_qsus4"), SubResource("Resource_4ysww"), SubResource("Resource_o0syq"), SubResource("Resource_2y1mt"), SubResource("Resource_m1pjq")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_2pcws"), SubResource("Resource_piire"), SubResource("Resource_4x8uw"), SubResource("Resource_h6wbl"), SubResource("Resource_br1tl")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_e56ub"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_kove3"]
+script = ExtResource("2_yopqh")
 id = &"clan_chinoike_d_ketsuryugan"
 display_name = "Ketsuryūgan"
 description = "Yeux de sang : les coups saignent."
@@ -866,8 +866,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_m8lfp"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_gfiwp"]
+script = ExtResource("2_yopqh")
 id = &"clan_chinoike_c_lame_de_sang"
 display_name = "Lame de sang"
 description = "Lame de sang durci."
@@ -881,8 +881,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_jp6nn"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_lns7e"]
+script = ExtResource("2_yopqh")
 id = &"clan_chinoike_b_ebullition_du_sang"
 display_name = "Ébullition du sang"
 description = "Fait bouillir le sang de la cible."
@@ -896,8 +896,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_be2jg"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_7mt31"]
+script = ExtResource("2_yopqh")
 id = &"clan_chinoike_a_genjutsu_sanglant"
 display_name = "Genjutsu sanglant"
 description = "Illusion qui terrifie."
@@ -911,8 +911,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_k2lsk"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_fr2sn"]
+script = ExtResource("2_yopqh")
 id = &"clan_chinoike_s_lune_de_sang"
 display_name = "Lune de sang"
 description = "Œil maudit qui paralyse et vide la vie."
@@ -926,17 +926,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_traig"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_dce6w"]
+script = ExtResource("1_wavea")
 id = &"clan_chinoike"
 display_name = "Chinoike"
 village_id = &"ame"
 description = "Ketsuryūgan et sang."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_e56ub"), SubResource("Resource_m8lfp"), SubResource("Resource_jp6nn"), SubResource("Resource_be2jg"), SubResource("Resource_k2lsk")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_kove3"), SubResource("Resource_gfiwp"), SubResource("Resource_lns7e"), SubResource("Resource_7mt31"), SubResource("Resource_fr2sn")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_2ada5"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_o1l7f"]
+script = ExtResource("2_yopqh")
 id = &"clan_fuma_d_fuma_shuriken"
 display_name = "Fūma shuriken"
 description = "Grand shuriken qui revient."
@@ -950,8 +950,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_rfh5j"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_oc66f"]
+script = ExtResource("2_yopqh")
 id = &"clan_fuma_c_moulin_geant"
 display_name = "Moulin géant"
 description = "Shuriken tournoyant autour de soi."
@@ -965,8 +965,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_ewsn4"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_3rpqb"]
+script = ExtResource("2_yopqh")
 id = &"clan_fuma_b_tempete_de_lames"
 display_name = "Tempête de lames"
 description = "Pluie de shuriken sur une zone."
@@ -980,8 +980,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_jpd5u"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_le2tn"]
+script = ExtResource("2_yopqh")
 id = &"clan_fuma_a_ombre_de_shuriken"
 display_name = "Ombre de shuriken"
 description = "Shuriken caché dans l'ombre d'un autre."
@@ -995,8 +995,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_bvalb"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_213ve"]
+script = ExtResource("2_yopqh")
 id = &"clan_fuma_s_danse_des_mille_lames"
 display_name = "Danse des mille lames"
 description = "Mille shuriken balaient l'arène."
@@ -1010,17 +1010,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_xc302"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_mmx7t"]
+script = ExtResource("1_wavea")
 id = &"clan_fuma"
 display_name = "Fūma"
 village_id = &"ame"
 description = "Maîtres des grands shuriken."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_2ada5"), SubResource("Resource_rfh5j"), SubResource("Resource_ewsn4"), SubResource("Resource_jpd5u"), SubResource("Resource_bvalb")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_o1l7f"), SubResource("Resource_oc66f"), SubResource("Resource_3rpqb"), SubResource("Resource_le2tn"), SubResource("Resource_213ve")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_4p50u"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_j6v6y"]
+script = ExtResource("2_yopqh")
 id = &"clan_salamandre_d_poison_de_salamandre"
 display_name = "Poison de salamandre"
 description = "Poison qui ronge les PV."
@@ -1034,8 +1034,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_bytbf"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_364yp"]
+script = ExtResource("2_yopqh")
 id = &"clan_salamandre_c_ibuse"
 display_name = "Ibuse"
 description = "Invoque la salamandre géante."
@@ -1049,8 +1049,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_ke013"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_2qhf8"]
+script = ExtResource("2_yopqh")
 id = &"clan_salamandre_b_brume_toxique"
 display_name = "Brume toxique"
 description = "Nuage empoisonné persistant."
@@ -1064,8 +1064,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_4kiho"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_u4a7l"]
+script = ExtResource("2_yopqh")
 id = &"clan_salamandre_a_kusarigama_de_hanzo"
 display_name = "Kusarigama de Hanzō"
 description = "Faucille enchaînée empoisonnée."
@@ -1079,8 +1079,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_100db"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_gtwed"]
+script = ExtResource("2_yopqh")
 id = &"clan_salamandre_s_gardien_ibuse"
 display_name = "Gardien Ibuse"
 description = "Ibuse protège et empoisonne la zone."
@@ -1094,17 +1094,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_06kpl"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_vmbfs"]
+script = ExtResource("1_wavea")
 id = &"clan_salamandre"
 display_name = "Salamandre"
 village_id = &"ame"
 description = "Poison et invocation d'Ibuse."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_4p50u"), SubResource("Resource_bytbf"), SubResource("Resource_ke013"), SubResource("Resource_4kiho"), SubResource("Resource_100db")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_j6v6y"), SubResource("Resource_364yp"), SubResource("Resource_2qhf8"), SubResource("Resource_u4a7l"), SubResource("Resource_gtwed")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_pt4eu"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_xvovg"]
+script = ExtResource("2_yopqh")
 id = &"clan_kaguya_d_balles_d_os"
 display_name = "Balles d'os"
 description = "Tire des fragments d'os."
@@ -1118,8 +1118,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_ufnen"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_h6ueo"]
+script = ExtResource("2_yopqh")
 id = &"clan_kaguya_c_danse_du_camelia"
 display_name = "Danse du camélia"
 description = "Épée d'os rapide."
@@ -1133,8 +1133,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_6wv74"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_llurh"]
+script = ExtResource("2_yopqh")
 id = &"clan_kaguya_b_danse_du_saule"
 display_name = "Danse du saule"
 description = "Os qui jaillissent de tout le corps."
@@ -1148,8 +1148,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_4s66e"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_5te86"]
+script = ExtResource("2_yopqh")
 id = &"clan_kaguya_a_danse_du_meleze"
 display_name = "Danse du mélèze"
 description = "Armure d'os acérée."
@@ -1163,8 +1163,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_bsivt"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_0cw5l"]
+script = ExtResource("2_yopqh")
 id = &"clan_kaguya_s_foret_d_os"
 display_name = "Forêt d'os"
 description = "Forêt de lances d'os en zone."
@@ -1178,17 +1178,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_jkedc"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_4qss4"]
+script = ExtResource("1_wavea")
 id = &"clan_kaguya"
 display_name = "Kaguya"
 village_id = &"ame"
 description = "Shikotsumyaku : manipulation des os."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_pt4eu"), SubResource("Resource_ufnen"), SubResource("Resource_6wv74"), SubResource("Resource_4s66e"), SubResource("Resource_bsivt")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_xvovg"), SubResource("Resource_h6ueo"), SubResource("Resource_llurh"), SubResource("Resource_5te86"), SubResource("Resource_0cw5l")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_vdcgd"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_y6s38"]
+script = ExtResource("2_yopqh")
 id = &"clan_kami_d_papillons_de_papier"
 display_name = "Papillons de papier"
 description = "Nuée qui aveugle et suit la cible."
@@ -1202,8 +1202,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_dc5ym"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_phj5k"]
+script = ExtResource("2_yopqh")
 id = &"clan_kami_c_lances_de_papier"
 display_name = "Lances de papier"
 description = "Lances de papier tranchant."
@@ -1217,8 +1217,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_x4st3"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_gf1nq"]
+script = ExtResource("2_yopqh")
 id = &"clan_kami_b_ailes_de_papier"
 display_name = "Ailes de papier"
 description = "Envol qui rend insaisissable."
@@ -1232,8 +1232,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_4ra0f"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_60dbm"]
+script = ExtResource("2_yopqh")
 id = &"clan_kami_a_clone_de_papier"
 display_name = "Clone de papier"
 description = "Clone qui explose."
@@ -1247,8 +1247,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_najff"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_y2ems"]
+script = ExtResource("2_yopqh")
 id = &"clan_kami_s_mer_de_papier"
 display_name = "Mer de papier"
 description = "Océan de papier qui ensevelit l'arène."
@@ -1262,17 +1262,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_jl7lp"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_8eamu"]
+script = ExtResource("1_wavea")
 id = &"clan_kami"
 display_name = "Kami"
 village_id = &"ame"
 description = "Origami de chakra."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_vdcgd"), SubResource("Resource_dc5ym"), SubResource("Resource_x4st3"), SubResource("Resource_4ra0f"), SubResource("Resource_najff")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_y6s38"), SubResource("Resource_phj5k"), SubResource("Resource_gf1nq"), SubResource("Resource_60dbm"), SubResource("Resource_y2ems")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_f71v4"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_3lj6r"]
+script = ExtResource("2_yopqh")
 id = &"clan_hozuki_d_liquefaction"
 display_name = "Liquéfaction"
 description = "Devient eau : esquive les coups."
@@ -1286,8 +1286,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_6hq3w"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_nqp82"]
+script = ExtResource("2_yopqh")
 id = &"clan_hozuki_c_balle_d_eau"
 display_name = "Balle d'eau"
 description = "Tir d'eau sous pression."
@@ -1301,8 +1301,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_2u8ps"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_q14u2"]
+script = ExtResource("2_yopqh")
 id = &"clan_hozuki_b_bras_gonfle"
 display_name = "Bras gonflé"
 description = "Bras hypertrophié qui écrase."
@@ -1316,8 +1316,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_trhvg"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_468ax"]
+script = ExtResource("2_yopqh")
 id = &"clan_hozuki_a_corps_d_eau"
 display_name = "Corps d'eau"
 description = "Intangible pendant plusieurs secondes."
@@ -1331,8 +1331,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_mp7xy"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_yvqbm"]
+script = ExtResource("2_yopqh")
 id = &"clan_hozuki_s_dragon_d_eau_colossal"
 display_name = "Dragon d'eau colossal"
 description = "Se transforme en dragon d'eau."
@@ -1346,17 +1346,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_65djg"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_x6wog"]
+script = ExtResource("1_wavea")
 id = &"clan_hozuki"
 display_name = "Hōzuki"
 village_id = &"kiri"
 description = "Corps liquide."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_f71v4"), SubResource("Resource_6hq3w"), SubResource("Resource_2u8ps"), SubResource("Resource_trhvg"), SubResource("Resource_mp7xy")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_3lj6r"), SubResource("Resource_nqp82"), SubResource("Resource_q14u2"), SubResource("Resource_468ax"), SubResource("Resource_yvqbm")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_w4jyo"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_r6qr2"]
+script = ExtResource("2_yopqh")
 id = &"clan_hoshigaki_d_peau_de_requin"
 display_name = "Peau de requin"
 description = "Réduit les dégâts reçus."
@@ -1370,8 +1370,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_5viuv"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_py8um"]
+script = ExtResource("2_yopqh")
 id = &"clan_hoshigaki_c_absorption_de_chakra"
 display_name = "Absorption de chakra"
 description = "Vole le chakra au contact."
@@ -1385,8 +1385,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_6enkk"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_nqok5"]
+script = ExtResource("2_yopqh")
 id = &"clan_hoshigaki_b_charge_du_requin"
 display_name = "Charge du requin"
 description = "Plongée qui percute."
@@ -1400,8 +1400,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_b2ai6"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_la1lf"]
+script = ExtResource("2_yopqh")
 id = &"clan_hoshigaki_a_fusion_requin"
 display_name = "Fusion requin"
 description = "Forme de requin : vitesse et dégâts."
@@ -1415,8 +1415,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_cngkr"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_rlboj"]
+script = ExtResource("2_yopqh")
 id = &"clan_hoshigaki_s_mille_requins"
 display_name = "Mille requins"
 description = "Banc de requins qui dévore l'arène."
@@ -1430,17 +1430,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_mdce0"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_j2tn2"]
+script = ExtResource("1_wavea")
 id = &"clan_hoshigaki"
 display_name = "Hoshigaki"
 village_id = &"kiri"
 description = "Hommes-requins."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_w4jyo"), SubResource("Resource_5viuv"), SubResource("Resource_6enkk"), SubResource("Resource_b2ai6"), SubResource("Resource_cngkr")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_r6qr2"), SubResource("Resource_py8um"), SubResource("Resource_nqok5"), SubResource("Resource_la1lf"), SubResource("Resource_rlboj")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_xwpwc"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_mrtjk"]
+script = ExtResource("2_yopqh")
 id = &"clan_yuki_d_senbon_de_glace"
 display_name = "Senbon de glace"
 description = "Aiguilles de glace qui ralentissent."
@@ -1454,8 +1454,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_jpntr"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_d3ptj"]
+script = ExtResource("2_yopqh")
 id = &"clan_yuki_c_miroirs_de_glace"
 display_name = "Miroirs de glace"
 description = "Cage de miroirs autour de la cible."
@@ -1469,8 +1469,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_6tvan"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_xbbkn"]
+script = ExtResource("2_yopqh")
 id = &"clan_yuki_b_lances_de_glace"
 display_name = "Lances de glace"
 description = "Lances qui jaillissent du sol."
@@ -1484,8 +1484,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_7wley"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_c0jhn"]
+script = ExtResource("2_yopqh")
 id = &"clan_yuki_a_prison_de_glace"
 display_name = "Prison de glace"
 description = "Gèle la cible sur place."
@@ -1499,8 +1499,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_uu81q"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_6r2yb"]
+script = ExtResource("2_yopqh")
 id = &"clan_yuki_s_dragon_noir_de_glace"
 display_name = "Dragon noir de glace"
 description = "Dragon de glace qui gèle la zone."
@@ -1514,17 +1514,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_ougtq"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_6n21p"]
+script = ExtResource("1_wavea")
 id = &"clan_yuki"
 display_name = "Yuki"
 village_id = &"kiri"
 description = "Hyōton : la glace."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_xwpwc"), SubResource("Resource_jpntr"), SubResource("Resource_6tvan"), SubResource("Resource_7wley"), SubResource("Resource_uu81q")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_mrtjk"), SubResource("Resource_d3ptj"), SubResource("Resource_xbbkn"), SubResource("Resource_c0jhn"), SubResource("Resource_6r2yb")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_vbnjj"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_uu6y8"]
+script = ExtResource("2_yopqh")
 id = &"clan_karatachi_d_corail"
 display_name = "Corail"
 description = "Corail qui enracine la cible."
@@ -1538,8 +1538,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_ppgw0"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_f58qf"]
+script = ExtResource("2_yopqh")
 id = &"clan_karatachi_c_miroir_d_eau"
 display_name = "Miroir d'eau"
 description = "Renvoie la prochaine technique."
@@ -1553,8 +1553,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_o6taw"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_oqxp7"]
+script = ExtResource("2_yopqh")
 id = &"clan_karatachi_b_baton_a_crochets"
 display_name = "Bâton à crochets"
 description = "Frappe qui attire."
@@ -1568,8 +1568,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_gu8dq"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_vnt38"]
+script = ExtResource("2_yopqh")
 id = &"clan_karatachi_a_sceau_de_corail"
 display_name = "Sceau de corail"
 description = "Corail qui pétrifie en zone."
@@ -1583,8 +1583,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_hhsyb"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_kfo6g"]
+script = ExtResource("2_yopqh")
 id = &"clan_karatachi_s_reflexion_totale"
 display_name = "Réflexion totale"
 description = "Copie la dernière technique ennemie."
@@ -1598,17 +1598,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_bkuwv"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_6ycaq"]
+script = ExtResource("1_wavea")
 id = &"clan_karatachi"
 display_name = "Karatachi"
 village_id = &"kiri"
 description = "Corail et miroirs d'eau."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_vbnjj"), SubResource("Resource_ppgw0"), SubResource("Resource_o6taw"), SubResource("Resource_gu8dq"), SubResource("Resource_hhsyb")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_uu6y8"), SubResource("Resource_f58qf"), SubResource("Resource_oqxp7"), SubResource("Resource_vnt38"), SubResource("Resource_kfo6g")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_sbrhk"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_a1wwq"]
+script = ExtResource("2_yopqh")
 id = &"clan_epeistes_d_kubikiribocho"
 display_name = "Kubikiribōchō"
 description = "Tranche lourde qui se répare en touchant."
@@ -1622,8 +1622,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_7wx62"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_b063x"]
+script = ExtResource("2_yopqh")
 id = &"clan_epeistes_c_kiba"
 display_name = "Kiba"
 description = "Lames de foudre jumelles."
@@ -1637,8 +1637,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_1uavy"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_m61o5"]
+script = ExtResource("2_yopqh")
 id = &"clan_epeistes_b_hiramekarei"
 display_name = "Hiramekarei"
 description = "Lame de chakra étendue."
@@ -1652,8 +1652,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_alglp"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_lrlay"]
+script = ExtResource("2_yopqh")
 id = &"clan_epeistes_a_nuibari"
 display_name = "Nuibari"
 description = "Aiguille qui coud plusieurs ennemis ensemble."
@@ -1667,8 +1667,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_mtvcr"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_f6qfp"]
+script = ExtResource("2_yopqh")
 id = &"clan_epeistes_s_samehada"
 display_name = "Samehada"
 description = "L'épée dévore le chakra et soigne son porteur."
@@ -1682,17 +1682,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_wbtb3"]
-script = ExtResource("1_gqkqd")
+[sub_resource type="Resource" id="Resource_8bele"]
+script = ExtResource("1_wavea")
 id = &"clan_epeistes"
 display_name = "Épéistes"
 village_id = &"kiri"
 description = "Héritiers des sept épées de Kiri."
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_sbrhk"), SubResource("Resource_7wx62"), SubResource("Resource_1uavy"), SubResource("Resource_alglp"), SubResource("Resource_mtvcr")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_a1wwq"), SubResource("Resource_b063x"), SubResource("Resource_m61o5"), SubResource("Resource_lrlay"), SubResource("Resource_f6qfp")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_aki41"]
-script = ExtResource("3_nv6x4")
+[sub_resource type="Resource" id="Resource_icfsx"]
+script = ExtResource("3_nlep2")
 grade = 0
 display_name = "Genin"
 base_hp = 100.0
@@ -1701,10 +1701,11 @@ tenketsu_points = 2
 max_jutsu_rank = 1
 granted_choices = Array[int]([0])
 sub_jutsu_event = 0
+xp_to_next = 300
 placeholder_stats = false
 
-[sub_resource type="Resource" id="Resource_74ylr"]
-script = ExtResource("3_nv6x4")
+[sub_resource type="Resource" id="Resource_2imgn"]
+script = ExtResource("3_nlep2")
 grade = 1
 display_name = "Chunin"
 base_hp = 120.0
@@ -1713,10 +1714,11 @@ tenketsu_points = 2
 max_jutsu_rank = 2
 granted_choices = Array[int]([1])
 sub_jutsu_event = 1
+xp_to_next = 700
 placeholder_stats = false
 
-[sub_resource type="Resource" id="Resource_40a77"]
-script = ExtResource("3_nv6x4")
+[sub_resource type="Resource" id="Resource_sbsi2"]
+script = ExtResource("3_nlep2")
 grade = 2
 display_name = "Konin"
 base_hp = 135.0
@@ -1725,10 +1727,11 @@ tenketsu_points = 2
 max_jutsu_rank = 2
 granted_choices = Array[int]([])
 sub_jutsu_event = 0
+xp_to_next = 1300
 placeholder_stats = false
 
-[sub_resource type="Resource" id="Resource_7c27w"]
-script = ExtResource("3_nv6x4")
+[sub_resource type="Resource" id="Resource_uoeot"]
+script = ExtResource("3_nlep2")
 grade = 3
 display_name = "Tokubetsu"
 base_hp = 155.0
@@ -1737,10 +1740,11 @@ tenketsu_points = 2
 max_jutsu_rank = 3
 granted_choices = Array[int]([2])
 sub_jutsu_event = 2
+xp_to_next = 2200
 placeholder_stats = false
 
-[sub_resource type="Resource" id="Resource_6hq73"]
-script = ExtResource("3_nv6x4")
+[sub_resource type="Resource" id="Resource_h023a"]
+script = ExtResource("3_nlep2")
 grade = 4
 display_name = "Jonin"
 base_hp = 180.0
@@ -1749,10 +1753,11 @@ tenketsu_points = 2
 max_jutsu_rank = 4
 granted_choices = Array[int]([])
 sub_jutsu_event = 0
+xp_to_next = 0
 placeholder_stats = false
 
-[sub_resource type="Resource" id="Resource_n1jni"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_ilbwm"]
+script = ExtResource("2_yopqh")
 id = &"katon_d_goukakyuu"
 display_name = "Boule de feu suprême"
 description = "Grosse boule de feu qui explose à l'impact."
@@ -1766,8 +1771,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_4y3df"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_ycfui"]
+script = ExtResource("2_yopqh")
 id = &"katon_d_housenka"
 display_name = "Pluie de phénix"
 description = "Salve de petites flammes guidées qui brûlent."
@@ -1781,8 +1786,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_47v2t"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_mkymp"]
+script = ExtResource("2_yopqh")
 id = &"katon_c_ryuuka"
 display_name = "Feu du dragon"
 description = "Jet de flammes en ligne droite qui traverse."
@@ -1796,8 +1801,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_8pulj"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_3ku53"]
+script = ExtResource("2_yopqh")
 id = &"katon_c_haisekishou"
 display_name = "Cendres ardentes"
 description = "Nuage de cendres qui s'enflamme en zone."
@@ -1811,8 +1816,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_cd3xh"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_rhkil"]
+script = ExtResource("2_yopqh")
 id = &"katon_b_karyuu_endan"
 display_name = "Missile du dragon de feu"
 description = "Long dragon de feu qui laisse le sol en flammes."
@@ -1826,8 +1831,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_urod2"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_6ecvc"]
+script = ExtResource("2_yopqh")
 id = &"katon_b_bakuen"
 display_name = "Brasier"
 description = "Explosion autour de soi qui repousse."
@@ -1841,8 +1846,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_5etyw"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_4l6qh"]
+script = ExtResource("2_yopqh")
 id = &"katon_a_gouryuuka"
 display_name = "Grand dragon de feu"
 description = "Plusieurs dragons de feu tombent sur une zone."
@@ -1856,8 +1861,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_2o4tb"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_iovgb"]
+script = ExtResource("2_yopqh")
 id = &"katon_a_bakufuu_ranbu"
 display_name = "Tempête de flammes"
 description = "Tourbillon de feu canalisé qui aspire les ennemis."
@@ -1871,8 +1876,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_uqstp"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_r37s5"]
+script = ExtResource("2_yopqh")
 id = &"katon_s_goka_messhitsu"
 display_name = "Annihilation des flammes"
 description = "Mur de feu gigantesque qui balaie l'arène."
@@ -1886,8 +1891,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_hf7m0"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_7kfju"]
+script = ExtResource("2_yopqh")
 id = &"katon_s_karura"
 display_name = "Phénix de Karura"
 description = "Phénix qui renaît une fois et brûle tout sur son passage."
@@ -1901,17 +1906,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_asp17"]
-script = ExtResource("4_4i3ef")
+[sub_resource type="Resource" id="Resource_lbmxd"]
+script = ExtResource("4_vu886")
 id = &"katon"
 display_name = "Katon"
 description = "Feu : dégâts en zone et brûlures."
 color = Color(1, 0.478431, 0.101961, 1)
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_n1jni"), SubResource("Resource_4y3df"), SubResource("Resource_47v2t"), SubResource("Resource_8pulj"), SubResource("Resource_cd3xh"), SubResource("Resource_urod2"), SubResource("Resource_5etyw"), SubResource("Resource_2o4tb"), SubResource("Resource_uqstp"), SubResource("Resource_hf7m0")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_ilbwm"), SubResource("Resource_ycfui"), SubResource("Resource_mkymp"), SubResource("Resource_3ku53"), SubResource("Resource_rhkil"), SubResource("Resource_6ecvc"), SubResource("Resource_4l6qh"), SubResource("Resource_iovgb"), SubResource("Resource_r37s5"), SubResource("Resource_7kfju")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_8pqig"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_5n0mr"]
+script = ExtResource("2_yopqh")
 id = &"suiton_d_mizurappa"
 display_name = "Vague d'eau"
 description = "Vague frontale qui repousse et ralentit."
@@ -1925,8 +1930,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_lcbb8"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_60de5"]
+script = ExtResource("2_yopqh")
 id = &"suiton_d_mizu_bunshin"
 display_name = "Clone d'eau"
 description = "Clone qui distrait et absorbe un coup."
@@ -1940,8 +1945,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_oxm7b"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_ybsgf"]
+script = ExtResource("2_yopqh")
 id = &"suiton_c_suiryuudan"
 display_name = "Dragon d'eau"
 description = "Dragon d'eau qui percute et projette."
@@ -1955,8 +1960,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_rbsvy"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_ug5ct"]
+script = ExtResource("2_yopqh")
 id = &"suiton_c_suijinheki"
 display_name = "Mur d'eau"
 description = "Mur qui bloque les projectiles."
@@ -1970,8 +1975,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_mpdub"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_pylxh"]
+script = ExtResource("2_yopqh")
 id = &"suiton_b_suikoudan"
 display_name = "Requin d'eau"
 description = "Requin qui traque la cible la plus proche."
@@ -1985,8 +1990,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_g5cpq"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_640y0"]
+script = ExtResource("2_yopqh")
 id = &"suiton_b_suirou"
 display_name = "Prison d'eau"
 description = "Enferme une cible au contact (entrave)."
@@ -2000,8 +2005,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_qqx20"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_n86gb"]
+script = ExtResource("2_yopqh")
 id = &"suiton_a_daibakufu"
 display_name = "Grande cascade"
 description = "Torrent qui balaie une grande zone."
@@ -2015,8 +2020,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_41gtb"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_hpf3q"]
+script = ExtResource("2_yopqh")
 id = &"suiton_a_kirigakure"
 display_name = "Brume cachée"
 description = "Brume qui masque les alliés et ralentit les ennemis."
@@ -2030,8 +2035,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_hrcka"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_84s15"]
+script = ExtResource("2_yopqh")
 id = &"suiton_s_daikoudan"
 display_name = "Grand requin"
 description = "Requin titanesque qui dévore le chakra."
@@ -2045,8 +2050,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_a8vul"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_o58yl"]
+script = ExtResource("2_yopqh")
 id = &"suiton_s_suishouha"
 display_name = "Déferlante"
 description = "Raz-de-marée qui inonde l'arène."
@@ -2060,17 +2065,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_i17rs"]
-script = ExtResource("4_4i3ef")
+[sub_resource type="Resource" id="Resource_xmoxu"]
+script = ExtResource("4_vu886")
 id = &"suiton"
 display_name = "Suiton"
 description = "Eau : contrôle, ralentissements et prisons."
 color = Color(0.301961, 0.607843, 1, 1)
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_8pqig"), SubResource("Resource_lcbb8"), SubResource("Resource_oxm7b"), SubResource("Resource_rbsvy"), SubResource("Resource_mpdub"), SubResource("Resource_g5cpq"), SubResource("Resource_qqx20"), SubResource("Resource_41gtb"), SubResource("Resource_hrcka"), SubResource("Resource_a8vul")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_5n0mr"), SubResource("Resource_60de5"), SubResource("Resource_ybsgf"), SubResource("Resource_ug5ct"), SubResource("Resource_pylxh"), SubResource("Resource_640y0"), SubResource("Resource_n86gb"), SubResource("Resource_hpf3q"), SubResource("Resource_84s15"), SubResource("Resource_o58yl")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_nta5e"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_xcm46"]
+script = ExtResource("2_yopqh")
 id = &"raiton_d_raikyuu"
 display_name = "Sphère de foudre"
 description = "Boule électrique rapide qui paralyse brièvement."
@@ -2084,8 +2089,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_gbwv6"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_ehnn3"]
+script = ExtResource("2_yopqh")
 id = &"raiton_d_jibashi"
 display_name = "Décharge"
 description = "Décharge au contact qui interrompt."
@@ -2099,8 +2104,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_m05pe"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_wx5y4"]
+script = ExtResource("2_yopqh")
 id = &"raiton_c_kangekiha"
 display_name = "Onde électrique"
 description = "Arc électrique en cône."
@@ -2114,8 +2119,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_8dw2j"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_f04kr"]
+script = ExtResource("2_yopqh")
 id = &"raiton_c_raikou_senbon"
 display_name = "Aiguilles de foudre"
 description = "Pluie d'aiguilles électriques."
@@ -2129,8 +2134,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_341hm"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_68uf2"]
+script = ExtResource("2_yopqh")
 id = &"raiton_b_raiton_yoroi"
 display_name = "Armure de foudre"
 description = "Armure qui augmente la vitesse et les dégâts."
@@ -2144,8 +2149,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_f1v61"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_n5x1s"]
+script = ExtResource("2_yopqh")
 id = &"raiton_b_raiga"
 display_name = "Croc de foudre"
 description = "Ruée électrique qui traverse les ennemis."
@@ -2159,8 +2164,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_w3twa"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_mtr5l"]
+script = ExtResource("2_yopqh")
 id = &"raiton_a_raigeki_ryuu"
 display_name = "Dragon de foudre"
 description = "Dragon électrique qui enchaîne les cibles."
@@ -2174,8 +2179,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_prcmy"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_yr1ti"]
+script = ExtResource("2_yopqh")
 id = &"raiton_a_gian"
 display_name = "Fausse obscurité"
 description = "Rayon perforant à longue portée."
@@ -2189,8 +2194,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_5adcx"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_5dtek"]
+script = ExtResource("2_yopqh")
 id = &"raiton_s_kuropansa"
 display_name = "Panthère noire"
 description = "Panthère de foudre qui paralyse en zone."
@@ -2204,8 +2209,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_ivli1"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_jcmnk"]
+script = ExtResource("2_yopqh")
 id = &"raiton_s_raijin_no_ken"
 display_name = "Épée du dieu du tonnerre"
 description = "Lame de foudre étendue, frappes en série."
@@ -2219,17 +2224,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_uc6ln"]
-script = ExtResource("4_4i3ef")
+[sub_resource type="Resource" id="Resource_fx15n"]
+script = ExtResource("4_vu886")
 id = &"raiton"
 display_name = "Raiton"
 description = "Foudre : vitesse, perforation et paralysie."
 color = Color(0.623529, 0.847059, 1, 1)
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_nta5e"), SubResource("Resource_gbwv6"), SubResource("Resource_m05pe"), SubResource("Resource_8dw2j"), SubResource("Resource_341hm"), SubResource("Resource_f1v61"), SubResource("Resource_w3twa"), SubResource("Resource_prcmy"), SubResource("Resource_5adcx"), SubResource("Resource_ivli1")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_xcm46"), SubResource("Resource_ehnn3"), SubResource("Resource_wx5y4"), SubResource("Resource_f04kr"), SubResource("Resource_68uf2"), SubResource("Resource_n5x1s"), SubResource("Resource_mtr5l"), SubResource("Resource_yr1ti"), SubResource("Resource_5dtek"), SubResource("Resource_jcmnk")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_eyneq"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_aka7t"]
+script = ExtResource("2_yopqh")
 id = &"doton_d_doryuuheki"
 display_name = "Mur de terre"
 description = "Mur qui bloque coups et projectiles."
@@ -2243,8 +2248,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_25yls"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_fa40s"]
+script = ExtResource("2_yopqh")
 id = &"doton_d_ganchuurou"
 display_name = "Prison rocheuse"
 description = "Piliers qui entravent la cible."
@@ -2258,8 +2263,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_qeusj"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_8rt50"]
+script = ExtResource("2_yopqh")
 id = &"doton_c_doryuudan"
 display_name = "Dragon de terre"
 description = "Tête de dragon qui crache des boulets de boue."
@@ -2273,8 +2278,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_e1aty"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_ln7wq"]
+script = ExtResource("2_yopqh")
 id = &"doton_c_yomi_numa"
 display_name = "Marais des enfers"
 description = "Sol boueux qui ralentit fortement."
@@ -2288,8 +2293,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_osnwn"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_gd2uq"]
+script = ExtResource("2_yopqh")
 id = &"doton_b_doryuu_sou"
 display_name = "Lances de terre"
 description = "Pointes qui jaillissent du sol en ligne."
@@ -2303,8 +2308,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_be2jl"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_e6nku"]
+script = ExtResource("2_yopqh")
 id = &"doton_b_kajuugan"
 display_name = "Poids lourd"
 description = "Alourdit la cible (ralentit, empêche les dashs)."
@@ -2318,8 +2323,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_bsbm5"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_verwv"]
+script = ExtResource("2_yopqh")
 id = &"doton_a_iwa_gaeshi"
 display_name = "Retournement de terrain"
 description = "Soulève le sol et projette tout le monde."
@@ -2333,8 +2338,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_w1s2g"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_60ptw"]
+script = ExtResource("2_yopqh")
 id = &"doton_a_kengan"
 display_name = "Poing de roche"
 description = "Bras de pierre qui protège puis frappe."
@@ -2348,8 +2353,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_xwfq4"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_1qfhp"]
+script = ExtResource("2_yopqh")
 id = &"doton_s_chidou_kaku"
 display_name = "Montagne mouvante"
 description = "Gigantesque bloc qui écrase la zone."
@@ -2363,8 +2368,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_achjh"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_u8xbb"]
+script = ExtResource("2_yopqh")
 id = &"doton_s_kekkai_doumu"
 display_name = "Dôme de terre"
 description = "Dôme qui protège l'équipe puis explose."
@@ -2378,17 +2383,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_ir4ud"]
-script = ExtResource("4_4i3ef")
+[sub_resource type="Resource" id="Resource_mqxgk"]
+script = ExtResource("4_vu886")
 id = &"doton"
 display_name = "Doton"
 description = "Terre : défense, murs et lourds impacts."
 color = Color(0.658824, 0.501961, 0.301961, 1)
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_eyneq"), SubResource("Resource_25yls"), SubResource("Resource_qeusj"), SubResource("Resource_e1aty"), SubResource("Resource_osnwn"), SubResource("Resource_be2jl"), SubResource("Resource_bsbm5"), SubResource("Resource_w1s2g"), SubResource("Resource_xwfq4"), SubResource("Resource_achjh")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_aka7t"), SubResource("Resource_fa40s"), SubResource("Resource_8rt50"), SubResource("Resource_ln7wq"), SubResource("Resource_gd2uq"), SubResource("Resource_e6nku"), SubResource("Resource_verwv"), SubResource("Resource_60ptw"), SubResource("Resource_1qfhp"), SubResource("Resource_u8xbb")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_i7cs0"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_6iwbo"]
+script = ExtResource("2_yopqh")
 id = &"futon_d_daitoppa"
 display_name = "Grande bourrasque"
 description = "Rafale qui repousse en cône."
@@ -2402,8 +2407,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_yqvfq"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_vijro"]
+script = ExtResource("2_yopqh")
 id = &"futon_d_shinkuu_gyoku"
 display_name = "Balle de vide"
 description = "Projectiles d'air rapides."
@@ -2417,8 +2422,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_mwoki"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_bubay"]
+script = ExtResource("2_yopqh")
 id = &"futon_c_kamaitachi"
 display_name = "Faucheuse"
 description = "Lames de vent qui saignent."
@@ -2432,8 +2437,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_ik2nj"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_obhcf"]
+script = ExtResource("2_yopqh")
 id = &"futon_c_kaze_no_yoroi"
 display_name = "Voile de vent"
 description = "Dévie les projectiles quelques instants."
@@ -2447,8 +2452,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_uooq4"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_ce2jm"]
+script = ExtResource("2_yopqh")
 id = &"futon_b_atsugai"
 display_name = "Pression"
 description = "Explosion de vent concentrée."
@@ -2462,8 +2467,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_r4wl2"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_ajrv1"]
+script = ExtResource("2_yopqh")
 id = &"futon_b_kaze_no_yaiba"
 display_name = "Lame de vent"
 description = "Lame invisible à longue portée."
@@ -2477,8 +2482,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_1pvrl"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_6fsqr"]
+script = ExtResource("2_yopqh")
 id = &"futon_a_shinkuu_taigyoku"
 display_name = "Grande sphère de vide"
 description = "Énorme sphère d'air comprimé."
@@ -2492,8 +2497,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_6dfrn"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_y18v2"]
+script = ExtResource("2_yopqh")
 id = &"futon_a_fuujin"
 display_name = "Pas du vent"
 description = "Saut porté par le vent qui frappe à l'atterrissage."
@@ -2507,8 +2512,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_7tb0o"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_vk2qn"]
+script = ExtResource("2_yopqh")
 id = &"futon_s_rasen_tatsumaki"
 display_name = "Tornade spirale"
 description = "Tornade qui aspire et lacère."
@@ -2522,8 +2527,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_2wyah"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_rqjmx"]
+script = ExtResource("2_yopqh")
 id = &"futon_s_shinkuu_renpa"
 display_name = "Rafale du vide"
 description = "Mitraille de vide sur une grande zone."
@@ -2537,17 +2542,17 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_k8jup"]
-script = ExtResource("4_4i3ef")
+[sub_resource type="Resource" id="Resource_8ytby"]
+script = ExtResource("4_vu886")
 id = &"futon"
 display_name = "Futon"
 description = "Vent : portée, coupures et repoussements."
 color = Color(0.611765, 1, 0.721569, 1)
-jutsu = Array[ExtResource("2_n6y1t")]([SubResource("Resource_i7cs0"), SubResource("Resource_yqvfq"), SubResource("Resource_mwoki"), SubResource("Resource_ik2nj"), SubResource("Resource_uooq4"), SubResource("Resource_r4wl2"), SubResource("Resource_1pvrl"), SubResource("Resource_6dfrn"), SubResource("Resource_7tb0o"), SubResource("Resource_2wyah")])
+jutsu = Array[ExtResource("2_yopqh")]([SubResource("Resource_6iwbo"), SubResource("Resource_vijro"), SubResource("Resource_bubay"), SubResource("Resource_obhcf"), SubResource("Resource_ce2jm"), SubResource("Resource_ajrv1"), SubResource("Resource_6fsqr"), SubResource("Resource_y18v2"), SubResource("Resource_vk2qn"), SubResource("Resource_rqjmx")])
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_61dbs"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_gx366"]
+script = ExtResource("2_yopqh")
 id = &"medic_paume_mystique"
 display_name = "Paume mystique"
 description = "Soigne un allié (ou soi-même)."
@@ -2561,8 +2566,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_546ur"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_3ndew"]
+script = ExtResource("2_yopqh")
 id = &"medic_extraction"
 display_name = "Extraction"
 description = "Retire poisons et altérations d'un allié."
@@ -2576,8 +2581,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_yt30l"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_66dly"]
+script = ExtResource("2_yopqh")
 id = &"medic_scalpel_de_chakra"
 display_name = "Scalpel de chakra"
 description = "Coupe les muscles : ralentit et affaiblit."
@@ -2591,8 +2596,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_o56w2"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_5qlpy"]
+script = ExtResource("2_yopqh")
 id = &"medic_passive_medecine_ninja"
 display_name = "Médecine ninja"
 description = "Les soins prodigués sont plus efficaces."
@@ -2606,18 +2611,18 @@ requirements = Array[StringName]([])
 passive = true
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_02ixi"]
-script = ExtResource("6_n8wsr")
+[sub_resource type="Resource" id="Resource_pc32u"]
+script = ExtResource("6_rfxa7")
 id = &"medic"
 display_name = "Médecin"
 description = "Soigne, purifie et maintient l'équipe en vie."
 role = "Soutien"
-active_skills = Array[ExtResource("2_n6y1t")]([SubResource("Resource_61dbs"), SubResource("Resource_546ur"), SubResource("Resource_yt30l")])
-passive_skill = SubResource("Resource_o56w2")
+active_skills = Array[ExtResource("2_yopqh")]([SubResource("Resource_gx366"), SubResource("Resource_3ndew"), SubResource("Resource_66dly")])
+passive_skill = SubResource("Resource_5qlpy")
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_fafj6"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_7mlmf"]
+script = ExtResource("2_yopqh")
 id = &"tracker_marque_de_traque"
 display_name = "Marque de traque"
 description = "Révèle et marque une cible."
@@ -2631,8 +2636,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_bipy4"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_t2csx"]
+script = ExtResource("2_yopqh")
 id = &"tracker_chiens_pisteurs"
 display_name = "Chiens pisteurs"
 description = "Invoque des chiens qui harcèlent la cible."
@@ -2646,8 +2651,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_7twrk"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_36nn0"]
+script = ExtResource("2_yopqh")
 id = &"tracker_piege_a_fil"
 display_name = "Piège à fil"
 description = "Piège qui entrave le premier ennemi."
@@ -2661,8 +2666,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_jng3j"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_wblo8"]
+script = ExtResource("2_yopqh")
 id = &"tracker_passive_il_du_chasseur"
 display_name = "Œil du chasseur"
 description = "Dégâts accrus contre les cibles marquées ou isolées."
@@ -2676,18 +2681,18 @@ requirements = Array[StringName]([])
 passive = true
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_0s5y4"]
-script = ExtResource("6_n8wsr")
+[sub_resource type="Resource" id="Resource_wb7g7"]
+script = ExtResource("6_rfxa7")
 id = &"tracker"
 display_name = "Traqueur"
 description = "Marque, piste et achève les cibles isolées."
 role = "Traque"
-active_skills = Array[ExtResource("2_n6y1t")]([SubResource("Resource_fafj6"), SubResource("Resource_bipy4"), SubResource("Resource_7twrk")])
-passive_skill = SubResource("Resource_jng3j")
+active_skills = Array[ExtResource("2_yopqh")]([SubResource("Resource_7mlmf"), SubResource("Resource_t2csx"), SubResource("Resource_36nn0")])
+passive_skill = SubResource("Resource_wblo8")
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_bbdi8"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_j8l2e"]
+script = ExtResource("2_yopqh")
 id = &"fighter_ruee"
 display_name = "Ruée"
 description = "Fonce sur la cible et frappe."
@@ -2701,8 +2706,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_ytc1s"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_wdfal"]
+script = ExtResource("2_yopqh")
 id = &"fighter_enchainement"
 display_name = "Enchaînement"
 description = "Série de coups rapides."
@@ -2716,8 +2721,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_62hhc"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_nkrn0"]
+script = ExtResource("2_yopqh")
 id = &"fighter_brise_garde"
 display_name = "Brise-garde"
 description = "Coup lourd qui brise la garde."
@@ -2731,8 +2736,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_hmxg2"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_2cac1"]
+script = ExtResource("2_yopqh")
 id = &"fighter_passive_instinct_de_combat"
 display_name = "Instinct de combat"
 description = "Chaque coup au corps à corps réduit les temps de recharge."
@@ -2746,18 +2751,18 @@ requirements = Array[StringName]([])
 passive = true
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_pqope"]
-script = ExtResource("6_n8wsr")
+[sub_resource type="Resource" id="Resource_o8udq"]
+script = ExtResource("6_rfxa7")
 id = &"fighter"
 display_name = "Combattant"
 description = "Taijutsu offensif et enchaînements."
 role = "Dégâts"
-active_skills = Array[ExtResource("2_n6y1t")]([SubResource("Resource_bbdi8"), SubResource("Resource_ytc1s"), SubResource("Resource_62hhc")])
-passive_skill = SubResource("Resource_hmxg2")
+active_skills = Array[ExtResource("2_yopqh")]([SubResource("Resource_j8l2e"), SubResource("Resource_wdfal"), SubResource("Resource_nkrn0")])
+passive_skill = SubResource("Resource_2cac1")
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_2in5x"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_hjfjj"]
+script = ExtResource("2_yopqh")
 id = &"bulwark_provocation"
 display_name = "Provocation"
 description = "Force les ennemis proches à vous cibler."
@@ -2771,8 +2776,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_350mg"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_333p2"]
+script = ExtResource("2_yopqh")
 id = &"bulwark_bouclier_de_chakra"
 display_name = "Bouclier de chakra"
 description = "Bouclier sur soi ou un allié."
@@ -2786,8 +2791,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_m56pf"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_0jwkm"]
+script = ExtResource("2_yopqh")
 id = &"bulwark_mur_protecteur"
 display_name = "Mur protecteur"
 description = "Se place devant un allié et bloque."
@@ -2801,8 +2806,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_wjy5n"]
-script = ExtResource("2_n6y1t")
+[sub_resource type="Resource" id="Resource_5556g"]
+script = ExtResource("2_yopqh")
 id = &"bulwark_passive_peau_de_fer"
 display_name = "Peau de fer"
 description = "Réduit les dégâts subis."
@@ -2816,18 +2821,18 @@ requirements = Array[StringName]([])
 passive = true
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_ge1rs"]
-script = ExtResource("6_n8wsr")
+[sub_resource type="Resource" id="Resource_xfhvn"]
+script = ExtResource("6_rfxa7")
 id = &"bulwark"
 display_name = "Rempart"
 description = "Encaisse et protège ses alliés."
 role = "Protection"
-active_skills = Array[ExtResource("2_n6y1t")]([SubResource("Resource_2in5x"), SubResource("Resource_350mg"), SubResource("Resource_m56pf")])
-passive_skill = SubResource("Resource_wjy5n")
+active_skills = Array[ExtResource("2_yopqh")]([SubResource("Resource_hjfjj"), SubResource("Resource_333p2"), SubResource("Resource_0jwkm")])
+passive_skill = SubResource("Resource_5556g")
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_7c61y"]
-script = ExtResource("7_6ntxc")
+[sub_resource type="Resource" id="Resource_pcgnl"]
+script = ExtResource("7_tmfox")
 weight = 4.0
 exclusions = Array[StringName]([])
 allowed_villages = Array[StringName]([])
@@ -2845,8 +2850,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_3u5af"]
-script = ExtResource("7_6ntxc")
+[sub_resource type="Resource" id="Resource_j2vjh"]
+script = ExtResource("7_tmfox")
 weight = 4.0
 exclusions = Array[StringName]([])
 allowed_villages = Array[StringName]([])
@@ -2864,8 +2869,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_u6hkt"]
-script = ExtResource("7_6ntxc")
+[sub_resource type="Resource" id="Resource_bbdmf"]
+script = ExtResource("7_tmfox")
 weight = 4.0
 exclusions = Array[StringName]([])
 allowed_villages = Array[StringName]([])
@@ -2883,8 +2888,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_68bfc"]
-script = ExtResource("7_6ntxc")
+[sub_resource type="Resource" id="Resource_3fnec"]
+script = ExtResource("7_tmfox")
 weight = 4.0
 exclusions = Array[StringName]([])
 allowed_villages = Array[StringName]([])
@@ -2902,8 +2907,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_srpm1"]
-script = ExtResource("7_6ntxc")
+[sub_resource type="Resource" id="Resource_pq2dt"]
+script = ExtResource("7_tmfox")
 weight = 4.0
 exclusions = Array[StringName]([])
 allowed_villages = Array[StringName]([])
@@ -2921,8 +2926,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_hsgoq"]
-script = ExtResource("7_6ntxc")
+[sub_resource type="Resource" id="Resource_emdy8"]
+script = ExtResource("7_tmfox")
 weight = 2.0
 exclusions = Array[StringName]([])
 allowed_villages = Array[StringName]([])
@@ -2940,8 +2945,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_67ydh"]
-script = ExtResource("7_6ntxc")
+[sub_resource type="Resource" id="Resource_jcv1c"]
+script = ExtResource("7_tmfox")
 weight = 2.0
 exclusions = Array[StringName]([])
 allowed_villages = Array[StringName]([])
@@ -2959,8 +2964,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_jq143"]
-script = ExtResource("7_6ntxc")
+[sub_resource type="Resource" id="Resource_6g32b"]
+script = ExtResource("7_tmfox")
 weight = 2.0
 exclusions = Array[StringName]([])
 allowed_villages = Array[StringName]([])
@@ -2978,8 +2983,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_xv6e4"]
-script = ExtResource("7_6ntxc")
+[sub_resource type="Resource" id="Resource_bq257"]
+script = ExtResource("7_tmfox")
 weight = 2.0
 exclusions = Array[StringName]([])
 allowed_villages = Array[StringName]([])
@@ -2997,8 +3002,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_jcaqi"]
-script = ExtResource("7_6ntxc")
+[sub_resource type="Resource" id="Resource_stc0s"]
+script = ExtResource("7_tmfox")
 weight = 1.0
 exclusions = Array[StringName]([])
 allowed_villages = Array[StringName]([])
@@ -3016,8 +3021,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_q3hr6"]
-script = ExtResource("7_6ntxc")
+[sub_resource type="Resource" id="Resource_s00r8"]
+script = ExtResource("7_tmfox")
 weight = 1.0
 exclusions = Array[StringName]([])
 allowed_villages = Array[StringName]([])
@@ -3035,8 +3040,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_gdf27"]
-script = ExtResource("7_6ntxc")
+[sub_resource type="Resource" id="Resource_qpb1a"]
+script = ExtResource("7_tmfox")
 weight = 1.0
 exclusions = Array[StringName]([])
 allowed_villages = Array[StringName]([])
@@ -3054,8 +3059,8 @@ requirements = Array[StringName]([])
 passive = false
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_fhxdr"]
-script = ExtResource("8_gm4xx")
+[sub_resource type="Resource" id="Resource_o6vdy"]
+script = ExtResource("8_eqbnf")
 id = &"tenketsu_vitality"
 display_name = "Vitalité"
 description = "+8 PV max par niveau."
@@ -3068,8 +3073,8 @@ position_in_tree = Vector2(0, 0)
 max_level = 3
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_rptic"]
-script = ExtResource("8_gm4xx")
+[sub_resource type="Resource" id="Resource_dp5hm"]
+script = ExtResource("8_eqbnf")
 id = &"tenketsu_flow"
 display_name = "Flux de chakra"
 description = "+10 chakra max par niveau."
@@ -3082,8 +3087,8 @@ position_in_tree = Vector2(2, 0)
 max_level = 3
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_ipenj"]
-script = ExtResource("8_gm4xx")
+[sub_resource type="Resource" id="Resource_eagmn"]
+script = ExtResource("8_eqbnf")
 id = &"tenketsu_agility"
 display_name = "Agilité"
 description = "+3 % de vitesse par niveau."
@@ -3096,8 +3101,8 @@ position_in_tree = Vector2(4, 0)
 max_level = 2
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_2luhh"]
-script = ExtResource("8_gm4xx")
+[sub_resource type="Resource" id="Resource_syblx"]
+script = ExtResource("8_eqbnf")
 id = &"tenketsu_regeneration"
 display_name = "Régénération"
 description = "+0,5 PV/s par niveau."
@@ -3110,8 +3115,8 @@ position_in_tree = Vector2(0, 1)
 max_level = 2
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_275hc"]
-script = ExtResource("8_gm4xx")
+[sub_resource type="Resource" id="Resource_r5w6i"]
+script = ExtResource("8_eqbnf")
 id = &"tenketsu_circulation"
 display_name = "Circulation"
 description = "+1 chakra/s par niveau."
@@ -3124,8 +3129,8 @@ position_in_tree = Vector2(2, 1)
 max_level = 2
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_rdpwo"]
-script = ExtResource("8_gm4xx")
+[sub_resource type="Resource" id="Resource_nnc6c"]
+script = ExtResource("8_eqbnf")
 id = &"tenketsu_reflexes"
 display_name = "Réflexes"
 description = "-4 % de temps de recharge par niveau."
@@ -3138,8 +3143,8 @@ position_in_tree = Vector2(4, 1)
 max_level = 2
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_0wm1h"]
-script = ExtResource("8_gm4xx")
+[sub_resource type="Resource" id="Resource_euk72"]
+script = ExtResource("8_eqbnf")
 id = &"tenketsu_iron_body"
 display_name = "Corps de fer"
 description = "-4 % de dégâts subis par niveau."
@@ -3152,8 +3157,8 @@ position_in_tree = Vector2(0, 2)
 max_level = 2
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_wkeqk"]
-script = ExtResource("8_gm4xx")
+[sub_resource type="Resource" id="Resource_ts8kx"]
+script = ExtResource("8_eqbnf")
 id = &"tenketsu_focus"
 display_name = "Concentration"
 description = "+5 % de dégâts des techniques par niveau."
@@ -3166,8 +3171,8 @@ position_in_tree = Vector2(2, 2)
 max_level = 2
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_eoke0"]
-script = ExtResource("8_gm4xx")
+[sub_resource type="Resource" id="Resource_0dg83"]
+script = ExtResource("8_eqbnf")
 id = &"tenketsu_pressure_points"
 display_name = "Points vitaux"
 description = "+5 % de dégâts au corps à corps par niveau."
@@ -3180,8 +3185,8 @@ position_in_tree = Vector2(4, 2)
 max_level = 2
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_rsnk0"]
-script = ExtResource("8_gm4xx")
+[sub_resource type="Resource" id="Resource_025va"]
+script = ExtResource("8_eqbnf")
 id = &"tenketsu_eight_gates"
 display_name = "Ouverture des portes"
 description = "Ultime : +10 % de dégâts et de vitesse sous 30 % de PV."
@@ -3194,40 +3199,50 @@ position_in_tree = Vector2(2, 3)
 max_level = 1
 placeholder = false
 
-[sub_resource type="Resource" id="Resource_b3oid"]
-script = ExtResource("9_iejm0")
+[sub_resource type="Resource" id="Resource_1qq1j"]
+script = ExtResource("9_utktj")
 id = &"tenketsu"
-nodes = Array[ExtResource("8_gm4xx")]([SubResource("Resource_fhxdr"), SubResource("Resource_rptic"), SubResource("Resource_ipenj"), SubResource("Resource_2luhh"), SubResource("Resource_275hc"), SubResource("Resource_rdpwo"), SubResource("Resource_0wm1h"), SubResource("Resource_wkeqk"), SubResource("Resource_eoke0"), SubResource("Resource_rsnk0")])
+nodes = Array[ExtResource("8_eqbnf")]([SubResource("Resource_o6vdy"), SubResource("Resource_dp5hm"), SubResource("Resource_eagmn"), SubResource("Resource_syblx"), SubResource("Resource_r5w6i"), SubResource("Resource_nnc6c"), SubResource("Resource_euk72"), SubResource("Resource_ts8kx"), SubResource("Resource_0dg83"), SubResource("Resource_025va")])
 
-[sub_resource type="Resource" id="Resource_1p7vu"]
-script = ExtResource("10_c5wkk")
+[sub_resource type="Resource" id="Resource_2jxm4"]
+script = ExtResource("10_1lptm")
 id = &"konoha"
 display_name = "Konoha"
 
-[sub_resource type="Resource" id="Resource_h36ac"]
-script = ExtResource("10_c5wkk")
+[sub_resource type="Resource" id="Resource_hyola"]
+script = ExtResource("10_1lptm")
 id = &"suna"
 display_name = "Suna"
 
-[sub_resource type="Resource" id="Resource_p6ogb"]
-script = ExtResource("10_c5wkk")
+[sub_resource type="Resource" id="Resource_n4vbo"]
+script = ExtResource("10_1lptm")
 id = &"ame"
 display_name = "Ame"
 
-[sub_resource type="Resource" id="Resource_q2ejd"]
-script = ExtResource("10_c5wkk")
+[sub_resource type="Resource" id="Resource_brdks"]
+script = ExtResource("10_1lptm")
 id = &"kiri"
 display_name = "Kiri"
 
 [resource]
-script = ExtResource("5_edetc")
-grades = Array[ExtResource("3_nv6x4")]([SubResource("Resource_aki41"), SubResource("Resource_74ylr"), SubResource("Resource_40a77"), SubResource("Resource_7c27w"), SubResource("Resource_6hq73")])
-villages = Array[ExtResource("10_c5wkk")]([SubResource("Resource_1p7vu"), SubResource("Resource_h36ac"), SubResource("Resource_p6ogb"), SubResource("Resource_q2ejd")])
-natures = Array[ExtResource("4_4i3ef")]([SubResource("Resource_asp17"), SubResource("Resource_i17rs"), SubResource("Resource_uc6ln"), SubResource("Resource_ir4ud"), SubResource("Resource_k8jup")])
-clans = Array[ExtResource("1_gqkqd")]([SubResource("Resource_wgg81"), SubResource("Resource_kckgg"), SubResource("Resource_3721o"), SubResource("Resource_cxrvt"), SubResource("Resource_uweky"), SubResource("Resource_e0hmo"), SubResource("Resource_bkfcf"), SubResource("Resource_8jtat"), SubResource("Resource_j3iwh"), SubResource("Resource_umm11"), SubResource("Resource_traig"), SubResource("Resource_xc302"), SubResource("Resource_06kpl"), SubResource("Resource_jkedc"), SubResource("Resource_jl7lp"), SubResource("Resource_65djg"), SubResource("Resource_mdce0"), SubResource("Resource_ougtq"), SubResource("Resource_bkuwv"), SubResource("Resource_wbtb3")])
-specializations = Array[ExtResource("6_n8wsr")]([SubResource("Resource_02ixi"), SubResource("Resource_0s5y4"), SubResource("Resource_pqope"), SubResource("Resource_ge1rs")])
-tenketsu_tree = SubResource("Resource_b3oid")
-sub_jutsu = Array[ExtResource("7_6ntxc")]([SubResource("Resource_7c61y"), SubResource("Resource_3u5af"), SubResource("Resource_u6hkt"), SubResource("Resource_68bfc"), SubResource("Resource_srpm1"), SubResource("Resource_hsgoq"), SubResource("Resource_67ydh"), SubResource("Resource_jq143"), SubResource("Resource_xv6e4"), SubResource("Resource_jcaqi"), SubResource("Resource_q3hr6"), SubResource("Resource_gdf27")])
+script = ExtResource("5_kv0hm")
+grades = Array[ExtResource("3_nlep2")]([SubResource("Resource_icfsx"), SubResource("Resource_2imgn"), SubResource("Resource_sbsi2"), SubResource("Resource_uoeot"), SubResource("Resource_h023a")])
+villages = Array[ExtResource("10_1lptm")]([SubResource("Resource_2jxm4"), SubResource("Resource_hyola"), SubResource("Resource_n4vbo"), SubResource("Resource_brdks")])
+natures = Array[ExtResource("4_vu886")]([SubResource("Resource_lbmxd"), SubResource("Resource_xmoxu"), SubResource("Resource_fx15n"), SubResource("Resource_mqxgk"), SubResource("Resource_8ytby")])
+clans = Array[ExtResource("1_wavea")]([SubResource("Resource_k5fng"), SubResource("Resource_qabdv"), SubResource("Resource_1lwg0"), SubResource("Resource_dk61f"), SubResource("Resource_4f212"), SubResource("Resource_mn3rw"), SubResource("Resource_ihfk7"), SubResource("Resource_ofjai"), SubResource("Resource_6sqk3"), SubResource("Resource_8chi8"), SubResource("Resource_dce6w"), SubResource("Resource_mmx7t"), SubResource("Resource_vmbfs"), SubResource("Resource_4qss4"), SubResource("Resource_8eamu"), SubResource("Resource_x6wog"), SubResource("Resource_j2tn2"), SubResource("Resource_6n21p"), SubResource("Resource_6ycaq"), SubResource("Resource_8bele")])
+specializations = Array[ExtResource("6_rfxa7")]([SubResource("Resource_pc32u"), SubResource("Resource_wb7g7"), SubResource("Resource_o8udq"), SubResource("Resource_xfhvn")])
+tenketsu_tree = SubResource("Resource_1qq1j")
+sub_jutsu = Array[ExtResource("7_tmfox")]([SubResource("Resource_pcgnl"), SubResource("Resource_j2vjh"), SubResource("Resource_bbdmf"), SubResource("Resource_3fnec"), SubResource("Resource_pq2dt"), SubResource("Resource_emdy8"), SubResource("Resource_jcv1c"), SubResource("Resource_6g32b"), SubResource("Resource_bq257"), SubResource("Resource_stc0s"), SubResource("Resource_s00r8"), SubResource("Resource_qpb1a")])
+mob_xp = {
+"bandit": 12,
+"bandit_thrower": 14,
+"boss_akatsuki": 250,
+"elite_missing_nin": 70,
+"rogue_kunoichi": 32,
+"rogue_ninja": 30,
+"ronin": 65
+}
+max_kills_per_minute = 30
 sub_jutsu_roll_ranks = Array[int]([2, 3, 4])
-max_equipped_jutsu = 6
+max_equipped_jutsu = 4
 specialization_grants_skills = true

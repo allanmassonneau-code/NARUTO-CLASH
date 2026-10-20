@@ -20,6 +20,7 @@ const STATE_LABELS: Dictionary = {
 	ProgressionTypes.NodeState.LOCKED_BY_CHOICE: "Verrouillée par ton choix",
 	ProgressionTypes.NodeState.UNLOCKED: "Apprise",
 }
+const WORLD_SCENE: String = "res://world/world.tscn"
 const GRADE_NAMES: Array[String] = ["Genin", "Chunin", "Konin", "Tokubetsu", "Jonin"]
 
 ## Main screen of the game (no close button, Esc does nothing).
@@ -136,6 +137,10 @@ func _header_bar() -> void:
 	UiStyle.label(titles, "NINJA BATTLE" if embedded else "SHINOBI", 34, UiStyle.ACCENT, 900)
 	var online: String = "Profil en ligne (serveur)" if Profiles.is_remote() else "Profil hors ligne"
 	UiStyle.label(titles, online + ("  ·  " + status_text if status_text != "" else ""), 13, UiStyle.MUTED, 700)
+	if embedded and Profiles.profile != null:
+		var go := _button(row, "PARTIR À L'AVENTURE", func() -> void: get_tree().change_scene_to_file(WORLD_SCENE))
+		go.add_theme_font_override("font", UiStyle.font(900))
+		go.add_theme_color_override("font_color", UiStyle.ACCENT)
 	if not Profiles.is_remote() and Profiles.profile != null:
 		_button(row, "Promouvoir (test)", Profiles.dev_promote).tooltip_text = "Outil de test hors ligne : les grades s'obtiennent normalement en jeu."
 		_button(row, "Supprimer (test)", func() -> void: _confirm("Supprimer ce personnage hors ligne ?", Profiles.dev_reset))
