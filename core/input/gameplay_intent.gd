@@ -19,9 +19,14 @@ var guard_held: bool = false
 var concentrate_held: bool = false
 ## Jump (Space) pressed this tick.
 var jump_pressed: bool = false
+## Walk mode (Alt toggles walk / run; running is the default).
+var walk: bool = false
+## Chakra sprint requested this tick (double tap forward).
+var sprint_pressed: bool = false
 
 
 func clear_actions() -> void:
 	pressed_slots.clear()
 	cancel_pressed = false
 	jump_pressed = false
+	sprint_pressed = false

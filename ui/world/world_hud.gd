@@ -29,6 +29,7 @@ var _stamina: ProgressBar
 var _kit_row: HBoxContainer
 var _kit_refresh: float = 0.0
 var _concentrate: Label
+var _move_mode: Label
 var _slots_row: HBoxContainer
 var _slots: Dictionary = {}
 var _toast: Label
@@ -83,6 +84,17 @@ func _process(_delta: float) -> void:
 	_energy.value = energy.current_energy
 	_energy_text.text = "CHAKRA %d / %d" % [floori(energy.current_energy), roundi(energy.max_energy)]
 	_concentrate.visible = _player.concentrating
+	if _player.sprint_denied > 0.0:
+		_move_mode.text = "Course de chakra impossible en combat"
+		_move_mode.add_theme_color_override("font_color", Color(1.0, 0.5, 0.4))
+	elif _player.sprinting:
+		_move_mode.text = "COURSE DE CHAKRA"
+		_move_mode.add_theme_color_override("font_color", UiStyle.CHAKRA)
+	elif _player.walking:
+		_move_mode.text = "Marche"
+		_move_mode.add_theme_color_override("font_color", UiStyle.MUTED)
+	else:
+		_move_mode.text = ""
 	_stamina.value = _player.stamina
 	_kit_refresh -= _delta
 	if _kit_refresh <= 0.0:
@@ -228,7 +240,14 @@ func _build() -> void:
 	_concentrate.offset_top = -190
 	_concentrate.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_concentrate.visible = false
-	var hint_text: String = "B : techniques  ·  Espace : saut  ·  %s (maintenir) : concentration  ·  F : garde  ·  Échap : menu SHINOBI  ·  O : options" % key_label(KEY_R)
+	_move_mode = UiStyle.label(_root, "", 15, Color.WHITE, 900)
+	_move_mode.add_theme_constant_override("outline_size", 6)
+	_move_mode.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+	_move_mode.offset_left = -300
+	_move_mode.offset_right = 300
+	_move_mode.offset_top = -215
+	_move_mode.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var hint_text: String = "B : techniques  ·  Alt : marcher / courir  ·  %s %s : course de chakra  ·  Espace : saut  ·  %s (maintenir) : concentration  ·  F : garde  ·  Échap : menu SHINOBI  ·  O : options" % [key_label(KEY_W), key_label(KEY_W), key_label(KEY_R)]
 	var hint := UiStyle.label(_root, hint_text, 13, UiStyle.MUTED, 700)
 	hint.position = Vector2(20, 104)
 	_toast = UiStyle.label(_root, "", 20, Color.WHITE, 900)
