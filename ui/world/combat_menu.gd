@@ -214,6 +214,13 @@ func _build_bar() -> void:
 		cell.clip_text = true
 		cell.text = "%d\n%s" % [i + 1, _short(j.display_name) if j != null else "libre"]
 		cell.add_theme_font_size_override("font_size", 11)
+		if j != null:
+			var tex := SSIcons.for_technique(j.id, j.display_name)
+			if tex != null:
+				cell.text = str(i + 1)
+				cell.icon = tex
+				cell.expand_icon = true
+				cell.tooltip_text = j.display_name
 		var selected: bool = i == _target_slot
 		var color: Color = UiStyle.ACCENT if selected else Color(1, 1, 1, 0.15)
 		cell.add_theme_stylebox_override("normal", UiStyle.panel(Color(0.1, 0.08, 0.14, 0.95), 8, color, 4))
@@ -269,6 +276,7 @@ func _row(j: JutsuData, slot: int) -> void:
 	star.add_theme_color_override("font_color", UiStyle.ACCENT)
 	star.pressed.connect(func() -> void: _toggle_favorite.call_deferred(j.id))
 	line.add_child(star)
+	SSIcons.add_rect(line, j.id, j.display_name, 40)
 	var info := VBoxContainer.new()
 	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	info.mouse_filter = Control.MOUSE_FILTER_IGNORE
