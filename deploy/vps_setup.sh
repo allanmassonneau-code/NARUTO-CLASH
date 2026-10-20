@@ -5,7 +5,7 @@
 #   sudo bash vps_setup.sh --deploy-key "ssh-ed25519 AAAA... ci"          # install
 #   sudo bash vps_setup.sh --wipe --deploy-key "ssh-ed25519 AAAA... ci"   # clean first, then install
 #   sudo bash vps_setup.sh --https ninjabattle.fr      # only add HTTPS (Let's Encrypt) for a domain
-#   SITE_PASSWORD=... sudo -E bash vps_setup.sh --auth <user>   # password-protect the download site
+#   sudo bash vps_setup.sh --no-auth                   # remove the old password protection of the site
 #
 # Installs: nginx (serves launcher updates on :80 /naruto-clash/), Godot headless,
 # two game servers as systemd services (1v1 on UDP 7777, 2v2 on UDP 7778),
@@ -19,7 +19,7 @@ WIPE=0
 INVENTORY=0
 DEPLOY_KEY=""
 DOMAIN=""
-AUTH_USER=""
+NO_AUTH=0
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -27,7 +27,7 @@ while [[ $# -gt 0 ]]; do
     --inventory) INVENTORY=1 ;;
     --deploy-key) DEPLOY_KEY="$2"; shift ;;
     --https) DOMAIN="$2"; shift ;;
-    --auth) AUTH_USER="$2"; shift ;;
+    --no-auth) NO_AUTH=1 ;;
     *) echo "Unknown option $1"; exit 1 ;;
   esac
   shift
@@ -218,40 +218,22 @@ NGINX
   echo "HTTPS ready: https://$domain/"
 }
 
-# Basic auth on the downloads (launcher, game, version.json). The download
-# page itself stays public; the ACME challenge stays open.
-# The password comes from $SITE_PASSWORD, never from the command line.
-setup_auth() {
-  local user="$1"
-  [[ -n "${SITE_PASSWORD:-}" ]] || { echo "SITE_PASSWORD missing"; exit 1; }
-  printf '%s:%s\n' "$user" "$(printf '%s' "$SITE_PASSWORD" | openssl passwd -apr1 -stdin)" > /etc/nginx/ninja.htpasswd
-  chown root:www-data /etc/nginx/ninja.htpasswd
-  chmod 640 /etc/nginx/ninja.htpasswd
-  install -d /etc/nginx/snippets
-  cat > /etc/nginx/snippets/ninja-auth.conf <<NGINX
-auth_basic "Ninja Battle";
-auth_basic_user_file /etc/nginx/ninja.htpasswd;
-location = /naruto-clash/ { auth_basic off; alias $WWW/; index index.html; }
-location = /naruto-clash/index.html { auth_basic off; alias $WWW/index.html; }
-NGINX
-  cat > /etc/nginx/snippets/ninja-auth-root.conf <<NGINX
-location = / { auth_basic off; root $WWW; index index.html; }
-location = /index.html { auth_basic off; root $WWW; }
-NGINX
+# The download site is public (its address is simply not shared): removes the
+# basic auth an older setup may have installed.
+remove_auth() {
   local f
-  f=/etc/nginx/sites-available/naruto-clash
-  [[ -f "$f" ]] && ! grep -q "ninja-auth.conf" "$f" && sed -i '0,/server_name .*;/s//&\n    include snippets\/ninja-auth.conf;/' "$f"
-  f=/etc/nginx/sites-available/ninja-domain-tls
-  [[ -f "$f" ]] && ! grep -q "ninja-auth.conf" "$f" && \
-    sed -i '0,/server_name .*;/s//&\n    include snippets\/ninja-auth.conf;\n    include snippets\/ninja-auth-root.conf;/' "$f"
+  for f in /etc/nginx/sites-available/naruto-clash /etc/nginx/sites-available/ninja-domain-tls; do
+    [[ -f "$f" ]] && sed -i '/include snippets\/ninja-auth\(-root\)\?\.conf;/d' "$f"
+  done
+  rm -f /etc/nginx/snippets/ninja-auth.conf /etc/nginx/snippets/ninja-auth-root.conf /etc/nginx/ninja.htpasswd
   nginx -t
   systemctl reload nginx
-  echo "Downloads protected (user: $user)"
+  echo "Download site is public again"
 }
 
 if [[ -n "$DOMAIN" ]]; then setup_https "$DOMAIN"; fi
-if [[ -n "$AUTH_USER" ]]; then setup_auth "$AUTH_USER"; fi
-if [[ -n "$DOMAIN$AUTH_USER" ]]; then exit 0; fi
+if [[ $NO_AUTH -eq 1 ]]; then remove_auth; fi
+if [[ -n "$DOMAIN" || $NO_AUTH -eq 1 ]]; then exit 0; fi
 if [[ $INVENTORY -eq 1 ]]; then inventory; exit 0; fi
 if [[ $WIPE -eq 1 ]]; then inventory; wipe; fi
 setup_naruto

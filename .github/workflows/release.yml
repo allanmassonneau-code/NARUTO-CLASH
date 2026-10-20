@@ -80,8 +80,6 @@ jobs:
         env:
           PUBLIC_HOST: ${{ secrets.VPS_HOST }}
           PUBLIC_URL: https://ninjabattle.fr/naruto-clash/
-          SITE_USER: ${{ secrets.SITE_USER }}
-          SITE_PASSWORD: ${{ secrets.SITE_PASSWORD }}
           CHANGELOG: ${{ github.event.head_commit.message }}
         run: |
           VERSION="0.3.${{ github.run_number }}"

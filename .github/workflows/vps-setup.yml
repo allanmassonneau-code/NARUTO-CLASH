@@ -18,8 +18,8 @@ on:
         description: "Only set up HTTPS for this domain (leave empty for a full setup)"
         type: string
         default: ""
-      protect:
-        description: "Only password-protect the site (secrets SITE_USER / SITE_PASSWORD)"
+      unprotect:
+        description: "Only remove the old password protection of the download site"
         type: boolean
         default: false
 
@@ -36,9 +36,7 @@ jobs:
       WIPE: ${{ inputs.wipe }}
       CONFIRM: ${{ inputs.confirm }}
       HTTPS_DOMAIN: ${{ inputs.https_domain }}
-      PROTECT: ${{ inputs.protect }}
-      SITE_USER: ${{ secrets.SITE_USER }}
-      SITE_PASSWORD: ${{ secrets.SITE_PASSWORD }}
+      UNPROTECT: ${{ inputs.unprotect }}
     steps:
       - uses: actions/checkout@v4
 
@@ -74,10 +72,8 @@ jobs:
           $SSH "$ROOT_USER@$HOST" "$SUDO pkill -f vps_setu[p].sh; $SUDO pkill -x apt-get; sleep 2; $SUDO rm -f /var/cache/apt/*.bin; true"
           $SCP deploy/vps_setup.sh deploy.pub "$ROOT_USER@$HOST:/tmp/"
           FLAGS='--deploy-key "$(cat /tmp/deploy.pub)"'
-          if [ "$PROTECT" = "true" ]; then
-            [ -n "$SITE_USER" ] && [ -n "$SITE_PASSWORD" ] || { echo "Secrets SITE_USER / SITE_PASSWORD missing"; exit 1; }
-            # Password goes through stdin, not the command line.
-            printf '%s' "$SITE_PASSWORD" | $SSH "$ROOT_USER@$HOST" "read -r SITE_PASSWORD; export SITE_PASSWORD; $SUDO_E bash /tmp/vps_setup.sh --auth '$SITE_USER'"
+          if [ "$UNPROTECT" = "true" ]; then
+            $SSH "$ROOT_USER@$HOST" "$SUDO bash /tmp/vps_setup.sh --no-auth"
           elif [ -n "$HTTPS_DOMAIN" ]; then
             $SSH "$ROOT_USER@$HOST" "$SUDO bash /tmp/vps_setup.sh --https '$HTTPS_DOMAIN'"
           elif [ "$WIPE" = "true" ]; then
@@ -88,11 +84,8 @@ jobs:
 
       - name: Check web server
         run: |
-          if [ "$PROTECT" = "true" ]; then
-            code=$(curl -s -o /dev/null -w '%{http_code}' "http://$HOST/naruto-clash/version.json")
-            [ "$code" = "401" ] && echo "Downloads are password-protected" || { echo "Expected 401, got $code"; exit 1; }
-            curl -fsS -o /dev/null "http://$HOST/naruto-clash/" && echo "Download page still public"
-            curl -fsS -o /dev/null -u "$SITE_USER:$SITE_PASSWORD" "http://$HOST/naruto-clash/version.json" && echo "Password works"
+          if [ "$UNPROTECT" = "true" ]; then
+            curl -fsS -o /dev/null "http://$HOST/naruto-clash/version.json" && echo "Downloads are public"
             exit 0
           fi
           curl -fsS "http://$HOST/" >/dev/null && echo "VPS ready"
