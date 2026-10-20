@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # Publishes a release to the VPS (after deploy/build_release.sh):
-#   - game server code -> /opt/naruto-clash/server (then restarts both servers)
+#   - game server code -> /opt/naruto-clash/server (then restarts both servers);
+#     the converted SS assets (_ss_local) stay out: the headless server never
+#     renders them and importing them would exceed the service start timeout
+
 #   - build/publish/*  -> /var/www/naruto-clash (launcher downloads)
 # Usage: deploy/deploy.sh <host> [user=deploy]     (SSH key must be loaded)
 set -euo pipefail
@@ -17,6 +20,7 @@ cd "$ROOT"
 rsync -az --delete --chmod=Dg+rwxs,Fg+rw -e "ssh $SSH_OPTS" \
   --exclude ".git" --exclude ".godot" --exclude "build" --exclude "launcher" \
   --exclude "tests" --exclude "tools" --exclude "deploy" --exclude ".github" \
+  --exclude "_ss_local" \
   ./ "$TARGET:/opt/naruto-clash/server/"
 
 # Archive + launcher first, manifest last so clients never see a half-published release.
