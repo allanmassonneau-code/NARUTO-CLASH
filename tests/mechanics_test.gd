@@ -231,6 +231,15 @@ func _run() -> void:
 	mob.health.invulnerable_debug = false
 	mob.controls_enabled = true
 
+	# SHINOBI menu as an in-game overlay.
+	_world.open_shinobi_menu()
+	await _wait(0.1)
+	_check(is_instance_valid(_world.shinobi_screen) and not _player.controls_enabled and _world.is_inside_tree(),
+		"Esc opens the SHINOBI menu in game (world kept, controls off)")
+	_world.shinobi_screen.queue_free()
+	await _wait(0.1)
+	_check(not is_instance_valid(_world.shinobi_screen) and _player.controls_enabled, "closing it gives control back")
+
 	Profiles.dev_reset()
 	print("RESULT: %s (%d failures)" % ["PASS" if _failures == 0 else "FAIL", _failures])
 	get_tree().quit(0 if _failures == 0 else 1)

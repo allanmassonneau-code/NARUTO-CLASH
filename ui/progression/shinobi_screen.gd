@@ -25,6 +25,8 @@ const GRADE_NAMES: Array[String] = ["Genin", "Chunin", "Konin", "Tokubetsu", "Jo
 
 ## Main screen of the game (no close button, Esc does nothing).
 var embedded: bool = false
+## In-game overlay: shows a "Menu principal" button calling this.
+var on_quit: Callable
 ## Extra line under the title (connection state), set by the main menu.
 var status_text: String = ""
 var _db: ProgressionDatabase
@@ -45,7 +47,7 @@ func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	var bg := ColorRect.new()
-	bg.color = Color(0.04, 0.035, 0.07, 0.97)
+	bg.color = Color(0.04, 0.035, 0.07, 0.97 if embedded else 0.9)
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
 	var margin := MarginContainer.new()
@@ -144,8 +146,10 @@ func _header_bar() -> void:
 	if not Profiles.is_remote() and Profiles.profile != null:
 		_button(row, "Promouvoir (test)", Profiles.dev_promote).tooltip_text = "Outil de test hors ligne : les grades s'obtiennent normalement en jeu."
 		_button(row, "Supprimer (test)", func() -> void: _confirm("Supprimer ce personnage hors ligne ?", Profiles.dev_reset))
+	if on_quit.is_valid():
+		_button(row, "Menu principal", on_quit)
 	if not embedded:
-		_button(row, "✕  Fermer", queue_free)
+		_button(row, "✕  Fermer  (Échap)", queue_free)
 
 
 func _profile_header(p: CharacterProfile) -> void:

@@ -34,6 +34,7 @@ var player: CombatCharacter
 var camera: ArenaCamera
 var hud: WorldHud
 var combat_menu: CombatMenu
+var shinobi_screen: ShinobiScreen
 var mobs: Array[CombatCharacter] = []
 
 var _mob_ids: Dictionary = {}  # CombatCharacter -> mob id
@@ -81,7 +82,32 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		get_tree().change_scene_to_file(GameSession.MENU_SCENE)
+		open_shinobi_menu()
+		get_viewport().set_input_as_handled()
+
+
+## SHINOBI menu (natures, clan, specialization, Tenketsu, loadout) as an
+## in-game overlay: the world keeps running, the player stops taking input.
+func open_shinobi_menu() -> void:
+	if is_instance_valid(shinobi_screen):
+		return
+	if combat_menu != null and combat_menu.is_open():
+		combat_menu.toggle()
+	var layer := CanvasLayer.new()
+	layer.layer = 10
+	add_child(layer)
+	shinobi_screen = ShinobiScreen.new()
+	shinobi_screen.on_quit = _quit_to_menu
+	layer.add_child(shinobi_screen)
+	player.controls_enabled = false
+	shinobi_screen.tree_exited.connect(func() -> void:
+		layer.queue_free()
+		if is_instance_valid(player) and not player.is_dead():
+			player.controls_enabled = true)
+
+
+func _quit_to_menu() -> void:
+	get_tree().change_scene_to_file.call_deferred(GameSession.MENU_SCENE)
 
 
 func _physics_process(delta: float) -> void:
@@ -143,7 +169,7 @@ func _village_spawn() -> Transform3D:
 
 func _respawn_player() -> void:
 	player.reset_for_round(_village_spawn())
-	player.controls_enabled = true
+	player.controls_enabled = not is_instance_valid(shinobi_screen)
 	hud.toast("Tu reprends connaissance au village.", Color(0.8, 0.9, 1.0))
 
 
@@ -210,6 +236,9 @@ func _on_mob_died(mob: CombatCharacter) -> void:
 
 
 func _on_profile_updated(_profile: CharacterProfile, result: ProgressionResult) -> void:
+	if Profiles.profile == null:
+		_quit_to_menu()  # character deleted (offline test tool)
+		return
 	var rebuild: bool = false
 	var promotion: bool = false
 	for event: Dictionary in result.events:
