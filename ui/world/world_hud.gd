@@ -11,7 +11,7 @@ const SLOT_KEYS: Dictionary = {
 }
 ## Bar order: basic attack, dash, substitution, then the six techniques.
 const BAR: Array[StringName] = [&"lmb", &"space", &"q", &"j1", &"j2", &"j3", &"j4", &"j5", &"j6"]
-const REASON_COLORS: Dictionary = {"CHAKRA": Color(0.45, 0.7, 1.0), "BLOQUÉ": Color(1.0, 0.5, 0.4), "ENDURANCE": Color(1.0, 0.8, 0.3), "ACTIVE": Color(1.0, 0.85, 0.4)}
+const REASON_COLORS: Dictionary = {"CHAKRA": Color(0.45, 0.7, 1.0), "BLOQUÉ": Color(1.0, 0.5, 0.4), "ENDURANCE": Color(1.0, 0.8, 0.3), "RECAST": Color(0.5, 1.0, 0.6), "ACTIVE": Color(1.0, 0.85, 0.4)}
 
 var _world: World
 var _player: CombatCharacter
@@ -26,6 +26,8 @@ var _hp_text: Label
 var _energy: ProgressBar
 var _energy_text: Label
 var _stamina: ProgressBar
+var _kit_row: HBoxContainer
+var _kit_refresh: float = 0.0
 var _concentrate: Label
 var _slots_row: HBoxContainer
 var _slots: Dictionary = {}
@@ -40,6 +42,20 @@ func bind(world: World, player: CombatCharacter) -> void:
 	_player = player
 	_build()
 	rebuild_slots()
+
+
+## Kit resources (Vigueur, Charges...), active modes and recasts.
+func _update_kit_row() -> void:
+	var lines: Array[Dictionary] = _player.kit.hud_lines()
+	while _kit_row.get_child_count() < lines.size():
+		var l := UiStyle.label(_kit_row, "", 13, Color.WHITE, 900)
+		l.add_theme_constant_override("outline_size", 5)
+	for i in _kit_row.get_child_count():
+		var label := _kit_row.get_child(i) as Label
+		label.visible = i < lines.size()
+		if label.visible:
+			label.text = lines[i].text
+			label.add_theme_color_override("font_color", lines[i].color)
 
 
 func _process(_delta: float) -> void:
@@ -68,6 +84,10 @@ func _process(_delta: float) -> void:
 	_energy_text.text = "CHAKRA %d / %d" % [floori(energy.current_energy), roundi(energy.max_energy)]
 	_concentrate.visible = _player.concentrating
 	_stamina.value = _player.stamina
+	_kit_refresh -= _delta
+	if _kit_refresh <= 0.0:
+		_kit_refresh = 0.15
+		_update_kit_row()
 	for slot: StringName in _slots:
 		var w: Dictionary = _slots[slot]
 		var a: AbilityData = _player.abilities.get_ability(slot)
@@ -189,6 +209,11 @@ func _build() -> void:
 	_energy_text.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_energy_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_energy_text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_kit_row = HBoxContainer.new()
+	_kit_row.add_theme_constant_override("separation", 14)
+	_kit_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	fcol.add_child(_kit_row)
+	fcol.move_child(_kit_row, 0)
 	_stamina = UiStyle.bar(fcol, Color(1.0, 0.8, 0.3), 5, 2)
 	_stamina.max_value = CombatCharacter.MAX_STAMINA
 	_stamina.tooltip_text = "Endurance"

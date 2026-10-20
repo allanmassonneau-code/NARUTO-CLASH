@@ -1,0 +1,33 @@
+class_name TechniqueIndex
+## Every technique kit file (natures, clans, sub-jutsu). One file per kit.
+
+const KITS: Array[GDScript] = [
+	preload("res://content/techniques/natures/katon.gd"),
+	preload("res://content/techniques/natures/suiton.gd"),
+	preload("res://content/techniques/natures/raiton.gd"),
+	preload("res://content/techniques/natures/doton.gd"),
+	preload("res://content/techniques/natures/futon.gd"),
+	preload("res://content/techniques/clans/senju.gd"),
+	preload("res://content/techniques/clans/uchiha.gd"),
+	preload("res://content/techniques/clans/uzumaki.gd"),
+	preload("res://content/techniques/clans/nara.gd"),
+	preload("res://content/techniques/clans/akimichi.gd"),
+	preload("res://content/techniques/clans/roran.gd"),
+	preload("res://content/techniques/clans/sabaku.gd"),
+	preload("res://content/techniques/clans/hoki.gd"),
+	preload("res://content/techniques/clans/kugutsu.gd"),
+	preload("res://content/techniques/clans/hakumei.gd"),
+	preload("res://content/techniques/clans/chinoike.gd"),
+	preload("res://content/techniques/clans/fuma.gd"),
+	preload("res://content/techniques/clans/salamandre.gd"),
+	preload("res://content/techniques/clans/kaguya.gd"),
+	preload("res://content/techniques/clans/kami.gd"),
+	preload("res://content/techniques/clans/hozuki.gd"),
+	preload("res://content/techniques/clans/hoshigaki.gd"),
+	preload("res://content/techniques/clans/yuki.gd"),
+	preload("res://content/techniques/clans/karatachi.gd"),
+	preload("res://content/techniques/clans/epeistes.gd"),
+	preload("res://content/techniques/sub_jutsu/rank_b.gd"),
+	preload("res://content/techniques/sub_jutsu/rank_a.gd"),
+	preload("res://content/techniques/sub_jutsu/rank_s.gd"),
+]

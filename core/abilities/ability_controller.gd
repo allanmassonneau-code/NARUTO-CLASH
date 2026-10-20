@@ -216,6 +216,8 @@ func unavailable_reason(slot: StringName) -> String:
 	var ability: AbilityData = get_castable(slot)
 	if ability == null:
 		return ""
+	if ability.source_id != &"" and character.kit.has_recast(ability.source_id):
+		return "RECAST"
 	if get_cooldown_left(slot) > 0.0 and ability != copied:
 		return "RECHARGE"
 	if not character.energy.can_afford(ability.energy_cost):
@@ -286,6 +288,8 @@ func tick(delta: float, intent: GameplayIntent) -> void:
 	var wanted: StringName = _buffered_slot
 	if wanted == &"" and intent != null and not intent.held_slots.is_empty():
 		wanted = intent.held_slots[0]  # holding LMB keeps the string going
+	if phase == Phase.RECOVERY and wanted != &"" and _is_recast(wanted):
+		_finish_recovery()
 	if phase == Phase.RECOVERY and wanted != &"" and _can_cancel_recovery(wanted):
 		_finish_recovery()
 	if phase != Phase.IDLE or wanted == &"":
@@ -293,6 +297,11 @@ func tick(delta: float, intent: GameplayIntent) -> void:
 	if try_cast(wanted) and wanted == _buffered_slot:
 		_buffered_slot = &""
 		_buffer_left = 0.0
+
+
+func _is_recast(slot: StringName) -> bool:
+	var a: AbilityData = get_ability(slot)
+	return a != null and a.source_id != &"" and character.kit.has_recast(a.source_id)
 
 
 ## Recovery can be cut short by the next hit of a combo string, or by a
@@ -317,6 +326,11 @@ func get_castable(slot: StringName) -> AbilityData:
 
 func try_cast(slot: StringName) -> bool:
 	var ability: AbilityData = get_castable(slot)
+	if ability != null and ability.source_id != &"" and character.kit.has_recast(ability.source_id) \
+			and phase != Phase.STARTUP and character.status.can_act() and not character.is_dead():
+		# Design-bible recast: second press inside the window (free).
+		character.kit.fire_recast(ability.source_id)
+		return true
 	if ability == null or phase != Phase.IDLE or character.is_dead():
 		return false
 	if not character.status.can_act() or not character.status.can_cast(slot) or not is_ready(slot):

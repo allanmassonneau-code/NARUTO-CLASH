@@ -167,6 +167,7 @@ func _finish() -> void:
 func _hit_inside(damage: float, full_hit: bool) -> void:
 	var center: Vector3 = global_position + Vector3.UP * HitQuery.BODY_HEIGHT
 	var reach: float = ability.hit_radius + HitQuery.HURTBOX_RADIUS
+	KitObject.damage_objects_in(get_tree(), global_position, ability.hit_radius, team, damage)
 	for target: CombatCharacter in HitQuery.characters_in_sphere(get_world_3d(), center, reach):
 		if target.team == team:
 			continue

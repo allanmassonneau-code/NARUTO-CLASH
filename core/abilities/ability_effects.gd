@@ -51,6 +51,9 @@ static func activate(ctrl: AbilityController, a: AbilityData) -> void:
 			c.dismiss_clone()
 			var dest: Vector3 = _clear_point(c, ctrl.cast_direction, a.summon_distance)
 			c.clone = ShadowClone.spawn(c, dest, a.summon_duration)
+		AbilityData.Kind.SCRIPTED:
+			if a.technique != null:
+				a.technique.cast(Tk.from_cast(ctrl, a, a.technique))
 		AbilityData.Kind.SUBSTITUTION:
 			c.arm_substitution(a.substitution_radius)
 
@@ -130,6 +133,7 @@ static func melee_from(c: CombatCharacter, origin: Vector3, direction: Vector3, 
 	var center: Vector3 = origin + Vector3.UP * HitQuery.BODY_HEIGHT
 	var half_arc: float = deg_to_rad(a.arc_degrees) * 0.5
 	CombatFx.arc(c, origin, direction, a.max_range, a.arc_degrees, a.color, 0.15)
+	KitObject.damage_objects_in(c.get_tree(), origin + direction * a.max_range * 0.5, a.max_range * 0.6, c.team, a.damage * damage_scale)
 	ArenaRules.hit_orb_arc(c, origin, direction, a, a.damage * damage_scale)
 	for target: CombatCharacter in HitQuery.characters_in_sphere(c.get_world_3d(), center, a.max_range + HitQuery.HURTBOX_RADIUS):
 		if target.team == c.team or already_hit.has(target):

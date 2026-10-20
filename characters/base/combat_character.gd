@@ -77,6 +77,8 @@ var _concentrate_lock: float = 0.0
 var air_time: float = 0.0
 var _jump_cooldown: float = 0.0
 var stamina: float = MAX_STAMINA
+## Technique kits: resources, marks, recasts, modifiers, signatures.
+var kit: KitState
 var _stamina_delay: float = 0.0
 ## Time since the current launch started (projection arc).
 var _launch_elapsed: float = 0.0
@@ -125,6 +127,9 @@ func _ready() -> void:
 	collision_layer = LAYER_CHARACTERS
 	collision_mask = MASK_DEFAULT
 	movement.data = data.movement
+	kit = KitState.new(self)
+	add_child(kit)
+	setup_kits()
 	health.setup(data.max_health)
 	if data.max_chakra > 0.0:
 		energy.configure_chakra(data.max_chakra, data.chakra_regen)
@@ -163,10 +168,12 @@ func _physics_process(delta: float) -> void:
 	_tick_jump(delta, intent, can_act)
 	_tick_substitution()
 	abilities.tick(delta, intent if can_act and not guarding and not concentrating else null)
-	energy.tick(delta, CONCENTRATE_REGEN_MULTIPLIER if concentrating else 1.0)
+	energy.tick(delta, (CONCENTRATE_REGEN_MULTIPLIER if concentrating else 1.0) * kit.modifier_mult("chakra_regen"))
 	_tick_stamina(delta)
+	kit.tick(delta)
 	var wish: Vector3 = intent.move_direction if intent != null and status.can_move() and not concentrating else Vector3.ZERO
-	movement.speed_multiplier = abilities.get_move_multiplier() * status.speed_multiplier() * (GUARD_MOVE_MULTIPLIER if guarding else 1.0)
+	movement.speed_multiplier = abilities.get_move_multiplier() * status.speed_multiplier() * (GUARD_MOVE_MULTIPLIER if guarding else 1.0) \
+		* kit.modifier_mult("speed")
 	_tick_status_effects(delta)
 	var knockback_speed: float = movement.forced_speed() if movement.is_knockback else 0.0
 	velocity = movement.compute_velocity(wish, delta)
@@ -209,6 +216,16 @@ func _tick_guard(delta: float, intent: GameplayIntent, can_act: bool) -> void:
 	if intent.pressed_slots.has(&"lmb") and _parry_cooldown <= 0.0:
 		_parry_left = PARRY_WINDOW
 		_parry_cooldown = PARRY_COOLDOWN
+
+
+## (Re)creates the signature mechanics of the kits in data.kits.
+func setup_kits() -> void:
+	kit.signatures.clear()
+	for kit_id: StringName in data.kits:
+		var sig: KitSignature = TechniqueRegistry.signature(kit_id)
+		if sig != null:
+			sig.setup(self)
+			kit.signatures.append(sig)
 
 
 ## Concentration: hold to stand still and regenerate chakra fast.
@@ -388,7 +405,7 @@ func _is_frontal(hit: HitData) -> bool:
 ## Central damage pipeline: immaterial -> counter -> modifiers (empower,
 ## marks, rooted bonus) -> damage -> CC -> knockback -> on-hit effects.
 func receive_hit(hit: HitData) -> HitData.Result:
-	if is_dead() or status.has_status(StatusController.Type.IMMATERIAL):
+	if is_dead() or status.has_status(StatusController.Type.IMMATERIAL) or kit.has_flag("untargetable"):
 		return HitData.Result.IGNORED
 	if status.has_status(StatusController.Type.COUNTER):
 		abilities.resolve_counter(hit)
@@ -421,13 +438,23 @@ func receive_hit(hit: HitData) -> HitData.Result:
 		if a.bonus_vs_rooted > 0.0 and status.has_status(StatusController.Type.ROOT):
 			damage += a.bonus_vs_rooted
 			status.remove_status(StatusController.Type.ROOT)
+	# Technique kits: damage modifiers, on-deal / on-take hooks, resistances.
+	if is_instance_valid(hit.source) and hit.source != self:
+		damage *= hit.source.kit.modifier_mult("damage_dealt")
+		if a != null and hit.source.abilities.is_basic_attack(a):
+			damage *= hit.source.kit.modifier_mult("basic_damage") * (1.0 + float(hit.source.data.stat_bonuses.get(&"melee_power", 0.0)))
+		damage = hit.source.kit.on_deal(self, hit, damage)
+	damage *= kit.modifier_mult("damage_taken") * (1.0 - float(data.stat_bonuses.get(&"resistance", 0.0)))
+	damage = kit.on_take(hit, damage)
+	if kit.has_flag("cc_immune"):
+		stun = 0.0
 	# Projection: a launched fighter stays up (no stun / knockback while in
 	# the air); a launch hit sends a grounded one up.
 	var aerial: bool = false
 	if is_launched():
 		_extend_launch()
 		aerial = true
-	elif a != null and a.launch_duration > 0.0 and not data.launch_immune:
+	elif a != null and a.launch_duration > 0.0 and not data.launch_immune and not kit.has_flag("tenacity"):
 		launch(a.launch_duration)
 		aerial = true
 	if aerial:
@@ -437,6 +464,10 @@ func receive_hit(hit: HitData) -> HitData.Result:
 		concentrating = false
 		_concentrate_lock = CONCENTRATE_HIT_LOCKOUT
 	health.apply_damage(damage)
+	if damage > 0.0 and is_instance_valid(hit.source) and hit.source != self:
+		var steal: float = hit.source.kit.modifier_sum("lifesteal")
+		if steal > 0.0:
+			hit.source.health.heal(damage * steal)
 	if damage > 0.0:
 		status.remove_status(StatusController.Type.INCAPACITATE)  # genjutsu breaks on damage
 		energy.gain(damage * DAMAGE_TAKEN_ENERGY)  # comeback: getting hit charges the ultimate too
@@ -450,7 +481,8 @@ func receive_hit(hit: HitData) -> HitData.Result:
 		status.apply_status(StatusController.Type.ROOT, hit.root_duration)
 	if hit.knockback_velocity != Vector3.ZERO and not aerial:
 		abilities.interrupt()
-		movement.apply_forced_motion(hit.knockback_velocity, hit.knockback_duration, true, true)
+		var knock: Vector3 = hit.knockback_velocity * (0.25 if kit.has_flag("tenacity") else 1.0)
+		movement.apply_forced_motion(knock, hit.knockback_duration, true, true)
 		_slam_source = hit.source
 	if a != null:
 		if a.slow_duration > 0.0:
@@ -573,6 +605,7 @@ func reset_for_round(spawn: Transform3D) -> void:
 	pursuing = null
 	stamina = MAX_STAMINA
 	_stamina_delay = 0.0
+	kit.reset()
 	_disarm_substitution()
 	_passive_used = false
 	_passive_timer = 0.0

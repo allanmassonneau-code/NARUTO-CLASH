@@ -90,6 +90,14 @@ static func build(jutsu: JutsuData, db: ProgressionDatabase) -> AbilityData:
 			a.stun_duration = 0.5 + rank * 0.1
 	if tags.has(&"LAUNCH"):
 		a.launch_duration = 1.0 + rank * 0.1
+	var technique: Technique = TechniqueRegistry.create(jutsu)
+	if technique != null:
+		# Design-bible script: tag defaults above give the frame data, the
+		# script runs the mechanics.
+		a.kind = AbilityData.Kind.SCRIPTED
+		a.technique = technique
+		a.max_range = maxf(a.max_range, 8.0)
+		technique.configure(a)
 	if tags.has(&"DEBUFF"):
 		a.slow_duration = 1.5
 	if tags.has(&"DOT"):

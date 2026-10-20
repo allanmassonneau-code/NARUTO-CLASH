@@ -182,6 +182,7 @@ func _refresh_player_kit(promotion: bool = false) -> void:
 	player.abilities.interrupt()
 	player.data = ShinobiKit.build(profile, Profiles.db, Profiles.service())
 	player.abilities.setup(player, player.data)
+	player.setup_kits()
 	player.movement.data = player.data.movement
 	if promotion:
 		player.health.setup(player.data.max_health)

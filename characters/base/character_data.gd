@@ -13,6 +13,10 @@ extends Resource
 @export var max_chakra: float = 0.0
 ## Chakra regenerated per second in chakra mode.
 @export var chakra_regen: float = 0.0
+## Technique kits owned (clan, natures): their signature mechanics apply.
+@export var kits: Array[StringName] = []
+## Tenketsu stat bonuses (jutsu_power, melee_power, resistance...).
+@export var stat_bonuses: Dictionary = {}
 ## Can't be launched by projection techniques (bosses).
 @export var launch_immune: bool = false
 @export var movement: MovementData

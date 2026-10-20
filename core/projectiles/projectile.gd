@@ -66,6 +66,11 @@ func _physics_process(delta: float) -> void:
 		return
 	global_position = from + step
 	_travelled += step.length()
+	if not visual_only:
+		var blocker: KitObject = KitObject.blocker_at(get_tree(), global_position, team)
+		if blocker != null:
+			_expire(global_position)
+			return
 	if visual_only:
 		if _travelled >= ability.max_range:
 			queue_free()

@@ -23,6 +23,10 @@ static func build(profile: CharacterProfile, db: ProgressionDatabase, service: P
 	var bonus: Dictionary = service.tenketsu.stat_bonuses(profile)
 	data.max_health = resources.hp
 	data.max_chakra = resources.chakra
+	data.stat_bonuses = bonus
+	for kit_id: StringName in [profile.clan_id, profile.primary_nature, profile.secondary_nature]:
+		if kit_id != &"":
+			data.kits.append(kit_id)
 	data.chakra_regen = BASE_CHAKRA_REGEN + float(bonus.get(&"chakra_regen", 0.0))
 	var movement := MovementData.new()
 	movement.move_speed = 7.0 * (1.0 + float(bonus.get(&"mobility", 0.0)))

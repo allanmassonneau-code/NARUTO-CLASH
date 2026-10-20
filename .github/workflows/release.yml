@@ -54,6 +54,9 @@ jobs:
           grep -q "RESULT: PASS" world.log
           "$GODOT" --headless --fixed-fps 60 --path . res://tests/mechanics_test.tscn 2>&1 | tee mechanics.log
           grep -q "RESULT: PASS" mechanics.log
+          "$GODOT" --headless --fixed-fps 60 --path . res://tests/techniques_test.tscn 2>&1 | tee techniques.log
+          grep -q "RESULT: PASS" techniques.log
+          ! grep -q "SCRIPT ERROR" techniques.log
 
       - name: Windows icon tooling (wine + rcedit)
         run: |

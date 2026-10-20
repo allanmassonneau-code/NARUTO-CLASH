@@ -3,7 +3,7 @@ extends Resource
 ## Data-driven definition of a jutsu: frame data, costs, hit properties.
 ## The `kind` selects a generic executor in AbilityEffects.
 
-enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL, SUMMON_CLONE, TELEPORT, SUBSTITUTION }
+enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL, SUMMON_CLONE, TELEPORT, SUBSTITUTION, SCRIPTED }
 
 @export_category("Identity")
 @export var display_name: String = "Jutsu"
@@ -18,6 +18,8 @@ enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL, SUMMON
 ## Progression technique this ability was built from (keeps its cooldown
 ## when it moves between bar slots).
 @export var source_id: StringName = &""
+## SCRIPTED: the design-bible technique script run on activation.
+var technique: Technique
 
 @export_category("Frame Data")
 @export var startup_time: float = 0.1

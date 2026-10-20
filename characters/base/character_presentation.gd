@@ -302,6 +302,10 @@ func _update_overhead() -> void:
 	var marks: int = _character.status.get_stacks(StatusController.Type.MARK)
 	if marks > 0:
 		text += "  " + "◆".repeat(marks)
+	# Design-bible kit marks (Braise, Humidité...): name + stacks.
+	for key: String in _character.kit.marks:
+		var m: Dictionary = _character.kit.marks[key]
+		text += "\n%s %s" % [m.label, "●".repeat(m.stacks)]
 	overhead.text = text
 
 
