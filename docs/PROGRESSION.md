@@ -57,6 +57,19 @@ Règles choisies faute de précision (modifiables dans `rules`) :
 - 6 techniques équipables ;
 - la spécialité donne ses 4 compétences dès le choix.
 
+## Réseau et interface
+
+- `Profiles` (autoload, `core/progression/profiles.gd`) : accès client au profil.
+  - En ligne : chaque requête part au serveur (`Net.c2s_profile_*`), qui la valide avec `ProgressionAuthority`,
+    sauvegarde le profil (`user://profiles/acc_<hash du jeton>.json` sur le VPS) et renvoie profil + événements.
+    Le compte est identifié par un jeton secret généré au premier lancement (`GameSession.account_token`).
+  - Hors ligne : même autorité, exécutée localement (profil `local_…`). Boutons de test « Promouvoir » / « Supprimer ».
+- Écran `ui/progression/shinobi_screen.gd` (bouton **SHINOBI** du menu) : création (village, clan / sans clan, clan),
+  en-tête (grade, PV, chakra, Tenketsu), choix en attente (natures, spécialité, évolution Sub-jutsu avec confirmation),
+  arbres de nature (D1 OU D2… avec états LOCKED_GRADE / AVAILABLE / SELECTED / LOCKED_BY_CHOICE), arbre de clan,
+  spécialité, Sub-jutsu (révélation animée), Tenketsu, équipement.
+- Les grades ne se demandent pas : en ligne ils seront donnés par le jeu (missions…) ou un admin.
+
 ## Tests
 
 `godot --headless --path . res://tests/progression_test.tscn` : les 20 tests de la spec + sauvegarde,

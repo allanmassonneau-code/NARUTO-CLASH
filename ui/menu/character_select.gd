@@ -141,6 +141,14 @@ func _build_header(parent: Control) -> void:
 	var spacer2 := Control.new()
 	spacer2.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(spacer2)
+	var shinobi := Button.new()
+	shinobi.text = "SHINOBI"
+	shinobi.tooltip_text = "Ton personnage : grade, natures, clan, spécialité, Tenketsu"
+	shinobi.custom_minimum_size = Vector2(140, 46)
+	shinobi.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	shinobi.add_theme_font_override("font", UiStyle.font(900))
+	shinobi.pressed.connect(func() -> void: add_child(ShinobiScreen.new()))
+	row.add_child(shinobi)
 	_friends_button = Button.new()
 	_friends_button.text = "FRIENDS"
 	_friends_button.custom_minimum_size = Vector2(140, 46)
