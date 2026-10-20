@@ -186,7 +186,41 @@ func unequip_jutsu(profile: CharacterProfile, jutsu_id: StringName) -> Progressi
 	if not profile.equipped_jutsu.has(jutsu_id):
 		return ProgressionResult.fail(&"NOT_EQUIPPED")
 	profile.equipped_jutsu.erase(jutsu_id)
-	return ProgressionResult.success()
+	var result := ProgressionResult.success()
+	result.add_event(&"loadout_changed", {})
+	return result
+
+
+## Puts a technique in bar slot `slot` (0-based). Already equipped elsewhere:
+## the two slots swap. Slot past the end of the bar: appended.
+func equip_jutsu_at(profile: CharacterProfile, jutsu_id: StringName, slot: int) -> ProgressionResult:
+	if not profile.knows(jutsu_id):
+		return ProgressionResult.fail(&"NOT_LEARNED")
+	var jutsu: JutsuData = db.get_jutsu(jutsu_id)
+	if jutsu != null and jutsu.passive:
+		return ProgressionResult.fail(&"PASSIVE_NOT_EQUIPPABLE")
+	if slot < 0 or slot >= db.max_equipped_jutsu:
+		return ProgressionResult.fail(&"INVALID_SLOT")
+	var bar: Array[StringName] = profile.equipped_jutsu
+	var current: int = bar.find(jutsu_id)
+	if current == slot:
+		return ProgressionResult.fail(&"ALREADY_EQUIPPED")
+	if current >= 0:
+		if slot < bar.size():
+			bar[current] = bar[slot]
+			bar[slot] = jutsu_id
+		else:
+			bar.remove_at(current)
+			bar.append(jutsu_id)
+	elif slot < bar.size():
+		bar[slot] = jutsu_id
+	elif bar.size() < db.max_equipped_jutsu:
+		bar.append(jutsu_id)
+	else:
+		return ProgressionResult.fail(&"NO_FREE_SLOT")
+	var result := ProgressionResult.success()
+	result.add_event(&"loadout_changed", {})
+	return result
 
 
 func _add_learned(profile: CharacterProfile, jutsu_id: StringName) -> void:

@@ -31,6 +31,7 @@ func _ready() -> void:
 	Profiles.request({"action": "choose_primary_nature", "nature": &"katon"})
 	Profiles.request({"action": "learn_jutsu", "jutsu": &"katon_d_goukakyuu"})
 	Profiles.request({"action": "equip_jutsu", "jutsu": &"katon_d_goukakyuu"})
+	Profiles.request({"action": "learn_jutsu", "jutsu": &"katon_c_haisekishou"})
 	_world = (load("res://world/world.tscn") as PackedScene).instantiate() as World
 	add_child(_world)
 	_player = _world.player
@@ -139,6 +140,32 @@ func _run() -> void:
 	_player.global_position = anchor + Vector3(6.0, 0.0, 0.0)
 	await _wait(0.05)
 	_check(not _player.substitution_armed, "leaving the zone cancels the substitution")
+
+	# Combat menu: swapping techniques keeps cooldowns, HP and chakra.
+	var abilities: AbilityController = _player.abilities
+	_player.global_position = anchor
+	await _wait(0.6)
+	abilities.reset_cooldown(&"j1")
+	energy.sync_state(energy.max_energy)
+	_input.pressed.append(&"j1")
+	await _wait(0.6)
+	var cd: float = abilities.get_cooldown_left(&"j1")
+	_check(cd > 0.0, "technique on cooldown before the swap")
+	hp = _player.health.current_health
+	var chakra: float = energy.current_energy
+	Profiles.request({"action": "equip_jutsu_at", "jutsu": &"katon_c_haisekishou", "slot": 0})
+	_check(abilities.get_ability(&"j1").source_id == &"katon_c_haisekishou", "menu places a technique in slot 1")
+	_check(abilities.get_cooldown_left(&"j1") == 0.0, "the new technique is ready")
+	_check(abilities.technique_cooldown(&"katon_d_goukakyuu") > cd - 0.1, "swapped-out technique keeps its cooldown")
+	_check(is_equal_approx(_player.health.current_health, hp) and energy.current_energy >= chakra - 0.1, "swap keeps HP and chakra")
+	Profiles.request({"action": "equip_jutsu_at", "jutsu": &"katon_d_goukakyuu", "slot": 1})
+	_check(abilities.get_ability(&"j2").source_id == &"katon_d_goukakyuu" and abilities.get_cooldown_left(&"j2") > cd - 0.2,
+		"cooldown follows the technique to its new slot")
+	var menu: CombatMenu = _world.combat_menu
+	menu.toggle()
+	_check(menu.is_open(), "B opens the combat menu")
+	menu.toggle()
+	_check(not menu.is_open(), "and closes it")
 
 	Profiles.dev_reset()
 	print("RESULT: %s (%d failures)" % ["PASS" if _failures == 0 else "FAIL", _failures])

@@ -20,6 +20,7 @@ Options: **O** (or the gear button) for volumes, mute, spatial sound, fullscreen
 | Space | Jump (clears ground areas) |
 | Q (A on AZERTY) | Substitution: saves your spot and shows a zone; while you stay in it, the next hit is negated and you reappear on the spot. 1 charge, 50 s recharge |
 | R (hold) | Concentration: immobile, chakra regenerates 6x faster; hits deal +25% and break it |
+| B | Combat menu (no pause): learned techniques by category (favorites, natures, clan, specialization, sub-jutsu); click to place one in the selected bar slot, or hover + 1–6. Cooldowns follow the technique |
 | F (hold) | Guard: frontal hits deal 30% and no CC, slower movement; breaks after 45 blocked damage |
 | F + LMB | Perfect parry (0.22 s window): an enemy basic attack is negated and its attacker stunned 1.2 s |
 | X or middle mouse | Cancel during startup (feint) |

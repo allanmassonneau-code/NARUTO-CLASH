@@ -20,6 +20,9 @@ const SLOT_ACTIONS: Dictionary = {
 }
 
 @export var camera: Camera3D
+## UI that may claim a press before it becomes a cast (combat menu):
+## any object with `blocks_slot(slot: StringName) -> bool`.
+var ui_blocker: Object
 ## Height of the plane used for mouse aiming (arena floor).
 @export var aim_plane_height: float = 0.0
 
@@ -35,16 +38,20 @@ func poll_intent() -> GameplayIntent:
 		intent.has_aim_point = true
 	# If the cursor ray misses the plane we keep the previous aim point.
 	for slot: StringName in SLOT_ACTIONS:
-		if Input.is_action_just_pressed(SLOT_ACTIONS[slot]):
+		if Input.is_action_just_pressed(SLOT_ACTIONS[slot]) and not _blocked(slot):
 			intent.pressed_slots.append(slot)
 	intent.held_slots.clear()
-	if Input.is_action_pressed(SLOT_ACTIONS[&"lmb"]):
+	if Input.is_action_pressed(SLOT_ACTIONS[&"lmb"]) and not _blocked(&"lmb"):
 		intent.held_slots.append(&"lmb")
 	intent.cancel_pressed = Input.is_action_just_pressed("ability_cancel")
 	intent.guard_held = Input.is_action_pressed("guard")
 	intent.concentrate_held = Input.is_action_pressed("concentrate")
 	intent.jump_pressed = Input.is_action_just_pressed("jump")
 	return intent
+
+
+func _blocked(slot: StringName) -> bool:
+	return is_instance_valid(ui_blocker) and ui_blocker.blocks_slot(slot)
 
 
 func _read_move_direction() -> Vector3:

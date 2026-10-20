@@ -33,6 +33,9 @@ var cast_target_point: Vector3 = Vector3.ZERO
 
 var _abilities: Dictionary = {}
 var _cooldowns: Dictionary = {}
+## Cooldowns of techniques taken off the bar (cooldown key -> seconds left),
+## restored if they come back: swapping never resets a cooldown.
+var _stashed: Dictionary = {}
 var _buffered_slot: StringName = &""
 var _buffer_left: float = 0.0
 var _hit_this_cast: Array[CombatCharacter] = []
@@ -53,13 +56,38 @@ var _combo_left: Dictionary = {}
 
 func setup(owner_character: CombatCharacter, data: CharacterData) -> void:
 	character = owner_character
+	for slot: StringName in _abilities:
+		if get_cooldown_left(slot) > 0.0:
+			_stashed[cooldown_key(slot, _abilities[slot])] = get_cooldown_left(slot)
+	var stashed: Dictionary = _stashed
 	_abilities = data.get_ability_map()
 	reset()
+	for slot: StringName in _abilities:
+		var key: StringName = cooldown_key(slot, _abilities[slot])
+		if stashed.has(key):
+			_cooldowns[slot] = stashed[key]
+			stashed.erase(key)
+	_stashed = stashed
+
+
+## Techniques keep their cooldown by technique id, other slots by slot.
+static func cooldown_key(slot: StringName, ability: AbilityData) -> StringName:
+	return ability.source_id if ability != null and ability.source_id != &"" else StringName("slot:" + slot)
+
+
+## Cooldown left of a technique, on the bar or not.
+func technique_cooldown(source_id: StringName) -> float:
+	for slot: StringName in _abilities:
+		if (_abilities[slot] as AbilityData).source_id == source_id:
+			return get_cooldown_left(slot)
+	return _stashed.get(source_id, 0.0)
 
 
 func reset() -> void:
+	_cooldowns.clear()
 	for slot: StringName in _abilities:
 		_cooldowns[slot] = 0.0
+	_stashed = {}
 	_clear_cast()
 	_buffered_slot = &""
 	_buffer_left = 0.0
@@ -214,6 +242,10 @@ func get_move_multiplier() -> float:
 func tick(delta: float, intent: GameplayIntent) -> void:
 	for slot: StringName in _cooldowns:
 		_cooldowns[slot] = maxf(0.0, _cooldowns[slot] - delta)
+	for key: StringName in _stashed.keys():
+		_stashed[key] -= delta
+		if _stashed[key] <= 0.0:
+			_stashed.erase(key)
 	if copied != null:
 		copied_left -= delta
 		if copied_left <= 0.0 and not (current == copied and phase != Phase.IDLE):

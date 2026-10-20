@@ -195,7 +195,7 @@ func _build() -> void:
 	_concentrate.offset_top = -190
 	_concentrate.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_concentrate.visible = false
-	var hint_text: String = "Espace : saut  ·  %s (maintenir) : concentration  ·  F : garde  ·  Échap : menu SHINOBI  ·  O : options" % key_label(KEY_R)
+	var hint_text: String = "B : techniques  ·  Espace : saut  ·  %s (maintenir) : concentration  ·  F : garde  ·  Échap : menu SHINOBI  ·  O : options" % key_label(KEY_R)
 	var hint := UiStyle.label(_root, hint_text, 13, UiStyle.MUTED, 700)
 	hint.position = Vector2(20, 104)
 	_toast = UiStyle.label(_root, "", 20, Color.WHITE, 900)

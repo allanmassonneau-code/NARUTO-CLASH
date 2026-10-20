@@ -33,6 +33,7 @@ const ZONES: Array[Dictionary] = [
 var player: CombatCharacter
 var camera: ArenaCamera
 var hud: WorldHud
+var combat_menu: CombatMenu
 var mobs: Array[CombatCharacter] = []
 
 var _mob_ids: Dictionary = {}  # CombatCharacter -> mob id
@@ -69,6 +70,9 @@ func _ready() -> void:
 	hud = WorldHud.new()
 	add_child(hud)
 	hud.bind(self, player)
+	combat_menu = CombatMenu.new()
+	add_child(combat_menu)
+	combat_menu.bind(player)
 	if CombatFx.is_enabled():
 		Sfx.warm_up()
 		OptionsPanel.attach(self)
@@ -143,16 +147,22 @@ func _respawn_player() -> void:
 	hud.toast("Tu reprends connaissance au village.", Color(0.8, 0.9, 1.0))
 
 
-## Rebuilds the player's kit after a promotion or a loadout change.
-func _refresh_player_kit() -> void:
+## Rebuilds the player's kit after a promotion (full heal, new pools) or a
+## loadout change from the combat menu (cooldowns, HP and chakra kept).
+func _refresh_player_kit(promotion: bool = false) -> void:
 	var profile: CharacterProfile = Profiles.profile
 	if profile == null or player == null:
 		return
+	player.abilities.interrupt()
 	player.data = ShinobiKit.build(profile, Profiles.db, Profiles.service())
 	player.abilities.setup(player, player.data)
-	player.health.setup(player.data.max_health)
 	player.movement.data = player.data.movement
+	if promotion:
+		player.health.setup(player.data.max_health)
+		player.energy.configure_chakra(player.data.max_chakra, player.data.chakra_regen)
 	hud.rebuild_slots()
+	if combat_menu != null:
+		combat_menu.refresh()
 
 
 func _spawn_mobs() -> void:
@@ -201,6 +211,7 @@ func _on_mob_died(mob: CombatCharacter) -> void:
 
 func _on_profile_updated(_profile: CharacterProfile, result: ProgressionResult) -> void:
 	var rebuild: bool = false
+	var promotion: bool = false
 	for event: Dictionary in result.events:
 		match event.type:
 			&"xp_gained":
@@ -208,13 +219,16 @@ func _on_profile_updated(_profile: CharacterProfile, result: ProgressionResult) 
 			&"promoted":
 				hud.announce("PROMU %s !" % ShinobiScreen.GRADE_NAMES[int(event.grade)].to_upper())
 				rebuild = true
+				promotion = true
+			&"loadout_changed", &"jutsu_equipped":
+				rebuild = true
 			&"choice_required":
 				hud.toast("Nouveau choix disponible dans SHINOBI (Échap).", Color(1.0, 0.85, 0.4))
 			&"sub_jutsu_obtained":
 				var sub: SubJutsuData = Profiles.db.get_sub_jutsu(event.sub_jutsu)
 				hud.toast("Technique cachée obtenue : %s" % (sub.display_name if sub else ""), Color(0.8, 0.5, 1.0))
 	if rebuild:
-		_refresh_player_kit()
+		_refresh_player_kit(promotion)
 
 
 # --- Map ---------------------------------------------------------------------------

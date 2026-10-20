@@ -15,6 +15,9 @@ enum Kind { MELEE_ARC, PROJECTILE, DASH, GROUND_AREA, COUNTER, SELF_HEAL, SUMMON
 @export var anim: StringName = &""
 ## Presentation: spell effect id used by SpellVfx ("rasengan", "chidori"...).
 @export var vfx: StringName = &""
+## Progression technique this ability was built from (keeps its cooldown
+## when it moves between bar slots).
+@export var source_id: StringName = &""
 
 @export_category("Frame Data")
 @export var startup_time: float = 0.1

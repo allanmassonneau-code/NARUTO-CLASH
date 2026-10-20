@@ -208,6 +208,18 @@ func _robustness_tests() -> void:
 	_check(service.equip_jutsu(p, _nature_jutsu(p.primary_nature, R.B, 0)).error == &"NOT_LEARNED", "learned and equipped are separate")
 	var passive_id: StringName = db.specializations[0].passive_skill.id
 	_check(service.equip_jutsu(p, passive_id).error == &"PASSIVE_NOT_EQUIPPABLE", "passives are not equipped")
+	# Slot placement (combat menu): place, swap, append, bounds.
+	var c1: StringName = _nature_jutsu(p.primary_nature, R.C, 1)
+	var d0: StringName = _nature_jutsu(p.primary_nature, R.D, 0)
+	service.learn_jutsu(p, d0)
+	_check(service.equip_jutsu_at(p, d0, 0).ok and p.equipped_jutsu == ([d0] as Array[StringName]),
+		"equip_jutsu_at replaces the slot's technique")
+	_check(service.equip_jutsu_at(p, c1, 4).ok and p.equipped_jutsu == ([d0, c1] as Array[StringName]), "past the bar: appended")
+	_check(service.equip_jutsu_at(p, c1, 0).ok and p.equipped_jutsu == ([c1, d0] as Array[StringName]), "already equipped: slots swap")
+	_check(service.equip_jutsu_at(p, c1, 6).error == &"INVALID_SLOT", "slot out of range refused")
+	_check(service.equip_jutsu_at(p, passive_id, 0).error == &"PASSIVE_NOT_EQUIPPABLE", "passives can't be placed")
+	_check(ProgressionAuthority.new(service).handle_request(p, {"action": "equip_jutsu_at", "jutsu": d0, "slot": 0}).ok
+		and p.equipped_jutsu == ([d0, c1] as Array[StringName]), "authority handles equip_jutsu_at")
 	# Save / load roundtrip.
 	var saves := ProgressionSaveService.new("user://test_profiles")
 	saves.save_profile(p)

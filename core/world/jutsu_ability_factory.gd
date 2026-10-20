@@ -11,8 +11,10 @@ const NATURE_VFX: Dictionary = {&"katon": &"katon", &"raiton": &"chidori", &"dot
 
 static func build(jutsu: JutsuData, db: ProgressionDatabase) -> AbilityData:
 	if jutsu.gameplay_data != null:
+		jutsu.gameplay_data.source_id = jutsu.id
 		return jutsu.gameplay_data
 	var a := AbilityData.new()
+	a.source_id = jutsu.id
 	a.display_name = jutsu.display_name
 	a.icon = jutsu.icon
 	a.color = _color(jutsu, db)

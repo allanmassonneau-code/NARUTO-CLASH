@@ -33,6 +33,8 @@ func handle_request(profile: CharacterProfile, request: Dictionary) -> Progressi
 			result = service.learn_jutsu(profile, _id(request, "jutsu"))
 		"equip_jutsu":
 			result = service.equip_jutsu(profile, _id(request, "jutsu"))
+		"equip_jutsu_at":
+			result = service.equip_jutsu_at(profile, _id(request, "jutsu"), int(request.get("slot", -1)))
 		"unequip_jutsu":
 			result = service.unequip_jutsu(profile, _id(request, "jutsu"))
 		"unlock_tenketsu":
