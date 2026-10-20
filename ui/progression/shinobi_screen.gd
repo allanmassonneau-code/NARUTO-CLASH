@@ -114,7 +114,7 @@ func _rebuild() -> void:
 	_header_bar()
 	var p: CharacterProfile = Profiles.profile
 	if p == null:
-		_creation()
+		_creation_prompt()
 		return
 	_profile_header(p)
 	_pending_banner(p)
@@ -135,7 +135,7 @@ func _rebuild() -> void:
 		"loadout":
 			_loadout_view(p)
 		"look":
-			_appearance_view(p)
+			_appearance_prompt()
 
 
 func _header_bar() -> void:
@@ -226,6 +226,24 @@ func _tabs(p: CharacterProfile) -> void:
 
 
 # --- Creation -------------------------------------------------------------------
+
+## No character yet: open the full-screen character creator.
+func _creation_prompt() -> void:
+	var b := _button(_body, "CRÉER UN PERSONNAGE", func() -> void: CharacterCreator.open(self))
+	b.custom_minimum_size = Vector2(360, 70)
+	b.add_theme_font_override("font", UiStyle.font(900))
+	b.add_theme_color_override("font_color", UiStyle.ACCENT)
+
+
+## Appearance is edited in the character creator (edit mode).
+func _appearance_prompt() -> void:
+	UiStyle.label(_body, "APPARENCE", 18, UiStyle.ACCENT, 900)
+	UiStyle.label(_body, "Coiffure, tenue et couleurs se modifient dans le créateur de personnage (les traits et tenues de ton clan sont conservés).", 13, UiStyle.MUTED, 600)
+	var b := _button(_body, "OUVRIR LE CRÉATEUR", func() -> void:
+		var creator: CharacterCreator = CharacterCreator.open(self, true)
+		creator.finished.connect(func(_done: bool) -> void: _rebuild()))
+	b.custom_minimum_size = Vector2(320, 56)
+
 
 func _creation() -> void:
 	var panel := _panel(_body, UiStyle.ACCENT)

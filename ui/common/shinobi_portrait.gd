@@ -20,6 +20,10 @@ var _tint := Color(1, 1, 1, 0)
 ## Fighter whose state (casting / stun / dead) the HUD portrait mirrors.
 var mirror: CombatCharacter
 var flourishes: bool = true
+## Extra yaw set by the user (drag to turn, character creator).
+var yaw: float = 0.0
+## Gentle automatic sway (off while the user turns the model).
+var auto_sway: bool = true
 
 
 static func create(data: CharacterData, framing: Framing, pixel_size: Vector2i) -> ShinobiPortrait:
@@ -125,7 +129,7 @@ func _process(delta: float) -> void:
 	_model.animate(delta, 0.0, pose, _tint, 0.0)
 	_turn += delta
 	if _framing == Framing.FULL_BODY:
-		_pivot.rotation_degrees.y = 18.0 + sin(_turn * 0.5) * 10.0
+		_pivot.rotation_degrees.y = 18.0 + yaw + (sin(_turn * 0.5) * 10.0 if auto_sway else 0.0)
 
 
 func _mirror_pose() -> StringName:
