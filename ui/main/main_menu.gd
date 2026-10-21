@@ -37,6 +37,13 @@ func _ready() -> void:
 	add_child(_retry)
 	_rebuild()
 	_connect()
+	if GameSession.menu_notice != "":
+		var dialog := AcceptDialog.new()
+		dialog.title = "Retour au menu"
+		dialog.dialog_text = GameSession.menu_notice
+		GameSession.menu_notice = ""
+		add_child(dialog)
+		dialog.popup_centered.call_deferred()
 
 
 func _connect() -> void:

@@ -41,10 +41,9 @@ const JUMP_DURATION: float = 0.55
 const JUMP_HEIGHT: float = 1.6
 const JUMP_COOLDOWN: float = 0.15
 ## Locomotion: running by default, walking (Alt toggle) and chakra sprint
-## (double tap forward): faster, drains chakra, not usable in combat.
+## (double tap a movement key): faster, free, not usable in combat.
 const WALK_MULTIPLIER: float = 0.45
 const SPRINT_MULTIPLIER: float = 1.75
-const SPRINT_CHAKRA_PER_SECOND: float = 6.0
 ## In combat for this long after dealing or taking damage.
 const COMBAT_TIMEOUT: float = 5.0
 ## Stamina: spent by basic attack stances, regenerates after a short pause.
@@ -186,7 +185,7 @@ func _physics_process(delta: float) -> void:
 	_tick_substitution()
 	_tick_locomotion(delta, intent, can_act)
 	abilities.tick(delta, intent if can_act and not guarding and not concentrating else null)
-	energy.tick(delta, 0.0 if sprinting else (CONCENTRATE_REGEN_MULTIPLIER if concentrating else 1.0) * kit.modifier_mult("chakra_regen"))
+	energy.tick(delta, (CONCENTRATE_REGEN_MULTIPLIER if concentrating else 1.0) * kit.modifier_mult("chakra_regen"))
 	_tick_stamina(delta)
 	kit.tick(delta)
 	var wish: Vector3 = intent.move_direction if intent != null and status.can_move() and not concentrating else Vector3.ZERO
@@ -247,16 +246,14 @@ func _tick_locomotion(delta: float, intent: GameplayIntent, can_act: bool) -> vo
 	if intent != null and intent.sprint_pressed and not sprinting:
 		if in_combat():
 			sprint_denied = 1.5
-		elif can_act and energy.current_energy > SPRINT_CHAKRA_PER_SECOND * 0.5:
+		elif can_act:
 			sprinting = true
 	if not sprinting:
 		return
 	var moving: bool = intent != null and intent.move_direction.length() > 0.2
 	if not moving or not can_act or guarding or concentrating or abilities.is_casting() or in_combat() \
-			or is_launched() or energy.current_energy <= 0.0:
+			or is_launched():
 		sprinting = false
-		return
-	energy.sync_state(maxf(0.0, energy.current_energy - SPRINT_CHAKRA_PER_SECOND * delta))
 
 
 ## (Re)creates the signature mechanics of the kits in data.kits.
