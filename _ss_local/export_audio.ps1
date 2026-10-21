@@ -1,4 +1,4 @@
-# Exports the Shinobi Striker sounds the game uses (SD_Default.bnk + streamed music .wem) into
+﻿# Exports the Shinobi Striker sounds the game uses (SD_Default.bnk + streamed music .wem) into
 # _ss_local/sfx and _ss_local/music as 16-bit WAV, plus _ss_local/sfx/catalog.json.
 # Needs the local reference copy: _SS_REFERENCE\extracted\audio\SD_Default.{bnk,txt} + wem\ (see README).
 # Usage (from the project root): powershell -File _ss_local\export_audio.ps1
@@ -115,7 +115,7 @@ $alias = @{ "SilentStrange" = "SilentStrangle"; "DetonatingClayC2Dragon" = "C2Dr
     "SandShowerBarrage" = "SandShower"; "TrueRasenShuriken" = "RasenSyuriken"; "EarthDragonBomb" = "EarthDragon"; "MudWall" = "Doryuheki";
     "SummonSalamandar" = "Salamandar"; "SharkBomb" = "SharkBomb"; "PhoenixFlowerNC" = "PhoenixFlower"; "FlyingRaijinLv2" = "FlyingRaijin" }
 function Find-Folder($icon) {
-    $name = if ($alias.ContainsKey($icon)) { $alias[$icon] } else { $icon }
+    $name = if ($alias.ContainsKey($icon)) { $alias[$icon] } else { $icon -replace "^SP_", "" }
     foreach ($k in $folders.Keys) { if ($k -ieq $name) { return $k } }
     foreach ($k in $folders.Keys) { if ($k -ieq ("Ninjutsu_" + $name)) { return $k } }
     $d = [regex]::Match($name, "^(D\d+NJ)(\d)")
@@ -129,8 +129,13 @@ function Pick($list, $pattern, $avoid) {
     return @($list | Where-Object { $_.name -match $pattern -and $_.name -notmatch "Loop|loop" -and $_.size -le 80000 -and ($null -eq $avoid -or $_.name -notmatch $avoid) } |
         Sort-Object name | Group-Object { Base-Name $_.name } | ForEach-Object { $_.Group[0] } | Select-Object -First 2)
 }
-$icons = (Select-String -Path (Join-Path $root "core\graphics\ss_icons.gd") -Pattern '": "([A-Za-z0-9_]+)"' -AllMatches).Matches |
-    ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique
+# Keys: every SS jutsu used by the kits (asset folder and icon, data/progression/ss_kit_assets.json) and the
+# fallback icons of SSIcons (per kit / per name).
+$icons = @((Select-String -Path (Join-Path $root "core\graphics\ss_icons.gd") -Pattern '": "([A-Za-z0-9_]+)"' -AllMatches).Matches |
+    ForEach-Object { $_.Groups[1].Value })
+$kitAssets = Get-Content (Join-Path $root "data\progression\ss_kit_assets.json") -Raw -Encoding UTF8 | ConvertFrom-Json
+foreach ($p in $kitAssets.PSObject.Properties) { $icons += [string]$p.Value.asset; $icons += [string]$p.Value.icon }
+$icons = $icons | Where-Object { $_ } | Sort-Object -Unique
 New-Item -ItemType Directory -Force (Join-Path $sfx "tech") | Out-Null
 foreach ($icon in $icons) {
     $folder = Find-Folder $icon

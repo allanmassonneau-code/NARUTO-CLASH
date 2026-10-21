@@ -189,7 +189,7 @@ func recast_left(id: StringName) -> float:
 # --- Modifiers ----------------------------------------------------------------------
 
 ## Temporary modifier (replaces one with the same id). Props:
-##   damage_dealt, damage_taken, speed, basic_damage, chakra_regen, lifesteal: multipliers / fractions
+##   damage_dealt, damage_taken, heal_taken, speed, basic_damage, chakra_regen, lifesteal: multipliers / fractions
 ##   tenacity (forced movement x0.25, no launch), cc_immune, untargetable, silence_self: flags
 ##   uses: int (removed after that many on_deal calls)
 ##   on_deal(target, hit, damage) / on_take(hit, damage) -> optional float new damage

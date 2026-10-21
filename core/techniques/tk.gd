@@ -312,6 +312,7 @@ func heal(target: CombatCharacter, amount: float) -> void:
 	if _forwarded(target, {"heal": amount}):
 		return
 	if target != null and not target.is_dead():
+		amount *= target.kit.modifier_mult("heal_taken")  # anti-heal debuffs (SS "soins réduits")
 		target.health.heal(amount)
 		if CombatFx.is_enabled():
 			CombatFx.damage_number(target, target.global_position + Vector3.UP * 2.2, amount, Color(0.4, 1.0, 0.5), "+%d" % roundi(amount))

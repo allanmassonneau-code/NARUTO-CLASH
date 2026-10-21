@@ -32,9 +32,9 @@ func _ready() -> void:
 	Profiles.dev_reset()
 	Profiles.create("Testeur", &"konoha", ProgressionTypes.Origin.CLAN, &"clan_uchiha")
 	Profiles.request({"action": "choose_primary_nature", "nature": &"katon"})
-	Profiles.request({"action": "learn_jutsu", "jutsu": &"katon_d_braise_tracante"})
-	Profiles.request({"action": "equip_jutsu", "jutsu": &"katon_d_braise_tracante"})
-	Profiles.request({"action": "learn_jutsu", "jutsu": &"katon_c_anneau_de_cendres"})
+	Profiles.request({"action": "learn_jutsu", "jutsu": &"katon_d_boules_de_feu"})
+	Profiles.request({"action": "equip_jutsu", "jutsu": &"katon_d_boules_de_feu"})
+	Profiles.request({"action": "learn_jutsu", "jutsu": &"katon_c_boule_de_feu_supreme"})
 	_world = (load("res://world/world.tscn") as PackedScene).instantiate() as World
 	add_child(_world)
 	_player = _world.player
@@ -156,13 +156,13 @@ func _run() -> void:
 	_check(cd > 0.0, "technique on cooldown before the swap")
 	hp = _player.health.current_health
 	var chakra: float = energy.current_energy
-	Profiles.request({"action": "equip_jutsu_at", "jutsu": &"katon_c_anneau_de_cendres", "slot": 0})
-	_check(abilities.get_ability(&"j1").source_id == &"katon_c_anneau_de_cendres", "menu places a technique in slot 1")
+	Profiles.request({"action": "equip_jutsu_at", "jutsu": &"katon_c_boule_de_feu_supreme", "slot": 0})
+	_check(abilities.get_ability(&"j1").source_id == &"katon_c_boule_de_feu_supreme", "menu places a technique in slot 1")
 	_check(abilities.get_cooldown_left(&"j1") == 0.0, "the new technique is ready")
-	_check(abilities.technique_cooldown(&"katon_d_braise_tracante") > cd - 0.1, "swapped-out technique keeps its cooldown")
+	_check(abilities.technique_cooldown(&"katon_d_boules_de_feu") > cd - 0.1, "swapped-out technique keeps its cooldown")
 	_check(is_equal_approx(_player.health.current_health, hp) and energy.current_energy >= chakra - 0.1, "swap keeps HP and chakra")
-	Profiles.request({"action": "equip_jutsu_at", "jutsu": &"katon_d_braise_tracante", "slot": 1})
-	_check(abilities.get_ability(&"j2").source_id == &"katon_d_braise_tracante" and abilities.get_cooldown_left(&"j2") > cd - 0.2,
+	Profiles.request({"action": "equip_jutsu_at", "jutsu": &"katon_d_boules_de_feu", "slot": 1})
+	_check(abilities.get_ability(&"j2").source_id == &"katon_d_boules_de_feu" and abilities.get_cooldown_left(&"j2") > cd - 0.2,
 		"cooldown follows the technique to its new slot")
 	var menu: CombatMenu = _world.combat_menu
 	menu.toggle()
@@ -174,7 +174,7 @@ func _run() -> void:
 	# Projection system itself (the bible's launchers call it from their scripts).
 	var launcher := AbilityData.new()
 	launcher.launch_duration = 1.1
-	var scripted: AbilityData = JutsuAbilityFactory.build(Profiles.db.get_jutsu(&"katon_c_comete_incendiaire"), Profiles.db)
+	var scripted: AbilityData = JutsuAbilityFactory.build(Profiles.db.get_jutsu(&"katon_c_feu_du_dragon"), Profiles.db)
 	_check(scripted.kind == AbilityData.Kind.SCRIPTED and scripted.launch_duration == 0.0,
 		"bible techniques are scripted (no generic tag effects)")
 	var mob: CombatCharacter = _world.mobs[0]

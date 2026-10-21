@@ -38,6 +38,7 @@ static func build(profile: CharacterProfile, db: ProgressionDatabase, service: P
 	data.lmb = JutsuAbilityFactory.taijutsu()
 	data.space = JutsuAbilityFactory.dash()
 	data.q = JutsuAbilityFactory.substitution()
+	_kit_kawarimi(data.q, [profile.clan_id, profile.primary_nature, profile.secondary_nature])
 	var slot: int = 0
 	for id: StringName in profile.equipped_jutsu:
 		var jutsu: JutsuData = db.get_jutsu(id)
@@ -84,3 +85,15 @@ static func look_for(profile: CharacterProfile) -> ShinobiLook:
 		&"clan_epeistes":
 			look.weapon = ShinobiLook.Weapon.SWORD
 	return look
+
+
+## The kit's own Shinobi Striker substitution (Clone de sable, Clone d'encre...): the clan's first,
+## else a nature's. Same mechanics as the universal Kawarimi; name and icon from SS (ss_kit_assets.json).
+static func _kit_kawarimi(a: AbilityData, kits: Array) -> void:
+	for kit_id: Variant in kits:
+		var id := StringName("kawarimi_%s" % kit_id)
+		var ss: Dictionary = SSIcons.asset(id)
+		if not ss.is_empty():
+			a.source_id = id
+			a.display_name = str(ss.get("name", a.display_name))
+			return

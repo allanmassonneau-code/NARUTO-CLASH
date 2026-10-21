@@ -64,18 +64,21 @@ static func tech(id: StringName, slot: String, display_name: String = "") -> Aud
 		if String(id).begins_with(kit + "_"):
 			kit_icon = SSIcons.BY_KIT[kit]
 			break
-	var icon: String = SSIcons.BY_ID.get(id, kit_icon)
-	if icon == "" and display_name != "":
-		icon = SSIcons._by_name(display_name)
+	# Each technique is an SS jutsu: its sounds are under its SS asset folder (or its icon name).
+	var folder: String = str(SSIcons.asset(id).get("asset", ""))
+	var icon: String = SSIcons.icon_name(id)
+	if icon == "":
+		icon = kit_icon if display_name == "" else SSIcons._by_name(display_name)
+	var entry: Dictionary = tech_map.get(folder, tech_map.get(icon, {}))
 	# The jutsu's own SS sound, else its element's (kit icon), else the impact for a cast.
-	var files: Array = tech_map.get(icon, {}).get(slot, [])
+	var files: Array = entry.get(slot, [])
 	if files.is_empty():
 		files = tech_map.get(kit_icon, {}).get(slot, [])
 	if files.is_empty():
 		files = ELEMENT_FALLBACK.get(slot, {}).get(SSVfxProfiles.element_of(id), [])
 		files = tech_map.get(files[0], {}).get(slot, []) if not files.is_empty() else []
 	if files.is_empty() and slot == "cast":
-		files = tech_map.get(icon, {}).get("impact", [])
+		files = entry.get("impact", [])
 	if files.is_empty():
 		# Last resort: a generic SS hit (blades, threads, puppets) or blast.
 		var physical: bool = SSVfxProfiles.element_of(id) in [&"steel", &"sword", &"puppet", &"spider", &"paper"]

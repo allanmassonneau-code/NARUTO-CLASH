@@ -1,5 +1,13 @@
 # Techniques — API des kits (bible de game design)
 
+> **Kits Shinobi Striker.** Tous les sorts sont de vrais jutsu de Naruto Shinobi Striker. La répartition est
+> dans `tools/ss_kits.txt` (kit, rang, ID SS) ; `powershell -File tools\ss_kits.ps1` écrit
+> `data/progression/content.json` (noms et descriptions SS en français, recharges SS),
+> `data/progression/ss_jutsu.json` (données SS utilisées) et `data/progression/ss_kit_assets.json` (icône, dossier
+> SS, type : lus par `SSIcons`, `SSAudio`). Puis `godot --headless --path . -s tools/build_progression_db.gd`.
+> Les fiches par kit (`tools/ss_kit_briefs/<kit>.md`) décrivent chaque jutsu à coder. `tools/progression_content.py`
+> (ancienne bible) n'est plus la source des sorts : ne pas le relancer sans réappliquer `ss_kits.ps1`.
+
 Chaque technique de la bible (`docs/BIBLE_JUTSU.md`) est un script. Un fichier par kit :
 `content/techniques/natures/<nature>.gd`, `content/techniques/clans/<clan>.gd`,
 `content/techniques/sub_jutsu/rank_<b|a|s>.gd` (listés dans `content/techniques/technique_index.gd`).
@@ -50,7 +58,7 @@ Champs : `caster`, `dir` (direction verrouillée), `aim` (point visé, borné à
   `recast(window, fn(t)[, on_expire])` (2e appui gratuit).
 - État de kit : `mark(e, key, stacks, s, max, label)`, `marks(e, key)`, `consume_mark(e, key)` ;
   ressources du lanceur `res/add_res/spend_res/take_all_res(key)` (déclarées dans la signature : `fighter.kit.define_resource(key, max, label, color, decay)`) ;
-  `buff(key, s, props)` / `debuff(e, key, s, props)` — props : `damage_dealt, damage_taken, speed, basic_damage, chakra_regen`
+  `buff(key, s, props)` / `debuff(e, key, s, props)` — props : `damage_dealt, damage_taken, heal_taken, speed, basic_damage, chakra_regen`
   (multiplicateurs), `lifesteal` (fraction), `tenacity, cc_immune, untargetable` (flags), `uses`,
   `on_deal(target, hit, dmg) -> float?`, `on_take(hit, dmg) -> float?`, `on_tick(dt)`, `on_end()`, `label, color` (HUD).
 - Retour visuel : `fx(name, at, radius[, color])` avec name ∈ burst, explosion, wave, spikes, column, implosion, bolt,
