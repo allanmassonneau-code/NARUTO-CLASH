@@ -258,7 +258,7 @@ func _run() -> void:
 	await _wait(1.0)
 	var sprint_speed: float = _player.global_position.distance_to(pos)
 	_check(_player.sprinting and sprint_speed > run_speed * 1.4, "double forward: chakra sprint (%.1f m/s)" % sprint_speed)
-	_check(energy.current_energy < energy.max_energy - 4.0, "the chakra sprint drains chakra")
+	_check(energy.current_energy >= energy.max_energy - 0.5, "the chakra sprint costs no chakra")
 	_input.intent.move_direction = Vector3.ZERO
 	await _wait(0.1)
 	_check(not _player.sprinting, "stopping ends the sprint")
