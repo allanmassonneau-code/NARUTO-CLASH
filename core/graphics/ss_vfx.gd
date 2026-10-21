@@ -20,6 +20,7 @@ const KINDS: Dictionary = {
 	&"spikes": ["spikes", 2, 2], &"shards": ["shards", 2, 2], &"rock": ["rock", 2, 2], &"dust": ["dust", 1, 1],
 	&"sand": ["sand", 2, 2], &"ice": ["ice", 1, 1], &"ink": ["ink", 4, 3], &"crack": ["crack", 1, 1],
 	&"magma": ["magma", 1, 1], &"seal": ["seal", 4, 1], &"seal_strip": ["seal_strip", 1, 1],
+	&"chakra_flame": ["chakra_flame", 4, 4], &"glow_soft": ["glow_soft", 1, 1], &"orb_soft": ["orb_soft", 1, 1],
 }
 ## Matter (not light): alpha-blended instead of additive. Dark tints are always alpha-blended.
 const MATTER: Array[StringName] = [&"smoke", &"cloud", &"rock", &"dust", &"sand", &"ink", &"spikes", &"crack", &"shards"]

@@ -37,6 +37,7 @@ var _was_silenced: bool = false
 var _was_rooted: bool = false
 var _was_launched: bool = false
 var _sprint_trail: float = 0.0
+var _chakra_fx: SSChakraFx
 var _was_genjutsu: bool = false
 ## The fighter this machine controls (hitstop / feedback when it's involved).
 static var local_player: CombatCharacter
@@ -123,9 +124,12 @@ func _process(delta: float) -> void:
 		pose = &"guard:windup"
 		tint = Color(0.6, 0.8, 1.0, 0.12)
 	model.sprinting = _character.sprinting
+	if _chakra_fx == null:
+		_chakra_fx = SSChakraFx.new(_character)
+	_chakra_fx.update(delta, _character.concentrating and not _character.is_dead(), _character.sprinting)
 	if _character.sprinting:
 		_sprint_trail -= delta
-		if _sprint_trail <= 0.0:
+		if _sprint_trail <= 0.0 and not SSVfx.available():
 			_sprint_trail = 0.07
 			SpellVfx.afterimage(_character, UiStyle.CHAKRA)
 		if tint.a < 0.15:
