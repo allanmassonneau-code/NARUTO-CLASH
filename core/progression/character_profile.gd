@@ -87,6 +87,7 @@ func to_dict() -> Dictionary:
 		"skills": {"learned": _strings(learned_jutsu), "equipped": _strings(equipped_jutsu)},
 		"sub_jutsu": _strings(owned_sub_jutsu),
 		"tenketsu": {"earned": tenketsu_earned, "levels": tenketsu_levels.duplicate()},
+		"appearance": appearance.duplicate(true),
 	}
 
 
