@@ -1,0 +1,87 @@
+== /Game/Weapons/Ninjutsu/Fireball/Meshes/SM_EFF_Fireball_A_01
+fichier : NARUTO/Content/Weapons/Ninjutsu/Fireball/Meshes/SM_EFF_Fireball_A_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/Fireball/Meshes/SM_EFF_Fireball_A_01.uasset  2 376 octets
+  NARUTO/Content/Weapons/Ninjutsu/Fireball/Meshes/SM_EFF_Fireball_A_01.uexp  28 087 octets
+
+/Game/Weapons/Ninjutsu/Fireball/Meshes/SM_EFF_Fireball_A_01  flags 80000000  69 Namen  9 Importe  3 Exporte  Kopf 2376  Bulk ab 30459  Daten 30463
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Game/Effects/Materials/Fire/MI_EFF_Fire_E_01.MI_EFF_Fire_E_01 (MaterialInstanceConstant)
+  imp  5 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  6 /Game/Effects/Materials/Fire/MI_EFF_Fire_E_01./Game/Effects/Materials/Fire/MI_EFF_Fire_E_01 (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_70 : BodySetup  outer 3  @948 +eb6
+    AggGeom (StructProperty KAggregateGeom)
+      ConvexElems (ArrayProperty of StructProperty) [1]
+        0 (StructProperty KConvexElem)
+          VertexData (ArrayProperty of StructProperty) [32]
+            0 (StructProperty Vector) = 150 62.132 -59.5
+            1 (StructProperty Vector) = 150 -62.132 -59.5
+            2 (StructProperty Vector) = 150 -62.132 59.5
+            3 (StructProperty Vector) = 150 62.132 59.5
+            4 (StructProperty Vector) = -150 -62.132 -59.5
+            5 (StructProperty Vector) = -150 62.132 -59.5
+            6 (StructProperty Vector) = -150 62.132 59.5
+            7 (StructProperty Vector) = -150 -62.132 59.5
+            8 (StructProperty Vector) = -62.1321 150 -62.1321
+            9 (StructProperty Vector) = 62.132 150 -62.1321
+            10 (StructProperty Vector) = 62.132 150 62.132
+            11 (StructProperty Vector) = -62.132 150 62.132
+            12 (StructProperty Vector) = 62.132 -150 -62.1321
+            13 (StructProperty Vector) = -62.1321 -150 -62.1321
+            14 (StructProperty Vector) = -62.1321 -150 62.132
+            15 (StructProperty Vector) = 62.132 -150 62.132
+            16 (StructProperty Vector) = -59.4999 62.132 150
+            17 (StructProperty Vector) = 59.5 62.132 150
+            18 (StructProperty Vector) = 59.5 -62.132 150
+            19 (StructProperty Vector) = -59.5 -62.132 150
+            20 (StructProperty Vector) = -59.4999 -62.132 -150
+            21 (StructProperty Vector) = 59.4999 -62.132 -150
+            22 (StructProperty Vector) = 59.4999 62.132 -150
+            23 (StructProperty Vector) = -59.4999 62.132 -150
+            24 (StructProperty Vector) = -104.764 107.368 104.757
+            25 (StructProperty Vector) = 104.764 107.368 104.757
+            26 (StructProperty Vector) = 104.764 -107.368 -104.757
+            27 (StructProperty Vector) = -104.764 -107.368 -104.757
+            28 (StructProperty Vector) = -104.764 107.368 -104.757
+            29 (StructProperty Vector) = 104.764 107.368 -104.757
+            30 (StructProperty Vector) = 104.764 -107.368 104.757
+            31 (StructProperty Vector) = -104.764 -107.368 104.757
+          ElemBox (StructProperty Box) = -150 -150 -150 150 150 150
+          Transform (StructProperty Transform)
+            Rotation (StructProperty Quat) = 0 0 0 1
+            Translation (StructProperty Vector) = 0 0 0
+            Scale3D (StructProperty Vector) = 1 1 1
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +517 von eb6
+exp 1 NavCollision_12 : NavCollision  outer 3  @17fe +7b5
+    -- Eigenschaften ok, Ende bei +8 von 7b5
+exp 2 SM_EFF_Fireball_A_01 : StaticMesh  outer 0  @1fb3 +5748
+    StaticMaterials (ArrayProperty of StructProperty) [1]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = MI_EFF_Fire_E_01
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 560.71
+          LocalUVDensities[1] (FloatProperty) = 0
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightmapUVDensity (FloatProperty) = 560.71
+    LightMapResolution (IntProperty) = 64
+    ExtendedBounds (StructProperty BoxSphereBounds) = 6.86636e-44 0 8.82818e-44 0 1.68156e-44 0 9.3887e-44
+    -- Eigenschaften ok, Ende bei +272 von 5748
+
+== dependances /Game :
+  /Game/Effects/Materials/Fire/MI_EFF_Fire_E_01

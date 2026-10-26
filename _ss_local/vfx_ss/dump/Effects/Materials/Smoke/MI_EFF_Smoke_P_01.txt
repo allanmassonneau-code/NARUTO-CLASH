@@ -1,0 +1,79 @@
+== /Game/Effects/Materials/Smoke/MI_EFF_Smoke_P_01
+fichier : NARUTO/Content/Effects/Materials/Smoke/MI_EFF_Smoke_P_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/Materials/Smoke/MI_EFF_Smoke_P_01.uasset  6?459 octets
+  NARUTO/Content/Effects/Materials/Smoke/MI_EFF_Smoke_P_01.uexp  317?002 octets
+
+/Game/Effects/Materials/Smoke/MI_EFF_Smoke_P_01  flags 80000000  183 Namen  9 Importe  1 Exporte  Kopf 6459  Bulk ab 323457  Daten 323461
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Materials/M_EFF_Base_Naruto_02.M_EFF_Base_Naruto_02 (Material)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Materials/M_EFF_Base_Naruto_02./Game/Effects/BaseMaterials/Materials/M_EFF_Base_Naruto_02 (Package)
+  imp  4 /Game/Effects/Textures/Smoke/T_EFF_Smoke_16_BC./Game/Effects/Textures/Smoke/T_EFF_Smoke_16_BC (Package)
+  imp  5 /Game/Effects/Textures/Smoke/T_EFF_Smoke_16_M./Game/Effects/Textures/Smoke/T_EFF_Smoke_16_M (Package)
+  imp  6 /Script/Engine./Script/Engine (Package)
+  imp  7 /Game/Effects/Textures/Smoke/T_EFF_Smoke_16_BC.T_EFF_Smoke_16_BC (Texture2D)
+  imp  8 /Game/Effects/Textures/Smoke/T_EFF_Smoke_16_M.T_EFF_Smoke_16_M (Texture2D)
+exp 0 MI_EFF_Smoke_P_01 : MaterialInstanceConstant  outer 0  @193b +4d646
+    Parent (ObjectProperty) = obj -2
+    bHasStaticPermutationResource (BoolProperty) = 1
+    ScalarParameterValues (ArrayProperty of StructProperty) [6]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 13_OpacityMap_Contrast
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 4.16638e+09 1.27366e+09 3.95132e+09 1.37396e+08
+      1 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 14_OpacityMap_Multi
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 2.96806e+08 1.18391e+09 4.09121e+09 1.47812e+09
+      2 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 11_Emissive_Value
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 3.36951e+09 1.16471e+09 1.90581e+09 3.5983e+09
+      3 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 13_EmissiveMap_Contrast
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 2.81263e+09 1.27362e+09 1.72671e+09 1.5927e+09
+      4 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 14_EmissiveMap_Multi
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 3.25843e+09 1.22428e+09 1.01215e+09 1.87026e+09
+      5 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [3]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 01_ColorMap
+        ParameterValue (ObjectProperty) = obj -8
+        ExpressionGUID (StructProperty Guid) = 6.54449e+08 1.07827e+09 3.06662e+09 3.95476e+09
+      1 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 01_OpacityMap
+        ParameterValue (ObjectProperty) = obj -9
+        ExpressionGUID (StructProperty Guid) = 2.1702e+08 1.24777e+09 1.56472e+09 3.38423e+09
+      2 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 02_EmissiveMap
+        ParameterValue (ObjectProperty) = obj -9
+        ExpressionGUID (StructProperty Guid) = 2.59996e+09 1.31801e+09 1.48753e+09 3.31416e+08
+    VectorParameterValues (ArrayProperty of StructProperty) [2]
+      0 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 11_Color_Base
+        ParameterValue (StructProperty LinearColor) = 1 1 1 1
+        ExpressionGUID (StructProperty Guid) = 1.58705e+09 1.31751e+09 5.94923e+08 2.73506e+09
+      1 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 10_Emissive_BaseColor
+        ParameterValue (StructProperty LinearColor) = 1 1 1 1
+        ExpressionGUID (StructProperty Guid) = 4.42324e+07 1.08876e+09 3.69812e+09 3.61859e+08
+    BasePropertyOverrides (StructProperty MaterialInstanceBasePropertyOverrides)
+      bOverride_BlendMode (BoolProperty) = 1
+      bOverride_ShadingModel (BoolProperty) = 1
+      bOverride_TwoSided (BoolProperty) = 1
+      BlendMode (ByteProperty EBlendMode) = BLEND_Translucent
+      ShadingModel (ByteProperty EMaterialShadingModel) = MSM_Unlit
+      TwoSided (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +849 von 4d646
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Materials/M_EFF_Base_Naruto_02
+  /Game/Effects/Textures/Smoke/T_EFF_Smoke_16_BC
+  /Game/Effects/Textures/Smoke/T_EFF_Smoke_16_M

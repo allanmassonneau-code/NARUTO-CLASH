@@ -1,0 +1,57 @@
+== /Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMT_1_MUD
+fichier : NARUTO/Content/Effects/BaseMaterials/Instance_Base/MI_EFF_GMT_1_MUD.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/BaseMaterials/Instance_Base/MI_EFF_GMT_1_MUD.uasset  7?215 octets
+  NARUTO/Content/Effects/BaseMaterials/Instance_Base/MI_EFF_GMT_1_MUD.uexp  223?466 octets
+
+/Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMT_1_MUD  flags 80000000  205 Namen  11 Importe  1 Exporte  Kopf 7215  Bulk ab 230677  Daten 230681
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Materials/M_EFF_GradationMap.M_EFF_GradationMap (Material)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Materials/M_EFF_GradationMap./Game/Effects/BaseMaterials/Materials/M_EFF_GradationMap (Package)
+  imp  4 /Game/Effects/BaseMaterials/Textures/T_EFF_GMO__Default_01_M./Game/Effects/BaseMaterials/Textures/T_EFF_GMO__Default_01_M (Package)
+  imp  5 /Game/Effects/BaseMaterials/Textures/T_EFF_GMT__Default_01_BC./Game/Effects/BaseMaterials/Textures/T_EFF_GMT__Default_01_BC (Package)
+  imp  6 /Game/Effects/Textures/Common/T_EFF_Sphere_03_M./Game/Effects/Textures/Common/T_EFF_Sphere_03_M (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Game/Effects/BaseMaterials/Textures/T_EFF_GMO__Default_01_M.T_EFF_GMO__Default_01_M (Texture2D)
+  imp  9 /Game/Effects/BaseMaterials/Textures/T_EFF_GMT__Default_01_BC.T_EFF_GMT__Default_01_BC (Texture2D)
+  imp 10 /Game/Effects/Textures/Common/T_EFF_Sphere_03_M.T_EFF_Sphere_03_M (Texture2D)
+exp 0 MI_EFF_GMT_1_MUD : MaterialInstanceConstant  outer 0  @1c2f +368e6
+    Parent (ObjectProperty) = obj -2
+    bHasStaticPermutationResource (BoolProperty) = 1
+    ScalarParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [4]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_OpacityMap
+        ParameterValue (ObjectProperty) = obj -11
+        ExpressionGUID (StructProperty Guid) = 2.1702e+08 1.24777e+09 1.56472e+09 3.38423e+09
+      1 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 35_OpacityMap_GradationMap
+        ParameterValue (ObjectProperty) = obj -9
+        ExpressionGUID (StructProperty Guid) = 1.38781e+09 1.25369e+09 4.21816e+09 1.86563e+09
+      2 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_EmissiveMap
+        ParameterValue (ObjectProperty) = obj -11
+        ExpressionGUID (StructProperty Guid) = 2.59996e+09 1.31801e+09 1.48753e+09 3.31416e+08
+      3 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 35_EmissiveMap_GradationMap
+        ParameterValue (ObjectProperty) = obj -10
+        ExpressionGUID (StructProperty Guid) = 8.61289e+08 1.25889e+09 2.92737e+09 1.30524e+09
+    BasePropertyOverrides (StructProperty MaterialInstanceBasePropertyOverrides)
+      bOverride_BlendMode (BoolProperty) = 1
+      bOverride_ShadingModel (BoolProperty) = 1
+      bOverride_TwoSided (BoolProperty) = 1
+      BlendMode (ByteProperty EBlendMode) = BLEND_Masked
+      ShadingModel (ByteProperty EMaterialShadingModel) = MSM_Unlit
+      TwoSided (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +481 von 368e6
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Materials/M_EFF_GradationMap
+  /Game/Effects/BaseMaterials/Textures/T_EFF_GMO__Default_01_M
+  /Game/Effects/BaseMaterials/Textures/T_EFF_GMT__Default_01_BC
+  /Game/Effects/Textures/Common/T_EFF_Sphere_03_M

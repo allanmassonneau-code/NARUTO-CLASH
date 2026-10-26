@@ -1,0 +1,56 @@
+== /Game/Weapons/Ninjutsu/SandShower/Meshes/SM_WEP_Eff_SandShower_A_04
+fichier : NARUTO/Content/Weapons/Ninjutsu/SandShower/Meshes/SM_WEP_Eff_SandShower_A_04.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/SandShower/Meshes/SM_WEP_Eff_SandShower_A_04.uasset  2?351 octets
+  NARUTO/Content/Weapons/Ninjutsu/SandShower/Meshes/SM_WEP_Eff_SandShower_A_04.uexp  47?025 octets
+
+/Game/Weapons/Ninjutsu/SandShower/Meshes/SM_WEP_Eff_SandShower_A_04  flags 80000000  61 Namen  11 Importe  3 Exporte  Kopf 2351  Bulk ab 49372  Daten 49376
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial (Material)
+  imp  5 /Game/Effects/Materials/Earth/MI_EFF_Sand_A_06.MI_EFF_Sand_A_06 (MaterialInstanceConstant)
+  imp  6 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  7 /Engine/EngineMaterials/WorldGridMaterial./Engine/EngineMaterials/WorldGridMaterial (Package)
+  imp  8 /Game/Effects/Materials/Earth/MI_EFF_Sand_A_06./Game/Effects/Materials/Earth/MI_EFF_Sand_A_06 (Package)
+  imp  9 /Script/Engine./Script/Engine (Package)
+  imp 10 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_0 : BodySetup  outer 3  @92f +59bf
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +16c von 59bf
+exp 1 NavCollision_17 : NavCollision  outer 3  @62ee +61
+    -- Eigenschaften ok, Ende bei +8 von 61
+exp 2 SM_WEP_Eff_SandShower_A_04 : StaticMesh  outer 0  @634f +5d8d
+    StaticMaterials (ArrayProperty of StructProperty) [2]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = _asdadasddefault
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 162.958
+          LocalUVDensities[1] (FloatProperty) = 0
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+      1 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = material0
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 2.34381
+          LocalUVDensities[1] (FloatProperty) = 0
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightMapResolution (IntProperty) = 64
+    ExtendedBounds (StructProperty BoxSphereBounds) = 6.44597e-44 0 7.9874e-44 0 1.68156e-44 0 8.26766e-44
+    -- Eigenschaften ok, Ende bei +35f von 5d8d
+
+== dependances /Game :
+  /Game/Effects/Materials/Earth/MI_EFF_Sand_A_06

@@ -1,0 +1,79 @@
+== /Game/Effects/Meshes/Water/SM_EFF_Waterwave_01
+fichier : NARUTO/Content/Effects/Meshes/Water/SM_EFF_Waterwave_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Effects/Meshes/Water/SM_EFF_Waterwave_01.uasset  2?407 octets
+  NARUTO/Content/Effects/Meshes/Water/SM_EFF_Waterwave_01.uexp  8?448 octets
+
+/Game/Effects/Meshes/Water/SM_EFF_Waterwave_01  flags 80000000  71 Namen  9 Importe  3 Exporte  Kopf 2407  Bulk ab 10851  Daten 10855
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial (Material)
+  imp  5 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  6 /Engine/EngineMaterials/WorldGridMaterial./Engine/EngineMaterials/WorldGridMaterial (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_26 : BodySetup  outer 3  @967 +f96
+    AggGeom (StructProperty KAggregateGeom)
+      ConvexElems (ArrayProperty of StructProperty) [1]
+        0 (StructProperty KConvexElem)
+          VertexData (ArrayProperty of StructProperty) [24]
+            0 (StructProperty Vector) = -0.52146 0.5 0.5
+            1 (StructProperty Vector) = 0.52146 0.5 0.5
+            2 (StructProperty Vector) = 0.5 -0.52146 0.5
+            3 (StructProperty Vector) = -0.5 -0.52146 0.5
+            4 (StructProperty Vector) = -0.47854 -0.5 -0.5
+            5 (StructProperty Vector) = 0.47854 -0.5 -0.5
+            6 (StructProperty Vector) = 0.5 0.478541 -0.5
+            7 (StructProperty Vector) = -0.5 0.478541 -0.5
+            8 (StructProperty Vector) = 0.687671 0.709132 0.312329
+            9 (StructProperty Vector) = -0.6875 0.6875 0.33396
+            10 (StructProperty Vector) = -0.375 1 0.02146
+            11 (StructProperty Vector) = 0.375 1 0.02146
+            12 (StructProperty Vector) = -0.6875 -0.6875 -0.29104
+            13 (StructProperty Vector) = -0.375 -1 0.0214599
+            14 (StructProperty Vector) = 0.375 -1 0.0214599
+            15 (StructProperty Vector) = 0.6875 -0.6875 -0.29104
+            16 (StructProperty Vector) = 0.6875 0.6875 -0.29104
+            17 (StructProperty Vector) = -0.687671 0.709131 -0.290869
+            18 (StructProperty Vector) = -0.6875 -0.6875 0.33396
+            19 (StructProperty Vector) = 0.6875 -0.6875 0.33396
+            20 (StructProperty Vector) = 1 0.375 0.0214599
+            21 (StructProperty Vector) = 1 -0.375 0.0214599
+            22 (StructProperty Vector) = -1 0.375 0.0214598
+            23 (StructProperty Vector) = -1 -0.375 0.02146
+          ElemBox (StructProperty Box) = -1 -1 -0.5 1 1 0.5
+          Transform (StructProperty Transform)
+            Rotation (StructProperty Quat) = 0 0 0 1
+            Translation (StructProperty Vector) = 0 0 0
+            Scale3D (StructProperty Vector) = 1 1 1
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +4b7 von f96
+exp 1 NavCollision_3 : NavCollision  outer 3  @18fd +76d
+    -- Eigenschaften ok, Ende bei +8 von 76d
+exp 2 SM_EFF_Waterwave_01 : StaticMesh  outer 0  @206a +9f9
+    StaticMaterials (ArrayProperty of StructProperty) [1]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = M_EFF_Test_WaterWave_02
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 99.989
+          LocalUVDensities[1] (FloatProperty) = 101.558
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightmapUVDensity (FloatProperty) = 88.9034
+    LightMapResolution (IntProperty) = 64
+    LightMapCoordinateIndex (IntProperty) = 1
+    ExtendedBounds (StructProperty BoxSphereBounds) = 7.00649e-44 0 8.96831e-44 0 1.68156e-44 0 9.52883e-44
+    -- Eigenschaften ok, Ende bei +28f von 9f9
+
+== dependances /Game :

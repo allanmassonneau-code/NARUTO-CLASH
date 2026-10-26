@@ -1,0 +1,58 @@
+== /Game/Effects/Materials/Common/MI_EFF_Sphere_C_01
+fichier : NARUTO/Content/Effects/Materials/Common/MI_EFF_Sphere_C_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/Materials/Common/MI_EFF_Sphere_C_01.uasset  2?864 octets
+  NARUTO/Content/Effects/Materials/Common/MI_EFF_Sphere_C_01.uexp  74?242 octets
+
+/Game/Effects/Materials/Common/MI_EFF_Sphere_C_01  flags 80000000  83 Namen  7 Importe  1 Exporte  Kopf 2864  Bulk ab 77102  Daten 77106
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Materials/M_EFF_GPUParticleSimple_01.M_EFF_GPUParticleSimple_01 (Material)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Materials/M_EFF_GPUParticleSimple_01./Game/Effects/BaseMaterials/Materials/M_EFF_GPUParticleSimple_01 (Package)
+  imp  4 /Game/Effects/Textures/Common/T_EFF_Sphere_02_M./Game/Effects/Textures/Common/T_EFF_Sphere_02_M (Package)
+  imp  5 /Script/Engine./Script/Engine (Package)
+  imp  6 /Game/Effects/Textures/Common/T_EFF_Sphere_02_M.T_EFF_Sphere_02_M (Texture2D)
+exp 0 MI_EFF_Sphere_C_01 : MaterialInstanceConstant  outer 0  @b30 +121fe
+    Parent (ObjectProperty) = obj -2
+    bHasStaticPermutationResource (BoolProperty) = 1
+    ScalarParameterValues (ArrayProperty of StructProperty) [3]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 13_Opacity_Contrast
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 3.53831e+09 1.19376e+09 1.52341e+09 3.8748e+09
+      1 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 14_Opacity_Multi
+        ParameterValue (FloatProperty) = 10
+        ExpressionGUID (StructProperty Guid) = 2.68054e+09 1.29074e+09 3.81746e+09 2.12708e+09
+      2 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_OpacityMap
+        ParameterValue (ObjectProperty) = obj -7
+        ExpressionGUID (StructProperty Guid) = 3.40419e+09 1.33933e+09 2.23527e+09 4.29789e+08
+    VectorParameterValues (ArrayProperty of StructProperty) [3]
+      0 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 05_Color
+        ParameterValue (StructProperty LinearColor) = 1 1 1 1
+        ExpressionGUID (StructProperty Guid) = 2.65062e+09 1.28917e+09 8.15881e+08 3.14373e+09
+      1 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 05_ShadowColor
+        ParameterValue (StructProperty LinearColor) = 0.2 0.35 0.23 1
+        ExpressionGUID (StructProperty Guid) = 2.8917e+09 1.12855e+09 2.83428e+09 4.12367e+09
+      2 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 05_EmissiveColor
+        ParameterValue (StructProperty LinearColor) = 1 1 1 1
+        ExpressionGUID (StructProperty Guid) = 1.82994e+09 1.32571e+09 3.44102e+09 2.71424e+09
+    BasePropertyOverrides (StructProperty MaterialInstanceBasePropertyOverrides)
+      bOverride_BlendMode (BoolProperty) = 1
+      bOverride_ShadingModel (BoolProperty) = 1
+      BlendMode (ByteProperty EBlendMode) = BLEND_Masked
+      ShadingModel (ByteProperty EMaterialShadingModel) = MSM_Unlit
+    -- Eigenschaften ok, Ende bei +61d von 121fe
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Materials/M_EFF_GPUParticleSimple_01
+  /Game/Effects/Textures/Common/T_EFF_Sphere_02_M

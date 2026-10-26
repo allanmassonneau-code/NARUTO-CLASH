@@ -1,0 +1,45 @@
+== /Game/Weapons/Ninjutsu/EarthDragon/Meshes/SM_EFF_Dragon_01
+fichier : NARUTO/Content/Weapons/Ninjutsu/EarthDragon/Meshes/SM_EFF_Dragon_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/EarthDragon/Meshes/SM_EFF_Dragon_01.uasset  2?186 octets
+  NARUTO/Content/Weapons/Ninjutsu/EarthDragon/Meshes/SM_EFF_Dragon_01.uexp  54?229 octets
+
+/Game/Weapons/Ninjutsu/EarthDragon/Meshes/SM_EFF_Dragon_01  flags 80000000  57 Namen  9 Importe  3 Exporte  Kopf 2186  Bulk ab 56411  Daten 56415
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Game/Weapons/Ninjutsu/EarthDragon/Materials/MI_EFF_EarthDragon_A.MI_EFF_EarthDragon_A (MaterialInstanceConstant)
+  imp  5 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  6 /Game/Weapons/Ninjutsu/EarthDragon/Materials/MI_EFF_EarthDragon_A./Game/Weapons/Ninjutsu/EarthDragon/Materials/MI_EFF_EarthDragon_A (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_0 : BodySetup  outer 3  @88a +6a21
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +16c von 6a21
+exp 1 NavCollision_2 : NavCollision  outer 3  @72ab +61
+    -- Eigenschaften ok, Ende bei +8 von 61
+exp 2 SM_EFF_Dragon_01 : StaticMesh  outer 0  @730c +694f
+    StaticMaterials (ArrayProperty of StructProperty) [1]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = polySurface7_blinn
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 556.593
+          LocalUVDensities[1] (FloatProperty) = 0
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightMapResolution (IntProperty) = 64
+    ExtendedBounds (StructProperty BoxSphereBounds) = 5.88545e-44 0 7.56701e-44 0 1.68156e-44 0 7.84727e-44
+    -- Eigenschaften ok, Ende bei +255 von 694f
+
+== dependances /Game :
+  /Game/Weapons/Ninjutsu/EarthDragon/Materials/MI_EFF_EarthDragon_A

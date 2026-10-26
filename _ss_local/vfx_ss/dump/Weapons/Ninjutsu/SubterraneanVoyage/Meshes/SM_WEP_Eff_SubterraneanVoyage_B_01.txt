@@ -1,0 +1,44 @@
+== /Game/Weapons/Ninjutsu/SubterraneanVoyage/Meshes/SM_WEP_Eff_SubterraneanVoyage_B_01
+fichier : NARUTO/Content/Weapons/Ninjutsu/SubterraneanVoyage/Meshes/SM_WEP_Eff_SubterraneanVoyage_B_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/SubterraneanVoyage/Meshes/SM_WEP_Eff_SubterraneanVoyage_B_01.uasset  2?159 octets
+  NARUTO/Content/Weapons/Ninjutsu/SubterraneanVoyage/Meshes/SM_WEP_Eff_SubterraneanVoyage_B_01.uexp  14?567 octets
+
+/Game/Weapons/Ninjutsu/SubterraneanVoyage/Meshes/SM_WEP_Eff_SubterraneanVoyage_B_01  flags 80000000  56 Namen  9 Importe  3 Exporte  Kopf 2159  Bulk ab 16722  Daten 16726
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial (Material)
+  imp  5 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  6 /Engine/EngineMaterials/WorldGridMaterial./Engine/EngineMaterials/WorldGridMaterial (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_0 : BodySetup  outer 3  @86f +114b
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +16c von 114b
+exp 1 NavCollision_1 : NavCollision  outer 3  @19ba +61
+    -- Eigenschaften ok, Ende bei +8 von 61
+exp 2 SM_WEP_Eff_SubterraneanVoyage_B_01 : StaticMesh  outer 0  @1a1b +2737
+    StaticMaterials (ArrayProperty of StructProperty) [1]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = None
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 15.755
+          LocalUVDensities[1] (FloatProperty) = 0
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightMapResolution (IntProperty) = 64
+    ExtendedBounds (StructProperty BoxSphereBounds) = 5.74532e-44 0 7.28675e-44 0 1.68156e-44 0 7.56701e-44
+    -- Eigenschaften ok, Ende bei +255 von 2737
+
+== dependances /Game :

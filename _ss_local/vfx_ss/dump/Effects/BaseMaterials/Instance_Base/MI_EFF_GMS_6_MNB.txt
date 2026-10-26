@@ -1,0 +1,67 @@
+== /Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_6_MNB
+fichier : NARUTO/Content/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_6_MNB.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_6_MNB.uasset  9?169 octets
+  NARUTO/Content/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_6_MNB.uexp  609?821 octets
+
+/Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_6_MNB  flags 80000000  246 Namen  11 Importe  1 Exporte  Kopf 9169  Bulk ab 618986  Daten 618990
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Materials/M_EFF_GradationMap.M_EFF_GradationMap (Material)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Materials/M_EFF_GradationMap./Game/Effects/BaseMaterials/Materials/M_EFF_GradationMap (Package)
+  imp  4 /Game/Effects/BaseMaterials/Textures/T_EFF_Default_06_N./Game/Effects/BaseMaterials/Textures/T_EFF_Default_06_N (Package)
+  imp  5 /Game/Effects/Textures/Common/T_EFF_Sphere_03_M./Game/Effects/Textures/Common/T_EFF_Sphere_03_M (Package)
+  imp  6 /Game/Effects/Textures/GradationMap/T_EFF_GMO_02_M./Game/Effects/Textures/GradationMap/T_EFF_GMO_02_M (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Game/Effects/BaseMaterials/Textures/T_EFF_Default_06_N.T_EFF_Default_06_N (Texture2D)
+  imp  9 /Game/Effects/Textures/Common/T_EFF_Sphere_03_M.T_EFF_Sphere_03_M (Texture2D)
+  imp 10 /Game/Effects/Textures/GradationMap/T_EFF_GMO_02_M.T_EFF_GMO_02_M (Texture2D)
+exp 0 MI_EFF_GMS_6_MNB : MaterialInstanceConstant  outer 0  @23d1 +94e19
+    Parent (ObjectProperty) = obj -2
+    bHasStaticPermutationResource (BoolProperty) = 1
+    ScalarParameterValues (ArrayProperty of StructProperty) [2]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 21_Outline
+        ParameterValue (FloatProperty) = 0.5
+        ExpressionGUID (StructProperty Guid) = 2.97272e+09 1.13447e+09 3.36489e+09 2.90728e+09
+      1 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [3]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_OpacityMap
+        ParameterValue (ObjectProperty) = obj -10
+        ExpressionGUID (StructProperty Guid) = 2.1702e+08 1.24777e+09 1.56472e+09 3.38423e+09
+      1 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 35_OpacityMap_GradationMap
+        ParameterValue (ObjectProperty) = obj -11
+        ExpressionGUID (StructProperty Guid) = 1.38781e+09 1.25369e+09 4.21816e+09 1.86563e+09
+      2 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_NormalMap
+        ParameterValue (ObjectProperty) = obj -9
+        ExpressionGUID (StructProperty Guid) = 2.24098e+09 1.17826e+09 1.56317e+09 2.17196e+09
+    VectorParameterValues (ArrayProperty of StructProperty) [2]
+      0 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 11_Color_Base
+        ParameterValue (StructProperty LinearColor) = 1 1 1 1
+        ExpressionGUID (StructProperty Guid) = 1.58705e+09 1.31751e+09 5.94923e+08 2.73506e+09
+      1 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 12_Color_Base_Shadow
+        ParameterValue (StructProperty LinearColor) = 0.5 0.5 0.5 1
+        ExpressionGUID (StructProperty Guid) = 1.96065e+09 1.31717e+09 1.01775e+09 4.03615e+09
+    BasePropertyOverrides (StructProperty MaterialInstanceBasePropertyOverrides)
+      bOverride_OpacityMaskClipValue (BoolProperty) = 1
+      bOverride_BlendMode (BoolProperty) = 1
+      bOverride_ShadingModel (BoolProperty) = 1
+      OpacityMaskClipValue (FloatProperty) = 0.05
+      BlendMode (ByteProperty EBlendMode) = BLEND_Masked
+      ShadingModel (ByteProperty EMaterialShadingModel) = MSM_NarutoShade
+      Lock (BoolProperty) = 0
+    -- Eigenschaften ok, Ende bei +64a von 94e19
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Materials/M_EFF_GradationMap
+  /Game/Effects/BaseMaterials/Textures/T_EFF_Default_06_N
+  /Game/Effects/Textures/Common/T_EFF_Sphere_03_M
+  /Game/Effects/Textures/GradationMap/T_EFF_GMO_02_M

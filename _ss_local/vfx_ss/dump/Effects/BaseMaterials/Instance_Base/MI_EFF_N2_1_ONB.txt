@@ -1,0 +1,46 @@
+== /Game/Effects/BaseMaterials/Instance_Base/MI_EFF_N2_1_ONB
+fichier : NARUTO/Content/Effects/BaseMaterials/Instance_Base/MI_EFF_N2_1_ONB.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/BaseMaterials/Instance_Base/MI_EFF_N2_1_ONB.uasset  6?885 octets
+  NARUTO/Content/Effects/BaseMaterials/Instance_Base/MI_EFF_N2_1_ONB.uexp  471?272 octets
+
+/Game/Effects/BaseMaterials/Instance_Base/MI_EFF_N2_1_ONB  flags 80000000  182 Namen  9 Importe  1 Exporte  Kopf 6885  Bulk ab 478153  Daten 478157
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Materials/M_EFF_Base_Naruto_02.M_EFF_Base_Naruto_02 (Material)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Engine/EngineResources/DefaultTexture./Engine/EngineResources/DefaultTexture (Package)
+  imp  4 /Game/Effects/BaseMaterials/Materials/M_EFF_Base_Naruto_02./Game/Effects/BaseMaterials/Materials/M_EFF_Base_Naruto_02 (Package)
+  imp  5 /Game/Effects/BaseMaterials/Textures/T_EFF_Default_02_N./Game/Effects/BaseMaterials/Textures/T_EFF_Default_02_N (Package)
+  imp  6 /Script/Engine./Script/Engine (Package)
+  imp  7 /Engine/EngineResources/DefaultTexture.DefaultTexture (Texture2D)
+  imp  8 /Game/Effects/BaseMaterials/Textures/T_EFF_Default_02_N.T_EFF_Default_02_N (Texture2D)
+exp 0 MI_EFF_N2_1_ONB : MaterialInstanceConstant  outer 0  @1ae5 +730e4
+    Parent (ObjectProperty) = obj -2
+    bHasStaticPermutationResource (BoolProperty) = 1
+    ScalarParameterValues (ArrayProperty of StructProperty) [2]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 11_Normal_Multi
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 1.08483e+09 1.21941e+09 2.46072e+09 1.22254e+09
+      1 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [2]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 01_ColorMap
+        ParameterValue (ObjectProperty) = obj -8
+        ExpressionGUID (StructProperty Guid) = 6.54449e+08 1.07827e+09 3.06662e+09 3.95476e+09
+      1 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 01_NormalMap
+        ParameterValue (ObjectProperty) = obj -9
+        ExpressionGUID (StructProperty Guid) = 2.24098e+09 1.17826e+09 1.56317e+09 2.17196e+09
+    BasePropertyOverrides (StructProperty MaterialInstanceBasePropertyOverrides)
+      bOverride_BlendMode (BoolProperty) = 1
+      bOverride_ShadingModel (BoolProperty) = 1
+      ShadingModel (ByteProperty EMaterialShadingModel) = MSM_NarutoShade
+    -- Eigenschaften ok, Ende bei +39d von 730e4
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Materials/M_EFF_Base_Naruto_02
+  /Game/Effects/BaseMaterials/Textures/T_EFF_Default_02_N

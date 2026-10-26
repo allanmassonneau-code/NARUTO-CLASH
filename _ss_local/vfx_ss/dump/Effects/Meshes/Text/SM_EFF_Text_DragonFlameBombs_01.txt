@@ -1,0 +1,74 @@
+== /Game/Effects/Meshes/Text/SM_EFF_Text_DragonFlameBombs_01
+fichier : NARUTO/Content/Effects/Meshes/Text/SM_EFF_Text_DragonFlameBombs_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Effects/Meshes/Text/SM_EFF_Text_DragonFlameBombs_01.uasset  2?464 octets
+  NARUTO/Content/Effects/Meshes/Text/SM_EFF_Text_DragonFlameBombs_01.uexp  26?674 octets
+
+/Game/Effects/Meshes/Text/SM_EFF_Text_DragonFlameBombs_01  flags 80000000  71 Namen  9 Importe  3 Exporte  Kopf 2464  Bulk ab 29134  Daten 29138
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Game/Effects/Materials/Text/MI_EFF_Text_DragonFlameBombs_01.MI_EFF_Text_DragonFlameBombs_01 (MaterialInstanceConstant)
+  imp  5 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  6 /Game/Effects/Materials/Text/MI_EFF_Text_DragonFlameBombs_01./Game/Effects/Materials/Text/MI_EFF_Text_DragonFlameBombs_01 (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_0 : BodySetup  outer 3  @9a0 +ab4
+    AggGeom (StructProperty KAggregateGeom)
+      ConvexElems (ArrayProperty of StructProperty) [1]
+        0 (StructProperty KConvexElem)
+          VertexData (ArrayProperty of StructProperty) [18]
+            0 (StructProperty Vector) = 24.7219 1.77814 -3.02815
+            1 (StructProperty Vector) = 24.7219 1.77814 39.3413
+            2 (StructProperty Vector) = 23.9375 1.77814 40.125
+            3 (StructProperty Vector) = 1.74999 1.77814 40.125
+            4 (StructProperty Vector) = -34.5969 1.77814 3.77814
+            5 (StructProperty Vector) = -34.5969 1.77814 -1.86666
+            6 (StructProperty Vector) = -16.4375 1.77814 -20.0103
+            7 (StructProperty Vector) = 7.73974 1.77814 -20.0103
+            8 (StructProperty Vector) = -36.5069 -0.13191 0.00691605
+            9 (StructProperty Vector) = -36.5069 -0.13191 1.86809
+            10 (StructProperty Vector) = 3.6875 -0.13191 42.0625
+            11 (StructProperty Vector) = 22 -0.13191 42.0625
+            12 (StructProperty Vector) = 26.6319 -0.13191 37.433
+            13 (StructProperty Vector) = 26.6319 -0.13191 -1.11809
+            14 (StructProperty Vector) = 9.65589 -0.13191 -18.0941
+            15 (StructProperty Vector) = -18.4059 -0.13191 -18.0941
+            16 (StructProperty Vector) = 22.125 -0.128455 42.0035
+            17 (StructProperty Vector) = 3.5625 -0.128455 41.9375
+          ElemBox (StructProperty Box) = -36.5069 -0.13191 -20.0103 26.6319 1.77814 42.0625
+          Transform (StructProperty Transform)
+            Rotation (StructProperty Quat) = 0 0 0 1
+            Translation (StructProperty Vector) = 0 0 0
+            Scale3D (StructProperty Vector) = 1 1 1
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +46f von ab4
+exp 1 NavCollision_5 : NavCollision  outer 3  @1454 +455
+    -- Eigenschaften ok, Ende bei +8 von 455
+exp 2 SM_EFF_Text_DragonFlameBombs_01 : StaticMesh  outer 0  @18a9 +5925
+    StaticMaterials (ArrayProperty of StructProperty) [1]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = lambert1
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 20.7882
+          LocalUVDensities[1] (FloatProperty) = 50.6855
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightmapUVDensity (FloatProperty) = 50.6855
+    LightMapResolution (IntProperty) = 64
+    LightMapCoordinateIndex (IntProperty) = 1
+    ExtendedBounds (StructProperty BoxSphereBounds) = 7.14662e-44 0 9.10844e-44 0 1.68156e-44 0 9.66896e-44
+    -- Eigenschaften ok, Ende bei +28f von 5925
+
+== dependances /Game :
+  /Game/Effects/Materials/Text/MI_EFF_Text_DragonFlameBombs_01

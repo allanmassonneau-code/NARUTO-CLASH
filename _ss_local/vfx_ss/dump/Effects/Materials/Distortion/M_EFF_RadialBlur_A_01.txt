@@ -1,0 +1,31 @@
+== /Game/Effects/Materials/Distortion/M_EFF_RadialBlur_A_01
+fichier : NARUTO/Content/Effects/Materials/Distortion/M_EFF_RadialBlur_A_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/Materials/Distortion/M_EFF_RadialBlur_A_01.uasset  1 358 octets
+  NARUTO/Content/Effects/Materials/Distortion/M_EFF_RadialBlur_A_01.uexp  487 octets
+
+/Game/Effects/Materials/Distortion/M_EFF_RadialBlur_A_01  flags 80000000  31 Namen  7 Importe  1 Exporte  Kopf 1358  Bulk ab 1841  Daten 1845
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Materials/M_EFF_RadialBlur.M_EFF_RadialBlur (Material)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Materials/M_EFF_RadialBlur./Game/Effects/BaseMaterials/Materials/M_EFF_RadialBlur (Package)
+  imp  4 /Game/Effects/Textures/Common/T_EFF_Sphere_01_M./Game/Effects/Textures/Common/T_EFF_Sphere_01_M (Package)
+  imp  5 /Script/Engine./Script/Engine (Package)
+  imp  6 /Game/Effects/Textures/Common/T_EFF_Sphere_01_M.T_EFF_Sphere_01_M (Texture2D)
+exp 0 M_EFF_RadialBlur_A_01 : MaterialInstanceConstant  outer 0  @54e +1e3
+    Parent (ObjectProperty) = obj -2
+    ScalarParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = Mask_Map
+        ParameterValue (ObjectProperty) = obj -7
+        ExpressionGUID (StructProperty Guid) = 3.85555e+09 1.14708e+09 4.2005e+08 3.9946e+09
+    -- Eigenschaften ok, Ende bei +1df von 1e3
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Materials/M_EFF_RadialBlur
+  /Game/Effects/Textures/Common/T_EFF_Sphere_01_M

@@ -1,0 +1,76 @@
+== /Game/Effects/Materials/Distortion/MI_EFF_Distortion_Hit_A_01
+fichier : NARUTO/Content/Effects/Materials/Distortion/MI_EFF_Distortion_Hit_A_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/Materials/Distortion/MI_EFF_Distortion_Hit_A_01.uasset  3?953 octets
+  NARUTO/Content/Effects/Materials/Distortion/MI_EFF_Distortion_Hit_A_01.uexp  116?777 octets
+
+/Game/Effects/Materials/Distortion/MI_EFF_Distortion_Hit_A_01  flags 80000000  101 Namen  7 Importe  1 Exporte  Kopf 3953  Bulk ab 120726  Daten 120730
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Materials/M_EFF_Distortion_01.M_EFF_Distortion_01 (Material)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Materials/M_EFF_Distortion_01./Game/Effects/BaseMaterials/Materials/M_EFF_Distortion_01 (Package)
+  imp  4 /Game/Effects/Textures/Hit/T_EFF_Hit_02_M./Game/Effects/Textures/Hit/T_EFF_Hit_02_M (Package)
+  imp  5 /Script/Engine./Script/Engine (Package)
+  imp  6 /Game/Effects/Textures/Hit/T_EFF_Hit_02_M.T_EFF_Hit_02_M (Texture2D)
+exp 0 MI_EFF_Distortion_Hit_A_01 : MaterialInstanceConstant  outer 0  @f71 +1c825
+    Parent (ObjectProperty) = obj -2
+    bHasStaticPermutationResource (BoolProperty) = 1
+    ScalarParameterValues (ArrayProperty of StructProperty) [9]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 01_Opacity_Value
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 1.69198e+08 1.18485e+09 3.86062e+09 1.9222e+09
+      1 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 01_Opacity_Fresnel_Power
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 4.20727e+09 1.1785e+09 1.86444e+09 1.27e+09
+      2 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 02_Opacity_Fresnel_Multi
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 3.88865e+09 1.23163e+09 9.41049e+08 1.41449e+09
+      3 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 03_Opacity_Fresnel_Contrast
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 1.67755e+09 1.19539e+09 1.27176e+09 4.22975e+08
+      4 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 01_Opacity_DepthFade_Distance
+        ParameterValue (FloatProperty) = 50
+        ExpressionGUID (StructProperty Guid) = 2.8064e+09 1.17987e+09 1.32365e+09 1.30641e+09
+      5 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 01_Opacity_DepthFade_Power
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 2.98072e+09 1.32084e+09 3.35446e+09 2.6832e+09
+      6 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 02_Opacity_DepthFade_Multi
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 1.41789e+08 1.08933e+09 1.33911e+09 2.57713e+09
+      7 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 12_Opacity_DepthFade_Contrast
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 1.70564e+09 1.27692e+09 2.86906e+09 8.89684e+08
+      8 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [2]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 01_ColorMap
+        ParameterValue (ObjectProperty) = obj -7
+        ExpressionGUID (StructProperty Guid) = 1.3268e+09 1.15994e+09 1.65342e+09 1.69909e+09
+      1 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 01_Refraction_Map
+        ParameterValue (ObjectProperty) = obj -7
+        ExpressionGUID (StructProperty Guid) = 2.54829e+09 1.15047e+09 2.00875e+09 9.99287e+08
+    VectorParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 11_BaseColor
+        ParameterValue (StructProperty LinearColor) = 1 1 1 1
+        ExpressionGUID (StructProperty Guid) = 3.51134e+09 1.14042e+09 1.30685e+09 1.73178e+09
+    BasePropertyOverrides (StructProperty MaterialInstanceBasePropertyOverrides)
+      bOverride_BlendMode (BoolProperty) = 1
+      BlendMode (ByteProperty EBlendMode) = BLEND_Additive
+    -- Eigenschaften ok, Ende bei +835 von 1c825
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Materials/M_EFF_Distortion_01
+  /Game/Effects/Textures/Hit/T_EFF_Hit_02_M

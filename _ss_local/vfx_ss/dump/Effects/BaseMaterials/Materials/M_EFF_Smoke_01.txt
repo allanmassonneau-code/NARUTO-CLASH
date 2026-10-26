@@ -1,0 +1,740 @@
+== /Game/Effects/BaseMaterials/Materials/M_EFF_Smoke_01
+fichier : NARUTO/Content/Effects/BaseMaterials/Materials/M_EFF_Smoke_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : Material
+fichiers lies :
+  NARUTO/Content/Effects/BaseMaterials/Materials/M_EFF_Smoke_01.uasset  15 082 octets
+  NARUTO/Content/Effects/BaseMaterials/Materials/M_EFF_Smoke_01.uexp  289 389 octets
+
+/Game/Effects/BaseMaterials/Materials/M_EFF_Smoke_01  flags 80000000  249 Namen  55 Importe  38 Exporte  Kopf 15082  Bulk ab 304467  Daten 304471
+  imp  0 /Script/Engine.Material (Class)
+  imp  1 /Script/Engine.MaterialExpressionMaterialFunctionCall (Class)
+  imp  2 /Script/Engine.MaterialExpressionScalarParameter (Class)
+  imp  3 /Script/Engine.MaterialExpressionStaticBoolParameter (Class)
+  imp  4 /Script/Engine.MaterialExpressionStaticComponentMaskParameter (Class)
+  imp  5 /Script/Engine.MaterialExpressionStaticSwitchParameter (Class)
+  imp  6 /Script/Engine.MaterialExpressionTextureObjectParameter (Class)
+  imp  7 /Script/Engine.MaterialExpressionTextureSampleParameterSubUV (Class)
+  imp  8 /Script/Engine.MaterialExpressionVectorParameter (Class)
+  imp  9 /Script/Engine.Default__Material (Material)
+  imp 10 /Script/Engine.Default__MaterialExpressionMaterialFunctionCall (MaterialExpressionMaterialFunctionCall)
+  imp 11 /Script/Engine.Default__MaterialExpressionScalarParameter (MaterialExpressionScalarParameter)
+  imp 12 /Script/Engine.Default__MaterialExpressionStaticBoolParameter (MaterialExpressionStaticBoolParameter)
+  imp 13 /Script/Engine.Default__MaterialExpressionStaticComponentMaskParameter (MaterialExpressionStaticComponentMaskParameter)
+  imp 14 /Script/Engine.Default__MaterialExpressionStaticSwitchParameter (MaterialExpressionStaticSwitchParameter)
+  imp 15 /Script/Engine.Default__MaterialExpressionTextureObjectParameter (MaterialExpressionTextureObjectParameter)
+  imp 16 /Script/Engine.Default__MaterialExpressionTextureSampleParameterSubUV (MaterialExpressionTextureSampleParameterSubUV)
+  imp 17 /Script/Engine.Default__MaterialExpressionVectorParameter (MaterialExpressionVectorParameter)
+  imp 18 /Engine/Functions/Engine_MaterialFunctions01/Gradient/LinearGradient.LinearGradient (MaterialFunction)
+  imp 19 /Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast.CheapContrast (MaterialFunction)
+  imp 20 /Engine/Functions/Engine_MaterialFunctions01/Texturing/ComputeMipLevel.ComputeMipLevel (MaterialFunction)
+  imp 21 /Engine/Functions/Engine_MaterialFunctions01/Texturing/TextureCropping.TextureCropping (MaterialFunction)
+  imp 22 /Engine/Functions/Engine_MaterialFunctions02/Texturing/ScreenAlignedPixelToPixelUVs.ScreenAlignedPixelToPixelUVs (MaterialFunction)
+  imp 23 /Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components.BreakOutFloat4Components (MaterialFunction)
+  imp 24 /Engine/Functions/Engine_MaterialFunctions02/Utility/DebugFloat4Values.DebugFloat4Values (MaterialFunction)
+  imp 25 /Engine/Functions/Engine_MaterialFunctions02/Utility/DebugScalarValues.DebugScalarValues (MaterialFunction)
+  imp 26 /Engine/Functions/Engine_MaterialFunctions02/Utility/DitherTemporalAA.DitherTemporalAA (MaterialFunction)
+  imp 27 /Game/NarutoShading/MaterialFunctions/MF_N1LookUp.MF_N1LookUp (MaterialFunction)
+  imp 28 /Game/Shading/MaterialFunctions/Effects/MF_EFF_Dissolve.MF_EFF_Dissolve (MaterialFunction)
+  imp 29 /Game/Shading/MaterialFunctions/Effects/MF_EFF_InputUV_ParticleRandom.MF_EFF_InputUV_ParticleRandom (MaterialFunction)
+  imp 30 /Game/Shading/MaterialFunctions/Effects/MF_EFF_Panner.MF_EFF_Panner (MaterialFunction)
+  imp 31 /Game/Shading/MaterialFunctions/Effects/MF_EFF_ParamCheck_Cosine.MF_EFF_ParamCheck_Cosine (MaterialFunction)
+  imp 32 /Game/Shading/MaterialParam/MP_UtilMaterialParameterCollection.MP_UtilMaterialParameterCollection (MaterialParameterCollection)
+  imp 33 /Engine/Functions/Engine_MaterialFunctions01/Gradient/LinearGradient./Engine/Functions/Engine_MaterialFunctions01/Gradient/LinearGradient (Package)
+  imp 34 /Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast./Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast (Package)
+  imp 35 /Engine/Functions/Engine_MaterialFunctions01/Texturing/ComputeMipLevel./Engine/Functions/Engine_MaterialFunctions01/Texturing/ComputeMipLevel (Package)
+  imp 36 /Engine/Functions/Engine_MaterialFunctions01/Texturing/TextureCropping./Engine/Functions/Engine_MaterialFunctions01/Texturing/TextureCropping (Package)
+  imp 37 /Engine/Functions/Engine_MaterialFunctions02/Texturing/ScreenAlignedPixelToPixelUVs./Engine/Functions/Engine_MaterialFunctions02/Texturing/ScreenAlignedPixelToPixelUVs (Package)
+  imp 38 /Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components./Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components (Package)
+  imp 39 /Engine/Functions/Engine_MaterialFunctions02/Utility/DebugFloat4Values./Engine/Functions/Engine_MaterialFunctions02/Utility/DebugFloat4Values (Package)
+  imp 40 /Engine/Functions/Engine_MaterialFunctions02/Utility/DebugScalarValues./Engine/Functions/Engine_MaterialFunctions02/Utility/DebugScalarValues (Package)
+  imp 41 /Engine/Functions/Engine_MaterialFunctions02/Utility/DitherTemporalAA./Engine/Functions/Engine_MaterialFunctions02/Utility/DitherTemporalAA (Package)
+  imp 42 /Game/Effects/Textures/Smoke/T_EFF_Smoke_11_BC./Game/Effects/Textures/Smoke/T_EFF_Smoke_11_BC (Package)
+  imp 43 /Game/Effects/Textures/Smoke/T_EFF_Smoke_11_M./Game/Effects/Textures/Smoke/T_EFF_Smoke_11_M (Package)
+  imp 44 /Game/Effects/Textures/Smoke/T_EFF_Smoke_11_N./Game/Effects/Textures/Smoke/T_EFF_Smoke_11_N (Package)
+  imp 45 /Game/NarutoShading/MaterialFunctions/MF_N1LookUp./Game/NarutoShading/MaterialFunctions/MF_N1LookUp (Package)
+  imp 46 /Game/Shading/MaterialFunctions/Effects/MF_EFF_Dissolve./Game/Shading/MaterialFunctions/Effects/MF_EFF_Dissolve (Package)
+  imp 47 /Game/Shading/MaterialFunctions/Effects/MF_EFF_InputUV_ParticleRandom./Game/Shading/MaterialFunctions/Effects/MF_EFF_InputUV_ParticleRandom (Package)
+  imp 48 /Game/Shading/MaterialFunctions/Effects/MF_EFF_Panner./Game/Shading/MaterialFunctions/Effects/MF_EFF_Panner (Package)
+  imp 49 /Game/Shading/MaterialFunctions/Effects/MF_EFF_ParamCheck_Cosine./Game/Shading/MaterialFunctions/Effects/MF_EFF_ParamCheck_Cosine (Package)
+  imp 50 /Game/Shading/MaterialParam/MP_UtilMaterialParameterCollection./Game/Shading/MaterialParam/MP_UtilMaterialParameterCollection (Package)
+  imp 51 /Script/Engine./Script/Engine (Package)
+  imp 52 /Game/Effects/Textures/Smoke/T_EFF_Smoke_11_BC.T_EFF_Smoke_11_BC (Texture2D)
+  imp 53 /Game/Effects/Textures/Smoke/T_EFF_Smoke_11_M.T_EFF_Smoke_11_M (Texture2D)
+  imp 54 /Game/Effects/Textures/Smoke/T_EFF_Smoke_11_N.T_EFF_Smoke_11_N (Texture2D)
+exp 0 M_EFF_Smoke_01 : Material  outer 0  @3aea +424d1
+    BaseColor (StructProperty ColorMaterialInput) = 0
+    Metallic (StructProperty ScalarMaterialInput) = 0
+    Specular (StructProperty ScalarMaterialInput) = 0
+    Roughness (StructProperty ScalarMaterialInput) = 0
+    Normal (StructProperty VectorMaterialInput) = 0
+    EmissiveColor (StructProperty ColorMaterialInput) = 0
+    Opacity (StructProperty ScalarMaterialInput) = 0
+    OpacityMask (StructProperty ScalarMaterialInput) = 0
+    BlendMode (ByteProperty EBlendMode) = BLEND_Masked
+    ShadingModel (ByteProperty EMaterialShadingModel) = MSM_NarutoShade
+    SubsurfaceColor (StructProperty ColorMaterialInput) = 0
+    ClearCoat (StructProperty ScalarMaterialInput) = 0
+    AmbientOcclusion (StructProperty ScalarMaterialInput) = 0
+    bEnableSeparateTranslucency (BoolProperty) = 0
+    TwoSided (BoolProperty) = 1
+    TranslucencyLightingMode (ByteProperty ETranslucencyLightingMode) = TLM_VolumetricDirectional
+    bUsedWithParticleSprites (BoolProperty) = 1
+    bUsedWithMeshParticles (BoolProperty) = 1
+    EditorX (IntProperty) = 976
+    EditorY (IntProperty) = 4.29497e+09
+    Expressions (ArrayProperty of ObjectProperty) [73]
+      0 (ObjectProperty) = obj 0
+      1 (ObjectProperty) = obj 20
+      2 (ObjectProperty) = obj 0
+      3 (ObjectProperty) = obj 7
+      4 (ObjectProperty) = obj 0
+      5 (ObjectProperty) = obj 29
+      6 (ObjectProperty) = obj 0
+      7 (ObjectProperty) = obj 0
+      8 (ObjectProperty) = obj 0
+      9 (ObjectProperty) = obj 0
+      10 (ObjectProperty) = obj 11
+      11 (ObjectProperty) = obj 2
+      12 (ObjectProperty) = obj 35
+      13 (ObjectProperty) = obj 0
+      14 (ObjectProperty) = obj 37
+      15 (ObjectProperty) = obj 36
+      16 (ObjectProperty) = obj 0
+      17 (ObjectProperty) = obj 0
+      18 (ObjectProperty) = obj 0
+      19 (ObjectProperty) = obj 0
+      20 (ObjectProperty) = obj 19
+      21 (ObjectProperty) = obj 12
+      22 (ObjectProperty) = obj 32
+      23 (ObjectProperty) = obj 31
+      24 (ObjectProperty) = obj 0
+      25 (ObjectProperty) = obj 18
+      26 (ObjectProperty) = obj 0
+      27 (ObjectProperty) = obj 0
+      28 (ObjectProperty) = obj 9
+      29 (ObjectProperty) = obj 15
+      30 (ObjectProperty) = obj 0
+      31 (ObjectProperty) = obj 14
+      32 (ObjectProperty) = obj 0
+      33 (ObjectProperty) = obj 0
+      34 (ObjectProperty) = obj 33
+      35 (ObjectProperty) = obj 0
+      36 (ObjectProperty) = obj 17
+      37 (ObjectProperty) = obj 10
+      38 (ObjectProperty) = obj 0
+      39 (ObjectProperty) = obj 16
+      40 (ObjectProperty) = obj 8
+      41 (ObjectProperty) = obj 22
+      42 (ObjectProperty) = obj 21
+      43 (ObjectProperty) = obj 0
+      44 (ObjectProperty) = obj 26
+      45 (ObjectProperty) = obj 27
+      46 (ObjectProperty) = obj 0
+      47 (ObjectProperty) = obj 38
+      48 (ObjectProperty) = obj 0
+      49 (ObjectProperty) = obj 0
+      50 (ObjectProperty) = obj 0
+      51 (ObjectProperty) = obj 0
+      52 (ObjectProperty) = obj 0
+      53 (ObjectProperty) = obj 24
+      54 (ObjectProperty) = obj 34
+      55 (ObjectProperty) = obj 6
+      56 (ObjectProperty) = obj 5
+      57 (ObjectProperty) = obj 0
+      58 (ObjectProperty) = obj 23
+      59 (ObjectProperty) = obj 0
+      60 (ObjectProperty) = obj 0
+      61 (ObjectProperty) = obj 28
+      62 (ObjectProperty) = obj 0
+      63 (ObjectProperty) = obj 0
+      64 (ObjectProperty) = obj 30
+      65 (ObjectProperty) = obj 0
+      66 (ObjectProperty) = obj 4
+      67 (ObjectProperty) = obj 13
+      68 (ObjectProperty) = obj 3
+      69 (ObjectProperty) = obj 0
+      70 (ObjectProperty) = obj 25
+      71 (ObjectProperty) = obj 0
+      72 (ObjectProperty) = obj 0
+    MaterialFunctionInfos (ArrayProperty of StructProperty) [20]
+      0 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 1.68649e+09 1.31759e+09 1.43294e+09 7.34003e+07
+        Function (ObjectProperty) = obj -28
+      1 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 1.37531e+09 1.32725e+09 3.21655e+09 3.81977e+09
+        Function (ObjectProperty) = obj -27
+      2 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 7.27113e+08 1.33013e+09 5.56645e+08 5.9583e+08
+        Function (ObjectProperty) = obj -23
+      3 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 1.06773e+09 1.17738e+09 4.19654e+09 1.87708e+09
+        Function (ObjectProperty) = obj -20
+      4 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 3.08328e+09 1.31149e+09 1.99947e+09 7.16527e+08
+        Function (ObjectProperty) = obj -19
+      5 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 1.06773e+09 1.17738e+09 4.19654e+09 1.87708e+09
+        Function (ObjectProperty) = obj -20
+      6 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 3.08328e+09 1.31149e+09 1.99947e+09 7.16527e+08
+        Function (ObjectProperty) = obj -19
+      7 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 1.06773e+09 1.17738e+09 4.19654e+09 1.87708e+09
+        Function (ObjectProperty) = obj -20
+      8 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 3.08328e+09 1.31149e+09 1.99947e+09 7.16527e+08
+        Function (ObjectProperty) = obj -19
+      9 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 5.53651e+08 1.31806e+09 1.01653e+08 2.6409e+09
+        Function (ObjectProperty) = obj -31
+      10 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 3.72966e+09 1.3187e+09 3.32531e+09 2.40074e+09
+        Function (ObjectProperty) = obj -30
+      11 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 1.06773e+09 1.17738e+09 4.19654e+09 1.87708e+09
+        Function (ObjectProperty) = obj -20
+      12 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 3.08328e+09 1.31149e+09 1.99947e+09 7.16527e+08
+        Function (ObjectProperty) = obj -19
+      13 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 3.50884e+09 1.11204e+09 2.14782e+09 7.19905e+08
+        Function (ObjectProperty) = obj -29
+      14 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 3.83349e+09 1.18172e+09 3.24282e+09 3.98786e+09
+        Function (ObjectProperty) = obj -21
+      15 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 2.84872e+09 1.26192e+09 9.21948e+08 1.05608e+09
+        Function (ObjectProperty) = obj -22
+      16 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 1.51977e+08 1.1696e+09 1.25048e+09 2.59305e+09
+        Function (ObjectProperty) = obj -26
+      17 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 3.76973e+09 1.14155e+09 3.79836e+09 4.29462e+09
+        Function (ObjectProperty) = obj -32
+      18 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 3.09995e+08 1.27303e+09 1.70761e+08 1.13714e+09
+        Function (ObjectProperty) = obj -24
+      19 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 2.46292e+08 1.12739e+09 2.90887e+09 1.62049e+09
+        Function (ObjectProperty) = obj -25
+    MaterialParameterCollectionInfos (ArrayProperty of StructProperty) [1]
+      0 (StructProperty MaterialParameterCollectionInfo)
+        StateId (StructProperty Guid) = 1.93307e+09 1.0994e+09 1.12357e+09 8.35046e+08
+        ParameterCollection (ObjectProperty) = obj -33
+    StateId (StructProperty Guid) = 4.75908e+08 1.12179e+09 3.11388e+09 1.6649e+09
+    LightmassSettings (StructProperty LightmassMaterialInterfaceSettings)
+      DiffuseBoost (FloatProperty) = 10
+    TextureStreamingData (ArrayProperty of StructProperty) [3]
+      0 (StructProperty MaterialTextureInfo)
+        SamplingScale (FloatProperty) = 0.015625
+        UVChannelIndex (IntProperty) = 0
+        TextureName (NameProperty) = Good64x64TilingNoiseHighFreq
+      1 (StructProperty MaterialTextureInfo)
+        SamplingScale (FloatProperty) = 0.015625
+        UVChannelIndex (IntProperty) = 0
+        TextureName (NameProperty) = T_EFF_Smoke_11_M
+      2 (StructProperty MaterialTextureInfo)
+        SamplingScale (FloatProperty) = 0.015625
+        UVChannelIndex (IntProperty) = 0
+        TextureName (NameProperty) = T_EFF_Smoke_11_N
+    -- Eigenschaften ok, Ende bei +1195 von 424d1
+exp 1 MaterialExpressionMaterialFunctionCall_0 : MaterialExpressionMaterialFunctionCall  outer 1  @45fbb +48f
+    MaterialFunction (ObjectProperty) = obj -27
+    FunctionInputs (ArrayProperty of StructProperty) [2]
+      0 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 2.55301e+09 1.07581e+09 3.6917e+09 1.5759e+09
+        Input (StructProperty ExpressionInput) = 0
+      1 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 3.9034e+09 1.11737e+09 3.24527e+09 5.12829e+08
+        Input (StructProperty ExpressionInput) = 0
+    FunctionOutputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty FunctionExpressionOutput)
+        ExpressionOutputId (StructProperty Guid) = 2.61326e+09 1.18109e+09 3.58368e+09 1.1709e+09
+        Output (StructProperty ExpressionOutput)
+          OutputName (StrProperty) = Result
+          Mask (IntProperty) = 0
+          MaskR (IntProperty) = 0
+          MaskG (IntProperty) = 0
+          MaskB (IntProperty) = 0
+          MaskA (IntProperty) = 0
+    Material (ObjectProperty) = obj 1
+    Outputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ExpressionOutput)
+        OutputName (StrProperty) = Result
+        Mask (IntProperty) = 0
+        MaskR (IntProperty) = 0
+        MaskG (IntProperty) = 0
+        MaskB (IntProperty) = 0
+        MaskA (IntProperty) = 0
+    -- Eigenschaften ok, Ende bei +48b von 48f
+exp 2 MaterialExpressionMaterialFunctionCall_17 : MaterialExpressionMaterialFunctionCall  outer 1  @4644a +486
+    MaterialFunction (ObjectProperty) = obj -29
+    FunctionInputs (ArrayProperty of StructProperty) [2]
+      0 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 3.58098e+09 1.12271e+09 3.25261e+09 4.04025e+09
+        Input (StructProperty ExpressionInput) = 0
+      1 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 2.45517e+09 1.12936e+09 1.02249e+09 3.76073e+09
+        Input (StructProperty ExpressionInput) = 0
+    FunctionOutputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty FunctionExpressionOutput)
+        ExpressionOutputId (StructProperty Guid) = 4.18288e+09 1.24351e+09 3.72248e+09 3.20839e+09
+        Output (StructProperty ExpressionOutput)
+          OutputName (StrProperty) = Result
+          Mask (IntProperty) = 0
+          MaskR (IntProperty) = 0
+          MaskG (IntProperty) = 0
+          MaskB (IntProperty) = 0
+          MaskA (IntProperty) = 0
+    Material (ObjectProperty) = obj 1
+    Outputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ExpressionOutput)
+        OutputName (StrProperty) = Result
+        Mask (IntProperty) = 0
+        MaskR (IntProperty) = 0
+        MaskG (IntProperty) = 0
+        MaskB (IntProperty) = 0
+        MaskA (IntProperty) = 0
+    -- Eigenschaften ok, Ende bei +482 von 486
+exp 3 MaterialExpressionMaterialFunctionCall_18 : MaterialExpressionMaterialFunctionCall  outer 1  @468d0 +484
+    MaterialFunction (ObjectProperty) = obj -20
+    FunctionInputs (ArrayProperty of StructProperty) [2]
+      0 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 2.51303e+09 1.2218e+09 3.81333e+09 1.29672e+08
+        Input (StructProperty ExpressionInput) = 0
+      1 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 1.0107e+09 1.21409e+09 3.27766e+09 4.03715e+09
+        Input (StructProperty ExpressionInput) = 0
+    FunctionOutputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty FunctionExpressionOutput)
+        ExpressionOutputId (StructProperty Guid) = 1.34899e+09 1.24459e+09 3.67762e+09 3.19133e+09
+        Output (StructProperty ExpressionOutput)
+          OutputName (StrProperty) = Result
+          Mask (IntProperty) = 0
+          MaskR (IntProperty) = 0
+          MaskG (IntProperty) = 0
+          MaskB (IntProperty) = 0
+          MaskA (IntProperty) = 0
+    Material (ObjectProperty) = obj 1
+    Outputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ExpressionOutput)
+        OutputName (StrProperty) = Result
+        Mask (IntProperty) = 0
+        MaskR (IntProperty) = 0
+        MaskG (IntProperty) = 0
+        MaskB (IntProperty) = 0
+        MaskA (IntProperty) = 0
+    -- Eigenschaften ok, Ende bei +480 von 484
+exp 4 MaterialExpressionMaterialFunctionCall_19 : MaterialExpressionMaterialFunctionCall  outer 1  @46d54 +52e
+    MaterialFunction (ObjectProperty) = obj -30
+    FunctionInputs (ArrayProperty of StructProperty) [3]
+      0 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 2.39079e+09 1.17077e+09 4.20462e+09 3.34021e+09
+        Input (StructProperty ExpressionInput) = 0
+      1 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 2.72859e+09 1.17887e+09 9.02781e+08 1.42886e+09
+        Input (StructProperty ExpressionInput) = 0
+      2 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 1.27157e+09 1.15754e+09 1.13768e+09 2.16946e+09
+        Input (StructProperty ExpressionInput) = 0
+    FunctionOutputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty FunctionExpressionOutput)
+        ExpressionOutputId (StructProperty Guid) = 1.58583e+09 1.32132e+09 1.8948e+09 1.81944e+09
+        Output (StructProperty ExpressionOutput)
+          OutputName (StrProperty) = OutUV
+          Mask (IntProperty) = 0
+          MaskR (IntProperty) = 0
+          MaskG (IntProperty) = 0
+          MaskB (IntProperty) = 0
+          MaskA (IntProperty) = 0
+    Material (ObjectProperty) = obj 1
+    Outputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ExpressionOutput)
+        OutputName (StrProperty) = OutUV
+        Mask (IntProperty) = 0
+        MaskR (IntProperty) = 0
+        MaskG (IntProperty) = 0
+        MaskB (IntProperty) = 0
+        MaskA (IntProperty) = 0
+    -- Eigenschaften ok, Ende bei +52a von 52e
+exp 5 MaterialExpressionMaterialFunctionCall_20 : MaterialExpressionMaterialFunctionCall  outer 1  @47282 +7cc
+    MaterialFunction (ObjectProperty) = obj -31
+    FunctionInputs (ArrayProperty of StructProperty) [4]
+      0 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 1.02003e+09 1.3244e+09 3.42306e+09 3.15789e+09
+        Input (StructProperty ExpressionInput) = 0
+      1 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 1.75609e+09 1.301e+09 3.92227e+09 4.19493e+09
+        Input (StructProperty ExpressionInput) = 0
+      2 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 3.78889e+09 1.23086e+09 2.78101e+09 3.67363e+09
+        Input (StructProperty ExpressionInput) = 0
+      3 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 6.28831e+08 1.21158e+09 3.32023e+09 1.935e+09
+        Input (StructProperty ExpressionInput) = 0
+    FunctionOutputs (ArrayProperty of StructProperty) [2]
+      0 (StructProperty FunctionExpressionOutput)
+        ExpressionOutputId (StructProperty Guid) = 2.30207e+09 1.32232e+09 8.84038e+08 3.46543e+09
+        Output (StructProperty ExpressionOutput)
+          OutputName (StrProperty) = Tiling
+          Mask (IntProperty) = 0
+          MaskR (IntProperty) = 0
+          MaskG (IntProperty) = 0
+          MaskB (IntProperty) = 0
+          MaskA (IntProperty) = 0
+      1 (StructProperty FunctionExpressionOutput)
+        ExpressionOutputId (StructProperty Guid) = 1.58583e+09 1.32132e+09 1.8948e+09 1.81944e+09
+        Output (StructProperty ExpressionOutput)
+          OutputName (StrProperty) = Panner
+          Mask (IntProperty) = 0
+          MaskR (IntProperty) = 0
+          MaskG (IntProperty) = 0
+          MaskB (IntProperty) = 0
+          MaskA (IntProperty) = 0
+    Material (ObjectProperty) = obj 1
+    Outputs (ArrayProperty of StructProperty) [2]
+      0 (StructProperty ExpressionOutput)
+        OutputName (StrProperty) = Tiling
+        Mask (IntProperty) = 0
+        MaskR (IntProperty) = 0
+        MaskG (IntProperty) = 0
+        MaskB (IntProperty) = 0
+        MaskA (IntProperty) = 0
+      1 (StructProperty ExpressionOutput)
+        OutputName (StrProperty) = Panner
+        Mask (IntProperty) = 0
+        MaskR (IntProperty) = 0
+        MaskG (IntProperty) = 0
+        MaskB (IntProperty) = 0
+        MaskA (IntProperty) = 0
+    -- Eigenschaften ok, Ende bei +7c8 von 7cc
+exp 6 MaterialExpressionMaterialFunctionCall_24 : MaterialExpressionMaterialFunctionCall  outer 1  @47a4e +494
+    MaterialFunction (ObjectProperty) = obj -28
+    FunctionInputs (ArrayProperty of StructProperty) [2]
+      0 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 3.85807e+09 1.20341e+09 6.72181e+08 4.14722e+09
+        Input (StructProperty ExpressionInput) = 0
+      1 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 3.58495e+09 1.18749e+09 2.80252e+09 2.05069e+09
+        Input (StructProperty ExpressionInput) = 0
+    FunctionOutputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty FunctionExpressionOutput)
+        ExpressionOutputId (StructProperty Guid) = 8.60123e+08 1.12636e+09 1.81699e+09 4.27015e+09
+        Output (StructProperty ExpressionOutput)
+          OutputName (StrProperty) = Result
+          Mask (IntProperty) = 0
+          MaskR (IntProperty) = 0
+          MaskG (IntProperty) = 0
+          MaskB (IntProperty) = 0
+          MaskA (IntProperty) = 0
+    Material (ObjectProperty) = obj 1
+    Outputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ExpressionOutput)
+        OutputName (StrProperty) = Result
+        Mask (IntProperty) = 0
+        MaskR (IntProperty) = 0
+        MaskG (IntProperty) = 0
+        MaskB (IntProperty) = 0
+        MaskA (IntProperty) = 0
+    -- Eigenschaften ok, Ende bei +490 von 494
+exp 7 MaterialExpressionMaterialFunctionCall_4 : MaterialExpressionMaterialFunctionCall  outer 1  @47ee2 +484
+    MaterialFunction (ObjectProperty) = obj -20
+    FunctionInputs (ArrayProperty of StructProperty) [2]
+      0 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 2.51303e+09 1.2218e+09 3.81333e+09 1.29672e+08
+        Input (StructProperty ExpressionInput) = 0
+      1 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 1.0107e+09 1.21409e+09 3.27766e+09 4.03715e+09
+        Input (StructProperty ExpressionInput) = 0
+    FunctionOutputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty FunctionExpressionOutput)
+        ExpressionOutputId (StructProperty Guid) = 1.34899e+09 1.24459e+09 3.67762e+09 3.19133e+09
+        Output (StructProperty ExpressionOutput)
+          OutputName (StrProperty) = Result
+          Mask (IntProperty) = 0
+          MaskR (IntProperty) = 0
+          MaskG (IntProperty) = 0
+          MaskB (IntProperty) = 0
+          MaskA (IntProperty) = 0
+    Material (ObjectProperty) = obj 1
+    Outputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ExpressionOutput)
+        OutputName (StrProperty) = Result
+        Mask (IntProperty) = 0
+        MaskR (IntProperty) = 0
+        MaskG (IntProperty) = 0
+        MaskB (IntProperty) = 0
+        MaskA (IntProperty) = 0
+    -- Eigenschaften ok, Ende bei +480 von 484
+exp 8 MaterialExpressionMaterialFunctionCall_5 : MaterialExpressionMaterialFunctionCall  outer 1  @48366 +484
+    MaterialFunction (ObjectProperty) = obj -20
+    FunctionInputs (ArrayProperty of StructProperty) [2]
+      0 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 2.51303e+09 1.2218e+09 3.81333e+09 1.29672e+08
+        Input (StructProperty ExpressionInput) = 0
+      1 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 1.0107e+09 1.21409e+09 3.27766e+09 4.03715e+09
+        Input (StructProperty ExpressionInput) = 0
+    FunctionOutputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty FunctionExpressionOutput)
+        ExpressionOutputId (StructProperty Guid) = 1.34899e+09 1.24459e+09 3.67762e+09 3.19133e+09
+        Output (StructProperty ExpressionOutput)
+          OutputName (StrProperty) = Result
+          Mask (IntProperty) = 0
+          MaskR (IntProperty) = 0
+          MaskG (IntProperty) = 0
+          MaskB (IntProperty) = 0
+          MaskA (IntProperty) = 0
+    Material (ObjectProperty) = obj 1
+    Outputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ExpressionOutput)
+        OutputName (StrProperty) = Result
+        Mask (IntProperty) = 0
+        MaskR (IntProperty) = 0
+        MaskG (IntProperty) = 0
+        MaskB (IntProperty) = 0
+        MaskA (IntProperty) = 0
+    -- Eigenschaften ok, Ende bei +480 von 484
+exp 9 MaterialExpressionMaterialFunctionCall_6 : MaterialExpressionMaterialFunctionCall  outer 1  @487ea +484
+    MaterialFunction (ObjectProperty) = obj -20
+    FunctionInputs (ArrayProperty of StructProperty) [2]
+      0 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 2.51303e+09 1.2218e+09 3.81333e+09 1.29672e+08
+        Input (StructProperty ExpressionInput) = 0
+      1 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 1.0107e+09 1.21409e+09 3.27766e+09 4.03715e+09
+        Input (StructProperty ExpressionInput) = 0
+    FunctionOutputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty FunctionExpressionOutput)
+        ExpressionOutputId (StructProperty Guid) = 1.34899e+09 1.24459e+09 3.67762e+09 3.19133e+09
+        Output (StructProperty ExpressionOutput)
+          OutputName (StrProperty) = Result
+          Mask (IntProperty) = 0
+          MaskR (IntProperty) = 0
+          MaskG (IntProperty) = 0
+          MaskB (IntProperty) = 0
+          MaskA (IntProperty) = 0
+    Material (ObjectProperty) = obj 1
+    Outputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ExpressionOutput)
+        OutputName (StrProperty) = Result
+        Mask (IntProperty) = 0
+        MaskR (IntProperty) = 0
+        MaskG (IntProperty) = 0
+        MaskB (IntProperty) = 0
+        MaskA (IntProperty) = 0
+    -- Eigenschaften ok, Ende bei +480 von 484
+exp 10 MaterialExpressionScalarParameter_0 : MaterialExpressionScalarParameter  outer 1  @48c6e +a8
+    DefaultValue (FloatProperty) = 1
+    ParameterName (NameProperty) = AO
+    ExpressionGUID (StructProperty Guid) = 3.51475e+09 1.22513e+09 2.05394e+09 3.06412e+07
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 11 MaterialExpressionScalarParameter_1 : MaterialExpressionScalarParameter  outer 1  @48d16 +8b
+    ParameterName (NameProperty) = Normal_Value
+    ExpressionGUID (StructProperty Guid) = 1.76248e+09 1.24742e+09 1.81391e+08 7.05444e+08
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +87 von 8b
+exp 12 MaterialExpressionScalarParameter_10 : MaterialExpressionScalarParameter  outer 1  @48da1 +14a
+    SliderMax (FloatProperty) = 100
+    ParameterName (NameProperty) = 12_OpacityDissolve_Contrast
+    ExpressionGUID (StructProperty Guid) = 3.14233e+09 1.21907e+09 3.04119e+09 2.46888e+09
+    Group (NameProperty) = 23_Opacity_Dissolve
+    Material (ObjectProperty) = obj 1
+    Desc (StrProperty) = コントラストの強度です。
+
+値が大きくなるとコントラストが強くなります。
+    bCommentBubbleVisible (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +146 von 14a
+exp 13 MaterialExpressionScalarParameter_14 : MaterialExpressionScalarParameter  outer 1  @48eeb +a8
+    DefaultValue (FloatProperty) = 1
+    ParameterName (NameProperty) = Opacity_Multi
+    ExpressionGUID (StructProperty Guid) = 9.99952e+08 1.15248e+09 4.09723e+09 4.27012e+09
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 14 MaterialExpressionScalarParameter_15 : MaterialExpressionScalarParameter  outer 1  @48f93 +8b
+    ParameterName (NameProperty) = Opacity_Contrast
+    ExpressionGUID (StructProperty Guid) = 3.57164e+08 1.24531e+09 4.13241e+09 1.23235e+09
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +87 von 8b
+exp 15 MaterialExpressionScalarParameter_16 : MaterialExpressionScalarParameter  outer 1  @4901e +a8
+    DefaultValue (FloatProperty) = 1
+    ParameterName (NameProperty) = Emissive_Multi
+    ExpressionGUID (StructProperty Guid) = 1.84055e+09 1.17231e+09 2.69715e+09 4.00405e+09
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 16 MaterialExpressionScalarParameter_17 : MaterialExpressionScalarParameter  outer 1  @490c6 +8b
+    ParameterName (NameProperty) = Emissive_Contrast
+    ExpressionGUID (StructProperty Guid) = 3.13973e+09 1.23017e+09 4.27927e+09 3.26665e+09
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +87 von 8b
+exp 17 MaterialExpressionScalarParameter_2 : MaterialExpressionScalarParameter  outer 1  @49151 +a8
+    DefaultValue (FloatProperty) = 1
+    ParameterName (NameProperty) = Normal_Multi
+    ExpressionGUID (StructProperty Guid) = 1.79925e+08 1.24137e+09 3.38025e+09 1.22795e+09
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 18 MaterialExpressionScalarParameter_40 : MaterialExpressionScalarParameter  outer 1  @491f9 +13c
+    DefaultValue (FloatProperty) = 8
+    SliderMax (FloatProperty) = 15
+    ParameterName (NameProperty) = 01_LookupType_ID
+    ExpressionGUID (StructProperty Guid) = 3.16588e+09 1.20817e+09 1.8871e+09 3.8864e+09
+    Material (ObjectProperty) = obj 1
+    Desc (StrProperty) = LookupIDを指定します。
+
+現状は8固定としてください。
+    bCommentBubbleVisible (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +138 von 13c
+exp 19 MaterialExpressionScalarParameter_7 : MaterialExpressionScalarParameter  outer 1  @49335 +a8
+    DefaultValue (FloatProperty) = 0.5
+    ParameterName (NameProperty) = OutLine_Thickness
+    ExpressionGUID (StructProperty Guid) = 1.61519e+08 1.33692e+09 8.37869e+08 3.03851e+09
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 20 MaterialExpressionScalarParameter_8 : MaterialExpressionScalarParameter  outer 1  @493dd +c9
+    DefaultValue (FloatProperty) = 1
+    ParameterName (NameProperty) = 13_Color_Multi
+    ExpressionGUID (StructProperty Guid) = 7.89873e+08 1.17097e+09 9.02402e+08 3.92363e+09
+    Group (NameProperty) = 01_Color
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +c5 von c9
+exp 21 MaterialExpressionScalarParameter_9 : MaterialExpressionScalarParameter  outer 1  @494a6 +ac
+    ParameterName (NameProperty) = 14_Color_Contrast
+    ExpressionGUID (StructProperty Guid) = 2.12958e+09 1.2137e+09 3.35706e+09 1.02915e+09
+    Group (NameProperty) = 01_Color
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +a8 von ac
+exp 22 MaterialExpressionStaticBoolParameter_22 : MaterialExpressionStaticBoolParameter  outer 1  @49552 +f9
+    ParameterName (NameProperty) = 11_OpacityDissolve_Invert
+    ExpressionGUID (StructProperty Guid) = 4.07256e+09 1.14234e+09 3.65033e+09 2.27779e+09
+    Group (NameProperty) = 23_Opacity_Dissolve
+    Material (ObjectProperty) = obj 1
+    Desc (StrProperty) = 白黒反転させますか？
+    bCommentBubbleVisible (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +f5 von f9
+exp 23 MaterialExpressionStaticBoolParameter_30 : MaterialExpressionStaticBoolParameter  outer 1  @4964b +123
+    DefaultValue (BoolProperty) = 1
+    ParameterName (NameProperty) = 00_SupportLineDraw
+    ExpressionGUID (StructProperty Guid) = 6.76117e+08 1.16496e+09 3.72376e+09 4.06003e+09
+    Group (NameProperty) = 90_NarutoShaderParam
+    Material (ObjectProperty) = obj 1
+    Desc (StrProperty) = 線画エフェクト処理を有効にしますか？
+    bCommentBubbleVisible (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +11f von 123
+exp 24 MaterialExpressionStaticBoolParameter_56 : MaterialExpressionStaticBoolParameter  outer 1  @4976e +107
+    ParameterName (NameProperty) = 00_USE_OpacityDissolve
+    ExpressionGUID (StructProperty Guid) = 2.91104e+09 1.30038e+09 2.26059e+09 4.11167e+09
+    Group (NameProperty) = 23_Opacity_Dissolve
+    Material (ObjectProperty) = obj 1
+    Desc (StrProperty) = Dissoleveを使用しますか？
+    bCommentBubbleVisible (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +103 von 107
+exp 25 MaterialExpressionStaticComponentMaskParameter_11 : MaterialExpressionStaticComponentMaskParameter  outer 1  @49875 +fa
+    Input (StructProperty ExpressionInput) = 0
+    DefaultB (BoolProperty) = 1
+    ParameterName (NameProperty) = Emissive_Channel_Color
+    ExpressionGUID (StructProperty Guid) = 8.99972e+08 1.16102e+09 3.74033e+09 1.40507e+09
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +f6 von fa
+exp 26 MaterialExpressionStaticComponentMaskParameter_12 : MaterialExpressionStaticComponentMaskParameter  outer 1  @4996f +fa
+    Input (StructProperty ExpressionInput) = 0
+    DefaultR (BoolProperty) = 1
+    ParameterName (NameProperty) = Opacity_Channel_Color
+    ExpressionGUID (StructProperty Guid) = 3.99162e+09 1.31602e+09 3.78302e+09 1.38592e+08
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +f6 von fa
+exp 27 MaterialExpressionStaticComponentMaskParameter_2 : MaterialExpressionStaticComponentMaskParameter  outer 1  @49a69 +1aa
+    Input (StructProperty ExpressionInput) = 0
+    DefaultR (BoolProperty) = 1
+    ParameterName (NameProperty) = 06_OpacityDissolve_Channel
+    ExpressionGUID (StructProperty Guid) = 2.31701e+08 1.18613e+09 3.58734e+09 1.94167e+09
+    Group (NameProperty) = 23_Opacity_Dissolve
+    Material (ObjectProperty) = obj 1
+    Desc (StrProperty) = Dissolveで使用するチャンネルを1つ指定してください。
+    bCommentBubbleVisible (BoolProperty) = 1
+    bCollapsed (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +1a6 von 1aa
+exp 28 MaterialExpressionStaticSwitchParameter_0 : MaterialExpressionStaticSwitchParameter  outer 1  @49c13 +135
+    A (StructProperty ExpressionInput) = 0
+    B (StructProperty ExpressionInput) = 0
+    ParameterName (NameProperty) = Use_Emissive
+    ExpressionGUID (StructProperty Guid) = 2.85343e+09 1.28815e+09 3.15877e+08 4.12178e+09
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +131 von 135
+exp 29 MaterialExpressionTextureObjectParameter_5 : MaterialExpressionTextureObjectParameter  outer 1  @49d48 +117
+    ParameterName (NameProperty) = 05_OpacityDissolve_Map
+    ExpressionGUID (StructProperty Guid) = 3.81279e+09 1.08988e+09 5.14712e+08 3.94231e+09
+    Group (NameProperty) = 23_Opacity_Dissolve
+    Material (ObjectProperty) = obj 1
+    Desc (StrProperty) = Dissolveに使用するテクスチャを指定します。
+    bCommentBubbleVisible (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +113 von 117
+exp 30 MaterialExpressionTextureSampleParameterSubUV_1 : MaterialExpressionTextureSampleParameterSubUV  outer 1  @49e5f +d1
+    ParameterName (NameProperty) = 00_Normal_Texture
+    ExpressionGUID (StructProperty Guid) = 1.72737e+09 1.14672e+09 2.81108e+09 1.76268e+08
+    Texture (ObjectProperty) = obj -55
+    SamplerType (ByteProperty EMaterialSamplerType) = SAMPLERTYPE_Normal
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +cd von d1
+exp 31 MaterialExpressionTextureSampleParameterSubUV_4 : MaterialExpressionTextureSampleParameterSubUV  outer 1  @49f30 +d1
+    ParameterName (NameProperty) = OpacityTexture
+    ExpressionGUID (StructProperty Guid) = 9.31548e+07 1.0954e+09 2.01581e+09 3.54479e+09
+    Texture (ObjectProperty) = obj -54
+    SamplerType (ByteProperty EMaterialSamplerType) = SAMPLERTYPE_Alpha
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +cd von d1
+exp 32 MaterialExpressionTextureSampleParameterSubUV_5 : MaterialExpressionTextureSampleParameterSubUV  outer 1  @4a001 +a8
+    ParameterName (NameProperty) = Emissive_Texture
+    ExpressionGUID (StructProperty Guid) = 2.26166e+09 1.09715e+09 1.36752e+09 3.85006e+09
+    Texture (ObjectProperty) = obj -53
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 33 MaterialExpressionVectorParameter_11 : MaterialExpressionVectorParameter  outer 1  @4a0a9 +17a
+    DefaultValue (StructProperty LinearColor) = 1 1 1 1
+    ParameterName (NameProperty) = 20_OpacityDissolve_Animation
+    ExpressionGUID (StructProperty Guid) = 2.20241e+09 1.30179e+09 1.54897e+09 1.47768e+09
+    Group (NameProperty) = 23_Opacity_Dissolve_Animation
+    Material (ObjectProperty) = obj 1
+    Desc (StrProperty) = R　タイリング U
+
+G　タイリング V
+
+B　スクロール U
+
+A　スクロール V
+    bCommentBubbleVisible (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +176 von 17a
+exp 34 MaterialExpressionVectorParameter_21 : MaterialExpressionVectorParameter  outer 1  @4a223 +cc
+    DefaultValue (StructProperty LinearColor) = 0.2 0.35 0.23 1
+    ParameterName (NameProperty) = ShadowColor
+    ExpressionGUID (StructProperty Guid) = 2.62516e+09 1.29586e+09 1.67195e+09 3.77913e+09
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +c8 von cc
+exp 35 MaterialExpressionVectorParameter_23 : MaterialExpressionVectorParameter  outer 1  @4a2ef +cc
+    DefaultValue (StructProperty LinearColor) = 1 1 1 1
+    ParameterName (NameProperty) = Color
+    ExpressionGUID (StructProperty Guid) = 1.09951e+09 1.09858e+09 3.23521e+09 9.032e+08
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +c8 von cc
+exp 36 MaterialExpressionVectorParameter_3 : MaterialExpressionVectorParameter  outer 1  @4a3bb +cc
+    DefaultValue (StructProperty LinearColor) = 0 0 0 1
+    ParameterName (NameProperty) = Emissive_Color
+    ExpressionGUID (StructProperty Guid) = 3.14471e+09 1.27494e+09 1.23788e+09 1.42095e+09
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +c8 von cc
+exp 37 MaterialExpressionVectorParameter_4 : MaterialExpressionVectorParameter  outer 1  @4a487 +cc
+    DefaultValue (StructProperty LinearColor) = 0 0 0 1
+    ParameterName (NameProperty) = Line_Color
+    ExpressionGUID (StructProperty Guid) = 1.94582e+09 1.19267e+09 1.41487e+09 4.10533e+09
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +c8 von cc
+
+== dependances /Game :
+  /Game/Effects/Textures/Smoke/T_EFF_Smoke_11_BC
+  /Game/Effects/Textures/Smoke/T_EFF_Smoke_11_M
+  /Game/Effects/Textures/Smoke/T_EFF_Smoke_11_N
+  /Game/NarutoShading/MaterialFunctions/MF_N1LookUp
+  /Game/Shading/MaterialFunctions/Effects/MF_EFF_Dissolve
+  /Game/Shading/MaterialFunctions/Effects/MF_EFF_InputUV_ParticleRandom
+  /Game/Shading/MaterialFunctions/Effects/MF_EFF_Panner
+  /Game/Shading/MaterialFunctions/Effects/MF_EFF_ParamCheck_Cosine
+  /Game/Shading/MaterialParam/MP_UtilMaterialParameterCollection

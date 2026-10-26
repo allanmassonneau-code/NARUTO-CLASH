@@ -1,0 +1,36 @@
+== /Game/Weapons/Ninjutsu/D84NJ2/Materials/MI_WEP_Eff_D84NJ2_Dist_01
+fichier : NARUTO/Content/Weapons/Ninjutsu/D84NJ2/Materials/MI_WEP_Eff_D84NJ2_Dist_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/D84NJ2/Materials/MI_WEP_Eff_D84NJ2_Dist_01.uasset  1?519 octets
+  NARUTO/Content/Weapons/Ninjutsu/D84NJ2/Materials/MI_WEP_Eff_D84NJ2_Dist_01.uexp  672 octets
+
+/Game/Weapons/Ninjutsu/D84NJ2/Materials/MI_WEP_Eff_D84NJ2_Dist_01  flags 80000000  36 Namen  7 Importe  1 Exporte  Kopf 1519  Bulk ab 2187  Daten 2191
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/Materials/Distortion/MI_EFF_Distortion_Hit_A_01.MI_EFF_Distortion_Hit_A_01 (MaterialInstanceConstant)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/Materials/Distortion/MI_EFF_Distortion_Hit_A_01./Game/Effects/Materials/Distortion/MI_EFF_Distortion_Hit_A_01 (Package)
+  imp  4 /Game/Effects/Textures/Smoke/T_EFF_Smoke_21_M./Game/Effects/Textures/Smoke/T_EFF_Smoke_21_M (Package)
+  imp  5 /Script/Engine./Script/Engine (Package)
+  imp  6 /Game/Effects/Textures/Smoke/T_EFF_Smoke_21_M.T_EFF_Smoke_21_M (Texture2D)
+exp 0 MI_WEP_Eff_D84NJ2_Dist_01 : MaterialInstanceConstant  outer 0  @5ef +29c
+    Parent (ObjectProperty) = obj -2
+    ScalarParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 01_Refraction_Map
+        ParameterValue (ObjectProperty) = obj -7
+        ExpressionGUID (StructProperty Guid) = 2.54829e+09 1.15047e+09 2.00875e+09 9.99287e+08
+    TextureStreamingData (ArrayProperty of StructProperty) [1]
+      0 (StructProperty MaterialTextureInfo)
+        SamplingScale (FloatProperty) = 1
+        UVChannelIndex (IntProperty) = 0
+        TextureName (NameProperty) = T_EFF_Smoke_21_M
+    -- Eigenschaften ok, Ende bei +298 von 29c
+
+== dependances /Game :
+  /Game/Effects/Materials/Distortion/MI_EFF_Distortion_Hit_A_01
+  /Game/Effects/Textures/Smoke/T_EFF_Smoke_21_M

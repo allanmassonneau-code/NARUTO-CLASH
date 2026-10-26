@@ -1,0 +1,53 @@
+== /Game/Weapons/Ninjutsu/EarthDragon/Meshes/SM_WEP_Eff_EarthDragon_bullet
+fichier : NARUTO/Content/Weapons/Ninjutsu/EarthDragon/Meshes/SM_WEP_Eff_EarthDragon_bullet.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/EarthDragon/Meshes/SM_WEP_Eff_EarthDragon_bullet.uasset  2?173 octets
+  NARUTO/Content/Weapons/Ninjutsu/EarthDragon/Meshes/SM_WEP_Eff_EarthDragon_bullet.uexp  7?327 octets
+
+/Game/Weapons/Ninjutsu/EarthDragon/Meshes/SM_WEP_Eff_EarthDragon_bullet  flags 80000000  58 Namen  9 Importe  3 Exporte  Kopf 2173  Bulk ab 9496  Daten 9500
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial (Material)
+  imp  5 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  6 /Engine/EngineMaterials/WorldGridMaterial./Engine/EngineMaterials/WorldGridMaterial (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_4 : BodySetup  outer 3  @87d +42d
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +16c von 42d
+exp 1 NavCollision_8 : NavCollision  outer 3  @caa +61
+    -- Eigenschaften ok, Ende bei +8 von 61
+exp 2 SM_WEP_Eff_EarthDragon_bullet : StaticMesh  outer 0  @d0b +180d
+    StaticMaterials (ArrayProperty of StructProperty) [2]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = rock
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 48.0673
+          LocalUVDensities[1] (FloatProperty) = 0
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+      1 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = sand_Tail
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 74.5969
+          LocalUVDensities[1] (FloatProperty) = 0
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightMapResolution (IntProperty) = 64
+    ExtendedBounds (StructProperty BoxSphereBounds) = 5.74532e-44 0 7.56701e-44 0 1.68156e-44 0 7.84727e-44
+    -- Eigenschaften ok, Ende bei +35f von 180d
+
+== dependances /Game :

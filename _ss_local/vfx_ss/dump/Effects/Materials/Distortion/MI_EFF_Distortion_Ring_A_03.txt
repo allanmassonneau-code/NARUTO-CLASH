@@ -1,0 +1,53 @@
+== /Game/Effects/Materials/Distortion/MI_EFF_Distortion_Ring_A_03
+fichier : NARUTO/Content/Effects/Materials/Distortion/MI_EFF_Distortion_Ring_A_03.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/Materials/Distortion/MI_EFF_Distortion_Ring_A_03.uasset  3?797 octets
+  NARUTO/Content/Effects/Materials/Distortion/MI_EFF_Distortion_Ring_A_03.uexp  128?584 octets
+
+/Game/Effects/Materials/Distortion/MI_EFF_Distortion_Ring_A_03  flags 80000000  96 Namen  7 Importe  1 Exporte  Kopf 3797  Bulk ab 132377  Daten 132381
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Materials/M_EFF_Distortion_01.M_EFF_Distortion_01 (Material)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Materials/M_EFF_Distortion_01./Game/Effects/BaseMaterials/Materials/M_EFF_Distortion_01 (Package)
+  imp  4 /Game/Effects/Textures/Common/T_EFF_Ring_01_M./Game/Effects/Textures/Common/T_EFF_Ring_01_M (Package)
+  imp  5 /Script/Engine./Script/Engine (Package)
+  imp  6 /Game/Effects/Textures/Common/T_EFF_Ring_01_M.T_EFF_Ring_01_M (Texture2D)
+exp 0 MI_EFF_Distortion_Ring_A_03 : MaterialInstanceConstant  outer 0  @ed5 +1f644
+    Parent (ObjectProperty) = obj -2
+    bHasStaticPermutationResource (BoolProperty) = 1
+    ScalarParameterValues (ArrayProperty of StructProperty) [5]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 01_Opacity_DepthFade_Distance
+        ParameterValue (FloatProperty) = 50
+        ExpressionGUID (StructProperty Guid) = 2.8064e+09 1.17987e+09 1.32365e+09 1.30641e+09
+      1 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 01_Opacity_DepthFade_Power
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 2.98072e+09 1.32084e+09 3.35446e+09 2.6832e+09
+      2 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 02_Opacity_DepthFade_Multi
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 1.41789e+08 1.08933e+09 1.33911e+09 2.57713e+09
+      3 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 12_Opacity_DepthFade_Contrast
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 1.70564e+09 1.27692e+09 2.86906e+09 8.89684e+08
+      4 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 01_Refraction_Map
+        ParameterValue (ObjectProperty) = obj -7
+        ExpressionGUID (StructProperty Guid) = 2.54829e+09 1.15047e+09 2.00875e+09 9.99287e+08
+    BasePropertyOverrides (StructProperty MaterialInstanceBasePropertyOverrides)
+      bOverride_BlendMode (BoolProperty) = 1
+      bOverride_TwoSided (BoolProperty) = 1
+      BlendMode (ByteProperty EBlendMode) = BLEND_Additive
+      TwoSided (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +4c5 von 1f644
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Materials/M_EFF_Distortion_01
+  /Game/Effects/Textures/Common/T_EFF_Ring_01_M

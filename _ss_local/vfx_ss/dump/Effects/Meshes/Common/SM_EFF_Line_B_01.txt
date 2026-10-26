@@ -1,0 +1,46 @@
+== /Game/Effects/Meshes/Common/SM_EFF_Line_B_01
+fichier : NARUTO/Content/Effects/Meshes/Common/SM_EFF_Line_B_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Effects/Meshes/Common/SM_EFF_Line_B_01.uasset  2?160 octets
+  NARUTO/Content/Effects/Meshes/Common/SM_EFF_Line_B_01.uexp  7?811 octets
+
+/Game/Effects/Meshes/Common/SM_EFF_Line_B_01  flags 80000000  58 Namen  9 Importe  3 Exporte  Kopf 2160  Bulk ab 9967  Daten 9971
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial (Material)
+  imp  5 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  6 /Engine/EngineMaterials/WorldGridMaterial./Engine/EngineMaterials/WorldGridMaterial (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_0 : BodySetup  outer 3  @870 +b95
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +16c von b95
+exp 1 NavCollision_2 : NavCollision  outer 3  @1405 +61
+    -- Eigenschaften ok, Ende bei +8 von 61
+exp 2 SM_EFF_Line_B_01 : StaticMesh  outer 0  @1466 +1289
+    StaticMaterials (ArrayProperty of StructProperty) [1]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = WorldGridMaterial
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 428.687
+          LocalUVDensities[1] (FloatProperty) = 1993.06
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightmapUVDensity (FloatProperty) = 1993.06
+    LightMapResolution (IntProperty) = 64
+    LightMapCoordinateIndex (IntProperty) = 1
+    ExtendedBounds (StructProperty BoxSphereBounds) = 6.02558e-44 0 7.56701e-44 0 1.68156e-44 0 7.84727e-44
+    -- Eigenschaften ok, Ende bei +28f von 1289
+
+== dependances /Game :

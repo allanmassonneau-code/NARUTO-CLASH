@@ -1,0 +1,60 @@
+== /Game/Effects/Materials/Lightning/MI_EFF_GMT_Lightning_A_01
+fichier : NARUTO/Content/Effects/Materials/Lightning/MI_EFF_GMT_Lightning_A_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/Materials/Lightning/MI_EFF_GMT_Lightning_A_01.uasset  7?278 octets
+  NARUTO/Content/Effects/Materials/Lightning/MI_EFF_GMT_Lightning_A_01.uexp  226?121 octets
+
+/Game/Effects/Materials/Lightning/MI_EFF_GMT_Lightning_A_01  flags 80000000  209 Namen  9 Importe  1 Exporte  Kopf 7278  Bulk ab 233395  Daten 233399
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Materials/M_EFF_GradationMap.M_EFF_GradationMap (Material)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Materials/M_EFF_GradationMap./Game/Effects/BaseMaterials/Materials/M_EFF_GradationMap (Package)
+  imp  4 /Game/Effects/Textures/Common/T_EFF_Sphere_02_M./Game/Effects/Textures/Common/T_EFF_Sphere_02_M (Package)
+  imp  5 /Game/Effects/Textures/GradationMap/T_EFF_GMT_Lightning_01_BC./Game/Effects/Textures/GradationMap/T_EFF_GMT_Lightning_01_BC (Package)
+  imp  6 /Script/Engine./Script/Engine (Package)
+  imp  7 /Game/Effects/Textures/Common/T_EFF_Sphere_02_M.T_EFF_Sphere_02_M (Texture2D)
+  imp  8 /Game/Effects/Textures/GradationMap/T_EFF_GMT_Lightning_01_BC.T_EFF_GMT_Lightning_01_BC (Texture2D)
+exp 0 MI_EFF_GMT_Lightning_A_01 : MaterialInstanceConstant  outer 0  @1c6e +37345
+    Parent (ObjectProperty) = obj -2
+    bHasStaticPermutationResource (BoolProperty) = 1
+    ScalarParameterValues (ArrayProperty of StructProperty) [4]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 11_Opacity_Value
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 2.67734e+09 1.13272e+09 2.80748e+09 4.11813e+09
+      1 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 21_OpacityMap_Power
+        ParameterValue (FloatProperty) = 2
+        ExpressionGUID (StructProperty Guid) = 1.3091e+09 1.34166e+09 2.03726e+08 3.31908e+09
+      2 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 02_Emissive_Value
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 3.36951e+09 1.16471e+09 1.90581e+09 3.5983e+09
+      3 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [2]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_OpacityMap
+        ParameterValue (ObjectProperty) = obj -8
+        ExpressionGUID (StructProperty Guid) = 2.1702e+08 1.24777e+09 1.56472e+09 3.38423e+09
+      1 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 35_EmissiveMap_GradationMap
+        ParameterValue (ObjectProperty) = obj -9
+        ExpressionGUID (StructProperty Guid) = 8.61289e+08 1.25889e+09 2.92737e+09 1.30524e+09
+    VectorParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 05_Emissive_BaseColor
+        ParameterValue (StructProperty LinearColor) = 1 1 1 1
+        ExpressionGUID (StructProperty Guid) = 4.42324e+07 1.08876e+09 3.69812e+09 3.61859e+08
+    BasePropertyOverrides (StructProperty MaterialInstanceBasePropertyOverrides)
+      bOverride_BlendMode (BoolProperty) = 1
+      BlendMode (ByteProperty EBlendMode) = BLEND_Masked
+      ShadingModel (ByteProperty EMaterialShadingModel) = MSM_Unlit
+    -- Eigenschaften ok, Ende bei +5bb von 37345
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Materials/M_EFF_GradationMap
+  /Game/Effects/Textures/Common/T_EFF_Sphere_02_M
+  /Game/Effects/Textures/GradationMap/T_EFF_GMT_Lightning_01_BC

@@ -1,0 +1,42 @@
+== /Game/Weapons/Ninjutsu/D52NJ1/Meshes/SM_WEP_Eff_D52NJ1_A_01
+fichier : NARUTO/Content/Weapons/Ninjutsu/D52NJ1/Meshes/SM_WEP_Eff_D52NJ1_A_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/D52NJ1/Meshes/SM_WEP_Eff_D52NJ1_A_01.uasset  1?971 octets
+  NARUTO/Content/Weapons/Ninjutsu/D52NJ1/Meshes/SM_WEP_Eff_D52NJ1_A_01.uexp  55?224 octets
+
+/Game/Weapons/Ninjutsu/D52NJ1/Meshes/SM_WEP_Eff_D52NJ1_A_01  flags 80000000  53 Namen  7 Importe  3 Exporte  Kopf 1971  Bulk ab 57191  Daten 57195
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  5 /Script/Engine./Script/Engine (Package)
+  imp  6 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_0 : BodySetup  outer 3  @7b3 +18c
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +16c von 18c
+exp 1 NavCollision_0 : NavCollision  outer 3  @93f +61
+    -- Eigenschaften ok, Ende bei +8 von 61
+exp 2 SM_WEP_Eff_D52NJ1_A_01 : StaticMesh  outer 0  @9a0 +d5c7
+    StaticMaterials (ArrayProperty of StructProperty) [1]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = lambert1
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 134.937
+          LocalUVDensities[1] (FloatProperty) = 0
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightMapResolution (IntProperty) = 64
+    ExtendedBounds (StructProperty BoxSphereBounds) = 5.60519e-44 0 7.00649e-44 0 1.68156e-44 0 7.28675e-44
+    -- Eigenschaften ok, Ende bei +255 von d5c7
+
+== dependances /Game :

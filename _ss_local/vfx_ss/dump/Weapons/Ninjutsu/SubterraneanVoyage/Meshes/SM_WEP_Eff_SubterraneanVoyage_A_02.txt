@@ -1,0 +1,45 @@
+== /Game/Weapons/Ninjutsu/SubterraneanVoyage/Meshes/SM_WEP_Eff_SubterraneanVoyage_A_02
+fichier : NARUTO/Content/Weapons/Ninjutsu/SubterraneanVoyage/Meshes/SM_WEP_Eff_SubterraneanVoyage_A_02.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/SubterraneanVoyage/Meshes/SM_WEP_Eff_SubterraneanVoyage_A_02.uasset  2?261 octets
+  NARUTO/Content/Weapons/Ninjutsu/SubterraneanVoyage/Meshes/SM_WEP_Eff_SubterraneanVoyage_A_02.uexp  82?737 octets
+
+/Game/Weapons/Ninjutsu/SubterraneanVoyage/Meshes/SM_WEP_Eff_SubterraneanVoyage_A_02  flags 80000000  57 Namen  9 Importe  3 Exporte  Kopf 2261  Bulk ab 84994  Daten 84998
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Game/Weapons/Ninjutsu/SubterraneanVoyage/Materials/MI_WEP_Eff_SubterraneanVoyage_Dirt_01.MI_WEP_Eff_SubterraneanVoyage_Dirt_01 (MaterialInstanceConstant)
+  imp  5 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  6 /Game/Weapons/Ninjutsu/SubterraneanVoyage/Materials/MI_WEP_Eff_SubterraneanVoyage_Dirt_01./Game/Weapons/Ninjutsu/SubterraneanVoyage/Materials/MI_WEP_Eff_SubterraneanVoyage_Dirt_01 (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_0 : BodySetup  outer 3  @8d5 +90a5
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +16c von 90a5
+exp 1 NavCollision_18 : NavCollision  outer 3  @997a +61
+    -- Eigenschaften ok, Ende bei +8 von 61
+exp 2 SM_WEP_Eff_SubterraneanVoyage_A_02 : StaticMesh  outer 0  @99db +b227
+    StaticMaterials (ArrayProperty of StructProperty) [1]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = material0
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 48.2463
+          LocalUVDensities[1] (FloatProperty) = 0
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightMapResolution (IntProperty) = 64
+    ExtendedBounds (StructProperty BoxSphereBounds) = 6.02558e-44 0 7.56701e-44 0 1.68156e-44 0 7.84727e-44
+    -- Eigenschaften ok, Ende bei +255 von b227
+
+== dependances /Game :
+  /Game/Weapons/Ninjutsu/SubterraneanVoyage/Materials/MI_WEP_Eff_SubterraneanVoyage_Dirt_01
