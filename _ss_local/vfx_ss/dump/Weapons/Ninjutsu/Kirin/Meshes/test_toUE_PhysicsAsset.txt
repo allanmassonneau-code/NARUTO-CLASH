@@ -1,0 +1,117 @@
+== /Game/Weapons/Ninjutsu/Kirin/Meshes/test_toUE_PhysicsAsset
+fichier : NARUTO/Content/Weapons/Ninjutsu/Kirin/Meshes/test_toUE_PhysicsAsset.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : PhysicsAsset
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/Kirin/Meshes/test_toUE_PhysicsAsset.uasset  2 727 octets
+  NARUTO/Content/Weapons/Ninjutsu/Kirin/Meshes/test_toUE_PhysicsAsset.uexp  3 694 octets
+
+/Game/Weapons/Ninjutsu/Kirin/Meshes/test_toUE_PhysicsAsset  flags 80000000  59 Namen  7 Importe  8 Exporte  Kopf 2727  Bulk ab 6417  Daten 6421
+  imp  0 /Script/Engine.PhysicsAsset (Class)
+  imp  1 /Script/Engine.PhysicsConstraintTemplate (Class)
+  imp  2 /Script/Engine.SkeletalBodySetup (Class)
+  imp  3 /Script/Engine./Script/Engine (Package)
+  imp  4 /Script/Engine.Default__PhysicsAsset (PhysicsAsset)
+  imp  5 /Script/Engine.Default__PhysicsConstraintTemplate (PhysicsConstraintTemplate)
+  imp  6 /Script/Engine.Default__SkeletalBodySetup (SkeletalBodySetup)
+exp 0 test_toUE_PhysicsAsset : PhysicsAsset  outer 0  @aa7 +db
+    BoundsBodies (ArrayProperty of IntProperty) [4]
+      0 (IntProperty) = 0
+      1 (IntProperty) = 1
+      2 (IntProperty) = 2
+      3 (IntProperty) = 3
+    SkeletalBodySetups (ArrayProperty of ObjectProperty) [4]
+      0 (ObjectProperty) = obj 5
+      1 (ObjectProperty) = obj 6
+      2 (ObjectProperty) = obj 7
+      3 (ObjectProperty) = obj 8
+    ConstraintSetup (ArrayProperty of ObjectProperty) [3]
+      0 (ObjectProperty) = obj 2
+      1 (ObjectProperty) = obj 3
+      2 (ObjectProperty) = obj 4
+    -- Eigenschaften ok, Ende bei +a3 von db
+exp 1 PhysicsConstraintTemplate_0 : PhysicsConstraintTemplate  outer 1  @b82 +20b
+    DefaultInstance (StructProperty ConstraintInstance)
+      JointName (NameProperty) = BONE_02
+      ConstraintBone1 (NameProperty) = BONE_02
+      ConstraintBone2 (NameProperty) = BONE_00
+      Pos2 (StructProperty Vector) = 0 -6.95948 0.941267
+      ProfileInstance (StructProperty ConstraintProfileProperties)
+        ConeLimit (StructProperty ConeConstraint)
+          Swing1Motion (ByteProperty EAngularConstraintMotion) = ACM_Limited
+          Swing2Motion (ByteProperty EAngularConstraintMotion) = ACM_Limited
+        TwistLimit (StructProperty TwistConstraint)
+          TwistMotion (ByteProperty EAngularConstraintMotion) = ACM_Limited
+    -- Eigenschaften ok, Ende bei +207 von 20b
+exp 2 PhysicsConstraintTemplate_1 : PhysicsConstraintTemplate  outer 1  @d8d +248
+    DefaultInstance (StructProperty ConstraintInstance)
+      JointName (NameProperty) = BONE_012
+      ConstraintBone1 (NameProperty) = BONE_012
+      ConstraintBone2 (NameProperty) = BONE_00
+      Pos2 (StructProperty Vector) = 0 3.00735 1.12209
+      SecAxis2 (StructProperty Vector) = 0 0.975377 0.220542
+      ProfileInstance (StructProperty ConstraintProfileProperties)
+        ConeLimit (StructProperty ConeConstraint)
+          Swing1Motion (ByteProperty EAngularConstraintMotion) = ACM_Limited
+          Swing2Motion (ByteProperty EAngularConstraintMotion) = ACM_Limited
+        TwistLimit (StructProperty TwistConstraint)
+          TwistMotion (ByteProperty EAngularConstraintMotion) = ACM_Limited
+    -- Eigenschaften ok, Ende bei +244 von 248
+exp 3 PhysicsConstraintTemplate_2 : PhysicsConstraintTemplate  outer 1  @fd5 +248
+    DefaultInstance (StructProperty ConstraintInstance)
+      JointName (NameProperty) = BONE_014
+      ConstraintBone1 (NameProperty) = BONE_014
+      ConstraintBone2 (NameProperty) = BONE_012
+      Pos2 (StructProperty Vector) = 0 7.47551 2.3056
+      SecAxis2 (StructProperty Vector) = 0 0.979011 -0.203806
+      ProfileInstance (StructProperty ConstraintProfileProperties)
+        ConeLimit (StructProperty ConeConstraint)
+          Swing1Motion (ByteProperty EAngularConstraintMotion) = ACM_Limited
+          Swing2Motion (ByteProperty EAngularConstraintMotion) = ACM_Limited
+        TwistLimit (StructProperty TwistConstraint)
+          TwistMotion (ByteProperty EAngularConstraintMotion) = ACM_Limited
+    -- Eigenschaften ok, Ende bei +244 von 248
+exp 4 SkeletalBodySetup_0 : SkeletalBodySetup  outer 1  @121d +1bd
+    AggGeom (StructProperty KAggregateGeom)
+      SphylElems (ArrayProperty of StructProperty) [1]
+        0 (StructProperty KSphylElem)
+          Center (StructProperty Vector) = 0.11467 -0.9185 3.55119
+          Rotation (StructProperty Rotator) = -21.9917 -90 -89.4072
+          Radius (FloatProperty) = 11.4505
+          Length (FloatProperty) = 13.043
+    BoneName (NameProperty) = BONE_00
+    CollisionTraceFlag (ByteProperty ECollisionTraceFlag) = CTF_UseSimpleAsComplex
+    -- Eigenschaften ok, Ende bei +19d von 1bd
+exp 5 SkeletalBodySetup_1 : SkeletalBodySetup  outer 1  @13da +1bd
+    AggGeom (StructProperty KAggregateGeom)
+      SphylElems (ArrayProperty of StructProperty) [1]
+        0 (StructProperty KSphylElem)
+          Center (StructProperty Vector) = -4.15054e-07 -16.4359 0.636093
+          Rotation (StructProperty Rotator) = 4.73579 90 -90
+          Radius (FloatProperty) = 16.0389
+          Length (FloatProperty) = 23.2835
+    BoneName (NameProperty) = BONE_02
+    CollisionTraceFlag (ByteProperty ECollisionTraceFlag) = CTF_UseSimpleAsComplex
+    -- Eigenschaften ok, Ende bei +19d von 1bd
+exp 6 SkeletalBodySetup_2 : SkeletalBodySetup  outer 1  @1597 +1bd
+    AggGeom (StructProperty KAggregateGeom)
+      SphylElems (ArrayProperty of StructProperty) [1]
+        0 (StructProperty KSphylElem)
+          Center (StructProperty Vector) = -0.0115861 0.568785 -7.47183
+          Rotation (StructProperty Rotator) = 14.6898 -90 0.208106
+          Radius (FloatProperty) = 4.32209
+          Length (FloatProperty) = 12.2222
+    BoneName (NameProperty) = BONE_012
+    CollisionTraceFlag (ByteProperty ECollisionTraceFlag) = CTF_UseSimpleAsComplex
+    -- Eigenschaften ok, Ende bei +19d von 1bd
+exp 7 SkeletalBodySetup_3 : SkeletalBodySetup  outer 1  @1754 +1bd
+    AggGeom (StructProperty KAggregateGeom)
+      SphylElems (ArrayProperty of StructProperty) [1]
+        0 (StructProperty KSphylElem)
+          Center (StructProperty Vector) = 5.56707e-05 0.726886 0.908091
+          Rotation (StructProperty Rotator) = 0 90.0074 -89.9884
+          Radius (FloatProperty) = 5.48188
+          Length (FloatProperty) = 31.007
+    BoneName (NameProperty) = BONE_014
+    CollisionTraceFlag (ByteProperty ECollisionTraceFlag) = CTF_UseSimpleAsComplex
+    -- Eigenschaften ok, Ende bei +19d von 1bd
+
+== dependances /Game :

@@ -1,0 +1,354 @@
+== /Game/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/BP_LightningStyleChakra
+fichier : NARUTO/Content/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/BP_LightningStyleChakra.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : BoolProperty
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/BP_LightningStyleChakra.uasset  11 494 octets
+  NARUTO/Content/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/BP_LightningStyleChakra.uexp  7 791 octets
+
+/Game/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/BP_LightningStyleChakra  flags 80000000  184 Namen  77 Importe  23 Exporte  Kopf 11494  Bulk ab 19281  Daten 19285
+  imp  0 /Game/Blueprints/DamageType/NN_DamageType_NinjaSkill_Special.NN_DamageType_NinjaSkill_Special_C (BlueprintGeneratedClass)
+  imp  1 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C (BlueprintGeneratedClass)
+  imp  2 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C (BlueprintGeneratedClass)
+  imp  3 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C (BlueprintGeneratedClass)
+  imp  4 /Script/Engine.Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+  imp  5 /Script/CoreUObject.Default__BoolProperty (BoolProperty)
+  imp  6 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.Default__BP_Ninjutsu_Base_C (BP_Ninjutsu_Base_C)
+  imp  7 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.Default__BP_Ninjutsu_Buff_Base_C (BP_Ninjutsu_Buff_Base_C)
+  imp  8 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.Default__BP_Projectile_Base_C (BP_Projectile_Base_C)
+  imp  9 /Script/CoreUObject.BoolProperty (Class)
+  imp 10 /Script/CoreUObject.FloatProperty (Class)
+  imp 11 /Script/CoreUObject.Function (Class)
+  imp 12 /Script/CoreUObject.IntProperty (Class)
+  imp 13 /Script/CoreUObject.Object (Class)
+  imp 14 /Script/CoreUObject.ObjectProperty (Class)
+  imp 15 /Script/CoreUObject.StructProperty (Class)
+  imp 16 /Script/Engine.Actor (Class)
+  imp 17 /Script/Engine.BlueprintGeneratedClass (Class)
+  imp 18 /Script/Engine.InheritableComponentHandler (Class)
+  imp 19 /Script/Engine.ParticleSystemComponent (Class)
+  imp 20 /Script/Engine.SceneComponent (Class)
+  imp 21 /Script/Engine.SCS_Node (Class)
+  imp 22 /Script/Engine.SimpleConstructionScript (Class)
+  imp 23 /Script/Engine.SphereComponent (Class)
+  imp 24 /Script/NARUTO.NN_CharacterPawn (Class)
+  imp 25 /Script/NARUTO.NN_Weapon (Class)
+  imp 26 /Game/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/BP_MaterialLightningStyleChakra.BP_MaterialLightningStyleChakra (CurveLinearColor)
+  imp 27 /Game/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/BP_MaterialLightningStyleChakra_Enemy.BP_MaterialLightningStyleChakra_Enemy (CurveLinearColor)
+  imp 28 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.EffecitiveTime (FloatProperty)
+  imp 29 /Script/CoreUObject.Default__FloatProperty (FloatProperty)
+  imp 30 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C.ReceiveBeginPlay (Function)
+  imp 31 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C.ReceiveDestroyed (Function)
+  imp 32 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C.UserConstructionScript (Function)
+  imp 33 /Script/CoreUObject.Default__Function (Function)
+  imp 34 /Script/NARUTO.NN_CharacterPawn.SetIsUseGauge (Function)
+  imp 35 /Script/NARUTO.NN_Weapon.DoDestroyByD43NJ3 (Function)
+  imp 36 /Script/NARUTO.NN_Weapon.GetFinishMoveAvailableTime (Function)
+  imp 37 /Script/NARUTO.NN_Weapon.IsNoInhibitionByD52NJ2 (Function)
+  imp 38 /Script/Engine.Default__InheritableComponentHandler (InheritableComponentHandler)
+  imp 39 /Script/CoreUObject.Default__IntProperty (IntProperty)
+  imp 40 /Game/Blueprints/DamageType/NN_DamageType_NinjaSkill_Special.Default__NN_DamageType_NinjaSkill_Special_C (NN_DamageType_NinjaSkill_Special_C)
+  imp 41 /Game/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/NN_ProjectileProps_LightningStyleChakra.NN_ProjectileProps_LightningStyleChakra (NN_WeaponProps)
+  imp 42 /Script/CoreUObject.Default__ObjectProperty (ObjectProperty)
+  imp 43 /Script/Engine.Actor.Instigator (ObjectProperty)
+  imp 44 /Game/Blueprints/DamageType/NN_DamageType_NinjaSkill_Special./Game/Blueprints/DamageType/NN_DamageType_NinjaSkill_Special (Package)
+  imp 45 /Game/Weapons/BaseBlueprints/BP_Projectile_Base./Game/Weapons/BaseBlueprints/BP_Projectile_Base (Package)
+  imp 46 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base (Package)
+  imp 47 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base (Package)
+  imp 48 /Game/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/BP_MaterialLightningStyleChakra./Game/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/BP_MaterialLightningStyleChakra (Package)
+  imp 49 /Game/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/BP_MaterialLightningStyleChakra_Enemy./Game/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/BP_MaterialLightningStyleChakra_Enemy (Package)
+  imp 50 /Game/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/NN_ProjectileProps_LightningStyleChakra./Game/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/NN_ProjectileProps_LightningStyleChakra (Package)
+  imp 51 /Game/Weapons/Ninjutsu/LightningStyleChakra/Particles/P_WEP_LightningStyleChakra_Loop./Game/Weapons/Ninjutsu/LightningStyleChakra/Particles/P_WEP_LightningStyleChakra_Loop (Package)
+  imp 52 /Game/Weapons/Ninjutsu/LightningStyleChakra/Particles/P_WEP_LightningStyleChakra_Muzzle./Game/Weapons/Ninjutsu/LightningStyleChakra/Particles/P_WEP_LightningStyleChakra_Muzzle (Package)
+  imp 53 /Script/CoreUObject./Script/CoreUObject (Package)
+  imp 54 /Script/Engine./Script/Engine (Package)
+  imp 55 /Script/GameplayTags./Script/GameplayTags (Package)
+  imp 56 /Script/NARUTO./Script/NARUTO (Package)
+  imp 57 /Game/Weapons/Ninjutsu/LightningStyleChakra/Particles/P_WEP_LightningStyleChakra_Loop.P_WEP_LightningStyleChakra_Loop (ParticleSystem)
+  imp 58 /Game/Weapons/Ninjutsu/LightningStyleChakra/Particles/P_WEP_LightningStyleChakra_Muzzle.P_WEP_LightningStyleChakra_Muzzle (ParticleSystem)
+  imp 59 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.ProjectileMovement_GEN_VARIABLE (ProjectileMovementComponent)
+  imp 60 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C.ProjectileMovement_GEN_VARIABLE (ProjectileMovementComponent)
+  imp 61 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.DefaultSceneRoot_REMOVED_628DECC24C105FE693737EA4B602DB70 (SceneComponent)
+  imp 62 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.FakeTarget_GEN_VARIABLE (SceneComponent)
+  imp 63 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 64 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 65 /Script/Engine.Default__SceneComponent (SceneComponent)
+  imp 66 /Script/Engine.PointerToUberGraphFrame (ScriptStruct)
+  imp 67 /Script/GameplayTags.GameplayTag (ScriptStruct)
+  imp 68 /Script/Engine.Default__SCS_Node (SCS_Node)
+  imp 69 /Script/Engine.Default__SimpleConstructionScript (SimpleConstructionScript)
+  imp 70 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 71 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 72 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 73 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 74 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 75 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.EndEffect (StructProperty)
+  imp 76 /Script/CoreUObject.Default__StructProperty (StructProperty)
+exp 0 K2Node_DynamicCast_bSuccess2 : BoolProperty  outer 7  @2ce6 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 1 K2Node_DynamicCast_AsNN_Character_Pawn2 : ObjectProperty  outer 7  @2d0c +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 2 CallFunc_RequestEffect_OutComp : ObjectProperty  outer 7  @2d34 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 3 K2Node_DynamicCast_bSuccess : BoolProperty  outer 7  @2d5c +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 4 K2Node_DynamicCast_AsNN_Character_Pawn : ObjectProperty  outer 7  @2d82 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 5 EntryPoint : IntProperty  outer 7  @2daa +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 6 ExecuteUbergraph_BP_LightningStyleChakra : Function  outer 17  @2dce +fc
+    -- Eigenschaften ok, Ende bei +8 von fc
+exp 7 DoDestroyByD43NJ3 : Function  outer 17  @2eca +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 8 ReceiveDestroyed : Function  outer 17  @2f08 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 9 ReceiveBeginPlay : Function  outer 17  @2f46 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 10 UserConstructionScript : Function  outer 17  @2f84 +35
+    -- Eigenschaften ok, Ende bei +8 von 35
+exp 11 ReturnValue : BoolProperty  outer 13  @2fb9 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 12 IsNoInhibitionByD52NJ2 : Function  outer 17  @2fdf +3a
+    -- Eigenschaften ok, Ende bei +8 von 3a
+exp 13 ReturnValue : FloatProperty  outer 15  @3019 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 14 GetFinishMoveAvailableTime : Function  outer 17  @303d +42
+    -- Eigenschaften ok, Ende bei +8 von 42
+exp 15 UberGraphFrame : StructProperty  outer 17  @307f +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 16 BP_LightningStyleChakra_C : BlueprintGeneratedClass  outer 0  @30a7 +118
+    SimpleConstructionScript (ObjectProperty) = obj 22
+    InheritableComponentHandler (ObjectProperty) = obj 19
+    UberGraphFramePointerProperty (ObjectProperty) = obj 16
+    UberGraphFunction (ObjectProperty) = obj 7
+    -- Eigenschaften ok, Ende bei +7c von 118
+exp 17 Default__BP_LightningStyleChakra_C : BP_LightningStyleChakra_C  outer 0  @31bf +1670
+    UberGraphFrame (StructProperty PointerToUberGraphFrame) = 0
+    ToOwnOnly (BoolProperty) = 1
+    BuffInfos (ArrayProperty of StructProperty) [7]
+      0 (StructProperty NN_BuffInfo)
+        Type (EnumProperty ENN_StatusManageType) = ENN_StatusManageType::ENN_StatusManageType_AdjustMoveSpeed
+        EffectiveTime (FloatProperty) = 17
+        DeltaTime (FloatProperty) = 0
+        Param (FloatProperty) = 1.5
+        DamageHitInfoName (NameProperty) = None
+        IsCanNotClearDebuff (BoolProperty) = 0
+        IsCanNotInhibitionBuff (BoolProperty) = 0
+        UseBuffEffect (BoolProperty) = 0
+        HUDEffectType (EnumProperty ENN_StatusManage_HUDEffectType) = ENN_StatusManage_HUDEffectType::ENN_StatusManage_HUDEffectType_Invalid
+        UseMaterialEffect (BoolProperty) = 1
+        MaterialEffectName (NameProperty) = AF_EmissiveFresnel_Loop
+        MaterialEffectCurve (ObjectProperty) = obj -27
+        MaterialEffectCurveEnemy (ObjectProperty) = obj -28
+        UseBuffStock (BoolProperty) = 1
+        IsModeBuff (BoolProperty) = 1
+        InitDeltaTime (FloatProperty) = 0
+        TargetNinjaSkillSlot (IntProperty) = 4.29497e+09
+        AttackerWeapon (ObjectProperty) = obj 0
+        AttackerCharacter (ObjectProperty) = obj 0
+        IsTmpBuff (BoolProperty) = 0
+        Index (IntProperty) = 4.29497e+09
+        IsLinkedEffectBuff (BoolProperty) = 0
+        AddBuffType (EnumProperty ENN_StatusManage_AddBuffType) = ENN_StatusManage_AddBuffType::ENN_StatusManage_AddBuffType_None
+      1 (StructProperty NN_BuffInfo)
+        Type (EnumProperty ENN_StatusManageType) = ENN_StatusManageType::ENN_StatusManageType_AdjustNearAttackSpeed
+        EffectiveTime (FloatProperty) = 17
+        DeltaTime (FloatProperty) = 0
+        Param (FloatProperty) = 1.5
+        DamageHitInfoName (NameProperty) = None
+        IsCanNotClearDebuff (BoolProperty) = 0
+        IsCanNotInhibitionBuff (BoolProperty) = 0
+        UseBuffEffect (BoolProperty) = 0
+        HUDEffectType (EnumProperty ENN_StatusManage_HUDEffectType) = ENN_StatusManage_HUDEffectType::ENN_StatusManage_HUDEffectType_Invalid
+        UseMaterialEffect (BoolProperty) = 0
+        MaterialEffectName (NameProperty) = None
+        MaterialEffectCurve (ObjectProperty) = obj 0
+        MaterialEffectCurveEnemy (ObjectProperty) = obj 0
+        UseBuffStock (BoolProperty) = 1
+        IsModeBuff (BoolProperty) = 1
+        InitDeltaTime (FloatProperty) = 0
+        TargetNinjaSkillSlot (IntProperty) = 4.29497e+09
+        AttackerWeapon (ObjectProperty) = obj 0
+        AttackerCharacter (ObjectProperty) = obj 0
+        IsTmpBuff (BoolProperty) = 0
+        Index (IntProperty) = 4.29497e+09
+        IsLinkedEffectBuff (BoolProperty) = 0
+        AddBuffType (EnumProperty ENN_StatusManage_AddBuffType) = ENN_StatusManage_AddBuffType::ENN_StatusManage_AddBuffType_None
+      2 (StructProperty NN_BuffInfo)
+        Type (EnumProperty ENN_StatusManageType) = ENN_StatusManageType::ENN_StatusManageType_AdjustDefensePower
+        EffectiveTime (FloatProperty) = 17
+        DeltaTime (FloatProperty) = 0
+        Param (FloatProperty) = 2
+        DamageHitInfoName (NameProperty) = None
+        IsCanNotClearDebuff (BoolProperty) = 0
+        IsCanNotInhibitionBuff (BoolProperty) = 0
+        UseBuffEffect (BoolProperty) = 0
+        HUDEffectType (EnumProperty ENN_StatusManage_HUDEffectType) = ENN_StatusManage_HUDEffectType::ENN_StatusManage_HUDEffectType_Invalid
+        UseMaterialEffect (BoolProperty) = 0
+        MaterialEffectName (NameProperty) = None
+        MaterialEffectCurve (ObjectProperty) = obj 0
+        MaterialEffectCurveEnemy (ObjectProperty) = obj 0
+        UseBuffStock (BoolProperty) = 1
+        IsModeBuff (BoolProperty) = 1
+        InitDeltaTime (FloatProperty) = 0
+        TargetNinjaSkillSlot (IntProperty) = 4.29497e+09
+        AttackerWeapon (ObjectProperty) = obj 0
+        AttackerCharacter (ObjectProperty) = obj 0
+        IsTmpBuff (BoolProperty) = 0
+        Index (IntProperty) = 4.29497e+09
+        IsLinkedEffectBuff (BoolProperty) = 0
+        AddBuffType (EnumProperty ENN_StatusManage_AddBuffType) = ENN_StatusManage_AddBuffType::ENN_StatusManage_AddBuffType_None
+      3 (StructProperty NN_BuffInfo)
+        Type (EnumProperty ENN_StatusManageType) = ENN_StatusManageType::ENN_StatusManageType_SuperArmor
+        EffectiveTime (FloatProperty) = 17
+        DeltaTime (FloatProperty) = 0
+        Param (FloatProperty) = 1
+        DamageHitInfoName (NameProperty) = None
+        IsCanNotClearDebuff (BoolProperty) = 0
+        IsCanNotInhibitionBuff (BoolProperty) = 0
+        UseBuffEffect (BoolProperty) = 0
+        HUDEffectType (EnumProperty ENN_StatusManage_HUDEffectType) = ENN_StatusManage_HUDEffectType::ENN_StatusManage_HUDEffectType_Invalid
+        UseMaterialEffect (BoolProperty) = 0
+        MaterialEffectName (NameProperty) = None
+        MaterialEffectCurve (ObjectProperty) = obj 0
+        MaterialEffectCurveEnemy (ObjectProperty) = obj 0
+        UseBuffStock (BoolProperty) = 0
+        IsModeBuff (BoolProperty) = 0
+        InitDeltaTime (FloatProperty) = 0
+        TargetNinjaSkillSlot (IntProperty) = 4.29497e+09
+        AttackerWeapon (ObjectProperty) = obj 0
+        AttackerCharacter (ObjectProperty) = obj 0
+        IsTmpBuff (BoolProperty) = 0
+        Index (IntProperty) = 4.29497e+09
+        IsLinkedEffectBuff (BoolProperty) = 0
+        AddBuffType (EnumProperty ENN_StatusManage_AddBuffType) = ENN_StatusManage_AddBuffType::ENN_StatusManage_AddBuffType_None
+      4 (StructProperty NN_BuffInfo)
+        Type (EnumProperty ENN_StatusManageType) = ENN_StatusManageType::ENN_StatusManageType_LightingChakraMode
+        EffectiveTime (FloatProperty) = 17
+        DeltaTime (FloatProperty) = 0
+        Param (FloatProperty) = 1
+        DamageHitInfoName (NameProperty) = None
+        IsCanNotClearDebuff (BoolProperty) = 0
+        IsCanNotInhibitionBuff (BoolProperty) = 0
+        UseBuffEffect (BoolProperty) = 0
+        HUDEffectType (EnumProperty ENN_StatusManage_HUDEffectType) = ENN_StatusManage_HUDEffectType::ENN_StatusManage_HUDEffectType_Invalid
+        UseMaterialEffect (BoolProperty) = 0
+        MaterialEffectName (NameProperty) = None
+        MaterialEffectCurve (ObjectProperty) = obj 0
+        MaterialEffectCurveEnemy (ObjectProperty) = obj 0
+        UseBuffStock (BoolProperty) = 0
+        IsModeBuff (BoolProperty) = 0
+        InitDeltaTime (FloatProperty) = 0
+        TargetNinjaSkillSlot (IntProperty) = 4.29497e+09
+        AttackerWeapon (ObjectProperty) = obj 0
+        AttackerCharacter (ObjectProperty) = obj 0
+        IsTmpBuff (BoolProperty) = 0
+        Index (IntProperty) = 4.29497e+09
+        IsLinkedEffectBuff (BoolProperty) = 0
+        AddBuffType (EnumProperty ENN_StatusManage_AddBuffType) = ENN_StatusManage_AddBuffType::ENN_StatusManage_AddBuffType_None
+      5 (StructProperty NN_BuffInfo)
+        Type (EnumProperty ENN_StatusManageType) = ENN_StatusManageType::ENN_StatusManageType_SetNinjutsuCoolStockMax
+        EffectiveTime (FloatProperty) = 0
+        DeltaTime (FloatProperty) = 0
+        Param (FloatProperty) = 0
+        DamageHitInfoName (NameProperty) = None
+        IsCanNotClearDebuff (BoolProperty) = 0
+        IsCanNotInhibitionBuff (BoolProperty) = 0
+        UseBuffEffect (BoolProperty) = 0
+        HUDEffectType (EnumProperty ENN_StatusManage_HUDEffectType) = ENN_StatusManage_HUDEffectType::ENN_StatusManage_HUDEffectType_Invalid
+        UseMaterialEffect (BoolProperty) = 0
+        MaterialEffectName (NameProperty) = None
+        MaterialEffectCurve (ObjectProperty) = obj 0
+        MaterialEffectCurveEnemy (ObjectProperty) = obj 0
+        UseBuffStock (BoolProperty) = 0
+        IsModeBuff (BoolProperty) = 0
+        InitDeltaTime (FloatProperty) = 0
+        TargetNinjaSkillSlot (IntProperty) = 4.29497e+09
+        AttackerWeapon (ObjectProperty) = obj 0
+        AttackerCharacter (ObjectProperty) = obj 0
+        IsTmpBuff (BoolProperty) = 0
+        Index (IntProperty) = 4.29497e+09
+        IsLinkedEffectBuff (BoolProperty) = 0
+        AddBuffType (EnumProperty ENN_StatusManage_AddBuffType) = ENN_StatusManage_AddBuffType::ENN_StatusManage_AddBuffType_None
+      6 (StructProperty NN_BuffInfo)
+        Type (EnumProperty ENN_StatusManageType) = ENN_StatusManageType::ENN_StatusManageType_AdjustActionSpeed
+        EffectiveTime (FloatProperty) = 17
+        DeltaTime (FloatProperty) = 0
+        Param (FloatProperty) = 0.3
+        DamageHitInfoName (NameProperty) = None
+        IsCanNotClearDebuff (BoolProperty) = 0
+        IsCanNotInhibitionBuff (BoolProperty) = 0
+        UseBuffEffect (BoolProperty) = 0
+        HUDEffectType (EnumProperty ENN_StatusManage_HUDEffectType) = ENN_StatusManage_HUDEffectType::ENN_StatusManage_HUDEffectType_Invalid
+        UseMaterialEffect (BoolProperty) = 0
+        MaterialEffectName (NameProperty) = None
+        MaterialEffectCurve (ObjectProperty) = obj 0
+        MaterialEffectCurveEnemy (ObjectProperty) = obj 0
+        UseBuffStock (BoolProperty) = 1
+        IsModeBuff (BoolProperty) = 1
+        InitDeltaTime (FloatProperty) = 0
+        TargetNinjaSkillSlot (IntProperty) = 4.29497e+09
+        AttackerWeapon (ObjectProperty) = obj 0
+        AttackerCharacter (ObjectProperty) = obj 0
+        IsTmpBuff (BoolProperty) = 0
+        Index (IntProperty) = 4.29497e+09
+        IsLinkedEffectBuff (BoolProperty) = 0
+        AddBuffType (EnumProperty ENN_StatusManage_AddBuffType) = ENN_StatusManage_AddBuffType::ENN_StatusManage_AddBuffType_None
+    bIgnoreEffectToPVPNPC (BoolProperty) = 1
+    NinjutsuName (StrProperty) = 雷遁チャクラモード
+    SkillType (EnumProperty ENN_NinjaSkillType) = ENN_NinjaSkillType::ENN_NinjaSkillType_LightningStyleChakra
+    EffecitiveTime (FloatProperty) = 17
+    MuzzleEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -59
+      AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    UseMuzzleOnActive (BoolProperty) = 1
+    LoopEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -58
+      AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    LifeTime (FloatProperty) = 17
+    HitDamageType (ObjectProperty) = obj -1
+    WeaponPropsData (ObjectProperty) = obj -42
+    m_GamePlayTagContainer (StructProperty GameplayTagContainer) = 0
+    SoundID (NameProperty) = ID_WeaponSound_Ninjutsu_LightningStyleChakra
+    -- Eigenschaften ok, Ende bei +1670 von 1670
+exp 18 InheritableComponentHandler : InheritableComponentHandler  outer 17  @482f +205
+    Records (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ComponentOverrideRecord)
+        ComponentClass (ObjectProperty) = obj -24
+        ComponentTemplate (ObjectProperty) = obj 23
+        ComponentKey (StructProperty ComponentKey)
+          OwnerClass (ObjectProperty) = obj -2
+          SCSVariableName (NameProperty) = SphereCollision
+          AssociatedGuid (StructProperty Guid) = 2.75764e+09 1.08167e+09 3.09072e+09 2.06247e+09
+        CookedComponentInstancingData (StructProperty BlueprintCookedComponentInstancingData)
+          bIsValid (BoolProperty) = 0
+          ChangedPropertyList (ArrayProperty of StructProperty) = 0
+    -- Eigenschaften ok, Ende bei +201 von 205
+exp 19 DefaultSceneRoot_GEN_VARIABLE : SceneComponent  outer 17  @4a34 +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 20 SCS_Node_0 : SCS_Node  outer 22  @4a40 +a8
+    ComponentClass (ObjectProperty) = obj -21
+    ComponentTemplate (ObjectProperty) = obj 20
+    VariableGuid (StructProperty Guid) = 3.78183e+08 1.29179e+09 3.63797e+09 3.71888e+08
+    InternalVariableName (NameProperty) = DefaultSceneRoot
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 21 SimpleConstructionScript_0 : SimpleConstructionScript  outer 17  @4ae8 +29
+    DefaultSceneRootNode (ObjectProperty) = obj 21
+    -- Eigenschaften ok, Ende bei +25 von 29
+exp 22 SphereCollision_GEN_VARIABLE : SphereComponent  outer 17  @4b11 +40
+    bVisible (BoolProperty) = 0
+    bHiddenInGame (BoolProperty) = 0
+    -- Eigenschaften ok, Ende bei +3c von 40
+
+== dependances /Game :
+  /Game/Blueprints/DamageType/NN_DamageType_NinjaSkill_Special
+  /Game/Weapons/BaseBlueprints/BP_Projectile_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base
+  /Game/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/BP_MaterialLightningStyleChakra
+  /Game/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/BP_MaterialLightningStyleChakra_Enemy
+  /Game/Weapons/Ninjutsu/LightningStyleChakra/Blueprints/NN_ProjectileProps_LightningStyleChakra
+  /Game/Weapons/Ninjutsu/LightningStyleChakra/Particles/P_WEP_LightningStyleChakra_Loop
+  /Game/Weapons/Ninjutsu/LightningStyleChakra/Particles/P_WEP_LightningStyleChakra_Muzzle

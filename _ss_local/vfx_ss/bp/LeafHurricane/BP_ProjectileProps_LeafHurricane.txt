@@ -1,0 +1,39 @@
+== /Game/Weapons/Ninjutsu/LeafHurricane/BluePrints/BP_ProjectileProps_LeafHurricane
+fichier : NARUTO/Content/Weapons/Ninjutsu/LeafHurricane/BluePrints/BP_ProjectileProps_LeafHurricane.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : NN_WeaponProps
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/LeafHurricane/BluePrints/BP_ProjectileProps_LeafHurricane.uasset  1 760 octets
+  NARUTO/Content/Weapons/Ninjutsu/LeafHurricane/BluePrints/BP_ProjectileProps_LeafHurricane.uexp  541 octets
+
+/Game/Weapons/Ninjutsu/LeafHurricane/BluePrints/BP_ProjectileProps_LeafHurricane  flags 80000000  34 Namen  11 Importe  1 Exporte  Kopf 1760  Bulk ab 2297  Daten 2301
+  imp  0 /Script/NARUTO.NN_WeaponProps (Class)
+  imp  1 /Game/Blueprints/Props/ControllerVibrate/NearAttackFinishForceFeedback.NearAttackFinishForceFeedback (ForceFeedbackEffect)
+  imp  2 /Script/NARUTO.Default__NN_WeaponProps (NN_WeaponProps)
+  imp  3 /Game/Blueprints/Props/ControllerVibrate/NearAttackFinishForceFeedback./Game/Blueprints/Props/ControllerVibrate/NearAttackFinishForceFeedback (Package)
+  imp  4 /Game/Effects/Particles/Hit/A_WeaponType/P_EFF_Hit_NinjustuBlow_A./Game/Effects/Particles/Hit/A_WeaponType/P_EFF_Hit_NinjustuBlow_A (Package)
+  imp  5 /Game/Effects/Particles/Hit/C_StatusType/P_EFF_Hit_Blow_DeadAttack./Game/Effects/Particles/Hit/C_StatusType/P_EFF_Hit_Blow_DeadAttack (Package)
+  imp  6 /Game/Effects/Particles/Status/P_EFF_Guard_A./Game/Effects/Particles/Status/P_EFF_Guard_A (Package)
+  imp  7 /Script/NARUTO./Script/NARUTO (Package)
+  imp  8 /Game/Effects/Particles/Hit/A_WeaponType/P_EFF_Hit_NinjustuBlow_A.P_EFF_Hit_NinjustuBlow_A (ParticleSystem)
+  imp  9 /Game/Effects/Particles/Hit/C_StatusType/P_EFF_Hit_Blow_DeadAttack.P_EFF_Hit_Blow_DeadAttack (ParticleSystem)
+  imp 10 /Game/Effects/Particles/Status/P_EFF_Guard_A.P_EFF_Guard_A (ParticleSystem)
+exp 0 BP_ProjectileProps_LeafHurricane : NN_WeaponProps  outer 0  @6e0 +219
+    HitNormalReaction (StructProperty NN_WeaponReactionInfo)
+      Effect (ObjectProperty) = obj -9
+      AttachType (EnumProperty ENN_WeaponReactionAttachType) = ENN_WeaponReactionAttachType::AttachToTarget
+    HitHardReaction (StructProperty NN_WeaponReactionInfo)
+      Effect (ObjectProperty) = obj -9
+      AttachType (EnumProperty ENN_WeaponReactionAttachType) = ENN_WeaponReactionAttachType::AttachToTarget
+    HitFinishReaction (StructProperty NN_WeaponReactionInfo)
+      Effect (ObjectProperty) = obj -10
+      CotrollerVibrate (ObjectProperty) = obj -2
+      AttachType (EnumProperty ENN_WeaponReactionAttachType) = ENN_WeaponReactionAttachType::AttachToTarget
+    GuardReaction (StructProperty NN_WeaponReactionInfo)
+      Effect (ObjectProperty) = obj -11
+    HitEffect (ObjectProperty) = obj -9
+    -- Eigenschaften ok, Ende bei +215 von 219
+
+== dependances /Game :
+  /Game/Blueprints/Props/ControllerVibrate/NearAttackFinishForceFeedback
+  /Game/Effects/Particles/Hit/A_WeaponType/P_EFF_Hit_NinjustuBlow_A
+  /Game/Effects/Particles/Hit/C_StatusType/P_EFF_Hit_Blow_DeadAttack
+  /Game/Effects/Particles/Status/P_EFF_Guard_A

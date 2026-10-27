@@ -1,0 +1,1304 @@
+== /Game/Weapons/Ninjutsu/LeafRisingWind/Blueprints/BP_LeafRisingWind_AnimInfoProps
+fichier : NARUTO/Content/Weapons/Ninjutsu/LeafRisingWind/Blueprints/BP_LeafRisingWind_AnimInfoProps.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : NN_NinjaSkillAnimationInfoProps
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/LeafRisingWind/Blueprints/BP_LeafRisingWind_AnimInfoProps.uasset  3 503 octets
+  NARUTO/Content/Weapons/Ninjutsu/LeafRisingWind/Blueprints/BP_LeafRisingWind_AnimInfoProps.uexp  62 185 octets
+
+/Game/Weapons/Ninjutsu/LeafRisingWind/Blueprints/BP_LeafRisingWind_AnimInfoProps  flags 80000000  118 Namen  3 Importe  1 Exporte  Kopf 3503  Bulk ab 65684  Daten 65688
+  imp  0 /Script/NARUTO.NN_NinjaSkillAnimationInfoProps (Class)
+  imp  1 /Script/NARUTO.Default__NN_NinjaSkillAnimationInfoProps (NN_NinjaSkillAnimationInfoProps)
+  imp  2 /Script/NARUTO./Script/NARUTO (Package)
+exp 0 BP_LeafRisingWind_AnimInfoProps : NN_NinjaSkillAnimationInfoProps  outer 0  @daf +f2e5
+    AnimList (ArrayProperty of StructProperty) [5]
+      0 (StructProperty NN_NinjaSkillAnimationInfo)
+        AnimType (EnumProperty ENN_AnimCharacterType) = ENN_AnimCharacterType::ENN_AnimCharacterType_Custom
+        InputDirType (EnumProperty ENN_InputDirectionType) = ENN_InputDirectionType::ENN_InputDirectionType_None
+        InnAnimList (ArrayProperty of ObjectProperty) = 0
+        InnAnimRate (FloatProperty) = 1
+        InnAnimBlendIn (FloatProperty) = 0.1
+        InnAnimBlendOut (FloatProperty) = 0
+        InnUseFacialBlendShape (BoolProperty) = 0
+        InnLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Custom/Animations/Ninjutsu/Attack/CustomMan_Ninjutsu_Teleportation_Charge_Start.CustomMan_Ninjutsu_Teleportation_Charge_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0.1
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeContinueAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Custom/Animations/Ninjutsu/Attack/CustomMan_Ninjutsu_Teleportation_Charge_Loop.CustomMan_Ninjutsu_Teleportation_Charge_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Custom/Animations/Ninjutsu/Attack/CustomMan_Ninjutsu_Teleportation_Charge_Loop.CustomMan_Ninjutsu_Teleportation_Charge_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirChargeStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Custom/Animations/Base/CustomMan_Fall_Front_Loop.CustomMan_Fall_Front_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 10
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirChargeContinueAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Custom/Animations/Base/CustomMan_Fall_Front_Loop.CustomMan_Fall_Front_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 10
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirChargeLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Custom/Animations/Base/CustomMan_Fall_Front_Loop.CustomMan_Fall_Front_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallChargeStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallChargeContinueAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallChargeLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeLandAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Custom/Animations/Ninjutsu/Attack/CustomMan_Ninjutsu_Teleportation_Charge_Start.CustomMan_Ninjutsu_Teleportation_Charge_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeLandLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        StartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Custom/Animations/Ninjutsu/Attack/CustomMan_Ninjutsu_LeafHurricane_Start.CustomMan_Ninjutsu_LeafHurricane_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Custom/Animations/Ninjutsu/Attack/CustomMan_Ninjutsu_Teleportation_Loop.CustomMan_Ninjutsu_Teleportation_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LoopBlendSpace (ObjectProperty) = obj 0
+        LoopAttackAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        EndAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Custom/Animations/Ninjutsu/Attack/CustomMan_Ninjutsu_LeafRisingWind.CustomMan_Ninjutsu_LeafRisingWind
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Custom/Animations/Ninjutsu/Attack/CustomMan_Ninjutsu_Aerial_LeafHurricane_Start.CustomMan_Ninjutsu_Aerial_LeafHurricane_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Custom/Animations/Ninjutsu/Attack/CustomMan_Ninjutsu_Aerial_Teleportation_Loop.CustomMan_Ninjutsu_Aerial_Teleportation_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirLoopAttackAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirEndAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Custom/Animations/Ninjutsu/Attack/CustomMan_Ninjutsu_LeafRisingWind.CustomMan_Ninjutsu_LeafRisingWind
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LandAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LandStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallEndAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ContinuousActionAnimList (ArrayProperty of StructProperty) = 0
+        ContinuousActionAirAnimList (ArrayProperty of StructProperty) = 0
+        SecondaryStart (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryLoop (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryEnd (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryEndEnd (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryAirStart (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ...
+      1 (StructProperty NN_NinjaSkillAnimationInfo)
+        AnimType (EnumProperty ENN_AnimCharacterType) = ENN_AnimCharacterType::ENN_AnimCharacterType_RockLee
+        InputDirType (EnumProperty ENN_InputDirectionType) = ENN_InputDirectionType::ENN_InputDirectionType_None
+        InnAnimList (ArrayProperty of ObjectProperty) = 0
+        InnAnimRate (FloatProperty) = 1
+        InnAnimBlendIn (FloatProperty) = 0.1
+        InnAnimBlendOut (FloatProperty) = 0
+        InnUseFacialBlendShape (BoolProperty) = 0
+        InnLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Original/Lee/Lee_Default/Animation/Ninjutsu/Lee_Ninjutsu_Teleportation_Charge_Start.Lee_Ninjutsu_Teleportation_Charge_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0.1
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeContinueAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Original/Lee/Lee_Default/Animation/Ninjutsu/Lee_Ninjutsu_Teleportation_Charge_Loop.Lee_Ninjutsu_Teleportation_Charge_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Original/Lee/Lee_Default/Animation/Ninjutsu/Lee_Ninjutsu_Teleportation_Charge_Loop.Lee_Ninjutsu_Teleportation_Charge_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirChargeStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Original/Lee/Lee_Default/Animation/Base/Lee_Fall_Vertical_Loop.Lee_Fall_Vertical_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 10
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirChargeContinueAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Original/Lee/Lee_Default/Animation/Base/Lee_Fall_Vertical_Loop.Lee_Fall_Vertical_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 10
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirChargeLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Original/Lee/Lee_Default/Animation/Base/Lee_Fall_Vertical_Loop.Lee_Fall_Vertical_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallChargeStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallChargeContinueAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallChargeLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeLandAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Original/Lee/Lee_Default/Animation/Ninjutsu/Lee_Ninjutsu_Teleportation_Charge_Start.Lee_Ninjutsu_Teleportation_Charge_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeLandLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        StartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Original/Lee/Lee_Default/Animation/Ninjutsu/Lee_Ninjutsu_Teleportation_Start.Lee_Ninjutsu_Teleportation_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Original/Lee/Lee_Default/Animation/Ninjutsu/Lee_Ninjutsu_Teleportation_Loop.Lee_Ninjutsu_Teleportation_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LoopBlendSpace (ObjectProperty) = obj 0
+        LoopAttackAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        EndAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Original/Lee/Lee_Default/Animation/Ninjutsu/Lee_Ninjutsu_LeafRisingWind.Lee_Ninjutsu_LeafRisingWind
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Original/Lee/Lee_Default/Animation/Ninjutsu/Lee_Ninjutsu_Teleportation_Start.Lee_Ninjutsu_Teleportation_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Original/Lee/Lee_Default/Animation/Ninjutsu/Lee_Ninjutsu_Teleportation_Loop.Lee_Ninjutsu_Teleportation_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirLoopAttackAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirEndAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/Original/Lee/Lee_Default/Animation/Ninjutsu/Lee_Ninjutsu_LeafRisingWind.Lee_Ninjutsu_LeafRisingWind
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LandAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LandStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallEndAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ContinuousActionAnimList (ArrayProperty of StructProperty) = 0
+        ContinuousActionAirAnimList (ArrayProperty of StructProperty) = 0
+        SecondaryStart (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryLoop (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryEnd (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryEndEnd (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryAirStart (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ...
+      2 (StructProperty NN_NinjaSkillAnimationInfo)
+        AnimType (EnumProperty ENN_AnimCharacterType) = ENN_AnimCharacterType::ENN_AnimCharacterType_LeafNinja
+        InputDirType (EnumProperty ENN_InputDirectionType) = ENN_InputDirectionType::ENN_InputDirectionType_None
+        InnAnimList (ArrayProperty of ObjectProperty) = 0
+        InnAnimRate (FloatProperty) = 1
+        InnAnimBlendIn (FloatProperty) = 0.1
+        InnAnimBlendOut (FloatProperty) = 0
+        InnUseFacialBlendShape (BoolProperty) = 0
+        InnLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/LeafNinja/LeafNinja_Default/Animation/Ninjutsu/LeafNinja_Ninjutsu_Teleportation_Charge_Start.LeafNinja_Ninjutsu_Teleportation_Charge_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0.1
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeContinueAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/LeafNinja/LeafNinja_Default/Animation/Ninjutsu/LeafNinja_Ninjutsu_Teleportation_Charge_Loop.LeafNinja_Ninjutsu_Teleportation_Charge_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/LeafNinja/LeafNinja_Default/Animation/Ninjutsu/LeafNinja_Ninjutsu_Teleportation_Charge_Loop.LeafNinja_Ninjutsu_Teleportation_Charge_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirChargeStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/LeafNinja/LeafNinja_Default/Animation/Base/LeafNinja_Fall_Vertical_Loop.LeafNinja_Fall_Vertical_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 10
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirChargeContinueAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/LeafNinja/LeafNinja_Default/Animation/Base/LeafNinja_Fall_Vertical_Loop.LeafNinja_Fall_Vertical_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 10
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirChargeLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/LeafNinja/LeafNinja_Default/Animation/Base/LeafNinja_Fall_Vertical_Loop.LeafNinja_Fall_Vertical_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallChargeStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallChargeContinueAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallChargeLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeLandAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/LeafNinja/LeafNinja_Default/Animation/Ninjutsu/LeafNinja_Ninjutsu_Teleportation_Charge_Start.LeafNinja_Ninjutsu_Teleportation_Charge_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeLandLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        StartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/LeafNinja/LeafNinja_Default/Animation/Ninjutsu/Leaf_Ninjutsu_Teleportation_Start.Leaf_Ninjutsu_Teleportation_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/LeafNinja/LeafNinja_Default/Animation/Ninjutsu/Leaf_Ninjutsu_Teleportation_Loop.Leaf_Ninjutsu_Teleportation_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LoopBlendSpace (ObjectProperty) = obj 0
+        LoopAttackAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        EndAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/LeafNinja/LeafNinja_Default/Animation/Ninjutsu/LeafNinja_Ninjutsu_LeafRisingWind.LeafNinja_Ninjutsu_LeafRisingWind
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/LeafNinja/LeafNinja_Default/Animation/Ninjutsu/Leaf_Ninjutsu_Teleportation_Start.Leaf_Ninjutsu_Teleportation_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/LeafNinja/LeafNinja_Default/Animation/Ninjutsu/Leaf_Ninjutsu_Teleportation_Loop.Leaf_Ninjutsu_Teleportation_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirLoopAttackAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirEndAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/LeafNinja/LeafNinja_Default/Animation/Ninjutsu/LeafNinja_Ninjutsu_LeafRisingWind.LeafNinja_Ninjutsu_LeafRisingWind
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LandAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LandStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallEndAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ContinuousActionAnimList (ArrayProperty of StructProperty) = 0
+        ContinuousActionAirAnimList (ArrayProperty of StructProperty) = 0
+        SecondaryStart (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryLoop (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryEnd (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryEndEnd (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryAirStart (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ...
+      3 (StructProperty NN_NinjaSkillAnimationInfo)
+        AnimType (EnumProperty ENN_AnimCharacterType) = ENN_AnimCharacterType::ENN_AnimCharacterType_SoundNinja
+        InputDirType (EnumProperty ENN_InputDirectionType) = ENN_InputDirectionType::ENN_InputDirectionType_None
+        InnAnimList (ArrayProperty of ObjectProperty) = 0
+        InnAnimRate (FloatProperty) = 1
+        InnAnimBlendIn (FloatProperty) = 0.1
+        InnAnimBlendOut (FloatProperty) = 0
+        InnUseFacialBlendShape (BoolProperty) = 0
+        InnLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/SoundNinja/SoundNinja_Default/Animation/Ninjutsu/SoundNinja_Ninjutsu_Teleportation_Charge_Start.SoundNinja_Ninjutsu_Teleportation_Charge_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0.1
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeContinueAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/SoundNinja/SoundNinja_Default/Animation/Ninjutsu/SoundNinja_Ninjutsu_Teleportation_Charge_Loop.SoundNinja_Ninjutsu_Teleportation_Charge_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/SoundNinja/SoundNinja_Default/Animation/Ninjutsu/SoundNinja_Ninjutsu_Teleportation_Charge_Loop.SoundNinja_Ninjutsu_Teleportation_Charge_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirChargeStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/SoundNinja/SoundNinja_Default/Animation/Base/SoundNinja_Fall_Vertical_Loop.SoundNinja_Fall_Vertical_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 10
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirChargeContinueAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/SoundNinja/SoundNinja_Default/Animation/Base/SoundNinja_Fall_Vertical_Loop.SoundNinja_Fall_Vertical_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 10
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirChargeLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/SoundNinja/SoundNinja_Default/Animation/Base/SoundNinja_Fall_Vertical_Loop.SoundNinja_Fall_Vertical_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallChargeStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallChargeContinueAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallChargeLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeLandAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/SoundNinja/SoundNinja_Default/Animation/Ninjutsu/SoundNinja_Ninjutsu_Teleportation_Charge_Start.SoundNinja_Ninjutsu_Teleportation_Charge_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeLandLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        StartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/SoundNinja/SoundNinja_Default/Animation/Ninjutsu/SoundNinja_Ninjutsu_Teleportation_Start.SoundNinja_Ninjutsu_Teleportation_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/SoundNinja/SoundNinja_Default/Animation/Ninjutsu/SoundNinja_Ninjutsu_Teleportation_Loop.SoundNinja_Ninjutsu_Teleportation_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LoopBlendSpace (ObjectProperty) = obj 0
+        LoopAttackAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        EndAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/SoundNinja/SoundNinja_Default/Animation/Ninjutsu/SoundNinja_Ninjutsu_Teleportation_End.SoundNinja_Ninjutsu_Teleportation_End
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/SoundNinja/SoundNinja_Default/Animation/Ninjutsu/SoundNinja_Ninjutsu_Teleportation_Start.SoundNinja_Ninjutsu_Teleportation_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/SoundNinja/SoundNinja_Default/Animation/Ninjutsu/SoundNinja_Ninjutsu_Teleportation_Loop.SoundNinja_Ninjutsu_Teleportation_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirLoopAttackAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirEndAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/SoundNinja/SoundNinja_Default/Animation/Ninjutsu/SoundNinja_Ninjutsu_Teleportation_End.SoundNinja_Ninjutsu_Teleportation_End
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LandAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LandStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallEndAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ContinuousActionAnimList (ArrayProperty of StructProperty) = 0
+        ContinuousActionAirAnimList (ArrayProperty of StructProperty) = 0
+        SecondaryStart (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryLoop (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryEnd (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryEndEnd (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryAirStart (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ...
+      4 (StructProperty NN_NinjaSkillAnimationInfo)
+        AnimType (EnumProperty ENN_AnimCharacterType) = ENN_AnimCharacterType::ENN_AnimCharacterType_BlackOpsMist
+        InputDirType (EnumProperty ENN_InputDirectionType) = ENN_InputDirectionType::ENN_InputDirectionType_None
+        InnAnimList (ArrayProperty of ObjectProperty) = 0
+        InnAnimRate (FloatProperty) = 1
+        InnAnimBlendIn (FloatProperty) = 0.1
+        InnAnimBlendOut (FloatProperty) = 0
+        InnUseFacialBlendShape (BoolProperty) = 0
+        InnLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/BlackOpsMist_Default/Animation/Ninjutsu/BlackOpsMist_Ninjutsu_Teleportation_Charge_Start.BlackOpsMist_Ninjutsu_Teleportation_Charge_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0.1
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeContinueAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/BlackOpsMist_Default/Animation/Ninjutsu/BlackOpsMist_Ninjutsu_Teleportation_Charge_Loop.BlackOpsMist_Ninjutsu_Teleportation_Charge_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/BlackOpsMist_Default/Animation/Ninjutsu/BlackOpsMist_Ninjutsu_Teleportation_Charge_Loop.BlackOpsMist_Ninjutsu_Teleportation_Charge_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirChargeStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/BlackOpsMist_Default/Animation/Base/BlackOpsMist_Fall_Vertical_Loop.BlackOpsMist_Fall_Vertical_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 10
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirChargeContinueAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/BlackOpsMist_Default/Animation/Base/BlackOpsMist_Fall_Vertical_Loop.BlackOpsMist_Fall_Vertical_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 10
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirChargeLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/BlackOpsMist_Default/Animation/Base/BlackOpsMist_Fall_Vertical_Loop.BlackOpsMist_Fall_Vertical_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallChargeStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallChargeContinueAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallChargeLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeLandAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/BlackOpsMist_Default/Animation/Ninjutsu/BlackOpsMist_Ninjutsu_Teleportation_Charge_Start.BlackOpsMist_Ninjutsu_Teleportation_Charge_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ChargeLandLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        StartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/BlackOpsMist_Default/Animation/Ninjutsu/BlackOpsMist_Ninjutsu_Teleportation_Start.BlackOpsMist_Ninjutsu_Teleportation_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/BlackOpsMist_Default/Animation/Ninjutsu/BlackOpsMist_Ninjutsu_Teleportation_Loop.BlackOpsMist_Ninjutsu_Teleportation_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LoopBlendSpace (ObjectProperty) = obj 0
+        LoopAttackAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        EndAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/BlackOpsMist_Default/Animation/Ninjutsu/BlackOpsMist_Ninjutsu_Teleportation_End.BlackOpsMist_Ninjutsu_Teleportation_End
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/BlackOpsMist_Default/Animation/Ninjutsu/BlackOpsMist_Ninjutsu_Teleportation_Start.BlackOpsMist_Ninjutsu_Teleportation_Start
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/BlackOpsMist_Default/Animation/Ninjutsu/BlackOpsMist_Ninjutsu_Teleportation_Loop.BlackOpsMist_Ninjutsu_Teleportation_Loop
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirLoopAttackAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        AirEndAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = /Game/Characters/NPC/BlackOpsMist_Default/Animation/Ninjutsu/BlackOpsMist_Ninjutsu_Teleportation_End.BlackOpsMist_Ninjutsu_Teleportation_End
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LandAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        LandStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallStartAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallLoopAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        WallEndAnim (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ContinuousActionAnimList (ArrayProperty of StructProperty) = 0
+        ContinuousActionAirAnimList (ArrayProperty of StructProperty) = 0
+        SecondaryStart (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryLoop (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryEnd (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryEndEnd (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        SecondaryAirStart (StructProperty NN_AnimationInfo)
+          Anim (AssetObjectProperty) = 0
+          MeleeWeaponAnim (ObjectProperty) = obj 0
+          BodyPartsnim (ObjectProperty) = obj 0
+          rate (FloatProperty) = 1
+          blendIn (FloatProperty) = 0
+          blendOut (FloatProperty) = 0
+          UseFacialBlendShape (BoolProperty) = 0
+        ...
+    UseLoop (BoolProperty) = 1
+    IsInitSpawnNinjaSkillOnActivate (BoolProperty) = 1
+    UseAttackStartWhenStart (BoolProperty) = 1
+    IsNinjaSkillHorming (BoolProperty) = 1
+    IsNinjaSkillMoveToLeverDir (BoolProperty) = 1
+    IsAutoDestroyNinjaSkill (BoolProperty) = 1
+    IsSuperArmor (BoolProperty) = 1
+    IsAttach (BoolProperty) = 1
+    SpawnSocketName (NameProperty) = EFF_Hips01
+    StartMinTime (FloatProperty) = 0
+    HormingTime (FloatProperty) = 0.1
+    HomingSpeedMax (FloatProperty) = 2500
+    LoopSpeed (FloatProperty) = 1500
+    LoopTime (FloatProperty) = 0.1
+    LoopMinRange (FloatProperty) = 300
+    MoveOffset (StructProperty Vector) = -50 0 0
+    CoolTime (FloatProperty) = 12
+    CoolStock (IntProperty) = 1
+    SuccessType (EnumProperty ENN_NinjaSkillSuccessType) = ENN_NinjaSkillSuccessType::ENN_NinjaSkillSuccessType_Hit
+    UseEyeAim (BoolProperty) = 1
+    CameraOverrideStart (StructProperty NN_LooseCameraOverrideInfo)
+      Enabled (BoolProperty) = 1
+      ParamSetName (NameProperty) = Rasengan
+    CameraOverrideLoop (StructProperty NN_LooseCameraOverrideInfo)
+      Enabled (BoolProperty) = 1
+      ParamSetName (NameProperty) = Rasengan_Loop
+    CameraOverrideEnd (StructProperty NN_LooseCameraOverrideInfo)
+      Enabled (BoolProperty) = 1
+      ParamSetName (NameProperty) = LeafRisingWind
+    -- Eigenschaften ok, Ende bei +f2e1 von f2e5
+
+== dependances /Game :

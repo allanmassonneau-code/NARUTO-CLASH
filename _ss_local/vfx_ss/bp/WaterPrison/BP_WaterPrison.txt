@@ -1,0 +1,348 @@
+== /Game/Weapons/Ninjutsu/WaterPrison/Blueprints/BP_WaterPrison
+fichier : NARUTO/Content/Weapons/Ninjutsu/WaterPrison/Blueprints/BP_WaterPrison.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : FloatProperty
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/WaterPrison/Blueprints/BP_WaterPrison.uasset  19 725 octets
+  NARUTO/Content/Weapons/Ninjutsu/WaterPrison/Blueprints/BP_WaterPrison.uexp  6 877 octets
+
+/Game/Weapons/Ninjutsu/WaterPrison/Blueprints/BP_WaterPrison  flags 80000000  268 Namen  124 Importe  61 Exporte  Kopf 19725  Bulk ab 26598  Daten 26602
+  imp  0 /Game/Blueprints/DamageType/NN_DamageType_NinjaSkill_Special.NN_DamageType_NinjaSkill_Special_C (BlueprintGeneratedClass)
+  imp  1 /Game/Blueprints/Pawns/BP_Pawn_AI.BP_Pawn_AI_C (BlueprintGeneratedClass)
+  imp  2 /Game/Effects/BluePrints/BP_Eff_InWaterCtrl_Code.BP_Eff_InWaterCtrl_Code_C (BlueprintGeneratedClass)
+  imp  3 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C (BlueprintGeneratedClass)
+  imp  4 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C (BlueprintGeneratedClass)
+  imp  5 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_PutAttack_Base.BP_Ninjutsu_PutAttack_Base_C (BlueprintGeneratedClass)
+  imp  6 /Script/Engine.Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+  imp  7 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.DidInfluenceEffect (BoolProperty)
+  imp  8 /Script/CoreUObject.Default__BoolProperty (BoolProperty)
+  imp  9 /Game/Effects/BluePrints/BP_Eff_InWaterCtrl_Code.Default__BP_Eff_InWaterCtrl_Code_C (BP_Eff_InWaterCtrl_Code_C)
+  imp 10 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.Default__BP_Ninjutsu_Base_C (BP_Ninjutsu_Base_C)
+  imp 11 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_PutAttack_Base.Default__BP_Ninjutsu_PutAttack_Base_C (BP_Ninjutsu_PutAttack_Base_C)
+  imp 12 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C (BP_Pawn_AI_C)
+  imp 13 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.Default__BP_Projectile_Base_C (BP_Projectile_Base_C)
+  imp 14 /Game/Blueprints/Pawns/BP_Pawn_AI.BP_Pawn_AI_C.BP_VisibleFromCameraComp_GEN_VARIABLE (BP_VisibleFromCameraComp_C)
+  imp 15 /Script/CoreUObject.Default__ByteProperty (ByteProperty)
+  imp 16 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.CollisionCylinder (CapsuleComponent)
+  imp 17 /Script/CoreUObject.BoolProperty (Class)
+  imp 18 /Script/CoreUObject.ByteProperty (Class)
+  imp 19 /Script/CoreUObject.Class (Class)
+  imp 20 /Script/CoreUObject.ClassProperty (Class)
+  imp 21 /Script/CoreUObject.FloatProperty (Class)
+  imp 22 /Script/CoreUObject.Function (Class)
+  imp 23 /Script/CoreUObject.IntProperty (Class)
+  imp 24 /Script/CoreUObject.Object (Class)
+  imp 25 /Script/CoreUObject.ObjectProperty (Class)
+  imp 26 /Script/CoreUObject.StructProperty (Class)
+  imp 27 /Script/Engine.Actor (Class)
+  imp 28 /Script/Engine.BlueprintGeneratedClass (Class)
+  imp 29 /Script/Engine.Character (Class)
+  imp 30 /Script/Engine.CurveFloat (Class)
+  imp 31 /Script/Engine.GameplayStatics (Class)
+  imp 32 /Script/Engine.InheritableComponentHandler (Class)
+  imp 33 /Script/Engine.KismetMathLibrary (Class)
+  imp 34 /Script/Engine.KismetSystemLibrary (Class)
+  imp 35 /Script/Engine.SceneComponent (Class)
+  imp 36 /Script/Engine.SCS_Node (Class)
+  imp 37 /Script/Engine.SimpleConstructionScript (Class)
+  imp 38 /Script/Engine.TimelineComponent (Class)
+  imp 39 /Script/Engine.TimelineTemplate (Class)
+  imp 40 /Script/NARUTO.NN_EffectCtrlBase (Class)
+  imp 41 /Script/NARUTO.NN_PlayerPawn_Base (Class)
+  imp 42 /Script/CoreUObject.Default__ClassProperty (ClassProperty)
+  imp 43 /Script/Engine.Default__CurveFloat (CurveFloat)
+  imp 44 /Script/Engine.ETimelineDirection (Enum)
+  imp 45 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.CollisionRadius (FloatProperty)
+  imp 46 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.PostProcessInLerpSpeed (FloatProperty)
+  imp 47 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.PostProcessOutLerpSpeed (FloatProperty)
+  imp 48 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.PostProcessRadius (FloatProperty)
+  imp 49 /Script/CoreUObject.Default__FloatProperty (FloatProperty)
+  imp 50 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.RequestInfluenceEffectAndSound (Function)
+  imp 51 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.ReceiveDestroyed (Function)
+  imp 52 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.RequestEndPostProcess (Function)
+  imp 53 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.RequestStartPostProcess (Function)
+  imp 54 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_PutAttack_Base.BP_Ninjutsu_PutAttack_Base_C.ReceiveTick (Function)
+  imp 55 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_PutAttack_Base.BP_Ninjutsu_PutAttack_Base_C.UserConstructionScript (Function)
+  imp 56 /Script/CoreUObject.Default__Function (Function)
+  imp 57 /Script/Engine.Actor.ActorHasTag (Function)
+  imp 58 /Script/Engine.GameplayStatics.GetPlayerCharacter (Function)
+  imp 59 /Script/Engine.KismetMathLibrary.EqualEqual_ObjectObject (Function)
+  imp 60 /Script/Engine.KismetMathLibrary.Multiply_FloatFloat (Function)
+  imp 61 /Script/Engine.KismetMathLibrary.Not_PreBool (Function)
+  imp 62 /Script/Engine.KismetSystemLibrary.Delay (Function)
+  imp 63 /Script/Engine.KismetSystemLibrary.IsValid (Function)
+  imp 64 /Script/Engine.TimelineComponent.Play (Function)
+  imp 65 /Script/NARUTO.NN_PlayerPawn_Base.GetPostEffectCtrl (Function)
+  imp 66 /Script/NARUTO.NN_PlayerPawn_Base.StartPostEffect (Function)
+  imp 67 /Script/NARUTO.NN_PlayerPawn_Base.StopPostEffect (Function)
+  imp 68 /Script/Engine.Default__GameplayStatics (GameplayStatics)
+  imp 69 /Script/Engine.Default__InheritableComponentHandler (InheritableComponentHandler)
+  imp 70 /Script/CoreUObject.Default__IntProperty (IntProperty)
+  imp 71 /Script/Engine.Default__KismetSystemLibrary (KismetSystemLibrary)
+  imp 72 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.BossActionComponent (NN_BossActionComponent)
+  imp 73 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.CameraClippingComponent (NN_CameraClippingComponent)
+  imp 74 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.CharMoveComp (NN_CharacterMovementComponent)
+  imp 75 /Game/Blueprints/DamageType/NN_DamageType_NinjaSkill_Special.Default__NN_DamageType_NinjaSkill_Special_C (NN_DamageType_NinjaSkill_Special_C)
+  imp 76 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.HealthComponent (NN_HealthComponents)
+  imp 77 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.ParticleManageComponent (NN_ParticleManageComponent)
+  imp 78 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.PlayerActionComponent (NN_PlayerActionComponent)
+  imp 79 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.GameplayTasksComponent (NN_PlayTasksComponent)
+  imp 80 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.StatusManageComponent (NN_StatusManageComponent)
+  imp 81 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.TargetLockedComponent (NN_TargetLockedComponent)
+  imp 82 /Game/Weapons/Ninjutsu/WaterPrison/Blueprints/BP_ProjectileProps_WaterPrison.BP_ProjectileProps_WaterPrison (NN_WeaponProps)
+  imp 83 /Script/CoreUObject.Default__ObjectProperty (ObjectProperty)
+  imp 84 /Script/Engine.Actor.Instigator (ObjectProperty)
+  imp 85 /Game/Blueprints/DamageType/NN_DamageType_NinjaSkill_Special./Game/Blueprints/DamageType/NN_DamageType_NinjaSkill_Special (Package)
+  imp 86 /Game/Blueprints/Pawns/BP_Pawn_AI./Game/Blueprints/Pawns/BP_Pawn_AI (Package)
+  imp 87 /Game/Effects/BluePrints/BP_Eff_InWaterCtrl_Code./Game/Effects/BluePrints/BP_Eff_InWaterCtrl_Code (Package)
+  imp 88 /Game/Weapons/BaseBlueprints/BP_Projectile_Base./Game/Weapons/BaseBlueprints/BP_Projectile_Base (Package)
+  imp 89 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base (Package)
+  imp 90 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_PutAttack_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_PutAttack_Base (Package)
+  imp 91 /Game/Weapons/Ninjutsu/WaterPrison/Blueprints/BP_ProjectileProps_WaterPrison./Game/Weapons/Ninjutsu/WaterPrison/Blueprints/BP_ProjectileProps_WaterPrison (Package)
+  imp 92 /Game/Weapons/Ninjutsu/WaterPrison/Particles/P_WEP_WaterPrison_Hit./Game/Weapons/Ninjutsu/WaterPrison/Particles/P_WEP_WaterPrison_Hit (Package)
+  imp 93 /Game/Weapons/Ninjutsu/WaterPrison/Particles/P_WEP_WaterPrison_Start./Game/Weapons/Ninjutsu/WaterPrison/Particles/P_WEP_WaterPrison_Start (Package)
+  imp 94 /Game/Weapons/Ninjutsu/WaterPrison/Particles/P_WEP_WaterPrison_Status_End./Game/Weapons/Ninjutsu/WaterPrison/Particles/P_WEP_WaterPrison_Status_End (Package)
+  imp 95 /Game/Weapons/Ninjutsu/WaterPrison/Particles/P_WEP_WaterPrison_Status_Loop./Game/Weapons/Ninjutsu/WaterPrison/Particles/P_WEP_WaterPrison_Status_Loop (Package)
+  imp 96 /Script/CoreUObject./Script/CoreUObject (Package)
+  imp 97 /Script/Engine./Script/Engine (Package)
+  imp 98 /Script/GameplayTags./Script/GameplayTags (Package)
+  imp 99 /Script/NARUTO./Script/NARUTO (Package)
+  imp 100 /Game/Weapons/Ninjutsu/WaterPrison/Particles/P_WEP_WaterPrison_Hit.P_WEP_WaterPrison_Hit (ParticleSystem)
+  imp 101 /Game/Weapons/Ninjutsu/WaterPrison/Particles/P_WEP_WaterPrison_Start.P_WEP_WaterPrison_Start (ParticleSystem)
+  imp 102 /Game/Weapons/Ninjutsu/WaterPrison/Particles/P_WEP_WaterPrison_Status_End.P_WEP_WaterPrison_Status_End (ParticleSystem)
+  imp 103 /Game/Weapons/Ninjutsu/WaterPrison/Particles/P_WEP_WaterPrison_Status_Loop.P_WEP_WaterPrison_Status_Loop (ParticleSystem)
+  imp 104 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.ProjectileMovement_GEN_VARIABLE (ProjectileMovementComponent)
+  imp 105 /Game/Blueprints/Pawns/BP_Pawn_AI.BP_Pawn_AI_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 106 /Game/Effects/BluePrints/BP_Eff_InWaterCtrl_Code.BP_Eff_InWaterCtrl_Code_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 107 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.DefaultSceneRoot_REMOVED_628DECC24C105FE693737EA4B602DB70 (SceneComponent)
+  imp 108 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.FakeTarget_GEN_VARIABLE (SceneComponent)
+  imp 109 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 110 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_PutAttack_Base.BP_Ninjutsu_PutAttack_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 111 /Script/Engine.Default__SceneComponent (SceneComponent)
+  imp 112 /Script/Engine.LatentActionInfo (ScriptStruct)
+  imp 113 /Script/Engine.PointerToUberGraphFrame (ScriptStruct)
+  imp 114 /Script/GameplayTags.GameplayTag (ScriptStruct)
+  imp 115 /Script/Engine.Default__SCS_Node (SCS_Node)
+  imp 116 /Script/Engine.Default__SimpleConstructionScript (SimpleConstructionScript)
+  imp 117 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.CharacterMesh0 (SkeletalMeshComponent)
+  imp 118 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 119 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 120 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 121 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_PutAttack_Base.BP_Ninjutsu_PutAttack_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 122 /Script/CoreUObject.Default__StructProperty (StructProperty)
+  imp 123 /Script/Engine.Default__TimelineTemplate (TimelineTemplate)
+exp 0 BeatenPostProcessOutTime : FloatProperty  outer 54  @4d0d +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 1 BeatenPostProcessInTime : FloatProperty  outer 54  @4d31 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 2 BeatenPostProcessRadius : FloatProperty  outer 54  @4d55 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 3 BeatenPostProcessTarget : ObjectProperty  outer 54  @4d79 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 4 SpawnPostEffectCtrl : ObjectProperty  outer 54  @4da1 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 5 WaterPostProcessCtrlClass : ClassProperty  outer 54  @4dc9 +2c
+    -- Eigenschaften ok, Ende bei +8 von 2c
+exp 6 PostProcessAutoEndTime : FloatProperty  outer 54  @4df5 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 7 TimeLine_WaterPPCtrl : ObjectProperty  outer 54  @4e19 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 8 TimeLine_WaterPPCtrl__Direction_F6C5F81D487E1AA8CA8DBE8372548659 : ByteProperty  outer 54  @4e41 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 9 TimeLine_WaterPPCtrl_PPCtrlRadius_F6C5F81D487E1AA8CA8DBE8372548659 : FloatProperty  outer 54  @4e69 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 10 CallFunc_Multiply_FloatFloat_ReturnValue : FloatProperty  outer 27  @4e8d +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 11 CallFunc_IsValid_ReturnValue : BoolProperty  outer 27  @4eb1 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 12 K2Node_DynamicCast_bSuccess4 : BoolProperty  outer 27  @4ed7 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 13 K2Node_DynamicCast_AsNN_Player_Pawn_Base2 : ObjectProperty  outer 27  @4efd +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 14 CallFunc_Not_PreBool_ReturnValue : BoolProperty  outer 27  @4f25 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 15 CallFunc_ShouldIgnoreWaterPrisonInfluence_bReturn : BoolProperty  outer 27  @4f4b +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 16 CallFunc_ActorHasTag_ReturnValue : BoolProperty  outer 27  @4f71 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 17 K2Node_DynamicCast_bSuccess3 : BoolProperty  outer 27  @4f97 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 18 K2Node_DynamicCast_AsBP_Pawn_AI : ObjectProperty  outer 27  @4fbd +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 19 K2Node_DynamicCast_bSuccess2 : BoolProperty  outer 27  @4fe5 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 20 K2Node_DynamicCast_AsActor : ObjectProperty  outer 27  @500b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 21 K2Node_DynamicCast_bSuccess : BoolProperty  outer 27  @5033 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 22 K2Node_DynamicCast_AsNN_Player_Pawn_Base : ObjectProperty  outer 27  @5059 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 23 K2Node_Event_Target : ObjectProperty  outer 27  @5081 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 24 K2Node_Event_DeltaSeconds : FloatProperty  outer 27  @50a9 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 25 EntryPoint : IntProperty  outer 27  @50cd +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 26 ExecuteUbergraph_BP_WaterPrison : Function  outer 54  @50f1 +26f
+    -- Eigenschaften ok, Ende bei +8 von 26f
+exp 27 ReceiveDestroyed : Function  outer 54  @5360 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 28 RequestEndPostProcess : Function  outer 54  @539e +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 29 RequestStartPostProcess : Function  outer 54  @53dc +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 30 Target : ObjectProperty  outer 32  @541a +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 31 RequestInfluenceEffectAndSound : Function  outer 54  @5442 +48
+    -- Eigenschaften ok, Ende bei +8 von 48
+exp 32 DeltaSeconds : FloatProperty  outer 34  @548a +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 33 ReceiveTick : Function  outer 54  @54ae +48
+    -- Eigenschaften ok, Ende bei +8 von 48
+exp 34 TimeLine_WaterPPCtrl__UpdateFunc : Function  outer 54  @54f6 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 35 TimeLine_WaterPPCtrl__FinishedFunc : Function  outer 54  @5534 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 36 UserConstructionScript : Function  outer 54  @5572 +35
+    -- Eigenschaften ok, Ende bei +8 von 35
+exp 37 CallFunc_EqualEqual_ObjectObject_ReturnValue : BoolProperty  outer 45  @55a7 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 38 CallFunc_GetPlayerCharacter_ReturnValue : ObjectProperty  outer 45  @55cd +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 39 CallFunc_IsValid_ReturnValue2 : BoolProperty  outer 45  @55f5 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 40 CallFunc_GetPostEffectCtrl_ReturnValue : ObjectProperty  outer 45  @561b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 41 CallFunc_IsValid_ReturnValue : BoolProperty  outer 45  @5643 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 42 TempCtrl : ObjectProperty  outer 45  @5669 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 43 Target : ObjectProperty  outer 45  @5691 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 44 RequestStartBeatenPostProcess : Function  outer 54  @56b9 +170
+    -- Eigenschaften ok, Ende bei +8 von 170
+exp 45 CallFunc_EqualEqual_ObjectObject_ReturnValue : BoolProperty  outer 52  @5829 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 46 CallFunc_GetPostEffectCtrl_ReturnValue : ObjectProperty  outer 52  @584f +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 47 CallFunc_GetPlayerCharacter_ReturnValue : ObjectProperty  outer 52  @5877 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 48 K2Node_DynamicCast_bSuccess : BoolProperty  outer 52  @589f +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 49 K2Node_DynamicCast_AsNN_Player_Pawn_Base : ObjectProperty  outer 52  @58c5 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 50 CallFunc_IsValid_ReturnValue : BoolProperty  outer 52  @58ed +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 51 StartOwnPostEffect : Function  outer 54  @5913 +176
+    -- Eigenschaften ok, Ende bei +8 von 176
+exp 52 UberGraphFrame : StructProperty  outer 54  @5a89 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 53 BP_WaterPrison_C : BlueprintGeneratedClass  outer 0  @5ab1 +171
+    Timelines (ArrayProperty of ObjectProperty) [1]
+      0 (ObjectProperty) = obj 61
+    SimpleConstructionScript (ObjectProperty) = obj 60
+    InheritableComponentHandler (ObjectProperty) = obj 57
+    UberGraphFramePointerProperty (ObjectProperty) = obj 53
+    UberGraphFunction (ObjectProperty) = obj 27
+    -- Eigenschaften ok, Ende bei +a5 von 171
+exp 54 Default__BP_WaterPrison_C : BP_WaterPrison_C  outer 0  @5c22 +8b7
+    UberGraphFrame (StructProperty PointerToUberGraphFrame) = 0
+    PostProcessAutoEndTime (FloatProperty) = 1.7
+    WaterPostProcessCtrlClass (ObjectProperty) = obj -3
+    BeatenPostProcessRadius (FloatProperty) = 100
+    BeatenPostProcessInTime (FloatProperty) = 1
+    BeatenPostProcessOutTime (FloatProperty) = 2
+    StartHitTime (FloatProperty) = 1
+    HitDurationTime (FloatProperty) = 0.8
+    NearHitAttackInfoName (NameProperty) = WaterPrison
+    DisableBlockedAttakHit (BoolProperty) = 1
+    NinjutsuName (StrProperty) = 水遁・水牢の術
+    SkillType (EnumProperty ENN_NinjaSkillType) = ENN_NinjaSkillType::ENN_NinjaSkillType_WaterPrison
+    EffecitiveTime (FloatProperty) = 10
+    StartEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -102
+      Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+        Translation (StructProperty Vector) = 0 0 200
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    LoopEffect (StructProperty BP_ParticleInfo)
+      Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+        Translation (StructProperty Vector) = 0 0 90
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    EndEffect (StructProperty BP_ParticleInfo)
+      Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+        Translation (StructProperty Vector) = 0 0 90
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    UsePostProcess (BoolProperty) = 1
+    PostProcessCtrlClass (ObjectProperty) = obj -3
+    PostProcessRadius (FloatProperty) = 1800
+    PostProcessInterpDistance (FloatProperty) = 10
+    PostProcessInLerpSpeed (FloatProperty) = 10
+    PostProcessOutLerpSpeed (FloatProperty) = 10
+    bForceBossDebuffOnPvP (BoolProperty) = 1
+    HitEffect (ObjectProperty) = obj -101
+    IsDispHitEffect (BoolProperty) = 1
+    InfluenceEffectInfo (StructProperty NN_ParticleInfo)
+      Template (ObjectProperty) = obj -104
+      IsAttach (BoolProperty) = 1
+      UseTeamColor (BoolProperty) = 1
+    InfluenceEndEffectInfo (StructProperty NN_ParticleInfo)
+      Template (ObjectProperty) = obj -103
+      IsAttach (BoolProperty) = 1
+      UseTeamColor (BoolProperty) = 1
+    CollisionRadius (FloatProperty) = 0
+    InstanceLimit (IntProperty) = 16
+    DisableGuard (BoolProperty) = 1
+    IsMultiHitSameCount (BoolProperty) = 1
+    MultiHitRadius (FloatProperty) = 1800
+    MultiHitStartAdjustHeight (FloatProperty) = 50
+    HitDamageType (ObjectProperty) = obj -1
+    AttackHitInfoName (NameProperty) = WaterPrison
+    IgnoreHitSameTeamOtherProjectile (BoolProperty) = 1
+    WeaponPropsData (ObjectProperty) = obj -83
+    AntiBossAdjustment (ArrayProperty of StructProperty) [1]
+      0 (StructProperty NN_NinjaSkillAntiBoss)
+        TagForAdjustment (StructProperty GameplayTag)
+          TagName (NameProperty) = SkillAgainstBoss.Debuff.Defense
+        AdjustFactor (FloatProperty) = 0.5
+        DebuffTime (FloatProperty) = 10
+    m_GamePlayTagContainer (StructProperty GameplayTagContainer) = 0
+    SoundID (NameProperty) = ID_WeaponSound_Ninjutsu_WaterPrison
+    -- Eigenschaften ok, Ende bei +8b7 von 8b7
+exp 55 CurveFloat_0 : CurveFloat  outer 54  @64d9 +107
+    FloatCurve (StructProperty RichCurve)
+      Keys (ArrayProperty of StructProperty) [1]
+        0 (StructProperty RichCurveKey) = 0
+    -- Eigenschaften ok, Ende bei +103 von 107
+exp 56 InheritableComponentHandler : InheritableComponentHandler  outer 54  @65e0 +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 57 DefaultSceneRoot_GEN_VARIABLE : SceneComponent  outer 54  @65ec +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 58 SCS_Node_0 : SCS_Node  outer 60  @65f8 +a8
+    ComponentClass (ObjectProperty) = obj -36
+    ComponentTemplate (ObjectProperty) = obj 58
+    VariableGuid (StructProperty Guid) = 8.32867e+08 1.15759e+09 1.54615e+09 2.29619e+06
+    InternalVariableName (NameProperty) = DefaultSceneRoot
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 59 SimpleConstructionScript_0 : SimpleConstructionScript  outer 54  @66a0 +29
+    DefaultSceneRootNode (ObjectProperty) = obj 59
+    -- Eigenschaften ok, Ende bei +25 von 29
+exp 60 TimeLine_WaterPPCtrl_Template : TimelineTemplate  outer 54  @66c9 +11d
+    bValidatedAsWired (BoolProperty) = 1
+    FloatTracks (ArrayProperty of StructProperty) [1]
+      0 (StructProperty TTFloatTrack)
+        CurveFloat (ObjectProperty) = obj 56
+        TrackName (NameProperty) = PPCtrlRadius
+        bIsExternalCurve (BoolProperty) = 0
+    TimelineGuid (StructProperty Guid) = 4.14017e+09 1.21622e+09 3.39829e+09 1.91814e+09
+    -- Eigenschaften ok, Ende bei +119 von 11d
+
+== dependances /Game :
+  /Game/Blueprints/DamageType/NN_DamageType_NinjaSkill_Special
+  /Game/Blueprints/Pawns/BP_Pawn_AI
+  /Game/Effects/BluePrints/BP_Eff_InWaterCtrl_Code
+  /Game/Weapons/BaseBlueprints/BP_Projectile_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_PutAttack_Base
+  /Game/Weapons/Ninjutsu/WaterPrison/Blueprints/BP_ProjectileProps_WaterPrison
+  /Game/Weapons/Ninjutsu/WaterPrison/Particles/P_WEP_WaterPrison_Hit
+  /Game/Weapons/Ninjutsu/WaterPrison/Particles/P_WEP_WaterPrison_Start
+  /Game/Weapons/Ninjutsu/WaterPrison/Particles/P_WEP_WaterPrison_Status_End
+  /Game/Weapons/Ninjutsu/WaterPrison/Particles/P_WEP_WaterPrison_Status_Loop

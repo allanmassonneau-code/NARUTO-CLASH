@@ -1,0 +1,206 @@
+== /Game/Weapons/Ninjutsu/DestroyerFlame/Blueprints/BP_DestroyerFlame
+fichier : NARUTO/Content/Weapons/Ninjutsu/DestroyerFlame/Blueprints/BP_DestroyerFlame.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : BoolProperty
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/DestroyerFlame/Blueprints/BP_DestroyerFlame.uasset  10 990 octets
+  NARUTO/Content/Weapons/Ninjutsu/DestroyerFlame/Blueprints/BP_DestroyerFlame.uexp  3 525 octets
+
+/Game/Weapons/Ninjutsu/DestroyerFlame/Blueprints/BP_DestroyerFlame  flags 80000000  158 Namen  66 Importe  33 Exporte  Kopf 10990  Bulk ab 14511  Daten 14515
+  imp  0 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C (BlueprintGeneratedClass)
+  imp  1 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C (BlueprintGeneratedClass)
+  imp  2 /Script/Engine.Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+  imp  3 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.UseExplodeHit (BoolProperty)
+  imp  4 /Script/CoreUObject.Default__BoolProperty (BoolProperty)
+  imp  5 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.Default__BP_Ninjutsu_Shooting_Base_C (BP_Ninjutsu_Shooting_Base_C)
+  imp  6 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.Default__BP_Projectile_Base_C (BP_Projectile_Base_C)
+  imp  7 /Script/CoreUObject.BoolProperty (Class)
+  imp  8 /Script/CoreUObject.FloatProperty (Class)
+  imp  9 /Script/CoreUObject.Function (Class)
+  imp 10 /Script/CoreUObject.IntProperty (Class)
+  imp 11 /Script/CoreUObject.Object (Class)
+  imp 12 /Script/CoreUObject.ObjectProperty (Class)
+  imp 13 /Script/CoreUObject.StructProperty (Class)
+  imp 14 /Script/Engine.Actor (Class)
+  imp 15 /Script/Engine.BlueprintGeneratedClass (Class)
+  imp 16 /Script/Engine.InheritableComponentHandler (Class)
+  imp 17 /Script/Engine.SceneComponent (Class)
+  imp 18 /Script/Engine.SCS_Node (Class)
+  imp 19 /Script/Engine.SimpleConstructionScript (Class)
+  imp 20 /Script/NARUTO.NN_Weapon (Class)
+  imp 21 /Script/CoreUObject.Default__FloatProperty (FloatProperty)
+  imp 22 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.CheckHitIgnoreCurrentHitActor (Function)
+  imp 23 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.ExplodeOnHit (Function)
+  imp 24 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.UserConstructionScript (Function)
+  imp 25 /Script/CoreUObject.Default__Function (Function)
+  imp 26 /Script/Engine.Actor.ActorHasTag (Function)
+  imp 27 /Script/NARUTO.NN_Weapon.Base_BlockSuperArmor (Function)
+  imp 28 /Script/NARUTO.NN_Weapon.GetLostEffectType (Function)
+  imp 29 /Script/Engine.Default__InheritableComponentHandler (InheritableComponentHandler)
+  imp 30 /Script/CoreUObject.Default__IntProperty (IntProperty)
+  imp 31 /Game/Effects/Materials/Decal/MI_EFF_Decal_Fire_A_01.MI_EFF_Decal_Fire_A_01 (MaterialInstanceConstant)
+  imp 32 /Game/Weapons/Ninjutsu/DestroyerFlame/Blueprints/BP_DestroyerFlame_ProjectileProps.BP_DestroyerFlame_ProjectileProps (NN_WeaponProps)
+  imp 33 /Script/CoreUObject.Default__ObjectProperty (ObjectProperty)
+  imp 34 /Game/Effects/Materials/Decal/MI_EFF_Decal_Fire_A_01./Game/Effects/Materials/Decal/MI_EFF_Decal_Fire_A_01 (Package)
+  imp 35 /Game/Effects/Particles/Decal_Fire/P_EFF_Decal_Fire_A_01./Game/Effects/Particles/Decal_Fire/P_EFF_Decal_Fire_A_01 (Package)
+  imp 36 /Game/Effects/Particles/Influence/P_EFF_Influence_Fire_A./Game/Effects/Particles/Influence/P_EFF_Influence_Fire_A (Package)
+  imp 37 /Game/Weapons/BaseBlueprints/BP_Projectile_Base./Game/Weapons/BaseBlueprints/BP_Projectile_Base (Package)
+  imp 38 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base (Package)
+  imp 39 /Game/Weapons/Ninjutsu/DestroyerFlame/Blueprints/BP_DestroyerFlame_ProjectileProps./Game/Weapons/Ninjutsu/DestroyerFlame/Blueprints/BP_DestroyerFlame_ProjectileProps (Package)
+  imp 40 /Game/Weapons/Ninjutsu/DestroyerFlame/Particles/P_WEP_DestroyerFlame_Hit./Game/Weapons/Ninjutsu/DestroyerFlame/Particles/P_WEP_DestroyerFlame_Hit (Package)
+  imp 41 /Game/Weapons/Ninjutsu/DestroyerFlame/Particles/P_WEP_DestroyerFlame_Loop./Game/Weapons/Ninjutsu/DestroyerFlame/Particles/P_WEP_DestroyerFlame_Loop (Package)
+  imp 42 /Game/Weapons/Ninjutsu/DestroyerFlame/Particles/P_WEP_DestroyerFlame_Muzzle./Game/Weapons/Ninjutsu/DestroyerFlame/Particles/P_WEP_DestroyerFlame_Muzzle (Package)
+  imp 43 /Script/CoreUObject./Script/CoreUObject (Package)
+  imp 44 /Script/Engine./Script/Engine (Package)
+  imp 45 /Script/GameplayTags./Script/GameplayTags (Package)
+  imp 46 /Script/NARUTO./Script/NARUTO (Package)
+  imp 47 /Game/Effects/Particles/Decal_Fire/P_EFF_Decal_Fire_A_01.P_EFF_Decal_Fire_A_01 (ParticleSystem)
+  imp 48 /Game/Effects/Particles/Influence/P_EFF_Influence_Fire_A.P_EFF_Influence_Fire_A (ParticleSystem)
+  imp 49 /Game/Weapons/Ninjutsu/DestroyerFlame/Particles/P_WEP_DestroyerFlame_Hit.P_WEP_DestroyerFlame_Hit (ParticleSystem)
+  imp 50 /Game/Weapons/Ninjutsu/DestroyerFlame/Particles/P_WEP_DestroyerFlame_Loop.P_WEP_DestroyerFlame_Loop (ParticleSystem)
+  imp 51 /Game/Weapons/Ninjutsu/DestroyerFlame/Particles/P_WEP_DestroyerFlame_Muzzle.P_WEP_DestroyerFlame_Muzzle (ParticleSystem)
+  imp 52 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.ProjectileMovement_GEN_VARIABLE (ProjectileMovementComponent)
+  imp 53 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.DefaultSceneRoot_REMOVED_628DECC24C105FE693737EA4B602DB70 (SceneComponent)
+  imp 54 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.FakeTarget_GEN_VARIABLE (SceneComponent)
+  imp 55 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 56 /Script/Engine.Default__SceneComponent (SceneComponent)
+  imp 57 /Script/Engine.PointerToUberGraphFrame (ScriptStruct)
+  imp 58 /Script/GameplayTags.GameplayTag (ScriptStruct)
+  imp 59 /Script/Engine.Default__SCS_Node (SCS_Node)
+  imp 60 /Script/Engine.Default__SimpleConstructionScript (SimpleConstructionScript)
+  imp 61 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 62 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 63 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 64 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 65 /Script/CoreUObject.Default__StructProperty (StructProperty)
+exp 0 CallFunc_ActorHasTag_ReturnValue : BoolProperty  outer 7  @2aee +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 1 K2Node_DynamicCast_bSuccess : BoolProperty  outer 7  @2b14 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 2 K2Node_DynamicCast_AsNN_Weapon : ObjectProperty  outer 7  @2b3a +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 3 K2Node_Event_DoDestroy : BoolProperty  outer 7  @2b62 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 4 K2Node_Event_Other : ObjectProperty  outer 7  @2b88 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 5 EntryPoint : IntProperty  outer 7  @2bb0 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 6 ExecuteUbergraph_BP_DestroyerFlame : Function  outer 28  @2bd4 +b2
+    -- Eigenschaften ok, Ende bei +8 von b2
+exp 7 DoDestroy : BoolProperty  outer 10  @2c86 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 8 Other : ObjectProperty  outer 10  @2cac +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 9 ExplodeOnHit : Function  outer 28  @2cd4 +52
+    -- Eigenschaften ok, Ende bei +8 von 52
+exp 10 UserConstructionScript : Function  outer 28  @2d26 +35
+    -- Eigenschaften ok, Ende bei +8 von 35
+exp 11 CallFunc_ActorHasTag_ReturnValue : BoolProperty  outer 22  @2d5b +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 12 CallFunc_CheckHitIgnoreCurrentHitActor_IsHit : BoolProperty  outer 22  @2d81 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 13 K2Node_DynamicCast_bSuccess : BoolProperty  outer 22  @2da7 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 14 K2Node_DynamicCast_AsNN_Weapon : ObjectProperty  outer 22  @2dcd +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 15 IsHit : BoolProperty  outer 22  @2df5 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 16 IgnoreTarget : ObjectProperty  outer 22  @2e1b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 17 ForceTarget : ObjectProperty  outer 22  @2e43 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 18 IsAnyHit : BoolProperty  outer 22  @2e6b +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 19 HitRadius : FloatProperty  outer 22  @2e91 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 20 HitCount : IntProperty  outer 22  @2eb5 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 21 CheckHitIgnoreCurrentHitActor : Function  outer 28  @2ed9 +c6
+    -- Eigenschaften ok, Ende bei +8 von c6
+exp 22 ReturnValue : IntProperty  outer 24  @2f9f +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 23 GetLostEffectType : Function  outer 28  @2fc3 +42
+    -- Eigenschaften ok, Ende bei +8 von 42
+exp 24 ReturnValue : BoolProperty  outer 26  @3005 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 25 Base_BlockSuperArmor : Function  outer 28  @302b +3a
+    -- Eigenschaften ok, Ende bei +8 von 3a
+exp 26 UberGraphFrame : StructProperty  outer 28  @3065 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 27 BP_DestroyerFlame_C : BlueprintGeneratedClass  outer 0  @308d +10c
+    SimpleConstructionScript (ObjectProperty) = obj 33
+    InheritableComponentHandler (ObjectProperty) = obj 30
+    UberGraphFramePointerProperty (ObjectProperty) = obj 27
+    UberGraphFunction (ObjectProperty) = obj 7
+    -- Eigenschaften ok, Ende bei +7c von 10c
+exp 28 Default__BP_DestroyerFlame_C : BP_DestroyerFlame_C  outer 0  @3199 +62d
+    UberGraphFrame (StructProperty PointerToUberGraphFrame) = 0
+    MuzzleEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -52
+      AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Head01
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    UseMuzzleOnActive (BoolProperty) = 1
+    LoopEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -51
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    Speed (FloatProperty) = 3200
+    LifeTime (FloatProperty) = 2.5
+    ImpactEffect (ObjectProperty) = obj -50
+    BuffEffect (ObjectProperty) = obj -49
+    CollisionRadius (FloatProperty) = 200
+    HomingRotateRandomRange (FloatProperty) = 8000
+    HomingPower (FloatProperty) = 8000
+    HomingEndTime (FloatProperty) = 1.5
+    Decal_Material (ObjectProperty) = obj -32
+    Decal_Particle (ObjectProperty) = obj -48
+    Decal_LifeTime (FloatProperty) = 5
+    Decal_Size (StructProperty Vector) = 30 420 420
+    AnyHitRadius (FloatProperty) = 200
+    DelayDestroyTime (FloatProperty) = 0.1
+    IsMultiHitSameCount (BoolProperty) = 1
+    AttackHitInfoName (NameProperty) = DestroyerFlame_Main
+    CounterHitPower (IntProperty) = 80
+    UseExplodeHit (BoolProperty) = 1
+    ExplodeHitRadius (FloatProperty) = 800
+    ExplodeHitDuration (FloatProperty) = 0.2
+    ExplodeHitDeltaTime (FloatProperty) = 0.2
+    Decal_TracePointDistance (FloatProperty) = -50
+    Decal_TraceRangeMagnification (FloatProperty) = 3
+    ProhobitZeroVelocity (BoolProperty) = 1
+    ExplodeAttackHitName (NameProperty) = DestroyerFlame_Sub
+    IsNullifiableByD55NJ1 (BoolProperty) = 1
+    IsNullifiableByD61NJ2 (BoolProperty) = 1
+    WeaponPropsData (ObjectProperty) = obj -33
+    AntiBossAdjustment (ArrayProperty of StructProperty) [1]
+      0 (StructProperty NN_NinjaSkillAntiBoss)
+        TagForAdjustment (StructProperty GameplayTag)
+          TagName (NameProperty) = SpecialDamage.Fire
+        AdjustFactor (FloatProperty) = 1
+        DebuffTime (FloatProperty) = 10
+    m_GamePlayTagContainer (StructProperty GameplayTagContainer) = 0
+    SoundID (NameProperty) = ID_WeaponSound_Ninjutsu_DestroyerFlame
+    -- Eigenschaften ok, Ende bei +62d von 62d
+exp 29 InheritableComponentHandler : InheritableComponentHandler  outer 28  @37c6 +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 30 DefaultSceneRoot_GEN_VARIABLE : SceneComponent  outer 28  @37d2 +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 31 SCS_Node_0 : SCS_Node  outer 33  @37de +a8
+    ComponentClass (ObjectProperty) = obj -18
+    ComponentTemplate (ObjectProperty) = obj 31
+    VariableGuid (StructProperty Guid) = 1.20965e+09 1.27636e+09 3.75276e+09 3.63625e+08
+    InternalVariableName (NameProperty) = DefaultSceneRoot
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 32 SimpleConstructionScript_0 : SimpleConstructionScript  outer 28  @3886 +29
+    DefaultSceneRootNode (ObjectProperty) = obj 32
+    -- Eigenschaften ok, Ende bei +25 von 29
+
+== dependances /Game :
+  /Game/Effects/Materials/Decal/MI_EFF_Decal_Fire_A_01
+  /Game/Effects/Particles/Decal_Fire/P_EFF_Decal_Fire_A_01
+  /Game/Effects/Particles/Influence/P_EFF_Influence_Fire_A
+  /Game/Weapons/BaseBlueprints/BP_Projectile_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base
+  /Game/Weapons/Ninjutsu/DestroyerFlame/Blueprints/BP_DestroyerFlame_ProjectileProps
+  /Game/Weapons/Ninjutsu/DestroyerFlame/Particles/P_WEP_DestroyerFlame_Hit
+  /Game/Weapons/Ninjutsu/DestroyerFlame/Particles/P_WEP_DestroyerFlame_Loop
+  /Game/Weapons/Ninjutsu/DestroyerFlame/Particles/P_WEP_DestroyerFlame_Muzzle

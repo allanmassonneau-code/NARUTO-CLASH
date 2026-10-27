@@ -1,0 +1,906 @@
+== /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2
+fichier : NARUTO/Content/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : ObjectProperty
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2.uasset  50 844 octets
+  NARUTO/Content/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2.uexp  24 398 octets
+
+/Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2  flags 80000000  490 Namen  175 Importe  248 Exporte  Kopf 50844  Bulk ab 75238  Daten 75242
+  imp  0 /Script/AkAudio.Default__AkGameplayStatics (AkGameplayStatics)
+  imp  1 /Script/CoreUObject.Default__ArrayProperty (ArrayProperty)
+  imp  2 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C (BlueprintGeneratedClass)
+  imp  3 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.BP_Weapon_Base_C (BlueprintGeneratedClass)
+  imp  4 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C (BlueprintGeneratedClass)
+  imp  5 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Fire.BP_D84NJ2_Fire_C (BlueprintGeneratedClass)
+  imp  6 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Shoot.BP_D84NJ2_Shoot_C (BlueprintGeneratedClass)
+  imp  7 /Script/Engine.Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+  imp  8 /Script/CoreUObject.Default__BoolProperty (BoolProperty)
+  imp  9 /Script/NARUTO.NN_CharacterPawn.IsBossCharacter (BoolProperty)
+  imp 10 /Script/NARUTO.NN_CharacterPawnBase.IsDead (BoolProperty)
+  imp 11 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Fire.Default__BP_D84NJ2_Fire_C (BP_D84NJ2_Fire_C)
+  imp 12 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Shoot.Default__BP_D84NJ2_Shoot_C (BP_D84NJ2_Shoot_C)
+  imp 13 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.Default__BP_Ninjutsu_Base_C (BP_Ninjutsu_Base_C)
+  imp 14 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.Default__BP_Projectile_Base_C (BP_Projectile_Base_C)
+  imp 15 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.Default__BP_Weapon_Base_C (BP_Weapon_Base_C)
+  imp 16 /Script/Engine.Default__CapsuleComponent (CapsuleComponent)
+  imp 17 /Script/AkAudio.AkGameplayStatics (Class)
+  imp 18 /Script/CoreUObject.ArrayProperty (Class)
+  imp 19 /Script/CoreUObject.BoolProperty (Class)
+  imp 20 /Script/CoreUObject.DelegateProperty (Class)
+  imp 21 /Script/CoreUObject.FloatProperty (Class)
+  imp 22 /Script/CoreUObject.Function (Class)
+  imp 23 /Script/CoreUObject.InterfaceProperty (Class)
+  imp 24 /Script/CoreUObject.IntProperty (Class)
+  imp 25 /Script/CoreUObject.NameProperty (Class)
+  imp 26 /Script/CoreUObject.Object (Class)
+  imp 27 /Script/CoreUObject.ObjectProperty (Class)
+  imp 28 /Script/CoreUObject.StructProperty (Class)
+  imp 29 /Script/Engine.Actor (Class)
+  imp 30 /Script/Engine.ActorComponent (Class)
+  imp 31 /Script/Engine.BlueprintGeneratedClass (Class)
+  imp 32 /Script/Engine.CapsuleComponent (Class)
+  imp 33 /Script/Engine.Character (Class)
+  imp 34 /Script/Engine.GameplayStatics (Class)
+  imp 35 /Script/Engine.InheritableComponentHandler (Class)
+  imp 36 /Script/Engine.KismetArrayLibrary (Class)
+  imp 37 /Script/Engine.KismetMathLibrary (Class)
+  imp 38 /Script/Engine.KismetSystemLibrary (Class)
+  imp 39 /Script/Engine.ParticleSystem (Class)
+  imp 40 /Script/Engine.ParticleSystemComponent (Class)
+  imp 41 /Script/Engine.SceneComponent (Class)
+  imp 42 /Script/Engine.SCS_Node (Class)
+  imp 43 /Script/Engine.SimpleConstructionScript (Class)
+  imp 44 /Script/Engine.SphereComponent (Class)
+  imp 45 /Script/GameplayTags.GameplayTagAssetInterface (Class)
+  imp 46 /Script/NARUTO.NN_CharacterPawn (Class)
+  imp 47 /Script/NARUTO.NN_CharacterPawnBase (Class)
+  imp 48 /Script/NARUTO.NN_PlayerTaskFinishMove (Class)
+  imp 49 /Script/NARUTO.NN_TargetLockedComponent (Class)
+  imp 50 /Script/NARUTO.NN_Weapon (Class)
+  imp 51 /Script/CoreUObject.Default__DelegateProperty (DelegateProperty)
+  imp 52 /Script/CoreUObject.Default__FloatProperty (FloatProperty)
+  imp 53 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.DelayedDestroy (Function)
+  imp 54 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.ReceiveBeginPlay (Function)
+  imp 55 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.ReceiveDestroyed (Function)
+  imp 56 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.ReceiveTick (Function)
+  imp 57 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.UserConstructionScript (Function)
+  imp 58 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Shoot.BP_D84NJ2_Shoot_C.KunaiHit__DelegateSignature (Function)
+  imp 59 /Script/AkAudio.AkGameplayStatics.PostEvent (Function)
+  imp 60 /Script/CoreUObject.Default__Function (Function)
+  imp 61 /Script/Engine.Actor.ActorHasTag (Function)
+  imp 62 /Script/Engine.Actor.GetActorForwardVector (Function)
+  imp 63 /Script/Engine.Actor.GetActorUpVector (Function)
+  imp 64 /Script/Engine.Actor.GetTransform (Function)
+  imp 65 /Script/Engine.Actor.HasAuthority (Function)
+  imp 66 /Script/Engine.Actor.K2_GetActorLocation (Function)
+  imp 67 /Script/Engine.Actor.K2_GetActorRotation (Function)
+  imp 68 /Script/Engine.ActorComponent.K2_DestroyComponent (Function)
+  imp 69 /Script/Engine.GameplayStatics.BeginDeferredActorSpawnFromClass (Function)
+  imp 70 /Script/Engine.GameplayStatics.FinishSpawningActor (Function)
+  imp 71 /Script/Engine.GameplayStatics.SpawnEmitterAtLocation (Function)
+  imp 72 /Script/Engine.KismetArrayLibrary.Array_Add (Function)
+  imp 73 /Script/Engine.KismetArrayLibrary.Array_Contains (Function)
+  imp 74 /Script/Engine.KismetArrayLibrary.Array_Get (Function)
+  imp 75 /Script/Engine.KismetArrayLibrary.Array_Length (Function)
+  imp 76 /Script/Engine.KismetArrayLibrary.Array_RemoveItem (Function)
+  imp 77 /Script/Engine.KismetMathLibrary.Add_IntInt (Function)
+  imp 78 /Script/Engine.KismetMathLibrary.Add_VectorVector (Function)
+  imp 79 /Script/Engine.KismetMathLibrary.BooleanAND (Function)
+  imp 80 /Script/Engine.KismetMathLibrary.BooleanOR (Function)
+  imp 81 /Script/Engine.KismetMathLibrary.BreakTransform (Function)
+  imp 82 /Script/Engine.KismetMathLibrary.Conv_IntToFloat (Function)
+  imp 83 /Script/Engine.KismetMathLibrary.Divide_FloatFloat (Function)
+  imp 84 /Script/Engine.KismetMathLibrary.Divide_IntInt (Function)
+  imp 85 /Script/Engine.KismetMathLibrary.FindLookAtRotation (Function)
+  imp 86 /Script/Engine.KismetMathLibrary.GetAxes (Function)
+  imp 87 /Script/Engine.KismetMathLibrary.Greater_IntInt (Function)
+  imp 88 /Script/Engine.KismetMathLibrary.GreaterEqual_FloatFloat (Function)
+  imp 89 /Script/Engine.KismetMathLibrary.GreaterEqual_IntInt (Function)
+  imp 90 /Script/Engine.KismetMathLibrary.Less_IntInt (Function)
+  imp 91 /Script/Engine.KismetMathLibrary.LessEqual_IntInt (Function)
+  imp 92 /Script/Engine.KismetMathLibrary.MakeRotFromX (Function)
+  imp 93 /Script/Engine.KismetMathLibrary.MakeTransform (Function)
+  imp 94 /Script/Engine.KismetMathLibrary.Multiply_FloatFloat (Function)
+  imp 95 /Script/Engine.KismetMathLibrary.Multiply_VectorFloat (Function)
+  imp 96 /Script/Engine.KismetMathLibrary.Normal (Function)
+  imp 97 /Script/Engine.KismetMathLibrary.Not_PreBool (Function)
+  imp 98 /Script/Engine.KismetMathLibrary.NotEqual_ObjectObject (Function)
+  imp 99 /Script/Engine.KismetMathLibrary.RotateAngleAxis (Function)
+  imp 100 /Script/Engine.KismetMathLibrary.Subtract_IntInt (Function)
+  imp 101 /Script/Engine.KismetMathLibrary.Subtract_VectorVector (Function)
+  imp 102 /Script/Engine.KismetMathLibrary.VSize (Function)
+  imp 103 /Script/Engine.KismetSystemLibrary.Delay (Function)
+  imp 104 /Script/Engine.KismetSystemLibrary.IsValid (Function)
+  imp 105 /Script/Engine.KismetSystemLibrary.SetNamePropertyByName (Function)
+  imp 106 /Script/Engine.KismetSystemLibrary.SetObjectPropertyByName (Function)
+  imp 107 /Script/Engine.SceneComponent.K2_SetWorldLocationAndRotation (Function)
+  imp 108 /Script/NARUTO.NN_CharacterPawn.CalcSpawnWeaponLocation (Function)
+  imp 109 /Script/NARUTO.NN_CharacterPawn.CalcSpawnWeaponRotation (Function)
+  imp 110 /Script/NARUTO.NN_CharacterPawn.GetAttackTarget (Function)
+  imp 111 /Script/NARUTO.NN_CharacterPawn.GetAttackTargetComp (Function)
+  imp 112 /Script/NARUTO.NN_CharacterPawn.IsNinjaSkillStartState (Function)
+  imp 113 /Script/NARUTO.NN_CharacterPawn.IsTaskActive (Function)
+  imp 114 /Script/NARUTO.NN_CharacterPawn.SetNinjaSkillBranch (Function)
+  imp 115 /Script/NARUTO.NN_CharacterPawn.StartPrgRot (Function)
+  imp 116 /Script/NARUTO.NN_Weapon.DoDestroyByD35NJ3 (Function)
+  imp 117 /Script/NARUTO.NN_Weapon.GetLostEffectType (Function)
+  imp 118 /Script/Engine.Default__GameplayStatics (GameplayStatics)
+  imp 119 /Script/Engine.Default__InheritableComponentHandler (InheritableComponentHandler)
+  imp 120 /Script/CoreUObject.Default__InterfaceProperty (InterfaceProperty)
+  imp 121 /Script/CoreUObject.Default__IntProperty (IntProperty)
+  imp 122 /Script/Engine.Default__KismetArrayLibrary (KismetArrayLibrary)
+  imp 123 /Script/Engine.Default__KismetSystemLibrary (KismetSystemLibrary)
+  imp 124 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Shoot.BP_D84NJ2_Shoot_C.KunaiHit (MulticastDelegateProperty)
+  imp 125 /Script/CoreUObject.Default__NameProperty (NameProperty)
+  imp 126 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_ProjectileProps_D84NJ2.BP_ProjectileProps_D84NJ2 (NN_WeaponProps)
+  imp 127 /Script/CoreUObject.Default__ObjectProperty (ObjectProperty)
+  imp 128 /Script/Engine.Actor.Instigator (ObjectProperty)
+  imp 129 /Script/Engine.Character.Mesh (ObjectProperty)
+  imp 130 /Game/Weapons/BaseBlueprints/BP_Projectile_Base./Game/Weapons/BaseBlueprints/BP_Projectile_Base (Package)
+  imp 131 /Game/Weapons/BaseBlueprints/BP_Weapon_Base./Game/Weapons/BaseBlueprints/BP_Weapon_Base (Package)
+  imp 132 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base (Package)
+  imp 133 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Fire./Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Fire (Package)
+  imp 134 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Shoot./Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Shoot (Package)
+  imp 135 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_ProjectileProps_D84NJ2./Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_ProjectileProps_D84NJ2 (Package)
+  imp 136 /Game/Weapons/Ninjutsu/D84NJ2/Particles/P_WEP_D84NJ2_WireHit_01./Game/Weapons/Ninjutsu/D84NJ2/Particles/P_WEP_D84NJ2_WireHit_01 (Package)
+  imp 137 /Script/AkAudio./Script/AkAudio (Package)
+  imp 138 /Script/CoreUObject./Script/CoreUObject (Package)
+  imp 139 /Script/Engine./Script/Engine (Package)
+  imp 140 /Script/GameplayTags./Script/GameplayTags (Package)
+  imp 141 /Script/NARUTO./Script/NARUTO (Package)
+  imp 142 /Game/Weapons/Ninjutsu/D84NJ2/Particles/P_WEP_D84NJ2_WireHit_01.P_WEP_D84NJ2_WireHit_01 (ParticleSystem)
+  imp 143 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Shoot.BP_D84NJ2_Shoot_C.ParticleSystem_GEN_VARIABLE (ParticleSystemComponent)
+  imp 144 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.ProjectileMovement_GEN_VARIABLE (ProjectileMovementComponent)
+  imp 145 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Fire.BP_D84NJ2_Fire_C.ProjectileMovement_GEN_VARIABLE (ProjectileMovementComponent)
+  imp 146 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.DefaultSceneRoot_REMOVED_628DECC24C105FE693737EA4B602DB70 (SceneComponent)
+  imp 147 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.FakeTarget_GEN_VARIABLE (SceneComponent)
+  imp 148 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.BP_Weapon_Base_C.DefaultSceneRoot_REMOVED_1422D7FE4042589AAE1156AB42BAD9B3 (SceneComponent)
+  imp 149 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 150 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Fire.BP_D84NJ2_Fire_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 151 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Shoot.BP_D84NJ2_Shoot_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 152 /Script/Engine.Default__SceneComponent (SceneComponent)
+  imp 153 /Script/CoreUObject.Rotator (ScriptStruct)
+  imp 154 /Script/CoreUObject.Transform (ScriptStruct)
+  imp 155 /Script/CoreUObject.Vector (ScriptStruct)
+  imp 156 /Script/Engine.HitResult (ScriptStruct)
+  imp 157 /Script/Engine.LatentActionInfo (ScriptStruct)
+  imp 158 /Script/Engine.PointerToUberGraphFrame (ScriptStruct)
+  imp 159 /Script/GameplayTags.GameplayTag (ScriptStruct)
+  imp 160 /Script/NARUTO.NN_AttachSoundInfo (ScriptStruct)
+  imp 161 /Script/Engine.Default__SCS_Node (SCS_Node)
+  imp 162 /Script/Engine.Default__SimpleConstructionScript (SimpleConstructionScript)
+  imp 163 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Shoot.BP_D84NJ2_Shoot_C.SK_WEP_Shuriken_A_GEN_VARIABLE (SkeletalMeshComponent)
+  imp 164 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 165 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 166 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.BP_Weapon_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 167 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 168 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Fire.BP_D84NJ2_Fire_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 169 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Fire.BP_D84NJ2_Fire_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 170 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Shoot.BP_D84NJ2_Shoot_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 171 /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Shoot.BP_D84NJ2_Shoot_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 172 /Script/NARUTO.NN_AttachSoundInfo.EventName (StrProperty)
+  imp 173 /Script/CoreUObject.Default__StructProperty (StructProperty)
+  imp 174 /Script/NARUTO.NN_Weapon.InfluenceStartSound (StructProperty)
+exp 0 MyKunai : ObjectProperty  outer 12  @c69c +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 1 DidRequestEnd : BoolProperty  outer 239  @c6c4 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 2 FireSpawnTIme : FloatProperty  outer 239  @c6ea +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 3 FireSpawnRotation : StructProperty  outer 239  @c70e +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 4 TargetWireEffectComp : ObjectProperty  outer 239  @c736 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 5 TargetWireEffect : ObjectProperty  outer 239  @c75e +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 6 CantSecondary : BoolProperty  outer 239  @c786 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 7 KunaiRadius : FloatProperty  outer 239  @c7ac +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 8 MuzzleComp : ObjectProperty  outer 239  @c7d0 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 9 DidSpawnKunai : BoolProperty  outer 239  @c7f8 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 10 DidSecondary : BoolProperty  outer 239  @c81e +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 11 MyKunai : ArrayProperty  outer 239  @c844 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 12 KunaiSpawnNum : IntProperty  outer 239  @c86c +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 13 OwnerCharacter : ObjectProperty  outer 239  @c890 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 14 FireEndArea : ObjectProperty  outer 239  @c8b8 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 15 CallFunc_IsNinjaSkillStartState_ReturnValue2 : BoolProperty  outer 97  @c8e0 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 16 CallFunc_IsValid_ReturnValue7 : BoolProperty  outer 97  @c906 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 17 CallFunc_GetOwnerCharacter_OwnerCharacter7 : ObjectProperty  outer 97  @c92c +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 18 CallFunc_IsValid_ReturnValue6 : BoolProperty  outer 97  @c954 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 19 CallFunc_GetOwnerCharacter_OwnerCharacter6 : ObjectProperty  outer 97  @c97a +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 20 K2Node_CustomEvent_rot : StructProperty  outer 97  @c9a2 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 21 CallFunc_FindLookAtRotation_ReturnValue : StructProperty  outer 97  @c9ca +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 22 K2Node_Select2_Default : StructProperty  outer 97  @c9f2 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 23 CallFunc_Add_VectorVector_ReturnValue : StructProperty  outer 97  @ca1a +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 24 K2Node_Select_Default : StructProperty  outer 97  @ca42 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 25 Temp_bool_Variable2 : BoolProperty  outer 97  @ca6a +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 26 Temp_bool_Has_Been_Initd_Variable : BoolProperty  outer 97  @ca90 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 27 CallFunc_BooleanAND_ReturnValue2 : BoolProperty  outer 97  @cab6 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 28 CallFunc_K2_SetWorldLocationAndRotation_SweepHitResult : StructProperty  outer 97  @cadc +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 29 CallFunc_Not_PreBool_ReturnValue2 : BoolProperty  outer 97  @cb04 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 30 CallFunc_IsTaskActive_ReturnValue : BoolProperty  outer 97  @cb2a +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 31 CallFunc_IsNinjaSkillStartState_ReturnValue : BoolProperty  outer 97  @cb50 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 32 CallFunc_GetOwnerCharacter_OwnerCharacter5 : ObjectProperty  outer 97  @cb76 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 33 CallFunc_FinishSpawningActor_ReturnValue : ObjectProperty  outer 97  @cb9e +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 34 K2Node_CustomEvent_Rotation : StructProperty  outer 97  @cbc6 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 35 K2Node_CustomEvent_Location : StructProperty  outer 97  @cbee +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 36 CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue : ObjectProperty  outer 97  @cc16 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 37 CallFunc_MakeTransform_ReturnValue : StructProperty  outer 97  @cc3e +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 38 Temp_bool_Variable : BoolProperty  outer 97  @cc66 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 39 CallFunc_SpawnEmitterAtLocation_ReturnValue : ObjectProperty  outer 97  @cc8c +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 40 CallFunc_BreakTransform_Scale3 : StructProperty  outer 97  @ccb4 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 41 CallFunc_BreakTransform_Rotation3 : StructProperty  outer 97  @ccdc +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 42 CallFunc_BreakTransform_Location3 : StructProperty  outer 97  @cd04 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 43 CallFunc_GetSocketTransform_ReturnValue2 : StructProperty  outer 97  @cd2c +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 44 CallFunc_IsValid_ReturnValue5 : BoolProperty  outer 97  @cd54 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 45 CallFunc_K2_GetActorRotation_ReturnValue : StructProperty  outer 97  @cd7a +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 46 CallFunc_K2_GetActorLocation_ReturnValue3 : StructProperty  outer 97  @cda2 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 47 K2Node_CustomEvent_Target : ObjectProperty  outer 97  @cdca +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 48 K2Node_CustomEvent_Rotation2 : StructProperty  outer 97  @cdf2 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 49 K2Node_CustomEvent_Location2 : StructProperty  outer 97  @ce1a +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 50 CallFunc_GetOwnerCharacter_OwnerCharacter4 : ObjectProperty  outer 97  @ce42 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 51 K2Node_CreateDelegate_OutputDelegate : DelegateProperty  outer 97  @ce6a +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 52 CallFunc_BreakTransform_Scale2 : StructProperty  outer 97  @ce92 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 53 CallFunc_BreakTransform_Rotation2 : StructProperty  outer 97  @ceba +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 54 CallFunc_BreakTransform_Location2 : StructProperty  outer 97  @cee2 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 55 CallFunc_GetTransform_ReturnValue : StructProperty  outer 97  @cf0a +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 56 CallFunc_IsValid_ReturnValue4 : BoolProperty  outer 97  @cf32 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 57 CallFunc_GetOwnerCharacter_OwnerCharacter3 : ObjectProperty  outer 97  @cf58 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 58 CallFunc_IsValid_ReturnValue3 : BoolProperty  outer 97  @cf80 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 59 CallFunc_CheckHit_bHit : BoolProperty  outer 97  @cfa6 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 60 CallFunc_BreakTransform_Scale : StructProperty  outer 97  @cfcc +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 61 CallFunc_BreakTransform_Rotation : StructProperty  outer 97  @cff4 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 62 CallFunc_BreakTransform_Location : StructProperty  outer 97  @d01c +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 63 CallFunc_GetSocketTransform_ReturnValue : StructProperty  outer 97  @d044 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 64 CallFunc_CheckNoWire_NoWire : BoolProperty  outer 97  @d06c +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 65 CallFunc_Multiply_VectorFloat_ReturnValue : StructProperty  outer 97  @d092 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 66 K2Node_DynamicCast_bSuccess : BoolProperty  outer 97  @d0ba +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 67 K2Node_DynamicCast_AsNN_Character_Pawn : ObjectProperty  outer 97  @d0e0 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 68 CallFunc_GetActorForwardVector_ReturnValue : StructProperty  outer 97  @d108 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 69 K2Node_CustomEvent_HitLoc : StructProperty  outer 97  @d130 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 70 K2Node_CustomEvent_HitKunai : ObjectProperty  outer 97  @d158 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 71 K2Node_CustomEvent_Target2 : ObjectProperty  outer 97  @d180 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 72 K2Node_CustomEvent_HitLoc2 : StructProperty  outer 97  @d1a8 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 73 K2Node_CustomEvent_HitKunai2 : ObjectProperty  outer 97  @d1d0 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 74 K2Node_CustomEvent_InTarget : ObjectProperty  outer 97  @d1f8 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 75 K2Node_CustomEvent_Kunai : ObjectProperty  outer 97  @d220 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 76 CallFunc_HasAuthority_ReturnValue2 : BoolProperty  outer 97  @d248 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 77 CallFunc_HasAuthority_ReturnValue : BoolProperty  outer 97  @d26e +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 78 CallFunc_GreaterEqual_FloatFloat_ReturnValue : BoolProperty  outer 97  @d294 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 79 CallFunc_VSize_ReturnValue : FloatProperty  outer 97  @d2ba +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 80 CallFunc_Subtract_VectorVector_ReturnValue : StructProperty  outer 97  @d2de +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 81 CallFunc_K2_GetActorLocation_ReturnValue2 : StructProperty  outer 97  @d306 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 82 CallFunc_IsValid_ReturnValue2 : BoolProperty  outer 97  @d32e +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 83 CallFunc_GetOwnerCharacter_OwnerCharacter2 : ObjectProperty  outer 97  @d354 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 84 CallFunc_GetOwnerCharacter_OwnerCharacter : ObjectProperty  outer 97  @d37c +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 85 CallFunc_K2_GetActorLocation_ReturnValue : StructProperty  outer 97  @d3a4 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 86 CallFunc_GreaterEqual_IntInt_ReturnValue : BoolProperty  outer 97  @d3cc +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 87 CallFunc_IsValid_ReturnValue : BoolProperty  outer 97  @d3f2 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 88 CallFunc_Array_Length_ReturnValue : IntProperty  outer 97  @d418 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 89 CallFunc_Array_Get_Item : ObjectProperty  outer 97  @d43c +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 90 CallFunc_BooleanAND_ReturnValue : BoolProperty  outer 97  @d464 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 91 Temp_bool_IsClosed_Variable : BoolProperty  outer 97  @d48a +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 92 CallFunc_Not_PreBool_ReturnValue : BoolProperty  outer 97  @d4b0 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 93 CallFunc_CheckDestroyKunai_DestroyAll : BoolProperty  outer 97  @d4d6 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 94 K2Node_Event_DeltaSeconds : FloatProperty  outer 97  @d4fc +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 95 EntryPoint : IntProperty  outer 97  @d520 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 96 ExecuteUbergraph_BP_D84NJ2 : Function  outer 239  @d544 +d47
+    -- Eigenschaften ok, Ende bei +8 von d47
+exp 97 rot : StructProperty  outer 99  @e28b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 98 Multicast_PrgRot : Function  outer 239  @e2b3 +4a
+    -- Eigenschaften ok, Ende bei +8 von 4a
+exp 99 Rotation : StructProperty  outer 102  @e2fd +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 100 Location : StructProperty  outer 102  @e325 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 101 Multicast_SetFireArea : Function  outer 239  @e34d +54
+    -- Eigenschaften ok, Ende bei +8 von 54
+exp 102 Target : ObjectProperty  outer 106  @e3a1 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 103 Rotation : StructProperty  outer 106  @e3c9 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 104 Location : StructProperty  outer 106  @e3f1 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 105 Multicast_SpawnTargetWireEffect : Function  outer 239  @e419 +5e
+    -- Eigenschaften ok, Ende bei +8 von 5e
+exp 106 HitLoc : StructProperty  outer 110  @e477 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 107 HitKunai : ObjectProperty  outer 110  @e49f +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 108 Target : ObjectProperty  outer 110  @e4c7 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 109 OnSecondaryAttack : Function  outer 239  @e4ef +5c
+    -- Eigenschaften ok, Ende bei +8 von 5c
+exp 110 HitLoc : StructProperty  outer 114  @e54b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 111 HitKunai : ObjectProperty  outer 114  @e573 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 112 InTarget : ObjectProperty  outer 114  @e59b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 113 Delegate_HitKunai : Function  outer 239  @e5c3 +5c
+    -- Eigenschaften ok, Ende bei +8 von 5c
+exp 114 Kunai : ObjectProperty  outer 116  @e61f +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 115 CallHitKunai : Function  outer 239  @e647 +48
+    -- Eigenschaften ok, Ende bei +8 von 48
+exp 116 DestroyEvent : Function  outer 239  @e68f +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 117 Multicast_DestroyEvent : Function  outer 239  @e6cd +40
+    -- Eigenschaften ok, Ende bei +8 von 40
+exp 118 ReceiveDestroyed : Function  outer 239  @e70d +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 119 DelayedDestroy : Function  outer 239  @e74b +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 120 DeltaSeconds : FloatProperty  outer 122  @e789 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 121 ReceiveTick : Function  outer 239  @e7ad +48
+    -- Eigenschaften ok, Ende bei +8 von 48
+exp 122 DoDestroyByD35NJ3 : Function  outer 239  @e7f5 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 123 ReceiveBeginPlay : Function  outer 239  @e833 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 124 UserConstructionScript : Function  outer 239  @e871 +35
+    -- Eigenschaften ok, Ende bei +8 von 35
+exp 125 ReturnValue : IntProperty  outer 127  @e8a6 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 126 GetLostEffectType : Function  outer 239  @e8ca +42
+    -- Eigenschaften ok, Ende bei +8 von 42
+exp 127 CallFunc_Array_Add_ReturnValue : IntProperty  outer 174  @e90c +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 128 CallFunc_FinishSpawningActor_ReturnValue : ObjectProperty  outer 174  @e930 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 129 CallFunc_Divide_FloatFloat_ReturnValue2 : FloatProperty  outer 174  @e958 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 130 CallFunc_Divide_FloatFloat_ReturnValue : FloatProperty  outer 174  @e97c +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 131 CallFunc_Conv_IntToFloat_ReturnValue2 : FloatProperty  outer 174  @e9a0 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 132 CallFunc_Greater_IntInt_ReturnValue : BoolProperty  outer 174  @e9c4 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 133 CallFunc_LessEqual_IntInt_ReturnValue : BoolProperty  outer 174  @e9ea +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 134 CallFunc_Subtract_IntInt_ReturnValue2 : IntProperty  outer 174  @ea10 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 135 CallFunc_Subtract_IntInt_ReturnValue : IntProperty  outer 174  @ea34 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 136 CallFunc_Divide_IntInt_ReturnValue : IntProperty  outer 174  @ea58 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 137 CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue : ObjectProperty  outer 174  @ea7c +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 138 CallFunc_CalcSpawnWeaponLocation_ReturnValue : StructProperty  outer 174  @eaa4 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 139 CallFunc_MakeTransform_ReturnValue2 : StructProperty  outer 174  @eacc +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 140 K2Node_Select_Default : NameProperty  outer 174  @eaf4 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 141 Temp_name_Variable7 : NameProperty  outer 174  @eb18 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 142 Temp_int_Variable2 : IntProperty  outer 174  @eb3c +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 143 CallFunc_CalcSpawnWeaponRotation_ReturnValue : StructProperty  outer 174  @eb60 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 144 CallFunc_MakeTransform_ReturnValue : StructProperty  outer 174  @eb88 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 145 CallFunc_Add_IntInt_ReturnValue : IntProperty  outer 174  @ebb0 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 146 CallFunc_RotateAngleAxis_ReturnValue : StructProperty  outer 174  @ebd4 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 147 Temp_int_Variable : IntProperty  outer 174  @ebfc +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 148 CallFunc_Normal_ReturnValue : StructProperty  outer 174  @ec20 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 149 CallFunc_GetAxes_Z : StructProperty  outer 174  @ec48 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 150 CallFunc_GetAxes_Y : StructProperty  outer 174  @ec70 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 151 CallFunc_GetAxes_X : StructProperty  outer 174  @ec98 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 152 CallFunc_Multiply_FloatFloat_ReturnValue : FloatProperty  outer 174  @ecc0 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 153 CallFunc_Conv_IntToFloat_ReturnValue : FloatProperty  outer 174  @ece4 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 154 Temp_name_Variable6 : NameProperty  outer 174  @ed08 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 155 Temp_name_Variable5 : NameProperty  outer 174  @ed2c +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 156 Temp_name_Variable4 : NameProperty  outer 174  @ed50 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 157 Temp_name_Variable3 : NameProperty  outer 174  @ed74 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 158 Temp_name_Variable2 : NameProperty  outer 174  @ed98 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 159 CallFunc_GetAttackTarget_ReturnValue : ObjectProperty  outer 174  @edbc +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 160 CallFunc_GetActorUpVector_ReturnValue : StructProperty  outer 174  @ede4 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 161 CallFunc_GetAttackTargetComp_ReturnValue : ObjectProperty  outer 174  @ee0c +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 162 CallFunc_GetOwnerCharacter_OwnerCharacter : ObjectProperty  outer 174  @ee34 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 163 CallFunc_HasAuthority_ReturnValue : BoolProperty  outer 174  @ee5c +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 164 CallFunc_MakeRotFromX_ReturnValue : StructProperty  outer 174  @ee82 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 165 Temp_name_Variable : NameProperty  outer 174  @eeaa +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 166 AngleNum : IntProperty  outer 174  @eece +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 167 SpawnRot : StructProperty  outer 174  @eef2 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 168 DefaultSpawnRot : StructProperty  outer 174  @ef1a +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 169 DeltaRadius : FloatProperty  outer 174  @ef42 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 170 NowIndex : IntProperty  outer 174  @ef66 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 171 SpawnLoc : StructProperty  outer 174  @ef8a +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 172 SpawnRotDir : StructProperty  outer 174  @efb2 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 173 SpawnKunai : Function  outer 239  @efda +782
+    -- Eigenschaften ok, Ende bei +8 von 782
+exp 174 CallFunc_LessEqual_IntInt_ReturnValue2 : BoolProperty  outer 188  @f75c +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 175 CallFunc_Array_Length_ReturnValue3 : IntProperty  outer 188  @f782 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 176 CallFunc_LessEqual_IntInt_ReturnValue : BoolProperty  outer 188  @f7a6 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 177 CallFunc_Less_IntInt_ReturnValue : BoolProperty  outer 188  @f7cc +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 178 CallFunc_Array_Length_ReturnValue2 : IntProperty  outer 188  @f7f2 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 179 CallFunc_Array_Length_ReturnValue : IntProperty  outer 188  @f816 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 180 CallFunc_Array_RemoveItem_ReturnValue : BoolProperty  outer 188  @f83a +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 181 CallFunc_IsValid_ReturnValue : BoolProperty  outer 188  @f860 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 182 CallFunc_Array_Get_Item : ObjectProperty  outer 188  @f886 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 183 CallFunc_Add_IntInt_ReturnValue : IntProperty  outer 188  @f8ae +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 184 Temp_int_Loop_Counter_Variable : IntProperty  outer 188  @f8d2 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 185 Temp_int_Array_Index_Variable : IntProperty  outer 188  @f8f6 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 186 DestroyAll : BoolProperty  outer 188  @f91a +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 187 CheckDestroyKunai : Function  outer 239  @f940 +219
+    -- Eigenschaften ok, Ende bei +8 von 219
+exp 188 K2Node_DynamicCast_bSuccess : BoolProperty  outer 193  @fb59 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 189 K2Node_DynamicCast_AsNN_Character_Pawn : ObjectProperty  outer 193  @fb7f +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 190 CallFunc_IsValid_ReturnValue : BoolProperty  outer 193  @fba7 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 191 OwnerCharacter : ObjectProperty  outer 193  @fbcd +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 192 GetOwnerCharacter : Function  outer 239  @fbf5 +ae
+    -- Eigenschaften ok, Ende bei +8 von ae
+exp 193 CallFunc_Array_Contains_ReturnValue : BoolProperty  outer 198  @fca3 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 194 CallFunc_Array_RemoveItem_ReturnValue : BoolProperty  outer 198  @fcc9 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 195 CallFunc_HasAuthority_ReturnValue : BoolProperty  outer 198  @fcef +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 196 Target : ObjectProperty  outer 198  @fd15 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 197 RemoveKunai : Function  outer 239  @fd3d +97
+    -- Eigenschaften ok, Ende bei +8 von 97
+exp 198 CallFunc_Add_IntInt_ReturnValue : IntProperty  outer 210  @fdd4 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 199 CallFunc_GreaterEqual_IntInt_ReturnValue : BoolProperty  outer 210  @fdf8 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 200 CallFunc_Array_Length_ReturnValue2 : IntProperty  outer 210  @fe1e +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 201 CallFunc_IsValid_ReturnValue : BoolProperty  outer 210  @fe42 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 202 CallFunc_Less_IntInt_ReturnValue : BoolProperty  outer 210  @fe68 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 203 CallFunc_Array_RemoveItem_ReturnValue : BoolProperty  outer 210  @fe8e +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 204 CallFunc_Array_Length_ReturnValue : IntProperty  outer 210  @feb4 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 205 CallFunc_Array_Get_Item : ObjectProperty  outer 210  @fed8 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 206 Temp_int_Loop_Counter_Variable : IntProperty  outer 210  @ff00 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 207 Temp_int_Array_Index_Variable : IntProperty  outer 210  @ff24 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 208 CallFunc_HasAuthority_ReturnValue : BoolProperty  outer 210  @ff48 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 209 DestroyAllKunai : Function  outer 239  @ff6e +1ef
+    -- Eigenschaften ok, Ende bei +8 von 1ef
+exp 210 CallFunc_BooleanOR_ReturnValue5 : BoolProperty  outer 225  @1015d +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 211 CallFunc_BooleanOR_ReturnValue4 : BoolProperty  outer 225  @10183 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 212 CallFunc_BooleanOR_ReturnValue3 : BoolProperty  outer 225  @101a9 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 213 CallFunc_BooleanOR_ReturnValue2 : BoolProperty  outer 225  @101cf +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 214 CallFunc_BooleanOR_ReturnValue : BoolProperty  outer 225  @101f5 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 215 CallFunc_HasMatchingGameplayTag_ReturnValue2 : BoolProperty  outer 225  @1021b +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 216 CallFunc_HasMatchingGameplayTag_self2_CastInput : InterfaceProperty  outer 225  @10241 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 217 CallFunc_ActorHasTag_ReturnValue3 : BoolProperty  outer 225  @10269 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 218 CallFunc_ActorHasTag_ReturnValue2 : BoolProperty  outer 225  @1028f +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 219 CallFunc_ActorHasTag_ReturnValue : BoolProperty  outer 225  @102b5 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 220 CallFunc_HasMatchingGameplayTag_ReturnValue : BoolProperty  outer 225  @102db +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 221 CallFunc_HasMatchingGameplayTag_self_CastInput : InterfaceProperty  outer 225  @10301 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 222 NoWire : BoolProperty  outer 225  @10329 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 223 Target : ObjectProperty  outer 225  @1034f +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 224 CheckNoWire : Function  outer 239  @10377 +183
+    -- Eigenschaften ok, Ende bei +8 von 183
+exp 225 CallFunc_Add_IntInt_ReturnValue : IntProperty  outer 237  @104fa +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 226 CallFunc_NotEqual_ObjectObject_ReturnValue : BoolProperty  outer 237  @1051e +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 227 CallFunc_Less_IntInt_ReturnValue : BoolProperty  outer 237  @10544 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 228 CallFunc_IsValid_ReturnValue : BoolProperty  outer 237  @1056a +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 229 CallFunc_Array_Length_ReturnValue : IntProperty  outer 237  @10590 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 230 CallFunc_Array_Get_Item : ObjectProperty  outer 237  @105b4 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 231 Temp_int_Loop_Counter_Variable : IntProperty  outer 237  @105dc +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 232 Temp_int_Array_Index_Variable : IntProperty  outer 237  @10600 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 233 HitLoc : StructProperty  outer 237  @10624 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 234 HitTarget : ObjectProperty  outer 237  @1064c +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 235 HitKunai : ObjectProperty  outer 237  @10674 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 236 RequestKunaiNoHitEvent : Function  outer 239  @1069c +1a0
+    -- Eigenschaften ok, Ende bei +8 von 1a0
+exp 237 UberGraphFrame : StructProperty  outer 239  @1083c +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 238 BP_D84NJ2_C : BlueprintGeneratedClass  outer 0  @10864 +1d8
+    SimpleConstructionScript (ObjectProperty) = obj 246
+    InheritableComponentHandler (ObjectProperty) = obj 242
+    UberGraphFramePointerProperty (ObjectProperty) = obj 238
+    UberGraphFunction (ObjectProperty) = obj 97
+    -- Eigenschaften ok, Ende bei +7c von 1d8
+exp 239 Default__BP_D84NJ2_C : BP_D84NJ2_C  outer 0  @10a3c +5ef
+    UberGraphFrame (StructProperty PointerToUberGraphFrame) = 0
+    KunaiSpawnNum (IntProperty) = 7
+    KunaiRadius (FloatProperty) = 42
+    TargetWireEffect (ObjectProperty) = obj -143
+    FireSpawnRotation (StructProperty Rotator) = 0 0 0
+    FireSpawnTIme (FloatProperty) = 1.2
+    EffecitiveTime (FloatProperty) = 4
+    ChargeEffect (StructProperty BP_ParticleInfo)
+      AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    StartEffect (StructProperty BP_ParticleInfo)
+      AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+      RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator1
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+    LoopEffect (StructProperty BP_ParticleInfo)
+      AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    EndEffect (StructProperty BP_ParticleInfo)
+      AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    Speed (FloatProperty) = 0
+    LifeTime (FloatProperty) = 10
+    IsExplodeAfterLifetime (BoolProperty) = 0
+    IsExplodeOnStop (BoolProperty) = 0
+    IsExplodeOnHit (BoolProperty) = 0
+    CollisionRadius (FloatProperty) = 15
+    DelayDestroyTime (FloatProperty) = 0.3
+    AttackHitInfoName (NameProperty) = D84NJ2_Wire
+    IgnoreHitSameTeamOtherProjectile (BoolProperty) = 1
+    CounterHitPower (IntProperty) = 99
+    NoOffsetProj (BoolProperty) = 1
+    WeaponPropsData (ObjectProperty) = obj -127
+    AntiBossAdjustment (ArrayProperty of StructProperty) [1]
+      0 (StructProperty NN_NinjaSkillAntiBoss)
+        TagForAdjustment (StructProperty GameplayTag)
+          TagName (NameProperty) = SkillAgainstBoss.DamageAdjustment
+        AdjustFactor (FloatProperty) = 0.7
+        DebuffTime (FloatProperty) = 10
+    SoundID (NameProperty) = ID_WeaponSound_Ninjutsu_D84NJ2
+    Tags (ArrayProperty of NameProperty) [2]
+      0 (NameProperty) = D84NJ2
+      1 (NameProperty) = CanHitInD35NJ3
+    -- Eigenschaften ok, Ende bei +5ef von 5ef
+exp 240 FireEndArea_GEN_VARIABLE : CapsuleComponent  outer 239  @1102b +60d
+    CapsuleRadius (FloatProperty) = 10
+    BodyInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = Custom
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [14]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = WorldStatic
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          1 (StructProperty ResponseChannel)
+            Channel (NameProperty) = WorldDynamic
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          2 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Pawn
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          3 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Visibility
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          4 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Camera
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          5 (StructProperty ResponseChannel)
+            Channel (NameProperty) = PhysicsBody
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          6 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Vehicle
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          7 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Destructible
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          8 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Projectile
+            Response (ByteProperty ECollisionResponse) = ECR_Overlap
+          9 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          10 (StructProperty ResponseChannel)
+            Channel (NameProperty) = ProjectileAll
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          11 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Wall
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          12 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Shield
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          13 (StructProperty ResponseChannel)
+            Channel (NameProperty) = WireKunai
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      CollisionEnabled (ByteProperty ECollisionEnabled) = ECollisionEnabled::NoCollision
+      ObjectType (ByteProperty ECollisionChannel) = ECC_GameTraceChannel1
+    ComponentTags (ArrayProperty of NameProperty) [1]
+      0 (NameProperty) = D84NJ2_FireEndArea
+    -- Eigenschaften ok, Ende bei +609 von 60d
+exp 241 InheritableComponentHandler : InheritableComponentHandler  outer 239  @11638 +3a8
+    Records (ArrayProperty of StructProperty) [2]
+      0 (StructProperty ComponentOverrideRecord)
+        ComponentClass (ObjectProperty) = obj -45
+        ComponentTemplate (ObjectProperty) = obj 247
+        ComponentKey (StructProperty ComponentKey)
+          OwnerClass (ObjectProperty) = obj -4
+          SCSVariableName (NameProperty) = Sphere
+          AssociatedGuid (StructProperty Guid) = 1.82842e+08 1.17003e+09 1.7583e+09 2.9781e+09
+        CookedComponentInstancingData (StructProperty BlueprintCookedComponentInstancingData)
+          bIsValid (BoolProperty) = 0
+          ChangedPropertyList (ArrayProperty of StructProperty) = 0
+      1 (StructProperty ComponentOverrideRecord)
+        ComponentClass (ObjectProperty) = obj -45
+        ComponentTemplate (ObjectProperty) = obj 248
+        ComponentKey (StructProperty ComponentKey)
+          OwnerClass (ObjectProperty) = obj -3
+          SCSVariableName (NameProperty) = SphereCollision
+          AssociatedGuid (StructProperty Guid) = 2.75764e+09 1.08167e+09 3.09072e+09 2.06247e+09
+        CookedComponentInstancingData (StructProperty BlueprintCookedComponentInstancingData)
+          bIsValid (BoolProperty) = 0
+          ChangedPropertyList (ArrayProperty of StructProperty) = 0
+    -- Eigenschaften ok, Ende bei +3a4 von 3a8
+exp 242 DefaultSceneRoot_GEN_VARIABLE : SceneComponent  outer 239  @119e0 +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 243 SCS_Node_0 : SCS_Node  outer 246  @119ec +a8
+    ComponentClass (ObjectProperty) = obj -42
+    ComponentTemplate (ObjectProperty) = obj 243
+    VariableGuid (StructProperty Guid) = 2.98586e+09 1.2016e+09 3.16546e+09 3.42658e+09
+    InternalVariableName (NameProperty) = DefaultSceneRoot
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 244 SCS_Node_2 : SCS_Node  outer 246  @11a94 +ea
+    ComponentClass (ObjectProperty) = obj -33
+    ComponentTemplate (ObjectProperty) = obj 241
+    ParentComponentOrVariableName (NameProperty) = Sphere
+    ParentComponentOwnerClassName (NameProperty) = BP_Weapon_Base_C
+    VariableGuid (StructProperty Guid) = 2.27203e+09 1.24998e+09 2.98367e+09 4.00957e+08
+    InternalVariableName (NameProperty) = FireEndArea
+    -- Eigenschaften ok, Ende bei +e6 von ea
+exp 245 SimpleConstructionScript_0 : SimpleConstructionScript  outer 239  @11b7e +7b
+    RootNodes (ArrayProperty of ObjectProperty) [1]
+      0 (ObjectProperty) = obj 245
+    AllNodes (ArrayProperty of ObjectProperty) [1]
+      0 (ObjectProperty) = obj 245
+    DefaultSceneRootNode (ObjectProperty) = obj 244
+    -- Eigenschaften ok, Ende bei +77 von 7b
+exp 246 Sphere_GEN_VARIABLE : SphereComponent  outer 239  @11bf9 +45a
+    BodyInstance (StructProperty BodyInstance)
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [11]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Pawn
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          1 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Camera
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          2 (StructProperty ResponseChannel)
+            Channel (NameProperty) = PhysicsBody
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          3 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Vehicle
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          4 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Destructible
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          5 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Projectile
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          6 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          7 (StructProperty ResponseChannel)
+            Channel (NameProperty) = ProjectileAll
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          8 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Wall
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          9 (StructProperty ResponseChannel)
+            Channel (NameProperty) = WireKunai
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          10 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Visibility
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+    -- Eigenschaften ok, Ende bei +456 von 45a
+exp 247 SphereCollision_GEN_VARIABLE : SphereComponent  outer 239  @12053 +593
+    bGenerateOverlapEvents (BoolProperty) = 0
+    BodyInstance (StructProperty BodyInstance)
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [14]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Visibility
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          1 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Camera
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          2 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          3 (StructProperty ResponseChannel)
+            Channel (NameProperty) = WorldStatic
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          4 (StructProperty ResponseChannel)
+            Channel (NameProperty) = WorldDynamic
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          5 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Pawn
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          6 (StructProperty ResponseChannel)
+            Channel (NameProperty) = PhysicsBody
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          7 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Vehicle
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          8 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Destructible
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          9 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Projectile
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          10 (StructProperty ResponseChannel)
+            Channel (NameProperty) = ProjectileAll
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          11 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Wall
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          12 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Shield
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          13 (StructProperty ResponseChannel)
+            Channel (NameProperty) = WireKunai
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      CollisionEnabled (ByteProperty ECollisionEnabled) = ECollisionEnabled::NoCollision
+    -- Eigenschaften ok, Ende bei +58f von 593
+
+== dependances /Game :
+  /Game/Weapons/BaseBlueprints/BP_Projectile_Base
+  /Game/Weapons/BaseBlueprints/BP_Weapon_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base
+  /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Fire
+  /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_D84NJ2_Shoot
+  /Game/Weapons/Ninjutsu/D84NJ2/Blueprints/BP_ProjectileProps_D84NJ2
+  /Game/Weapons/Ninjutsu/D84NJ2/Particles/P_WEP_D84NJ2_WireHit_01

@@ -1,0 +1,467 @@
+== /Game/Weapons/Ninjutsu/SuperSharkBomb/Blueprints/BP_SuperSharkBomb
+fichier : NARUTO/Content/Weapons/Ninjutsu/SuperSharkBomb/Blueprints/BP_SuperSharkBomb.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : IntProperty
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/SuperSharkBomb/Blueprints/BP_SuperSharkBomb.uasset  20 599 octets
+  NARUTO/Content/Weapons/Ninjutsu/SuperSharkBomb/Blueprints/BP_SuperSharkBomb.uexp  10 534 octets
+
+/Game/Weapons/Ninjutsu/SuperSharkBomb/Blueprints/BP_SuperSharkBomb  flags 80000000  318 Namen  111 Importe  62 Exporte  Kopf 20599  Bulk ab 31129  Daten 31133
+  imp  0 /Game/Items/Shark/Shark_Super/Animation/Shark_Aerial_Ninjutsu_SuperSharkBomb_Attack.Shark_Aerial_Ninjutsu_SuperSharkBomb_Attack (AnimSequence)
+  imp  1 /Game/Blueprints/DamageType/NN_DamageType_NinjaSkill_Special.NN_DamageType_NinjaSkill_Special_C (BlueprintGeneratedClass)
+  imp  2 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C (BlueprintGeneratedClass)
+  imp  3 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.BP_Weapon_Base_C (BlueprintGeneratedClass)
+  imp  4 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C (BlueprintGeneratedClass)
+  imp  5 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C (BlueprintGeneratedClass)
+  imp  6 /Script/Engine.Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+  imp  7 /Script/CoreUObject.Default__BoolProperty (BoolProperty)
+  imp  8 /Script/NARUTO.NN_CharacterPawnBase.IsDead (BoolProperty)
+  imp  9 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.Default__BP_Ninjutsu_Base_C (BP_Ninjutsu_Base_C)
+  imp 10 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.Default__BP_Ninjutsu_Shooting_Base_C (BP_Ninjutsu_Shooting_Base_C)
+  imp 11 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.Default__BP_Projectile_Base_C (BP_Projectile_Base_C)
+  imp 12 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.Default__BP_Weapon_Base_C (BP_Weapon_Base_C)
+  imp 13 /Script/ClothingSystemRuntime.ClothingSimulationFactoryNv (Class)
+  imp 14 /Script/CoreUObject.BoolProperty (Class)
+  imp 15 /Script/CoreUObject.FloatProperty (Class)
+  imp 16 /Script/CoreUObject.Function (Class)
+  imp 17 /Script/CoreUObject.IntProperty (Class)
+  imp 18 /Script/CoreUObject.NameProperty (Class)
+  imp 19 /Script/CoreUObject.Object (Class)
+  imp 20 /Script/CoreUObject.ObjectProperty (Class)
+  imp 21 /Script/CoreUObject.StructProperty (Class)
+  imp 22 /Script/Engine.Actor (Class)
+  imp 23 /Script/Engine.BlueprintGeneratedClass (Class)
+  imp 24 /Script/Engine.InheritableComponentHandler (Class)
+  imp 25 /Script/Engine.KismetMathLibrary (Class)
+  imp 26 /Script/Engine.KismetSystemLibrary (Class)
+  imp 27 /Script/Engine.PrimitiveComponent (Class)
+  imp 28 /Script/Engine.ProjectileMovementComponent (Class)
+  imp 29 /Script/Engine.SceneComponent (Class)
+  imp 30 /Script/Engine.SCS_Node (Class)
+  imp 31 /Script/Engine.SimpleConstructionScript (Class)
+  imp 32 /Script/Engine.SkeletalMeshComponent (Class)
+  imp 33 /Script/Engine.SphereComponent (Class)
+  imp 34 /Script/NARUTO.NN_CharacterPawn (Class)
+  imp 35 /Script/NARUTO.NN_CharacterPawnBase (Class)
+  imp 36 /Script/NARUTO.NN_PlayerPawn_Base (Class)
+  imp 37 /Script/NARUTO.NN_Weapon (Class)
+  imp 38 /Game/Sounds/Blueprints/FL_Sound.Default__FL_Sound_C (FL_Sound_C)
+  imp 39 /Script/CoreUObject.Default__FloatProperty (FloatProperty)
+  imp 40 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.AttackHitEvent (Function)
+  imp 41 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.CheckHit (Function)
+  imp 42 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.ReceiveTick (Function)
+  imp 43 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.ReceiveBeginPlay (Function)
+  imp 44 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.UserConstructionScript (Function)
+  imp 45 /Script/CoreUObject.Default__Function (Function)
+  imp 46 /Script/Engine.Actor.GetOwner (Function)
+  imp 47 /Script/Engine.Actor.HasAuthority (Function)
+  imp 48 /Script/Engine.KismetMathLibrary.Add_IntInt (Function)
+  imp 49 /Script/Engine.KismetMathLibrary.Less_IntInt (Function)
+  imp 50 /Script/Engine.KismetSystemLibrary.IsValid (Function)
+  imp 51 /Script/Engine.KismetSystemLibrary.K2_ClearAndInvalidateTimerHandle (Function)
+  imp 52 /Script/Engine.KismetSystemLibrary.K2_IsValidTimerHandle (Function)
+  imp 53 /Script/Engine.KismetSystemLibrary.K2_SetTimer (Function)
+  imp 54 /Script/NARUTO.NN_CharacterPawn.AddBuff (Function)
+  imp 55 /Script/NARUTO.NN_CharacterPawn.AddGamePlayScore (Function)
+  imp 56 /Script/NARUTO.NN_CharacterPawnBase.GetAgainstType (Function)
+  imp 57 /Script/NARUTO.NN_Weapon.DisableOverlapByD35NJ3 (Function)
+  imp 58 /Script/NARUTO.NN_Weapon.GetLostEffectType (Function)
+  imp 59 /Script/NARUTO.NN_Weapon.OnCanIncrementFinishMoveGaugeByDamage (Function)
+  imp 60 /Script/Engine.Default__InheritableComponentHandler (InheritableComponentHandler)
+  imp 61 /Script/CoreUObject.Default__IntProperty (IntProperty)
+  imp 62 /Script/Engine.Default__KismetSystemLibrary (KismetSystemLibrary)
+  imp 63 /Script/CoreUObject.Default__NameProperty (NameProperty)
+  imp 64 /Game/Blueprints/DamageType/NN_DamageType_NinjaSkill_Special.Default__NN_DamageType_NinjaSkill_Special_C (NN_DamageType_NinjaSkill_Special_C)
+  imp 65 /Game/Weapons/Ninjutsu/SuperSharkBomb/Blueprints/BP_ProjectileProps_SuperSharkBomb.BP_ProjectileProps_SuperSharkBomb (NN_WeaponProps)
+  imp 66 /Script/CoreUObject.Default__ObjectProperty (ObjectProperty)
+  imp 67 /Script/Engine.Actor.Instigator (ObjectProperty)
+  imp 68 /Game/Blueprints/DamageType/NN_DamageType_NinjaSkill_Special./Game/Blueprints/DamageType/NN_DamageType_NinjaSkill_Special (Package)
+  imp 69 /Game/Items/Shark/Shark_Super/Animation/Shark_Aerial_Ninjutsu_SuperSharkBomb_Attack./Game/Items/Shark/Shark_Super/Animation/Shark_Aerial_Ninjutsu_SuperSharkBomb_Attack (Package)
+  imp 70 /Game/Sounds/Blueprints/FL_Sound./Game/Sounds/Blueprints/FL_Sound (Package)
+  imp 71 /Game/Weapons/BaseBlueprints/BP_Projectile_Base./Game/Weapons/BaseBlueprints/BP_Projectile_Base (Package)
+  imp 72 /Game/Weapons/BaseBlueprints/BP_Weapon_Base./Game/Weapons/BaseBlueprints/BP_Weapon_Base (Package)
+  imp 73 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base (Package)
+  imp 74 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base (Package)
+  imp 75 /Game/Weapons/Ninjutsu/SuperSharkBomb/Blueprints/BP_ProjectileProps_SuperSharkBomb./Game/Weapons/Ninjutsu/SuperSharkBomb/Blueprints/BP_ProjectileProps_SuperSharkBomb (Package)
+  imp 76 /Game/Weapons/Ninjutsu/SuperSharkBomb/Meshes/SK_WEP_Eff_SuperSharkBomb_A_01./Game/Weapons/Ninjutsu/SuperSharkBomb/Meshes/SK_WEP_Eff_SuperSharkBomb_A_01 (Package)
+  imp 77 /Game/Weapons/Ninjutsu/SuperSharkBomb/Particles/P_WEP_SuperSharkBomb_Hit_A./Game/Weapons/Ninjutsu/SuperSharkBomb/Particles/P_WEP_SuperSharkBomb_Hit_A (Package)
+  imp 78 /Game/Weapons/Ninjutsu/SuperSharkBomb/Particles/P_WEP_SuperSharkBomb_Loop./Game/Weapons/Ninjutsu/SuperSharkBomb/Particles/P_WEP_SuperSharkBomb_Loop (Package)
+  imp 79 /Game/Weapons/Ninjutsu/SuperSharkBomb/Particles/P_WEP_SuperSharkBomb_Muzzle./Game/Weapons/Ninjutsu/SuperSharkBomb/Particles/P_WEP_SuperSharkBomb_Muzzle (Package)
+  imp 80 /Script/ClothingSystemRuntime./Script/ClothingSystemRuntime (Package)
+  imp 81 /Script/CoreUObject./Script/CoreUObject (Package)
+  imp 82 /Script/Engine./Script/Engine (Package)
+  imp 83 /Script/GameplayTags./Script/GameplayTags (Package)
+  imp 84 /Script/NARUTO./Script/NARUTO (Package)
+  imp 85 /Game/Weapons/Ninjutsu/SuperSharkBomb/Particles/P_WEP_SuperSharkBomb_Hit_A.P_WEP_SuperSharkBomb_Hit_A (ParticleSystem)
+  imp 86 /Game/Weapons/Ninjutsu/SuperSharkBomb/Particles/P_WEP_SuperSharkBomb_Loop.P_WEP_SuperSharkBomb_Loop (ParticleSystem)
+  imp 87 /Game/Weapons/Ninjutsu/SuperSharkBomb/Particles/P_WEP_SuperSharkBomb_Muzzle.P_WEP_SuperSharkBomb_Muzzle (ParticleSystem)
+  imp 88 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.ProjectileMovement_GEN_VARIABLE (ProjectileMovementComponent)
+  imp 89 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.DefaultSceneRoot_REMOVED_628DECC24C105FE693737EA4B602DB70 (SceneComponent)
+  imp 90 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.FakeTarget_GEN_VARIABLE (SceneComponent)
+  imp 91 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.BP_Weapon_Base_C.DefaultSceneRoot_REMOVED_1422D7FE4042589AAE1156AB42BAD9B3 (SceneComponent)
+  imp 92 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 93 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 94 /Script/Engine.Default__SceneComponent (SceneComponent)
+  imp 95 /Script/CoreUObject.Vector (ScriptStruct)
+  imp 96 /Script/Engine.PointerToUberGraphFrame (ScriptStruct)
+  imp 97 /Script/Engine.TimerHandle (ScriptStruct)
+  imp 98 /Script/GameplayTags.GameplayTag (ScriptStruct)
+  imp 99 /Script/NARUTO.NN_BuffInfo (ScriptStruct)
+  imp 100 /Script/Engine.Default__SCS_Node (SCS_Node)
+  imp 101 /Script/Engine.Default__SimpleConstructionScript (SimpleConstructionScript)
+  imp 102 /Game/Weapons/Ninjutsu/SuperSharkBomb/Meshes/SK_WEP_Eff_SuperSharkBomb_A_01.SK_WEP_Eff_SuperSharkBomb_A_01 (SkeletalMesh)
+  imp 103 /Script/Engine.Default__SkeletalMeshComponent (SkeletalMeshComponent)
+  imp 104 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 105 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 106 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.BP_Weapon_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 107 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 108 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 109 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 110 /Script/CoreUObject.Default__StructProperty (StructProperty)
+exp 0 MaxNumOfIncFinshMoveGauge : IntProperty  outer 52  @5077 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 1 NumOfIncFinshMoveGauge : IntProperty  outer 52  @509b +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 2 Mesh : ObjectProperty  outer 52  @50bf +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 3 Timer_InitTeamColor : StructProperty  outer 52  @50e7 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 4 HitBuffInfo : StructProperty  outer 52  @510f +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 5 AddFinishMoveGaugeNum : FloatProperty  outer 52  @5137 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 6 SuperSharkBombDebuff : StructProperty  outer 52  @515b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 7 SK_WEP_Eff_SuperSharkBomb_A_01 : ObjectProperty  outer 52  @5183 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 8 CallFunc_GetAgainstType_ReturnValue : NameProperty  outer 21  @51ab +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 9 K2Node_DynamicCast_bSuccess2 : BoolProperty  outer 21  @51cf +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 10 K2Node_DynamicCast_AsNN_Player_Pawn_Base : ObjectProperty  outer 21  @51f5 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 11 K2Node_DynamicCast_bSuccess : BoolProperty  outer 21  @521d +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 12 K2Node_DynamicCast_AsNN_Character_Pawn : ObjectProperty  outer 21  @5243 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 13 CallFunc_GetOwner_ReturnValue : ObjectProperty  outer 21  @526b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 14 K2Node_Event_BeatenAnim : BoolProperty  outer 21  @5293 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 15 K2Node_Event_HitLoc : StructProperty  outer 21  @52b9 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 16 K2Node_Event_Target : ObjectProperty  outer 21  @52e1 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 17 K2Node_Event_DeltaSeconds : FloatProperty  outer 21  @5309 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 18 CallFunc_HasAuthority_ReturnValue : BoolProperty  outer 21  @532d +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 19 EntryPoint : IntProperty  outer 21  @5353 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 20 ExecuteUbergraph_BP_SuperSharkBomb : Function  outer 52  @5377 +185
+    -- Eigenschaften ok, Ende bei +8 von 185
+exp 21 BeatenAnim : BoolProperty  outer 25  @54fc +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 22 HitLoc : StructProperty  outer 25  @5522 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 23 Target : ObjectProperty  outer 25  @554a +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 24 AttackHitEvent : Function  outer 52  @5572 +5c
+    -- Eigenschaften ok, Ende bei +8 von 5c
+exp 25 DeltaSeconds : FloatProperty  outer 27  @55ce +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 26 ReceiveTick : Function  outer 52  @55f2 +48
+    -- Eigenschaften ok, Ende bei +8 von 48
+exp 27 ReceiveBeginPlay : Function  outer 52  @563a +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 28 UserConstructionScript : Function  outer 52  @5678 +35
+    -- Eigenschaften ok, Ende bei +8 von 35
+exp 29 CallFunc_IsValid_ReturnValue : BoolProperty  outer 34  @56ad +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 30 CallFunc_K2_SetTimer_ReturnValue : StructProperty  outer 34  @56d3 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 31 CallFunc_SetupOwnerTeamColor_DoSet : BoolProperty  outer 34  @56fb +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 32 CallFunc_K2_IsValidTimerHandle_ReturnValue : BoolProperty  outer 34  @5721 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 33 InitTeamColor : Function  outer 52  @5747 +fc
+    -- Eigenschaften ok, Ende bei +8 von fc
+exp 34 CallFunc_Less_IntInt_ReturnValue : BoolProperty  outer 38  @5843 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 35 CallFunc_Add_IntInt_ReturnValue : IntProperty  outer 38  @5869 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 36 ReturnValue : BoolProperty  outer 38  @588d +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 37 OnCanIncrementFinishMoveGaugeByDamage : Function  outer 52  @58b3 +8f
+    -- Eigenschaften ok, Ende bei +8 von 8f
+exp 38 K2Node_DynamicCast_bSuccess : BoolProperty  outer 46  @5942 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 39 K2Node_DynamicCast_AsNN_Character_Pawn : ObjectProperty  outer 46  @5968 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 40 CallFunc_IsValid_ReturnValue : BoolProperty  outer 46  @5990 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 41 CallFunc_CheckHit_bHit : BoolProperty  outer 46  @59b6 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 42 bHit : BoolProperty  outer 46  @59dc +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 43 OtherComp : ObjectProperty  outer 46  @5a02 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 44 Other : ObjectProperty  outer 46  @5a2a +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 45 CheckHit : Function  outer 52  @5a52 +cb
+    -- Eigenschaften ok, Ende bei +8 von cb
+exp 46 ReturnValue : BoolProperty  outer 48  @5b1d +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 47 DisableOverlapByD35NJ3 : Function  outer 52  @5b43 +3a
+    -- Eigenschaften ok, Ende bei +8 von 3a
+exp 48 ReturnValue : IntProperty  outer 50  @5b7d +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 49 GetLostEffectType : Function  outer 52  @5ba1 +42
+    -- Eigenschaften ok, Ende bei +8 von 42
+exp 50 UberGraphFrame : StructProperty  outer 52  @5be3 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 51 BP_SuperSharkBomb_C : BlueprintGeneratedClass  outer 0  @5c0b +13c
+    SimpleConstructionScript (ObjectProperty) = obj 59
+    InheritableComponentHandler (ObjectProperty) = obj 54
+    UberGraphFramePointerProperty (ObjectProperty) = obj 51
+    UberGraphFunction (ObjectProperty) = obj 21
+    -- Eigenschaften ok, Ende bei +7c von 13c
+exp 52 Default__BP_SuperSharkBomb_C : BP_SuperSharkBomb_C  outer 0  @5d47 +b84
+    UberGraphFrame (StructProperty PointerToUberGraphFrame) = 0
+    SuperSharkBombDebuff (StructProperty NN_BuffInfo)
+      Type (EnumProperty ENN_StatusManageType) = ENN_StatusManageType::ENN_StatusManageType_ClearNinjutsuCoolStock
+      EffectiveTime (FloatProperty) = 0.001
+      DeltaTime (FloatProperty) = 0.1
+      Param (FloatProperty) = 0
+      DamageHitInfoName (NameProperty) = None
+      IsCanNotClearDebuff (BoolProperty) = 0
+      IsCanNotInhibitionBuff (BoolProperty) = 0
+      UseBuffEffect (BoolProperty) = 0
+      HUDEffectType (EnumProperty ENN_StatusManage_HUDEffectType) = ENN_StatusManage_HUDEffectType::ENN_StatusManage_HUDEffectType_Invalid
+      UseMaterialEffect (BoolProperty) = 0
+      MaterialEffectName (NameProperty) = None
+      MaterialEffectCurve (ObjectProperty) = obj 0
+      MaterialEffectCurveEnemy (ObjectProperty) = obj 0
+      UseBuffStock (BoolProperty) = 0
+      IsModeBuff (BoolProperty) = 0
+      InitDeltaTime (FloatProperty) = 0
+      TargetNinjaSkillSlot (IntProperty) = 4.29497e+09
+      AttackerWeapon (ObjectProperty) = obj 0
+      AttackerCharacter (ObjectProperty) = obj 0
+      IsTmpBuff (BoolProperty) = 0
+      Index (IntProperty) = 4.29497e+09
+      IsLinkedEffectBuff (BoolProperty) = 0
+      AddBuffType (EnumProperty ENN_StatusManage_AddBuffType) = ENN_StatusManage_AddBuffType::ENN_StatusManage_AddBuffType_None
+    AddFinishMoveGaugeNum (FloatProperty) = 50
+    HitBuffInfo (StructProperty NN_BuffInfo)
+      Type (EnumProperty ENN_StatusManageType) = ENN_StatusManageType::ENN_StatusManageType_IncrementFinishMoveGauge
+      EffectiveTime (FloatProperty) = 0.001
+      DeltaTime (FloatProperty) = 0
+      Param (FloatProperty) = 50
+      DamageHitInfoName (NameProperty) = None
+      IsCanNotClearDebuff (BoolProperty) = 0
+      IsCanNotInhibitionBuff (BoolProperty) = 0
+      UseBuffEffect (BoolProperty) = 0
+      HUDEffectType (EnumProperty ENN_StatusManage_HUDEffectType) = ENN_StatusManage_HUDEffectType::ENN_StatusManage_HUDEffectType_Invalid
+      UseMaterialEffect (BoolProperty) = 0
+      MaterialEffectName (NameProperty) = None
+      MaterialEffectCurve (ObjectProperty) = obj 0
+      MaterialEffectCurveEnemy (ObjectProperty) = obj 0
+      UseBuffStock (BoolProperty) = 0
+      IsModeBuff (BoolProperty) = 0
+      InitDeltaTime (FloatProperty) = 0
+      TargetNinjaSkillSlot (IntProperty) = 4.29497e+09
+      AttackerWeapon (ObjectProperty) = obj 0
+      AttackerCharacter (ObjectProperty) = obj 0
+      IsTmpBuff (BoolProperty) = 0
+      Index (IntProperty) = 4.29497e+09
+      IsLinkedEffectBuff (BoolProperty) = 0
+      AddBuffType (EnumProperty ENN_StatusManage_AddBuffType) = ENN_StatusManage_AddBuffType::ENN_StatusManage_AddBuffType_None
+    Timer_InitTeamColor (StructProperty TimerHandle)
+      Handle (UInt64Property) = 0
+    MaxNumOfIncFinshMoveGauge (IntProperty) = 4
+    NinjutsuName (StrProperty) = 水遁・大鮫弾の術
+    SkillType (EnumProperty ENN_NinjaSkillType) = ENN_NinjaSkillType::ENN_NinjaSkillType_SuperSharkBomb
+    MuzzleEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -88
+      AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+      Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+        Translation (StructProperty Vector) = 0 0 40
+    LoopEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -87
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    Speed (FloatProperty) = 1500
+    LifeTime (FloatProperty) = 5
+    IsExplodeOnStop (BoolProperty) = 0
+    IsExplodeOnHit (BoolProperty) = 0
+    ImpactEffect (ObjectProperty) = obj -86
+    CollisionRadius (FloatProperty) = 650
+    HomingPower (FloatProperty) = 1000
+    HomingStartTime (FloatProperty) = 0.3
+    HomingEndTime (FloatProperty) = 2
+    DisableGuard (BoolProperty) = 1
+    AnyHitRadius (FloatProperty) = 650
+    DelayDestroyTime (FloatProperty) = 0.1
+    IsMultiHit (BoolProperty) = 1
+    IsMultiHitOnce (BoolProperty) = 1
+    MultiHitRadius (FloatProperty) = 650
+    MultiHitStartAdjustHeight (FloatProperty) = 100
+    MultiHitDeltaTime (FloatProperty) = 1
+    MultiHitTime (FloatProperty) = 5
+    MultiHitChangeRadiusTime (FloatProperty) = 2
+    HitDamageType (ObjectProperty) = obj -2
+    AttackHitInfoName (NameProperty) = SuperSharkBomb
+    IsMoveOnHit (BoolProperty) = 1
+    CounterHitPower (IntProperty) = 99
+    WeaponPropsData (ObjectProperty) = obj -66
+    m_GamePlayTagContainer (StructProperty GameplayTagContainer) = 0
+    SoundID (NameProperty) = ID_WeaponSound_Ninjutsu_SuperSharkBomb
+    -- Eigenschaften ok, Ende bei +b84 von b84
+exp 53 InheritableComponentHandler : InheritableComponentHandler  outer 52  @68cb +54b
+    Records (ArrayProperty of StructProperty) [3]
+      0 (StructProperty ComponentOverrideRecord)
+        ComponentClass (ObjectProperty) = obj -34
+        ComponentTemplate (ObjectProperty) = obj 62
+        ComponentKey (StructProperty ComponentKey)
+          OwnerClass (ObjectProperty) = obj -3
+          SCSVariableName (NameProperty) = SphereCollision
+          AssociatedGuid (StructProperty Guid) = 2.75764e+09 1.08167e+09 3.09072e+09 2.06247e+09
+        CookedComponentInstancingData (StructProperty BlueprintCookedComponentInstancingData)
+          bIsValid (BoolProperty) = 0
+          ChangedPropertyList (ArrayProperty of StructProperty) = 0
+      1 (StructProperty ComponentOverrideRecord)
+        ComponentClass (ObjectProperty) = obj -34
+        ComponentTemplate (ObjectProperty) = obj 61
+        ComponentKey (StructProperty ComponentKey)
+          OwnerClass (ObjectProperty) = obj -4
+          SCSVariableName (NameProperty) = Sphere
+          AssociatedGuid (StructProperty Guid) = 1.82842e+08 1.17003e+09 1.7583e+09 2.9781e+09
+        CookedComponentInstancingData (StructProperty BlueprintCookedComponentInstancingData)
+          bIsValid (BoolProperty) = 0
+          ChangedPropertyList (ArrayProperty of StructProperty) = 0
+      2 (StructProperty ComponentOverrideRecord)
+        ComponentClass (ObjectProperty) = obj -29
+        ComponentTemplate (ObjectProperty) = obj 55
+        ComponentKey (StructProperty ComponentKey)
+          OwnerClass (ObjectProperty) = obj -3
+          SCSVariableName (NameProperty) = ProjectileMovement
+          AssociatedGuid (StructProperty Guid) = 3.60545e+09 1.12928e+09 2.13284e+09 7.8419e+08
+        CookedComponentInstancingData (StructProperty BlueprintCookedComponentInstancingData)
+          bIsValid (BoolProperty) = 0
+          ChangedPropertyList (ArrayProperty of StructProperty) = 0
+    -- Eigenschaften ok, Ende bei +547 von 54b
+exp 54 ProjectileMovement_GEN_VARIABLE : ProjectileMovementComponent  outer 52  @6e16 +b4
+    InitialSpeed (FloatProperty) = 3500
+    MaxSpeed (FloatProperty) = 3500
+    bShouldBounce (BoolProperty) = 1
+    bBounceAngleAffectsFriction (BoolProperty) = 1
+    ProjectileGravityScale (FloatProperty) = 0
+    Bounciness (FloatProperty) = 0.9
+    -- Eigenschaften ok, Ende bei +b0 von b4
+exp 55 DefaultSceneRoot_GEN_VARIABLE : SceneComponent  outer 52  @6eca +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 56 SCS_Node_0 : SCS_Node  outer 59  @6ed6 +a8
+    ComponentClass (ObjectProperty) = obj -30
+    ComponentTemplate (ObjectProperty) = obj 56
+    VariableGuid (StructProperty Guid) = 6.88909e+08 1.10731e+09 4.06962e+09 2.14143e+09
+    InternalVariableName (NameProperty) = DefaultSceneRoot
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 57 SCS_Node_3 : SCS_Node  outer 59  @6f7e +ea
+    ComponentClass (ObjectProperty) = obj -33
+    ComponentTemplate (ObjectProperty) = obj 60
+    ParentComponentOrVariableName (NameProperty) = Sphere
+    ParentComponentOwnerClassName (NameProperty) = BP_Weapon_Base_C
+    VariableGuid (StructProperty Guid) = 2.01319e+09 1.32888e+09 2.781e+09 2.88565e+09
+    InternalVariableName (NameProperty) = SK_WEP_Eff_SuperSharkBomb_A_01
+    -- Eigenschaften ok, Ende bei +e6 von ea
+exp 58 SimpleConstructionScript_0 : SimpleConstructionScript  outer 52  @7068 +7b
+    RootNodes (ArrayProperty of ObjectProperty) [1]
+      0 (ObjectProperty) = obj 58
+    AllNodes (ArrayProperty of ObjectProperty) [1]
+      0 (ObjectProperty) = obj 58
+    DefaultSceneRootNode (ObjectProperty) = obj 57
+    -- Eigenschaften ok, Ende bei +77 von 7b
+exp 59 SK_WEP_Eff_SuperSharkBomb_A_01_GEN_VARIABLE : SkeletalMeshComponent  outer 52  @70e3 +17c
+    AnimationMode (ByteProperty EAnimationMode) = EAnimationMode::AnimationSingleNode
+    AnimationData (StructProperty SingleAnimationPlayData)
+      AnimToPlay (ObjectProperty) = obj -1
+    ClothingSimulationFactory (ObjectProperty) = obj -14
+    SkeletalMesh (ObjectProperty) = obj -103
+    RelativeLocation (StructProperty Vector) = -100 0 0
+    RelativeRotation (StructProperty Rotator) = 0 -90 0
+    RelativeScale3D (StructProperty Vector) = 3 3 3
+    -- Eigenschaften ok, Ende bei +178 von 17c
+exp 60 Sphere_GEN_VARIABLE : SphereComponent  outer 52  @725f +257
+    bGenerateOverlapEvents (BoolProperty) = 0
+    BodyInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = NoCollision
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [3]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Visibility
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          1 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Camera
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          2 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      CollisionEnabled (ByteProperty ECollisionEnabled) = ECollisionEnabled::NoCollision
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +253 von 257
+exp 61 SphereCollision_GEN_VARIABLE : SphereComponent  outer 52  @74b6 +4e3
+    SphereRadius (FloatProperty) = 250
+    BodyInstance (StructProperty BodyInstance)
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [12]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = WorldStatic
+            Response (ByteProperty ECollisionResponse) = ECR_Overlap
+          1 (StructProperty ResponseChannel)
+            Channel (NameProperty) = WorldDynamic
+            Response (ByteProperty ECollisionResponse) = ECR_Overlap
+          2 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Pawn
+            Response (ByteProperty ECollisionResponse) = ECR_Overlap
+          3 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Visibility
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          4 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Camera
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          5 (StructProperty ResponseChannel)
+            Channel (NameProperty) = PhysicsBody
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          6 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Vehicle
+            Response (ByteProperty ECollisionResponse) = ECR_Overlap
+          7 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Destructible
+            Response (ByteProperty ECollisionResponse) = ECR_Overlap
+          8 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Projectile
+            Response (ByteProperty ECollisionResponse) = ECR_Overlap
+          9 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          10 (StructProperty ResponseChannel)
+            Channel (NameProperty) = ProjectileAll
+            Response (ByteProperty ECollisionResponse) = ECR_Overlap
+          11 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Wall
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      bEnableGravity (BoolProperty) = 0
+    -- Eigenschaften ok, Ende bei +4df von 4e3
+
+== dependances /Game :
+  /Game/Blueprints/DamageType/NN_DamageType_NinjaSkill_Special
+  /Game/Items/Shark/Shark_Super/Animation/Shark_Aerial_Ninjutsu_SuperSharkBomb_Attack
+  /Game/Sounds/Blueprints/FL_Sound
+  /Game/Weapons/BaseBlueprints/BP_Projectile_Base
+  /Game/Weapons/BaseBlueprints/BP_Weapon_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base
+  /Game/Weapons/Ninjutsu/SuperSharkBomb/Blueprints/BP_ProjectileProps_SuperSharkBomb
+  /Game/Weapons/Ninjutsu/SuperSharkBomb/Meshes/SK_WEP_Eff_SuperSharkBomb_A_01
+  /Game/Weapons/Ninjutsu/SuperSharkBomb/Particles/P_WEP_SuperSharkBomb_Hit_A
+  /Game/Weapons/Ninjutsu/SuperSharkBomb/Particles/P_WEP_SuperSharkBomb_Loop
+  /Game/Weapons/Ninjutsu/SuperSharkBomb/Particles/P_WEP_SuperSharkBomb_Muzzle

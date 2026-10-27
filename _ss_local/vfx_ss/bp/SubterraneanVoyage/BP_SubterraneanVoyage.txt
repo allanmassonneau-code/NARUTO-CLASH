@@ -1,0 +1,724 @@
+== /Game/Weapons/Ninjutsu/SubterraneanVoyage/Blueprints/BP_SubterraneanVoyage
+fichier : NARUTO/Content/Weapons/Ninjutsu/SubterraneanVoyage/Blueprints/BP_SubterraneanVoyage.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : BoolProperty
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/SubterraneanVoyage/Blueprints/BP_SubterraneanVoyage.uasset  32 746 octets
+  NARUTO/Content/Weapons/Ninjutsu/SubterraneanVoyage/Blueprints/BP_SubterraneanVoyage.uexp  17 800 octets
+
+/Game/Weapons/Ninjutsu/SubterraneanVoyage/Blueprints/BP_SubterraneanVoyage  flags 80000000  432 Namen  200 Importe  106 Exporte  Kopf 32746  Bulk ab 50542  Daten 50546
+  imp  0 /Script/CoreUObject.Default__ArrayProperty (ArrayProperty)
+  imp  1 /Game/Blueprints/Pawns/BP_Pawn_AI.BP_Pawn_AI_C (BlueprintGeneratedClass)
+  imp  2 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base.BP_Pawn_AI_Infantry_Base_C (BlueprintGeneratedClass)
+  imp  3 /Game/Blueprints/Pawns/NN_Pawn_Player.NN_Pawn_Player_C (BlueprintGeneratedClass)
+  imp  4 /Game/Weapons/BaseBlueprints/BP_MeleeWeapon_Base.BP_MeleeWeapon_Base_C (BlueprintGeneratedClass)
+  imp  5 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C (BlueprintGeneratedClass)
+  imp  6 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C (BlueprintGeneratedClass)
+  imp  7 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_ControlMove_Base.BP_Ninjutsu_ControlMove_Base_C (BlueprintGeneratedClass)
+  imp  8 /Script/Engine.Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+  imp  9 /Script/CoreUObject.Default__BoolProperty (BoolProperty)
+  imp 10 /Game/Weapons/BaseBlueprints/BP_MeleeWeapon_Base.Default__BP_MeleeWeapon_Base_C (BP_MeleeWeapon_Base_C)
+  imp 11 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base.BP_Pawn_AI_Infantry_Base_C.BP_Minimap_AI_Component_GEN_VARIABLE (BP_Minimap_AI_Component_C)
+  imp 12 /Game/Blueprints/Pawns/NN_Pawn_Player.NN_Pawn_Player_C.BP_Minimap_Component_GEN_VARIABLE (BP_Minimap_Component_C)
+  imp 13 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.Default__BP_Ninjutsu_Base_C (BP_Ninjutsu_Base_C)
+  imp 14 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_ControlMove_Base.Default__BP_Ninjutsu_ControlMove_Base_C (BP_Ninjutsu_ControlMove_Base_C)
+  imp 15 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C (BP_Pawn_AI_C)
+  imp 16 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base.Default__BP_Pawn_AI_Infantry_Base_C (BP_Pawn_AI_Infantry_Base_C)
+  imp 17 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.Default__BP_Projectile_Base_C (BP_Projectile_Base_C)
+  imp 18 /Game/Blueprints/Pawns/BP_Pawn_AI.BP_Pawn_AI_C.BP_VisibleFromCameraComp_GEN_VARIABLE (BP_VisibleFromCameraComp_C)
+  imp 19 /Game/Blueprints/Pawns/NN_Pawn_Player.NN_Pawn_Player_C.BP_VisibleFromCameraComp_GEN_VARIABLE (BP_VisibleFromCameraComp_C)
+  imp 20 /Script/CoreUObject.Default__ByteProperty (ByteProperty)
+  imp 21 /Script/Engine.PhysicalMaterial.SurfaceType (ByteProperty)
+  imp 22 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.CollisionCylinder (CapsuleComponent)
+  imp 23 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base.Default__BP_Pawn_AI_Infantry_Base_C.CollisionCylinder (CapsuleComponent)
+  imp 24 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.CollisionCylinder (CapsuleComponent)
+  imp 25 /Game/Weapons/BaseBlueprints/BP_MeleeWeapon_Base.BP_MeleeWeapon_Base_C.Capsule_GEN_VARIABLE (CapsuleComponent)
+  imp 26 /Script/CoreUObject.ArrayProperty (Class)
+  imp 27 /Script/CoreUObject.BoolProperty (Class)
+  imp 28 /Script/CoreUObject.ByteProperty (Class)
+  imp 29 /Script/CoreUObject.Class (Class)
+  imp 30 /Script/CoreUObject.ClassProperty (Class)
+  imp 31 /Script/CoreUObject.FloatProperty (Class)
+  imp 32 /Script/CoreUObject.Function (Class)
+  imp 33 /Script/CoreUObject.InterfaceProperty (Class)
+  imp 34 /Script/CoreUObject.IntProperty (Class)
+  imp 35 /Script/CoreUObject.NameProperty (Class)
+  imp 36 /Script/CoreUObject.Object (Class)
+  imp 37 /Script/CoreUObject.ObjectProperty (Class)
+  imp 38 /Script/CoreUObject.StructProperty (Class)
+  imp 39 /Script/Engine.Actor (Class)
+  imp 40 /Script/Engine.BlueprintGeneratedClass (Class)
+  imp 41 /Script/Engine.Character (Class)
+  imp 42 /Script/Engine.GameplayStatics (Class)
+  imp 43 /Script/Engine.InheritableComponentHandler (Class)
+  imp 44 /Script/Engine.KismetMathLibrary (Class)
+  imp 45 /Script/Engine.KismetSystemLibrary (Class)
+  imp 46 /Script/Engine.Pawn (Class)
+  imp 47 /Script/Engine.PhysicalMaterial (Class)
+  imp 48 /Script/Engine.PrimitiveComponent (Class)
+  imp 49 /Script/Engine.ProjectileMovementComponent (Class)
+  imp 50 /Script/Engine.SceneComponent (Class)
+  imp 51 /Script/Engine.SCS_Node (Class)
+  imp 52 /Script/Engine.SimpleConstructionScript (Class)
+  imp 53 /Script/Engine.StaticMeshComponent (Class)
+  imp 54 /Script/GameplayTags.GameplayTagAssetInterface (Class)
+  imp 55 /Script/NARUTO.NN_CharacterPawn (Class)
+  imp 56 /Script/NARUTO.NN_CharacterPawnBase (Class)
+  imp 57 /Script/NARUTO.NN_PlayerPawn_Base (Class)
+  imp 58 /Script/NARUTO.NN_Weapon (Class)
+  imp 59 /Script/CoreUObject.Default__ClassProperty (ClassProperty)
+  imp 60 /Script/Engine.EEndPlayReason (Enum)
+  imp 61 /Script/Engine.EPhysicalSurface (Enum)
+  imp 62 /Game/Sounds/Blueprints/FL_Sound.Default__FL_Sound_C (FL_Sound_C)
+  imp 63 /Script/CoreUObject.Default__FloatProperty (FloatProperty)
+  imp 64 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.ReceiveEndPlay (Function)
+  imp 65 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.OnAttackEndBP (Function)
+  imp 66 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.OnAttackStartBP (Function)
+  imp 67 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_ControlMove_Base.BP_Ninjutsu_ControlMove_Base_C.ReceiveBeginPlay (Function)
+  imp 68 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_ControlMove_Base.BP_Ninjutsu_ControlMove_Base_C.ReceiveTick (Function)
+  imp 69 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_ControlMove_Base.BP_Ninjutsu_ControlMove_Base_C.UserConstructionScript (Function)
+  imp 70 /Script/CoreUObject.Default__Function (Function)
+  imp 71 /Script/Engine.Actor.GetActorUpVector (Function)
+  imp 72 /Script/Engine.Actor.GetGameTimeSinceCreation (Function)
+  imp 73 /Script/Engine.Actor.GetInstigator (Function)
+  imp 74 /Script/Engine.Actor.HasAuthority (Function)
+  imp 75 /Script/Engine.Actor.K2_GetActorLocation (Function)
+  imp 76 /Script/Engine.Actor.K2_GetActorRotation (Function)
+  imp 77 /Script/Engine.GameplayStatics.BreakHitResult (Function)
+  imp 78 /Script/Engine.KismetMathLibrary.Add_VectorVector (Function)
+  imp 79 /Script/Engine.KismetMathLibrary.Multiply_VectorFloat (Function)
+  imp 80 /Script/Engine.KismetMathLibrary.NotEqual_ByteByte (Function)
+  imp 81 /Script/Engine.KismetMathLibrary.Subtract_FloatFloat (Function)
+  imp 82 /Script/Engine.KismetSystemLibrary.Delay (Function)
+  imp 83 /Script/Engine.KismetSystemLibrary.IsValid (Function)
+  imp 84 /Script/Engine.KismetSystemLibrary.K2_ClearAndInvalidateTimerHandle (Function)
+  imp 85 /Script/Engine.KismetSystemLibrary.K2_SetTimer (Function)
+  imp 86 /Script/Engine.KismetSystemLibrary.LineTraceSingle (Function)
+  imp 87 /Script/Engine.SceneComponent.K2_SetWorldLocationAndRotation (Function)
+  imp 88 /Script/Engine.SceneComponent.SetHiddenInGame (Function)
+  imp 89 /Script/NARUTO.NN_CharacterPawn.AddBuff (Function)
+  imp 90 /Script/NARUTO.NN_CharacterPawn.AddGamePlayScore (Function)
+  imp 91 /Script/NARUTO.NN_CharacterPawn.RemoveBuff (Function)
+  imp 92 /Script/NARUTO.NN_CharacterPawn.SetIsSubterraneanVoyage (Function)
+  imp 93 /Script/NARUTO.NN_CharacterPawnBase.GetAgainstType (Function)
+  imp 94 /Script/NARUTO.NN_Weapon.CanDestroyByD35NJ3 (Function)
+  imp 95 /Script/NARUTO.NN_Weapon.DisableOverlapByD35NJ3 (Function)
+  imp 96 /Script/NARUTO.NN_Weapon.DoDestroyByD35NJ3 (Function)
+  imp 97 /Script/NARUTO.NN_Weapon.IsLoopEndIncludeStart (Function)
+  imp 98 /Script/NARUTO.NN_Weapon.IsNoInhibitionByD52NJ2 (Function)
+  imp 99 /Script/Engine.Default__GameplayStatics (GameplayStatics)
+  imp 100 /Script/Engine.Default__InheritableComponentHandler (InheritableComponentHandler)
+  imp 101 /Script/CoreUObject.Default__InterfaceProperty (InterfaceProperty)
+  imp 102 /Script/CoreUObject.Default__IntProperty (IntProperty)
+  imp 103 /Script/Engine.Default__KismetSystemLibrary (KismetSystemLibrary)
+  imp 104 /Script/CoreUObject.Default__NameProperty (NameProperty)
+  imp 105 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.BossActionComponent (NN_BossActionComponent)
+  imp 106 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base.Default__BP_Pawn_AI_Infantry_Base_C.BossActionComponent (NN_BossActionComponent)
+  imp 107 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.BossActionComponent (NN_BossActionComponent)
+  imp 108 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.CameraClippingComponent (NN_CameraClippingComponent)
+  imp 109 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base.Default__BP_Pawn_AI_Infantry_Base_C.CameraClippingComponent (NN_CameraClippingComponent)
+  imp 110 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.CameraClippingComponent (NN_CameraClippingComponent)
+  imp 111 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.CharMoveComp (NN_CharacterMovementComponent)
+  imp 112 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base.Default__BP_Pawn_AI_Infantry_Base_C.CharMoveComp (NN_CharacterMovementComponent)
+  imp 113 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.CharMoveComp (NN_CharacterMovementComponent)
+  imp 114 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.HealthComponent (NN_HealthComponents)
+  imp 115 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base.Default__BP_Pawn_AI_Infantry_Base_C.HealthComponent (NN_HealthComponents)
+  imp 116 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.HealthComponent (NN_HealthComponents)
+  imp 117 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.ParticleManageComponent (NN_ParticleManageComponent)
+  imp 118 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base.Default__BP_Pawn_AI_Infantry_Base_C.ParticleManageComponent (NN_ParticleManageComponent)
+  imp 119 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.ParticleManageComponent (NN_ParticleManageComponent)
+  imp 120 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C (NN_Pawn_Player_C)
+  imp 121 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.PlayerActionComponent (NN_PlayerActionComponent)
+  imp 122 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base.Default__BP_Pawn_AI_Infantry_Base_C.PlayerActionComponent (NN_PlayerActionComponent)
+  imp 123 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.PlayerActionComponent (NN_PlayerActionComponent)
+  imp 124 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.GameplayTasksComponent (NN_PlayTasksComponent)
+  imp 125 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base.Default__BP_Pawn_AI_Infantry_Base_C.GameplayTasksComponent (NN_PlayTasksComponent)
+  imp 126 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.GameplayTasksComponent (NN_PlayTasksComponent)
+  imp 127 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.StatusManageComponent (NN_StatusManageComponent)
+  imp 128 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base.Default__BP_Pawn_AI_Infantry_Base_C.StatusManageComponent (NN_StatusManageComponent)
+  imp 129 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.StatusManageComponent (NN_StatusManageComponent)
+  imp 130 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.TargetLockedComponent (NN_TargetLockedComponent)
+  imp 131 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base.Default__BP_Pawn_AI_Infantry_Base_C.TargetLockedComponent (NN_TargetLockedComponent)
+  imp 132 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.TargetLockedComponent (NN_TargetLockedComponent)
+  imp 133 /Game/Blueprints/Pawns/BP_Pawn_AI.BP_Pawn_AI_C.MeleeWeapon (ObjectProperty)
+  imp 134 /Game/Blueprints/Pawns/NN_Pawn_Player.NN_Pawn_Player_C.EquipMeleeWeapon (ObjectProperty)
+  imp 135 /Script/CoreUObject.Default__ObjectProperty (ObjectProperty)
+  imp 136 /Script/Engine.Actor.Instigator (ObjectProperty)
+  imp 137 /Script/Engine.Character.Mesh (ObjectProperty)
+  imp 138 /Game/Blueprints/Pawns/BP_Pawn_AI./Game/Blueprints/Pawns/BP_Pawn_AI (Package)
+  imp 139 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base./Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base (Package)
+  imp 140 /Game/Blueprints/Pawns/NN_Pawn_Player./Game/Blueprints/Pawns/NN_Pawn_Player (Package)
+  imp 141 /Game/Blueprints/Structs/BP_ParticleInfo./Game/Blueprints/Structs/BP_ParticleInfo (Package)
+  imp 142 /Game/Sounds/Blueprints/FL_Sound./Game/Sounds/Blueprints/FL_Sound (Package)
+  imp 143 /Game/Weapons/BaseBlueprints/BP_MeleeWeapon_Base./Game/Weapons/BaseBlueprints/BP_MeleeWeapon_Base (Package)
+  imp 144 /Game/Weapons/BaseBlueprints/BP_Projectile_Base./Game/Weapons/BaseBlueprints/BP_Projectile_Base (Package)
+  imp 145 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base (Package)
+  imp 146 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_ControlMove_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_ControlMove_Base (Package)
+  imp 147 /Game/Weapons/MeleeWeapons/Samehada/Samehada_Default/Meshes/SM_WEP_Samehada_Filet./Game/Weapons/MeleeWeapons/Samehada/Samehada_Default/Meshes/SM_WEP_Samehada_Filet (Package)
+  imp 148 /Game/Weapons/Ninjutsu/SubterraneanVoyage/Particles/P_WEP_Eff_Subterranean_Loop_Dirt./Game/Weapons/Ninjutsu/SubterraneanVoyage/Particles/P_WEP_Eff_Subterranean_Loop_Dirt (Package)
+  imp 149 /Game/Weapons/Ninjutsu/SubterraneanVoyage/Particles/P_WEP_Eff_Subterranean_Loop_Water./Game/Weapons/Ninjutsu/SubterraneanVoyage/Particles/P_WEP_Eff_Subterranean_Loop_Water (Package)
+  imp 150 /Game/Weapons/Ninjutsu/SubterraneanVoyage/Particles/P_WEP_Eff_Subterranean_Start_Dirt./Game/Weapons/Ninjutsu/SubterraneanVoyage/Particles/P_WEP_Eff_Subterranean_Start_Dirt (Package)
+  imp 151 /Game/Weapons/Ninjutsu/SubterraneanVoyage/Particles/P_WEP_Eff_Subterranean_Start_Water./Game/Weapons/Ninjutsu/SubterraneanVoyage/Particles/P_WEP_Eff_Subterranean_Start_Water (Package)
+  imp 152 /Script/CoreUObject./Script/CoreUObject (Package)
+  imp 153 /Script/Engine./Script/Engine (Package)
+  imp 154 /Script/GameplayTags./Script/GameplayTags (Package)
+  imp 155 /Script/NARUTO./Script/NARUTO (Package)
+  imp 156 /Game/Weapons/Ninjutsu/SubterraneanVoyage/Particles/P_WEP_Eff_Subterranean_Loop_Dirt.P_WEP_Eff_Subterranean_Loop_Dirt (ParticleSystem)
+  imp 157 /Game/Weapons/Ninjutsu/SubterraneanVoyage/Particles/P_WEP_Eff_Subterranean_Loop_Water.P_WEP_Eff_Subterranean_Loop_Water (ParticleSystem)
+  imp 158 /Game/Weapons/Ninjutsu/SubterraneanVoyage/Particles/P_WEP_Eff_Subterranean_Start_Dirt.P_WEP_Eff_Subterranean_Start_Dirt (ParticleSystem)
+  imp 159 /Game/Weapons/Ninjutsu/SubterraneanVoyage/Particles/P_WEP_Eff_Subterranean_Start_Water.P_WEP_Eff_Subterranean_Start_Water (ParticleSystem)
+  imp 160 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.ProjectileMovement_GEN_VARIABLE (ProjectileMovementComponent)
+  imp 161 /Game/Blueprints/Pawns/BP_Pawn_AI.BP_Pawn_AI_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 162 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base.BP_Pawn_AI_Infantry_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 163 /Game/Blueprints/Pawns/NN_Pawn_Player.NN_Pawn_Player_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 164 /Game/Weapons/BaseBlueprints/BP_MeleeWeapon_Base.BP_MeleeWeapon_Base_C.DefaultSceneRoot_REMOVED_089258E54F581C2F88C472B92FBC9223 (SceneComponent)
+  imp 165 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.DefaultSceneRoot_REMOVED_628DECC24C105FE693737EA4B602DB70 (SceneComponent)
+  imp 166 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.FakeTarget_GEN_VARIABLE (SceneComponent)
+  imp 167 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 168 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_ControlMove_Base.BP_Ninjutsu_ControlMove_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 169 /Script/Engine.Default__SceneComponent (SceneComponent)
+  imp 170 /Script/CoreUObject.LinearColor (ScriptStruct)
+  imp 171 /Script/CoreUObject.Rotator (ScriptStruct)
+  imp 172 /Script/CoreUObject.Vector (ScriptStruct)
+  imp 173 /Script/Engine.HitResult (ScriptStruct)
+  imp 174 /Script/Engine.LatentActionInfo (ScriptStruct)
+  imp 175 /Script/Engine.PointerToUberGraphFrame (ScriptStruct)
+  imp 176 /Script/Engine.TimerHandle (ScriptStruct)
+  imp 177 /Script/GameplayTags.GameplayTag (ScriptStruct)
+  imp 178 /Script/NARUTO.NN_BuffInfo (ScriptStruct)
+  imp 179 /Script/Engine.Default__SCS_Node (SCS_Node)
+  imp 180 /Script/Engine.Default__SimpleConstructionScript (SimpleConstructionScript)
+  imp 181 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.CharacterMesh0 (SkeletalMeshComponent)
+  imp 182 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base.BP_Pawn_AI_Infantry_Base_C.ByakuganMesh_GEN_VARIABLE (SkeletalMeshComponent)
+  imp 183 /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base.Default__BP_Pawn_AI_Infantry_Base_C.CharacterMesh0 (SkeletalMeshComponent)
+  imp 184 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.CharacterMesh0 (SkeletalMeshComponent)
+  imp 185 /Game/Blueprints/Pawns/NN_Pawn_Player.NN_Pawn_Player_C.ByakuganMesh_GEN_VARIABLE (SkeletalMeshComponent)
+  imp 186 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 187 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 188 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 189 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_ControlMove_Base.BP_Ninjutsu_ControlMove_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 190 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_ControlMove_Base.BP_Ninjutsu_ControlMove_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 191 /Game/Weapons/MeleeWeapons/Samehada/Samehada_Default/Meshes/SM_WEP_Samehada_Filet.SM_WEP_Samehada_Filet (StaticMesh)
+  imp 192 /Game/Weapons/BaseBlueprints/BP_MeleeWeapon_Base.BP_MeleeWeapon_Base_C.MainMesh_GEN_VARIABLE (StaticMeshComponent)
+  imp 193 /Game/Weapons/BaseBlueprints/BP_MeleeWeapon_Base.BP_MeleeWeapon_Base_C.SheathMesh_GEN_VARIABLE (StaticMeshComponent)
+  imp 194 /Game/Weapons/BaseBlueprints/BP_MeleeWeapon_Base.BP_MeleeWeapon_Base_C.SubMesh_GEN_VARIABLE (StaticMeshComponent)
+  imp 195 /Game/Weapons/BaseBlueprints/BP_MeleeWeapon_Base.BP_MeleeWeapon_Base_C.SubSheathMesh_GEN_VARIABLE (StaticMeshComponent)
+  imp 196 /Script/Engine.Default__StaticMeshComponent (StaticMeshComponent)
+  imp 197 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.EndEffect (StructProperty)
+  imp 198 /Script/CoreUObject.Default__StructProperty (StructProperty)
+  imp 199 /Game/Blueprints/Structs/BP_ParticleInfo.BP_ParticleInfo (UserDefinedStruct)
+exp 0 ReceivedD35NJ3 : BoolProperty  outer 98  @7fea +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 1 EndEffectWater : StructProperty  outer 98  @8010 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 2 Timer_SetUseSamehadaFilet : StructProperty  outer 98  @8038 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 3 UseSamehadaFilet : BoolProperty  outer 98  @8060 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 4 HealInfo : StructProperty  outer 98  @8086 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 5 SM_WEP_Samehada_Filet : ObjectProperty  outer 98  @80ae +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 6 K2Node_DynamicCast_bSuccess4 : BoolProperty  outer 27  @80d6 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 7 K2Node_DynamicCast_AsNN_Character_Pawn3 : ObjectProperty  outer 27  @80fc +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 8 CallFunc_HasAuthority_ReturnValue3 : BoolProperty  outer 27  @8124 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 9 K2Node_SwitchEnum_CmpSuccess : BoolProperty  outer 27  @814a +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 10 CallFunc_GetSurfaceType_retType : ByteProperty  outer 27  @8170 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 11 CallFunc_HasAuthority_ReturnValue2 : BoolProperty  outer 27  @8198 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 12 K2Node_Event_EndPlayReason : ByteProperty  outer 27  @81be +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 13 CallFunc_GetAgainstType_ReturnValue : NameProperty  outer 27  @81e6 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 14 K2Node_DynamicCast_bSuccess3 : BoolProperty  outer 27  @820a +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 15 K2Node_DynamicCast_AsNN_Player_Pawn_Base : ObjectProperty  outer 27  @8230 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 16 K2Node_DynamicCast_bSuccess2 : BoolProperty  outer 27  @8258 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 17 K2Node_DynamicCast_AsNN_Character_Pawn2 : ObjectProperty  outer 27  @827e +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 18 K2Node_DynamicCast_bSuccess : BoolProperty  outer 27  @82a6 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 19 K2Node_DynamicCast_AsNN_Character_Pawn : ObjectProperty  outer 27  @82cc +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 20 CallFunc_GetInstigator_ReturnValue : ObjectProperty  outer 27  @82f4 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 21 K2Node_Event_DeltaSeconds : FloatProperty  outer 27  @831c +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 22 CallFunc_HasAuthority_ReturnValue : BoolProperty  outer 27  @8340 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 23 CallFunc_Subtract_FloatFloat_ReturnValue : FloatProperty  outer 27  @8366 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 24 CallFunc_GetGameTimeSinceCreation_ReturnValue : FloatProperty  outer 27  @838a +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 25 EntryPoint : IntProperty  outer 27  @83ae +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 26 ExecuteUbergraph_BP_SubterraneanVoyage : Function  outer 98  @83d2 +4ab
+    -- Eigenschaften ok, Ende bei +8 von 4ab
+exp 27 DoDestroyByD35NJ3 : Function  outer 98  @887d +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 28 OnAttackEndBP : Function  outer 98  @88bb +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 29 OnAttackStartBP : Function  outer 98  @88f9 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 30 EndPlayReason : ByteProperty  outer 32  @8937 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 31 ReceiveEndPlay : Function  outer 98  @895f +48
+    -- Eigenschaften ok, Ende bei +8 von 48
+exp 32 DeltaSeconds : FloatProperty  outer 34  @89a7 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 33 ReceiveTick : Function  outer 98  @89cb +48
+    -- Eigenschaften ok, Ende bei +8 von 48
+exp 34 ReceiveBeginPlay : Function  outer 98  @8a13 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 35 UserConstructionScript : Function  outer 98  @8a51 +35
+    -- Eigenschaften ok, Ende bei +8 von 35
+exp 36 CallFunc_HasMatchingGameplayTag_ReturnValue2 : BoolProperty  outer 48  @8a86 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 37 CallFunc_HasMatchingGameplayTag_self2_CastInput : InterfaceProperty  outer 48  @8aac +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 38 CallFunc_HasMatchingGameplayTag_ReturnValue : BoolProperty  outer 48  @8ad4 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 39 CallFunc_HasMatchingGameplayTag_self_CastInput : InterfaceProperty  outer 48  @8afa +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 40 K2Node_DynamicCast_bSuccess2 : BoolProperty  outer 48  @8b22 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 41 K2Node_DynamicCast_AsBP_Pawn_AI_Infantry_Base : ObjectProperty  outer 48  @8b48 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 42 K2Node_DynamicCast_bSuccess : BoolProperty  outer 48  @8b70 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 43 K2Node_DynamicCast_AsNN_Pawn_Player : ObjectProperty  outer 48  @8b96 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 44 CallFunc_GetInstigator_ReturnValue : ObjectProperty  outer 48  @8bbe +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 45 CheckClass : ClassProperty  outer 48  @8be6 +2c
+    -- Eigenschaften ok, Ende bei +8 von 2c
+exp 46 IsDisp : BoolProperty  outer 48  @8c12 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 47 IsDispSamehadaFilet : Function  outer 98  @8c38 +14c
+    -- Eigenschaften ok, Ende bei +8 von 14c
+exp 48 CallFunc_K2_SetWorldLocationAndRotation_SweepHitResult : StructProperty  outer 54  @8d84 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 49 CallFunc_GetSocketLocation_ReturnValue : StructProperty  outer 54  @8dac +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 50 CallFunc_K2_GetActorRotation_ReturnValue : StructProperty  outer 54  @8dd4 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 51 K2Node_DynamicCast_bSuccess : BoolProperty  outer 54  @8dfc +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 52 K2Node_DynamicCast_AsCharacter : ObjectProperty  outer 54  @8e22 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 53 UpdateSamehadaFilet : Function  outer 98  @8e4a +e4
+    -- Eigenschaften ok, Ende bei +8 von e4
+exp 54 CallFunc_IsDispSamehadaFilet_IsDisp : BoolProperty  outer 58  @8f2e +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 55 CallFunc_IsValid_ReturnValue : BoolProperty  outer 58  @8f54 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 56 CallFunc_K2_SetTimer_ReturnValue : StructProperty  outer 58  @8f7a +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 57 SetUseSamehadaFilet : Function  outer 98  @8fa2 +109
+    -- Eigenschaften ok, Ende bei +8 von 109
+exp 58 Temp_object_Variable : ObjectProperty  outer 82  @90ab +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 59 CallFunc_BreakHitResult_TraceEnd : StructProperty  outer 84  @90d3 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 60 CallFunc_BreakHitResult_TraceStart : StructProperty  outer 84  @90fb +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 61 CallFunc_BreakHitResult_FaceIndex : IntProperty  outer 84  @9123 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 62 CallFunc_BreakHitResult_HitItem : IntProperty  outer 84  @9147 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 63 CallFunc_BreakHitResult_HitBoneName : NameProperty  outer 84  @916b +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 64 CallFunc_BreakHitResult_HitComponent : ObjectProperty  outer 84  @918f +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 65 CallFunc_BreakHitResult_HitActor : ObjectProperty  outer 84  @91b7 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 66 CallFunc_BreakHitResult_PhysMat : ObjectProperty  outer 84  @91df +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 67 CallFunc_BreakHitResult_ImpactNormal : StructProperty  outer 84  @9207 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 68 CallFunc_BreakHitResult_Normal : StructProperty  outer 84  @922f +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 69 CallFunc_BreakHitResult_ImpactPoint : StructProperty  outer 84  @9257 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 70 CallFunc_BreakHitResult_Location : StructProperty  outer 84  @927f +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 71 CallFunc_BreakHitResult_Time : FloatProperty  outer 84  @92a7 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 72 CallFunc_BreakHitResult_bInitialOverlap : BoolProperty  outer 84  @92cb +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 73 CallFunc_BreakHitResult_bBlockingHit : BoolProperty  outer 84  @92f1 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 74 CallFunc_LineTraceSingle_ReturnValue : BoolProperty  outer 84  @9317 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 75 CallFunc_LineTraceSingle_OutHit : StructProperty  outer 84  @933d +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 76 CallFunc_Add_VectorVector_ReturnValue : StructProperty  outer 84  @9365 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 77 CallFunc_Multiply_VectorFloat_ReturnValue : StructProperty  outer 84  @938d +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 78 CallFunc_IsValid_ReturnValue : BoolProperty  outer 84  @93b5 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 79 CallFunc_GetActorUpVector_ReturnValue : StructProperty  outer 84  @93db +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 80 CallFunc_K2_GetActorLocation_ReturnValue : StructProperty  outer 84  @9403 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 81 Temp_object_Variable : ArrayProperty  outer 84  @942b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 82 retType : ByteProperty  outer 84  @9453 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 83 GetSurfaceType : Function  outer 98  @947b +1cc
+    -- Eigenschaften ok, Ende bei +8 von 1cc
+exp 84 ReturnValue : BoolProperty  outer 86  @9647 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 85 CanDestroyByD35NJ3 : Function  outer 98  @966d +3a
+    -- Eigenschaften ok, Ende bei +8 von 3a
+exp 86 ReturnValue : BoolProperty  outer 88  @96a7 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 87 DisableOverlapByD35NJ3 : Function  outer 98  @96cd +3a
+    -- Eigenschaften ok, Ende bei +8 von 3a
+exp 88 K2Node_Select_Default : BoolProperty  outer 94  @9707 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 89 CallFunc_IsLoopEndIncludeStart_ReturnValue : BoolProperty  outer 94  @972d +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 90 Temp_bool_Variable2 : BoolProperty  outer 94  @9753 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 91 Temp_bool_Variable : BoolProperty  outer 94  @9779 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 92 ReturnValue : BoolProperty  outer 94  @979f +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 93 IsLoopEndIncludeStart : Function  outer 98  @97c5 +7c
+    -- Eigenschaften ok, Ende bei +8 von 7c
+exp 94 ReturnValue : BoolProperty  outer 96  @9841 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 95 IsNoInhibitionByD52NJ2 : Function  outer 98  @9867 +3a
+    -- Eigenschaften ok, Ende bei +8 von 3a
+exp 96 UberGraphFrame : StructProperty  outer 98  @98a1 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 97 BP_SubterraneanVoyage_C : BlueprintGeneratedClass  outer 0  @98c9 +184
+    SimpleConstructionScript (ObjectProperty) = obj 105
+    InheritableComponentHandler (ObjectProperty) = obj 100
+    UberGraphFramePointerProperty (ObjectProperty) = obj 97
+    UberGraphFunction (ObjectProperty) = obj 27
+    -- Eigenschaften ok, Ende bei +7c von 184
+exp 98 Default__BP_SubterraneanVoyage_C : BP_SubterraneanVoyage_C  outer 0  @9a4d +235d
+    UberGraphFrame (StructProperty PointerToUberGraphFrame) = 0
+    HealInfo (StructProperty NN_BuffInfo)
+      Type (EnumProperty ENN_StatusManageType) = ENN_StatusManageType::ENN_StatusManageType_HealSubterraneanVoyage
+      EffectiveTime (FloatProperty) = 3.5
+      DeltaTime (FloatProperty) = 0
+      Param (FloatProperty) = 60
+      DamageHitInfoName (NameProperty) = None
+      IsCanNotClearDebuff (BoolProperty) = 0
+      IsCanNotInhibitionBuff (BoolProperty) = 0
+      UseBuffEffect (BoolProperty) = 0
+      HUDEffectType (EnumProperty ENN_StatusManage_HUDEffectType) = ENN_StatusManage_HUDEffectType::ENN_StatusManage_HUDEffectType_Invalid
+      UseMaterialEffect (BoolProperty) = 0
+      MaterialEffectName (NameProperty) = None
+      MaterialEffectCurve (ObjectProperty) = obj 0
+      MaterialEffectCurveEnemy (ObjectProperty) = obj 0
+      UseBuffStock (BoolProperty) = 0
+      IsModeBuff (BoolProperty) = 0
+      InitDeltaTime (FloatProperty) = 0
+      TargetNinjaSkillSlot (IntProperty) = 4.29497e+09
+      AttackerWeapon (ObjectProperty) = obj 0
+      AttackerCharacter (ObjectProperty) = obj 0
+      IsTmpBuff (BoolProperty) = 0
+      Index (IntProperty) = 4.29497e+09
+      IsLinkedEffectBuff (BoolProperty) = 0
+      AddBuffType (EnumProperty ENN_StatusManage_AddBuffType) = ENN_StatusManage_AddBuffType::ENN_StatusManage_AddBuffType_None
+    Timer_SetUseSamehadaFilet (StructProperty TimerHandle)
+      Handle (UInt64Property) = 0
+    EndEffectWater (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -160
+      AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+      Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+        Rotation (StructProperty Quat) = 0 0 0 1
+        Translation (StructProperty Vector) = 0 0 0
+        Scale3D (StructProperty Vector) = 1 1 1
+      RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator0
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 0
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 0
+      IsOnlyLocation_21_A73755164F5ECF686DF6F18A024361FA (BoolProperty) = 0
+    SurfeceEffectList (ArrayProperty of StructProperty) [12]
+      0 (StructProperty BP_SurfeceEffect)
+        Type_2_9D35C1E1439770744B4020AB59D30FA8 (ByteProperty EPhysicalSurface) = SurfaceType_Default
+        Effect_6_0BFD6D2440770C91B626B2A35BAC2906 (ObjectProperty) = obj -157
+        Info_9_2F916F7A4D68DAFBC94CD29E12ECDA8A (StructProperty BP_ParticleInfo)
+          Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -157
+          AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+          Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+            Rotation (StructProperty Quat) = 0 0 0 1
+            Translation (StructProperty Vector) = 0 0 0
+            Scale3D (StructProperty Vector) = 1 1 1
+          RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator1
+          IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+          UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 0
+          IsOnlyLocation_21_A73755164F5ECF686DF6F18A024361FA (BoolProperty) = 0
+      1 (StructProperty BP_SurfeceEffect)
+        Type_2_9D35C1E1439770744B4020AB59D30FA8 (ByteProperty EPhysicalSurface) = SurfaceType1
+        Effect_6_0BFD6D2440770C91B626B2A35BAC2906 (ObjectProperty) = obj -157
+        Info_9_2F916F7A4D68DAFBC94CD29E12ECDA8A (StructProperty BP_ParticleInfo)
+          Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -157
+          AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+          Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+            Rotation (StructProperty Quat) = 0 0 0 1
+            Translation (StructProperty Vector) = 0 0 0
+            Scale3D (StructProperty Vector) = 1 1 1
+          RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator0
+          IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+          UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 0
+          IsOnlyLocation_21_A73755164F5ECF686DF6F18A024361FA (BoolProperty) = 0
+      2 (StructProperty BP_SurfeceEffect)
+        Type_2_9D35C1E1439770744B4020AB59D30FA8 (ByteProperty EPhysicalSurface) = SurfaceType2
+        Effect_6_0BFD6D2440770C91B626B2A35BAC2906 (ObjectProperty) = obj -157
+        Info_9_2F916F7A4D68DAFBC94CD29E12ECDA8A (StructProperty BP_ParticleInfo)
+          Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -157
+          AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+          Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+            Rotation (StructProperty Quat) = 0 0 0 1
+            Translation (StructProperty Vector) = 0 0 0
+            Scale3D (StructProperty Vector) = 1 1 1
+          RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator0
+          IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+          UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 0
+          IsOnlyLocation_21_A73755164F5ECF686DF6F18A024361FA (BoolProperty) = 0
+      3 (StructProperty BP_SurfeceEffect)
+        Type_2_9D35C1E1439770744B4020AB59D30FA8 (ByteProperty EPhysicalSurface) = SurfaceType3
+        Effect_6_0BFD6D2440770C91B626B2A35BAC2906 (ObjectProperty) = obj -157
+        Info_9_2F916F7A4D68DAFBC94CD29E12ECDA8A (StructProperty BP_ParticleInfo)
+          Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -157
+          AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+          Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+            Rotation (StructProperty Quat) = 0 0 0 1
+            Translation (StructProperty Vector) = 0 0 0
+            Scale3D (StructProperty Vector) = 1 1 1
+          RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator0
+          IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+          UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 0
+          IsOnlyLocation_21_A73755164F5ECF686DF6F18A024361FA (BoolProperty) = 0
+      4 (StructProperty BP_SurfeceEffect)
+        Type_2_9D35C1E1439770744B4020AB59D30FA8 (ByteProperty EPhysicalSurface) = SurfaceType4
+        Effect_6_0BFD6D2440770C91B626B2A35BAC2906 (ObjectProperty) = obj -157
+        Info_9_2F916F7A4D68DAFBC94CD29E12ECDA8A (StructProperty BP_ParticleInfo)
+          Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -157
+          AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+          Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+            Rotation (StructProperty Quat) = 0 0 0 1
+            Translation (StructProperty Vector) = 0 0 0
+            Scale3D (StructProperty Vector) = 1 1 1
+          RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator0
+          IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+          UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 0
+          IsOnlyLocation_21_A73755164F5ECF686DF6F18A024361FA (BoolProperty) = 0
+      5 (StructProperty BP_SurfeceEffect)
+        Type_2_9D35C1E1439770744B4020AB59D30FA8 (ByteProperty EPhysicalSurface) = SurfaceType5
+        Effect_6_0BFD6D2440770C91B626B2A35BAC2906 (ObjectProperty) = obj -157
+        Info_9_2F916F7A4D68DAFBC94CD29E12ECDA8A (StructProperty BP_ParticleInfo)
+          Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -157
+          AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+          Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+            Rotation (StructProperty Quat) = 0 0 0 1
+            Translation (StructProperty Vector) = 0 0 0
+            Scale3D (StructProperty Vector) = 1 1 1
+          RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator0
+          IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+          UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 0
+          IsOnlyLocation_21_A73755164F5ECF686DF6F18A024361FA (BoolProperty) = 0
+      6 (StructProperty BP_SurfeceEffect)
+        Type_2_9D35C1E1439770744B4020AB59D30FA8 (ByteProperty EPhysicalSurface) = SurfaceType6
+        Effect_6_0BFD6D2440770C91B626B2A35BAC2906 (ObjectProperty) = obj -157
+        Info_9_2F916F7A4D68DAFBC94CD29E12ECDA8A (StructProperty BP_ParticleInfo)
+          Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -157
+          AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+          Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+            Rotation (StructProperty Quat) = 0 0 0 1
+            Translation (StructProperty Vector) = 0 0 0
+            Scale3D (StructProperty Vector) = 1 1 1
+          RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator0
+          IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+          UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 0
+          IsOnlyLocation_21_A73755164F5ECF686DF6F18A024361FA (BoolProperty) = 0
+      7 (StructProperty BP_SurfeceEffect)
+        Type_2_9D35C1E1439770744B4020AB59D30FA8 (ByteProperty EPhysicalSurface) = SurfaceType7
+        Effect_6_0BFD6D2440770C91B626B2A35BAC2906 (ObjectProperty) = obj -157
+        Info_9_2F916F7A4D68DAFBC94CD29E12ECDA8A (StructProperty BP_ParticleInfo)
+          Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -157
+          AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+          Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+            Rotation (StructProperty Quat) = 0 0 0 1
+            Translation (StructProperty Vector) = 0 0 0
+            Scale3D (StructProperty Vector) = 1 1 1
+          RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator0
+          IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+          UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 0
+          IsOnlyLocation_21_A73755164F5ECF686DF6F18A024361FA (BoolProperty) = 0
+      8 (StructProperty BP_SurfeceEffect)
+        Type_2_9D35C1E1439770744B4020AB59D30FA8 (ByteProperty EPhysicalSurface) = SurfaceType9
+        Effect_6_0BFD6D2440770C91B626B2A35BAC2906 (ObjectProperty) = obj -157
+        Info_9_2F916F7A4D68DAFBC94CD29E12ECDA8A (StructProperty BP_ParticleInfo)
+          Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -157
+          AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+          Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+            Rotation (StructProperty Quat) = 0 0 0 1
+            Translation (StructProperty Vector) = 0 0 0
+            Scale3D (StructProperty Vector) = 1 1 1
+          RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator0
+          IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+          UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 0
+          IsOnlyLocation_21_A73755164F5ECF686DF6F18A024361FA (BoolProperty) = 0
+      9 (StructProperty BP_SurfeceEffect)
+        Type_2_9D35C1E1439770744B4020AB59D30FA8 (ByteProperty EPhysicalSurface) = SurfaceType10
+        Effect_6_0BFD6D2440770C91B626B2A35BAC2906 (ObjectProperty) = obj -158
+        Info_9_2F916F7A4D68DAFBC94CD29E12ECDA8A (StructProperty BP_ParticleInfo)
+          Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -158
+          AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+          Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+            Rotation (StructProperty Quat) = 0 0 0 1
+            Translation (StructProperty Vector) = 0 0 0
+            Scale3D (StructProperty Vector) = 1 1 1
+          RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator0
+          IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+          UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 0
+          IsOnlyLocation_21_A73755164F5ECF686DF6F18A024361FA (BoolProperty) = 0
+      10 (StructProperty BP_SurfeceEffect)
+        Type_2_9D35C1E1439770744B4020AB59D30FA8 (ByteProperty EPhysicalSurface) = SurfaceType11
+        Effect_6_0BFD6D2440770C91B626B2A35BAC2906 (ObjectProperty) = obj -157
+        Info_9_2F916F7A4D68DAFBC94CD29E12ECDA8A (StructProperty BP_ParticleInfo)
+          Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -157
+          AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+          Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+            Rotation (StructProperty Quat) = 0 0 0 1
+            Translation (StructProperty Vector) = 0 0 0
+            Scale3D (StructProperty Vector) = 1 1 1
+          RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator0
+          IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+          UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 0
+          IsOnlyLocation_21_A73755164F5ECF686DF6F18A024361FA (BoolProperty) = 0
+      11 (StructProperty BP_SurfeceEffect)
+        Type_2_9D35C1E1439770744B4020AB59D30FA8 (ByteProperty EPhysicalSurface) = SurfaceType12
+        Effect_6_0BFD6D2440770C91B626B2A35BAC2906 (ObjectProperty) = obj -157
+        Info_9_2F916F7A4D68DAFBC94CD29E12ECDA8A (StructProperty BP_ParticleInfo)
+          Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -157
+          AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+          Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+            Rotation (StructProperty Quat) = 0 0 0 1
+            Translation (StructProperty Vector) = 0 0 0
+            Scale3D (StructProperty Vector) = 1 1 1
+          RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator0
+          IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+          UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 0
+          IsOnlyLocation_21_A73755164F5ECF686DF6F18A024361FA (BoolProperty) = 0
+    NinjutsuName (StrProperty) = 土遁・土中潜航
+    SkillType (EnumProperty ENN_NinjaSkillType) = ENN_NinjaSkillType::ENN_NinjaSkillType_SubterraneanVoyage
+    StartEffect (StructProperty BP_ParticleInfo)
+      AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+      RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator1
+    LoopEffect (StructProperty BP_ParticleInfo)
+      AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+    EndEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -159
+      AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+      RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator1
+    Speed (FloatProperty) = 0
+    LifeTime (FloatProperty) = 0
+    IsExplodeAfterLifetime (BoolProperty) = 0
+    IsExplodeOnStop (BoolProperty) = 0
+    IsExplodeOnHit (BoolProperty) = 0
+    CollisionRadius (FloatProperty) = 0
+    InstanceLimit (IntProperty) = 8
+    m_GamePlayTagContainer (StructProperty GameplayTagContainer) = 0
+    SoundID (NameProperty) = ID_WeaponSound_Ninjutsu_SubterraneanVoyage
+    Tags (ArrayProperty of NameProperty) [4]
+      0 (NameProperty) = InvalidD53NJ3
+      1 (NameProperty) = DestroyChakraDrone_A
+      2 (NameProperty) = SubterraneanVoyage
+      3 (NameProperty) = CanLostByD45NJ1
+    -- Eigenschaften ok, Ende bei +235d von 235d
+exp 99 InheritableComponentHandler : InheritableComponentHandler  outer 98  @bdaa +205
+    Records (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ComponentOverrideRecord)
+        ComponentClass (ObjectProperty) = obj -50
+        ComponentTemplate (ObjectProperty) = obj 101
+        ComponentKey (StructProperty ComponentKey)
+          OwnerClass (ObjectProperty) = obj -6
+          SCSVariableName (NameProperty) = ProjectileMovement
+          AssociatedGuid (StructProperty Guid) = 3.60545e+09 1.12928e+09 2.13284e+09 7.8419e+08
+        CookedComponentInstancingData (StructProperty BlueprintCookedComponentInstancingData)
+          bIsValid (BoolProperty) = 0
+          ChangedPropertyList (ArrayProperty of StructProperty) = 0
+    -- Eigenschaften ok, Ende bei +201 von 205
+exp 100 ProjectileMovement_GEN_VARIABLE : ProjectileMovementComponent  outer 98  @bfaf +9d
+    Bounciness (FloatProperty) = 0
+    Friction (FloatProperty) = 0
+    Velocity (StructProperty Vector) = 0 0 0
+    bAutoActivate (BoolProperty) = 0
+    -- Eigenschaften ok, Ende bei +99 von 9d
+exp 101 DefaultSceneRoot_GEN_VARIABLE : SceneComponent  outer 98  @c04c +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 102 SCS_Node_0 : SCS_Node  outer 105  @c058 +a8
+    ComponentClass (ObjectProperty) = obj -51
+    ComponentTemplate (ObjectProperty) = obj 102
+    VariableGuid (StructProperty Guid) = 2.43988e+09 1.07776e+09 8.80578e+08 3.08816e+09
+    InternalVariableName (NameProperty) = DefaultSceneRoot
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 103 SCS_Node_1 : SCS_Node  outer 105  @c100 +ea
+    ComponentClass (ObjectProperty) = obj -54
+    ComponentTemplate (ObjectProperty) = obj 106
+    ParentComponentOrVariableName (NameProperty) = Sphere
+    ParentComponentOwnerClassName (NameProperty) = BP_Weapon_Base_C
+    VariableGuid (StructProperty Guid) = 3.60145e+09 1.19634e+09 3.23772e+08 2.46048e+09
+    InternalVariableName (NameProperty) = SM_WEP_Samehada_Filet
+    -- Eigenschaften ok, Ende bei +e6 von ea
+exp 104 SimpleConstructionScript_0 : SimpleConstructionScript  outer 98  @c1ea +7b
+    RootNodes (ArrayProperty of ObjectProperty) [1]
+      0 (ObjectProperty) = obj 104
+    AllNodes (ArrayProperty of ObjectProperty) [1]
+      0 (ObjectProperty) = obj 104
+    DefaultSceneRootNode (ObjectProperty) = obj 103
+    -- Eigenschaften ok, Ende bei +77 von 7b
+exp 105 SM_WEP_Samehada_Filet_GEN_VARIABLE : StaticMeshComponent  outer 98  @c265 +309
+    StaticMesh (ObjectProperty) = obj -192
+    bGenerateOverlapEvents (BoolProperty) = 0
+    bReceivesDecals (BoolProperty) = 0
+    CastShadow (BoolProperty) = 0
+    BodyInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = NoCollision
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [3]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Visibility
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          1 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Camera
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          2 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      bEnableGravity (BoolProperty) = 0
+      CollisionEnabled (ByteProperty ECollisionEnabled) = ECollisionEnabled::NoCollision
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    CanCharacterStepUpOn (ByteProperty ECanBeCharacterBase) = ECB_No
+    bHiddenInGame (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +301 von 309
+
+== dependances /Game :
+  /Game/Blueprints/Pawns/BP_Pawn_AI
+  /Game/Blueprints/Pawns/BP_Pawn_AI_Infantry_Base
+  /Game/Blueprints/Pawns/NN_Pawn_Player
+  /Game/Blueprints/Structs/BP_ParticleInfo
+  /Game/Sounds/Blueprints/FL_Sound
+  /Game/Weapons/BaseBlueprints/BP_MeleeWeapon_Base
+  /Game/Weapons/BaseBlueprints/BP_Projectile_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_ControlMove_Base
+  /Game/Weapons/MeleeWeapons/Samehada/Samehada_Default/Meshes/SM_WEP_Samehada_Filet
+  /Game/Weapons/Ninjutsu/SubterraneanVoyage/Particles/P_WEP_Eff_Subterranean_Loop_Dirt
+  /Game/Weapons/Ninjutsu/SubterraneanVoyage/Particles/P_WEP_Eff_Subterranean_Loop_Water
+  /Game/Weapons/Ninjutsu/SubterraneanVoyage/Particles/P_WEP_Eff_Subterranean_Start_Dirt
+  /Game/Weapons/Ninjutsu/SubterraneanVoyage/Particles/P_WEP_Eff_Subterranean_Start_Water

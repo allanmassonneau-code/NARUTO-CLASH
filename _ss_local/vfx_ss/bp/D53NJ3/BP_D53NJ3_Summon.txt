@@ -1,0 +1,263 @@
+== /Game/Weapons/Ninjutsu/D53NJ3/Blueprints/BP_D53NJ3_Summon
+fichier : NARUTO/Content/Weapons/Ninjutsu/D53NJ3/Blueprints/BP_D53NJ3_Summon.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : ObjectProperty
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/D53NJ3/Blueprints/BP_D53NJ3_Summon.uasset  15 497 octets
+  NARUTO/Content/Weapons/Ninjutsu/D53NJ3/Blueprints/BP_D53NJ3_Summon.uexp  4 996 octets
+
+/Game/Weapons/Ninjutsu/D53NJ3/Blueprints/BP_D53NJ3_Summon  flags 80000000  199 Namen  103 Importe  52 Exporte  Kopf 15497  Bulk ab 20489  Daten 20493
+  imp  0 /Game/Characters/Original/D53/D53_Default/Animation/Ninjutsu/D53_Ninjutsu_D53NJ3_Enla_Arm.D53_Ninjutsu_D53NJ3_Enla_Arm (AnimSequence)
+  imp  1 /Game/Characters/Original/D53/D53_Default/Animation/Ninjutsu/D53_Ninjutsu_D53NJ3_Enla_Start.D53_Ninjutsu_D53NJ3_Enla_Start (AnimSequence)
+  imp  2 /Game/Blueprints/Pawns/BP_AnimActor.BP_AnimActor_C (BlueprintGeneratedClass)
+  imp  3 /Script/Engine.Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+  imp  4 /Script/CoreUObject.Default__BoolProperty (BoolProperty)
+  imp  5 /Script/NARUTO.NN_BuffInfo.IsCanNotClearDebuff (BoolProperty)
+  imp  6 /Script/NARUTO.NN_BuffInfo.IsCanNotInhibitionBuff (BoolProperty)
+  imp  7 /Script/NARUTO.NN_BuffInfo.IsModeBuff (BoolProperty)
+  imp  8 /Script/NARUTO.NN_BuffInfo.UseBuffEffect (BoolProperty)
+  imp  9 /Script/NARUTO.NN_BuffInfo.UseBuffStock (BoolProperty)
+  imp 10 /Script/NARUTO.NN_BuffInfo.UseMaterialEffect (BoolProperty)
+  imp 11 /Game/Blueprints/Pawns/BP_AnimActor.Default__BP_AnimActor_C (BP_AnimActor_C)
+  imp 12 /Script/CoreUObject.BoolProperty (Class)
+  imp 13 /Script/CoreUObject.FloatProperty (Class)
+  imp 14 /Script/CoreUObject.Function (Class)
+  imp 15 /Script/CoreUObject.IntProperty (Class)
+  imp 16 /Script/CoreUObject.Object (Class)
+  imp 17 /Script/CoreUObject.ObjectProperty (Class)
+  imp 18 /Script/CoreUObject.StructProperty (Class)
+  imp 19 /Script/Engine.Actor (Class)
+  imp 20 /Script/Engine.ActorComponent (Class)
+  imp 21 /Script/Engine.BlueprintGeneratedClass (Class)
+  imp 22 /Script/Engine.Character (Class)
+  imp 23 /Script/Engine.GameplayStatics (Class)
+  imp 24 /Script/Engine.KismetMathLibrary (Class)
+  imp 25 /Script/Engine.KismetSystemLibrary (Class)
+  imp 26 /Script/Engine.ParticleSystem (Class)
+  imp 27 /Script/Engine.ParticleSystemComponent (Class)
+  imp 28 /Script/Engine.SceneComponent (Class)
+  imp 29 /Script/Engine.SCS_Node (Class)
+  imp 30 /Script/Engine.SimpleConstructionScript (Class)
+  imp 31 /Script/Engine.SkeletalMeshActor (Class)
+  imp 32 /Script/Engine.SkeletalMeshComponent (Class)
+  imp 33 /Script/NARUTO.NN_CharacterPawn (Class)
+  imp 34 /Script/NARUTO.NN_Weapon (Class)
+  imp 35 /Script/NARUTO.NN_BuffInfo.HUDEffectType (EnumProperty)
+  imp 36 /Script/NARUTO.NN_BuffInfo.Type (EnumProperty)
+  imp 37 /Script/CoreUObject.Default__FloatProperty (FloatProperty)
+  imp 38 /Script/NARUTO.NN_BuffInfo.DeltaTime (FloatProperty)
+  imp 39 /Script/NARUTO.NN_BuffInfo.EffectiveTime (FloatProperty)
+  imp 40 /Script/NARUTO.NN_BuffInfo.Param (FloatProperty)
+  imp 41 /Script/CoreUObject.Default__Function (Function)
+  imp 42 /Script/Engine.Actor.GetAttachParentActor (Function)
+  imp 43 /Script/Engine.Actor.HasAuthority (Function)
+  imp 44 /Script/Engine.Actor.K2_GetActorLocation (Function)
+  imp 45 /Script/Engine.Actor.K2_GetActorRotation (Function)
+  imp 46 /Script/Engine.Actor.ReceiveBeginPlay (Function)
+  imp 47 /Script/Engine.Actor.ReceiveDestroyed (Function)
+  imp 48 /Script/Engine.Actor.ReceiveTick (Function)
+  imp 49 /Script/Engine.Actor.UserConstructionScript (Function)
+  imp 50 /Script/Engine.ActorComponent.K2_DestroyComponent (Function)
+  imp 51 /Script/Engine.GameplayStatics.SpawnEmitterAtLocation (Function)
+  imp 52 /Script/Engine.GameplayStatics.SpawnEmitterAttached (Function)
+  imp 53 /Script/Engine.KismetMathLibrary.Less_IntInt (Function)
+  imp 54 /Script/Engine.KismetMathLibrary.Subtract_FloatFloat (Function)
+  imp 55 /Script/Engine.KismetSystemLibrary.Delay (Function)
+  imp 56 /Script/Engine.KismetSystemLibrary.IsValid (Function)
+  imp 57 /Script/Engine.KismetSystemLibrary.K2_ClearAndInvalidateTimerHandle (Function)
+  imp 58 /Script/Engine.KismetSystemLibrary.K2_SetTimer (Function)
+  imp 59 /Script/Engine.SkeletalMeshComponent.PlayAnimation (Function)
+  imp 60 /Script/Engine.SkeletalMeshComponent.Stop (Function)
+  imp 61 /Script/NARUTO.NN_CharacterPawn.AddBuff (Function)
+  imp 62 /Script/NARUTO.NN_CharacterPawn.GetCurrentUseFinishMove (Function)
+  imp 63 /Script/NARUTO.NN_CharacterPawn.RemoveBuffByOwner (Function)
+  imp 64 /Script/Engine.Default__GameplayStatics (GameplayStatics)
+  imp 65 /Script/CoreUObject.Default__IntProperty (IntProperty)
+  imp 66 /Script/Engine.Default__KismetSystemLibrary (KismetSystemLibrary)
+  imp 67 /Script/NARUTO.NN_BuffInfo.DamageHitInfoName (NameProperty)
+  imp 68 /Script/NARUTO.NN_BuffInfo.MaterialEffectName (NameProperty)
+  imp 69 /Game/Blueprints/Functions/NN_FunctionLibrary.Default__NN_FunctionLibrary_C (NN_FunctionLibrary_C)
+  imp 70 /Script/CoreUObject.Default__ObjectProperty (ObjectProperty)
+  imp 71 /Script/Engine.Actor.Instigator (ObjectProperty)
+  imp 72 /Script/Engine.Character.Mesh (ObjectProperty)
+  imp 73 /Script/Engine.SkeletalMeshActor.SkeletalMeshComponent (ObjectProperty)
+  imp 74 /Script/NARUTO.NN_BuffInfo.MaterialEffectCurve (ObjectProperty)
+  imp 75 /Script/NARUTO.NN_BuffInfo.MaterialEffectCurveEnemy (ObjectProperty)
+  imp 76 /Game/Blueprints/Functions/NN_FunctionLibrary./Game/Blueprints/Functions/NN_FunctionLibrary (Package)
+  imp 77 /Game/Blueprints/Pawns/BP_AnimActor./Game/Blueprints/Pawns/BP_AnimActor (Package)
+  imp 78 /Game/Characters/Original/D53/D53_Default/Animation/Ninjutsu/D53_Ninjutsu_D53NJ3_Enla_Arm./Game/Characters/Original/D53/D53_Default/Animation/Ninjutsu/D53_Ninjutsu_D53NJ3_Enla_Arm (Package)
+  imp 79 /Game/Characters/Original/D53/D53_Default/Animation/Ninjutsu/D53_Ninjutsu_D53NJ3_Enla_Start./Game/Characters/Original/D53/D53_Default/Animation/Ninjutsu/D53_Ninjutsu_D53NJ3_Enla_Start (Package)
+  imp 80 /Game/Weapons/Ninjutsu/D53NJ3/Meshes/SK_CHR_D53NJ3_ENR./Game/Weapons/Ninjutsu/D53NJ3/Meshes/SK_CHR_D53NJ3_ENR (Package)
+  imp 81 /Game/Weapons/Ninjutsu/D53NJ3/Particles/P_WEP_D53NJ3_Appear./Game/Weapons/Ninjutsu/D53NJ3/Particles/P_WEP_D53NJ3_Appear (Package)
+  imp 82 /Game/Weapons/Ninjutsu/D53NJ3/Particles/P_WEP_D53NJ3_Debuff./Game/Weapons/Ninjutsu/D53NJ3/Particles/P_WEP_D53NJ3_Debuff (Package)
+  imp 83 /Game/Weapons/Ninjutsu/D53NJ3/Particles/P_WEP_D53NJ3_Exit./Game/Weapons/Ninjutsu/D53NJ3/Particles/P_WEP_D53NJ3_Exit (Package)
+  imp 84 /Script/CoreUObject./Script/CoreUObject (Package)
+  imp 85 /Script/Engine./Script/Engine (Package)
+  imp 86 /Script/NARUTO./Script/NARUTO (Package)
+  imp 87 /Game/Weapons/Ninjutsu/D53NJ3/Particles/P_WEP_D53NJ3_Appear.P_WEP_D53NJ3_Appear (ParticleSystem)
+  imp 88 /Game/Weapons/Ninjutsu/D53NJ3/Particles/P_WEP_D53NJ3_Debuff.P_WEP_D53NJ3_Debuff (ParticleSystem)
+  imp 89 /Game/Weapons/Ninjutsu/D53NJ3/Particles/P_WEP_D53NJ3_Exit.P_WEP_D53NJ3_Exit (ParticleSystem)
+  imp 90 /Game/Blueprints/Pawns/BP_AnimActor.BP_AnimActor_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 91 /Script/Engine.Default__SceneComponent (SceneComponent)
+  imp 92 /Script/CoreUObject.Rotator (ScriptStruct)
+  imp 93 /Script/CoreUObject.Vector (ScriptStruct)
+  imp 94 /Script/Engine.LatentActionInfo (ScriptStruct)
+  imp 95 /Script/Engine.PointerToUberGraphFrame (ScriptStruct)
+  imp 96 /Script/Engine.TimerHandle (ScriptStruct)
+  imp 97 /Script/NARUTO.NN_BuffInfo (ScriptStruct)
+  imp 98 /Script/Engine.Default__SCS_Node (SCS_Node)
+  imp 99 /Script/Engine.Default__SimpleConstructionScript (SimpleConstructionScript)
+  imp 100 /Game/Weapons/Ninjutsu/D53NJ3/Meshes/SK_CHR_D53NJ3_ENR.SK_CHR_D53NJ3_ENR (SkeletalMesh)
+  imp 101 /Game/Blueprints/Pawns/BP_AnimActor.Default__BP_AnimActor_C.SkeletalMeshComponent0 (SkeletalMeshComponent)
+  imp 102 /Script/CoreUObject.Default__StructProperty (StructProperty)
+exp 0 SlashEffect : ObjectProperty  outer 47  @3c89 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 1 AttachTarget : ObjectProperty  outer 47  @3cb1 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 2 OwnerWeapon : ObjectProperty  outer 47  @3cd9 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 3 AttackTimer : StructProperty  outer 47  @3d01 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 4 DebuffParamRate : FloatProperty  outer 47  @3d29 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 5 DebuffParam : FloatProperty  outer 47  @3d4d +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 6 AttackCount : IntProperty  outer 47  @3d71 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 7 ExitEffect : ObjectProperty  outer 47  @3d95 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 8 AppearEffect : ObjectProperty  outer 47  @3dbd +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 9 CallFunc_CountUpNumForReplicate_OutNum : IntProperty  outer 36  @3de5 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 10 CallFunc_IsValid_ReturnValue3 : BoolProperty  outer 36  @3e09 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 11 CallFunc_GetCurrentUseFinishMove_ReturnValue : ObjectProperty  outer 36  @3e2f +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 12 K2Node_MakeStruct_NN_BuffInfo : StructProperty  outer 36  @3e57 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 13 K2Node_DynamicCast_bSuccess2 : BoolProperty  outer 36  @3e7f +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 14 K2Node_DynamicCast_AsNN_Character_Pawn2 : ObjectProperty  outer 36  @3ea5 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 15 CallFunc_SpawnEmitterAttached_ReturnValue : ObjectProperty  outer 36  @3ecd +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 16 CallFunc_Subtract_FloatFloat_ReturnValue : FloatProperty  outer 36  @3ef5 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 17 Temp_bool_IsClosed_Variable : BoolProperty  outer 36  @3f19 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 18 CallFunc_Less_IntInt_ReturnValue : BoolProperty  outer 36  @3f3f +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 19 CallFunc_SpawnEmitterAtLocation_ReturnValue2 : ObjectProperty  outer 36  @3f65 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 20 CallFunc_K2_SetTimer_ReturnValue : StructProperty  outer 36  @3f8d +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 21 CallFunc_K2_GetActorRotation_ReturnValue2 : StructProperty  outer 36  @3fb5 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 22 CallFunc_SpawnEmitterAtLocation_ReturnValue : ObjectProperty  outer 36  @3fdd +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 23 CallFunc_K2_GetActorLocation_ReturnValue2 : StructProperty  outer 36  @4005 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 24 CallFunc_K2_GetActorRotation_ReturnValue : StructProperty  outer 36  @402d +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 25 CallFunc_K2_GetActorLocation_ReturnValue : StructProperty  outer 36  @4055 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 26 K2Node_Event_DeltaSeconds : FloatProperty  outer 36  @407d +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 27 CallFunc_HasAuthority_ReturnValue : BoolProperty  outer 36  @40a1 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 28 CallFunc_IsValid_ReturnValue2 : BoolProperty  outer 36  @40c7 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 29 Temp_bool_Has_Been_Initd_Variable : BoolProperty  outer 36  @40ed +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 30 CallFunc_IsValid_ReturnValue : BoolProperty  outer 36  @4113 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 31 K2Node_DynamicCast_bSuccess : BoolProperty  outer 36  @4139 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 32 K2Node_DynamicCast_AsNN_Character_Pawn : ObjectProperty  outer 36  @415f +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 33 CallFunc_GetAttachParentActor_ReturnValue : ObjectProperty  outer 36  @4187 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 34 EntryPoint : IntProperty  outer 36  @41af +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 35 ExecuteUbergraph_BP_D53NJ3_Summon : Function  outer 47  @41d3 +555
+    -- Eigenschaften ok, Ende bei +8 von 555
+exp 36 StartAttackAnim : Function  outer 47  @4728 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 37 ReceiveDestroyed : Function  outer 47  @4766 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 38 DeltaSeconds : FloatProperty  outer 40  @47a4 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 39 ReceiveTick : Function  outer 47  @47c8 +48
+    -- Eigenschaften ok, Ende bei +8 von 48
+exp 40 ReceiveBeginPlay : Function  outer 47  @4810 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 41 UserConstructionScript : Function  outer 47  @484e +2f
+    -- Eigenschaften ok, Ende bei +8 von 2f
+exp 42 CallFunc_IsValid_ReturnValue2 : BoolProperty  outer 45  @487d +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 43 CallFunc_IsValid_ReturnValue : BoolProperty  outer 45  @48a3 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 44 EndAttack : Function  outer 47  @48c9 +c7
+    -- Eigenschaften ok, Ende bei +8 von c7
+exp 45 UberGraphFrame : StructProperty  outer 47  @4990 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 46 BP_D53NJ3_Summon_C : BlueprintGeneratedClass  outer 0  @49b8 +fb
+    SimpleConstructionScript (ObjectProperty) = obj 51
+    UberGraphFramePointerProperty (ObjectProperty) = obj 46
+    UberGraphFunction (ObjectProperty) = obj 36
+    -- Eigenschaften ok, Ende bei +5f von fb
+exp 47 Default__BP_D53NJ3_Summon_C : BP_D53NJ3_Summon_C  outer 0  @4ab3 +1c9
+    UberGraphFrame (StructProperty PointerToUberGraphFrame) = 0
+    AppearEffect (ObjectProperty) = obj -88
+    ExitEffect (ObjectProperty) = obj -90
+    DebuffParam (FloatProperty) = -0.3
+    DebuffParamRate (FloatProperty) = 0.08
+    AttackTimer (StructProperty TimerHandle)
+      Handle (UInt64Property) = 0
+    SkeletalMeshComponent (ObjectProperty) = obj 52
+    PrimaryActorTick (StructProperty ActorTickFunction)
+      bCanEverTick (BoolProperty) = 1
+    RootComponent (ObjectProperty) = obj 52
+    Tags (ArrayProperty of NameProperty) [1]
+      0 (NameProperty) = D53NJ3_Summon
+    -- Eigenschaften ok, Ende bei +1c9 von 1c9
+exp 48 DefaultSceneRoot_GEN_VARIABLE : SceneComponent  outer 47  @4c7c +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 49 SCS_Node_0 : SCS_Node  outer 51  @4c88 +a8
+    ComponentClass (ObjectProperty) = obj -29
+    ComponentTemplate (ObjectProperty) = obj 49
+    VariableGuid (StructProperty Guid) = 3.84267e+09 1.21271e+09 1.08945e+09 3.98003e+08
+    InternalVariableName (NameProperty) = DefaultSceneRoot
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 50 SimpleConstructionScript_0 : SimpleConstructionScript  outer 47  @4d30 +29
+    DefaultSceneRootNode (ObjectProperty) = obj 50
+    -- Eigenschaften ok, Ende bei +25 von 29
+exp 51 SkeletalMeshComponent0 : SkeletalMeshComponent  outer 48  @4d59 +2b0
+    AnimationData (StructProperty SingleAnimationPlayData)
+      AnimToPlay (ObjectProperty) = obj -2
+    SkeletalMesh (ObjectProperty) = obj -101
+    BodyInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = NoCollision
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [3]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Visibility
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          1 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Camera
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          2 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      CollisionEnabled (ByteProperty ECollisionEnabled) = ECollisionEnabled::NoCollision
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +2ac von 2b0
+
+== dependances /Game :
+  /Game/Blueprints/Functions/NN_FunctionLibrary
+  /Game/Blueprints/Pawns/BP_AnimActor
+  /Game/Characters/Original/D53/D53_Default/Animation/Ninjutsu/D53_Ninjutsu_D53NJ3_Enla_Arm
+  /Game/Characters/Original/D53/D53_Default/Animation/Ninjutsu/D53_Ninjutsu_D53NJ3_Enla_Start
+  /Game/Weapons/Ninjutsu/D53NJ3/Meshes/SK_CHR_D53NJ3_ENR
+  /Game/Weapons/Ninjutsu/D53NJ3/Particles/P_WEP_D53NJ3_Appear
+  /Game/Weapons/Ninjutsu/D53NJ3/Particles/P_WEP_D53NJ3_Debuff
+  /Game/Weapons/Ninjutsu/D53NJ3/Particles/P_WEP_D53NJ3_Exit

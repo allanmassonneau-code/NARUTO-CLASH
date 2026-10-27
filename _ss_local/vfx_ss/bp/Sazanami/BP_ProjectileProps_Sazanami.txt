@@ -1,0 +1,36 @@
+== /Game/Weapons/Ninjutsu/Sazanami/Blueprints/BP_ProjectileProps_Sazanami
+fichier : NARUTO/Content/Weapons/Ninjutsu/Sazanami/Blueprints/BP_ProjectileProps_Sazanami.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : NN_WeaponProps
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/Sazanami/Blueprints/BP_ProjectileProps_Sazanami.uasset  1 565 octets
+  NARUTO/Content/Weapons/Ninjutsu/Sazanami/Blueprints/BP_ProjectileProps_Sazanami.uexp  541 octets
+
+/Game/Weapons/Ninjutsu/Sazanami/Blueprints/BP_ProjectileProps_Sazanami  flags 80000000  32 Namen  9 Importe  1 Exporte  Kopf 1565  Bulk ab 2102  Daten 2106
+  imp  0 /Script/NARUTO.NN_WeaponProps (Class)
+  imp  1 /Game/Blueprints/Props/ControllerVibrate/NearAttackFinishForceFeedback.NearAttackFinishForceFeedback (ForceFeedbackEffect)
+  imp  2 /Script/NARUTO.Default__NN_WeaponProps (NN_WeaponProps)
+  imp  3 /Game/Blueprints/Props/ControllerVibrate/NearAttackFinishForceFeedback./Game/Blueprints/Props/ControllerVibrate/NearAttackFinishForceFeedback (Package)
+  imp  4 /Game/Effects/Particles/Status/P_EFF_Guard_A./Game/Effects/Particles/Status/P_EFF_Guard_A (Package)
+  imp  5 /Game/Weapons/Ninjutsu/Sazanami/Particles/P_WEP_Sazanami_Hit./Game/Weapons/Ninjutsu/Sazanami/Particles/P_WEP_Sazanami_Hit (Package)
+  imp  6 /Script/NARUTO./Script/NARUTO (Package)
+  imp  7 /Game/Effects/Particles/Status/P_EFF_Guard_A.P_EFF_Guard_A (ParticleSystem)
+  imp  8 /Game/Weapons/Ninjutsu/Sazanami/Particles/P_WEP_Sazanami_Hit.P_WEP_Sazanami_Hit (ParticleSystem)
+exp 0 BP_ProjectileProps_Sazanami : NN_WeaponProps  outer 0  @61d +219
+    HitNormalReaction (StructProperty NN_WeaponReactionInfo)
+      Effect (ObjectProperty) = obj -9
+      AttachType (EnumProperty ENN_WeaponReactionAttachType) = ENN_WeaponReactionAttachType::AttachToTarget
+    HitHardReaction (StructProperty NN_WeaponReactionInfo)
+      Effect (ObjectProperty) = obj -9
+      AttachType (EnumProperty ENN_WeaponReactionAttachType) = ENN_WeaponReactionAttachType::AttachToTarget
+    HitFinishReaction (StructProperty NN_WeaponReactionInfo)
+      Effect (ObjectProperty) = obj -9
+      CotrollerVibrate (ObjectProperty) = obj -2
+      AttachType (EnumProperty ENN_WeaponReactionAttachType) = ENN_WeaponReactionAttachType::AttachToTarget
+    GuardReaction (StructProperty NN_WeaponReactionInfo)
+      Effect (ObjectProperty) = obj -8
+    HitEffect (ObjectProperty) = obj -9
+    -- Eigenschaften ok, Ende bei +215 von 219
+
+== dependances /Game :
+  /Game/Blueprints/Props/ControllerVibrate/NearAttackFinishForceFeedback
+  /Game/Effects/Particles/Status/P_EFF_Guard_A
+  /Game/Weapons/Ninjutsu/Sazanami/Particles/P_WEP_Sazanami_Hit

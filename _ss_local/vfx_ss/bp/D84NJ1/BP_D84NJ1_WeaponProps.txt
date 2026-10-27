@@ -1,0 +1,24 @@
+== /Game/Weapons/Ninjutsu/D84NJ1/Blueprints/BP_D84NJ1_WeaponProps
+fichier : NARUTO/Content/Weapons/Ninjutsu/D84NJ1/Blueprints/BP_D84NJ1_WeaponProps.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : NN_WeaponProps
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/D84NJ1/Blueprints/BP_D84NJ1_WeaponProps.uasset  1 180 octets
+  NARUTO/Content/Weapons/Ninjutsu/D84NJ1/Blueprints/BP_D84NJ1_WeaponProps.uexp  339 octets
+
+/Game/Weapons/Ninjutsu/D84NJ1/Blueprints/BP_D84NJ1_WeaponProps  flags 80000000  24 Namen  5 Importe  1 Exporte  Kopf 1180  Bulk ab 1515  Daten 1519
+  imp  0 /Script/NARUTO.NN_WeaponProps (Class)
+  imp  1 /Game/Blueprints/Props/ControllerVibrate/NearAttackFinishForceFeedback.NearAttackFinishForceFeedback (ForceFeedbackEffect)
+  imp  2 /Script/NARUTO.Default__NN_WeaponProps (NN_WeaponProps)
+  imp  3 /Game/Blueprints/Props/ControllerVibrate/NearAttackFinishForceFeedback./Game/Blueprints/Props/ControllerVibrate/NearAttackFinishForceFeedback (Package)
+  imp  4 /Script/NARUTO./Script/NARUTO (Package)
+exp 0 BP_D84NJ1_WeaponProps : NN_WeaponProps  outer 0  @49c +14f
+    HitNormalReaction (StructProperty NN_WeaponReactionInfo)
+      AttachType (EnumProperty ENN_WeaponReactionAttachType) = ENN_WeaponReactionAttachType::AttachToSelf
+    HitHardReaction (StructProperty NN_WeaponReactionInfo)
+      AttachType (EnumProperty ENN_WeaponReactionAttachType) = ENN_WeaponReactionAttachType::AttachToSelf
+    HitFinishReaction (StructProperty NN_WeaponReactionInfo)
+      CotrollerVibrate (ObjectProperty) = obj -2
+      AttachType (EnumProperty ENN_WeaponReactionAttachType) = ENN_WeaponReactionAttachType::AttachToSelf
+    -- Eigenschaften ok, Ende bei +14b von 14f
+
+== dependances /Game :
+  /Game/Blueprints/Props/ControllerVibrate/NearAttackFinishForceFeedback

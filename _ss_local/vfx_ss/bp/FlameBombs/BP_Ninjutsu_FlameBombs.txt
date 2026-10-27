@@ -1,0 +1,414 @@
+== /Game/Weapons/Ninjutsu/FlameBombs/Blueprints/BP_Ninjutsu_FlameBombs
+fichier : NARUTO/Content/Weapons/Ninjutsu/FlameBombs/Blueprints/BP_Ninjutsu_FlameBombs.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : BoolProperty
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/FlameBombs/Blueprints/BP_Ninjutsu_FlameBombs.uasset  26 539 octets
+  NARUTO/Content/Weapons/Ninjutsu/FlameBombs/Blueprints/BP_Ninjutsu_FlameBombs.uexp  8 849 octets
+
+/Game/Weapons/Ninjutsu/FlameBombs/Blueprints/BP_Ninjutsu_FlameBombs  flags 80000000  308 Namen  137 Importe  103 Exporte  Kopf 26539  Bulk ab 35384  Daten 35388
+  imp  0 /Script/CoreUObject.Default__ArrayProperty (ArrayProperty)
+  imp  1 /Game/Blueprints/Pawns/NN_Pawn_Player.NN_Pawn_Player_C (BlueprintGeneratedClass)
+  imp  2 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C (BlueprintGeneratedClass)
+  imp  3 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C (BlueprintGeneratedClass)
+  imp  4 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C (BlueprintGeneratedClass)
+  imp  5 /Script/Engine.Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+  imp  6 /Script/CoreUObject.Default__BoolProperty (BoolProperty)
+  imp  7 /Game/Blueprints/Pawns/NN_Pawn_Player.NN_Pawn_Player_C.BP_Minimap_Component_GEN_VARIABLE (BP_Minimap_Component_C)
+  imp  8 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.Default__BP_Ninjutsu_Base_C (BP_Ninjutsu_Base_C)
+  imp  9 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.Default__BP_Ninjutsu_Shooting_Base_C (BP_Ninjutsu_Shooting_Base_C)
+  imp 10 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.Default__BP_Projectile_Base_C (BP_Projectile_Base_C)
+  imp 11 /Game/Blueprints/Pawns/NN_Pawn_Player.NN_Pawn_Player_C.BP_VisibleFromCameraComp_GEN_VARIABLE (BP_VisibleFromCameraComp_C)
+  imp 12 /Script/CoreUObject.Default__ByteProperty (ByteProperty)
+  imp 13 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.CollisionCylinder (CapsuleComponent)
+  imp 14 /Script/CoreUObject.ArrayProperty (Class)
+  imp 15 /Script/CoreUObject.BoolProperty (Class)
+  imp 16 /Script/CoreUObject.ByteProperty (Class)
+  imp 17 /Script/CoreUObject.Class (Class)
+  imp 18 /Script/CoreUObject.ClassProperty (Class)
+  imp 19 /Script/CoreUObject.EnumProperty (Class)
+  imp 20 /Script/CoreUObject.FloatProperty (Class)
+  imp 21 /Script/CoreUObject.Function (Class)
+  imp 22 /Script/CoreUObject.IntProperty (Class)
+  imp 23 /Script/CoreUObject.Object (Class)
+  imp 24 /Script/CoreUObject.ObjectProperty (Class)
+  imp 25 /Script/CoreUObject.StructProperty (Class)
+  imp 26 /Script/Engine.Actor (Class)
+  imp 27 /Script/Engine.ActorComponent (Class)
+  imp 28 /Script/Engine.BlueprintGeneratedClass (Class)
+  imp 29 /Script/Engine.GameplayStatics (Class)
+  imp 30 /Script/Engine.GameStateBase (Class)
+  imp 31 /Script/Engine.InheritableComponentHandler (Class)
+  imp 32 /Script/Engine.KismetArrayLibrary (Class)
+  imp 33 /Script/Engine.KismetMathLibrary (Class)
+  imp 34 /Script/Engine.KismetSystemLibrary (Class)
+  imp 35 /Script/Engine.Pawn (Class)
+  imp 36 /Script/Engine.SceneComponent (Class)
+  imp 37 /Script/Engine.SCS_Node (Class)
+  imp 38 /Script/Engine.SimpleConstructionScript (Class)
+  imp 39 /Script/NARUTO.NN_CharacterPawn (Class)
+  imp 40 /Script/NARUTO.NN_GameState (Class)
+  imp 41 /Script/NARUTO.NN_PlayerPawn_Base (Class)
+  imp 42 /Script/NARUTO.NN_Weapon (Class)
+  imp 43 /Script/CoreUObject.Default__ClassProperty (ClassProperty)
+  imp 44 /Script/NARUTO.ENN_CoolTimeType (Enum)
+  imp 45 /Script/CoreUObject.Default__EnumProperty (EnumProperty)
+  imp 46 /Script/CoreUObject.Default__FloatProperty (FloatProperty)
+  imp 47 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.OnDestroyedByD55NJ1 (Function)
+  imp 48 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.ReceiveDestroyed (Function)
+  imp 49 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.DelayedDestroy (Function)
+  imp 50 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.ReceiveBeginPlay (Function)
+  imp 51 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.UserConstructionScript (Function)
+  imp 52 /Script/CoreUObject.Default__Function (Function)
+  imp 53 /Script/Engine.Actor.GetInstigator (Function)
+  imp 54 /Script/Engine.Actor.HasAuthority (Function)
+  imp 55 /Script/Engine.ActorComponent.K2_DestroyComponent (Function)
+  imp 56 /Script/Engine.GameplayStatics.GetAllActorsOfClass (Function)
+  imp 57 /Script/Engine.GameplayStatics.GetGameState (Function)
+  imp 58 /Script/Engine.GameplayStatics.GetObjectClass (Function)
+  imp 59 /Script/Engine.KismetArrayLibrary.Array_Get (Function)
+  imp 60 /Script/Engine.KismetArrayLibrary.Array_Length (Function)
+  imp 61 /Script/Engine.KismetMathLibrary.Add_IntInt (Function)
+  imp 62 /Script/Engine.KismetMathLibrary.BooleanAND (Function)
+  imp 63 /Script/Engine.KismetMathLibrary.EqualEqual_IntInt (Function)
+  imp 64 /Script/Engine.KismetMathLibrary.EqualEqual_ObjectObject (Function)
+  imp 65 /Script/Engine.KismetMathLibrary.Less_IntInt (Function)
+  imp 66 /Script/Engine.KismetMathLibrary.Not_PreBool (Function)
+  imp 67 /Script/Engine.KismetMathLibrary.NotEqual_ObjectObject (Function)
+  imp 68 /Script/Engine.KismetSystemLibrary.Delay (Function)
+  imp 69 /Script/Engine.KismetSystemLibrary.IsValid (Function)
+  imp 70 /Script/Engine.KismetSystemLibrary.K2_SetTimer (Function)
+  imp 71 /Script/NARUTO.NN_CharacterPawn.GetENTRY3Start (Function)
+  imp 72 /Script/NARUTO.NN_CharacterPawn.GetIsD42NJ2 (Function)
+  imp 73 /Script/NARUTO.NN_GameState.RegisterGameActor (Function)
+  imp 74 /Script/NARUTO.NN_GameState.UnregisterGameActor (Function)
+  imp 75 /Script/NARUTO.NN_PlayerPawn_Base.SetMaxCoolTimebyCategory (Function)
+  imp 76 /Script/NARUTO.NN_PlayerPawn_Base.SubCoolStockNinjaSkill (Function)
+  imp 77 /Script/NARUTO.NN_PlayerPawn_Base.SubCoolStockOrCoolTimeForD33NJ2 (Function)
+  imp 78 /Script/NARUTO.NN_Weapon.OnGetSecondaryAttack (Function)
+  imp 79 /Script/Engine.Default__GameplayStatics (GameplayStatics)
+  imp 80 /Script/Engine.Default__InheritableComponentHandler (InheritableComponentHandler)
+  imp 81 /Script/CoreUObject.Default__IntProperty (IntProperty)
+  imp 82 /Script/NARUTO.NN_Weapon.Slot (IntProperty)
+  imp 83 /Script/Engine.Default__KismetArrayLibrary (KismetArrayLibrary)
+  imp 84 /Script/Engine.Default__KismetSystemLibrary (KismetSystemLibrary)
+  imp 85 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.BossActionComponent (NN_BossActionComponent)
+  imp 86 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.CameraClippingComponent (NN_CameraClippingComponent)
+  imp 87 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.CharMoveComp (NN_CharacterMovementComponent)
+  imp 88 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.HealthComponent (NN_HealthComponents)
+  imp 89 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.ParticleManageComponent (NN_ParticleManageComponent)
+  imp 90 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C (NN_Pawn_Player_C)
+  imp 91 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.PlayerActionComponent (NN_PlayerActionComponent)
+  imp 92 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.GameplayTasksComponent (NN_PlayTasksComponent)
+  imp 93 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.StatusManageComponent (NN_StatusManageComponent)
+  imp 94 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.TargetLockedComponent (NN_TargetLockedComponent)
+  imp 95 /Game/Weapons/Ninjutsu/FlameBombs/Blueprints/BP_ProjectileProps_FlameBombs.BP_ProjectileProps_FlameBombs (NN_WeaponProps)
+  imp 96 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.SphereCollision (ObjectProperty)
+  imp 97 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.TempEffectComp_0 (ObjectProperty)
+  imp 98 /Script/CoreUObject.Default__ObjectProperty (ObjectProperty)
+  imp 99 /Game/Blueprints/Pawns/NN_Pawn_Player./Game/Blueprints/Pawns/NN_Pawn_Player (Package)
+  imp 100 /Game/Effects/Particles/Influence/P_EFF_Influence_Fire_A./Game/Effects/Particles/Influence/P_EFF_Influence_Fire_A (Package)
+  imp 101 /Game/Weapons/BaseBlueprints/BP_Projectile_Base./Game/Weapons/BaseBlueprints/BP_Projectile_Base (Package)
+  imp 102 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base (Package)
+  imp 103 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base (Package)
+  imp 104 /Game/Weapons/Ninjutsu/FlameBombs/Blueprints/BP_ProjectileProps_FlameBombs./Game/Weapons/Ninjutsu/FlameBombs/Blueprints/BP_ProjectileProps_FlameBombs (Package)
+  imp 105 /Game/Weapons/Ninjutsu/FlameBombs/Particles/P_WEP_FlameBombs_Hit./Game/Weapons/Ninjutsu/FlameBombs/Particles/P_WEP_FlameBombs_Hit (Package)
+  imp 106 /Game/Weapons/Ninjutsu/FlameBombs/Particles/P_WEP_FlameBombs_Loop./Game/Weapons/Ninjutsu/FlameBombs/Particles/P_WEP_FlameBombs_Loop (Package)
+  imp 107 /Game/Weapons/Ninjutsu/FlameBombs/Particles/P_WEP_FlameBombs_Muzzle./Game/Weapons/Ninjutsu/FlameBombs/Particles/P_WEP_FlameBombs_Muzzle (Package)
+  imp 108 /Script/CoreUObject./Script/CoreUObject (Package)
+  imp 109 /Script/Engine./Script/Engine (Package)
+  imp 110 /Script/GameplayTags./Script/GameplayTags (Package)
+  imp 111 /Script/NARUTO./Script/NARUTO (Package)
+  imp 112 /Game/Effects/Particles/Influence/P_EFF_Influence_Fire_A.P_EFF_Influence_Fire_A (ParticleSystem)
+  imp 113 /Game/Weapons/Ninjutsu/FlameBombs/Particles/P_WEP_FlameBombs_Hit.P_WEP_FlameBombs_Hit (ParticleSystem)
+  imp 114 /Game/Weapons/Ninjutsu/FlameBombs/Particles/P_WEP_FlameBombs_Loop.P_WEP_FlameBombs_Loop (ParticleSystem)
+  imp 115 /Game/Weapons/Ninjutsu/FlameBombs/Particles/P_WEP_FlameBombs_Muzzle.P_WEP_FlameBombs_Muzzle (ParticleSystem)
+  imp 116 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.ProjectileMovement_GEN_VARIABLE (ProjectileMovementComponent)
+  imp 117 /Game/Blueprints/Pawns/NN_Pawn_Player.NN_Pawn_Player_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 118 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.DefaultSceneRoot_REMOVED_628DECC24C105FE693737EA4B602DB70 (SceneComponent)
+  imp 119 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.FakeTarget_GEN_VARIABLE (SceneComponent)
+  imp 120 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 121 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 122 /Script/Engine.Default__SceneComponent (SceneComponent)
+  imp 123 /Script/Engine.LatentActionInfo (ScriptStruct)
+  imp 124 /Script/Engine.PointerToUberGraphFrame (ScriptStruct)
+  imp 125 /Script/Engine.TimerHandle (ScriptStruct)
+  imp 126 /Script/GameplayTags.GameplayTag (ScriptStruct)
+  imp 127 /Script/Engine.Default__SCS_Node (SCS_Node)
+  imp 128 /Script/Engine.Default__SimpleConstructionScript (SimpleConstructionScript)
+  imp 129 /Game/Blueprints/Pawns/NN_Pawn_Player.Default__NN_Pawn_Player_C.CharacterMesh0 (SkeletalMeshComponent)
+  imp 130 /Game/Blueprints/Pawns/NN_Pawn_Player.NN_Pawn_Player_C.ByakuganMesh_GEN_VARIABLE (SkeletalMeshComponent)
+  imp 131 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 132 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 133 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 134 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 135 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 136 /Script/CoreUObject.Default__StructProperty (StructProperty)
+exp 0 IsSetup : BoolProperty  outer 98  @67ab +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 1 IsSecondaryAttackStart : BoolProperty  outer 98  @67d1 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 2 IsFirstInput : BoolProperty  outer 98  @67f7 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 3 CanDestroy : BoolProperty  outer 98  @681d +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 4 UnderlyingType : ByteProperty  outer 56  @6843 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 5 UnderlyingType : ByteProperty  outer 51  @686b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 6 UnderlyingType : ByteProperty  outer 21  @6893 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 7 UnderlyingType : ByteProperty  outer 15  @68bb +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 8 UnderlyingType : ByteProperty  outer 14  @68e3 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 9 UnderlyingType : ByteProperty  outer 11  @690b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 10 K2Node_Select2_Default : EnumProperty  outer 63  @6933 +2c
+    -- Eigenschaften ok, Ende bei +8 von 2c
+exp 11 Temp_int_Variable2 : IntProperty  outer 63  @695f +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 12 CallFunc_K2_SetTimer_ReturnValue : StructProperty  outer 63  @6983 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 13 Temp_byte_Variable4 : EnumProperty  outer 63  @69ab +2c
+    -- Eigenschaften ok, Ende bei +8 von 2c
+exp 14 Temp_byte_Variable3 : EnumProperty  outer 63  @69d7 +2c
+    -- Eigenschaften ok, Ende bei +8 von 2c
+exp 15 Temp_bool_Has_Been_Initd_Variable : BoolProperty  outer 63  @6a03 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 16 CallFunc_GetSecondaryAttackAvailableTime_SecondaryAttackAvailableTime : FloatProperty  outer 63  @6a29 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 17 K2Node_DynamicCast_bSuccess9 : BoolProperty  outer 63  @6a4d +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 18 K2Node_DynamicCast_AsNN_Pawn_Player3 : ObjectProperty  outer 63  @6a73 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 19 CallFunc_GetInstigator_ReturnValue6 : ObjectProperty  outer 63  @6a9b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 20 K2Node_Select_Default : EnumProperty  outer 63  @6ac3 +2c
+    -- Eigenschaften ok, Ende bei +8 von 2c
+exp 21 K2Node_DynamicCast_bSuccess8 : BoolProperty  outer 63  @6aef +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 22 K2Node_DynamicCast_AsNN_Pawn_Player2 : ObjectProperty  outer 63  @6b15 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 23 CallFunc_GetInstigator_ReturnValue5 : ObjectProperty  outer 63  @6b3d +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 24 K2Node_DynamicCast_bSuccess7 : BoolProperty  outer 63  @6b65 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 25 K2Node_DynamicCast_AsNN_Character_Pawn3 : ObjectProperty  outer 63  @6b8b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 26 CallFunc_GetInstigator_ReturnValue4 : ObjectProperty  outer 63  @6bb3 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 27 CallFunc_Not_PreBool_ReturnValue2 : BoolProperty  outer 63  @6bdb +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 28 CallFunc_GetIsD42NJ2_ReturnValue : BoolProperty  outer 63  @6c01 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 29 K2Node_DynamicCast_bSuccess6 : BoolProperty  outer 63  @6c27 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 30 K2Node_DynamicCast_AsNN_Pawn_Player : ObjectProperty  outer 63  @6c4d +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 31 CallFunc_GetInstigator_ReturnValue3 : ObjectProperty  outer 63  @6c75 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 32 CallFunc_BooleanAND_ReturnValue : BoolProperty  outer 63  @6c9d +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 33 CallFunc_EqualEqual_IntInt_ReturnValue : BoolProperty  outer 63  @6cc3 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 34 K2Node_DynamicCast_bSuccess5 : BoolProperty  outer 63  @6ce9 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 35 K2Node_DynamicCast_AsNN_Character_Pawn2 : ObjectProperty  outer 63  @6d0f +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 36 CallFunc_GetENTRY3Start_ReturnValue : IntProperty  outer 63  @6d37 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 37 CallFunc_GetInstigator_ReturnValue2 : ObjectProperty  outer 63  @6d5b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 38 K2Node_DynamicCast_bSuccess4 : BoolProperty  outer 63  @6d83 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 39 K2Node_DynamicCast_AsNN_Character_Pawn : ObjectProperty  outer 63  @6da9 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 40 CallFunc_GetInstigator_ReturnValue : ObjectProperty  outer 63  @6dd1 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 41 CallFunc_Not_PreBool_ReturnValue : BoolProperty  outer 63  @6df9 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 42 CallFunc_HasFlameBombsActive_ResultFlame : ObjectProperty  outer 63  @6e1f +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 43 CallFunc_HasFlameBombsActive_Result : BoolProperty  outer 63  @6e47 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 44 CallFunc_HasAuthority_ReturnValue : BoolProperty  outer 63  @6e6d +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 45 Temp_int_Variable : IntProperty  outer 63  @6e93 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 46 K2Node_DynamicCast_bSuccess3 : BoolProperty  outer 63  @6eb7 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 47 K2Node_DynamicCast_AsNN_Game_State3 : ObjectProperty  outer 63  @6edd +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 48 CallFunc_IsValid_ReturnValue3 : BoolProperty  outer 63  @6f05 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 49 CallFunc_GetGameState_ReturnValue3 : ObjectProperty  outer 63  @6f2b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 50 Temp_byte_Variable2 : EnumProperty  outer 63  @6f53 +2c
+    -- Eigenschaften ok, Ende bei +8 von 2c
+exp 51 K2Node_DynamicCast_bSuccess2 : BoolProperty  outer 63  @6f7f +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 52 K2Node_DynamicCast_AsNN_Game_State2 : ObjectProperty  outer 63  @6fa5 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 53 CallFunc_IsValid_ReturnValue2 : BoolProperty  outer 63  @6fcd +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 54 CallFunc_GetGameState_ReturnValue2 : ObjectProperty  outer 63  @6ff3 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 55 Temp_byte_Variable : EnumProperty  outer 63  @701b +2c
+    -- Eigenschaften ok, Ende bei +8 von 2c
+exp 56 K2Node_DynamicCast_bSuccess : BoolProperty  outer 63  @7047 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 57 K2Node_DynamicCast_AsNN_Game_State : ObjectProperty  outer 63  @706d +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 58 CallFunc_IsValid_ReturnValue : BoolProperty  outer 63  @7095 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 59 Temp_bool_IsClosed_Variable : BoolProperty  outer 63  @70bb +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 60 CallFunc_GetGameState_ReturnValue : ObjectProperty  outer 63  @70e1 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 61 EntryPoint : IntProperty  outer 63  @7109 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 62 ExecuteUbergraph_BP_Ninjutsu_FlameBombs : Function  outer 98  @712d +851
+    -- Eigenschaften ok, Ende bei +8 von 851
+exp 63 ReceiveDestroyed : Function  outer 98  @797e +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 64 Multicast_OnDestroyedByD55NJ1 : Function  outer 98  @79bc +40
+    -- Eigenschaften ok, Ende bei +8 von 40
+exp 65 OnDestroyedByD55NJ1 : Function  outer 98  @79fc +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 66 ResetCoolTimeMax : Function  outer 98  @7a3a +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 67 DelayedDestroy : Function  outer 98  @7a78 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 68 ReceiveBeginPlay : Function  outer 98  @7ab6 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 69 UserConstructionScript : Function  outer 98  @7af4 +35
+    -- Eigenschaften ok, Ende bei +8 von 35
+exp 70 CallFunc_GetAllActorsOfClass_OutActors : ObjectProperty  outer 79  @7b29 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 71 CallFunc_BooleanAND_ReturnValue : BoolProperty  outer 88  @7b51 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 72 CallFunc_EqualEqual_ObjectObject_ReturnValue : BoolProperty  outer 88  @7b77 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 73 CallFunc_GetInstigator_ReturnValue2 : ObjectProperty  outer 88  @7b9d +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 74 CallFunc_NotEqual_ObjectObject_ReturnValue : BoolProperty  outer 88  @7bc5 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 75 CallFunc_Less_IntInt_ReturnValue : BoolProperty  outer 88  @7beb +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 76 CallFunc_Array_Get_Item : ObjectProperty  outer 88  @7c11 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 77 CallFunc_Array_Length_ReturnValue : IntProperty  outer 88  @7c39 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 78 CallFunc_GetAllActorsOfClass_OutActors : ArrayProperty  outer 88  @7c5d +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 79 CallFunc_GetObjectClass_ReturnValue : ClassProperty  outer 88  @7c85 +2c
+    -- Eigenschaften ok, Ende bei +8 von 2c
+exp 80 CallFunc_GetInstigator_ReturnValue : ObjectProperty  outer 88  @7cb1 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 81 CallFunc_Add_IntInt_ReturnValue : IntProperty  outer 88  @7cd9 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 82 Temp_int_Loop_Counter_Variable : IntProperty  outer 88  @7cfd +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 83 Temp_int_Array_Index_Variable : IntProperty  outer 88  @7d21 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 84 TempResult : BoolProperty  outer 88  @7d45 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 85 ResultFlame : ObjectProperty  outer 88  @7d6b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 86 Result : BoolProperty  outer 88  @7d93 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 87 HasFlameBombsActive : Function  outer 98  @7db9 +1f9
+    -- Eigenschaften ok, Ende bei +8 von 1f9
+exp 88 ReturnValue : BoolProperty  outer 90  @7fb2 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 89 OnGetSecondaryAttack : Function  outer 98  @7fd8 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 90 CallFunc_Not_PreBool_ReturnValue : BoolProperty  outer 96  @8016 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 91 CallFunc_GetIsD42NJ2_ReturnValue : BoolProperty  outer 96  @803c +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 92 K2Node_DynamicCast_bSuccess : BoolProperty  outer 96  @8062 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 93 K2Node_DynamicCast_AsNN_Pawn_Player : ObjectProperty  outer 96  @8088 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 94 CallFunc_GetInstigator_ReturnValue : ObjectProperty  outer 96  @80b0 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 95 DestroySelf : Function  outer 98  @80d8 +b0
+    -- Eigenschaften ok, Ende bei +8 von b0
+exp 96 UberGraphFrame : StructProperty  outer 98  @8188 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 97 BP_Ninjutsu_FlameBombs_C : BlueprintGeneratedClass  outer 0  @81b0 +148
+    SimpleConstructionScript (ObjectProperty) = obj 103
+    InheritableComponentHandler (ObjectProperty) = obj 100
+    UberGraphFramePointerProperty (ObjectProperty) = obj 97
+    UberGraphFunction (ObjectProperty) = obj 63
+    -- Eigenschaften ok, Ende bei +7c von 148
+exp 98 Default__BP_Ninjutsu_FlameBombs_C : BP_Ninjutsu_FlameBombs_C  outer 0  @82f8 +657
+    UberGraphFrame (StructProperty PointerToUberGraphFrame) = 0
+    NinjutsuName (StrProperty) = 火遁・炎弾
+    SkillType (EnumProperty ENN_NinjaSkillType) = ENN_NinjaSkillType::ENN_NinjaSkillType_FlameBombs
+    MuzzleEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -116
+      AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+      Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+        Rotation (StructProperty Quat) = 0 -0 0.707107 0.707107
+        Translation (StructProperty Vector) = -8 55 108
+      RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator1
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    LoopEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -115
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    Speed (FloatProperty) = 5000
+    ImpactEffect (ObjectProperty) = obj -114
+    InfluenceEffectInfo (StructProperty NN_ParticleInfo)
+      Template (ObjectProperty) = obj -113
+      AttachSocketName (NameProperty) = EFF_Root01
+      IsAttach (BoolProperty) = 1
+      UseTeamColor (BoolProperty) = 1
+    HomingPower (FloatProperty) = 10000
+    InstanceLimit (IntProperty) = 8
+    HomingStartTime (FloatProperty) = 0.1
+    HomingEndTime (FloatProperty) = 1.4
+    AnyHitRadius (FloatProperty) = 300
+    DelayDestroyTime (FloatProperty) = 0.1
+    AttackHitInfoName (NameProperty) = FlameBombs
+    CounterHitPower (IntProperty) = 40
+    IsNullifiableByD55NJ1 (BoolProperty) = 1
+    IsNullifiableByD61NJ2 (BoolProperty) = 1
+    WeaponPropsData (ObjectProperty) = obj -96
+    AntiBossAdjustment (ArrayProperty of StructProperty) [1]
+      0 (StructProperty NN_NinjaSkillAntiBoss)
+        TagForAdjustment (StructProperty GameplayTag)
+          TagName (NameProperty) = SpecialDamage.Fire
+        AdjustFactor (FloatProperty) = 1
+        DebuffTime (FloatProperty) = 10
+    m_GamePlayTagContainer (StructProperty GameplayTagContainer) = 0
+    SoundID (NameProperty) = ID_WeaponSound_Ninjutsu_FlameBombs
+    Tags (ArrayProperty of NameProperty) [1]
+      0 (NameProperty) = Ninjutsu.FlameBombs
+    -- Eigenschaften ok, Ende bei +657 von 657
+exp 99 InheritableComponentHandler : InheritableComponentHandler  outer 98  @894f +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 100 DefaultSceneRoot_GEN_VARIABLE : SceneComponent  outer 98  @895b +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 101 SCS_Node_1 : SCS_Node  outer 103  @8967 +a8
+    ComponentClass (ObjectProperty) = obj -37
+    ComponentTemplate (ObjectProperty) = obj 101
+    VariableGuid (StructProperty Guid) = 1.18062e+09 1.28444e+09 4.26225e+09 2.97982e+09
+    InternalVariableName (NameProperty) = DefaultSceneRoot
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 102 SimpleConstructionScript_1 : SimpleConstructionScript  outer 98  @8a0f +29
+    DefaultSceneRootNode (ObjectProperty) = obj 102
+    -- Eigenschaften ok, Ende bei +25 von 29
+
+== dependances /Game :
+  /Game/Blueprints/Pawns/NN_Pawn_Player
+  /Game/Effects/Particles/Influence/P_EFF_Influence_Fire_A
+  /Game/Weapons/BaseBlueprints/BP_Projectile_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base
+  /Game/Weapons/Ninjutsu/FlameBombs/Blueprints/BP_ProjectileProps_FlameBombs
+  /Game/Weapons/Ninjutsu/FlameBombs/Particles/P_WEP_FlameBombs_Hit
+  /Game/Weapons/Ninjutsu/FlameBombs/Particles/P_WEP_FlameBombs_Loop
+  /Game/Weapons/Ninjutsu/FlameBombs/Particles/P_WEP_FlameBombs_Muzzle

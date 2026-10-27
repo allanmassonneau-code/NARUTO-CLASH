@@ -1,0 +1,518 @@
+== /Game/Weapons/Ninjutsu/D25NJ3/Blueprints/BP_D25NJ3
+fichier : NARUTO/Content/Weapons/Ninjutsu/D25NJ3/Blueprints/BP_D25NJ3.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StructProperty
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/D25NJ3/Blueprints/BP_D25NJ3.uasset  24 132 octets
+  NARUTO/Content/Weapons/Ninjutsu/D25NJ3/Blueprints/BP_D25NJ3.uexp  13 130 octets
+
+/Game/Weapons/Ninjutsu/D25NJ3/Blueprints/BP_D25NJ3  flags 80000000  223 Namen  88 Importe  118 Exporte  Kopf 24132  Bulk ab 37258  Daten 37262
+  imp  0 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C.BuffInfos (ArrayProperty)
+  imp  1 /Script/CoreUObject.Default__ArrayProperty (ArrayProperty)
+  imp  2 /Game/Effects/BluePrints/BP_Eff_FogCtrl_Enemy.BP_Eff_FogCtrl_Enemy_C (BlueprintGeneratedClass)
+  imp  3 /Game/Effects/BluePrints/BP_Eff_FogCtrl_Friend.BP_Eff_FogCtrl_Friend_C (BlueprintGeneratedClass)
+  imp  4 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C (BlueprintGeneratedClass)
+  imp  5 /Script/Engine.Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+  imp  6 /Script/CoreUObject.Default__BoolProperty (BoolProperty)
+  imp  7 /Script/NARUTO.NN_CharacterPawnBase.IsDead (BoolProperty)
+  imp  8 /Game/Effects/BluePrints/BP_Eff_FogCtrl_Enemy.Default__BP_Eff_FogCtrl_Enemy_C (BP_Eff_FogCtrl_Enemy_C)
+  imp  9 /Game/Effects/BluePrints/BP_Eff_FogCtrl_Friend.Default__BP_Eff_FogCtrl_Friend_C (BP_Eff_FogCtrl_Friend_C)
+  imp 10 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.Default__BP_Ninjutsu_Buff_Base_C (BP_Ninjutsu_Buff_Base_C)
+  imp 11 /Script/CoreUObject.ArrayProperty (Class)
+  imp 12 /Script/CoreUObject.BoolProperty (Class)
+  imp 13 /Script/CoreUObject.FloatProperty (Class)
+  imp 14 /Script/CoreUObject.Function (Class)
+  imp 15 /Script/CoreUObject.IntProperty (Class)
+  imp 16 /Script/CoreUObject.Object (Class)
+  imp 17 /Script/CoreUObject.ObjectProperty (Class)
+  imp 18 /Script/CoreUObject.StructProperty (Class)
+  imp 19 /Script/Engine.Actor (Class)
+  imp 20 /Script/Engine.BlueprintGeneratedClass (Class)
+  imp 21 /Script/Engine.InheritableComponentHandler (Class)
+  imp 22 /Script/Engine.KismetArrayLibrary (Class)
+  imp 23 /Script/Engine.KismetMathLibrary (Class)
+  imp 24 /Script/Engine.KismetSystemLibrary (Class)
+  imp 25 /Script/Engine.Pawn (Class)
+  imp 26 /Script/Engine.SceneComponent (Class)
+  imp 27 /Script/Engine.SCS_Node (Class)
+  imp 28 /Script/Engine.SimpleConstructionScript (Class)
+  imp 29 /Script/NARUTO.NN_CharacterPawn (Class)
+  imp 30 /Script/NARUTO.NN_CharacterPawnBase (Class)
+  imp 31 /Script/NARUTO.NN_PlayerPawn_Base (Class)
+  imp 32 /Script/NARUTO.NN_Weapon (Class)
+  imp 33 /Script/NARUTO.NN_BuffInfo.Type (EnumProperty)
+  imp 34 /Game/Sounds/Blueprints/FL_Sound.Default__FL_Sound_C (FL_Sound_C)
+  imp 35 /Script/CoreUObject.Default__FloatProperty (FloatProperty)
+  imp 36 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C.AddBuffMember (Function)
+  imp 37 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C.ReceiveTick (Function)
+  imp 38 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C.RemoveBuffMember (Function)
+  imp 39 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C.UserConstructionScript (Function)
+  imp 40 /Script/CoreUObject.Default__Function (Function)
+  imp 41 /Script/Engine.Actor.GetInstigator (Function)
+  imp 42 /Script/Engine.Actor.HasAuthority (Function)
+  imp 43 /Script/Engine.KismetArrayLibrary.Array_Add (Function)
+  imp 44 /Script/Engine.KismetArrayLibrary.Array_Find (Function)
+  imp 45 /Script/Engine.KismetArrayLibrary.Array_Get (Function)
+  imp 46 /Script/Engine.KismetArrayLibrary.Array_Length (Function)
+  imp 47 /Script/Engine.KismetMathLibrary.Add_IntInt (Function)
+  imp 48 /Script/Engine.KismetMathLibrary.EqualEqual_ObjectObject (Function)
+  imp 49 /Script/Engine.KismetMathLibrary.Less_IntInt (Function)
+  imp 50 /Script/Engine.KismetMathLibrary.NotEqual_IntInt (Function)
+  imp 51 /Script/Engine.KismetSystemLibrary.IsValid (Function)
+  imp 52 /Script/NARUTO.NN_CharacterPawn.AddBuff (Function)
+  imp 53 /Script/NARUTO.NN_CharacterPawn.RemoveBuffByOwner (Function)
+  imp 54 /Script/NARUTO.NN_CharacterPawnBase.IsSameTeamActor (Function)
+  imp 55 /Script/NARUTO.NN_PlayerPawn_Base.AddGamePlayScoreForBuff (Function)
+  imp 56 /Script/NARUTO.NN_Weapon.IsNoInhibitionByD52NJ2 (Function)
+  imp 57 /Script/Engine.Default__InheritableComponentHandler (InheritableComponentHandler)
+  imp 58 /Script/CoreUObject.Default__IntProperty (IntProperty)
+  imp 59 /Script/Engine.Default__KismetArrayLibrary (KismetArrayLibrary)
+  imp 60 /Script/Engine.Default__KismetSystemLibrary (KismetSystemLibrary)
+  imp 61 /Game/Weapons/Ninjutsu/D25NJ3/Blueprints/BP_D25NJ3_WeaponProps.BP_D25NJ3_WeaponProps (NN_WeaponProps)
+  imp 62 /Script/CoreUObject.Default__ObjectProperty (ObjectProperty)
+  imp 63 /Script/Engine.Actor.Instigator (ObjectProperty)
+  imp 64 /Game/Effects/BluePrints/BP_Eff_FogCtrl_Enemy./Game/Effects/BluePrints/BP_Eff_FogCtrl_Enemy (Package)
+  imp 65 /Game/Effects/BluePrints/BP_Eff_FogCtrl_Friend./Game/Effects/BluePrints/BP_Eff_FogCtrl_Friend (Package)
+  imp 66 /Game/Sounds/Blueprints/FL_Sound./Game/Sounds/Blueprints/FL_Sound (Package)
+  imp 67 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base (Package)
+  imp 68 /Game/Weapons/Ninjutsu/D25NJ3/Blueprints/BP_D25NJ3_WeaponProps./Game/Weapons/Ninjutsu/D25NJ3/Blueprints/BP_D25NJ3_WeaponProps (Package)
+  imp 69 /Game/Weapons/Ninjutsu/D25NJ3/Particles/P_WEP_D25NJ3_Start./Game/Weapons/Ninjutsu/D25NJ3/Particles/P_WEP_D25NJ3_Start (Package)
+  imp 70 /Script/CoreUObject./Script/CoreUObject (Package)
+  imp 71 /Script/Engine./Script/Engine (Package)
+  imp 72 /Script/GameplayTags./Script/GameplayTags (Package)
+  imp 73 /Script/NARUTO./Script/NARUTO (Package)
+  imp 74 /Game/Weapons/Ninjutsu/D25NJ3/Particles/P_WEP_D25NJ3_Start.P_WEP_D25NJ3_Start (ParticleSystem)
+  imp 75 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C.ProjectileMovement_GEN_VARIABLE (ProjectileMovementComponent)
+  imp 76 /Game/Effects/BluePrints/BP_Eff_FogCtrl_Enemy.BP_Eff_FogCtrl_Enemy_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 77 /Game/Effects/BluePrints/BP_Eff_FogCtrl_Friend.BP_Eff_FogCtrl_Friend_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 78 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 79 /Script/Engine.Default__SceneComponent (SceneComponent)
+  imp 80 /Script/Engine.PointerToUberGraphFrame (ScriptStruct)
+  imp 81 /Script/GameplayTags.GameplayTag (ScriptStruct)
+  imp 82 /Script/NARUTO.NN_BuffInfo (ScriptStruct)
+  imp 83 /Script/Engine.Default__SCS_Node (SCS_Node)
+  imp 84 /Script/Engine.Default__SimpleConstructionScript (SimpleConstructionScript)
+  imp 85 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 86 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base.BP_Ninjutsu_Buff_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 87 /Script/CoreUObject.Default__StructProperty (StructProperty)
+exp 0 BuffInfoForFriend : StructProperty  outer 9  @5e44 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 1 BuffInfoForOwn : StructProperty  outer 8  @5e6c +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 2 EnemyBuffMemberList : ObjectProperty  outer 6  @5e94 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 3 FriendBuffMemberList : ObjectProperty  outer 5  @5ebc +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 4 FriendBuffMemberList : ArrayProperty  outer 113  @5ee4 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 5 EnemyBuffMemberList : ArrayProperty  outer 113  @5f0c +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 6 DoDestroy : BoolProperty  outer 113  @5f34 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 7 BuffInfoForOwn : ArrayProperty  outer 113  @5f5a +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 8 BuffInfoForFriend : ArrayProperty  outer 113  @5f82 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 9 CallFunc_NotEqual_IntInt_ReturnValue2 : BoolProperty  outer 34  @5faa +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 10 CallFunc_Array_Find_ReturnValue2 : IntProperty  outer 34  @5fd0 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 11 CallFunc_Array_Add_ReturnValue : IntProperty  outer 34  @5ff4 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 12 CallFunc_Add_IntInt_ReturnValue : IntProperty  outer 34  @6018 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 13 CallFunc_Less_IntInt_ReturnValue : BoolProperty  outer 34  @603c +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 14 CallFunc_Array_Length_ReturnValue : IntProperty  outer 34  @6062 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 15 CallFunc_Array_Get_Item : StructProperty  outer 34  @6086 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 16 Temp_int_Loop_Counter_Variable : IntProperty  outer 34  @60ae +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 17 K2Node_DynamicCast_bSuccess : BoolProperty  outer 34  @60d2 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 18 K2Node_DynamicCast_AsNN_Character_Pawn : ObjectProperty  outer 34  @60f8 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 19 CallFunc_HasAuthority_ReturnValue : BoolProperty  outer 34  @6120 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 20 CallFunc_EqualEqual_ObjectObject_ReturnValue2 : BoolProperty  outer 34  @6146 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 21 CallFunc_GetInstigator_ReturnValue2 : ObjectProperty  outer 34  @616c +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 22 CallFunc_IsSameTeamActor_ReturnValue : BoolProperty  outer 34  @6194 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 23 CallFunc_EqualEqual_ObjectObject_ReturnValue : BoolProperty  outer 34  @61ba +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 24 CallFunc_NotEqual_IntInt_ReturnValue : BoolProperty  outer 34  @61e0 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 25 CallFunc_Array_Find_ReturnValue : IntProperty  outer 34  @6206 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 26 CallFunc_IsValid_ReturnValue : BoolProperty  outer 34  @622a +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 27 K2Node_Event_Target : ObjectProperty  outer 34  @6250 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 28 CallFunc_GetInstigator_ReturnValue : ObjectProperty  outer 34  @6278 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 29 K2Node_Event_Target2 : ObjectProperty  outer 34  @62a0 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 30 K2Node_Event_DeltaSeconds : FloatProperty  outer 34  @62c8 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 31 Temp_int_Array_Index_Variable : IntProperty  outer 34  @62ec +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 32 EntryPoint : IntProperty  outer 34  @6310 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 33 ExecuteUbergraph_BP_D25NJ3 : Function  outer 113  @6334 +3bb
+    -- Eigenschaften ok, Ende bei +8 von 3bb
+exp 34 Target : ObjectProperty  outer 36  @66ef +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 35 RemoveBuffMember : Function  outer 113  @6717 +48
+    -- Eigenschaften ok, Ende bei +8 von 48
+exp 36 Target : ObjectProperty  outer 38  @675f +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 37 AddBuffMember : Function  outer 113  @6787 +48
+    -- Eigenschaften ok, Ende bei +8 von 48
+exp 38 DeltaSeconds : FloatProperty  outer 40  @67cf +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 39 ReceiveTick : Function  outer 113  @67f3 +48
+    -- Eigenschaften ok, Ende bei +8 von 48
+exp 40 UserConstructionScript : Function  outer 113  @683b +35
+    -- Eigenschaften ok, Ende bei +8 von 35
+exp 41 CallFunc_Less_IntInt_ReturnValue : BoolProperty  outer 53  @6870 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 42 CallFunc_Array_Get_Item : StructProperty  outer 53  @6896 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 43 CallFunc_Array_Length_ReturnValue : IntProperty  outer 53  @68be +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 44 K2Node_DynamicCast_bSuccess : BoolProperty  outer 53  @68e2 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 45 K2Node_DynamicCast_AsNN_Player_Pawn_Base : ObjectProperty  outer 53  @6908 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 46 CallFunc_Array_Add_ReturnValue : IntProperty  outer 53  @6930 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 47 CallFunc_Add_IntInt_ReturnValue : IntProperty  outer 53  @6954 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 48 Temp_int_Loop_Counter_Variable : IntProperty  outer 53  @6978 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 49 Temp_int_Array_Index_Variable : IntProperty  outer 53  @699c +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 50 IsDoAdd : BoolProperty  outer 53  @69c0 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 51 Target : ObjectProperty  outer 53  @69e6 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 52 AddBuffForFriend : Function  outer 113  @6a0e +19b
+    -- Eigenschaften ok, Ende bei +8 von 19b
+exp 53 CallFunc_Less_IntInt_ReturnValue2 : BoolProperty  outer 69  @6ba9 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 54 CallFunc_Array_Length_ReturnValue2 : IntProperty  outer 69  @6bcf +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 55 CallFunc_Array_Get_Item2 : StructProperty  outer 69  @6bf3 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 56 K2Node_DynamicCast_bSuccess : BoolProperty  outer 69  @6c1b +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 57 K2Node_DynamicCast_AsNN_Player_Pawn_Base : ObjectProperty  outer 69  @6c41 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 58 CallFunc_Add_IntInt_ReturnValue2 : IntProperty  outer 69  @6c69 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 59 CallFunc_Less_IntInt_ReturnValue : BoolProperty  outer 69  @6c8d +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 60 Temp_int_Loop_Counter_Variable2 : IntProperty  outer 69  @6cb3 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 61 CallFunc_Array_Length_ReturnValue : IntProperty  outer 69  @6cd7 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 62 CallFunc_Array_Get_Item : StructProperty  outer 69  @6cfb +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 63 Temp_int_Array_Index_Variable2 : IntProperty  outer 69  @6d23 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 64 Temp_int_Array_Index_Variable : IntProperty  outer 69  @6d47 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 65 CallFunc_Add_IntInt_ReturnValue : IntProperty  outer 69  @6d6b +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 66 Temp_int_Loop_Counter_Variable : IntProperty  outer 69  @6d8f +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 67 OwnerPlayer : ObjectProperty  outer 69  @6db3 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 68 AddBuffForOwn : Function  outer 113  @6ddb +228
+    -- Eigenschaften ok, Ende bei +8 von 228
+exp 69 CallFunc_Less_IntInt_ReturnValue : BoolProperty  outer 77  @7003 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 70 CallFunc_Array_Get_Item : StructProperty  outer 77  @7029 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 71 CallFunc_Array_Length_ReturnValue : IntProperty  outer 77  @7051 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 72 CallFunc_Add_IntInt_ReturnValue : IntProperty  outer 77  @7075 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 73 Temp_int_Loop_Counter_Variable : IntProperty  outer 77  @7099 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 74 Temp_int_Array_Index_Variable : IntProperty  outer 77  @70bd +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 75 Target : ObjectProperty  outer 77  @70e1 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 76 RemoveBuffForFriend : Function  outer 113  @7109 +116
+    -- Eigenschaften ok, Ende bei +8 von 116
+exp 77 CallFunc_Less_IntInt_ReturnValue2 : BoolProperty  outer 93  @721f +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 78 CallFunc_Array_Length_ReturnValue2 : IntProperty  outer 93  @7245 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 79 CallFunc_Array_Get_Item2 : StructProperty  outer 93  @7269 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 80 K2Node_DynamicCast_bSuccess : BoolProperty  outer 93  @7291 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 81 K2Node_DynamicCast_AsNN_Player_Pawn_Base : ObjectProperty  outer 93  @72b7 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 82 CallFunc_Add_IntInt_ReturnValue2 : IntProperty  outer 93  @72df +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 83 CallFunc_Less_IntInt_ReturnValue : BoolProperty  outer 93  @7303 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 84 CallFunc_Array_Length_ReturnValue : IntProperty  outer 93  @7329 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 85 CallFunc_Array_Get_Item : StructProperty  outer 93  @734d +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 86 Temp_int_Loop_Counter_Variable2 : IntProperty  outer 93  @7375 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 87 Temp_int_Array_Index_Variable2 : IntProperty  outer 93  @7399 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 88 Temp_int_Array_Index_Variable : IntProperty  outer 93  @73bd +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 89 CallFunc_Add_IntInt_ReturnValue : IntProperty  outer 93  @73e1 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 90 Temp_int_Loop_Counter_Variable : IntProperty  outer 93  @7405 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 91 OwnerPlayer : ObjectProperty  outer 93  @7429 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 92 RemoveBuffForOwn : Function  outer 113  @7451 +232
+    -- Eigenschaften ok, Ende bei +8 von 232
+exp 93 K2Node_DynamicCast_bSuccess : BoolProperty  outer 97  @7683 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 94 K2Node_DynamicCast_AsNN_Player_Pawn_Base : ObjectProperty  outer 97  @76a9 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 95 Target : ObjectProperty  outer 97  @76d1 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 96 StartPostEffectEnemy : Function  outer 113  @76f9 +84
+    -- Eigenschaften ok, Ende bei +8 von 84
+exp 97 K2Node_DynamicCast_bSuccess : BoolProperty  outer 101  @777d +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 98 K2Node_DynamicCast_AsNN_Player_Pawn_Base : ObjectProperty  outer 101  @77a3 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 99 Target : ObjectProperty  outer 101  @77cb +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 100 StartPostEffectFriend : Function  outer 113  @77f3 +84
+    -- Eigenschaften ok, Ende bei +8 von 84
+exp 101 K2Node_DynamicCast_bSuccess : BoolProperty  outer 105  @7877 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 102 K2Node_DynamicCast_AsNN_Player_Pawn_Base : ObjectProperty  outer 105  @789d +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 103 Target : ObjectProperty  outer 105  @78c5 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 104 EndPostEffectEnemy : Function  outer 113  @78ed +78
+    -- Eigenschaften ok, Ende bei +8 von 78
+exp 105 K2Node_DynamicCast_bSuccess : BoolProperty  outer 109  @7965 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 106 K2Node_DynamicCast_AsNN_Player_Pawn_Base : ObjectProperty  outer 109  @798b +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 107 Target : ObjectProperty  outer 109  @79b3 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 108 EndPostEffectFriend : Function  outer 113  @79db +78
+    -- Eigenschaften ok, Ende bei +8 von 78
+exp 109 ReturnValue : BoolProperty  outer 111  @7a53 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 110 IsNoInhibitionByD52NJ2 : Function  outer 113  @7a79 +3a
+    -- Eigenschaften ok, Ende bei +8 von 3a
+exp 111 UberGraphFrame : StructProperty  outer 113  @7ab3 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 112 BP_D25NJ3_C : BlueprintGeneratedClass  outer 0  @7adb +16c
+    SimpleConstructionScript (ObjectProperty) = obj 118
+    InheritableComponentHandler (ObjectProperty) = obj 115
+    UberGraphFramePointerProperty (ObjectProperty) = obj 112
+    UberGraphFunction (ObjectProperty) = obj 34
+    -- Eigenschaften ok, Ende bei +7c von 16c
+exp 113 Default__BP_D25NJ3_C : BP_D25NJ3_C  outer 0  @7c47 +145a
+    UberGraphFrame (StructProperty PointerToUberGraphFrame) = 0
+    BuffInfoForFriend (ArrayProperty of StructProperty) [3]
+      0 (StructProperty NN_BuffInfo)
+        Type (EnumProperty ENN_StatusManageType) = ENN_StatusManageType::ENN_StatusManageType_AdjustMoveSpeed
+        EffectiveTime (FloatProperty) = 20
+        DeltaTime (FloatProperty) = 0
+        Param (FloatProperty) = 1.3
+        DamageHitInfoName (NameProperty) = None
+        IsCanNotClearDebuff (BoolProperty) = 0
+        IsCanNotInhibitionBuff (BoolProperty) = 0
+        UseBuffEffect (BoolProperty) = 0
+        HUDEffectType (EnumProperty ENN_StatusManage_HUDEffectType) = ENN_StatusManage_HUDEffectType::ENN_StatusManage_HUDEffectType_Invalid
+        UseMaterialEffect (BoolProperty) = 0
+        MaterialEffectName (NameProperty) = None
+        MaterialEffectCurve (ObjectProperty) = obj 0
+        MaterialEffectCurveEnemy (ObjectProperty) = obj 0
+        UseBuffStock (BoolProperty) = 1
+        IsModeBuff (BoolProperty) = 0
+        InitDeltaTime (FloatProperty) = 0
+        TargetNinjaSkillSlot (IntProperty) = 4.29497e+09
+        AttackerWeapon (ObjectProperty) = obj 0
+        AttackerCharacter (ObjectProperty) = obj 0
+        IsTmpBuff (BoolProperty) = 0
+        Index (IntProperty) = 4.29497e+09
+        IsLinkedEffectBuff (BoolProperty) = 0
+        AddBuffType (EnumProperty ENN_StatusManage_AddBuffType) = ENN_StatusManage_AddBuffType::ENN_StatusManage_AddBuffType_None
+      1 (StructProperty NN_BuffInfo)
+        Type (EnumProperty ENN_StatusManageType) = ENN_StatusManageType::ENN_StatusManageType_AdjustActionSpeed
+        EffectiveTime (FloatProperty) = 20
+        DeltaTime (FloatProperty) = 0
+        Param (FloatProperty) = 0.3
+        DamageHitInfoName (NameProperty) = None
+        IsCanNotClearDebuff (BoolProperty) = 0
+        IsCanNotInhibitionBuff (BoolProperty) = 0
+        UseBuffEffect (BoolProperty) = 0
+        HUDEffectType (EnumProperty ENN_StatusManage_HUDEffectType) = ENN_StatusManage_HUDEffectType::ENN_StatusManage_HUDEffectType_Invalid
+        UseMaterialEffect (BoolProperty) = 0
+        MaterialEffectName (NameProperty) = None
+        MaterialEffectCurve (ObjectProperty) = obj 0
+        MaterialEffectCurveEnemy (ObjectProperty) = obj 0
+        UseBuffStock (BoolProperty) = 0
+        IsModeBuff (BoolProperty) = 0
+        InitDeltaTime (FloatProperty) = 0
+        TargetNinjaSkillSlot (IntProperty) = 4.29497e+09
+        AttackerWeapon (ObjectProperty) = obj 0
+        AttackerCharacter (ObjectProperty) = obj 0
+        IsTmpBuff (BoolProperty) = 0
+        Index (IntProperty) = 4.29497e+09
+        IsLinkedEffectBuff (BoolProperty) = 0
+        AddBuffType (EnumProperty ENN_StatusManage_AddBuffType) = ENN_StatusManage_AddBuffType::ENN_StatusManage_AddBuffType_None
+      2 (StructProperty NN_BuffInfo)
+        Type (EnumProperty ENN_StatusManageType) = ENN_StatusManageType::ENN_StatusManageType_AdjustWaterDamage
+        EffectiveTime (FloatProperty) = 20
+        DeltaTime (FloatProperty) = 0
+        Param (FloatProperty) = 0.3
+        DamageHitInfoName (NameProperty) = None
+        IsCanNotClearDebuff (BoolProperty) = 0
+        IsCanNotInhibitionBuff (BoolProperty) = 0
+        UseBuffEffect (BoolProperty) = 0
+        HUDEffectType (EnumProperty ENN_StatusManage_HUDEffectType) = ENN_StatusManage_HUDEffectType::ENN_StatusManage_HUDEffectType_Invalid
+        UseMaterialEffect (BoolProperty) = 0
+        MaterialEffectName (NameProperty) = None
+        MaterialEffectCurve (ObjectProperty) = obj 0
+        MaterialEffectCurveEnemy (ObjectProperty) = obj 0
+        UseBuffStock (BoolProperty) = 0
+        IsModeBuff (BoolProperty) = 0
+        InitDeltaTime (FloatProperty) = 0
+        TargetNinjaSkillSlot (IntProperty) = 4.29497e+09
+        AttackerWeapon (ObjectProperty) = obj 0
+        AttackerCharacter (ObjectProperty) = obj 0
+        IsTmpBuff (BoolProperty) = 0
+        Index (IntProperty) = 4.29497e+09
+        IsLinkedEffectBuff (BoolProperty) = 0
+        AddBuffType (EnumProperty ENN_StatusManage_AddBuffType) = ENN_StatusManage_AddBuffType::ENN_StatusManage_AddBuffType_None
+    BuffInfoForOwn (ArrayProperty of StructProperty) [2]
+      0 (StructProperty NN_BuffInfo)
+        Type (EnumProperty ENN_StatusManageType) = ENN_StatusManageType::ENN_StatusManageType_AdjustAttackPower
+        EffectiveTime (FloatProperty) = 20
+        DeltaTime (FloatProperty) = 0
+        Param (FloatProperty) = 1.3
+        DamageHitInfoName (NameProperty) = None
+        IsCanNotClearDebuff (BoolProperty) = 0
+        IsCanNotInhibitionBuff (BoolProperty) = 0
+        UseBuffEffect (BoolProperty) = 0
+        HUDEffectType (EnumProperty ENN_StatusManage_HUDEffectType) = ENN_StatusManage_HUDEffectType::ENN_StatusManage_HUDEffectType_Invalid
+        UseMaterialEffect (BoolProperty) = 0
+        MaterialEffectName (NameProperty) = None
+        MaterialEffectCurve (ObjectProperty) = obj 0
+        MaterialEffectCurveEnemy (ObjectProperty) = obj 0
+        UseBuffStock (BoolProperty) = 1
+        IsModeBuff (BoolProperty) = 0
+        InitDeltaTime (FloatProperty) = 0
+        TargetNinjaSkillSlot (IntProperty) = 4.29497e+09
+        AttackerWeapon (ObjectProperty) = obj 0
+        AttackerCharacter (ObjectProperty) = obj 0
+        IsTmpBuff (BoolProperty) = 0
+        Index (IntProperty) = 4.29497e+09
+        IsLinkedEffectBuff (BoolProperty) = 0
+        AddBuffType (EnumProperty ENN_StatusManage_AddBuffType) = ENN_StatusManage_AddBuffType::ENN_StatusManage_AddBuffType_None
+      1 (StructProperty NN_BuffInfo)
+        Type (EnumProperty ENN_StatusManageType) = ENN_StatusManageType::ENN_StatusManageType_AdjustWaterDamage
+        EffectiveTime (FloatProperty) = 20
+        DeltaTime (FloatProperty) = 0
+        Param (FloatProperty) = 0.3
+        DamageHitInfoName (NameProperty) = None
+        IsCanNotClearDebuff (BoolProperty) = 0
+        IsCanNotInhibitionBuff (BoolProperty) = 0
+        UseBuffEffect (BoolProperty) = 0
+        HUDEffectType (EnumProperty ENN_StatusManage_HUDEffectType) = ENN_StatusManage_HUDEffectType::ENN_StatusManage_HUDEffectType_Invalid
+        UseMaterialEffect (BoolProperty) = 0
+        MaterialEffectName (NameProperty) = None
+        MaterialEffectCurve (ObjectProperty) = obj 0
+        MaterialEffectCurveEnemy (ObjectProperty) = obj 0
+        UseBuffStock (BoolProperty) = 0
+        IsModeBuff (BoolProperty) = 0
+        InitDeltaTime (FloatProperty) = 0
+        TargetNinjaSkillSlot (IntProperty) = 4.29497e+09
+        AttackerWeapon (ObjectProperty) = obj 0
+        AttackerCharacter (ObjectProperty) = obj 0
+        IsTmpBuff (BoolProperty) = 0
+        Index (IntProperty) = 4.29497e+09
+        IsLinkedEffectBuff (BoolProperty) = 0
+        AddBuffType (EnumProperty ENN_StatusManage_AddBuffType) = ENN_StatusManage_AddBuffType::ENN_StatusManage_AddBuffType_None
+    EffectiveRange (FloatProperty) = -1
+    EffectiveHeight (FloatProperty) = -1
+    EffectiveDeltaTime (FloatProperty) = 0.01
+    ToSameTeam (BoolProperty) = 1
+    ToEnemyTeam (BoolProperty) = 1
+    BuffInfos (ArrayProperty of StructProperty) [1]
+      0 (StructProperty NN_BuffInfo)
+        Type (EnumProperty ENN_StatusManageType) = ENN_StatusManageType::ENN_StatusManageType_DisableUseKawarimiDuration
+        EffectiveTime (FloatProperty) = 20
+        DeltaTime (FloatProperty) = 0
+        Param (FloatProperty) = 1
+        DamageHitInfoName (NameProperty) = None
+        IsCanNotClearDebuff (BoolProperty) = 0
+        IsCanNotInhibitionBuff (BoolProperty) = 0
+        UseBuffEffect (BoolProperty) = 0
+        HUDEffectType (EnumProperty ENN_StatusManage_HUDEffectType) = ENN_StatusManage_HUDEffectType::ENN_StatusManage_HUDEffectType_Invalid
+        UseMaterialEffect (BoolProperty) = 0
+        MaterialEffectName (NameProperty) = None
+        MaterialEffectCurve (ObjectProperty) = obj 0
+        MaterialEffectCurveEnemy (ObjectProperty) = obj 0
+        UseBuffStock (BoolProperty) = 1
+        IsModeBuff (BoolProperty) = 0
+        InitDeltaTime (FloatProperty) = 0
+        TargetNinjaSkillSlot (IntProperty) = 4.29497e+09
+        AttackerWeapon (ObjectProperty) = obj 0
+        AttackerCharacter (ObjectProperty) = obj 0
+        IsTmpBuff (BoolProperty) = 0
+        Index (IntProperty) = 4.29497e+09
+        IsLinkedEffectBuff (BoolProperty) = 0
+        AddBuffType (EnumProperty ENN_StatusManage_AddBuffType) = ENN_StatusManage_AddBuffType::ENN_StatusManage_AddBuffType_None
+    bAllowBossDebuff (BoolProperty) = 1
+    EffecitiveTime (FloatProperty) = 20
+    StartEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -75
+      AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Hips01
+      IsOnlyLocation_21_A73755164F5ECF686DF6F18A024361FA (BoolProperty) = 1
+    LifeTime (FloatProperty) = 0
+    WeaponPropsData (ObjectProperty) = obj -62
+    AntiBossAdjustment (ArrayProperty of StructProperty) [1]
+      0 (StructProperty NN_NinjaSkillAntiBoss)
+        TagForAdjustment (StructProperty GameplayTag)
+          TagName (NameProperty) = SkillAgainstBoss.Debuff.AttackSpeed
+        AdjustFactor (FloatProperty) = 0.55
+        DebuffTime (FloatProperty) = 9
+    SoundID (NameProperty) = ID_WeaponSound_Ninjutsu_D25NJ3
+    Tags (ArrayProperty of NameProperty) [1]
+      0 (NameProperty) = KeepAttackHitList
+    -- Eigenschaften ok, Ende bei +145a von 145a
+exp 114 InheritableComponentHandler : InheritableComponentHandler  outer 113  @90a1 +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 115 DefaultSceneRoot_GEN_VARIABLE : SceneComponent  outer 113  @90ad +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 116 SCS_Node_0 : SCS_Node  outer 118  @90b9 +a8
+    ComponentClass (ObjectProperty) = obj -27
+    ComponentTemplate (ObjectProperty) = obj 116
+    VariableGuid (StructProperty Guid) = 3.8261e+09 1.27927e+09 3.62369e+09 1.04765e+09
+    InternalVariableName (NameProperty) = DefaultSceneRoot
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 117 SimpleConstructionScript_0 : SimpleConstructionScript  outer 113  @9161 +29
+    DefaultSceneRootNode (ObjectProperty) = obj 117
+    -- Eigenschaften ok, Ende bei +25 von 29
+
+== dependances /Game :
+  /Game/Effects/BluePrints/BP_Eff_FogCtrl_Enemy
+  /Game/Effects/BluePrints/BP_Eff_FogCtrl_Friend
+  /Game/Sounds/Blueprints/FL_Sound
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Buff_Base
+  /Game/Weapons/Ninjutsu/D25NJ3/Blueprints/BP_D25NJ3_WeaponProps
+  /Game/Weapons/Ninjutsu/D25NJ3/Particles/P_WEP_D25NJ3_Start

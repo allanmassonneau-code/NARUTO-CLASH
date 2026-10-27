@@ -1,0 +1,279 @@
+== /Game/Weapons/Ninjutsu/TrueRasenSyuriken/Blueprints/BP_Ninjutsu_TrueRasenShuriken
+fichier : NARUTO/Content/Weapons/Ninjutsu/TrueRasenSyuriken/Blueprints/BP_Ninjutsu_TrueRasenShuriken.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : ObjectProperty
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/TrueRasenSyuriken/Blueprints/BP_Ninjutsu_TrueRasenShuriken.uasset  15 505 octets
+  NARUTO/Content/Weapons/Ninjutsu/TrueRasenSyuriken/Blueprints/BP_Ninjutsu_TrueRasenShuriken.uexp  4 980 octets
+
+/Game/Weapons/Ninjutsu/TrueRasenSyuriken/Blueprints/BP_Ninjutsu_TrueRasenShuriken  flags 80000000  199 Namen  102 Importe  50 Exporte  Kopf 15505  Bulk ab 20481  Daten 20485
+  imp  0 /Script/CoreUObject.Default__ArrayProperty (ArrayProperty)
+  imp  1 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C (BlueprintGeneratedClass)
+  imp  2 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.BP_Weapon_Base_C (BlueprintGeneratedClass)
+  imp  3 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C (BlueprintGeneratedClass)
+  imp  4 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C (BlueprintGeneratedClass)
+  imp  5 /Game/Weapons/Ninjutsu/Petrifying/Blueprints/BP_Petrifying.BP_Petrifying_C (BlueprintGeneratedClass)
+  imp  6 /Script/Engine.Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+  imp  7 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.IsExplodeAfterLifetime (BoolProperty)
+  imp  8 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.IsExplodeOnHit (BoolProperty)
+  imp  9 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.IsExplodeOnStop (BoolProperty)
+  imp 10 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.NoOffsetProj (BoolProperty)
+  imp 11 /Script/CoreUObject.Default__BoolProperty (BoolProperty)
+  imp 12 /Script/Engine.ProjectileMovementComponent.bRotationFollowsVelocity (BoolProperty)
+  imp 13 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.Default__BP_Ninjutsu_Base_C (BP_Ninjutsu_Base_C)
+  imp 14 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.Default__BP_Ninjutsu_Shooting_Base_C (BP_Ninjutsu_Shooting_Base_C)
+  imp 15 /Game/Weapons/Ninjutsu/Petrifying/Blueprints/BP_Petrifying.Default__BP_Petrifying_C (BP_Petrifying_C)
+  imp 16 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.Default__BP_Projectile_Base_C (BP_Projectile_Base_C)
+  imp 17 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.Default__BP_Weapon_Base_C (BP_Weapon_Base_C)
+  imp 18 /Game/Weapons/Ninjutsu/Petrifying/Blueprints/BP_Petrifying.BP_Petrifying_C.Capsule_GEN_VARIABLE (CapsuleComponent)
+  imp 19 /Script/CoreUObject.ArrayProperty (Class)
+  imp 20 /Script/CoreUObject.BoolProperty (Class)
+  imp 21 /Script/CoreUObject.Function (Class)
+  imp 22 /Script/CoreUObject.IntProperty (Class)
+  imp 23 /Script/CoreUObject.Object (Class)
+  imp 24 /Script/CoreUObject.ObjectProperty (Class)
+  imp 25 /Script/CoreUObject.StructProperty (Class)
+  imp 26 /Script/Engine.Actor (Class)
+  imp 27 /Script/Engine.BlueprintGeneratedClass (Class)
+  imp 28 /Script/Engine.InheritableComponentHandler (Class)
+  imp 29 /Script/Engine.KismetArrayLibrary (Class)
+  imp 30 /Script/Engine.KismetMathLibrary (Class)
+  imp 31 /Script/Engine.PrimitiveComponent (Class)
+  imp 32 /Script/Engine.ProjectileMovementComponent (Class)
+  imp 33 /Script/Engine.SceneComponent (Class)
+  imp 34 /Script/Engine.SCS_Node (Class)
+  imp 35 /Script/Engine.SimpleConstructionScript (Class)
+  imp 36 /Script/NARUTO.NN_Weapon (Class)
+  imp 37 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.DelayDestroyTime (FloatProperty)
+  imp 38 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.CheckCharacterHitReaction (Function)
+  imp 39 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.CheckHit (Function)
+  imp 40 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.GetAttackerDirection (Function)
+  imp 41 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.RestartMove (Function)
+  imp 42 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.OnActionEndBP (Function)
+  imp 43 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.StartLoopEffect (Function)
+  imp 44 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.DelayedDestroy (Function)
+  imp 45 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.DoDestroyByD35NJ3 (Function)
+  imp 46 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.IsUseHitDelay (Function)
+  imp 47 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.ReceiveBeginPlay (Function)
+  imp 48 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.UserConstructionScript (Function)
+  imp 49 /Script/CoreUObject.Default__Function (Function)
+  imp 50 /Script/Engine.Actor.DetachRootComponentFromParent (Function)
+  imp 51 /Script/Engine.Actor.HasAuthority (Function)
+  imp 52 /Script/Engine.Actor.K2_GetActorLocation (Function)
+  imp 53 /Script/Engine.KismetArrayLibrary.Array_Add (Function)
+  imp 54 /Script/Engine.KismetArrayLibrary.Array_Contains (Function)
+  imp 55 /Script/Engine.KismetMathLibrary.Normal (Function)
+  imp 56 /Script/Engine.KismetMathLibrary.Subtract_VectorVector (Function)
+  imp 57 /Script/NARUTO.NN_Weapon.GetLostEffectType (Function)
+  imp 58 /Script/Engine.Default__InheritableComponentHandler (InheritableComponentHandler)
+  imp 59 /Script/CoreUObject.Default__IntProperty (IntProperty)
+  imp 60 /Script/Engine.Default__KismetArrayLibrary (KismetArrayLibrary)
+  imp 61 /Game/Weapons/Ninjutsu/TrueRasenSyuriken/Blueprints/BP_ProjectileProps_TrueRasenShuriken.BP_ProjectileProps_TrueRasenShuriken (NN_WeaponProps)
+  imp 62 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.ProjectileMovement (ObjectProperty)
+  imp 63 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.SphereCollision (ObjectProperty)
+  imp 64 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.BP_Weapon_Base_C.Sphere (ObjectProperty)
+  imp 65 /Script/CoreUObject.Default__ObjectProperty (ObjectProperty)
+  imp 66 /Game/Weapons/BaseBlueprints/BP_Projectile_Base./Game/Weapons/BaseBlueprints/BP_Projectile_Base (Package)
+  imp 67 /Game/Weapons/BaseBlueprints/BP_Weapon_Base./Game/Weapons/BaseBlueprints/BP_Weapon_Base (Package)
+  imp 68 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base (Package)
+  imp 69 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base (Package)
+  imp 70 /Game/Weapons/Ninjutsu/Petrifying/Blueprints/BP_Petrifying./Game/Weapons/Ninjutsu/Petrifying/Blueprints/BP_Petrifying (Package)
+  imp 71 /Game/Weapons/Ninjutsu/TrueRasenSyuriken/Blueprints/BP_ProjectileProps_TrueRasenShuriken./Game/Weapons/Ninjutsu/TrueRasenSyuriken/Blueprints/BP_ProjectileProps_TrueRasenShuriken (Package)
+  imp 72 /Game/Weapons/Ninjutsu/TrueRasenSyuriken/Particles/P_WEP_TrueRasenShuriken_Hit./Game/Weapons/Ninjutsu/TrueRasenSyuriken/Particles/P_WEP_TrueRasenShuriken_Hit (Package)
+  imp 73 /Game/Weapons/Ninjutsu/TrueRasenSyuriken/Particles/P_WEP_TrueRasenShuriken_Loop./Game/Weapons/Ninjutsu/TrueRasenSyuriken/Particles/P_WEP_TrueRasenShuriken_Loop (Package)
+  imp 74 /Game/Weapons/Ninjutsu/TrueRasenSyuriken/Particles/P_WEP_TrueRasenShuriken_Start./Game/Weapons/Ninjutsu/TrueRasenSyuriken/Particles/P_WEP_TrueRasenShuriken_Start (Package)
+  imp 75 /Script/CoreUObject./Script/CoreUObject (Package)
+  imp 76 /Script/Engine./Script/Engine (Package)
+  imp 77 /Script/GameplayTags./Script/GameplayTags (Package)
+  imp 78 /Script/NARUTO./Script/NARUTO (Package)
+  imp 79 /Game/Weapons/Ninjutsu/TrueRasenSyuriken/Particles/P_WEP_TrueRasenShuriken_Hit.P_WEP_TrueRasenShuriken_Hit (ParticleSystem)
+  imp 80 /Game/Weapons/Ninjutsu/TrueRasenSyuriken/Particles/P_WEP_TrueRasenShuriken_Loop.P_WEP_TrueRasenShuriken_Loop (ParticleSystem)
+  imp 81 /Game/Weapons/Ninjutsu/TrueRasenSyuriken/Particles/P_WEP_TrueRasenShuriken_Start.P_WEP_TrueRasenShuriken_Start (ParticleSystem)
+  imp 82 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.ProjectileMovement_GEN_VARIABLE (ProjectileMovementComponent)
+  imp 83 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.DefaultSceneRoot_REMOVED_628DECC24C105FE693737EA4B602DB70 (SceneComponent)
+  imp 84 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.FakeTarget_GEN_VARIABLE (SceneComponent)
+  imp 85 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.BP_Weapon_Base_C.DefaultSceneRoot_REMOVED_1422D7FE4042589AAE1156AB42BAD9B3 (SceneComponent)
+  imp 86 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 87 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 88 /Game/Weapons/Ninjutsu/Petrifying/Blueprints/BP_Petrifying.BP_Petrifying_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 89 /Script/Engine.Default__SceneComponent (SceneComponent)
+  imp 90 /Script/CoreUObject.Vector (ScriptStruct)
+  imp 91 /Script/Engine.PointerToUberGraphFrame (ScriptStruct)
+  imp 92 /Script/GameplayTags.GameplayTag (ScriptStruct)
+  imp 93 /Script/Engine.Default__SCS_Node (SCS_Node)
+  imp 94 /Script/Engine.Default__SimpleConstructionScript (SimpleConstructionScript)
+  imp 95 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 96 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 97 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.BP_Weapon_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 98 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 99 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 100 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 101 /Script/CoreUObject.Default__StructProperty (StructProperty)
+exp 0 HitActors : ObjectProperty  outer 2  @3c91 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 1 HitActors : ArrayProperty  outer 44  @3cb9 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 2 IsRestartMove : BoolProperty  outer 44  @3ce1 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 3 IsDestroyed : BoolProperty  outer 44  @3d07 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 4 CallFunc_HasAuthority_ReturnValue : BoolProperty  outer 7  @3d2d +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 5 EntryPoint : IntProperty  outer 7  @3d53 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 6 ExecuteUbergraph_BP_Ninjutsu_TrueRasenShuriken : Function  outer 44  @3d77 +176
+    -- Eigenschaften ok, Ende bei +8 von 176
+exp 7 DoDestroyByD35NJ3 : Function  outer 44  @3eed +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 8 StartLoopEffect : Function  outer 44  @3f2b +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 9 DelayedDestroy : Function  outer 44  @3f69 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 10 OnActionEndBP : Function  outer 44  @3fa7 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 11 RestartMove : Function  outer 44  @3fe5 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 12 ReceiveBeginPlay : Function  outer 44  @4023 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 13 UserConstructionScript : Function  outer 44  @4061 +35
+    -- Eigenschaften ok, Ende bei +8 von 35
+exp 14 CallFunc_Normal_ReturnValue : StructProperty  outer 21  @4096 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 15 CallFunc_Subtract_VectorVector_ReturnValue : StructProperty  outer 21  @40be +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 16 CallFunc_K2_GetActorLocation_ReturnValue2 : StructProperty  outer 21  @40e6 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 17 CallFunc_K2_GetActorLocation_ReturnValue : StructProperty  outer 21  @410e +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 18 ReturnValue : StructProperty  outer 21  @4136 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 19 Target : ObjectProperty  outer 21  @415e +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 20 GetAttackerDirection : Function  outer 44  @4186 +9f
+    -- Eigenschaften ok, Ende bei +8 von 9f
+exp 21 IsUse : BoolProperty  outer 23  @4225 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 22 IsUseHitDelay : Function  outer 44  @424b +36
+    -- Eigenschaften ok, Ende bei +8 von 36
+exp 23 K2Node_DynamicCast_bSuccess : BoolProperty  outer 31  @4281 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 24 K2Node_DynamicCast_AsBP_Petrifying : ObjectProperty  outer 31  @42a7 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 25 CallFunc_CheckHit_bHit2 : BoolProperty  outer 31  @42cf +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 26 CallFunc_CheckHit_bHit : BoolProperty  outer 31  @42f5 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 27 bHit : BoolProperty  outer 31  @431b +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 28 OtherComp : ObjectProperty  outer 31  @4341 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 29 Other : ObjectProperty  outer 31  @4369 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 30 CheckHit : Function  outer 44  @4391 +b1
+    -- Eigenschaften ok, Ende bei +8 von b1
+exp 31 ReturnValue : IntProperty  outer 33  @4442 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 32 GetLostEffectType : Function  outer 44  @4466 +42
+    -- Eigenschaften ok, Ende bei +8 von 42
+exp 33 CallFunc_Array_Contains_ReturnValue : BoolProperty  outer 42  @44a8 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 34 CallFunc_Array_Add_ReturnValue : IntProperty  outer 42  @44ce +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 35 CallFunc_CheckCharacterHitReaction_IsHit : BoolProperty  outer 42  @44f2 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 36 IsHit : BoolProperty  outer 42  @4518 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 37 OtherComp : ObjectProperty  outer 42  @453e +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 38 HitLoc : StructProperty  outer 42  @4566 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 39 Count : IntProperty  outer 42  @458e +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 40 Other : ObjectProperty  outer 42  @45b2 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 41 CheckCharacterHitReaction : Function  outer 44  @45da +b4
+    -- Eigenschaften ok, Ende bei +8 von b4
+exp 42 UberGraphFrame : StructProperty  outer 44  @468e +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 43 BP_Ninjutsu_TrueRasenShuriken_C : BlueprintGeneratedClass  outer 0  @46b6 +160
+    SimpleConstructionScript (ObjectProperty) = obj 50
+    InheritableComponentHandler (ObjectProperty) = obj 46
+    UberGraphFramePointerProperty (ObjectProperty) = obj 43
+    UberGraphFunction (ObjectProperty) = obj 7
+    -- Eigenschaften ok, Ende bei +7c von 160
+exp 44 Default__BP_Ninjutsu_TrueRasenShuriken_C : BP_Ninjutsu_TrueRasenShuriken_C  outer 0  @4816 +4e3
+    UberGraphFrame (StructProperty PointerToUberGraphFrame) = 0
+    NinjutsuName (StrProperty) = 仙法・風遁螺旋手裏剣
+    SkillType (EnumProperty ENN_NinjaSkillType) = ENN_NinjaSkillType::ENN_NinjaSkillType_TrueRasenShuriken
+    IntensiveLineTime (FloatProperty) = 0
+    EffecitiveTime (FloatProperty) = 4
+    StartEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -82
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    AttackStartEffectEndTime (FloatProperty) = 1
+    LoopEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -81
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    Speed (FloatProperty) = 0
+    LifeTime (FloatProperty) = 0
+    IsExplodeAfterLifetime (BoolProperty) = 0
+    IsExplodeOnStop (BoolProperty) = 0
+    IsExplodeOnHit (BoolProperty) = 0
+    ImpactEffect (ObjectProperty) = obj -80
+    CollisionRadius (FloatProperty) = 60
+    HomingStartTime (FloatProperty) = 0.1
+    HomingEndTime (FloatProperty) = 3
+    AnyHitRadius (FloatProperty) = 300
+    DelayDestroyTime (FloatProperty) = 2
+    IsMultiHit (BoolProperty) = 1
+    IsMultiHitSameCount (BoolProperty) = 1
+    MultiHitRadius (FloatProperty) = 420
+    MultiHitTime (FloatProperty) = 2
+    MultiHitChangeRadiusTime (FloatProperty) = 0.7
+    AttackHitInfoName (NameProperty) = TrueRasenShuriken
+    CounterHitPower (IntProperty) = 50
+    RestartMoveSpeed (FloatProperty) = 3500
+    IsNullifiableByD55NJ1 (BoolProperty) = 1
+    IsNullifiableByD61NJ2 (BoolProperty) = 1
+    WeaponPropsData (ObjectProperty) = obj -62
+    m_GamePlayTagContainer (StructProperty GameplayTagContainer) = 0
+    SoundID (NameProperty) = ID_WeaponSound_Ninjutsu_TrueRasenSyuriken
+    -- Eigenschaften ok, Ende bei +4e3 von 4e3
+exp 45 InheritableComponentHandler : InheritableComponentHandler  outer 44  @4cf9 +205
+    Records (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ComponentOverrideRecord)
+        ComponentClass (ObjectProperty) = obj -33
+        ComponentTemplate (ObjectProperty) = obj 47
+        ComponentKey (StructProperty ComponentKey)
+          OwnerClass (ObjectProperty) = obj -2
+          SCSVariableName (NameProperty) = ProjectileMovement
+          AssociatedGuid (StructProperty Guid) = 3.60545e+09 1.12928e+09 2.13284e+09 7.8419e+08
+        CookedComponentInstancingData (StructProperty BlueprintCookedComponentInstancingData)
+          bIsValid (BoolProperty) = 0
+          ChangedPropertyList (ArrayProperty of StructProperty) = 0
+    -- Eigenschaften ok, Ende bei +201 von 205
+exp 46 ProjectileMovement_GEN_VARIABLE : ProjectileMovementComponent  outer 44  @4efe +26
+    bRotationFollowsVelocity (BoolProperty) = 0
+    -- Eigenschaften ok, Ende bei +22 von 26
+exp 47 DefaultSceneRoot_GEN_VARIABLE : SceneComponent  outer 44  @4f24 +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 48 SCS_Node_1 : SCS_Node  outer 50  @4f30 +a8
+    ComponentClass (ObjectProperty) = obj -34
+    ComponentTemplate (ObjectProperty) = obj 48
+    VariableGuid (StructProperty Guid) = 1.18062e+09 1.28444e+09 4.26225e+09 2.97982e+09
+    InternalVariableName (NameProperty) = DefaultSceneRoot
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 49 SimpleConstructionScript_1 : SimpleConstructionScript  outer 44  @4fd8 +29
+    DefaultSceneRootNode (ObjectProperty) = obj 49
+    -- Eigenschaften ok, Ende bei +25 von 29
+
+== dependances /Game :
+  /Game/Weapons/BaseBlueprints/BP_Projectile_Base
+  /Game/Weapons/BaseBlueprints/BP_Weapon_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base
+  /Game/Weapons/Ninjutsu/Petrifying/Blueprints/BP_Petrifying
+  /Game/Weapons/Ninjutsu/TrueRasenSyuriken/Blueprints/BP_ProjectileProps_TrueRasenShuriken
+  /Game/Weapons/Ninjutsu/TrueRasenSyuriken/Particles/P_WEP_TrueRasenShuriken_Hit
+  /Game/Weapons/Ninjutsu/TrueRasenSyuriken/Particles/P_WEP_TrueRasenShuriken_Loop
+  /Game/Weapons/Ninjutsu/TrueRasenSyuriken/Particles/P_WEP_TrueRasenShuriken_Start

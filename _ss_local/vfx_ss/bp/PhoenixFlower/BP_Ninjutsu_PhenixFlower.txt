@@ -1,0 +1,174 @@
+== /Game/Weapons/Ninjutsu/PhoenixFlower/Blueprints/BP_Ninjutsu_PhenixFlower
+fichier : NARUTO/Content/Weapons/Ninjutsu/PhoenixFlower/Blueprints/BP_Ninjutsu_PhenixFlower.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : Function
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/PhoenixFlower/Blueprints/BP_Ninjutsu_PhenixFlower.uasset  9 310 octets
+  NARUTO/Content/Weapons/Ninjutsu/PhoenixFlower/Blueprints/BP_Ninjutsu_PhenixFlower.uexp  2 945 octets
+
+/Game/Weapons/Ninjutsu/PhoenixFlower/Blueprints/BP_Ninjutsu_PhenixFlower  flags 80000000  174 Namen  66 Importe  15 Exporte  Kopf 9310  Bulk ab 12251  Daten 12255
+  imp  0 /Game/Blueprints/Pawns/BP_Pawn_AI.BP_Pawn_AI_C (BlueprintGeneratedClass)
+  imp  1 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C (BlueprintGeneratedClass)
+  imp  2 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C (BlueprintGeneratedClass)
+  imp  3 /Script/Engine.Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+  imp  4 /Script/CoreUObject.Default__BoolProperty (BoolProperty)
+  imp  5 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.Default__BP_Ninjutsu_Shooting_Base_C (BP_Ninjutsu_Shooting_Base_C)
+  imp  6 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C (BP_Pawn_AI_C)
+  imp  7 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.Default__BP_Projectile_Base_C (BP_Projectile_Base_C)
+  imp  8 /Game/Blueprints/Pawns/BP_Pawn_AI.BP_Pawn_AI_C.BP_VisibleFromCameraComp_GEN_VARIABLE (BP_VisibleFromCameraComp_C)
+  imp  9 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.CollisionCylinder (CapsuleComponent)
+  imp 10 /Script/CoreUObject.BoolProperty (Class)
+  imp 11 /Script/CoreUObject.Function (Class)
+  imp 12 /Script/CoreUObject.Object (Class)
+  imp 13 /Script/CoreUObject.ObjectProperty (Class)
+  imp 14 /Script/Engine.BlueprintGeneratedClass (Class)
+  imp 15 /Script/Engine.InheritableComponentHandler (Class)
+  imp 16 /Script/Engine.SceneComponent (Class)
+  imp 17 /Script/Engine.SCS_Node (Class)
+  imp 18 /Script/Engine.SimpleConstructionScript (Class)
+  imp 19 /Script/Engine.SphereComponent (Class)
+  imp 20 /Script/NARUTO.NN_CharacterPawn (Class)
+  imp 21 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.CanDispInfluenceEffectOnAI (Function)
+  imp 22 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.UserConstructionScript (Function)
+  imp 23 /Script/CoreUObject.Default__Function (Function)
+  imp 24 /Script/Engine.Default__InheritableComponentHandler (InheritableComponentHandler)
+  imp 25 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.BossActionComponent (NN_BossActionComponent)
+  imp 26 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.CameraClippingComponent (NN_CameraClippingComponent)
+  imp 27 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.CharMoveComp (NN_CharacterMovementComponent)
+  imp 28 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.HealthComponent (NN_HealthComponents)
+  imp 29 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.ParticleManageComponent (NN_ParticleManageComponent)
+  imp 30 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.PlayerActionComponent (NN_PlayerActionComponent)
+  imp 31 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.GameplayTasksComponent (NN_PlayTasksComponent)
+  imp 32 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.StatusManageComponent (NN_StatusManageComponent)
+  imp 33 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.TargetLockedComponent (NN_TargetLockedComponent)
+  imp 34 /Game/Weapons/Ninjutsu/PhoenixFlower/Blueprints/BP_ProjectileProps_Phoenix_Flower.BP_ProjectileProps_Phoenix_Flower (NN_WeaponProps)
+  imp 35 /Script/CoreUObject.Default__ObjectProperty (ObjectProperty)
+  imp 36 /Game/Blueprints/Pawns/BP_Pawn_AI./Game/Blueprints/Pawns/BP_Pawn_AI (Package)
+  imp 37 /Game/Effects/Particles/Influence/P_EFF_Influence_Fire_A./Game/Effects/Particles/Influence/P_EFF_Influence_Fire_A (Package)
+  imp 38 /Game/Weapons/BaseBlueprints/BP_Projectile_Base./Game/Weapons/BaseBlueprints/BP_Projectile_Base (Package)
+  imp 39 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base (Package)
+  imp 40 /Game/Weapons/Ninjutsu/PhoenixFlower/Blueprints/BP_ProjectileProps_Phoenix_Flower./Game/Weapons/Ninjutsu/PhoenixFlower/Blueprints/BP_ProjectileProps_Phoenix_Flower (Package)
+  imp 41 /Game/Weapons/Ninjutsu/PhoenixFlower/Particles/P_WEP_PhoenixFlower_Hit./Game/Weapons/Ninjutsu/PhoenixFlower/Particles/P_WEP_PhoenixFlower_Hit (Package)
+  imp 42 /Game/Weapons/Ninjutsu/PhoenixFlower/Particles/P_WEP_PhoenixFlower_Loop./Game/Weapons/Ninjutsu/PhoenixFlower/Particles/P_WEP_PhoenixFlower_Loop (Package)
+  imp 43 /Game/Weapons/Ninjutsu/PhoenixFlower/Particles/P_WEP_PhoenixFlower_Muzzle./Game/Weapons/Ninjutsu/PhoenixFlower/Particles/P_WEP_PhoenixFlower_Muzzle (Package)
+  imp 44 /Script/CoreUObject./Script/CoreUObject (Package)
+  imp 45 /Script/Engine./Script/Engine (Package)
+  imp 46 /Script/GameplayTags./Script/GameplayTags (Package)
+  imp 47 /Script/NARUTO./Script/NARUTO (Package)
+  imp 48 /Game/Effects/Particles/Influence/P_EFF_Influence_Fire_A.P_EFF_Influence_Fire_A (ParticleSystem)
+  imp 49 /Game/Weapons/Ninjutsu/PhoenixFlower/Particles/P_WEP_PhoenixFlower_Hit.P_WEP_PhoenixFlower_Hit (ParticleSystem)
+  imp 50 /Game/Weapons/Ninjutsu/PhoenixFlower/Particles/P_WEP_PhoenixFlower_Loop.P_WEP_PhoenixFlower_Loop (ParticleSystem)
+  imp 51 /Game/Weapons/Ninjutsu/PhoenixFlower/Particles/P_WEP_PhoenixFlower_Muzzle.P_WEP_PhoenixFlower_Muzzle (ParticleSystem)
+  imp 52 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.ProjectileMovement_GEN_VARIABLE (ProjectileMovementComponent)
+  imp 53 /Game/Blueprints/Pawns/BP_Pawn_AI.BP_Pawn_AI_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 54 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.DefaultSceneRoot_REMOVED_628DECC24C105FE693737EA4B602DB70 (SceneComponent)
+  imp 55 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.FakeTarget_GEN_VARIABLE (SceneComponent)
+  imp 56 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 57 /Script/Engine.Default__SceneComponent (SceneComponent)
+  imp 58 /Script/GameplayTags.GameplayTag (ScriptStruct)
+  imp 59 /Script/Engine.Default__SCS_Node (SCS_Node)
+  imp 60 /Script/Engine.Default__SimpleConstructionScript (SimpleConstructionScript)
+  imp 61 /Game/Blueprints/Pawns/BP_Pawn_AI.Default__BP_Pawn_AI_C.CharacterMesh0 (SkeletalMeshComponent)
+  imp 62 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 63 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 64 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 65 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+exp 0 UserConstructionScript : Function  outer 9  @245e +35
+    -- Eigenschaften ok, Ende bei +8 von 35
+exp 1 CallFunc_HidePhenixFlowerInfluence_bReturn : BoolProperty  outer 8  @2493 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 2 K2Node_DynamicCast_bSuccess : BoolProperty  outer 8  @24b9 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 3 K2Node_DynamicCast_AsBP_Pawn_AI : ObjectProperty  outer 8  @24df +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 4 CallFunc_CanDispInfluenceEffectOnAI_ReturnValue : BoolProperty  outer 8  @2507 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 5 ReturnValue : BoolProperty  outer 8  @252d +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 6 CheckPawn : ObjectProperty  outer 8  @2553 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 7 CanDispInfluenceEffectOnAI : Function  outer 9  @257b +b1
+    -- Eigenschaften ok, Ende bei +8 von b1
+exp 8 BP_Ninjutsu_PhenixFlower_C : BlueprintGeneratedClass  outer 0  @262c +a2
+    SimpleConstructionScript (ObjectProperty) = obj 14
+    InheritableComponentHandler (ObjectProperty) = obj 11
+    -- Eigenschaften ok, Ende bei +42 von a2
+exp 9 Default__BP_Ninjutsu_PhenixFlower_C : BP_Ninjutsu_PhenixFlower_C  outer 0  @26ce +602
+    NinjutsuName (StrProperty) = 火遁・鳳仙火の術
+    SkillType (EnumProperty ENN_NinjaSkillType) = ENN_NinjaSkillType::ENN_NinjaSkillType_Phenix_Flower
+    IntensiveLineTime (FloatProperty) = 0
+    MuzzleEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -52
+      AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = EFF_Root01
+      Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+        Rotation (StructProperty Quat) = 0 -0 0.707107 0.707107
+        Translation (StructProperty Vector) = -8 55 108
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    UseMuzzleOnActive (BoolProperty) = 1
+    LoopEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -51
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    Speed (FloatProperty) = 2400
+    LifeTime (FloatProperty) = 2
+    ImpactEffect (ObjectProperty) = obj -50
+    InfluenceEffectInfo (StructProperty NN_ParticleInfo)
+      Template (ObjectProperty) = obj -49
+      AttachSocketName (NameProperty) = EFF_Root01
+      IsAttach (BoolProperty) = 1
+      UseTeamColor (BoolProperty) = 1
+    HomingPower (FloatProperty) = 10000
+    InstanceLimit (IntProperty) = 20
+    HomingEndTime (FloatProperty) = 2
+    DelayDestroyTime (FloatProperty) = 0.1
+    AttackHitInfoName (NameProperty) = PhoenixFlower
+    CounterHitPower (IntProperty) = 30
+    ProhobitNoTarget (BoolProperty) = 1
+    IsNullifiableByD55NJ1 (BoolProperty) = 1
+    IsNullifiableByD61NJ2 (BoolProperty) = 1
+    WeaponPropsData (ObjectProperty) = obj -35
+    AntiBossAdjustment (ArrayProperty of StructProperty) [1]
+      0 (StructProperty NN_NinjaSkillAntiBoss)
+        TagForAdjustment (StructProperty GameplayTag)
+          TagName (NameProperty) = SpecialDamage.Fire
+        AdjustFactor (FloatProperty) = 1
+        DebuffTime (FloatProperty) = 10
+    m_GamePlayTagContainer (StructProperty GameplayTagContainer) = 0
+    SoundID (NameProperty) = ID_WeaponSound_Ninjutsu_PhoenixFlower
+    -- Eigenschaften ok, Ende bei +602 von 602
+exp 10 InheritableComponentHandler : InheritableComponentHandler  outer 9  @2cd0 +205
+    Records (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ComponentOverrideRecord)
+        ComponentClass (ObjectProperty) = obj -20
+        ComponentTemplate (ObjectProperty) = obj 15
+        ComponentKey (StructProperty ComponentKey)
+          OwnerClass (ObjectProperty) = obj -2
+          SCSVariableName (NameProperty) = SphereCollision
+          AssociatedGuid (StructProperty Guid) = 2.75764e+09 1.08167e+09 3.09072e+09 2.06247e+09
+        CookedComponentInstancingData (StructProperty BlueprintCookedComponentInstancingData)
+          bIsValid (BoolProperty) = 0
+          ChangedPropertyList (ArrayProperty of StructProperty) = 0
+    -- Eigenschaften ok, Ende bei +201 von 205
+exp 11 DefaultSceneRoot_GEN_VARIABLE : SceneComponent  outer 9  @2ed5 +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 12 SCS_Node_1 : SCS_Node  outer 14  @2ee1 +a8
+    ComponentClass (ObjectProperty) = obj -17
+    ComponentTemplate (ObjectProperty) = obj 12
+    VariableGuid (StructProperty Guid) = 1.52606e+08 1.25792e+09 1.96779e+09 2.13702e+09
+    InternalVariableName (NameProperty) = DefaultSceneRoot
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 13 SimpleConstructionScript_1 : SimpleConstructionScript  outer 9  @2f89 +29
+    DefaultSceneRootNode (ObjectProperty) = obj 13
+    -- Eigenschaften ok, Ende bei +25 von 29
+exp 14 SphereCollision_GEN_VARIABLE : SphereComponent  outer 9  @2fb2 +29
+    SphereRadius (FloatProperty) = 100
+    -- Eigenschaften ok, Ende bei +25 von 29
+
+== dependances /Game :
+  /Game/Blueprints/Pawns/BP_Pawn_AI
+  /Game/Effects/Particles/Influence/P_EFF_Influence_Fire_A
+  /Game/Weapons/BaseBlueprints/BP_Projectile_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base
+  /Game/Weapons/Ninjutsu/PhoenixFlower/Blueprints/BP_ProjectileProps_Phoenix_Flower
+  /Game/Weapons/Ninjutsu/PhoenixFlower/Particles/P_WEP_PhoenixFlower_Hit
+  /Game/Weapons/Ninjutsu/PhoenixFlower/Particles/P_WEP_PhoenixFlower_Loop
+  /Game/Weapons/Ninjutsu/PhoenixFlower/Particles/P_WEP_PhoenixFlower_Muzzle

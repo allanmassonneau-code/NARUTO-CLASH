@@ -1,0 +1,100 @@
+== /Game/Weapons/Ninjutsu/EarthDragon/Blueprints/BP_EarthDragon_Bullet
+fichier : NARUTO/Content/Weapons/Ninjutsu/EarthDragon/Blueprints/BP_EarthDragon_Bullet.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : BlueprintGeneratedClass
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/EarthDragon/Blueprints/BP_EarthDragon_Bullet.uasset  4 880 octets
+  NARUTO/Content/Weapons/Ninjutsu/EarthDragon/Blueprints/BP_EarthDragon_Bullet.uexp  1 601 octets
+
+/Game/Weapons/Ninjutsu/EarthDragon/Blueprints/BP_EarthDragon_Bullet  flags 80000000  93 Namen  34 Importe  7 Exporte  Kopf 4880  Bulk ab 6477  Daten 6481
+  imp  0 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C (BlueprintGeneratedClass)
+  imp  1 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C (BlueprintGeneratedClass)
+  imp  2 /Script/Engine.Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+  imp  3 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.Default__BP_Ninjutsu_Shooting_Base_C (BP_Ninjutsu_Shooting_Base_C)
+  imp  4 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.Default__BP_Projectile_Base_C (BP_Projectile_Base_C)
+  imp  5 /Script/CoreUObject.Object (Class)
+  imp  6 /Script/Engine.BlueprintGeneratedClass (Class)
+  imp  7 /Script/Engine.InheritableComponentHandler (Class)
+  imp  8 /Script/Engine.SceneComponent (Class)
+  imp  9 /Script/Engine.SCS_Node (Class)
+  imp 10 /Script/Engine.SimpleConstructionScript (Class)
+  imp 11 /Script/Engine.SphereComponent (Class)
+  imp 12 /Script/Engine.Default__InheritableComponentHandler (InheritableComponentHandler)
+  imp 13 /Game/Weapons/BaseBlueprints/BP_Projectile_Base./Game/Weapons/BaseBlueprints/BP_Projectile_Base (Package)
+  imp 14 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base (Package)
+  imp 15 /Game/Weapons/Ninjutsu/EarthDragon/Particles/P_WEP_EarthDragon_Bullet./Game/Weapons/Ninjutsu/EarthDragon/Particles/P_WEP_EarthDragon_Bullet (Package)
+  imp 16 /Game/Weapons/Ninjutsu/EarthDragon/Particles/P_WEP_EarthDragon_Hit./Game/Weapons/Ninjutsu/EarthDragon/Particles/P_WEP_EarthDragon_Hit (Package)
+  imp 17 /Script/CoreUObject./Script/CoreUObject (Package)
+  imp 18 /Script/Engine./Script/Engine (Package)
+  imp 19 /Script/GameplayTags./Script/GameplayTags (Package)
+  imp 20 /Game/Weapons/Ninjutsu/EarthDragon/Particles/P_WEP_EarthDragon_Bullet.P_WEP_EarthDragon_Bullet (ParticleSystem)
+  imp 21 /Game/Weapons/Ninjutsu/EarthDragon/Particles/P_WEP_EarthDragon_Hit.P_WEP_EarthDragon_Hit (ParticleSystem)
+  imp 22 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.ProjectileMovement_GEN_VARIABLE (ProjectileMovementComponent)
+  imp 23 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.DefaultSceneRoot_REMOVED_628DECC24C105FE693737EA4B602DB70 (SceneComponent)
+  imp 24 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.FakeTarget_GEN_VARIABLE (SceneComponent)
+  imp 25 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 26 /Script/Engine.Default__SceneComponent (SceneComponent)
+  imp 27 /Script/GameplayTags.GameplayTag (ScriptStruct)
+  imp 28 /Script/Engine.Default__SCS_Node (SCS_Node)
+  imp 29 /Script/Engine.Default__SimpleConstructionScript (SimpleConstructionScript)
+  imp 30 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 31 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 32 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 33 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base.BP_Ninjutsu_Shooting_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+exp 0 BP_EarthDragon_Bullet_C : BlueprintGeneratedClass  outer 0  @1310 +8a
+    SimpleConstructionScript (ObjectProperty) = obj 6
+    InheritableComponentHandler (ObjectProperty) = obj 3
+    -- Eigenschaften ok, Ende bei +42 von 8a
+exp 1 Default__BP_EarthDragon_Bullet_C : BP_EarthDragon_Bullet_C  outer 0  @139a +2a8
+    LoopEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -21
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    LifeTime (FloatProperty) = 0.5
+    HitEffect (ObjectProperty) = obj -22
+    IsDispHitEffect (BoolProperty) = 1
+    HomingRotateRandomRange (FloatProperty) = 6000
+    InstanceLimit (IntProperty) = 15
+    HomingStartTime (FloatProperty) = 0.4
+    DelayDestroyTime (FloatProperty) = 0.1
+    UseHorming (BoolProperty) = 0
+    AttackHitInfoName (NameProperty) = EarthDragon
+    AntiBossAdjustment (ArrayProperty of StructProperty) [1]
+      0 (StructProperty NN_NinjaSkillAntiBoss)
+        TagForAdjustment (StructProperty GameplayTag)
+          TagName (NameProperty) = SkillAgainstBoss.DamageAdjustment
+        AdjustFactor (FloatProperty) = 0.2
+        DebuffTime (FloatProperty) = 10
+    SoundID (NameProperty) = ID_WeaponSound_Ninjutsu_EarthDragon
+    -- Eigenschaften ok, Ende bei +2a8 von 2a8
+exp 2 InheritableComponentHandler : InheritableComponentHandler  outer 1  @1642 +205
+    Records (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ComponentOverrideRecord)
+        ComponentClass (ObjectProperty) = obj -12
+        ComponentTemplate (ObjectProperty) = obj 7
+        ComponentKey (StructProperty ComponentKey)
+          OwnerClass (ObjectProperty) = obj -1
+          SCSVariableName (NameProperty) = SphereCollision
+          AssociatedGuid (StructProperty Guid) = 2.75764e+09 1.08167e+09 3.09072e+09 2.06247e+09
+        CookedComponentInstancingData (StructProperty BlueprintCookedComponentInstancingData)
+          bIsValid (BoolProperty) = 0
+          ChangedPropertyList (ArrayProperty of StructProperty) = 0
+    -- Eigenschaften ok, Ende bei +201 von 205
+exp 3 DefaultSceneRoot_GEN_VARIABLE : SceneComponent  outer 1  @1847 +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 4 SCS_Node_0 : SCS_Node  outer 6  @1853 +a8
+    ComponentClass (ObjectProperty) = obj -9
+    ComponentTemplate (ObjectProperty) = obj 4
+    VariableGuid (StructProperty Guid) = 3.09793e+09 1.17099e+09 3.25473e+09 2.53974e+08
+    InternalVariableName (NameProperty) = DefaultSceneRoot
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 5 SimpleConstructionScript_0 : SimpleConstructionScript  outer 1  @18fb +29
+    DefaultSceneRootNode (ObjectProperty) = obj 5
+    -- Eigenschaften ok, Ende bei +25 von 29
+exp 6 SphereCollision_GEN_VARIABLE : SphereComponent  outer 1  @1924 +29
+    SphereRadius (FloatProperty) = 30
+    -- Eigenschaften ok, Ende bei +25 von 29
+
+== dependances /Game :
+  /Game/Weapons/BaseBlueprints/BP_Projectile_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Shooting_Base
+  /Game/Weapons/Ninjutsu/EarthDragon/Particles/P_WEP_EarthDragon_Bullet
+  /Game/Weapons/Ninjutsu/EarthDragon/Particles/P_WEP_EarthDragon_Hit

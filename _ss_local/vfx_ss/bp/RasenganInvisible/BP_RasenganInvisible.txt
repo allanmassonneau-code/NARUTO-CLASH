@@ -1,0 +1,340 @@
+== /Game/Weapons/Ninjutsu/RasenganInvisible/Blueprints/BP_RasenganInvisible
+fichier : NARUTO/Content/Weapons/Ninjutsu/RasenganInvisible/Blueprints/BP_RasenganInvisible.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : FloatProperty
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/RasenganInvisible/Blueprints/BP_RasenganInvisible.uasset  14 791 octets
+  NARUTO/Content/Weapons/Ninjutsu/RasenganInvisible/Blueprints/BP_RasenganInvisible.uexp  7 463 octets
+
+/Game/Weapons/Ninjutsu/RasenganInvisible/Blueprints/BP_RasenganInvisible  flags 80000000  241 Namen  97 Importe  36 Exporte  Kopf 14791  Bulk ab 22250  Daten 22254
+  imp  0 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C (BlueprintGeneratedClass)
+  imp  1 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.BP_Weapon_Base_C (BlueprintGeneratedClass)
+  imp  2 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C (BlueprintGeneratedClass)
+  imp  3 /Script/Engine.Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+  imp  4 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.IsExplodeAfterLifetime (BoolProperty)
+  imp  5 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.IsExplodeOnHit (BoolProperty)
+  imp  6 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.IsExplodeOnStop (BoolProperty)
+  imp  7 /Script/CoreUObject.Default__BoolProperty (BoolProperty)
+  imp  8 /Script/Engine.ProjectileMovementComponent.bRotationFollowsVelocity (BoolProperty)
+  imp  9 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.Default__BP_Ninjutsu_Base_C (BP_Ninjutsu_Base_C)
+  imp 10 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.Default__BP_Projectile_Base_C (BP_Projectile_Base_C)
+  imp 11 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.Default__BP_Weapon_Base_C (BP_Weapon_Base_C)
+  imp 12 /Script/CoreUObject.BoolProperty (Class)
+  imp 13 /Script/CoreUObject.FloatProperty (Class)
+  imp 14 /Script/CoreUObject.Function (Class)
+  imp 15 /Script/CoreUObject.IntProperty (Class)
+  imp 16 /Script/CoreUObject.Object (Class)
+  imp 17 /Script/CoreUObject.ObjectProperty (Class)
+  imp 18 /Script/CoreUObject.StructProperty (Class)
+  imp 19 /Script/Engine.Actor (Class)
+  imp 20 /Script/Engine.BlueprintGeneratedClass (Class)
+  imp 21 /Script/Engine.InheritableComponentHandler (Class)
+  imp 22 /Script/Engine.KismetMathLibrary (Class)
+  imp 23 /Script/Engine.KismetSystemLibrary (Class)
+  imp 24 /Script/Engine.ParticleSystemComponent (Class)
+  imp 25 /Script/Engine.ProjectileMovementComponent (Class)
+  imp 26 /Script/Engine.SceneComponent (Class)
+  imp 27 /Script/Engine.SCS_Node (Class)
+  imp 28 /Script/Engine.SimpleConstructionScript (Class)
+  imp 29 /Script/Engine.SphereComponent (Class)
+  imp 30 /Script/NARUTO.NN_Weapon (Class)
+  imp 31 /Game/Sounds/Blueprints/FL_Sound.Default__FL_Sound_C (FL_Sound_C)
+  imp 32 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.EffecitiveTime (FloatProperty)
+  imp 33 /Script/CoreUObject.Default__FloatProperty (FloatProperty)
+  imp 34 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.GetAttackerDirection (Function)
+  imp 35 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.RestartMove (Function)
+  imp 36 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.OnActionEndBP (Function)
+  imp 37 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.ReceiveBeginPlay (Function)
+  imp 38 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.UserConstructionScript (Function)
+  imp 39 /Script/CoreUObject.Default__Function (Function)
+  imp 40 /Script/Engine.Actor.DetachRootComponentFromParent (Function)
+  imp 41 /Script/Engine.Actor.HasAuthority (Function)
+  imp 42 /Script/Engine.Actor.K2_GetActorLocation (Function)
+  imp 43 /Script/Engine.KismetMathLibrary.Normal (Function)
+  imp 44 /Script/Engine.KismetMathLibrary.Subtract_VectorVector (Function)
+  imp 45 /Script/Engine.KismetSystemLibrary.K2_SetTimer (Function)
+  imp 46 /Script/NARUTO.NN_Weapon.CanDestroyByD35NJ3 (Function)
+  imp 47 /Script/NARUTO.NN_Weapon.DoDestroyByD35NJ3 (Function)
+  imp 48 /Script/Engine.Default__InheritableComponentHandler (InheritableComponentHandler)
+  imp 49 /Script/CoreUObject.Default__IntProperty (IntProperty)
+  imp 50 /Script/Engine.Default__KismetSystemLibrary (KismetSystemLibrary)
+  imp 51 /Game/Weapons/Ninjutsu/RasenganInvisible/Blueprints/BP_ProjectileProps_RasenganInvisible.BP_ProjectileProps_RasenganInvisible (NN_WeaponProps)
+  imp 52 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.ProjectileMovement (ObjectProperty)
+  imp 53 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.SphereCollision (ObjectProperty)
+  imp 54 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.BP_Weapon_Base_C.Sphere (ObjectProperty)
+  imp 55 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.TempEffectComp_0 (ObjectProperty)
+  imp 56 /Script/CoreUObject.Default__ObjectProperty (ObjectProperty)
+  imp 57 /Script/Engine.Actor.Instigator (ObjectProperty)
+  imp 58 /Game/Blueprints/Structs/BP_ParticleInfo./Game/Blueprints/Structs/BP_ParticleInfo (Package)
+  imp 59 /Game/Sounds/Blueprints/FL_Sound./Game/Sounds/Blueprints/FL_Sound (Package)
+  imp 60 /Game/Weapons/BaseBlueprints/BP_Projectile_Base./Game/Weapons/BaseBlueprints/BP_Projectile_Base (Package)
+  imp 61 /Game/Weapons/BaseBlueprints/BP_Weapon_Base./Game/Weapons/BaseBlueprints/BP_Weapon_Base (Package)
+  imp 62 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base./Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base (Package)
+  imp 63 /Game/Weapons/Ninjutsu/RasenganInvisible/Blueprints/BP_ProjectileProps_RasenganInvisible./Game/Weapons/Ninjutsu/RasenganInvisible/Blueprints/BP_ProjectileProps_RasenganInvisible (Package)
+  imp 64 /Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_Charge./Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_Charge (Package)
+  imp 65 /Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_End./Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_End (Package)
+  imp 66 /Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_Hit./Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_Hit (Package)
+  imp 67 /Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_Loop./Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_Loop (Package)
+  imp 68 /Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_Muzzle./Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_Muzzle (Package)
+  imp 69 /Script/CoreUObject./Script/CoreUObject (Package)
+  imp 70 /Script/Engine./Script/Engine (Package)
+  imp 71 /Script/GameplayTags./Script/GameplayTags (Package)
+  imp 72 /Script/NARUTO./Script/NARUTO (Package)
+  imp 73 /Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_Charge.P_WEP_RasenganInvisible_Charge (ParticleSystem)
+  imp 74 /Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_End.P_WEP_RasenganInvisible_End (ParticleSystem)
+  imp 75 /Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_Hit.P_WEP_RasenganInvisible_Hit (ParticleSystem)
+  imp 76 /Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_Loop.P_WEP_RasenganInvisible_Loop (ParticleSystem)
+  imp 77 /Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_Muzzle.P_WEP_RasenganInvisible_Muzzle (ParticleSystem)
+  imp 78 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.ProjectileMovement_GEN_VARIABLE (ProjectileMovementComponent)
+  imp 79 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.DefaultSceneRoot_REMOVED_628DECC24C105FE693737EA4B602DB70 (SceneComponent)
+  imp 80 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.FakeTarget_GEN_VARIABLE (SceneComponent)
+  imp 81 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.BP_Weapon_Base_C.DefaultSceneRoot_REMOVED_1422D7FE4042589AAE1156AB42BAD9B3 (SceneComponent)
+  imp 82 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
+  imp 83 /Script/Engine.Default__SceneComponent (SceneComponent)
+  imp 84 /Script/CoreUObject.Vector (ScriptStruct)
+  imp 85 /Script/Engine.PointerToUberGraphFrame (ScriptStruct)
+  imp 86 /Script/Engine.TimerHandle (ScriptStruct)
+  imp 87 /Script/GameplayTags.GameplayTag (ScriptStruct)
+  imp 88 /Script/Engine.Default__SCS_Node (SCS_Node)
+  imp 89 /Script/Engine.Default__SimpleConstructionScript (SimpleConstructionScript)
+  imp 90 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 91 /Game/Weapons/BaseBlueprints/BP_Projectile_Base.BP_Projectile_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 92 /Game/Weapons/BaseBlueprints/BP_Weapon_Base.BP_Weapon_Base_C.Sphere_GEN_VARIABLE (SphereComponent)
+  imp 93 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.SphereCollision_GEN_VARIABLE (SphereComponent)
+  imp 94 /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base.BP_Ninjutsu_Base_C.MuzzleEffect (StructProperty)
+  imp 95 /Script/CoreUObject.Default__StructProperty (StructProperty)
+  imp 96 /Game/Blueprints/Structs/BP_ParticleInfo.BP_ParticleInfo (UserDefinedStruct)
+exp 0 MoveTime : FloatProperty  outer 28  @39c7 +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 1 MoveLoopEffect : StructProperty  outer 28  @39eb +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 2 IsRestartMove : BoolProperty  outer 28  @3a13 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 3 CallFunc_RequestEffect_OutComp2 : ObjectProperty  outer 8  @3a39 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 4 CallFunc_RequestEffect_OutComp : ObjectProperty  outer 8  @3a61 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 5 CallFunc_HasAuthority_ReturnValue : BoolProperty  outer 8  @3a89 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 6 EntryPoint : IntProperty  outer 8  @3aaf +24
+    -- Eigenschaften ok, Ende bei +8 von 24
+exp 7 ExecuteUbergraph_BP_RasenganInvisible : Function  outer 28  @3ad3 +126
+    -- Eigenschaften ok, Ende bei +8 von 126
+exp 8 DoDestroyByD35NJ3 : Function  outer 28  @3bf9 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 9 RequestRestartEffectMulticast : Function  outer 28  @3c37 +40
+    -- Eigenschaften ok, Ende bei +8 von 40
+exp 10 OnActionEndBP : Function  outer 28  @3c77 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 11 RestartMove : Function  outer 28  @3cb5 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 12 ReceiveBeginPlay : Function  outer 28  @3cf3 +3e
+    -- Eigenschaften ok, Ende bei +8 von 3e
+exp 13 UserConstructionScript : Function  outer 28  @3d31 +35
+    -- Eigenschaften ok, Ende bei +8 von 35
+exp 14 CallFunc_Normal_ReturnValue : StructProperty  outer 21  @3d66 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 15 CallFunc_Subtract_VectorVector_ReturnValue : StructProperty  outer 21  @3d8e +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 16 CallFunc_K2_GetActorLocation_ReturnValue2 : StructProperty  outer 21  @3db6 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 17 CallFunc_K2_GetActorLocation_ReturnValue : StructProperty  outer 21  @3dde +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 18 ReturnValue : StructProperty  outer 21  @3e06 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 19 Target : ObjectProperty  outer 21  @3e2e +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 20 GetAttackerDirection : Function  outer 28  @3e56 +9f
+    -- Eigenschaften ok, Ende bei +8 von 9f
+exp 21 CallFunc_K2_SetTimer_ReturnValue : StructProperty  outer 24  @3ef5 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 22 CallFunc_HasAuthority_ReturnValue : BoolProperty  outer 24  @3f1d +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 23 RestartMoveRasenganInvisible : Function  outer 28  @3f43 +111
+    -- Eigenschaften ok, Ende bei +8 von 111
+exp 24 ReturnValue : BoolProperty  outer 26  @4054 +26
+    -- Eigenschaften ok, Ende bei +8 von 26
+exp 25 CanDestroyByD35NJ3 : Function  outer 28  @407a +3a
+    -- Eigenschaften ok, Ende bei +8 von 3a
+exp 26 UberGraphFrame : StructProperty  outer 28  @40b4 +28
+    -- Eigenschaften ok, Ende bei +8 von 28
+exp 27 BP_RasenganInvisible_C : BlueprintGeneratedClass  outer 0  @40dc +13c
+    SimpleConstructionScript (ObjectProperty) = obj 34
+    InheritableComponentHandler (ObjectProperty) = obj 30
+    UberGraphFramePointerProperty (ObjectProperty) = obj 27
+    UberGraphFunction (ObjectProperty) = obj 8
+    -- Eigenschaften ok, Ende bei +7c von 13c
+exp 28 Default__BP_RasenganInvisible_C : BP_RasenganInvisible_C  outer 0  @4218 +841
+    UberGraphFrame (StructProperty PointerToUberGraphFrame) = 0
+    MoveLoopEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -77
+      AttachSocketName_5_8A15AED047F596F961C75DB77F43058C (NameProperty) = None
+      Offset_10_53AA19CE44AF4F7E65227E8BD02B65AB (StructProperty Transform)
+        Rotation (StructProperty Quat) = 0 0 0 1
+        Translation (StructProperty Vector) = 0 0 0
+        Scale3D (StructProperty Vector) = 1 1 1
+      RotBaseType_13_12E3068046BB27920FC2D9AAEED8ED80 (ByteProperty BP_ParticleRotBaseType) = BP_ParticleRotBaseType::NewEnumerator0
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+      IsOnlyLocation_21_A73755164F5ECF686DF6F18A024361FA (BoolProperty) = 0
+    MoveTime (FloatProperty) = 7
+    NinjutsuName (StrProperty) = 超大玉螺旋丸
+    SkillType (EnumProperty ENN_NinjaSkillType) = ENN_NinjaSkillType::ENN_NinjaSkillType_MassiveRasengan
+    PrgType (EnumProperty ENN_NinjaSkillPrgType) = ENN_NinjaSkillPrgType::ENN_NinjaSkillPrgType_Etc
+    ChargeEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -74
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    MuzzleEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -78
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    IgnoreMuzzleEffectWhenStart (BoolProperty) = 1
+    StartEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -74
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    LoopEffect (StructProperty BP_ParticleInfo)
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    EndEffect (StructProperty BP_ParticleInfo)
+      Template_2_657A320142F6A921336099B957B90776 (ObjectProperty) = obj -75
+      IsAttach_7_BC58182A4F3E7191D40353BB90E24079 (BoolProperty) = 1
+      UseTeamColor_15_54EAEC06434CCA4F66329A9B834DE28A (BoolProperty) = 1
+    Speed (FloatProperty) = 0
+    LifeTime (FloatProperty) = 0
+    IsExplodeAfterLifetime (BoolProperty) = 0
+    IsExplodeOnStop (BoolProperty) = 0
+    IsExplodeOnHit (BoolProperty) = 0
+    ImpactEffect (ObjectProperty) = obj -76
+    IsDispHitEffect (BoolProperty) = 1
+    CollisionRadius (FloatProperty) = 60
+    HomingPower (FloatProperty) = 10000
+    InstanceLimit (IntProperty) = 8
+    IsAnyHit (BoolProperty) = 1
+    AnyHitRadius (FloatProperty) = 300
+    DelayDestroyTime (FloatProperty) = 0.1
+    MultiHitRadius (FloatProperty) = 300
+    UseHorming (BoolProperty) = 1
+    AttackHitInfoName (NameProperty) = RasenganInvisible
+    IgnoreHitSameTeamOtherProjectile (BoolProperty) = 1
+    HiddenOnDestroy (BoolProperty) = 0
+    CounterHitPower (IntProperty) = 50
+    RestartMoveSpeed (FloatProperty) = 1000
+    IsNullifiableByD55NJ1 (BoolProperty) = 1
+    IsNullifiableByD61NJ2 (BoolProperty) = 1
+    WeaponPropsData (ObjectProperty) = obj -52
+    m_GamePlayTagContainer (StructProperty GameplayTagContainer) = 0
+    SoundID (NameProperty) = ID_WeaponSound_Ninjutsu_RasenganInvisible
+    -- Eigenschaften ok, Ende bei +841 von 841
+exp 29 InheritableComponentHandler : InheritableComponentHandler  outer 28  @4a59 +54b
+    Records (ArrayProperty of StructProperty) [3]
+      0 (StructProperty ComponentOverrideRecord)
+        ComponentClass (ObjectProperty) = obj -30
+        ComponentTemplate (ObjectProperty) = obj 36
+        ComponentKey (StructProperty ComponentKey)
+          OwnerClass (ObjectProperty) = obj -1
+          SCSVariableName (NameProperty) = SphereCollision
+          AssociatedGuid (StructProperty Guid) = 2.75764e+09 1.08167e+09 3.09072e+09 2.06247e+09
+        CookedComponentInstancingData (StructProperty BlueprintCookedComponentInstancingData)
+          bIsValid (BoolProperty) = 0
+          ChangedPropertyList (ArrayProperty of StructProperty) = 0
+      1 (StructProperty ComponentOverrideRecord)
+        ComponentClass (ObjectProperty) = obj -26
+        ComponentTemplate (ObjectProperty) = obj 31
+        ComponentKey (StructProperty ComponentKey)
+          OwnerClass (ObjectProperty) = obj -1
+          SCSVariableName (NameProperty) = ProjectileMovement
+          AssociatedGuid (StructProperty Guid) = 3.60545e+09 1.12928e+09 2.13284e+09 7.8419e+08
+        CookedComponentInstancingData (StructProperty BlueprintCookedComponentInstancingData)
+          bIsValid (BoolProperty) = 0
+          ChangedPropertyList (ArrayProperty of StructProperty) = 0
+      2 (StructProperty ComponentOverrideRecord)
+        ComponentClass (ObjectProperty) = obj -30
+        ComponentTemplate (ObjectProperty) = obj 35
+        ComponentKey (StructProperty ComponentKey)
+          OwnerClass (ObjectProperty) = obj -2
+          SCSVariableName (NameProperty) = Sphere
+          AssociatedGuid (StructProperty Guid) = 1.82842e+08 1.17003e+09 1.7583e+09 2.9781e+09
+        CookedComponentInstancingData (StructProperty BlueprintCookedComponentInstancingData)
+          bIsValid (BoolProperty) = 0
+          ChangedPropertyList (ArrayProperty of StructProperty) = 0
+    -- Eigenschaften ok, Ende bei +547 von 54b
+exp 30 ProjectileMovement_GEN_VARIABLE : ProjectileMovementComponent  outer 28  @4fa4 +ba
+    bRotationFollowsVelocity (BoolProperty) = 0
+    ProjectileGravityScale (FloatProperty) = 0
+    Bounciness (FloatProperty) = 0
+    Friction (FloatProperty) = 0
+    Velocity (StructProperty Vector) = 0 0 0
+    -- Eigenschaften ok, Ende bei +b6 von ba
+exp 31 DefaultSceneRoot_GEN_VARIABLE : SceneComponent  outer 28  @505e +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 32 SCS_Node_0 : SCS_Node  outer 34  @506a +a8
+    ComponentClass (ObjectProperty) = obj -27
+    ComponentTemplate (ObjectProperty) = obj 32
+    VariableGuid (StructProperty Guid) = 2.28869e+09 1.26566e+09 3.5086e+09 2.13129e+09
+    InternalVariableName (NameProperty) = DefaultSceneRoot
+    -- Eigenschaften ok, Ende bei +a4 von a8
+exp 33 SimpleConstructionScript_0 : SimpleConstructionScript  outer 28  @5112 +29
+    DefaultSceneRootNode (ObjectProperty) = obj 33
+    -- Eigenschaften ok, Ende bei +25 von 29
+exp 34 Sphere_GEN_VARIABLE : SphereComponent  outer 28  @513b +6e
+    BodyInstance (StructProperty BodyInstance)
+      CollisionEnabled (ByteProperty ECollisionEnabled) = ECollisionEnabled::NoCollision
+    -- Eigenschaften ok, Ende bei +6a von 6e
+exp 35 SphereCollision_GEN_VARIABLE : SphereComponent  outer 28  @51a9 +541
+    bReceivesDecals (BoolProperty) = 0
+    BodyInstance (StructProperty BodyInstance)
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [13]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Visibility
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          1 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Camera
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          2 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          3 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Wall
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          4 (StructProperty ResponseChannel)
+            Channel (NameProperty) = WorldStatic
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          5 (StructProperty ResponseChannel)
+            Channel (NameProperty) = WorldDynamic
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          6 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Pawn
+            Response (ByteProperty ECollisionResponse) = ECR_Overlap
+          7 (StructProperty ResponseChannel)
+            Channel (NameProperty) = PhysicsBody
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          8 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Vehicle
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          9 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Destructible
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          10 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Projectile
+            Response (ByteProperty ECollisionResponse) = ECR_Overlap
+          11 (StructProperty ResponseChannel)
+            Channel (NameProperty) = ProjectileAll
+            Response (ByteProperty ECollisionResponse) = ECR_Overlap
+          12 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Shield
+            Response (ByteProperty ECollisionResponse) = ECR_Overlap
+      CollisionEnabled (ByteProperty ECollisionEnabled) = ECollisionEnabled::NoCollision
+    -- Eigenschaften ok, Ende bei +53d von 541
+
+== dependances /Game :
+  /Game/Blueprints/Structs/BP_ParticleInfo
+  /Game/Sounds/Blueprints/FL_Sound
+  /Game/Weapons/BaseBlueprints/BP_Projectile_Base
+  /Game/Weapons/BaseBlueprints/BP_Weapon_Base
+  /Game/Weapons/BaseBlueprints/Ninjutsu/BP_Ninjutsu_Base
+  /Game/Weapons/Ninjutsu/RasenganInvisible/Blueprints/BP_ProjectileProps_RasenganInvisible
+  /Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_Charge
+  /Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_End
+  /Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_Hit
+  /Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_Loop
+  /Game/Weapons/Ninjutsu/RasenganInvisible/Particles/P_WEP_RasenganInvisible_Muzzle
