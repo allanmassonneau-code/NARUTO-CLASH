@@ -1,0 +1,405 @@
+== /Game/Weapons/Ninjutsu/SuiujiGatame/Particles/P_WEP_SuiujiGatame_Start
+fichier : NARUTO/Content/Weapons/Ninjutsu/SuiujiGatame/Particles/P_WEP_SuiujiGatame_Start.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : ParticleSystem
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/SuiujiGatame/Particles/P_WEP_SuiujiGatame_Start.uasset  5 738 octets
+  NARUTO/Content/Weapons/Ninjutsu/SuiujiGatame/Particles/P_WEP_SuiujiGatame_Start.uexp  8 116 octets
+
+/Game/Weapons/Ninjutsu/SuiujiGatame/Particles/P_WEP_SuiujiGatame_Start  flags 80000000  120 Namen  29 Importe  13 Exporte  Kopf 5738  Bulk ab 13850  Daten 13854
+  imp  0 /Script/Engine.DistributionFloatConstant (Class)
+  imp  1 /Script/Engine.ParticleLODLevel (Class)
+  imp  2 /Script/Engine.ParticleModuleColorOverLife (Class)
+  imp  3 /Script/Engine.ParticleModuleLifetime (Class)
+  imp  4 /Script/Engine.ParticleModuleLocation (Class)
+  imp  5 /Script/Engine.ParticleModuleOrientationAxisLock (Class)
+  imp  6 /Script/Engine.ParticleModuleParameterDynamic (Class)
+  imp  7 /Script/Engine.ParticleModuleRequired (Class)
+  imp  8 /Script/Engine.ParticleModuleSize (Class)
+  imp  9 /Script/Engine.ParticleModuleSizeMultiplyLife (Class)
+  imp 10 /Script/Engine.ParticleModuleSpawn (Class)
+  imp 11 /Script/Engine.ParticleSpriteEmitter (Class)
+  imp 12 /Script/Engine.ParticleSystem (Class)
+  imp 13 /Script/Engine.Default__DistributionFloatConstant (DistributionFloatConstant)
+  imp 14 /Game/Weapons/Ninjutsu/SuiujiGatame/Materials/MI_WEP_Eff_Suiujigatame_C_01.MI_WEP_Eff_Suiujigatame_C_01 (MaterialInstanceConstant)
+  imp 15 /Game/Weapons/Ninjutsu/SuiujiGatame/Materials/MI_WEP_Eff_Suiujigatame_C_01./Game/Weapons/Ninjutsu/SuiujiGatame/Materials/MI_WEP_Eff_Suiujigatame_C_01 (Package)
+  imp 16 /Script/Engine./Script/Engine (Package)
+  imp 17 /Script/Engine.Default__ParticleLODLevel (ParticleLODLevel)
+  imp 18 /Script/Engine.Default__ParticleModuleColorOverLife (ParticleModuleColorOverLife)
+  imp 19 /Script/Engine.Default__ParticleModuleLifetime (ParticleModuleLifetime)
+  imp 20 /Script/Engine.Default__ParticleModuleLocation (ParticleModuleLocation)
+  imp 21 /Script/Engine.Default__ParticleModuleOrientationAxisLock (ParticleModuleOrientationAxisLock)
+  imp 22 /Script/Engine.Default__ParticleModuleParameterDynamic (ParticleModuleParameterDynamic)
+  imp 23 /Script/Engine.Default__ParticleModuleRequired (ParticleModuleRequired)
+  imp 24 /Script/Engine.Default__ParticleModuleSize (ParticleModuleSize)
+  imp 25 /Script/Engine.Default__ParticleModuleSizeMultiplyLife (ParticleModuleSizeMultiplyLife)
+  imp 26 /Script/Engine.Default__ParticleModuleSpawn (ParticleModuleSpawn)
+  imp 27 /Script/Engine.Default__ParticleSpriteEmitter (ParticleSpriteEmitter)
+  imp 28 /Script/Engine.Default__ParticleSystem (ParticleSystem)
+exp 0 RequiredDistributionSpawnRate : DistributionFloatConstant  outer 8  @166a +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 1 ParticleLODLevel_0 : ParticleLODLevel  outer 12  @1676 +a4
+    RequiredModule (ObjectProperty) = obj 8
+    Modules (ArrayProperty of ObjectProperty) [7]
+      0 (ObjectProperty) = obj 4
+      1 (ObjectProperty) = obj 9
+      2 (ObjectProperty) = obj 3
+      3 (ObjectProperty) = obj 10
+      4 (ObjectProperty) = obj 7
+      5 (ObjectProperty) = obj 6
+      6 (ObjectProperty) = obj 5
+    SpawnModule (ObjectProperty) = obj 11
+    PeakActiveParticles (IntProperty) = 3
+    -- Eigenschaften ok, Ende bei +a0 von a4
+exp 2 ParticleModuleColorOverLife_0 : ParticleModuleColorOverLife  outer 13  @171a +39c
+    ColorOverLife (StructProperty RawDistributionVector)
+      MinValue (FloatProperty) = 1
+      MaxValue (FloatProperty) = 3
+      MinValueVec (StructProperty Vector) = 3 1 1
+      MaxValueVec (StructProperty Vector) = 3 1 1
+      Distribution (ObjectProperty) = obj 0
+      Table (StructProperty DistributionLookupTable)
+        Op (ByteProperty None) = 1
+        EntryCount (ByteProperty None) = 1
+        EntryStride (ByteProperty None) = 3
+        Values (ArrayProperty of FloatProperty) [3]
+          0 (FloatProperty) = 3
+          1 (FloatProperty) = 1
+          2 (FloatProperty) = 1
+    AlphaOverLife (StructProperty RawDistributionFloat)
+      MaxValue (FloatProperty) = 1
+      Distribution (ObjectProperty) = obj 0
+      Table (StructProperty DistributionLookupTable)
+        Op (ByteProperty None) = 1
+        EntryCount (ByteProperty None) = 16
+        EntryStride (ByteProperty None) = 1
+        TimeScale (FloatProperty) = 15
+        Values (ArrayProperty of FloatProperty) [16]
+          0 (FloatProperty) = 1
+          1 (FloatProperty) = 0.853551
+          2 (FloatProperty) = 0.536634
+          3 (FloatProperty) = 0.230542
+          4 (FloatProperty) = 0.109222
+          5 (FloatProperty) = 0.0829212
+          6 (FloatProperty) = 0.0612128
+          7 (FloatProperty) = 0.043664
+          8 (FloatProperty) = 0.0298301
+          9 (FloatProperty) = 0.0192703
+          10 (FloatProperty) = 0.0115466
+          11 (FloatProperty) = 0.00621323
+          12 (FloatProperty) = 0.00283524
+          13 (FloatProperty) = 0.000965486
+          14 (FloatProperty) = 0.000168863
+          15 (FloatProperty) = 0
+    LODValidity (ByteProperty None) = 1
+    -- Eigenschaften ok, Ende bei +398 von 39c
+exp 3 ParticleModuleLifetime_3 : ParticleModuleLifetime  outer 13  @1ab6 +186
+    Lifetime (StructProperty RawDistributionFloat)
+      MinValue (FloatProperty) = 0.8
+      MaxValue (FloatProperty) = 0.8
+      Distribution (ObjectProperty) = obj 0
+      Table (StructProperty DistributionLookupTable)
+        Op (ByteProperty None) = 1
+        EntryCount (ByteProperty None) = 1
+        EntryStride (ByteProperty None) = 1
+        Values (ArrayProperty of FloatProperty) [1]
+          0 (FloatProperty) = 0.8
+    LODValidity (ByteProperty None) = 1
+    -- Eigenschaften ok, Ende bei +182 von 186
+exp 4 ParticleModuleLocation_0 : ParticleModuleLocation  outer 13  @1c3c +1eb
+    StartLocation (StructProperty RawDistributionVector)
+      MaxValue (FloatProperty) = 5
+      MinValueVec (StructProperty Vector) = 0 0 5
+      MaxValueVec (StructProperty Vector) = 0 0 5
+      Distribution (ObjectProperty) = obj 0
+      Table (StructProperty DistributionLookupTable)
+        Op (ByteProperty None) = 1
+        EntryCount (ByteProperty None) = 1
+        EntryStride (ByteProperty None) = 3
+        Values (ArrayProperty of FloatProperty) [3]
+          0 (FloatProperty) = 0
+          1 (FloatProperty) = 0
+          2 (FloatProperty) = 5
+    LODValidity (ByteProperty None) = 1
+    -- Eigenschaften ok, Ende bei +1e7 von 1eb
+exp 5 ParticleModuleOrientationAxisLock_3 : ParticleModuleOrientationAxisLock  outer 13  @1e27 +57
+    LockAxisFlags (ByteProperty EParticleAxisLock) = EPAL_Z
+    LODValidity (ByteProperty None) = 1
+    -- Eigenschaften ok, Ende bei +53 von 57
+exp 6 ParticleModuleParameterDynamic_0 : ParticleModuleParameterDynamic  outer 13  @1e7e +a79
+    DynamicParams (ArrayProperty of StructProperty) [4]
+      0 (StructProperty EmitterDynamicParameter)
+        ParamName (NameProperty) = U_Scroll
+        bUseEmitterTime (BoolProperty) = 0
+        bSpawnTimeOnly (BoolProperty) = 0
+        ValueMethod (ByteProperty EEmitterDynamicParameterValue) = EDPV_UserSet
+        bScaleVelocityByParamValue (BoolProperty) = 0
+        ParamValue (StructProperty RawDistributionFloat)
+          MinValue (FloatProperty) = 0
+          MaxValue (FloatProperty) = 0
+          Distribution (ObjectProperty) = obj 0
+          Table (StructProperty DistributionLookupTable)
+            Op (ByteProperty None) = 1
+            EntryCount (ByteProperty None) = 1
+            EntryStride (ByteProperty None) = 1
+            SubEntryStride (ByteProperty None) = 0
+            TimeScale (FloatProperty) = 0
+            TimeBias (FloatProperty) = 0
+            Values (ArrayProperty of FloatProperty) [1]
+              0 (FloatProperty) = 0
+            LockFlag (ByteProperty None) = 0
+      1 (StructProperty EmitterDynamicParameter)
+        ParamName (NameProperty) = V_Scroll
+        bUseEmitterTime (BoolProperty) = 0
+        bSpawnTimeOnly (BoolProperty) = 0
+        ValueMethod (ByteProperty EEmitterDynamicParameterValue) = EDPV_UserSet
+        bScaleVelocityByParamValue (BoolProperty) = 0
+        ParamValue (StructProperty RawDistributionFloat)
+          MinValue (FloatProperty) = 0
+          MaxValue (FloatProperty) = 0
+          Distribution (ObjectProperty) = obj 0
+          Table (StructProperty DistributionLookupTable)
+            Op (ByteProperty None) = 1
+            EntryCount (ByteProperty None) = 1
+            EntryStride (ByteProperty None) = 1
+            SubEntryStride (ByteProperty None) = 0
+            TimeScale (FloatProperty) = 0
+            TimeBias (FloatProperty) = 0
+            Values (ArrayProperty of FloatProperty) [1]
+              0 (FloatProperty) = 0
+            LockFlag (ByteProperty None) = 0
+      2 (StructProperty EmitterDynamicParameter)
+        ParamName (NameProperty) = UVDistortion_Value
+        bUseEmitterTime (BoolProperty) = 0
+        bSpawnTimeOnly (BoolProperty) = 0
+        ValueMethod (ByteProperty EEmitterDynamicParameterValue) = EDPV_UserSet
+        bScaleVelocityByParamValue (BoolProperty) = 0
+        ParamValue (StructProperty RawDistributionFloat)
+          MinValue (FloatProperty) = 1
+          MaxValue (FloatProperty) = 1
+          Distribution (ObjectProperty) = obj 0
+          Table (StructProperty DistributionLookupTable)
+            Op (ByteProperty None) = 1
+            EntryCount (ByteProperty None) = 1
+            EntryStride (ByteProperty None) = 1
+            SubEntryStride (ByteProperty None) = 0
+            TimeScale (FloatProperty) = 0
+            TimeBias (FloatProperty) = 0
+            Values (ArrayProperty of FloatProperty) [1]
+              0 (FloatProperty) = 1
+            LockFlag (ByteProperty None) = 0
+      3 (StructProperty EmitterDynamicParameter)
+        ParamName (NameProperty) = DIssolve_Value
+        bUseEmitterTime (BoolProperty) = 0
+        bSpawnTimeOnly (BoolProperty) = 0
+        ValueMethod (ByteProperty EEmitterDynamicParameterValue) = EDPV_UserSet
+        bScaleVelocityByParamValue (BoolProperty) = 0
+        ParamValue (StructProperty RawDistributionFloat)
+          MinValue (FloatProperty) = 1
+          MaxValue (FloatProperty) = 1
+          Distribution (ObjectProperty) = obj 0
+          Table (StructProperty DistributionLookupTable)
+            Op (ByteProperty None) = 1
+            EntryCount (ByteProperty None) = 1
+            EntryStride (ByteProperty None) = 1
+            SubEntryStride (ByteProperty None) = 0
+            TimeScale (FloatProperty) = 0
+            TimeBias (FloatProperty) = 0
+            Values (ArrayProperty of FloatProperty) [1]
+              0 (FloatProperty) = 1
+            LockFlag (ByteProperty None) = 0
+    UpdateFlags (IntProperty) = 15
+    LODValidity (ByteProperty None) = 1
+    -- Eigenschaften ok, Ende bei +a75 von a79
+exp 7 ParticleModuleRequired_19 : ParticleModuleRequired  outer 13  @28f7 +134
+    Material (ObjectProperty) = obj -15
+    bUseLocalSpace (BoolProperty) = 1
+    bUseLegacyEmitterTime (BoolProperty) = 0
+    EmitterDuration (FloatProperty) = 0.1
+    EmitterLoops (IntProperty) = 1
+    SpawnRate (StructProperty RawDistributionFloat)
+      Distribution (ObjectProperty) = obj 1
+    RandomImageTime (FloatProperty) = 1
+    LODValidity (ByteProperty None) = 1
+    -- Eigenschaften ok, Ende bei +128 von 134
+exp 8 ParticleModuleSize_19 : ParticleModuleSize  outer 13  @2a2b +208
+    StartSize (StructProperty RawDistributionVector)
+      MinValue (FloatProperty) = 1
+      MaxValue (FloatProperty) = 1500
+      MinValueVec (StructProperty Vector) = 1500 1 1
+      MaxValueVec (StructProperty Vector) = 1500 1 1
+      Distribution (ObjectProperty) = obj 0
+      Table (StructProperty DistributionLookupTable)
+        Op (ByteProperty None) = 1
+        EntryCount (ByteProperty None) = 1
+        EntryStride (ByteProperty None) = 3
+        Values (ArrayProperty of FloatProperty) [3]
+          0 (FloatProperty) = 1500
+          1 (FloatProperty) = 1
+          2 (FloatProperty) = 1
+    LODValidity (ByteProperty None) = 1
+    -- Eigenschaften ok, Ende bei +204 von 208
+exp 9 ParticleModuleSizeMultiplyLife_17 : ParticleModuleSizeMultiplyLife  outer 13  @2c33 +33f
+    LifeMultiplier (StructProperty RawDistributionVector)
+      MaxValue (FloatProperty) = 1.2
+      MaxValueVec (StructProperty Vector) = 1.2 1.2 1.2
+      Distribution (ObjectProperty) = obj 0
+      Table (StructProperty DistributionLookupTable)
+        Op (ByteProperty None) = 1
+        EntryCount (ByteProperty None) = 32
+        EntryStride (ByteProperty None) = 3
+        TimeScale (FloatProperty) = 31
+        Values (ArrayProperty of FloatProperty) [96]
+          0 (FloatProperty) = 0
+          1 (FloatProperty) = 0
+          2 (FloatProperty) = 0
+          3 (FloatProperty) = 0.107527
+          4 (FloatProperty) = 0.107527
+          5 (FloatProperty) = 0.107527
+          6 (FloatProperty) = 0.215054
+          7 (FloatProperty) = 0.215054
+          8 (FloatProperty) = 0.215054
+          9 (FloatProperty) = 0.322581
+          10 (FloatProperty) = 0.322581
+          11 (FloatProperty) = 0.322581
+          12 (FloatProperty) = 0.430107
+          13 (FloatProperty) = 0.430107
+          14 (FloatProperty) = 0.430107
+          15 (FloatProperty) = 0.537634
+          16 (FloatProperty) = 0.537634
+          17 (FloatProperty) = 0.537634
+          18 (FloatProperty) = 0.645161
+          19 (FloatProperty) = 0.645161
+          20 (FloatProperty) = 0.645161
+          21 (FloatProperty) = 0.752688
+          22 (FloatProperty) = 0.752688
+          23 (FloatProperty) = 0.752688
+          24 (FloatProperty) = 0.860215
+          25 (FloatProperty) = 0.860215
+          26 (FloatProperty) = 0.860215
+          27 (FloatProperty) = 0.967742
+          28 (FloatProperty) = 0.967742
+          29 (FloatProperty) = 0.967742
+          30 (FloatProperty) = 1.00645
+          31 (FloatProperty) = 1.00645
+          32 (FloatProperty) = 1.00645
+          33 (FloatProperty) = 1.01567
+          34 (FloatProperty) = 1.01567
+          35 (FloatProperty) = 1.01567
+          36 (FloatProperty) = 1.02488
+          37 (FloatProperty) = 1.02488
+          38 (FloatProperty) = 1.02488
+          39 (FloatProperty) = 1.0341
+          40 (FloatProperty) = 1.0341
+          41 (FloatProperty) = 1.0341
+          42 (FloatProperty) = 1.04332
+          43 (FloatProperty) = 1.04332
+          44 (FloatProperty) = 1.04332
+          45 (FloatProperty) = 1.05253
+          46 (FloatProperty) = 1.05253
+          47 (FloatProperty) = 1.05253
+          48 (FloatProperty) = 1.06175
+          49 (FloatProperty) = 1.06175
+          50 (FloatProperty) = 1.06175
+          51 (FloatProperty) = 1.07097
+          52 (FloatProperty) = 1.07097
+          53 (FloatProperty) = 1.07097
+          54 (FloatProperty) = 1.08018
+          55 (FloatProperty) = 1.08018
+          56 (FloatProperty) = 1.08018
+          57 (FloatProperty) = 1.0894
+          58 (FloatProperty) = 1.0894
+          59 (FloatProperty) = 1.0894
+          60 (FloatProperty) = 1.09862
+          61 (FloatProperty) = 1.09862
+          62 (FloatProperty) = 1.09862
+          63 (FloatProperty) = 1.10783
+          64 (FloatProperty) = 1.10783
+          65 (FloatProperty) = 1.10783
+          66 (FloatProperty) = 1.11705
+          67 (FloatProperty) = 1.11705
+          68 (FloatProperty) = 1.11705
+          69 (FloatProperty) = 1.12627
+          70 (FloatProperty) = 1.12627
+          71 (FloatProperty) = 1.12627
+          72 (FloatProperty) = 1.13548
+          73 (FloatProperty) = 1.13548
+          74 (FloatProperty) = 1.13548
+          75 (FloatProperty) = 1.1447
+          76 (FloatProperty) = 1.1447
+          77 (FloatProperty) = 1.1447
+          78 (FloatProperty) = 1.15392
+          79 (FloatProperty) = 1.15392
+          80 (FloatProperty) = 1.15392
+          81 (FloatProperty) = 1.16313
+          82 (FloatProperty) = 1.16313
+          83 (FloatProperty) = 1.16313
+          84 (FloatProperty) = 1.17235
+          85 (FloatProperty) = 1.17235
+          86 (FloatProperty) = 1.17235
+          87 (FloatProperty) = 1.18157
+          88 (FloatProperty) = 1.18157
+          89 (FloatProperty) = 1.18157
+          90 (FloatProperty) = 1.19078
+          91 (FloatProperty) = 1.19078
+          92 (FloatProperty) = 1.19078
+          93 (FloatProperty) = 1.2
+          94 (FloatProperty) = 1.2
+          95 (FloatProperty) = 1.2
+    LODValidity (ByteProperty None) = 1
+    -- Eigenschaften ok, Ende bei +33b von 33f
+exp 10 ParticleModuleSpawn_19 : ParticleModuleSpawn  outer 13  @2f72 +4b1
+    Rate (StructProperty RawDistributionFloat)
+      Distribution (ObjectProperty) = obj 0
+      Table (StructProperty DistributionLookupTable)
+        Op (ByteProperty None) = 1
+        EntryCount (ByteProperty None) = 1
+        EntryStride (ByteProperty None) = 1
+        Values (ArrayProperty of FloatProperty) [1]
+          0 (FloatProperty) = 0
+    RateScale (StructProperty RawDistributionFloat)
+      MinValue (FloatProperty) = 1
+      MaxValue (FloatProperty) = 1
+      Distribution (ObjectProperty) = obj 0
+      Table (StructProperty DistributionLookupTable)
+        Op (ByteProperty None) = 1
+        EntryCount (ByteProperty None) = 1
+        EntryStride (ByteProperty None) = 1
+        Values (ArrayProperty of FloatProperty) [1]
+          0 (FloatProperty) = 1
+    BurstList (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ParticleBurst)
+        Count (IntProperty) = 1
+        CountLow (IntProperty) = 4.29497e+09
+        Time (FloatProperty) = 0
+    BurstScale (StructProperty RawDistributionFloat)
+      MinValue (FloatProperty) = 1
+      MaxValue (FloatProperty) = 1
+      Distribution (ObjectProperty) = obj 0
+      Table (StructProperty DistributionLookupTable)
+        Op (ByteProperty None) = 1
+        EntryCount (ByteProperty None) = 1
+        EntryStride (ByteProperty None) = 1
+        Values (ArrayProperty of FloatProperty) [1]
+          0 (FloatProperty) = 1
+    LODValidity (ByteProperty None) = 1
+    -- Eigenschaften ok, Ende bei +4ad von 4b1
+exp 11 ParticleSpriteEmitter_0 : ParticleSpriteEmitter  outer 13  @3423 +56
+    EmitterName (NameProperty) = Distortion2
+    LODLevels (ArrayProperty of ObjectProperty) [1]
+      0 (ObjectProperty) = obj 2
+    -- Eigenschaften ok, Ende bei +52 von 56
+exp 12 P_WEP_SuiujiGatame_Start : ParticleSystem  outer 0  @3479 +1a1
+    Emitters (ArrayProperty of ObjectProperty) [1]
+      0 (ObjectProperty) = obj 12
+    CurveEdSetup (ObjectProperty) = obj 0
+    LODDistances (ArrayProperty of FloatProperty) [1]
+      0 (FloatProperty) = 0
+    LODSettings (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ParticleSystemLOD) = 0
+    bUseFixedRelativeBoundingBox (BoolProperty) = 1
+    FixedRelativeBoundingBox (StructProperty Box) = -800 -800 -50 800 800 50
+    bShouldResetPeakCounts (BoolProperty) = 1
+    CustomOcclusionBounds (StructProperty Box) = 0 0 0 0 0 0
+    -- Eigenschaften ok, Ende bei +19d von 1a1
+
+== dependances /Game :
+  /Game/Weapons/Ninjutsu/SuiujiGatame/Materials/MI_WEP_Eff_Suiujigatame_C_01

@@ -1,0 +1,42 @@
+== /Game/Effects/BaseMaterials/Instance_Base/Clay/MI_EFF_Clay_01_WorldAligned
+fichier : NARUTO/Content/Effects/BaseMaterials/Instance_Base/Clay/MI_EFF_Clay_01_WorldAligned.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/BaseMaterials/Instance_Base/Clay/MI_EFF_Clay_01_WorldAligned.uasset  4 560 octets
+  NARUTO/Content/Effects/BaseMaterials/Instance_Base/Clay/MI_EFF_Clay_01_WorldAligned.uexp  115 255 octets
+
+/Game/Effects/BaseMaterials/Instance_Base/Clay/MI_EFF_Clay_01_WorldAligned  flags 80000000  118 Namen  5 Importe  1 Exporte  Kopf 4560  Bulk ab 119811  Daten 119815
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Materials/M_EFF_Clay.M_EFF_Clay (Material)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Materials/M_EFF_Clay./Game/Effects/BaseMaterials/Materials/M_EFF_Clay (Package)
+  imp  4 /Script/Engine./Script/Engine (Package)
+exp 0 MI_EFF_Clay_01_WorldAligned : MaterialInstanceConstant  outer 0  @11d0 +1c233
+    Parent (ObjectProperty) = obj -2
+    bHasStaticPermutationResource (BoolProperty) = 1
+    ScalarParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    VectorParameterValues (ArrayProperty of StructProperty) [2]
+      0 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 12_Color_B
+        ParameterValue (StructProperty LinearColor) = 0.715693 0.745404 0.715693 1
+        ExpressionGUID (StructProperty Guid) = 9.65029e+08 1.0821e+09 3.71286e+09 3.437e+09
+      1 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 12_ShadowColor_B
+        ParameterValue (StructProperty LinearColor) = 0.401978 0.439657 0.401978 1
+        ExpressionGUID (StructProperty Guid) = 2.53575e+09 1.08761e+09 1.78541e+09 3.00291e+09
+    TextureStreamingData (ArrayProperty of StructProperty) [2]
+      0 (StructProperty MaterialTextureInfo)
+        SamplingScale (FloatProperty) = 0.015625
+        UVChannelIndex (IntProperty) = 0
+        TextureName (NameProperty) = New_NarutoShadingLookUp
+      1 (StructProperty MaterialTextureInfo)
+        SamplingScale (FloatProperty) = 1
+        UVChannelIndex (IntProperty) = 0
+        TextureName (NameProperty) = T_EFF_Noise_04_BC
+    -- Eigenschaften ok, Ende bei +3e4 von 1c233
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Materials/M_EFF_Clay

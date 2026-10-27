@@ -1,0 +1,59 @@
+== /Game/Weapons/Ninjutsu/SusanoFlameControl/Materials/MI_WEP_Eff_SusanoFlameControl_I_01
+fichier : NARUTO/Content/Weapons/Ninjutsu/SusanoFlameControl/Materials/MI_WEP_Eff_SusanoFlameControl_I_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/SusanoFlameControl/Materials/MI_WEP_Eff_SusanoFlameControl_I_01.uasset  2 219 octets
+  NARUTO/Content/Weapons/Ninjutsu/SusanoFlameControl/Materials/MI_WEP_Eff_SusanoFlameControl_I_01.uexp  1 166 octets
+
+/Game/Weapons/Ninjutsu/SusanoFlameControl/Materials/MI_WEP_Eff_SusanoFlameControl_I_01  flags 80000000  49 Namen  13 Importe  1 Exporte  Kopf 2219  Bulk ab 3381  Daten 3385
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMT_1_TUD_Dpf_Omv.MI_EFF_GMT_1_TUD_Dpf_Omv (MaterialInstanceConstant)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMT_1_TUD_Dpf_Omv./Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMT_1_TUD_Dpf_Omv (Package)
+  imp  4 /Game/Effects/Textures/Common/T_EFF_Ring_01_M./Game/Effects/Textures/Common/T_EFF_Ring_01_M (Package)
+  imp  5 /Game/Effects/Textures/GradationMap/T_EFF_GMO_02_M./Game/Effects/Textures/GradationMap/T_EFF_GMO_02_M (Package)
+  imp  6 /Game/Effects/Textures/GradationMap/T_EFF_GMT_SusanoFlameControl_01_BC./Game/Effects/Textures/GradationMap/T_EFF_GMT_SusanoFlameControl_01_BC (Package)
+  imp  7 /Game/Effects/Textures/Smoke/T_EFF_Smoke_19_M./Game/Effects/Textures/Smoke/T_EFF_Smoke_19_M (Package)
+  imp  8 /Script/Engine./Script/Engine (Package)
+  imp  9 /Game/Effects/Textures/Common/T_EFF_Ring_01_M.T_EFF_Ring_01_M (Texture2D)
+  imp 10 /Game/Effects/Textures/GradationMap/T_EFF_GMO_02_M.T_EFF_GMO_02_M (Texture2D)
+  imp 11 /Game/Effects/Textures/GradationMap/T_EFF_GMT_SusanoFlameControl_01_BC.T_EFF_GMT_SusanoFlameControl_01_BC (Texture2D)
+  imp 12 /Game/Effects/Textures/Smoke/T_EFF_Smoke_19_M.T_EFF_Smoke_19_M (Texture2D)
+exp 0 MI_WEP_Eff_SusanoFlameControl_I_01 : MaterialInstanceConstant  outer 0  @8ab +48a
+    Parent (ObjectProperty) = obj -2
+    ScalarParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [5]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_OpacityMap
+        ParameterValue (ObjectProperty) = obj -10
+        ExpressionGUID (StructProperty Guid) = 2.1702e+08 1.24777e+09 1.56472e+09 3.38423e+09
+      1 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_OpacityMap_SubUV
+        ParameterValue (ObjectProperty) = obj -13
+        ExpressionGUID (StructProperty Guid) = 2.72082e+09 1.1717e+09 3.38514e+09 1.42878e+08
+      2 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 35_OpacityMap_GradationMap
+        ParameterValue (ObjectProperty) = obj -11
+        ExpressionGUID (StructProperty Guid) = 1.38781e+09 1.25369e+09 4.21816e+09 1.86563e+09
+      3 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_EmissiveMap
+        ParameterValue (ObjectProperty) = obj -10
+        ExpressionGUID (StructProperty Guid) = 2.59996e+09 1.31801e+09 1.48753e+09 3.31416e+08
+      4 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 35_EmissiveMap_GradationMap
+        ParameterValue (ObjectProperty) = obj -12
+        ExpressionGUID (StructProperty Guid) = 8.61289e+08 1.25889e+09 2.92737e+09 1.30524e+09
+    BasePropertyOverrides (StructProperty MaterialInstanceBasePropertyOverrides)
+      BlendMode (ByteProperty EBlendMode) = BLEND_Translucent
+      ShadingModel (ByteProperty EMaterialShadingModel) = MSM_Unlit
+    -- Eigenschaften ok, Ende bei +486 von 48a
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMT_1_TUD_Dpf_Omv
+  /Game/Effects/Textures/Common/T_EFF_Ring_01_M
+  /Game/Effects/Textures/GradationMap/T_EFF_GMO_02_M
+  /Game/Effects/Textures/GradationMap/T_EFF_GMT_SusanoFlameControl_01_BC
+  /Game/Effects/Textures/Smoke/T_EFF_Smoke_19_M

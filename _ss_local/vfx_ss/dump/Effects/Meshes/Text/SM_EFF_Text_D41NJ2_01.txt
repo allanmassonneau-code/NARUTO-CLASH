@@ -1,0 +1,45 @@
+== /Game/Effects/Meshes/Text/SM_EFF_Text_D41NJ2_01
+fichier : NARUTO/Content/Effects/Meshes/Text/SM_EFF_Text_D41NJ2_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Effects/Meshes/Text/SM_EFF_Text_D41NJ2_01.uasset  2 156 octets
+  NARUTO/Content/Effects/Meshes/Text/SM_EFF_Text_D41NJ2_01.uexp  57 699 octets
+
+/Game/Effects/Meshes/Text/SM_EFF_Text_D41NJ2_01  flags 80000000  57 Namen  9 Importe  3 Exporte  Kopf 2156  Bulk ab 59851  Daten 59855
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Game/Effects/Materials/Text/MI_EFF_Text_Common_01.MI_EFF_Text_Common_01 (MaterialInstanceConstant)
+  imp  5 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  6 /Game/Effects/Materials/Text/MI_EFF_Text_Common_01./Game/Effects/Materials/Text/MI_EFF_Text_Common_01 (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_0 : BodySetup  outer 3  @86c +4de7
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +16c von 4de7
+exp 1 NavCollision_2 : NavCollision  outer 3  @5653 +61
+    -- Eigenschaften ok, Ende bei +8 von 61
+exp 2 SM_EFF_Text_D41NJ2_01 : StaticMesh  outer 0  @56b4 +9317
+    StaticMaterials (ArrayProperty of StructProperty) [1]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = lambert1
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 13.3599
+          LocalUVDensities[1] (FloatProperty) = 0
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightMapResolution (IntProperty) = 64
+    ExtendedBounds (StructProperty BoxSphereBounds) = 6.02558e-44 0 7.56701e-44 0 1.68156e-44 0 7.84727e-44
+    -- Eigenschaften ok, Ende bei +255 von 9317
+
+== dependances /Game :
+  /Game/Effects/Materials/Text/MI_EFF_Text_Common_01

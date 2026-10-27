@@ -1,0 +1,44 @@
+== /Game/Weapons/Ninjutsu/D92NJ1/Meshes/SM_WEP_Eff_D92NJ1_Tentacle_04
+fichier : NARUTO/Content/Weapons/Ninjutsu/D92NJ1/Meshes/SM_WEP_Eff_D92NJ1_Tentacle_04.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/D92NJ1/Meshes/SM_WEP_Eff_D92NJ1_Tentacle_04.uasset  2 154 octets
+  NARUTO/Content/Weapons/Ninjutsu/D92NJ1/Meshes/SM_WEP_Eff_D92NJ1_Tentacle_04.uexp  6 348 octets
+
+/Game/Weapons/Ninjutsu/D92NJ1/Meshes/SM_WEP_Eff_D92NJ1_Tentacle_04  flags 80000000  57 Namen  9 Importe  3 Exporte  Kopf 2154  Bulk ab 8498  Daten 8502
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial (Material)
+  imp  5 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  6 /Engine/EngineMaterials/WorldGridMaterial./Engine/EngineMaterials/WorldGridMaterial (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_0 : BodySetup  outer 3  @86a +99c
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +16c von 99c
+exp 1 NavCollision_3 : NavCollision  outer 3  @1206 +61
+    -- Eigenschaften ok, Ende bei +8 von 61
+exp 2 SM_WEP_Eff_D92NJ1_Tentacle_04 : StaticMesh  outer 0  @1267 +ecb
+    StaticMaterials (ArrayProperty of StructProperty) [1]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = lambert1
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 5.29998
+          LocalUVDensities[1] (FloatProperty) = 0
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightMapResolution (IntProperty) = 64
+    ExtendedBounds (StructProperty BoxSphereBounds) = 5.88545e-44 0 7.42688e-44 0 1.68156e-44 0 7.70714e-44
+    -- Eigenschaften ok, Ende bei +255 von ecb
+
+== dependances /Game :

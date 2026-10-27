@@ -1,0 +1,57 @@
+== /Game/Weapons/Ninjutsu/SusanoFlameControl/Meshes/SM_WEP_Eff_SusanoFlameControl_Arrow_B
+fichier : NARUTO/Content/Weapons/Ninjutsu/SusanoFlameControl/Meshes/SM_WEP_Eff_SusanoFlameControl_Arrow_B.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/SusanoFlameControl/Meshes/SM_WEP_Eff_SusanoFlameControl_Arrow_B.uasset  2 482 octets
+  NARUTO/Content/Weapons/Ninjutsu/SusanoFlameControl/Meshes/SM_WEP_Eff_SusanoFlameControl_Arrow_B.uexp  39 715 octets
+
+/Game/Weapons/Ninjutsu/SusanoFlameControl/Meshes/SM_WEP_Eff_SusanoFlameControl_Arrow_B  flags 80000000  60 Namen  11 Importe  3 Exporte  Kopf 2482  Bulk ab 42193  Daten 42197
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Game/Weapons/Ninjutsu/SusanoFlameControl/Materials/MI_WEP_Eff_SusanoFlameControlArrow_A_01.MI_WEP_Eff_SusanoFlameControlArrow_A_01 (MaterialInstanceConstant)
+  imp  5 /Game/Weapons/Ninjutsu/SusanoFlameControl/Materials/MI_WEP_Eff_SusanoFlameControlArrow_B_01.MI_WEP_Eff_SusanoFlameControlArrow_B_01 (MaterialInstanceConstant)
+  imp  6 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  7 /Game/Weapons/Ninjutsu/SusanoFlameControl/Materials/MI_WEP_Eff_SusanoFlameControlArrow_A_01./Game/Weapons/Ninjutsu/SusanoFlameControl/Materials/MI_WEP_Eff_SusanoFlameControlArrow_A_01 (Package)
+  imp  8 /Game/Weapons/Ninjutsu/SusanoFlameControl/Materials/MI_WEP_Eff_SusanoFlameControlArrow_B_01./Game/Weapons/Ninjutsu/SusanoFlameControl/Materials/MI_WEP_Eff_SusanoFlameControlArrow_B_01 (Package)
+  imp  9 /Script/Engine./Script/Engine (Package)
+  imp 10 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_1 : BodySetup  outer 3  @9b2 +47e9
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +16c von 47e9
+exp 1 NavCollision_2 : NavCollision  outer 3  @519b +61
+    -- Eigenschaften ok, Ende bei +8 von 61
+exp 2 SM_WEP_Eff_SusanoFlameControl_Arrow_B : StaticMesh  outer 0  @51fc +52d5
+    StaticMaterials (ArrayProperty of StructProperty) [2]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = M
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 367.63
+          LocalUVDensities[1] (FloatProperty) = 473.876
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+      1 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = M2
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 504.515
+          LocalUVDensities[1] (FloatProperty) = 675.799
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightMapResolution (IntProperty) = 64
+    ExtendedBounds (StructProperty BoxSphereBounds) = 6.44597e-44 0 7.9874e-44 0 1.68156e-44 0 8.26766e-44
+    -- Eigenschaften ok, Ende bei +35f von 52d5
+
+== dependances /Game :
+  /Game/Weapons/Ninjutsu/SusanoFlameControl/Materials/MI_WEP_Eff_SusanoFlameControlArrow_A_01
+  /Game/Weapons/Ninjutsu/SusanoFlameControl/Materials/MI_WEP_Eff_SusanoFlameControlArrow_B_01

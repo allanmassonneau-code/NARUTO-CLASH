@@ -1,0 +1,56 @@
+== /Game/Effects/Materials/Hit/MI_EFF_Hit_I_02
+fichier : NARUTO/Content/Effects/Materials/Hit/MI_EFF_Hit_I_02.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/Materials/Hit/MI_EFF_Hit_I_02.uasset  1 958 octets
+  NARUTO/Content/Effects/Materials/Hit/MI_EFF_Hit_I_02.uexp  1 196 octets
+
+/Game/Effects/Materials/Hit/MI_EFF_Hit_I_02  flags 80000000  52 Namen  9 Importe  1 Exporte  Kopf 1958  Bulk ab 3150  Daten 3154
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_1_MUB.MI_EFF_GMS_1_MUB (MaterialInstanceConstant)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_1_MUB./Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_1_MUB (Package)
+  imp  4 /Game/Effects/Textures/GradationMap/T_EFF_GMO_04_M./Game/Effects/Textures/GradationMap/T_EFF_GMO_04_M (Package)
+  imp  5 /Game/Effects/Textures/Hit/T_EFF_Hit_13_M./Game/Effects/Textures/Hit/T_EFF_Hit_13_M (Package)
+  imp  6 /Script/Engine./Script/Engine (Package)
+  imp  7 /Game/Effects/Textures/GradationMap/T_EFF_GMO_04_M.T_EFF_GMO_04_M (Texture2D)
+  imp  8 /Game/Effects/Textures/Hit/T_EFF_Hit_13_M.T_EFF_Hit_13_M (Texture2D)
+exp 0 MI_EFF_Hit_I_02 : MaterialInstanceConstant  outer 0  @7a6 +4a8
+    Parent (ObjectProperty) = obj -2
+    ScalarParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [2]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_OpacityMap
+        ParameterValue (ObjectProperty) = obj -9
+        ExpressionGUID (StructProperty Guid) = 2.1702e+08 1.24777e+09 1.56472e+09 3.38423e+09
+      1 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 35_OpacityMap_GradationMap
+        ParameterValue (ObjectProperty) = obj -8
+        ExpressionGUID (StructProperty Guid) = 1.38781e+09 1.25369e+09 4.21816e+09 1.86563e+09
+    bLockStaticSwitch (BoolProperty) = 0
+    BasePropertyOverrides (StructProperty MaterialInstanceBasePropertyOverrides)
+      BlendMode (ByteProperty EBlendMode) = BLEND_Masked
+      ShadingModel (ByteProperty EMaterialShadingModel) = MSM_Unlit
+      Lock (BoolProperty) = 0
+    TextureStreamingData (ArrayProperty of StructProperty) [3]
+      0 (StructProperty MaterialTextureInfo)
+        SamplingScale (FloatProperty) = 0.015625
+        UVChannelIndex (IntProperty) = 0
+        TextureName (NameProperty) = T_EFF_GMO_04_M
+      1 (StructProperty MaterialTextureInfo)
+        SamplingScale (FloatProperty) = 0.015625
+        UVChannelIndex (IntProperty) = 0
+        TextureName (NameProperty) = T_EFF_GMS__Default_01_BC
+      2 (StructProperty MaterialTextureInfo)
+        SamplingScale (FloatProperty) = 0.015625
+        UVChannelIndex (IntProperty) = 0
+        TextureName (NameProperty) = T_EFF_Hit_13_M
+    -- Eigenschaften ok, Ende bei +4a4 von 4a8
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_1_MUB
+  /Game/Effects/Textures/GradationMap/T_EFF_GMO_04_M
+  /Game/Effects/Textures/Hit/T_EFF_Hit_13_M

@@ -1,0 +1,84 @@
+== /Game/Weapons/Ninjutsu/DomedWall/Meshes/SM_WEP_Eff_DomedWall_D_01
+fichier : NARUTO/Content/Weapons/Ninjutsu/DomedWall/Meshes/SM_WEP_Eff_DomedWall_D_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/DomedWall/Meshes/SM_WEP_Eff_DomedWall_D_01.uasset  2 417 octets
+  NARUTO/Content/Weapons/Ninjutsu/DomedWall/Meshes/SM_WEP_Eff_DomedWall_D_01.uexp  16 634 octets
+
+/Game/Weapons/Ninjutsu/DomedWall/Meshes/SM_WEP_Eff_DomedWall_D_01  flags 80000000  71 Namen  9 Importe  3 Exporte  Kopf 2417  Bulk ab 19047  Daten 19051
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial (Material)
+  imp  5 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  6 /Engine/EngineMaterials/WorldGridMaterial./Engine/EngineMaterials/WorldGridMaterial (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_2 : BodySetup  outer 3  @971 +1c08
+    AggGeom (StructProperty KAggregateGeom)
+      ConvexElems (ArrayProperty of StructProperty) [1]
+        0 (StructProperty KConvexElem)
+          VertexData (ArrayProperty of StructProperty) [29]
+            0 (StructProperty Vector) = 12.722 50.028 6.27803
+            1 (StructProperty Vector) = 12.722 10.1439 -33.6061
+            2 (StructProperty Vector) = 12.722 -34.1759 -33.5741
+            3 (StructProperty Vector) = 12.722 -43.903 -23.8469
+            4 (StructProperty Vector) = 12.722 -43.903 -8.52804
+            5 (StructProperty Vector) = 12.722 -10.347 25.028
+            6 (StructProperty Vector) = 12.722 50.028 25.028
+            7 (StructProperty Vector) = -12.722 -49.403 -18.347
+            8 (StructProperty Vector) = -12.722 -39.3469 -28.403
+            9 (StructProperty Vector) = -12.722 15.347 -28.403
+            10 (StructProperty Vector) = -12.722 50.028 6.27803
+            11 (StructProperty Vector) = -12.722 50.028 30.347
+            12 (StructProperty Vector) = -12.722 48.3825 31.9925
+            13 (StructProperty Vector) = -12.722 -3.44429 31.9307
+            14 (StructProperty Vector) = -12.722 -49.403 -14.028
+            15 (StructProperty Vector) = -8.03964 54.7104 10.9604
+            16 (StructProperty Vector) = 8.03964 54.7104 10.9604
+            17 (StructProperty Vector) = 8.03964 54.7104 25.6646
+            18 (StructProperty Vector) = -8.03964 54.7104 25.6646
+            19 (StructProperty Vector) = 6.36768 -50.2573 -17.4927
+            20 (StructProperty Vector) = -11.8677 -50.2573 -17.4927
+            21 (StructProperty Vector) = -11.8677 -50.2573 -14.8823
+            22 (StructProperty Vector) = 6.36768 -50.2573 -14.8823
+            23 (StructProperty Vector) = 5.84796 48.473 31.902
+            24 (StructProperty Vector) = 5.84796 -3.47297 31.902
+            25 (StructProperty Vector) = -12.736 48.473 31.902
+            26 (StructProperty Vector) = -7.48667 -34.1117 -33.6383
+            27 (StructProperty Vector) = -7.48667 10.1117 -33.6383
+            28 (StructProperty Vector) = 10.0625 52.6875 27.6875
+          ElemBox (StructProperty Box) = -12.736 -50.2573 -33.6383 12.722 54.7104 31.9925
+          Transform (StructProperty Transform)
+            Rotation (StructProperty Quat) = 0 0 0 1
+            Translation (StructProperty Vector) = 0 0 0
+            Scale3D (StructProperty Vector) = 1 1 1
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +4f3 von 1c08
+exp 1 NavCollision_7 : NavCollision  outer 3  @2579 +6c5
+    -- Eigenschaften ok, Ende bei +8 von 6c5
+exp 2 SM_WEP_Eff_DomedWall_D_01 : StaticMesh  outer 0  @2c3e +1e29
+    StaticMaterials (ArrayProperty of StructProperty) [1]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = lambert2
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 78.5899
+          LocalUVDensities[1] (FloatProperty) = 48.2014
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightmapUVDensity (FloatProperty) = 126.527
+    LightMapResolution (IntProperty) = 64
+    LightMapCoordinateIndex (IntProperty) = 1
+    ExtendedBounds (StructProperty BoxSphereBounds) = 7.00649e-44 0 8.96831e-44 0 1.68156e-44 0 9.52883e-44
+    -- Eigenschaften ok, Ende bei +28f von 1e29
+
+== dependances /Game :

@@ -1,0 +1,45 @@
+== /Game/Effects/Meshes/Text/SM_EFF_Text_EightInnerGatesSixth_01
+fichier : NARUTO/Content/Effects/Meshes/Text/SM_EFF_Text_EightInnerGatesSixth_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Effects/Meshes/Text/SM_EFF_Text_EightInnerGatesSixth_01.uasset  2 200 octets
+  NARUTO/Content/Effects/Meshes/Text/SM_EFF_Text_EightInnerGatesSixth_01.uexp  10 844 octets
+
+/Game/Effects/Meshes/Text/SM_EFF_Text_EightInnerGatesSixth_01  flags 80000000  56 Namen  9 Importe  3 Exporte  Kopf 2200  Bulk ab 13040  Daten 13044
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Game/Effects/Materials/Text/MI_EFF_Text_EightInnerGatesSixth_A_01.MI_EFF_Text_EightInnerGatesSixth_A_01 (MaterialInstanceConstant)
+  imp  5 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  6 /Game/Effects/Materials/Text/MI_EFF_Text_EightInnerGatesSixth_A_01./Game/Effects/Materials/Text/MI_EFF_Text_EightInnerGatesSixth_A_01 (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_0 : BodySetup  outer 3  @898 +18c
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +16c von 18c
+exp 1 NavCollision_0 : NavCollision  outer 3  @a24 +61
+    -- Eigenschaften ok, Ende bei +8 von 61
+exp 2 SM_EFF_Text_EightInnerGatesSixth_01 : StaticMesh  outer 0  @a85 +286b
+    StaticMaterials (ArrayProperty of StructProperty) [1]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = lambert1
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 147.851
+          LocalUVDensities[1] (FloatProperty) = 0
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightMapResolution (IntProperty) = 64
+    ExtendedBounds (StructProperty BoxSphereBounds) = 6.02558e-44 0 7.42688e-44 0 1.68156e-44 0 7.70714e-44
+    -- Eigenschaften ok, Ende bei +255 von 286b
+
+== dependances /Game :
+  /Game/Effects/Materials/Text/MI_EFF_Text_EightInnerGatesSixth_A_01

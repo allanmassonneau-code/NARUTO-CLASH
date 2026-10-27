@@ -1,0 +1,70 @@
+== /Game/Effects/Materials/Hit/MI_EFF_Shock_D_01
+fichier : NARUTO/Content/Effects/Materials/Hit/MI_EFF_Shock_D_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/Materials/Hit/MI_EFF_Shock_D_01.uasset  3 444 octets
+  NARUTO/Content/Effects/Materials/Hit/MI_EFF_Shock_D_01.uexp  109 020 octets
+
+/Game/Effects/Materials/Hit/MI_EFF_Shock_D_01  flags 80000000  91 Namen  9 Importe  1 Exporte  Kopf 3444  Bulk ab 112460  Daten 112464
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Materials/M_EFF_Dissolve_02.M_EFF_Dissolve_02 (Material)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Materials/M_EFF_Dissolve_02./Game/Effects/BaseMaterials/Materials/M_EFF_Dissolve_02 (Package)
+  imp  4 /Game/Effects/Textures/Hit/T_EFF_Shock_04_BC./Game/Effects/Textures/Hit/T_EFF_Shock_04_BC (Package)
+  imp  5 /Game/Effects/Textures/Hit/T_EFF_Shock_04_M./Game/Effects/Textures/Hit/T_EFF_Shock_04_M (Package)
+  imp  6 /Script/Engine./Script/Engine (Package)
+  imp  7 /Game/Effects/Textures/Hit/T_EFF_Shock_04_BC.T_EFF_Shock_04_BC (Texture2D)
+  imp  8 /Game/Effects/Textures/Hit/T_EFF_Shock_04_M.T_EFF_Shock_04_M (Texture2D)
+exp 0 MI_EFF_Shock_D_01 : MaterialInstanceConstant  outer 0  @d74 +1a9d8
+    Parent (ObjectProperty) = obj -2
+    bHasStaticPermutationResource (BoolProperty) = 1
+    ScalarParameterValues (ArrayProperty of StructProperty) [5]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 21_Dissolve_Tiling_U
+        ParameterValue (FloatProperty) = 5
+        ExpressionGUID (StructProperty Guid) = 3.22075e+07 1.26999e+09 1.75612e+09 1.08709e+09
+      1 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 22_Dissolve_Tiling_V
+        ParameterValue (FloatProperty) = 5
+        ExpressionGUID (StructProperty Guid) = 9.11581e+07 1.08538e+09 1.35061e+09 4.19712e+09
+      2 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 23_Dissolve_Power
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 2.75145e+09 1.19602e+09 3.2799e+09 1.47284e+09
+      3 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 24_Dissolve_Multi
+        ParameterValue (FloatProperty) = 5
+        ExpressionGUID (StructProperty Guid) = 3.27316e+09 1.10331e+09 3.47733e+09 7.03314e+08
+      4 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [2]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 00_BaseTexture
+        ParameterValue (ObjectProperty) = obj -8
+        ExpressionGUID (StructProperty Guid) = 3.14803e+09 1.30093e+09 9.19209e+08 3.23339e+09
+      1 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 00_Dissolve_Texture
+        ParameterValue (ObjectProperty) = obj -9
+        ExpressionGUID (StructProperty Guid) = 2.20876e+09 1.09315e+09 2.65257e+09 9.05586e+08
+    VectorParameterValues (ArrayProperty of StructProperty) [2]
+      0 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 03_BaseColor_A
+        ParameterValue (StructProperty LinearColor) = 1 1 1 1
+        ExpressionGUID (StructProperty Guid) = 2.80025e+09 1.20579e+09 2.21313e+09 1.22926e+08
+      1 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 04_BaseColor_B
+        ParameterValue (StructProperty LinearColor) = 0 0 0 1
+        ExpressionGUID (StructProperty Guid) = 8.77752e+08 1.2231e+09 3.61057e+09 3.45991e+09
+    BasePropertyOverrides (StructProperty MaterialInstanceBasePropertyOverrides)
+      bOverride_ShadingModel (BoolProperty) = 1
+      bOverride_TwoSided (BoolProperty) = 1
+      BlendMode (ByteProperty EBlendMode) = BLEND_Translucent
+      ShadingModel (ByteProperty EMaterialShadingModel) = MSM_Unlit
+      TwoSided (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +721 von 1a9d8
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Materials/M_EFF_Dissolve_02
+  /Game/Effects/Textures/Hit/T_EFF_Shock_04_BC
+  /Game/Effects/Textures/Hit/T_EFF_Shock_04_M

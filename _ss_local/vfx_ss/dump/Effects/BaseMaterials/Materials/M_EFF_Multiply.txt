@@ -1,0 +1,232 @@
+== /Game/Effects/BaseMaterials/Materials/M_EFF_Multiply
+fichier : NARUTO/Content/Effects/BaseMaterials/Materials/M_EFF_Multiply.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : Material
+fichiers lies :
+  NARUTO/Content/Effects/BaseMaterials/Materials/M_EFF_Multiply.uasset  6 305 octets
+  NARUTO/Content/Effects/BaseMaterials/Materials/M_EFF_Multiply.uexp  79 276 octets
+
+/Game/Effects/BaseMaterials/Materials/M_EFF_Multiply  flags 80000000  130 Namen  23 Importe  12 Exporte  Kopf 6305  Bulk ab 85577  Daten 85581
+  imp  0 /Script/Engine.Material (Class)
+  imp  1 /Script/Engine.MaterialExpressionMaterialFunctionCall (Class)
+  imp  2 /Script/Engine.MaterialExpressionScalarParameter (Class)
+  imp  3 /Script/Engine.MaterialExpressionStaticBoolParameter (Class)
+  imp  4 /Script/Engine.MaterialExpressionTextureObjectParameter (Class)
+  imp  5 /Script/Engine.MaterialExpressionTextureSample (Class)
+  imp  6 /Script/Engine.Default__Material (Material)
+  imp  7 /Script/Engine.Default__MaterialExpressionMaterialFunctionCall (MaterialExpressionMaterialFunctionCall)
+  imp  8 /Script/Engine.Default__MaterialExpressionScalarParameter (MaterialExpressionScalarParameter)
+  imp  9 /Script/Engine.Default__MaterialExpressionStaticBoolParameter (MaterialExpressionStaticBoolParameter)
+  imp 10 /Script/Engine.Default__MaterialExpressionTextureObjectParameter (MaterialExpressionTextureObjectParameter)
+  imp 11 /Script/Engine.Default__MaterialExpressionTextureSample (MaterialExpressionTextureSample)
+  imp 12 /Game/Shading/MaterialFunctions/Effects/MF_EFF_GradationMap_Base.MF_EFF_GradationMap_Base (MaterialFunction)
+  imp 13 /Game/Shading/MaterialFunctions/Effects/MF_EFF_InvertParam.MF_EFF_InvertParam (MaterialFunction)
+  imp 14 /Engine/EngineResources/DefaultTexture./Engine/EngineResources/DefaultTexture (Package)
+  imp 15 /Game/Effects/Textures/Common/T_EFF_Sphere_01_M./Game/Effects/Textures/Common/T_EFF_Sphere_01_M (Package)
+  imp 16 /Game/Effects/Textures/GradationMap/T_EFF_GMT_Base_02_BC./Game/Effects/Textures/GradationMap/T_EFF_GMT_Base_02_BC (Package)
+  imp 17 /Game/Shading/MaterialFunctions/Effects/MF_EFF_GradationMap_Base./Game/Shading/MaterialFunctions/Effects/MF_EFF_GradationMap_Base (Package)
+  imp 18 /Game/Shading/MaterialFunctions/Effects/MF_EFF_InvertParam./Game/Shading/MaterialFunctions/Effects/MF_EFF_InvertParam (Package)
+  imp 19 /Script/Engine./Script/Engine (Package)
+  imp 20 /Engine/EngineResources/DefaultTexture.DefaultTexture (Texture2D)
+  imp 21 /Game/Effects/Textures/Common/T_EFF_Sphere_01_M.T_EFF_Sphere_01_M (Texture2D)
+  imp 22 /Game/Effects/Textures/GradationMap/T_EFF_GMT_Base_02_BC.T_EFF_GMT_Base_02_BC (Texture2D)
+exp 0 M_EFF_Multiply : Material  outer 0  @18a1 +12233
+    EmissiveColor (StructProperty ColorMaterialInput) = 0
+    BlendMode (ByteProperty EBlendMode) = BLEND_Modulate
+    ShadingModel (ByteProperty EMaterialShadingModel) = MSM_Unlit
+    bEnableSeparateTranslucency (BoolProperty) = 0
+    bUsedWithParticleSprites (BoolProperty) = 1
+    bUsedWithMeshParticles (BoolProperty) = 1
+    EditorX (IntProperty) = 4.29497e+09
+    EditorY (IntProperty) = 4.29497e+09
+    Expressions (ArrayProperty of ObjectProperty) [26]
+      0 (ObjectProperty) = obj 0
+      1 (ObjectProperty) = obj 0
+      2 (ObjectProperty) = obj 11
+      3 (ObjectProperty) = obj 12
+      4 (ObjectProperty) = obj 0
+      5 (ObjectProperty) = obj 0
+      6 (ObjectProperty) = obj 0
+      7 (ObjectProperty) = obj 0
+      8 (ObjectProperty) = obj 4
+      9 (ObjectProperty) = obj 0
+      10 (ObjectProperty) = obj 6
+      11 (ObjectProperty) = obj 3
+      12 (ObjectProperty) = obj 0
+      13 (ObjectProperty) = obj 9
+      14 (ObjectProperty) = obj 0
+      15 (ObjectProperty) = obj 10
+      16 (ObjectProperty) = obj 2
+      17 (ObjectProperty) = obj 7
+      18 (ObjectProperty) = obj 0
+      19 (ObjectProperty) = obj 8
+      20 (ObjectProperty) = obj 5
+      21 (ObjectProperty) = obj 0
+      22 (ObjectProperty) = obj 0
+      23 (ObjectProperty) = obj 0
+      24 (ObjectProperty) = obj 0
+      25 (ObjectProperty) = obj 0
+    MaterialFunctionInfos (ArrayProperty of StructProperty) [2]
+      0 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 1.39095e+09 1.1908e+09 4.11922e+09 2.53041e+09
+        Function (ObjectProperty) = obj -14
+      1 (StructProperty MaterialFunctionInfo)
+        StateId (StructProperty Guid) = 1.00205e+09 1.30665e+09 2.54418e+09 1.98234e+09
+        Function (ObjectProperty) = obj -13
+    bCanMaskedBeAssumedOpaque (BoolProperty) = 1
+    StateId (StructProperty Guid) = 3.84588e+09 1.33004e+09 1.08341e+07 8.24865e+08
+    TextureStreamingData (ArrayProperty of StructProperty) [1]
+      0 (StructProperty MaterialTextureInfo)
+        SamplingScale (FloatProperty) = 0.015625
+        UVChannelIndex (IntProperty) = 0
+        TextureName (NameProperty) = T_EFF_Sphere_01_M
+    -- Eigenschaften ok, Ende bei +402 von 12233
+exp 1 MaterialExpressionMaterialFunctionCall_42 : MaterialExpressionMaterialFunctionCall  outer 1  @13ad4 +68c
+    MaterialFunction (ObjectProperty) = obj -13
+    FunctionInputs (ArrayProperty of StructProperty) [5]
+      0 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 1.95166e+09 1.10259e+09 5.92074e+08 3.92374e+09
+        Input (StructProperty ExpressionInput) = 0
+      1 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 3.86029e+09 1.16416e+09 6.37455e+08 2.98806e+09
+        Input (StructProperty ExpressionInput) = 0
+      2 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 3.12194e+09 1.2258e+09 2.35495e+09 4.23712e+09
+        Input (StructProperty ExpressionInput) = 0
+      3 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 1.69802e+09 1.18574e+09 2.9275e+09 7.7012e+08
+        Input (StructProperty ExpressionInput) = 0
+      4 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 2.99549e+09 1.14437e+09 2.19241e+09 1.99877e+09
+        Input (StructProperty ExpressionInput) = 0
+    FunctionOutputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty FunctionExpressionOutput)
+        ExpressionOutputId (StructProperty Guid) = 2.07337e+09 1.11792e+09 1.71813e+09 1.44046e+09
+        Output (StructProperty ExpressionOutput)
+          OutputName (StrProperty) = Result
+          Mask (IntProperty) = 0
+          MaskR (IntProperty) = 0
+          MaskG (IntProperty) = 0
+          MaskB (IntProperty) = 0
+          MaskA (IntProperty) = 0
+    Material (ObjectProperty) = obj 1
+    Outputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ExpressionOutput)
+        OutputName (StrProperty) = Result
+        Mask (IntProperty) = 0
+        MaskR (IntProperty) = 0
+        MaskG (IntProperty) = 0
+        MaskB (IntProperty) = 0
+        MaskA (IntProperty) = 0
+    -- Eigenschaften ok, Ende bei +688 von 68c
+exp 2 MaterialExpressionMaterialFunctionCall_66 : MaterialExpressionMaterialFunctionCall  outer 1  @14160 +485
+    MaterialFunction (ObjectProperty) = obj -14
+    FunctionInputs (ArrayProperty of StructProperty) [2]
+      0 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 3.76584e+09 1.30369e+09 1.41918e+09 1.65132e+09
+        Input (StructProperty ExpressionInput) = 0
+      1 (StructProperty FunctionExpressionInput)
+        ExpressionInputId (StructProperty Guid) = 2.49609e+09 1.16879e+09 2.15141e+09 1.38034e+09
+        Input (StructProperty ExpressionInput) = 0
+    FunctionOutputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty FunctionExpressionOutput)
+        ExpressionOutputId (StructProperty Guid) = 3.06533e+09 1.2907e+09 2.54497e+09 3.012e+09
+        Output (StructProperty ExpressionOutput)
+          OutputName (StrProperty) = Result
+          Mask (IntProperty) = 0
+          MaskR (IntProperty) = 0
+          MaskG (IntProperty) = 0
+          MaskB (IntProperty) = 0
+          MaskA (IntProperty) = 0
+    Material (ObjectProperty) = obj 1
+    Outputs (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ExpressionOutput)
+        OutputName (StrProperty) = Result
+        Mask (IntProperty) = 0
+        MaskR (IntProperty) = 0
+        MaskG (IntProperty) = 0
+        MaskB (IntProperty) = 0
+        MaskA (IntProperty) = 0
+    -- Eigenschaften ok, Ende bei +481 von 485
+exp 3 MaterialExpressionScalarParameter_1 : MaterialExpressionScalarParameter  outer 1  @145e5 +e6
+    DefaultValue (FloatProperty) = 100
+    SliderMax (FloatProperty) = 200
+    ParameterName (NameProperty) = 01_OpacityDepthFade_Distance
+    ExpressionGUID (StructProperty Guid) = 2.63115e+09 1.22003e+09 1.61946e+09 2.9435e+09
+    Group (NameProperty) = 25_Opacity_DepthFade
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +e2 von e6
+exp 4 MaterialExpressionScalarParameter_23 : MaterialExpressionScalarParameter  outer 1  @146cb +158
+    SliderMax (FloatProperty) = 1
+    ParameterName (NameProperty) = TeamType
+    ExpressionGUID (StructProperty Guid) = 4.19912e+08 1.20762e+09 3.53628e+09 9.06706e+08
+    Group (NameProperty) = 95_ETC
+    Material (ObjectProperty) = obj 1
+    Desc (StrProperty) = チームタイプを選択します。
+
+0 味方（原作色）
+
+1 敵（赤）
+
+2 Cチーム（緑？）
+
+3 Dチーム（未定）
+    -- Eigenschaften ok, Ende bei +154 von 158
+exp 5 MaterialExpressionScalarParameter_32 : MaterialExpressionScalarParameter  outer 1  @14823 +118
+    SliderMax (FloatProperty) = 1
+    ParameterName (NameProperty) = 25_OpacityDepthFade_Invert
+    ExpressionGUID (StructProperty Guid) = 1.70385e+09 1.19535e+09 3.12444e+09 2.85294e+09
+    Group (NameProperty) = 25_Opacity_DepthFade
+    Material (ObjectProperty) = obj 1
+    Desc (StrProperty) = 色を反転させますか？
+
+0　そのまま
+
+1　反転
+    -- Eigenschaften ok, Ende bei +114 von 118
+exp 6 MaterialExpressionStaticBoolParameter_58 : MaterialExpressionStaticBoolParameter  outer 1  @1493b +105
+    ParameterName (NameProperty) = 31_USE_TeamColorMode
+    ExpressionGUID (StructProperty Guid) = 3.74864e+09 1.19018e+09 2.52492e+09 3.0069e+09
+    Group (NameProperty) = 10_Color
+    Material (ObjectProperty) = obj 1
+    Desc (StrProperty) = Emissiveを使用しますか？
+    bCommentBubbleVisible (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +101 von 105
+exp 7 MaterialExpressionStaticBoolParameter_62 : MaterialExpressionStaticBoolParameter  outer 1  @14a40 +ac
+    ParameterName (NameProperty) = 30_USE_GradationMap
+    ExpressionGUID (StructProperty Guid) = 3.79338e+09 1.14829e+09 1.84852e+09 1.82196e+09
+    Group (NameProperty) = 10_Color
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +a8 von ac
+exp 8 MaterialExpressionStaticBoolParameter_73 : MaterialExpressionStaticBoolParameter  outer 1  @14aec +107
+    ParameterName (NameProperty) = 00_USE_OpacityDepthFade
+    ExpressionGUID (StructProperty Guid) = 3.62522e+08 1.33991e+09 1.62228e+09 7.05058e+08
+    Group (NameProperty) = 25_Opacity_DepthFade
+    Material (ObjectProperty) = obj 1
+    Desc (StrProperty) = DepthFadeを使用しますか？
+    bCommentBubbleVisible (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +103 von 107
+exp 9 MaterialExpressionTextureObjectParameter_14 : MaterialExpressionTextureObjectParameter  outer 1  @14bf3 +c9
+    ParameterName (NameProperty) = 35_GradationMap
+    ExpressionGUID (StructProperty Guid) = 3.67857e+08 1.24142e+09 5.97031e+08 1.54144e+09
+    Group (NameProperty) = 10_Color
+    Texture (ObjectProperty) = obj -23
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +c5 von c9
+exp 10 MaterialExpressionTextureObjectParameter_8 : MaterialExpressionTextureObjectParameter  outer 1  @14cbc +f2
+    ParameterName (NameProperty) = 01_OpacityMap
+    ExpressionGUID (StructProperty Guid) = 5.68814e+07 1.08253e+09 2.92229e+09 7.83067e+08
+    Group (NameProperty) = 20_Opacity
+    Texture (ObjectProperty) = obj -22
+    SamplerType (ByteProperty EMaterialSamplerType) = SAMPLERTYPE_Alpha
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +ee von f2
+exp 11 MaterialExpressionTextureSample_31 : MaterialExpressionTextureSample  outer 1  @14dae +9b
+    TextureObject (StructProperty ExpressionInput) = 0
+    Texture (ObjectProperty) = obj -21
+    Material (ObjectProperty) = obj 1
+    -- Eigenschaften ok, Ende bei +97 von 9b
+
+== dependances /Game :
+  /Game/Effects/Textures/Common/T_EFF_Sphere_01_M
+  /Game/Effects/Textures/GradationMap/T_EFF_GMT_Base_02_BC
+  /Game/Shading/MaterialFunctions/Effects/MF_EFF_GradationMap_Base
+  /Game/Shading/MaterialFunctions/Effects/MF_EFF_InvertParam

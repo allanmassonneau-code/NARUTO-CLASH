@@ -1,0 +1,57 @@
+== /Game/Effects/BaseMaterials/Materials/M_EFF_VertexColor
+fichier : NARUTO/Content/Effects/BaseMaterials/Materials/M_EFF_VertexColor.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : Material
+fichiers lies :
+  NARUTO/Content/Effects/BaseMaterials/Materials/M_EFF_VertexColor.uasset  2 877 octets
+  NARUTO/Content/Effects/BaseMaterials/Materials/M_EFF_VertexColor.uexp  96 265 octets
+
+/Game/Effects/BaseMaterials/Materials/M_EFF_VertexColor  flags 80000000  67 Namen  5 Importe  3 Exporte  Kopf 2877  Bulk ab 99138  Daten 99142
+  imp  0 /Script/Engine.Material (Class)
+  imp  1 /Script/Engine.MaterialExpressionVectorParameter (Class)
+  imp  2 /Script/Engine.Default__Material (Material)
+  imp  3 /Script/Engine.Default__MaterialExpressionVectorParameter (MaterialExpressionVectorParameter)
+  imp  4 /Script/Engine./Script/Engine (Package)
+exp 0 M_EFF_VertexColor : Material  outer 0  @b3d +175b9
+    BaseColor (StructProperty ColorMaterialInput) = 0
+    Metallic (StructProperty ScalarMaterialInput) = 0
+    Specular (StructProperty ScalarMaterialInput) = 0
+    Roughness (StructProperty ScalarMaterialInput) = 0
+    EmissiveColor (StructProperty ColorMaterialInput) = 0
+    Opacity (StructProperty ScalarMaterialInput) = 0
+    OpacityMask (StructProperty ScalarMaterialInput) = 0
+    bEnableSeparateTranslucency (BoolProperty) = 0
+    bUsedWithParticleSprites (BoolProperty) = 1
+    bUsedWithMeshParticles (BoolProperty) = 1
+    Expressions (ArrayProperty of ObjectProperty) [4]
+      0 (ObjectProperty) = obj 0
+      1 (ObjectProperty) = obj 2
+      2 (ObjectProperty) = obj 3
+      3 (ObjectProperty) = obj 0
+    bCanMaskedBeAssumedOpaque (BoolProperty) = 1
+    StateId (StructProperty Guid) = 4.27731e+09 1.21224e+09 3.22706e+09 6.58513e+08
+    -- Eigenschaften ok, Ende bei +371 von 175b9
+exp 1 MaterialExpressionVectorParameter_0 : MaterialExpressionVectorParameter  outer 1  @180f6 +126
+    DefaultValue (StructProperty LinearColor) = 0 1 0 1
+    ParameterName (NameProperty) = MSR
+    ExpressionGUID (StructProperty Guid) = 2.73797e+09 1.09841e+09 5.39034e+08 2.1433e+09
+    Material (ObjectProperty) = obj 1
+    Desc (StrProperty) = R Meralic
+
+G Speculer
+
+B Roughness
+    bCommentBubbleVisible (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +122 von 126
+exp 2 MaterialExpressionVectorParameter_1 : MaterialExpressionVectorParameter  outer 1  @1821c +126
+    DefaultValue (StructProperty LinearColor) = 1 1 1 1
+    ParameterName (NameProperty) = Color
+    ExpressionGUID (StructProperty Guid) = 4.52704e+08 1.1995e+09 4.17189e+09 8.6248e+08
+    Material (ObjectProperty) = obj 1
+    Desc (StrProperty) = R Meralic
+
+G Speculer
+
+B Roughness
+    bCommentBubbleVisible (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +122 von 126
+
+== dependances /Game :

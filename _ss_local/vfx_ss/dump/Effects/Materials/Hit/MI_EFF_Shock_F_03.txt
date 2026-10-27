@@ -1,0 +1,61 @@
+== /Game/Effects/Materials/Hit/MI_EFF_Shock_F_03
+fichier : NARUTO/Content/Effects/Materials/Hit/MI_EFF_Shock_F_03.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/Materials/Hit/MI_EFF_Shock_F_03.uasset  2 166 octets
+  NARUTO/Content/Effects/Materials/Hit/MI_EFF_Shock_F_03.uexp  1 218 octets
+
+/Game/Effects/Materials/Hit/MI_EFF_Shock_F_03  flags 80000000  52 Namen  13 Importe  1 Exporte  Kopf 2166  Bulk ab 3380  Daten 3384
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_1_MUB.MI_EFF_GMS_1_MUB (MaterialInstanceConstant)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_1_MUB./Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_1_MUB (Package)
+  imp  4 /Game/Effects/Textures/GradationMap/T_EFF_GMO_04_M./Game/Effects/Textures/GradationMap/T_EFF_GMO_04_M (Package)
+  imp  5 /Game/Effects/Textures/GradationMap/T_EFF_GMS_01_BC./Game/Effects/Textures/GradationMap/T_EFF_GMS_01_BC (Package)
+  imp  6 /Game/Effects/Textures/GradationMap/T_EFF_GMS_03_BC./Game/Effects/Textures/GradationMap/T_EFF_GMS_03_BC (Package)
+  imp  7 /Game/Effects/Textures/Hit/T_EFF_Shock_06_BC./Game/Effects/Textures/Hit/T_EFF_Shock_06_BC (Package)
+  imp  8 /Script/Engine./Script/Engine (Package)
+  imp  9 /Game/Effects/Textures/GradationMap/T_EFF_GMO_04_M.T_EFF_GMO_04_M (Texture2D)
+  imp 10 /Game/Effects/Textures/GradationMap/T_EFF_GMS_01_BC.T_EFF_GMS_01_BC (Texture2D)
+  imp 11 /Game/Effects/Textures/GradationMap/T_EFF_GMS_03_BC.T_EFF_GMS_03_BC (Texture2D)
+  imp 12 /Game/Effects/Textures/Hit/T_EFF_Shock_06_BC.T_EFF_Shock_06_BC (Texture2D)
+exp 0 MI_EFF_Shock_F_03 : MaterialInstanceConstant  outer 0  @876 +4be
+    Parent (ObjectProperty) = obj -2
+    ScalarParameterValues (ArrayProperty of StructProperty) [2]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 02_Emissive_Value
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 3.36951e+09 1.16471e+09 1.90581e+09 3.5983e+09
+      1 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [4]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_OpacityMap
+        ParameterValue (ObjectProperty) = obj -13
+        ExpressionGUID (StructProperty Guid) = 2.1702e+08 1.24777e+09 1.56472e+09 3.38423e+09
+      1 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 35_OpacityMap_GradationMap
+        ParameterValue (ObjectProperty) = obj -10
+        ExpressionGUID (StructProperty Guid) = 1.38781e+09 1.25369e+09 4.21816e+09 1.86563e+09
+      2 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_EmissiveMap
+        ParameterValue (ObjectProperty) = obj -11
+        ExpressionGUID (StructProperty Guid) = 2.59996e+09 1.31801e+09 1.48753e+09 3.31416e+08
+      3 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 35_EmissiveMap_GradationMap
+        ParameterValue (ObjectProperty) = obj -12
+        ExpressionGUID (StructProperty Guid) = 8.61289e+08 1.25889e+09 2.92737e+09 1.30524e+09
+    bLockStaticSwitch (BoolProperty) = 0
+    BasePropertyOverrides (StructProperty MaterialInstanceBasePropertyOverrides)
+      BlendMode (ByteProperty EBlendMode) = BLEND_Masked
+      ShadingModel (ByteProperty EMaterialShadingModel) = MSM_Unlit
+      Lock (BoolProperty) = 0
+    -- Eigenschaften ok, Ende bei +4ba von 4be
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_1_MUB
+  /Game/Effects/Textures/GradationMap/T_EFF_GMO_04_M
+  /Game/Effects/Textures/GradationMap/T_EFF_GMS_01_BC
+  /Game/Effects/Textures/GradationMap/T_EFF_GMS_03_BC
+  /Game/Effects/Textures/Hit/T_EFF_Shock_06_BC

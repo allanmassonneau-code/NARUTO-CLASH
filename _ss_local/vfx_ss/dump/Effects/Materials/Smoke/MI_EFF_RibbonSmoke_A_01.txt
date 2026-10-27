@@ -1,0 +1,74 @@
+== /Game/Effects/Materials/Smoke/MI_EFF_RibbonSmoke_A_01
+fichier : NARUTO/Content/Effects/Materials/Smoke/MI_EFF_RibbonSmoke_A_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/Materials/Smoke/MI_EFF_RibbonSmoke_A_01.uasset  7 999 octets
+  NARUTO/Content/Effects/Materials/Smoke/MI_EFF_RibbonSmoke_A_01.uexp  122 076 octets
+
+/Game/Effects/Materials/Smoke/MI_EFF_RibbonSmoke_A_01  flags 80000000  210 Namen  15 Importe  1 Exporte  Kopf 7999  Bulk ab 130071  Daten 130075
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Instance_Base/Ribon_Beam/MI_EFF_GMS_Ribon_6_MND.MI_EFF_GMS_Ribon_6_MND (MaterialInstanceConstant)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Instance_Base/Ribon_Beam/MI_EFF_GMS_Ribon_6_MND./Game/Effects/BaseMaterials/Instance_Base/Ribon_Beam/MI_EFF_GMS_Ribon_6_MND (Package)
+  imp  4 /Game/Effects/BaseMaterials/Textures/T_EFF_Default_05_M./Game/Effects/BaseMaterials/Textures/T_EFF_Default_05_M (Package)
+  imp  5 /Game/Effects/BaseMaterials/Textures/T_EFF_Default_06_N./Game/Effects/BaseMaterials/Textures/T_EFF_Default_06_N (Package)
+  imp  6 /Game/Effects/Textures/GradationMap/T_EFF_GMO_02_M./Game/Effects/Textures/GradationMap/T_EFF_GMO_02_M (Package)
+  imp  7 /Game/Effects/Textures/Gradient/T_EFF_Wave_06_M./Game/Effects/Textures/Gradient/T_EFF_Wave_06_M (Package)
+  imp  8 /Game/Effects/Textures/Noise/T_EFF_Noise_08_M./Game/Effects/Textures/Noise/T_EFF_Noise_08_M (Package)
+  imp  9 /Script/Engine./Script/Engine (Package)
+  imp 10 /Game/Effects/BaseMaterials/Textures/T_EFF_Default_05_M.T_EFF_Default_05_M (Texture2D)
+  imp 11 /Game/Effects/BaseMaterials/Textures/T_EFF_Default_06_N.T_EFF_Default_06_N (Texture2D)
+  imp 12 /Game/Effects/Textures/GradationMap/T_EFF_GMO_02_M.T_EFF_GMO_02_M (Texture2D)
+  imp 13 /Game/Effects/Textures/Gradient/T_EFF_Wave_06_M.T_EFF_Wave_06_M (Texture2D)
+  imp 14 /Game/Effects/Textures/Noise/T_EFF_Noise_08_M.T_EFF_Noise_08_M (Texture2D)
+exp 0 MI_EFF_RibbonSmoke_A_01 : MaterialInstanceConstant  outer 0  @1f3f +1dcd8
+    Parent (ObjectProperty) = obj -2
+    bHasStaticPermutationResource (BoolProperty) = 1
+    ScalarParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [5]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_OpacityMap
+        ParameterValue (ObjectProperty) = obj -14
+        ExpressionGUID (StructProperty Guid) = 2.1702e+08 1.24777e+09 1.56472e+09 3.38423e+09
+      1 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 35_OpacityMap_GradationMap
+        ParameterValue (ObjectProperty) = obj -13
+        ExpressionGUID (StructProperty Guid) = 1.38781e+09 1.25369e+09 4.21816e+09 1.86563e+09
+      2 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_OpacityDissolve_Map
+        ParameterValue (ObjectProperty) = obj -15
+        ExpressionGUID (StructProperty Guid) = 4.27156e+09 1.15943e+09 1.53883e+09 3.45283e+09
+      3 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_NormalMap
+        ParameterValue (ObjectProperty) = obj -12
+        ExpressionGUID (StructProperty Guid) = 2.24098e+09 1.17826e+09 1.56317e+09 2.17196e+09
+      4 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 10_UVDistortion_Map
+        ParameterValue (ObjectProperty) = obj -11
+        ExpressionGUID (StructProperty Guid) = 1.86995e+08 1.18682e+09 2.51172e+09 1.56377e+09
+    VectorParameterValues (ArrayProperty of StructProperty) [3]
+      0 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 11_OpacityUVDistortion_Value
+        ParameterValue (StructProperty LinearColor) = 1 1 0 0
+        ExpressionGUID (StructProperty Guid) = 1.34098e+09 1.33624e+09 2.49844e+09 3.91307e+09
+      1 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 11_UVDistortion_Value
+        ParameterValue (StructProperty LinearColor) = 0.1 0.1 1 1
+        ExpressionGUID (StructProperty Guid) = 3.94639e+09 1.15453e+09 2.2856e+09 8.7397e+08
+      2 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 20_UVDistortion_Animation
+        ParameterValue (StructProperty LinearColor) = 1 1 -0.5 0.1
+        ExpressionGUID (StructProperty Guid) = 1.87894e+09 1.30161e+09 3.01366e+09 1.28553e+09
+    bLockStaticSwitch (BoolProperty) = 0
+    -- Eigenschaften ok, Ende bei +686 von 1dcd8
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Instance_Base/Ribon_Beam/MI_EFF_GMS_Ribon_6_MND
+  /Game/Effects/BaseMaterials/Textures/T_EFF_Default_05_M
+  /Game/Effects/BaseMaterials/Textures/T_EFF_Default_06_N
+  /Game/Effects/Textures/GradationMap/T_EFF_GMO_02_M
+  /Game/Effects/Textures/Gradient/T_EFF_Wave_06_M
+  /Game/Effects/Textures/Noise/T_EFF_Noise_08_M

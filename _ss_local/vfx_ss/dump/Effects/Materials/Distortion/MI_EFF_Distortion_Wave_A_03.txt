@@ -1,0 +1,82 @@
+== /Game/Effects/Materials/Distortion/MI_EFF_Distortion_Wave_A_03
+fichier : NARUTO/Content/Effects/Materials/Distortion/MI_EFF_Distortion_Wave_A_03.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/Materials/Distortion/MI_EFF_Distortion_Wave_A_03.uasset  7 804 octets
+  NARUTO/Content/Effects/Materials/Distortion/MI_EFF_Distortion_Wave_A_03.uexp  230 054 octets
+
+/Game/Effects/Materials/Distortion/MI_EFF_Distortion_Wave_A_03  flags 80000000  218 Namen  7 Importe  1 Exporte  Kopf 7804  Bulk ab 237854  Daten 237858
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Materials/M_EFF_Base_Naruto_03.M_EFF_Base_Naruto_03 (Material)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Materials/M_EFF_Base_Naruto_03./Game/Effects/BaseMaterials/Materials/M_EFF_Base_Naruto_03 (Package)
+  imp  4 /Game/Effects/Textures/Noise/T_EFF_Noise_04_BC./Game/Effects/Textures/Noise/T_EFF_Noise_04_BC (Package)
+  imp  5 /Script/Engine./Script/Engine (Package)
+  imp  6 /Game/Effects/Textures/Noise/T_EFF_Noise_04_BC.T_EFF_Noise_04_BC (Texture2D)
+exp 0 MI_EFF_Distortion_Wave_A_03 : MaterialInstanceConstant  outer 0  @1e7c +382a2
+    Parent (ObjectProperty) = obj -2
+    bHasStaticPermutationResource (BoolProperty) = 1
+    ScalarParameterValues (ArrayProperty of StructProperty) [11]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 05_Refraction_Intensity
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 2.40234e+09 1.1421e+09 4.17831e+09 4.64771e+08
+      1 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 22_RefractionMask_Multi
+        ParameterValue (FloatProperty) = 0.1
+        ExpressionGUID (StructProperty Guid) = 1.12424e+09 1.07536e+09 2.84132e+09 2.61987e+09
+      2 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 23_RefractionMask_Contrast
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 3.9259e+09 1.16138e+09 3.03528e+09 5.24008e+07
+      3 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 01_RefractionFresnel_Power
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 3.6119e+08 1.22242e+09 2.95093e+09 1.797e+09
+      4 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 02_RefractionFresnel_Multi
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 1.80635e+09 1.16403e+09 1.12505e+08 2.79532e+08
+      5 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 03_RefractionFresnel_Contrast
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 1.36848e+09 1.30917e+09 2.07022e+09 4.17278e+09
+      6 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 01_RefractionDepthFade_Distance
+        ParameterValue (FloatProperty) = 30
+        ExpressionGUID (StructProperty Guid) = 3.97132e+09 1.1629e+09 1.39897e+09 3.16444e+09
+      7 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 12_RefractionDepthFade_Power
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 3.52217e+09 1.15809e+09 3.31758e+09 2.72821e+09
+      8 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 13_RefractionDepthFade_Contrast
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 8.61868e+08 1.14332e+09 1.08993e+09 1.8594e+09
+      9 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 13_RefractionDepthFade_Multi
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 1.21114e+09 1.23405e+09 3.13806e+09 2.35805e+09
+      10 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_RefractionMap
+        ParameterValue (ObjectProperty) = obj -7
+        ExpressionGUID (StructProperty Guid) = 2.45572e+09 1.31042e+09 8.12528e+08 3.53319e+08
+    VectorParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 20_RefractionAnimation_A
+        ParameterValue (StructProperty LinearColor) = 1 1 1 1
+        ExpressionGUID (StructProperty Guid) = 1.13674e+09 1.13351e+09 9.18566e+08 1.1434e+09
+    BasePropertyOverrides (StructProperty MaterialInstanceBasePropertyOverrides)
+      bOverride_BlendMode (BoolProperty) = 1
+      bOverride_TwoSided (BoolProperty) = 1
+      BlendMode (ByteProperty EBlendMode) = BLEND_Additive
+      TwoSided (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +8f0 von 382a2
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Materials/M_EFF_Base_Naruto_03
+  /Game/Effects/Textures/Noise/T_EFF_Noise_04_BC

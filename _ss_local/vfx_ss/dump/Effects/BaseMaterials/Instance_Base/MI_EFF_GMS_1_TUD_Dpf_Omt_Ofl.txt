@@ -1,0 +1,79 @@
+== /Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_1_TUD_Dpf_Omt_Ofl
+fichier : NARUTO/Content/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_1_TUD_Dpf_Omt_Ofl.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_1_TUD_Dpf_Omt_Ofl.uasset  7 310 octets
+  NARUTO/Content/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_1_TUD_Dpf_Omt_Ofl.uexp  132 072 octets
+
+/Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_1_TUD_Dpf_Omt_Ofl  flags 80000000  204 Namen  11 Importe  1 Exporte  Kopf 7310  Bulk ab 139378  Daten 139382
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Materials/M_EFF_GradationMap_Paritcle.M_EFF_GradationMap_Paritcle (Material)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Materials/M_EFF_GradationMap_Paritcle./Game/Effects/BaseMaterials/Materials/M_EFF_GradationMap_Paritcle (Package)
+  imp  4 /Game/Effects/BaseMaterials/Textures/T_EFF_Default_05_M./Game/Effects/BaseMaterials/Textures/T_EFF_Default_05_M (Package)
+  imp  5 /Game/Effects/BaseMaterials/Textures/T_EFF_GMO__Default_01_M./Game/Effects/BaseMaterials/Textures/T_EFF_GMO__Default_01_M (Package)
+  imp  6 /Game/Effects/BaseMaterials/Textures/T_EFF_GMS__Default_01_BC./Game/Effects/BaseMaterials/Textures/T_EFF_GMS__Default_01_BC (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Game/Effects/BaseMaterials/Textures/T_EFF_Default_05_M.T_EFF_Default_05_M (Texture2D)
+  imp  9 /Game/Effects/BaseMaterials/Textures/T_EFF_GMO__Default_01_M.T_EFF_GMO__Default_01_M (Texture2D)
+  imp 10 /Game/Effects/BaseMaterials/Textures/T_EFF_GMS__Default_01_BC.T_EFF_GMS__Default_01_BC (Texture2D)
+exp 0 MI_EFF_GMS_1_TUD_Dpf_Omt_Ofl : MaterialInstanceConstant  outer 0  @1c8e +203e4
+    Parent (ObjectProperty) = obj -2
+    bHasStaticPermutationResource (BoolProperty) = 1
+    ScalarParameterValues (ArrayProperty of StructProperty) [3]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 05_OpacityFresnel_Invert
+        ParameterValue (FloatProperty) = 1
+        ExpressionGUID (StructProperty Guid) = 2.49228e+09 1.28071e+09 1.17514e+09 1.51457e+09
+      1 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 01_OpacityDepthFade_Distance
+        ParameterValue (FloatProperty) = 100
+        ExpressionGUID (StructProperty Guid) = 4.26046e+09 1.25999e+09 3.84917e+09 2.88524e+09
+      2 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [5]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_OpacityMap
+        ParameterValue (ObjectProperty) = obj -9
+        ExpressionGUID (StructProperty Guid) = 2.1702e+08 1.24777e+09 1.56472e+09 3.38423e+09
+      1 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 35_OpacityMap_GradationMap
+        ParameterValue (ObjectProperty) = obj -10
+        ExpressionGUID (StructProperty Guid) = 1.38781e+09 1.25369e+09 4.21816e+09 1.86563e+09
+      2 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_OpacityMask_Map
+        ParameterValue (ObjectProperty) = obj -9
+        ExpressionGUID (StructProperty Guid) = 3.2697e+09 1.19568e+09 6.67523e+08 2.2843e+08
+      3 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_EmissiveMap
+        ParameterValue (ObjectProperty) = obj -9
+        ExpressionGUID (StructProperty Guid) = 2.59996e+09 1.31801e+09 1.48753e+09 3.31416e+08
+      4 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 35_EmissiveMap_GradationMap
+        ParameterValue (ObjectProperty) = obj -11
+        ExpressionGUID (StructProperty Guid) = 8.61289e+08 1.25889e+09 2.92737e+09 1.30524e+09
+    VectorParameterValues (ArrayProperty of StructProperty) [2]
+      0 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 20_OpacityAnimation_A
+        ParameterValue (StructProperty LinearColor) = 1 1 0.1 0.1
+        ExpressionGUID (StructProperty Guid) = 1.9266e+09 1.29283e+09 7.54091e+08 1.27681e+09
+      1 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 20_EmissiveAnimation_A
+        ParameterValue (StructProperty LinearColor) = 1 1 0.2 0.5
+        ExpressionGUID (StructProperty Guid) = 2.55371e+09 1.23006e+09 2.78961e+08 3.06176e+09
+    bLockStaticSwitch (BoolProperty) = 0
+    BasePropertyOverrides (StructProperty MaterialInstanceBasePropertyOverrides)
+      bOverride_BlendMode (BoolProperty) = 1
+      bOverride_ShadingModel (BoolProperty) = 1
+      bOverride_TwoSided (BoolProperty) = 1
+      BlendMode (ByteProperty EBlendMode) = BLEND_Translucent
+      ShadingModel (ByteProperty EMaterialShadingModel) = MSM_Unlit
+      TwoSided (BoolProperty) = 1
+    -- Eigenschaften ok, Ende bei +7dc von 203e4
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Materials/M_EFF_GradationMap_Paritcle
+  /Game/Effects/BaseMaterials/Textures/T_EFF_Default_05_M
+  /Game/Effects/BaseMaterials/Textures/T_EFF_GMO__Default_01_M
+  /Game/Effects/BaseMaterials/Textures/T_EFF_GMS__Default_01_BC

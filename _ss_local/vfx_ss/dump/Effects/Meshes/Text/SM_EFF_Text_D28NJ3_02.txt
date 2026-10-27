@@ -1,0 +1,47 @@
+== /Game/Effects/Meshes/Text/SM_EFF_Text_D28NJ3_02
+fichier : NARUTO/Content/Effects/Meshes/Text/SM_EFF_Text_D28NJ3_02.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Effects/Meshes/Text/SM_EFF_Text_D28NJ3_02.uasset  2 218 octets
+  NARUTO/Content/Effects/Meshes/Text/SM_EFF_Text_D28NJ3_02.uexp  36 119 octets
+
+/Game/Effects/Meshes/Text/SM_EFF_Text_D28NJ3_02  flags 80000000  59 Namen  9 Importe  3 Exporte  Kopf 2218  Bulk ab 38333  Daten 38337
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Game/Effects/Materials/Text/MI_EFF_Text_D28NJ3_B_01.MI_EFF_Text_D28NJ3_B_01 (MaterialInstanceConstant)
+  imp  5 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  6 /Game/Effects/Materials/Text/MI_EFF_Text_D28NJ3_B_01./Game/Effects/Materials/Text/MI_EFF_Text_D28NJ3_B_01 (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_0 : BodySetup  outer 3  @8aa +3bb5
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +16c von 3bb5
+exp 1 NavCollision_13 : NavCollision  outer 3  @445f +61
+    -- Eigenschaften ok, Ende bei +8 von 61
+exp 2 SM_EFF_Text_D28NJ3_02 : StaticMesh  outer 0  @44c0 +50fd
+    StaticMaterials (ArrayProperty of StructProperty) [1]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = lambert1
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 2.58095
+          LocalUVDensities[1] (FloatProperty) = 3.85062
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightmapUVDensity (FloatProperty) = 387.939
+    LightMapResolution (IntProperty) = 64
+    LightMapCoordinateIndex (IntProperty) = 1
+    ExtendedBounds (StructProperty BoxSphereBounds) = 6.30584e-44 0 7.84727e-44 0 1.68156e-44 0 8.12753e-44
+    -- Eigenschaften ok, Ende bei +28f von 50fd
+
+== dependances /Game :
+  /Game/Effects/Materials/Text/MI_EFF_Text_D28NJ3_B_01

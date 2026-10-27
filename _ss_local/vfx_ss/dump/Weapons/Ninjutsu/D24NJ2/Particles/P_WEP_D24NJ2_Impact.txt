@@ -1,0 +1,101 @@
+== /Game/Weapons/Ninjutsu/D24NJ2/Particles/P_WEP_D24NJ2_Impact
+fichier : NARUTO/Content/Weapons/Ninjutsu/D24NJ2/Particles/P_WEP_D24NJ2_Impact.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : ParticleSystem
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/D24NJ2/Particles/P_WEP_D24NJ2_Impact.uasset  3 387 octets
+  NARUTO/Content/Weapons/Ninjutsu/D24NJ2/Particles/P_WEP_D24NJ2_Impact.uexp  2 102 octets
+
+/Game/Weapons/Ninjutsu/D24NJ2/Particles/P_WEP_D24NJ2_Impact  flags 80000000  70 Namen  17 Importe  8 Exporte  Kopf 3387  Bulk ab 5485  Daten 5489
+  imp  0 /Script/Engine.DistributionFloatConstant (Class)
+  imp  1 /Script/Engine.ParticleLODLevel (Class)
+  imp  2 /Script/Engine.ParticleModuleLifetime (Class)
+  imp  3 /Script/Engine.ParticleModuleRequired (Class)
+  imp  4 /Script/Engine.ParticleModuleSpawn (Class)
+  imp  5 /Script/Engine.ParticleSpriteEmitter (Class)
+  imp  6 /Script/Engine.ParticleSystem (Class)
+  imp  7 /Script/Engine.Default__DistributionFloatConstant (DistributionFloatConstant)
+  imp  8 /Engine/EngineMaterials/DefaultParticle.DefaultParticle (Material)
+  imp  9 /Engine/EngineMaterials/DefaultParticle./Engine/EngineMaterials/DefaultParticle (Package)
+  imp 10 /Script/Engine./Script/Engine (Package)
+  imp 11 /Script/Engine.Default__ParticleLODLevel (ParticleLODLevel)
+  imp 12 /Script/Engine.Default__ParticleModuleLifetime (ParticleModuleLifetime)
+  imp 13 /Script/Engine.Default__ParticleModuleRequired (ParticleModuleRequired)
+  imp 14 /Script/Engine.Default__ParticleModuleSpawn (ParticleModuleSpawn)
+  imp 15 /Script/Engine.Default__ParticleSpriteEmitter (ParticleSpriteEmitter)
+  imp 16 /Script/Engine.Default__ParticleSystem (ParticleSystem)
+exp 0 RequiredDistributionSpawnRate : DistributionFloatConstant  outer 5  @d3b +c
+    -- Eigenschaften ok, Ende bei +8 von c
+exp 1 BurstScaleDistribution : DistributionFloatConstant  outer 6  @d47 +29
+    Constant (FloatProperty) = 1
+    -- Eigenschaften ok, Ende bei +25 von 29
+exp 2 ParticleLODLevel_0 : ParticleLODLevel  outer 7  @d70 +a6
+    bEnabled (BoolProperty) = 0
+    RequiredModule (ObjectProperty) = obj 5
+    Modules (ArrayProperty of ObjectProperty) [1]
+      0 (ObjectProperty) = obj 4
+    SpawnModule (ObjectProperty) = obj 6
+    PeakActiveParticles (IntProperty) = 2
+    -- Eigenschaften ok, Ende bei +a2 von a6
+exp 3 ParticleModuleLifetime_0 : ParticleModuleLifetime  outer 8  @e16 +186
+    Lifetime (StructProperty RawDistributionFloat)
+      MinValue (FloatProperty) = 1
+      MaxValue (FloatProperty) = 1
+      Distribution (ObjectProperty) = obj 0
+      Table (StructProperty DistributionLookupTable)
+        Op (ByteProperty None) = 1
+        EntryCount (ByteProperty None) = 1
+        EntryStride (ByteProperty None) = 1
+        Values (ArrayProperty of FloatProperty) [1]
+          0 (FloatProperty) = 1
+    LODValidity (ByteProperty None) = 1
+    -- Eigenschaften ok, Ende bei +182 von 186
+exp 4 ParticleModuleRequired_0 : ParticleModuleRequired  outer 8  @f9c +fa
+    Material (ObjectProperty) = obj -9
+    bUseLegacyEmitterTime (BoolProperty) = 0
+    SpawnRate (StructProperty RawDistributionFloat)
+      Distribution (ObjectProperty) = obj 1
+    RandomImageTime (FloatProperty) = 1
+    bEnabled (BoolProperty) = 0
+    LODValidity (ByteProperty None) = 1
+    -- Eigenschaften ok, Ende bei +ee von fa
+exp 5 ParticleModuleSpawn_0 : ParticleModuleSpawn  outer 8  @1096 +2fa
+    Rate (StructProperty RawDistributionFloat)
+      Distribution (ObjectProperty) = obj 0
+      Table (StructProperty DistributionLookupTable)
+        Op (ByteProperty None) = 1
+        EntryCount (ByteProperty None) = 1
+        EntryStride (ByteProperty None) = 1
+        Values (ArrayProperty of FloatProperty) [1]
+          0 (FloatProperty) = 0
+    RateScale (StructProperty RawDistributionFloat)
+      MinValue (FloatProperty) = 1
+      MaxValue (FloatProperty) = 1
+      Distribution (ObjectProperty) = obj 0
+      Table (StructProperty DistributionLookupTable)
+        Op (ByteProperty None) = 1
+        EntryCount (ByteProperty None) = 1
+        EntryStride (ByteProperty None) = 1
+        Values (ArrayProperty of FloatProperty) [1]
+          0 (FloatProperty) = 1
+    BurstScale (StructProperty RawDistributionFloat)
+      Distribution (ObjectProperty) = obj 2
+    LODValidity (ByteProperty None) = 1
+    -- Eigenschaften ok, Ende bei +2f6 von 2fa
+exp 6 ParticleSpriteEmitter_0 : ParticleSpriteEmitter  outer 8  @1390 +56
+    EmitterName (NameProperty) = Dummy
+    LODLevels (ArrayProperty of ObjectProperty) [1]
+      0 (ObjectProperty) = obj 3
+    -- Eigenschaften ok, Ende bei +52 von 56
+exp 7 P_WEP_D24NJ2_Impact : ParticleSystem  outer 0  @13e6 +187
+    Emitters (ArrayProperty of ObjectProperty) [1]
+      0 (ObjectProperty) = obj 7
+    CurveEdSetup (ObjectProperty) = obj 0
+    LODDistances (ArrayProperty of FloatProperty) [1]
+      0 (FloatProperty) = 0
+    LODSettings (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ParticleSystemLOD) = 0
+    FixedRelativeBoundingBox (StructProperty Box) = -1 -1 -1 1 1 1
+    bShouldResetPeakCounts (BoolProperty) = 1
+    CustomOcclusionBounds (StructProperty Box) = 0 0 0 0 0 0
+    -- Eigenschaften ok, Ende bei +183 von 187
+
+== dependances /Game :

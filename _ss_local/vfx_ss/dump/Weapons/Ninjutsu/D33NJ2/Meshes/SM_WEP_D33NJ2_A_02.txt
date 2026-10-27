@@ -1,0 +1,46 @@
+== /Game/Weapons/Ninjutsu/D33NJ2/Meshes/SM_WEP_D33NJ2_A_02
+fichier : NARUTO/Content/Weapons/Ninjutsu/D33NJ2/Meshes/SM_WEP_D33NJ2_A_02.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/D33NJ2/Meshes/SM_WEP_D33NJ2_A_02.uasset  2 207 octets
+  NARUTO/Content/Weapons/Ninjutsu/D33NJ2/Meshes/SM_WEP_D33NJ2_A_02.uexp  116 930 octets
+
+/Game/Weapons/Ninjutsu/D33NJ2/Meshes/SM_WEP_D33NJ2_A_02  flags 80000000  58 Namen  9 Importe  3 Exporte  Kopf 2207  Bulk ab 119133  Daten 119137
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Game/Weapons/Ninjutsu/D33NJ2/Materials/MI_WEP_D33NJ2_A_01.MI_WEP_D33NJ2_A_01 (MaterialInstanceConstant)
+  imp  5 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  6 /Game/Weapons/Ninjutsu/D33NJ2/Materials/MI_WEP_D33NJ2_A_01./Game/Weapons/Ninjutsu/D33NJ2/Materials/MI_WEP_D33NJ2_A_01 (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_0 : BodySetup  outer 3  @89f +a2f9
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +16c von a2f9
+exp 1 NavCollision_1 : NavCollision  outer 3  @ab98 +61
+    -- Eigenschaften ok, Ende bei +8 von 61
+exp 2 SM_WEP_D33NJ2_A_02 : StaticMesh  outer 0  @abf9 +12564
+    StaticMaterials (ArrayProperty of StructProperty) [1]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = MI_WEP_D33NJ1_A_01
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 124.265
+          LocalUVDensities[1] (FloatProperty) = 124.403
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightmapUVDensity (FloatProperty) = 124.403
+    LightMapCoordinateIndex (IntProperty) = 1
+    ExtendedBounds (StructProperty BoxSphereBounds) = 6.16571e-44 0 7.70714e-44 0 1.68156e-44 0 7.9874e-44
+    -- Eigenschaften ok, Ende bei +272 von 12564
+
+== dependances /Game :
+  /Game/Weapons/Ninjutsu/D33NJ2/Materials/MI_WEP_D33NJ2_A_01

@@ -1,0 +1,76 @@
+== /Game/Weapons/Ninjutsu/AbsoluteGuard/Meshes/SM_WEP_Eff_AbsoluteGuard_A
+fichier : NARUTO/Content/Weapons/Ninjutsu/AbsoluteGuard/Meshes/SM_WEP_Eff_AbsoluteGuard_A.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/AbsoluteGuard/Meshes/SM_WEP_Eff_AbsoluteGuard_A.uasset  2 733 octets
+  NARUTO/Content/Weapons/Ninjutsu/AbsoluteGuard/Meshes/SM_WEP_Eff_AbsoluteGuard_A.uexp  179 590 octets
+
+/Game/Weapons/Ninjutsu/AbsoluteGuard/Meshes/SM_WEP_Eff_AbsoluteGuard_A  flags 80000000  68 Namen  13 Importe  3 Exporte  Kopf 2733  Bulk ab 182319  Daten 182323
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Game/Weapons/Ninjutsu/AbsoluteGuard/Materials/MI_WEP_Eff_AbsoluteGuard_A_01.MI_WEP_Eff_AbsoluteGuard_A_01 (MaterialInstanceConstant)
+  imp  5 /Game/Weapons/Ninjutsu/AbsoluteGuard/Materials/MI_WEP_Eff_AbsoluteGuard_B_02.MI_WEP_Eff_AbsoluteGuard_B_02 (MaterialInstanceConstant)
+  imp  6 /Game/Weapons/Ninjutsu/AbsoluteGuard/Materials/MI_WEP_Eff_AbsoluteGuard_C_01.MI_WEP_Eff_AbsoluteGuard_C_01 (MaterialInstanceConstant)
+  imp  7 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  8 /Game/Weapons/Ninjutsu/AbsoluteGuard/Materials/MI_WEP_Eff_AbsoluteGuard_A_01./Game/Weapons/Ninjutsu/AbsoluteGuard/Materials/MI_WEP_Eff_AbsoluteGuard_A_01 (Package)
+  imp  9 /Game/Weapons/Ninjutsu/AbsoluteGuard/Materials/MI_WEP_Eff_AbsoluteGuard_B_02./Game/Weapons/Ninjutsu/AbsoluteGuard/Materials/MI_WEP_Eff_AbsoluteGuard_B_02 (Package)
+  imp 10 /Game/Weapons/Ninjutsu/AbsoluteGuard/Materials/MI_WEP_Eff_AbsoluteGuard_C_01./Game/Weapons/Ninjutsu/AbsoluteGuard/Materials/MI_WEP_Eff_AbsoluteGuard_C_01 (Package)
+  imp 11 /Script/Engine./Script/Engine (Package)
+  imp 12 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_0 : BodySetup  outer 3  @aad +a936
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = NoCollision
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [3]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Visibility
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          1 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Camera
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+          2 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      CollisionEnabled (ByteProperty ECollisionEnabled) = ECollisionEnabled::NoCollision
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +239 von a936
+exp 1 NavCollision_0 : NavCollision  outer 3  @b3e3 +61
+    -- Eigenschaften ok, Ende bei +8 von 61
+exp 2 SM_WEP_Eff_AbsoluteGuard_A : StaticMesh  outer 0  @b444 +213eb
+    StaticMaterials (ArrayProperty of StructProperty) [3]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = M_01
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 31.1675
+          LocalUVDensities[1] (FloatProperty) = 0
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+      1 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = M_02
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 72.1451
+          LocalUVDensities[1] (FloatProperty) = 0
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+      2 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = M_03
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 72.3663
+          LocalUVDensities[1] (FloatProperty) = 0
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightMapResolution (IntProperty) = 64
+    ExtendedBounds (StructProperty BoxSphereBounds) = 7.42688e-44 0 8.96831e-44 0 1.68156e-44 0 9.24857e-44
+    -- Eigenschaften ok, Ende bei +469 von 213eb
+
+== dependances /Game :
+  /Game/Weapons/Ninjutsu/AbsoluteGuard/Materials/MI_WEP_Eff_AbsoluteGuard_A_01
+  /Game/Weapons/Ninjutsu/AbsoluteGuard/Materials/MI_WEP_Eff_AbsoluteGuard_B_02
+  /Game/Weapons/Ninjutsu/AbsoluteGuard/Materials/MI_WEP_Eff_AbsoluteGuard_C_01

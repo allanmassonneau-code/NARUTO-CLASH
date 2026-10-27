@@ -1,0 +1,41 @@
+== /Game/Weapons/Ninjutsu/D81NJ3/Materials/MI_WEP_Eff_D81NJ3_Shock
+fichier : NARUTO/Content/Weapons/Ninjutsu/D81NJ3/Materials/MI_WEP_Eff_D81NJ3_Shock.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/D81NJ3/Materials/MI_WEP_Eff_D81NJ3_Shock.uasset  7 623 octets
+  NARUTO/Content/Weapons/Ninjutsu/D81NJ3/Materials/MI_WEP_Eff_D81NJ3_Shock.uexp  202 469 octets
+
+/Game/Weapons/Ninjutsu/D81NJ3/Materials/MI_WEP_Eff_D81NJ3_Shock  flags 80000000  213 Namen  7 Importe  1 Exporte  Kopf 7623  Bulk ab 210088  Daten 210092
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Materials/M_EFF_Base_Naruto_03.M_EFF_Base_Naruto_03 (Material)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Materials/M_EFF_Base_Naruto_03./Game/Effects/BaseMaterials/Materials/M_EFF_Base_Naruto_03 (Package)
+  imp  4 /Game/Effects/Textures/Hit/T_EFF_Shock_08_M./Game/Effects/Textures/Hit/T_EFF_Shock_08_M (Package)
+  imp  5 /Script/Engine./Script/Engine (Package)
+  imp  6 /Game/Effects/Textures/Hit/T_EFF_Shock_08_M.T_EFF_Shock_08_M (Texture2D)
+exp 0 MI_WEP_Eff_D81NJ3_Shock : MaterialInstanceConstant  outer 0  @1dc7 +316e1
+    Parent (ObjectProperty) = obj -2
+    bHasStaticPermutationResource (BoolProperty) = 1
+    ScalarParameterValues (ArrayProperty of StructProperty) [2]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 01_OpacityDepthFade_Distance
+        ParameterValue (FloatProperty) = 1000
+        ExpressionGUID (StructProperty Guid) = 4.26046e+09 1.25999e+09 3.84917e+09 2.88524e+09
+      1 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_OpacityMap
+        ParameterValue (ObjectProperty) = obj -7
+        ExpressionGUID (StructProperty Guid) = 2.1702e+08 1.24777e+09 1.56472e+09 3.38423e+09
+    BasePropertyOverrides (StructProperty MaterialInstanceBasePropertyOverrides)
+      bOverride_BlendMode (BoolProperty) = 1
+      bOverride_ShadingModel (BoolProperty) = 1
+      BlendMode (ByteProperty EBlendMode) = BLEND_Translucent
+      ShadingModel (ByteProperty EMaterialShadingModel) = MSM_Unlit
+    -- Eigenschaften ok, Ende bei +33f von 316e1
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Materials/M_EFF_Base_Naruto_03
+  /Game/Effects/Textures/Hit/T_EFF_Shock_08_M

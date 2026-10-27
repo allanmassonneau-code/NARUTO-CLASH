@@ -1,0 +1,40 @@
+== /Game/Effects/BaseMaterials/Instance_Base/Unique/MI_EFF_Multiply_UB
+fichier : NARUTO/Content/Effects/BaseMaterials/Instance_Base/Unique/MI_EFF_Multiply_UB.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Effects/BaseMaterials/Instance_Base/Unique/MI_EFF_Multiply_UB.uasset  2 589 octets
+  NARUTO/Content/Effects/BaseMaterials/Instance_Base/Unique/MI_EFF_Multiply_UB.uexp  76 162 octets
+
+/Game/Effects/BaseMaterials/Instance_Base/Unique/MI_EFF_Multiply_UB  flags 80000000  60 Namen  7 Importe  1 Exporte  Kopf 2589  Bulk ab 78747  Daten 78751
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Materials/M_EFF_Multiply.M_EFF_Multiply (Material)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Materials/M_EFF_Multiply./Game/Effects/BaseMaterials/Materials/M_EFF_Multiply (Package)
+  imp  4 /Game/Effects/Textures/Common/T_EFF_Sphere_02_M./Game/Effects/Textures/Common/T_EFF_Sphere_02_M (Package)
+  imp  5 /Script/Engine./Script/Engine (Package)
+  imp  6 /Game/Effects/Textures/Common/T_EFF_Sphere_02_M.T_EFF_Sphere_02_M (Texture2D)
+exp 0 MI_EFF_Multiply_UB : MaterialInstanceConstant  outer 0  @a1d +1297e
+    Parent (ObjectProperty) = obj -2
+    bHasStaticPermutationResource (BoolProperty) = 1
+    ScalarParameterValues (ArrayProperty of StructProperty) [3]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 01_OpacityDepthFade_Distance
+        ParameterValue (FloatProperty) = 100
+        ExpressionGUID (StructProperty Guid) = 2.63115e+09 1.22003e+09 1.61946e+09 2.9435e+09
+      1 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = 25_OpacityDepthFade_Invert
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 1.70385e+09 1.19535e+09 3.12444e+09 2.85294e+09
+      2 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 01_OpacityMap
+        ParameterValue (ObjectProperty) = obj -7
+        ExpressionGUID (StructProperty Guid) = 5.68814e+07 1.08253e+09 2.92229e+09 7.83067e+08
+    -- Eigenschaften ok, Ende bei +307 von 1297e
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Materials/M_EFF_Multiply
+  /Game/Effects/Textures/Common/T_EFF_Sphere_02_M

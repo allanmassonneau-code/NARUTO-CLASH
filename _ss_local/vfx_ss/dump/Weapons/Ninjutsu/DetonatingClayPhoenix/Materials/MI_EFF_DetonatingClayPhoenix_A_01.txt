@@ -1,0 +1,52 @@
+== /Game/Weapons/Ninjutsu/DetonatingClayPhoenix/Materials/MI_EFF_DetonatingClayPhoenix_A_01
+fichier : NARUTO/Content/Weapons/Ninjutsu/DetonatingClayPhoenix/Materials/MI_EFF_DetonatingClayPhoenix_A_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : MaterialInstanceConstant
+fichiers lies :
+  NARUTO/Content/Weapons/Ninjutsu/DetonatingClayPhoenix/Materials/MI_EFF_DetonatingClayPhoenix_A_01.uasset  1 987 octets
+  NARUTO/Content/Weapons/Ninjutsu/DetonatingClayPhoenix/Materials/MI_EFF_DetonatingClayPhoenix_A_01.uexp  1 241 octets
+
+/Game/Weapons/Ninjutsu/DetonatingClayPhoenix/Materials/MI_EFF_DetonatingClayPhoenix_A_01  flags 80000000  50 Namen  9 Importe  1 Exporte  Kopf 1987  Bulk ab 3224  Daten 3228
+  imp  0 /Script/Engine.MaterialInstanceConstant (Class)
+  imp  1 /Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_6_MNB.MI_EFF_GMS_6_MNB (MaterialInstanceConstant)
+  imp  2 /Script/Engine.Default__MaterialInstanceConstant (MaterialInstanceConstant)
+  imp  3 /Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_6_MNB./Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_6_MNB (Package)
+  imp  4 /Game/Effects/Textures/Earth/T_EFF_Rock_02_M./Game/Effects/Textures/Earth/T_EFF_Rock_02_M (Package)
+  imp  5 /Game/Effects/Textures/Earth/T_EFF_Rock_02_N./Game/Effects/Textures/Earth/T_EFF_Rock_02_N (Package)
+  imp  6 /Script/Engine./Script/Engine (Package)
+  imp  7 /Game/Effects/Textures/Earth/T_EFF_Rock_02_M.T_EFF_Rock_02_M (Texture2D)
+  imp  8 /Game/Effects/Textures/Earth/T_EFF_Rock_02_N.T_EFF_Rock_02_N (Texture2D)
+exp 0 MI_EFF_DetonatingClayPhoenix_A_01 : MaterialInstanceConstant  outer 0  @7c3 +4d5
+    Parent (ObjectProperty) = obj -2
+    ScalarParameterValues (ArrayProperty of StructProperty) [1]
+      0 (StructProperty ScalarParameterValue)
+        ParameterName (NameProperty) = RefractionDepthBias
+        ParameterValue (FloatProperty) = 0
+        ExpressionGUID (StructProperty Guid) = 0 0 0 0
+    TextureParameterValues (ArrayProperty of StructProperty) [2]
+      0 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_OpacityMap
+        ParameterValue (ObjectProperty) = obj -8
+        ExpressionGUID (StructProperty Guid) = 2.1702e+08 1.24777e+09 1.56472e+09 3.38423e+09
+      1 (StructProperty TextureParameterValue)
+        ParameterName (NameProperty) = 05_NormalMap
+        ParameterValue (ObjectProperty) = obj -9
+        ExpressionGUID (StructProperty Guid) = 2.24098e+09 1.17826e+09 1.56317e+09 2.17196e+09
+    VectorParameterValues (ArrayProperty of StructProperty) [2]
+      0 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 11_Color_Base
+        ParameterValue (StructProperty LinearColor) = 0.686686 0.603828 0.527115 1
+        ExpressionGUID (StructProperty Guid) = 1.58705e+09 1.31751e+09 5.94923e+08 2.73506e+09
+      1 (StructProperty VectorParameterValue)
+        ParameterName (NameProperty) = 12_Color_Base_Shadow
+        ParameterValue (StructProperty LinearColor) = 0.291771 0.258183 0.223228 1
+        ExpressionGUID (StructProperty Guid) = 1.96065e+09 1.31717e+09 1.01775e+09 4.03615e+09
+    BasePropertyOverrides (StructProperty MaterialInstanceBasePropertyOverrides)
+      bOverride_BlendMode (BoolProperty) = 1
+      bOverride_ShadingModel (BoolProperty) = 1
+      BlendMode (ByteProperty EBlendMode) = BLEND_Masked
+      ShadingModel (ByteProperty EMaterialShadingModel) = MSM_NarutoShade
+    -- Eigenschaften ok, Ende bei +4d1 von 4d5
+
+== dependances /Game :
+  /Game/Effects/BaseMaterials/Instance_Base/MI_EFF_GMS_6_MNB
+  /Game/Effects/Textures/Earth/T_EFF_Rock_02_M
+  /Game/Effects/Textures/Earth/T_EFF_Rock_02_N

@@ -1,0 +1,59 @@
+== /Game/Effects/Meshes/Water/SM_EFF_Water_B_01
+fichier : NARUTO/Content/Effects/Meshes/Water/SM_EFF_Water_B_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Effects/Meshes/Water/SM_EFF_Water_B_01.uasset  2 411 octets
+  NARUTO/Content/Effects/Meshes/Water/SM_EFF_Water_B_01.uexp  83 945 octets
+
+/Game/Effects/Meshes/Water/SM_EFF_Water_B_01  flags 80000000  62 Namen  11 Importe  3 Exporte  Kopf 2411  Bulk ab 86352  Daten 86356
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Game/Weapons/Ninjutsu/D101NJ1/Materials/MI_WEP_Eff_Wave_Fire_A_01.MI_WEP_Eff_Wave_Fire_A_01 (MaterialInstanceConstant)
+  imp  5 /Game/Weapons/Ninjutsu/D101NJ1/Materials/MI_WEP_Eff_Wave_Oil_A_01.MI_WEP_Eff_Wave_Oil_A_01 (MaterialInstanceConstant)
+  imp  6 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  7 /Game/Weapons/Ninjutsu/D101NJ1/Materials/MI_WEP_Eff_Wave_Fire_A_01./Game/Weapons/Ninjutsu/D101NJ1/Materials/MI_WEP_Eff_Wave_Fire_A_01 (Package)
+  imp  8 /Game/Weapons/Ninjutsu/D101NJ1/Materials/MI_WEP_Eff_Wave_Oil_A_01./Game/Weapons/Ninjutsu/D101NJ1/Materials/MI_WEP_Eff_Wave_Oil_A_01 (Package)
+  imp  9 /Script/Engine./Script/Engine (Package)
+  imp 10 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_0 : BodySetup  outer 3  @96b +9b2d
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +16c von 9b2d
+exp 1 NavCollision_6 : NavCollision  outer 3  @a498 +61
+    -- Eigenschaften ok, Ende bei +8 von 61
+exp 2 SM_EFF_Water_B_01 : StaticMesh  outer 0  @a4f9 +ac57
+    StaticMaterials (ArrayProperty of StructProperty) [2]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = lambert2
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 173.702
+          LocalUVDensities[1] (FloatProperty) = 304.502
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+      1 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = lambert3
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 177.213
+          LocalUVDensities[1] (FloatProperty) = 312.813
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightmapUVDensity (FloatProperty) = 315.187
+    LightMapResolution (IntProperty) = 64
+    LightMapCoordinateIndex (IntProperty) = 1
+    ExtendedBounds (StructProperty BoxSphereBounds) = 6.72623e-44 0 8.26766e-44 0 1.68156e-44 0 8.54792e-44
+    -- Eigenschaften ok, Ende bei +399 von ac57
+
+== dependances /Game :
+  /Game/Weapons/Ninjutsu/D101NJ1/Materials/MI_WEP_Eff_Wave_Fire_A_01
+  /Game/Weapons/Ninjutsu/D101NJ1/Materials/MI_WEP_Eff_Wave_Oil_A_01

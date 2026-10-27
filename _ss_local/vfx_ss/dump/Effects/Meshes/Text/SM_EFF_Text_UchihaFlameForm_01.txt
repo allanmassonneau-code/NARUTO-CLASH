@@ -1,0 +1,47 @@
+== /Game/Effects/Meshes/Text/SM_EFF_Text_UchihaFlameForm_01
+fichier : NARUTO/Content/Effects/Meshes/Text/SM_EFF_Text_UchihaFlameForm_01.uasset   pak : pakchunk0-WindowsNoEditor.pak   classe : StaticMesh
+fichiers lies :
+  NARUTO/Content/Effects/Meshes/Text/SM_EFF_Text_UchihaFlameForm_01.uasset  2 250 octets
+  NARUTO/Content/Effects/Meshes/Text/SM_EFF_Text_UchihaFlameForm_01.uexp  29 342 octets
+
+/Game/Effects/Meshes/Text/SM_EFF_Text_UchihaFlameForm_01  flags 80000000  59 Namen  9 Importe  3 Exporte  Kopf 2250  Bulk ab 31588  Daten 31592
+  imp  0 /Script/Engine.Default__BodySetup (BodySetup)
+  imp  1 /Script/Engine.BodySetup (Class)
+  imp  2 /Script/Engine.NavCollision (Class)
+  imp  3 /Script/Engine.StaticMesh (Class)
+  imp  4 /Game/Effects/Materials/Text/MI_EFF_Text_UchihaFlameForm_01.MI_EFF_Text_UchihaFlameForm_01 (MaterialInstanceConstant)
+  imp  5 /Script/Engine.Default__NavCollision (NavCollision)
+  imp  6 /Game/Effects/Materials/Text/MI_EFF_Text_UchihaFlameForm_01./Game/Effects/Materials/Text/MI_EFF_Text_UchihaFlameForm_01 (Package)
+  imp  7 /Script/Engine./Script/Engine (Package)
+  imp  8 /Script/Engine.Default__StaticMesh (StaticMesh)
+exp 0 BodySetup_0 : BodySetup  outer 3  @8ca +331c
+    DefaultInstance (StructProperty BodyInstance)
+      CollisionProfileName (NameProperty) = BlockAll
+      CollisionResponses (StructProperty CollisionResponse)
+        ResponseArray (ArrayProperty of StructProperty) [1]
+          0 (StructProperty ResponseChannel)
+            Channel (NameProperty) = Melee
+            Response (ByteProperty ECollisionResponse) = ECR_Ignore
+      ObjectType (ByteProperty ECollisionChannel) = ECC_WorldStatic
+    -- Eigenschaften ok, Ende bei +16c von 331c
+exp 1 NavCollision_2 : NavCollision  outer 3  @3be6 +61
+    -- Eigenschaften ok, Ende bei +8 von 61
+exp 2 SM_EFF_Text_UchihaFlameForm_01 : StaticMesh  outer 0  @3c47 +3f1d
+    StaticMaterials (ArrayProperty of StructProperty) [1]
+      0 (StructProperty StaticMaterial)
+        MaterialSlotName (NameProperty) = lambert1
+        UVChannelData (StructProperty MeshUVChannelInfo)
+          bInitialized (BoolProperty) = 1
+          bOverrideDensities (BoolProperty) = 0
+          LocalUVDensities (FloatProperty) = 78.5748
+          LocalUVDensities[1] (FloatProperty) = 76.6252
+          LocalUVDensities[2] (FloatProperty) = 0
+          LocalUVDensities[3] (FloatProperty) = 0
+    LightmapUVDensity (FloatProperty) = 76.6252
+    LightMapResolution (IntProperty) = 64
+    LightMapCoordinateIndex (IntProperty) = 1
+    ExtendedBounds (StructProperty BoxSphereBounds) = 6.30584e-44 0 7.84727e-44 0 1.68156e-44 0 8.12753e-44
+    -- Eigenschaften ok, Ende bei +28f von 3f1d
+
+== dependances /Game :
+  /Game/Effects/Materials/Text/MI_EFF_Text_UchihaFlameForm_01
